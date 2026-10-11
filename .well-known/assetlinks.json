@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.hsa_lejeu.twa",
+        "sha256_cert_fingerprints": ["A3:F4:E4:75:2E:11:3B:14:17:5E:3F:A1:08:21:08:04:A7:28:CB:01:F6:68:56:98:67:42:9D:CD:D5:92:C7:69"]
+      }
+    }]
