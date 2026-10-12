@@ -5416,6 +5416,43 @@ setInterval(()=>{try{const now=performance.now(),dt=Math.min(.2,(now-doorT0)/100
  else if(s.hold>0)s.f=7;else{s.f+=dt*16;if(s.f>=DAN)s.f=0}})}catch(_){}},40);
 window.doorDraw=function(cx,by,i){if(!DOORA.complete)return false;const s=DST[i]||{f:0},k=Math.floor(s.f)%DAN,dh=15.5,dw=Math.round(DAW*dh/DAH*2)/2;x.drawImage(DOORA,k*DAW,0,DAW,DAH,Math.round((cx-dw/2)*2)/2,by-dh,dw,dh);return true};
 
+// ===== v203 : quiz — la réponse s'affiche sur une fiche qui apparaît par-dessus, avec un petit jingle
+(function(){
+ const st=document.createElement('style');st.textContent=`
+#qfic{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:rgba(20,16,30,.45);padding:16px;animation:qfBg .2s ease-out}
+#qfic .qfc{position:relative;width:min(440px,94vw);max-height:88vh;overflow:auto;background:#fbf6e9;color:#3a3026;border:3px solid #6a5c4c;border-radius:12px;box-shadow:0 8px 0 #2a2433,0 14px 30px rgba(0,0,0,.45);padding:16px 18px 14px;font-family:'Atkinson Hyperlegible',sans-serif;animation:qfIn .38s cubic-bezier(.2,1.5,.4,1)}
+#qfic .qfc:before{content:'';position:absolute;left:0;right:0;top:0;height:8px;border-radius:9px 9px 0 0;background:var(--qc)}
+#qfic .qft{display:flex;align-items:center;gap:10px;margin:4px 0 10px}
+#qfic .qfs{flex:none;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;background:var(--qc);color:#fff;border:3px solid #fff;box-shadow:0 0 0 3px var(--qc);animation:qfSt .5s .15s both cubic-bezier(.2,1.8,.4,1)}
+#qfic .qft b{font:400 24px/1.1 Lilita,'Atkinson Hyperlegible',sans-serif;color:var(--qc)}
+#qfic .qft small{display:block;font-size:13px;color:#7a6a55;margin-top:2px}
+#qfic .qfa{background:#fff;border:2px dashed #d8c9a3;border-radius:8px;padding:8px 10px;margin-bottom:10px}
+#qfic .qfa em{display:block;font-style:normal;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#9a8a70;margin-bottom:3px}
+#qfic .qfa div{font-weight:700;line-height:1.35}
+#qfic .qfe{line-height:1.45;font-size:15px;margin:0 0 12px}
+#qfic .qfe:before{content:'💡 '}
+#qfic .qfb{display:inline-block;font-weight:700;font-size:13px;border-radius:20px;padding:4px 10px;margin-bottom:12px;background:var(--qb);color:var(--qc)}
+#qfic button{display:block;width:100%;font-size:16px;padding:10px}
+@keyframes qfBg{from{opacity:0}}
+@keyframes qfIn{from{transform:translateY(40px) scale(.85) rotate(-2deg);opacity:0}}
+@keyframes qfSt{from{transform:scale(0) rotate(-40deg)}}
+`;document.head.appendChild(st);
+ // jingle synthétique (pas besoin de fichier)
+ function qJing(ok){try{if(!AU.ctx||AU.s<=0||!AU.fx)return;const c=AU.ctx,t0=c.currentTime+.04;
+  const n=(m,dt,d,ty,g)=>{const o=c.createOscillator(),v=c.createGain();o.type=ty;o.frequency.value=440*Math.pow(2,(m-69)/12);v.gain.setValueAtTime(0,t0+dt);v.gain.linearRampToValueAtTime(g,t0+dt+.012);v.gain.exponentialRampToValueAtTime(.0001,t0+dt+d);o.connect(v);v.connect(AU.fx);o.start(t0+dt);o.stop(t0+dt+d+.05)};
+  if(ok){[72,76,79].forEach((m,i)=>{n(m,i*.085,.16,'square',.05);n(m-12,i*.085,.16,'triangle',.1)});n(84,.26,.5,'square',.05);n(88,.26,.5,'triangle',.07);n(72,.26,.55,'triangle',.12)}
+  else{n(67,0,.2,'triangle',.12);n(63,.17,.22,'triangle',.11);n(60,.36,.45,'triangle',.12);n(55,.36,.45,'square',.025)}}catch(_){}}
+ window.qJing=qJing;
+ W('ans',(o,a)=>{const c0=cur,ok=a[0]==c0[2],r=o(...a);try{
+  const mb=$('mb'),bs=mb.querySelectorAll('button.go');const g=bs[bs.length-1];if(g){const p=g.previousElementSibling;if(p&&p.tagName=='P')p.remove();g.remove()}
+  const f=document.createElement('div');f.id='qfic';
+  f.innerHTML=`<div class="qfc" style="--qc:${ok?'#2e9e4f':'#d9822b'};--qb:${ok?'#dff2e3':'#fbe7d2'}"><div class="qft"><div class="qfs">${ok?'✔':'?'}</div><div><b>${ok?'Bonne réponse !':'Pas tout à fait…'}</b><small>${ok?'Tu as les bons arguments.':'Voilà ce qu’il fallait répondre.'}</small></div></div>
+  <div class="qfa"><em>La bonne réponse</em><div></div></div><p class="qfe"></p><span class="qfb">${ok?'💶 +90 € de financement bonus':'Pas de bonus ce mois-ci'}</span><button class="go">Continuer</button></div>`;
+  f.querySelector('.qfa div').textContent=c0[1][c0[2]];f.querySelector('.qfe').innerHTML=c0[3]||'';
+  f.querySelector('button').onclick=()=>{f.remove();closeQ()};document.body.appendChild(f);
+  setTimeout(()=>qJing(ok),120)}catch(e){console.log(e)}return r});
+})();
+
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
 W('upd',(o,a)=>{const r=o(...a);try{polTick(a[0]);orTick(a[0])}catch(e){console.error(e)}return r});

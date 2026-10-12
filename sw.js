@@ -1,5 +1,5 @@
 // Hors ligne : le jeu et ses musiques sont mis en cache à la première visite.
-const V='hsa-v209';
+const V='hsa-v213';
 const FILES=['./','index.html','manifest.webmanifest','icon-192.png','icon-512.png','musique/hiver.mp3','musique/printemps.mp3','musique/ete.mp3','musique/automne.mp3','musique/reunions.mp3'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
