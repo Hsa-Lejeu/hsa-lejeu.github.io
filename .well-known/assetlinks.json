@@ -2,7 +2,7 @@
       "relation": ["delegate_permission/common.handle_all_urls"],
       "target": {
         "namespace": "android_app",
-        "package_name": "io.github.hsa_lejeu.twa",
-        "sha256_cert_fingerprints": ["A3:F4:E4:75:2E:11:3B:14:17:5E:3F:A1:08:21:08:04:A7:28:CB:01:F6:68:56:98:67:42:9D:CD:D5:92:C7:69"]
+        "package_name": "io.github.hsalejeu.haltesoinsaddictions",
+        "sha256_cert_fingerprints": ["FB:39:9A:CB:9D:D0:4A:F7:FB:2B:6F:98:6A:95:98:CA:B9:70:54:BC:2A:37:3C:86:61:27:53:B1:4D:98:0F:DF"]
       }
     }]
