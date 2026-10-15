@@ -1785,7 +1785,7 @@ sida:{mo:8,day:1,ic:'❤️',rib:1,t:'1er décembre : Journée mondiale de lutte
  go:()=>{const n=built[4]&&st[4]>0?3:0;CN.t=(CN.t||0)+n;MS.care+=n;aid+=n;NOT=nUp(5);q+=2;rdvSat(2,8);return n?`Stand du 1er décembre : ${n} dépistages rapides réalisés, préservatifs et matériel distribués. Les dépistages comptent pour l’ARS.`:'Stand du 1er décembre : préservatifs, matériel et informations distribués. Avec une salle de soins et une infirmière, on pourrait aussi dépister sur place !'}},
 sdp:{mo:2,day:20,ic:'✊',t:'Support. Don’t Punish.',cost:50,card:'c53',
  d:'Fin juin, partout dans le monde, des manifestations festives demandent de soigner plutôt que punir les personnes qui consomment des drogues. L’équipe peut défiler dans la rue du quartier.',
- go:(yy)=>{const y=yy||Math.min(3,YR);NOT=nUp(2+3*y);q+=2*y;STF.forEach(z=>z.e=Math.min(100,z.e+8));rdvSat(2*y,10);return y==1?'Une petite équipe, des ballons et beaucoup de cœur : quelques passant·es s’arrêtent, intrigué·es. C’est un début !':y==2?'Cette année, des riverain·es se joignent au cortège ! Le quartier défile avec la halte.':'Une foule immense ! Usager·es, riverain·es, commerçant·es, élu·es : tout le quartier danse dans la rue pour soigner plutôt que punir.'}},
+ go:(yy)=>{const y=Math.max(2,yy||Math.min(3,YR));NOT=nUp(2+3*y);q+=2*y;STF.forEach(z=>z.e=Math.min(100,z.e+8));rdvSat(2*y,10);return y==1?'Une petite équipe, des ballons et beaucoup de cœur : quelques passant·es s’arrêtent, intrigué·es. C’est un début !':y==2?'Pour cette première marche, des riverain·es se joignent au cortège ! Le quartier défile avec la halte.':'Une foule immense ! Usager·es, riverain·es, commerçant·es, élu·es : tout le quartier danse dans la rue pour soigner plutôt que punir.'}},
 iod:{mo:4,day:12,ic:'🕯️',t:'31 août : Journée internationale de sensibilisation aux overdoses',cost:40,card:'c54',
  d:'Une veillée pour se souvenir des personnes mortes d’une overdose et rappeler que ces morts sont évitables. On allume des bougies dans le square et on distribue de la naloxone.',
  go:()=>{NOT=nUp(4);q+=2;STF.forEach(z=>z.e=Math.min(100,z.e+10));if(built[1])S.n+=2;rdvSat(3,10);return (LPD?'On pense d’abord à celles et ceux qu’on a perdu·es. ':'')+'Bougies, silence, puis des mots doux. Des kits de naloxone sont distribués dans le square'+(built[1]?' (+2 doses offertes par un partenaire).':'.')}}};
@@ -1796,7 +1796,7 @@ tab:(H,T)=>{H.room('w0','f3');H.F('plant_l',4,60);H.F('ktable',84,76);const s=st
  H.R(92,64,5,4,'#e8f1fb');H.R(93,65,3,1,'#2e9e4f');H.R(104,64,5,4,'#fff6d0');H.R(105,65,3,1,'#e0405a')},
 sida:(H,T)=>{H.street();const nu=STF.find(z=>z.role=='inf'||z.r==4||z.r==1);H.spr(nu?nu.ci:stCi(0),24,98,58);H.F('ktable',82,72);EVd(H.g,'bal_r',60,66);EVd(H.g,'bal_r',128,64);ribbon(H,150,8,'#d6283c');
  const u=usCi();[0,1].forEach(i=>{walkTo(H,u[(i+2)%u.length],214+i*22,128+i*16,74+i*4,T,i*.6,40)});if(T>2.6){const k=(((T*2)|0)%2);H.R(88,48,4,6,'#f4f4f8');H.R(89,50+k,2,1,'#d6283c')}},
-sdp:(H,T,yr)=>{H.street();const g=H.g,y=yr||Math.min(3,YR),n=[0,5,11,22][y],rows=y==1?1:y==2?2:3,S_=[0,1,2,3,4].map(stCi),U=usCi(),cs=[];
+sdp:(H,T,yr)=>{H.street();const g=H.g,y=Math.max(2,yr||Math.min(3,YR)),n=[0,5,11,22][y],rows=y==1?1:y==2?2:3,S_=[0,1,2,3,4].map(stCi),U=usCi(),cs=[];
  for(let i=0;i<n;i++)cs.push(i<5?S_[i]:y>=3&&i%3==0?U[i%U.length]:RIVC[i%RIVC.length]);
  EVd(g,'gar2',10,12,2);EVd(g,'gar1',120,12,2);
  const P_=[];cs.forEach((c,i)=>{const r=i%rows,col=Math.floor(i/rows),X=100-col*16+(T-4)*22+r*5,Y=64+r*10;P_.push([Y,()=>{H.spr(c,12+(((T*9+i)|0)%6),X,Y);if(i%3==1)EVd(g,BALS[i%4],X-2,Y-12+Math.sin(T*3+i)*1.5)}])});
@@ -4617,9 +4617,9 @@ const gdEl=e=>{if(!e)return null;const r=e.getBoundingClientRect();return r.widt
 function gdState(){const app=$('app'),open=app.classList.contains('open')?app.dataset.t:'';
  if(st[0]>0||STF.some(z=>z.r==0))return{k:'fin',t:`Bravo, l’accueil est prêt ! 🎉 À toi maintenant : fais pareil pour la <b>salle de consommation</b>. Construis-la avec 🏗️ Locaux, puis touche son nom sur le plan pour recruter.`};
  if(built[0]){const hb=[...document.querySelectorAll('#staff button')].find(b=>(b.getAttribute('onclick')||'')=='hire(0)');
-  if(open==='0'&&hb)return{k:'hire',e:hb,t:`Recrute un·e <b>${R[0][1].toLowerCase()}</b> : la première personne de ton équipe !`};
+  if(open==='0'&&hb)return{k:'hire',e:hb.querySelector('.pr')||hb,t:`Recrute un·e <b>${R[0][1].toLowerCase()}</b> : touche l’<b>étiquette verte</b> avec le prix. Ce sera la première personne de ton équipe !`};
   const fi=$('rwf');if(fi&&/Équipe/.test((fi.querySelector('h4')||{}).textContent||'')){const tb=fi.querySelector('.rwtabs span[data-t="0"]');if(tb&&!tb.classList.contains('on'))return{k:'rtab',e:tb,t:'Ouvre l’onglet <b>Recrutement</b>.'};
-   const hb2=[...fi.querySelectorAll('.rwlist>button')].find(b=>b.textContent.includes(R[0][1].split('·')[0]))||fi.querySelector('.rwlist>button');if(hb2)return{k:'hire2',e:hb2,t:`Recrute un·e <b>${R[0][1].toLowerCase()}</b> : la première personne de ton équipe !`}}
+   const hb2=[...fi.querySelectorAll('.rwlist>button')].find(b=>b.textContent.includes(R[0][1].split('·')[0]))||fi.querySelector('.rwlist>button');if(hb2)return{k:'hire2',e:hb2.querySelector('.pr')||hb2,t:`Recrute un·e <b>${R[0][1].toLowerCase()}</b> : touche l’<b>étiquette verte</b> avec le prix. Ce sera la première personne de ton équipe !`}}
   const rw=document.querySelector('#rw .sg[data-p="staff"]')||document.querySelector('#rw .sg[data-k="0"]');if(rw)return{k:'wheel',e:rw,t:'Voici la roue de la salle : tout ce qu’on peut y faire. Choisis <b>👥 Équipe</b> pour recruter.'};
   return{k:'name',lab:0,t:'L’accueil est construit ! Astuce : sur le plan, le <b>nom d’une salle</b> se touche. Touche <b>ACCUEIL</b>.'}}
  if(sel==0&&$('ghb')){const g=$('ghb').querySelector('button.go');return{k:'ghost',e:g||$('ghb'),t:'Un aperçu apparaît sur le plan. Déplace-le avec les flèches ou en touchant une case libre, puis touche <b>✔ Construire ici</b>.'}}
@@ -6005,6 +6005,7 @@ function bDraw(){const cv=bd.querySelector('canvas');cv.width=40;cv.height=40;co
 function bUpd(){const n=CARDS.filter(c=>COL[c[0]]).length;bd.querySelector('.cbl').textContent=n+'/'+CARDS.length;CNEW=CNEW.filter(id=>COL[id]&&CARDS.some(c=>c[0]==id));const b=bd.querySelector('.cbn');b.hidden=!CNEW.length;b.textContent=CNEW.length}
 function bPos(){const sd=$('side'),sideOpen=sd&&getComputedStyle(sd).display!='none';const on=typeof started!='undefined'&&started&&!(typeof ENDING!='undefined'&&ENDING)&&!document.getElementById('splash')&&!sideOpen;bd.style.display=on?'flex':'none';if(!on)return;
  const c=$('ccv');let r=c&&c.getBoundingClientRect();if(r&&r.width>0&&r.top>0&&r.bottom<=innerHeight+2&&getComputedStyle(c).visibility!='hidden'){bd.style.bottom=Math.round(innerHeight-r.top+6)+'px';bd.style.right=Math.max(6,Math.round(innerWidth-r.right+(r.width-64)/2))+'px'}else{bd.style.bottom='12px';bd.style.right='12px'}}
+window.bPos=bPos;
 setTimeout(()=>{bDraw();bUpd();bPos()},800);setInterval(()=>{try{bPos();bUpd()}catch(_){}},500);addEventListener('resize',()=>{try{bPos()}catch(_){}});
 // ouvrir l'album à la page de la première nouvelle carte
 function newPage(){if(!CNEW.length)return -1;const per=innerWidth>innerHeight?8:9;let p=0;for(const cat of Object.keys(CCAT)){const L=CARDS.filter(c=>c[1]==cat);for(let k=0;k<L.length;k++)if(CNEW.includes(L[k][0]))return p+Math.floor(k/per);p+=Math.ceil(L.length/per)}return -1}
@@ -6112,15 +6113,15 @@ addEventListener('resize',()=>{try{lay()}catch(_){}});addEventListener('orientat
 const st=document.createElement('style');st.textContent=`
 #staff .xgrp.fx{margin:0 0 6px}#staff .xgrp.fx>h3{display:none}
 #staff .xgrp.fx .xrow{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))!important;gap:6px!important}
-#staff button.xp.fx{width:auto!important;min-width:0;display:flex!important;align-items:center;gap:10px;text-align:left;padding:6px 8px 8px!important;min-height:0!important}
-#staff button.xp.fx .pt{flex:none;position:relative}
-#staff button.xp.fx .tx{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:1.25}
-#staff button.xp.fx .tx .t1{font:700 14px/1.15 'Atkinson Hyperlegible',sans-serif;color:#2a2433;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#staff button.xp.fx .tx .t2{color:#6a5c4c;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#staff button.xp.fx .tx .t3{color:#2f6fb5;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#staff button.xp.fx .pr{flex:none;display:flex;flex-direction:column;align-items:center;gap:2px;background:#2e9e4f;color:#fff;border-radius:8px;padding:4px 8px;font:400 14px/1 Lilita,sans-serif;box-shadow:0 2px 0 #1f6e36}
-#staff button.xp.fx .pr small{font:700 9px/1 'Atkinson Hyperlegible',sans-serif;letter-spacing:.3px;text-transform:uppercase;opacity:.92}
-#staff button.xp.fx:disabled .pr{background:#9a9088;box-shadow:0 2px 0 #6e665f}
+:is(#staff,#rwf) button.xp.fx{width:auto!important;min-width:0;display:flex!important;align-items:center;gap:10px;text-align:left;padding:6px 8px 8px!important;min-height:0!important}
+:is(#staff,#rwf) button.xp.fx .pt{flex:none;position:relative}
+:is(#staff,#rwf) button.xp.fx .tx{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:1.25}
+:is(#staff,#rwf) button.xp.fx .tx .t1{font:700 14px/1.15 'Atkinson Hyperlegible',sans-serif;color:#2a2433;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+:is(#staff,#rwf) button.xp.fx .tx .t2{color:#6a5c4c;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+:is(#staff,#rwf) button.xp.fx .tx .t3{color:#2f6fb5;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+:is(#staff,#rwf) button.xp.fx .pr{flex:none;display:flex;flex-direction:column;align-items:center;gap:2px;background:#2e9e4f;color:#fff;border-radius:8px;padding:4px 8px;font:400 14px/1 Lilita,sans-serif;box-shadow:0 2px 0 #1f6e36}
+:is(#staff,#rwf) button.xp.fx .pr small{font:700 9px/1 'Atkinson Hyperlegible',sans-serif;letter-spacing:.3px;text-transform:uppercase;opacity:.92}
+:is(#staff,#rwf) button.xp.fx:disabled .pr{background:#9a9088;box-shadow:0 2px 0 #6e665f}
 `;document.head.appendChild(st);
 function fx(){const S=$('staff');if(!S)return;S.querySelectorAll('button.xp:not(.fx)').forEach(b=>{try{const tx=b.querySelector('.tx');if(!tx)return;const bt=tx.querySelector('b');if(!bt)return;const title=bt.textContent.trim();
  const raw=tx.innerHTML,m1=raw.match(/<\/b>\s*×\s*(\d+)/),n=m1?+m1[1]:0;const after=raw.split(/<br\s*\/?>/i)[1]||'';const l2=after.replace(/<span[\s\S]*$/,'').replace(/<[^>]+>/g,'').trim();
@@ -6154,7 +6155,7 @@ W('monthEnd',(o,a)=>{try{if(started&&!ended){const n=[2,3,4,5,6,7,8].filter(i=>b
 // ===== v237 : le cordon n'apparaît qu'avec un·e médiateur·rice ; sans, la file est plus désordonnée. Camille le suggère quand l'affluence monte.
 window.QMED=()=>{try{return STF.some(z=>z.role=='med')}catch(_){return false}};
 {const _q=window.QSP;window.QSP=k=>{const p=_q(k);if(p[0]>=176&&!QMED()){const j=k%12;return[p[0]+((j*37)%5)-2,p[1]+((j*53)%7)/2-1.5]}return p}}
-W('upd',(o,a)=>{const r=o(...a);try{if(started&&!ended&&!B.medTip&&!QMED()&&WL[0].length>=8){B.medTip=1;say('💬 Camille : « Il y a de plus en plus de monde devant la porte… Un·e médiateur·rice pourrait organiser la file avec des cordons, rassurer les personnes qui attendent et apaiser les riverains. Pense à en recruter dans l’onglet Équipe. »')}}catch(_){}return r});
+W('upd',(o,a)=>{const r=o(...a);try{if(started&&!ended&&!B.medTip&&!QMED()&&WL[0].length-(window.QNS?QNS():0)>=8){B.medTip=1;say('💬 Camille : « Il y a de plus en plus de monde devant la porte… Un·e médiateur·rice pourrait organiser la file avec des cordons, rassurer les personnes qui attendent et apaiser les riverains. Pense à en recruter dans l’onglet Équipe. »')}}catch(_){}return r});
 
 // ===== v238 : portes des salles du bas — on passe derrière le mur, on n'apparaît que dans l'encadrement de la porte
 {const DOORZ=(X,Y)=>{try{const t=x.getTransform();if(t.a!==2||Math.abs(t.e-OX*2)>.01||Math.abs(t.f-OY*2)>.01)return null;for(let r=0;r<9;r++){if(!built[r])continue;const b=R[r][3];if(b<10)continue;const d=DX[r];if(Math.abs(X-d)<8&&Y>b-.5&&Y<b+21)return{d,b}}}catch(_){}return null};
@@ -6225,12 +6226,22 @@ let tm=null;const mo=new MutationObserver(()=>{clearTimeout(tm);tm=setTimeout(()
 const obs=()=>{const t=document.getElementById('tabsbody');if(t)mo.observe(t,{childList:true,subtree:true,characterData:true})};
 const go=()=>{if(!document.getElementById('tabsbody')){setTimeout(go,500);return}run();obs()};go();
 })();
-W('tab',(o,a)=>{const r=o(...a);try{const s=document.getElementById('side'),n=a[0];if(s){if(n>=0)s.dataset.tab=String(n);else delete s.dataset.tab}}catch(_){}return r});
+W('tab',(o,a)=>{const r=o(...a);try{const s=document.getElementById('side'),n=a[0];if(s){if(n>=0)s.dataset.tab=String(n);else delete s.dataset.tab}}catch(_){}try{window.bPos&&bPos();requestAnimationFrame(()=>{try{bPos()}catch(_){}});setTimeout(()=>{try{bPos()}catch(_){}},350)}catch(_){}return r});
 
 // ===== v241 : recruter seulement en touchant l'étiquette de prix ; les ateliers passent dans l'onglet Quartier
 document.addEventListener('click',e=>{try{if(!e.isTrusted)return;const b=e.target.closest&&e.target.closest('button.xp');if(!b||!(b.closest('#staff')||b.closest('#rwf')))return;if(e.target.closest('.pr,.xr'))return;e.stopPropagation();e.preventDefault()}catch(_){}},true);
 {const st=document.createElement('style');st.textContent='#staff button.xp.fx,#rwf button.xp{cursor:default}#staff button.xp.fx:active,#rwf button.xp:active{transform:none!important}#staff button.xp .pr,#rwf button.xp .pr{cursor:pointer}#staff button.xp .pr:active,#rwf button.xp .pr:active{transform:translateY(2px) rotate(-4deg)}';document.head.appendChild(st)}
 (function mvAt(){const t0=document.getElementById('t0'),t3=document.getElementById('t3');if(!t0||!t3){setTimeout(mvAt,300);return}const b=t0.querySelector('.subt button[data-k="3"]'),s=t0.querySelector('.sub[data-k="3"]'),bar=t3.querySelector('.subt');if(!b||!s||!bar)return;b.dataset.k='9';s.dataset.k='9';b.classList.remove('on');bar.appendChild(b);t3.appendChild(s);s.hidden=true})();
+
+// ===== v244 : tutoriel à jour (boutons du haut, album, recrutement, ateliers, roue des salles)
+try{const st_=t=>String(t).replace(/<[^>]+>/g,'').trim();TUT.forEach(t=>{if(!t||typeof t[1]!='string')return;const s=st_(t[1]);
+ if(/^Les boutons du haut/.test(s))t[1]='Les boutons du haut : ⏩ <b>accélérer le temps</b> quand tout roule ; 🔗 le <b>réseau de la halte</b>, l’arbre de tout ce que tu peux débloquer en trois ans ; ☰ le <b>menu</b> : aide, ce tutoriel et paramètres (volume, retour au menu).<br>En bas à droite, l’<b>éventail de cartes</b> ouvre ton album de cartes pédagogiques, gardées d’une partie à l’autre.';
+ else if(/^👥\s*Équipe/.test(s))t[1]='👥 <b>Équipe</b> : recruter des professionnel·les (touche l’étiquette verte avec le prix, ou le 🎲 pour voir quelqu’un d’autre), suivre leur fatigue et les former.';
+ else if(/^🌳\s*Quartier/.test(s))t[1]='🌳 <b>Quartier</b> : tout ce qui se passe hors les murs. Maraudes, riverains, partenaires, ateliers collectifs… ces actions apparaîtront au fur et à mesure.';
+ else if(/^Dans le local, beaucoup/.test(s))t[1]='Dans le local, beaucoup de choses se touchent :<br>• le <b>nom d’une salle</b> ouvre sa roue : équipe, achats, actions, déplacer, statistiques ;<br>• le panneau du <b>bureau</b> ouvre les formations ;<br>• une <b>boîte jaune</b> pleine se vide, une <b>seringue</b> dans la rue se ramasse ;<br>• un·e collègue avec un ❗ au-dessus de la tête a besoin de toi : touche-le ou touche-la.<br>Dans les menus, le bouton <b>? À savoir</b> déplie les explications.';
+})}catch(_){}
+// ---- la fenêtre de défi se décale à droite des portraits des personnes suivies au long cours
+setInterval(()=>{try{const d=document.getElementById('dfb');if(!d)return;const l=document.getElementById('lci');let x0=8;if(l&&l.offsetParent!==null){const r=l.getBoundingClientRect(),q=d.getBoundingClientRect();if(r.width>0&&r.bottom>q.top&&r.top<q.bottom+40)x0=Math.round(r.right+8)}const v=x0+'px';if(d.style.left!==v)d.style.left=v}catch(_){}},200);
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
