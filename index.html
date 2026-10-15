@@ -6243,6 +6243,31 @@ try{const st_=t=>String(t).replace(/<[^>]+>/g,'').trim();TUT.forEach(t=>{if(!t||
 // ---- la fenêtre de défi se décale à droite des portraits des personnes suivies au long cours
 setInterval(()=>{try{const d=document.getElementById('dfb');if(!d)return;const l=document.getElementById('lci');let x0=8;if(l&&l.offsetParent!==null){const r=l.getBoundingClientRect(),q=d.getBoundingClientRect();if(r.width>0&&r.bottom>q.top&&r.top<q.bottom+40)x0=Math.round(r.right+8)}const v=x0+'px';if(d.style.left!==v)d.style.left=v}catch(_){}},200);
 
+// ===== v246 : tournée du camion — petit trajet halte → destination avec le camion qui avance et le temps restant
+(function(){const st=document.createElement('style');st.textContent=`
+#tvw .tp{display:none!important}
+canvas:not(#c){aspect-ratio:auto}
+#tvw .vtr{position:relative;height:22px;margin:4px 8px 0;display:flex;align-items:center;justify-content:space-between}
+#tvw .vtr .ln{position:absolute;left:20px;right:20px;top:50%;border-top:3px dotted #c9b49a;transform:translateY(-1px)}
+#tvw .vtr .lf{position:absolute;left:20px;top:50%;height:3px;background:#2e9e4f;border-radius:2px;transform:translateY(-1px)}
+#tvw .vtr .h,#tvw .vtr .d{position:relative;z-index:1;font-size:15px;line-height:1;background:#fffaf0;border:2px solid #2a2433;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center}
+#tvw .vtr .vk{position:absolute;top:50%;z-index:2;font-size:17px;line-height:1;transform:translate(-50%,-62%);transition:left .25s linear;filter:drop-shadow(0 1px 0 #2a2433)}
+#tvw .vtr .vk.go{transform:translate(-50%,-62%) scaleX(-1)}
+#tvw .vtt{text-align:center;font:700 11px 'Atkinson Hyperlegible',sans-serif;color:#2a2433;margin:2px 0 4px}
+`;document.head.appendChild(st);
+setInterval(()=>{try{const w=document.getElementById('tvw');if(!w||typeof TOUR=='undefined'||!TOUR)return;let tr=w.querySelector('.vtr');const T=TOUR,d=TDEST[T.k]||{ic:'📍'};
+ if(!tr){tr=document.createElement('div');tr.className='vtr';tr.innerHTML='<span class="ln"></span><span class="lf"></span><span class="h">🏠</span><span class="d"></span><span class="vk">🚐</span>';const tt=document.createElement('div');tt.className='vtt';const cvs=w.querySelector('canvas');cvs.after(tr);tr.after(tt)}
+ tr.querySelector('.d').textContent=d.ic||'📍';
+ const p=Math.max(0,Math.min(1,1-Math.max(0,T.t)/T.T0)),A=.28,Rt=.78;let f,go,txt;
+ const secs=s=>Math.max(1,Math.ceil(s))+' s';
+ if(p<A){f=p/A;go=1;txt='Arrivée dans '+secs((A-p)*T.T0)}
+ else if(p<Rt){f=1;go=0;txt='Sur place · retour dans '+secs((1-p)*T.T0)}
+ else{f=1-(p-Rt)/(1-Rt);go=0;txt='Retour à la halte dans '+secs((1-p)*T.T0)}
+ const W_=tr.clientWidth-40,X=20+f*W_;const vk=tr.querySelector('.vk');vk.style.left=X+'px';vk.classList.toggle('go',!!go);
+ const lf=tr.querySelector('.lf');lf.style.width=Math.max(0,(p<Rt?f:1)*W_)+'px';lf.style.background=p<Rt?'#2e9e4f':'#2f6fb5';
+ const tt=w.querySelector('.vtt');if(tt.textContent!==txt)tt.textContent=txt}catch(_){}},200);
+})();
+
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
 W('upd',(o,a)=>{const r=o(...a);try{polTick(a[0]);orTick(a[0])}catch(e){console.error(e)}return r});
