@@ -1,8 +1,11 @@
 [{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "io.github.hsalejeu.haltesoinsaddictions",
-        "sha256_cert_fingerprints": ["FB:39:9A:CB:9D:D0:4A:F7:FB:2B:6F:98:6A:95:98:CA:B9:70:54:BC:2A:37:3C:86:61:27:53:B1:4D:98:0F:DF"]
-      }
-    }]
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "io.github.hsalejeu.haltesoinsaddictions",
+    "sha256_cert_fingerprints": [
+      "6A:6D:73:0E:85:B3:57:B6:50:1B:C1:37:85:57:CA:87:14:A0:77:0E:F0:03:13:26:B9:1D:AE:6A:10:A8:4E:E7",
+      "FB:39:9A:CB:9D:D0:4A:F7:FB:2B:6F:98:6A:95:98:CA:B9:70:54:BC:2A:37:3C:86:61:27:53:B1:4D:98:0F:DF"
+    ]
+  }
+}]
