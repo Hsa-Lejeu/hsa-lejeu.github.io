@@ -1358,7 +1358,7 @@ P(3,2,8,'#ffffff');P(2,3,1,'#ffffff');P(9,20,1,O);P(10,20,4,C);P(14,20,1,O);P(10
 return NBS[k]=c}
 function needBub(v){const t=performance.now()/1000,bo=Math.round(Math.sin(t*2.6+v.x*.7)*1)/2,X=Math.round(v.x*2)/2-6,Y=v.y-29+bo,sa=(hist[v.name]||{}).sat||50,urg=sa<30&&((t*2.5)|0)%2,
 C={s:'#e0405a',m:'#7a4fb5',h:'#2f6fb5',d:'#2f6fb5',r:'#b07a3a',o:'#2e9e4f',y:'#2a9fd6',z:'#e8a060',a:'#c98a00'}[v.need]||'#2e9e4f';
-x.drawImage(nbSpr(C,urg?'#c0392b':'#2a2433'),X,Y,12,12.5);x.font='5.5px sans-serif';x.textAlign='center';x.fillText(NE[v.need],X+6,Y+6.2);if(v.hg>0){const hb=Math.sin(performance.now()/180)*.4;x.fillStyle='#fffdf6';x.beginPath();x.arc(X+11.5,Y+.8,2.6,0,7);x.fill();x.strokeStyle='#2a2433';x.lineWidth=.5;x.stroke();x.font='4px sans-serif';x.fillText('⏳',X+11.5,Y+2.2+hb)}x.textAlign='left';x.font=LBL}
+x.drawImage(nbSpr(C,urg?'#c0392b':'#2a2433'),X,Y,12,12.5);x.font='5.5px sans-serif';x.textAlign='center';x.fillText(NE[v.need],X+6,Y+6.2);if(v.hg>0){if(window.hgIco)hgIco(X+11.8,Y+.4)}x.textAlign='left';x.font=LBL}
 function satBar(v,sa){v.sd=v.sd==null?sa:v.sd+(sa-v.sd)*.08;const p=Math.max(0,Math.min(1,v.sd/100)),c=p>.6?['#5cc983','#a8eabd','#3d9e63']:p>.3?['#f1c04f','#fbe2a0','#c9952e']:['#ec6f82','#f9b9c3','#b84d60'],k=Math.max(1,Math.min(1.6,2/((typeof Z!='undefined'&&Z.s)||2))),w=Math.round(8*k*2)/2,hh=Math.round(2*Math.min(k,1.4)*2)/2,X=Math.round((v.x-w/2)*2)/2,Y=v.y+2.5,O='rgba(74,58,80,.55)';
 rect(X+.5,Y+hh,w-1,.5,'rgba(60,40,50,.15)');rect(X+.5,Y,w-1,hh,O);rect(X,Y+.5,w,hh-1,O);rect(X+.5,Y+.5,w-1,hh-1,'#f6f0e4');
 const f=(w-1)*p;if(f>0){rect(X+.5,Y+.5,f,hh-1,c[0]);rect(X+.5,Y+.5,f,.5,c[1]);if(hh>2)rect(X+.5,Y+hh-1,f,.5,c[2])}}
@@ -6354,6 +6354,80 @@ function dcAsk(){const das=$('das');let d=das.querySelector('.rfc');if(d){d.remo
  // l'orientation choisie est reprise au premier toucher suivant
  let pref=null;try{pref=localStorage.getItem('hsaOr')}catch(_){}
  if(pref){const re=()=>{document.removeEventListener('pointerup',re,true);if(cur()!=pref)lock(pref).then(lab)};document.addEventListener('pointerup',re,true);so.lock(pref).then(lab).catch(()=>{})}})();
+
+// ===== v249 : après « C’est moi ! » : des nuages couvrent l’écran, se dispersent sur la ville vue de haut, puis zoom progressif jusqu’au bureau
+const FLY={on:0,ph:'',t0:0,cl:[],c:null,g:null,W:0,H:0,skip:0};
+{const st=document.createElement('style');st.textContent=`#flyc{position:fixed;inset:0;width:100vw;height:100vh;z-index:2147483000;image-rendering:pixelated;touch-action:none}
+body.fly #hud,body.fly #tabs,body.fly #side,body.fly #msg,body.fly #cam,body.fly #lci,body.fly #dfb,body.fly #bAlb{opacity:0!important;pointer-events:none!important}
+body.flyo #hud,body.flyo #tabs{transition:opacity .6s}`;document.head.appendChild(st)}
+function flyCanvas(){let c=$('flyc');if(!c){c=document.createElement('canvas');c.id='flyc';document.body.appendChild(c)}const k=4;FLY.W=Math.ceil(innerWidth/k);FLY.H=Math.ceil(innerHeight/k);c.width=FLY.W;c.height=FLY.H;FLY.c=c;FLY.g=c.getContext('2d');FLY.g.imageSmoothingEnabled=false;return c}
+function flyClouds(){const W=FLY.W,H=FLY.H,R=Math.max(W,H)/5,L=[];const nx=Math.ceil(W/(R*1.1))+1,ny=Math.ceil(H/(R*1.0))+1;
+ for(let j=0;j<ny;j++)for(let i=0;i<nx;i++){const tx=(i+.5)*W/nx+(Math.random()-.5)*R*.5,ty=(j+.4)*H/ny+(Math.random()-.5)*R*.4,side=tx<W/2?-1:1;
+  L.push({tx,ty,r:R*(.85+Math.random()*.4),side,d:Math.random()*.25,puffs:[0,1,2,3,4].map(k=>({dx:(k-2)*.42+(Math.random()-.5)*.2,dy:-Math.abs(k-2)*-.05-(k%2?.28:0)+(Math.random()-.5)*.15,s:.45+Math.random()*.3}))})}
+ L.sort((a,b)=>a.ty-b.ty);return L}
+function flyBlob(g,X,Y,r,a){g.globalAlpha=a;const P=(c,oy,k)=>{g.fillStyle=c;this_.forEach(p=>{g.beginPath();g.arc(Math.round(X+p.dx*r),Math.round(Y+p.dy*r+oy),Math.max(1,Math.round(p.s*r*k)),0,7);g.fill()})};let this_=FLY._p;
+ P('#9fb6d3',r*.16,1);P('#dfe9f5',r*.06,1);P('#ffffff',0,.92);g.globalAlpha=1}
+function flyDraw(p,out){const g=FLY.g,W=FLY.W,H=FLY.H;g.clearRect(0,0,W,H);
+ const e=t=>t<0?0:t>1?1:1-Math.pow(1-t,3);
+ // ciel plein quand les nuages sont posés
+ const bg=out?Math.max(0,1-p*3):Math.max(0,(p-.55)/.45);if(bg>0){g.globalAlpha=bg;g.fillStyle='#eef5fc';g.fillRect(0,0,W,H);g.globalAlpha=1}
+ FLY.cl.forEach(c=>{let k,X,Y=c.ty,a=1;if(!out){k=e((p-c.d)/(1-c.d||1));X=c.tx+c.side*(1-k)*(W*.75+c.r)}else{k=e((p-c.d*.6)/(1-c.d*.6));X=c.tx+c.side*k*(W*.8+c.r*1.5);Y=c.ty-k*c.r*.3;a=1-Math.max(0,(k-.6)/.4)}
+  FLY._p=c.puffs;flyBlob(g,X,Y,c.r,a)})}
+function flyCover(done){flyCanvas();FLY.cl=flyClouds();FLY.ph='in';const t0=performance.now(),D=1000;try{sfx('page')}catch(_){}
+ const f=()=>{const p=Math.min(1,(performance.now()-t0)/D);flyDraw(p,0);if(p<1)requestAnimationFrame(f);else done()};f()}
+function flyTarget(){try{const s=Z.s,xx=Z.x,yy=Z.y;window.introZoom();const T={s:Z.s,x:Z.x,y:Z.y};Z.s=s;Z.x=xx;Z.y=yy;return T}catch(_){return{s:Z.s,x:Z.x,y:Z.y}}}
+function flyRun(){FLY.ph='out';document.body.classList.add('fly');const t0=performance.now(),DO=1600,HOLD=1100,DZ=3600,v=$('view');
+ const c=FLY.c;c.onpointerdown=()=>{FLY.skip=1};
+ const e3=t=>t<0?0:t>1?1:1-Math.pow(1-t,3);
+ const f=()=>{const t=window.FLYT!=null?window.FLYT:performance.now()-t0,sk=FLY.skip;
+  // caméra : toute la ville vue de haut, puis on descend vers le bureau
+  const T=flyTarget(),VW=v.clientWidth,VH=v.clientHeight,Px=VW/2,Py=(Z.hh+VH)/2,s0=Math.min(VW/Z.cw,(VH-Z.hh)/Z.ch)*.96,x0=Px-Z.cw*s0/2,y0=Py-Z.ch*s0/2;
+  let q=sk?1:Math.max(0,Math.min(1,(t-HOLD)/DZ));q=q<.5?4*q*q*q:1-Math.pow(-2*q+2,3)/2;
+  const w0x=(Px-x0)/s0,w0y=(Py-y0)/s0,w1x=(Px-T.x)/T.s,w1y=(Py-T.y)/T.s,s=s0*Math.pow(T.s/s0,q),wx=w0x+(w1x-w0x)*q,wy=w0y+(w1y-w0y)*q;
+  Z.s=s;Z.x=Px-wx*s;Z.y=Py-wy*s;applyZ();
+  // ciel et nuages : ils s'écartent jusqu'au bord de la ville, puis s'effacent pendant la descente
+  const g=FLY.g,W=FLY.W,H=FLY.H,k=4,vr=v.getBoundingClientRect(),rL=(vr.left+Z.x)/k,rT=(vr.top+Z.y)/k,rR=rL+Z.cw*Z.s/k,rB=rT+Z.ch*Z.s/k,cx=(rL+rR)/2,cy=(rT+rB)/2;
+  g.clearRect(0,0,W,H);const pd=sk?1:e3(t/DO),fa=Math.max(0,1-q*1.8);
+  if(fa>0){g.globalAlpha=fa;g.fillStyle='#bfe3ff';g.fillRect(0,0,W,Math.max(0,rT));g.fillRect(0,rB,W,H-rB);g.fillRect(0,rT,Math.max(0,rL),rB-rT);g.fillRect(rR,rT,W-rR,rB-rT);g.globalAlpha=1}
+  const bg=Math.max(0,1-pd*2.5);if(bg>0){g.globalAlpha=bg;g.fillStyle='#eef5fc';g.fillRect(0,0,W,H);g.globalAlpha=1}
+  if(fa>0)FLY.cl.forEach(c_=>{const dx=c_.tx-cx,dy=c_.ty-cy,L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L;
+    const ex=Math.min(ux?((ux>0?rR:rL)-cx)/ux:1e9,uy?((uy>0?rB:rT)-cy)/uy:1e9)+c_.r*1.05,d0=Math.max(L,ex),d=L+(d0-L)*pd+q*Math.max(W,H)*.6;
+    FLY._p=c_.puffs;flyBlob(g,cx+ux*d,cy+uy*d,c_.r,fa*(pd<1?1:1))});
+  if(sk||(t>=HOLD+DZ&&window.FLYT==null))return flyEnd();requestAnimationFrame(f)};f()}
+function flyEnd(){FLY.on=0;FLY.ph='';const c=$('flyc');if(c)c.remove();document.body.classList.add('flyo');document.body.classList.remove('fly');setTimeout(()=>document.body.classList.remove('flyo'),800);
+ const m=$('m');m.style.transition='opacity .45s';m.style.visibility='';requestAnimationFrame(()=>{m.style.opacity=1});setTimeout(()=>{m.style.transition=''},600);
+ try{window.introZoom()}catch(_){}}
+// pendant le vol, la première bulle de Camille attend (cachée) : sa place sert à calculer le cadrage final
+W('introNext',(o,a)=>{const r=o(...a);try{if(FLY.on){const m=$('m');m.style.visibility='hidden';m.style.opacity=0}}catch(_){}return r});
+W('draw',(o,a)=>{if(!FLY.on)return o(...a);const m=$('m'),h0=m.hidden;m.hidden=true;try{return o(...a)}finally{m.hidden=h0}});
+W('chefCreate',(o,a)=>{const r=o(...a);try{const spl=document.getElementById('splash');if(spl&&spl.style.opacity!=='0'){const cg=$('cgen'),ok=cg&&cg.querySelector('.ok');if(ok)cg.addEventListener('click',e=>{if(!e.target.closest||!e.target.closest('.ok')||cg._fly)return;e.stopPropagation();e.preventDefault();cg._fly=1;FLY.on=1;FLY.skip=0;
+  flyCover(()=>{try{ok.onclick()}catch(err){console.error(err)}setTimeout(flyRun,60)})},true)}}catch(_){}return r});
+// ---- album : le tampon « NOUVELLE » bien visible (au milieu de l'image, plus coupé par le bord) + contour qui pulse
+{const st=document.createElement('style');st.textContent=`.aslot.anew{box-shadow:0 0 0 3px #f28a1e,0 0 12px 3px rgba(242,138,30,.7)!important;animation:anFlip .7s ease both,anGlow 1.2s ease-in-out .7s infinite alternate!important}
+.aslot.anew::after{content:'NOUVELLE'!important;top:38%!important;left:50%!important;right:auto!important;transform:translate(-50%,-50%) rotate(-7deg)!important;z-index:3;white-space:nowrap;font:400 clamp(10px,2.6vw,14px)/1 Lilita,sans-serif!important;padding:4px 7px!important;background:#f28a1e!important;color:#fff!important;border:2.5px solid #2a2433!important;border-radius:8px!important;box-shadow:0 3px 0 #2a2433;text-shadow:0 1px 0 #a04e00;letter-spacing:.03em}
+@keyframes anGlow{from{box-shadow:0 0 0 3px #f28a1e,0 0 6px 1px rgba(242,138,30,.45)}to{box-shadow:0 0 0 3px #ffb347,0 0 16px 5px rgba(242,138,30,.85)}}`;document.head.appendChild(st)}
+// ---- roue d'une salle : le disque central prend la couleur de la salle (celle de sa plaque)
+{const RWC={0:'#2e9e4f',1:'#1f9e9a',2:'#e8783a',3:'#2f6fb5',4:'#e0405a',5:'#7a4fb5',6:'#b07a3a',7:'#d9893a',8:'#c98a00'};let RWI=-1;
+ W('roomWheel',(o,a)=>{RWI=a[0];const r=o(...a);try{const c=RWC[RWI],g=document.querySelector('#rw .ctr');if(c&&g){const ci=g.querySelector('circle');ci.setAttribute('fill',c);ci.setAttribute('stroke','#2a2433');ci.setAttribute('stroke-width','3');g.querySelectorAll('text').forEach(t=>{t.setAttribute('fill','#fff');t.setAttribute('stroke','#2a2433');t.setAttribute('stroke-width','2.4');t.setAttribute('paint-order','stroke');t.setAttribute('stroke-linejoin','round')})}}catch(_){}return r})}
+// ---- réunion trimestrielle : la bulle n'apparaît en glissant qu'une fois (avant, elle « clignotait » à chaque « Suivant »)
+{const st=document.createElement('style');st.textContent='#mtg.on .mb{animation:none!important}';document.head.appendChild(st);
+ new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.id=='mtg')setTimeout(()=>n.classList.add('on'),450)}).observe(document.body,{childList:true})}
+// ---- achats : de vraies images du pack LimeZu à la place des emojis (machine à café, matériel RDR, point d'eau, fleurs, matériel de soin)
+try{Object.assign(IM,{0:'coffee',3:'bottles',4:'sink_h',6:'cabflower',10:'medcab'})}catch(_){}
+// placements : point d'eau (petit évier) et fleurs dans un coin libre, chariot de soin contre le mur de droite
+try{IM[4]='sinkc';IT[4][6]=2;IT[4][7]=44;IM[6]='cabflower';IT[6][6]=4;IT[6][7]=44;IM[10]='drawer';IT[10][6]=46;IT[10][7]=44}catch(_){}
+// ---- sablier net (dessiné en vecteur, plus grand) à la place de l'emoji ⏳ minuscule
+window.hgIco=function(cx,cy,G){G=G||x;const t=performance.now()/1000,P=t%3/3,fl=P>.88?(P-.88)/.12:0;G.save();
+ G.fillStyle='#fffdf6';G.beginPath();G.arc(cx,cy,4.3,0,7);G.fill();G.strokeStyle='#2a2433';G.lineWidth=.55;G.stroke();
+ G.translate(cx,cy);G.scale(1.25,1.25);G.rotate(fl*Math.PI);const p=fl?1:Math.min(1,P/.88),w=1.35,h=1.85;
+ // sable
+ G.fillStyle='#e8a020';const ts=(1-p)*h*.85;if(ts>.05){G.beginPath();G.moveTo(-w*ts/h,-ts);G.lineTo(w*ts/h,-ts);G.lineTo(0,0);G.closePath();G.fill()}
+ const bs=p*h*.8;if(bs>.05){G.beginPath();G.moveTo(-w*.95,h-.05);G.lineTo(w*.95,h-.05);G.lineTo(w*.95*(1-bs/h*.6),h-bs);G.lineTo(-w*.95*(1-bs/h*.6),h-bs);G.closePath();G.fill()}
+ if(p<1&&!fl){G.fillRect(-.12,0,.24,h-bs)}
+ // verre
+ G.strokeStyle='#2a2433';G.lineWidth=.4;G.beginPath();G.moveTo(-w,-h);G.lineTo(w,-h);G.lineTo(.18,0);G.lineTo(w,h);G.lineTo(-w,h);G.lineTo(-.18,0);G.closePath();G.stroke();
+ // montants en bois
+ x.fillStyle='#8a5a2b';x.fillRect(-w-.5,-h-.65,2*w+1,.6);x.fillRect(-w-.5,h+.05,2*w+1,.6);x.restore()};
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
