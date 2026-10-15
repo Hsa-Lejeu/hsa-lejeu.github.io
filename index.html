@@ -6428,6 +6428,23 @@ window.hgIco=function(cx,cy,G){G=G||x;const t=performance.now()/1000,P=t%3/3,fl=
  G.strokeStyle='#2a2433';G.lineWidth=.4;G.beginPath();G.moveTo(-w,-h);G.lineTo(w,-h);G.lineTo(.18,0);G.lineTo(w,h);G.lineTo(-w,h);G.lineTo(-.18,0);G.closePath();G.stroke();
  // montants en bois
  x.fillStyle='#8a5a2b';x.fillRect(-w-.5,-h-.65,2*w+1,.6);x.fillRect(-w-.5,h+.05,2*w+1,.6);x.restore()};
+// ---- portraits des suivis au long cours (Jess, Jawad) : toujours sous la barre du haut, même quand elle passe sur deux lignes
+setInterval(()=>{try{const w=document.getElementById('lci'),h=document.getElementById('hud');if(!w||!h)return;const b=Math.round(h.getBoundingClientRect().bottom+8);if(b>8&&w.style.top!==b+'px')w.style.setProperty('top',b+'px','important')}catch(_){}},300);
+// ---- festival : l'invitation montre une affiche-calendrier (comme les rendez-vous de l'année) ; l'animation est gardée pour quand on accepte
+function festPoster(g,T){const MNF=['avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre','janvier','février','mars'],col='#7a4fb5';
+ g.save();g.fillStyle='#cdb68c';g.fillRect(0,0,200,104);g.fillStyle='rgba(120,90,50,.18)';for(let y=0;y<104;y+=8){g.fillRect(0,y,200,1);for(let xx=(y/8)%2?0:12;xx<200;xx+=24)g.fillRect(xx,y,1,8)}
+ const a=Math.min(1,T/.35),s=.6+.4*(1-Math.pow(1-a,3)),rot=Math.sin(T*1.6)*.012;g.translate(100,6);g.rotate(rot);g.scale(s,s);
+ g.fillStyle='rgba(0,0,0,.25)';g.fillRect(-47,3,98,94);g.fillStyle='#2a2433';g.fillRect(-50,0,100,94);g.fillStyle='#fffaf0';g.fillRect(-48,2,96,90);
+ g.fillStyle=col;g.fillRect(-48,2,96,20);g.fillStyle='#fff';g.font="400 10px Lilita,'Atkinson Hyperlegible',sans-serif";g.textAlign='center';g.textBaseline='middle';g.fillText(('Du '+FDAY0+' au '+FDAY1+' '+MNF[FMO]).toUpperCase(),0,12.5);
+ g.font="26px 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif";g.fillText('🎶',0,42);
+ g.fillStyle='#2a2433';g.font="400 9px Lilita,'Atkinson Hyperlegible',sans-serif";g.fillText('Festival du square',0,61);g.fillText('Stand de réduction',0,72);g.fillText('des risques',0,82);
+ g.fillStyle=col;g.fillRect(-20,88.5,40,1.5);
+ [[-44,5],[44,5]].forEach(([px,py])=>{g.fillStyle='#4a2f7a';g.beginPath();g.arc(px,py,2.6,0,7);g.fill();g.fillStyle='#b48cf0';g.beginPath();g.arc(px-.5,py-.5,1.8,0,7);g.fill()});
+ g.restore()}
+new MutationObserver(()=>{try{const ov=document.getElementById('fmo');if(!ov||ov._fstp)return;const ft=ov.querySelector('.ft'),fn=ov.querySelector('.fn');if(!ft||!fn||ft.textContent!='Festival'||!/festival du square/i.test(fn.textContent))return;ov._fstp=1;
+ ft.textContent='Rendez-vous de l’année';ov._rdvp=1;
+ const cv=ov.querySelector('canvas');if(!cv)return;const c2=document.createElement('canvas');c2.width=cv.width;c2.height=cv.height;c2.className=cv.className;c2.style.cssText=cv.style.cssText;cv.style.display='none';cv.after(c2);
+ const g=c2.getContext('2d');g.imageSmoothingEnabled=false;const t0=performance.now();(function fr(){if(!document.body.contains(c2))return;g.clearRect(0,0,c2.width,c2.height);festPoster(g,(performance.now()-t0)/1000);requestAnimationFrame(fr)})()}catch(_){}}).observe(document.body,{childList:true,subtree:true});
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
