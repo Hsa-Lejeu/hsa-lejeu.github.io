@@ -6268,6 +6268,18 @@ setInterval(()=>{try{const w=document.getElementById('tvw');if(!w||typeof TOUR==
  const tt=w.querySelector('.vtt');if(tt.textContent!==txt)tt.textContent=txt}catch(_){}},200);
 })();
 
+// ===== v247 : le son s'arrête quand l'appli passe en arrière-plan ; salaire du 1er mois au prorata ; créateur de personnage sur petit écran
+(function(){const PLAY=new Set(),_p=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(){PLAY.add(this);return _p.apply(this,arguments)};
+ let stopped=[];const hide=()=>{try{stopped=[];PLAY.forEach(a=>{if(!a.paused){stopped.push(a);a.pause()}});if(typeof AU!='undefined'&&AU.ctx&&AU.ctx.state=='running')AU.ctx.suspend()}catch(_){}};
+ const show=()=>{try{if(typeof AU!='undefined'&&AU.ctx&&AU.ctx.state=='suspended')AU.ctx.resume();stopped.forEach(a=>{if(a.paused&&(a.loop||a.duration>8)){const r=a.play();if(r&&r.catch)r.catch(()=>{})}});stopped=[]}catch(_){}};
+ document.addEventListener('visibilitychange',()=>{document.hidden?hide():show()});addEventListener('pagehide',hide);addEventListener('blur',()=>{if(document.hidden)hide()});addEventListener('freeze',hide);})();
+// salaire du premier mois : une embauche en cours de mois n'est payée que pour les jours travaillés
+{const tag=(o,a)=>{const n0=STF.length,r=o(...a);try{if(STF.length>n0){const z=STF[STF.length-1];z.hm=(YR-1)*12+mo;z.hd=day}}catch(_){}return r};W('hire',tag);W('hireX',tag)}
+W('monthEnd',(o,a)=>{try{if(started&&!ended){const am=(YR-1)*12+mo;let g=0;STF.forEach(z=>{if(z.hm===am&&z.hd>1&&!z.free){const s=z.role=='doc'?SALD+15*(YR-1):SAL+8*(YR-1);g+=Math.round(s*(z.hd-1)/30)}});if(g>0){eu+=g;LM.i['Embauches en cours de mois (prorata)']=(LM.i['Embauches en cours de mois (prorata)']||0)+g;LY.i['Embauches en cours de mois (prorata)']=(LY.i['Embauches en cours de mois (prorata)']||0)+g}}}catch(_){}return o(...a)});
+try{ICON['Embauches en cours de mois (prorata)']='📆'}catch(_){}
+// créateur de personnage : une seule colonne de réglages dès que la place manque
+{const st=document.createElement('style');st.textContent='#cgen .opts{container-type:inline-size;width:100%;align-self:stretch}@container (max-width:600px){#cgen .sel{grid-template-columns:1fr!important}}#cgen .row span{white-space:nowrap}#cgen .card{max-width:min(760px,100%)}';document.head.appendChild(st)}
+
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
 W('upd',(o,a)=>{const r=o(...a);try{polTick(a[0]);orTick(a[0])}catch(e){console.error(e)}return r});
