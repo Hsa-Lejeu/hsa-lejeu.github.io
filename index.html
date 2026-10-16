@@ -1063,7 +1063,7 @@ const TUT=[
 [()=>$('eu').parentNode,"💶 Le <b>budget</b> de la halte. Touche-le pour voir le détail : la ville et l’ARS financent notre travail, et chaque mois il faut payer les salaires."],
 [()=>$('ac').parentNode,"👥 Le nombre de <b>personnes accompagnées</b>. Touche-le pour suivre le <b>parcours</b> de chacun·e : confiance, soins, droits, un toit, un projet… jusqu’à l’envol 🕊️."],
 [()=>$('qf').closest('.r')||$('qf').closest('#hud>div'),"🏘️ La <b>tranquillité du quartier</b>. Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues et dialogue avec les habitant·es la font remonter."],
-[()=>$('nf').closest('.r')||$('nf').closest('#hud>div'),"📣 La <b>notoriété</b> : plus la halte est connue, plus les personnes qui en ont besoin viennent nous voir."],
+[()=>$('acf')?$('acf').closest('.r'):$('nf').closest('#hud>div'),"🤝 😊 👥 Les autres scores du bilan final : l’<b>accompagnement social</b> (hébergements, droits, repas), la <b>satisfaction</b> des personnes accueillies et l’<b>équipe</b> (moral, formations, salaires). La notoriété, elle, se voit dans le quartier : affiches, enseigne, bus…"],
 [()=>$('spf').closest('.r')||$('spf').closest('#hud>div'),"💚 La <b>santé publique</b> : tout ce que la halte fait pour la santé des personnes accueillies. Dépistages, vaccins, préservatifs, consultations psy, surdoses sauvées grâce à la naloxone… Attention, elle ne monte que si on a du <b>stock</b> : pense à commander dans l’onglet 🩺 Soins. Touche les barres pour voir le détail. C’est l’un des scores du bilan final !"],
 
 [()=>$('pl').closest('#hud>div'),"📅 La <b>date</b> et la saison. La barre avance pendant le mois : à la fin de chaque mois, on fait le bilan. On a trois ans pour convaincre !"],
@@ -5539,7 +5539,7 @@ setInterval(()=>{try{const f=$('spf');if(!f)return;const v=spNow();f.style.width
  if(hb&&sb){hb.title='Menu';hb.setAttribute('onclick','hudMenu()');hb.textContent='☰';hb.style.fontWeight='900';sb.remove()}})();
 window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)return;const mb=$('mb'),h2=mb.querySelector('h2');
  const qv=Math.round(q),nv=Math.round(NOT),col=v=>v<40?'neg':'pos';
- h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b><br>Plus la halte est connue, plus les personnes qui en ont besoin viennent.</p><h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
+ h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
  $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button class="go" onclick="closeH()">Fermer</button></div>';
@@ -5676,7 +5676,7 @@ window.finModal=function(){if(!$('m').hidden)return;paused=true;
 (function(){const st=document.createElement('style');st.textContent=`#ulp{top:calc(var(--hh,64px) + 10px)!important}
 @media (orientation:portrait){#ctoast{top:calc(var(--hh,64px) + 10px)!important;transition:transform .45s cubic-bezier(.2,1.5,.45,1),opacity .3s!important}#ctoast:not(.on){opacity:0;pointer-events:none}}`;document.head.appendChild(st)})();
 // si les deux annonces sont là en même temps, celle des nouveautés se place juste en dessous de la carte
-setInterval(()=>{try{const p=$('ulp');if(!p)return;const c=$('ctoast');let t='';if(c&&c.classList.contains('on')&&matchMedia('(orientation:portrait)').matches){const r=c.getBoundingClientRect();if(r.bottom>0&&r.height>0)t=(r.bottom+8)+'px'}p.style.setProperty('top',t||'calc(var(--hh,64px) + 10px)','important')}catch(_){}},200);
+setInterval(()=>{try{const p=$('ulp');if(!p)return;const c=$('ctoast');let t='';if(c&&c.classList.contains('on')&&matchMedia('(orientation:portrait)').matches){const r=c.getBoundingClientRect();if(r.bottom>0&&r.height>0)t=(r.bottom+8)+'px'}p.style.setProperty('top',t||(Math.max(Math.round($('hud').getBoundingClientRect().bottom),0)+10)+'px','important')}catch(_){}},200);
 
 // ===== v213 : l'invitation aux rendez-vous montre une affiche fixe ; l'animation est gardée pour la récompense (quand on participe)
 const RDVP={tab:['#2e7d4f','En novembre','Mois sans tabac'],sida:['#c0392b','1er décembre','Journée mondiale de lutte contre le sida'],sdp:['#e8780e','Autour du 26 juin','Support. Don’t Punish.'],iod:['#6a4fb5','31 août','Journée internationale des overdoses']};
@@ -6640,6 +6640,25 @@ window.hsaSign=function(n){const v=window.SIGNV||5;if(v==1||NOTT()<3)return HS0(
   for(let i=0;i<=16;i++){const bx=X+1+i*(w-2)/16,on=((T*3+i)|0)%2==0;x.fillStyle=on?'#fff6b0':'#9a7a34';x.fillRect(bx-.55,Y+h+.9,1.1,1.1)}return}
 
  return HS0(n)};
+
+// ===== v256 : les 5 scores du bilan final dans le menu du haut (la notoriété se voit dans le quartier)
+window.SC5=function(){const cl=v=>Math.max(0,Math.min(100,Math.round(v)));let soc=0,sat=0,eq=50;
+ try{soc=cl((CN.h||0)*20+(CN.d||0)*10+(CN.r||0)*5)}catch(_){}
+ try{const L=Object.values(hist).filter(h=>h.v),n=L.length;if(n){const hy=L.filter(h=>h.done).length,gn=L.filter(h=>h.st=='gone').length,av=L.reduce((t,h)=>t+Math.max(0,h.sat),0)/n;sat=cl(av+35*hy/n-45*gn/n+(CN.dn||0)*4+(CN.ws||0)*3)}}catch(_){}
+ try{eq=cl(ET?.8*ES/ET+.2*(100-AR*20):50)}catch(_){}return{soc,sat,eq}};
+(function(){const st=document.createElement('style');st.textContent=`
+#hud #spw{flex:2.2 1 190px!important;max-width:460px!important;min-width:150px!important;flex-direction:row!important;align-items:center!important;gap:5px!important;padding:1px 7px!important}
+#spw .r{flex:1 1 0;min-width:0;height:auto!important;gap:2px!important}#spw .r .ic{font-size:11px!important;width:13px!important}
+#hud #spw .bar{height:7px!important;min-width:10px!important}#spw .r.nhide{display:none!important}
+#spw #acf{background:#e0a020}#spw #saf{background:#f06292}#spw #eqf{background:#7b8cf0}
+@media (orientation:portrait){#hud #spw{flex-basis:100%!important;max-width:none!important;order:9}}`;document.head.appendChild(st);
+ const go=()=>{const w=$('spw'),sf=$('spf'),qf=$('qf'),nf=$('nf');if(!w||!sf||!qf||!nf)return false;if($('acf'))return true;
+  const rq=qf.closest('.r'),rn=nf.closest('.r'),rs=sf.closest('.r');rn.classList.add('nhide');rn.style.setProperty('display','none','important');w.insertBefore(rs,w.firstChild);
+  const mk=(id,ic,t)=>{const r=document.createElement('span');r.className='r';r.title=t;r.innerHTML=`<span class="ic">${ic}</span><span class="bar"><i id="${id}"></i></span>`;return r};
+  let ref=rq.nextSibling;[['acf','🤝','Accompagnement social'],['saf','😊','Satisfaction des personnes accueillies'],['eqf','👥','Équipe']].forEach(a=>{const r=mk(...a);w.insertBefore(r,ref);ref=r.nextSibling});
+  w.title='Les 5 scores du bilan : santé publique · tranquillité · accompagnement social · satisfaction · équipe';return true};
+ const t=setInterval(()=>{try{if(go())clearInterval(t)}catch(_){}},300);
+ setInterval(()=>{try{if(!$('acf'))return;const s=SC5();$('acf').style.width=s.soc+'%';$('saf').style.width=s.sat+'%';$('eqf').style.width=s.eq+'%'}catch(_){}},700)})();
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
