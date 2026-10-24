@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v324')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v325')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -4828,7 +4828,7 @@ function hdMake(ov){const cvs=ov.querySelector('canvas');cvs.width=HDC.W;cvs.hei
    cg.filter='none';cg.clearRect(0,0,HDC.W/2,HDC.H/2);cg.drawImage(cvs,0,0,HDC.W/2,HDC.H/2);
    [[0,.15,.88,1,'blur(1.5px)',1],[.15,.26,.76,.88,'blur(.8px)',.6]].forEach(([a0,a1,b0,b1,fl,al])=>{g.save();g.beginPath();g.rect(0,a0*HDC.H,HDC.W,(a1-a0)*HDC.H);g.rect(0,b0*HDC.H,HDC.W,(b1-b0)*HDC.H);g.clip();g.filter=fl;g.globalAlpha=al;g.drawImage(Cc,0,0,HDC.W,HDC.H);g.restore()})}
   // vignettage
-  {const gr=g.createRadialGradient(HDC.W/2,HDC.H/2,HDC.H*.35,HDC.W/2,HDC.H/2,HDC.W*.72);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,o.night?'rgba(0,0,0,.6)':'rgba(0,0,0,.42)');g.fillStyle=gr;g.fillRect(0,0,HDC.W,HDC.H)}
+  {const gr=g.createRadialGradient(HDC.W/2,HDC.H/2,Math.min(HDC.W,HDC.H)*.35,HDC.W/2,HDC.H/2,Math.max(Math.min(HDC.W,HDC.H)*.36,Math.hypot(HDC.W,HDC.H)*.55));gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,o.night?'rgba(0,0,0,.6)':'rgba(0,0,0,.42)');g.fillStyle=gr;g.fillRect(0,0,HDC.W,HDC.H)}
   // grain
   g.save();g.globalAlpha=.05;g.globalCompositeOperation='overlay';const p=g.createPattern(Nc,'repeat');g.translate((T*37|0)%128,(T*53|0)%128);g.fillStyle=p;g.fillRect(-128,-128,HDC.W+256,HDC.H+256);g.restore();
   // bandes noires
@@ -4932,7 +4932,7 @@ function hdCity(ov){const cvs=ov.querySelector('canvas'),v=$('view');const W=Mat
   g.save();g.globalAlpha=k;g.globalCompositeOperation='overlay';g.fillStyle=night?'rgba(40,50,120,.28)':'rgba(255,190,120,.16)';g.fillRect(0,0,W,H);g.restore();
   if(!night){g.save();g.globalCompositeOperation='lighter';g.globalAlpha=k;for(let i=0;i<5;i++){const a=(.55+i*.17+Math.sin(T*.3+i)*.04),x0=-60+i*W*.04,L=W*2;g.fillStyle=`rgba(255,235,180,${.035+.015*Math.sin(T*.7+i)})`;g.beginPath();g.moveTo(x0,-40);g.lineTo(x0+Math.cos(a)*L+50,-40+Math.sin(a)*L);g.lineTo(x0+Math.cos(a)*L-50,-40+Math.sin(a)*L);g.fill()}g.restore()}
   if(hasF){bg.filter='none';bg.clearRect(0,0,Bc.width,Bc.height);bg.drawImage(cvs,0,0,Bc.width,Bc.height);g.save();g.globalCompositeOperation='lighter';g.globalAlpha=k*(night?.28:.18);g.filter='blur(2px) contrast(1.6) brightness(.8)';g.drawImage(Bc,0,0,W,H);g.restore()}
-  {const gr=g.createRadialGradient(W/2,H/2,H*.35,W/2,H/2,W*.72);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,`rgba(0,0,0,${k*(night?.6:.42)})`);g.fillStyle=gr;g.fillRect(0,0,W,H)}
+  {const gr=g.createRadialGradient(W/2,H/2,Math.min(W,H)*.35,W/2,H/2,Math.max(Math.min(W,H)*.36,Math.hypot(W,H)*.55));gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,`rgba(0,0,0,${k*(night?.6:.42)})`);g.fillStyle=gr;g.fillRect(0,0,W,H)}
   g.save();g.globalAlpha=.05*k;g.globalCompositeOperation='overlay';g.fillStyle=g.createPattern(Nc,'repeat');g.translate((T*37|0)%128,(T*53|0)%128);g.fillRect(-128,-128,W+256,H+256);g.restore();
   g.fillStyle='#07060b';g.globalAlpha=k;g.fillRect(0,0,W,H*.07);g.fillRect(0,H*.93,W,H*.07);g.globalAlpha=1};
  const frame=(T,o)=>{o=o||{};const groups=passes();g.setTransform(1,0,0,1,0,0);g.filter='none';g.globalAlpha=1;g.globalCompositeOperation='source-over';
@@ -5540,7 +5540,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v324')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v325')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -6995,6 +6995,25 @@ window.radDraw=function(i,a,b,W_,dw){const r=FU.radiator;if(!r)return;const w=r[
  let X=-1;window._radRelax=0;for(let c=W_-w-2;c>=2;c--){if(!ov(c)){X=c;break}}if(X<0){window._radRelax=1;for(let c=W_-w-2;c>=2;c--){if(!ov(c)){X=c;break}}}window._radRelax=0;if(X<0)return;Q('radiator',a+X,b+20)};
 
 
+// ===== v325 : fin de partie — plus de fenêtres d'événements par-dessus l'allocution ni le bilan / l'épilogue, et le jeu reste en pause
+W('endGame',(o,a)=>{try{if(typeof POPQ!='undefined')POPQ.length=0;document.querySelectorAll('#fmo').forEach(e=>e.remove())}catch(_){}const r=o(...a);try{if(ended)paused=true}catch(_){}return r});
+W('popNext',(o,a)=>{try{if(ended||document.getElementById('tvov')||document.getElementById('epov')){if(typeof POPQ!='undefined')POPQ.length=0;return}}catch(_){}return o(...a)});
+W('popWin',(o,a)=>{try{if(ended||document.getElementById('tvov')||document.getElementById('epov'))return}catch(_){}return o(...a)});
+setInterval(()=>{try{if(document.getElementById('tvov')||document.getElementById('epov'))paused=true}catch(_){}},250);
+
+// ===== v325 : épilogue — bulles jamais en double, jamais coupées au bord, et décalées si elles se chevauchent
+window.epFix=function(b){try{const box=b.parentNode;if(!box)return;const t0=b.textContent,t=t0.replace(/ ([!?:;»])/g,'\u00a0$1').replace(/« /g,'«\u00a0');if(t!==t0)b.textContent=t;
+  if([...box.children].some(c=>c!==b&&!c.classList.contains('out')&&c.textContent==t)){b.remove();return}
+  const SW=box.clientWidth,SH=box.clientHeight,pad=6;if(!SW)return;
+  if(b.offsetWidth>SW-2*pad)b.style.maxWidth=(SW-2*pad)+'px';
+  // position réelle (sans l'animation d'apparition) : le coin bas-centre est à (offsetLeft, offsetTop) à cause de translate(-50%,-100%)
+  const w=b.offsetWidth,h=b.offsetHeight;let cx=b.offsetLeft,by=b.offsetTop;
+  cx=Math.max(pad+w/2,Math.min(SW-pad-w/2,cx));
+  const others=[...box.children].filter(c=>c!==b&&!c.classList.contains('out')).map(c=>({l:c.offsetLeft-c.offsetWidth/2,r:c.offsetLeft+c.offsetWidth/2,t:c.offsetTop-c.offsetHeight,b:c.offsetTop}));
+  for(let k=0;k<5;k++){const l=cx-w/2,r=cx+w/2,t=by-h;const hit=others.find(q=>q.l<r&&q.r>l&&q.t<by&&q.b>t);if(!hit)break;by=hit.t-4}
+  by=Math.max(pad+h,Math.min(SH-pad,by));b.style.left=cx+'px';b.style.top=by+'px'}catch(_){}};
+new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes){if(n.nodeType==1&&n.classList&&n.classList.contains('epbub'))epFix(n)}}).observe(document.body,{childList:true,subtree:true});
+
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
 W('upd',(o,a)=>{const r=o(...a);try{polTick(a[0]);orTick(a[0])}catch(e){console.error(e)}return r});
@@ -7043,7 +7062,7 @@ W('collect',(o,a)=>{const s0=DAS[0].l+DAS[1].l,r=o(...a);if(DAS[0].l+DAS[1].l<s0
 W('tourGo',(o,a)=>{const w=!!TOUR,r=o(...a);if(!w&&TOUR){B.tours=(B.tours||0)+1;B['t_'+TOUR.k]=(B['t_'+TOUR.k]||0)+1}return r});
 W('startWS',(o,a)=>{const w=!!WS,r=o(...a);if(!w&&WS)B.wsc=(B.wsc||0)+1;return r});
 W('endMeet',(o,a)=>{B.mt=(B.mt||0)+1;return o(...a)});})();
-</script><script>window.HSAV='hsa-v324'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
+</script><script>window.HSAV='hsa-v325'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
 var d=document.createElement('div');d.id='ioshint';d.innerHTML='<b>📲 Installer le jeu sur ton iPhone</b><br>Dans Safari, touche <b>Partager</b> (le carré avec une flèche ⬆️) puis <b>« Sur l’écran d’accueil »</b>. Le jeu s’ouvrira en plein écran, comme une appli.<button aria-label="Fermer">✕</button>';
 d.style.cssText='position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99999;max-width:min(92vw,420px);background:#fbf6e9;color:#3a3026;border:3px solid #6a5c4c;border-radius:12px;box-shadow:0 6px 0 #2a2433;padding:10px 34px 10px 12px;font:13px/1.35 system-ui,sans-serif';
 var b=d.querySelector('button');b.style.cssText='position:absolute;top:4px;right:6px;border:0;background:none;font-size:18px;color:#6a5c4c';b.onclick=function(){d.remove();try{localStorage.setItem('hsa-ioshint','1')}catch(e){}};
