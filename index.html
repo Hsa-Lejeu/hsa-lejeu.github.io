@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v325b')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v327')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -1523,7 +1523,7 @@ else if(L=='brad'){TT(4,238,287,100,139);[[244,336,'table2'],[294,336,'table1'],
 [[76,0],[5,1],[80,2],[12,3],[84,4],[22,5]].forEach(([ci,k])=>{const ph=t*.12+k*1.3,X=284+Math.sin(ph)*8,Y=316+((t*6+k*22)%100),d=(Math.floor(t*.5+k)%2)?0:3;wdl(Y,()=>pc(ci,X+(k%2?-14:14)*(Y>340&&Y<380?1:0),Y,0,1,d))});
 wdl(312,()=>pancarte('BRADERIE SOLIDAIRE',288,312))}}
 window.lotDraw=lotDraw;
-function autoDraw(){if(!B.auto)return;wdl(62,()=>{LD('auto',230,62);if(seas()==0||true){const a=.25+.15*Math.sin(performance.now()/400);x.globalAlpha=a;rect(231,46,12,4,'#7dffa0');x.globalAlpha=1}})}
+const AUTOX=203;function autoDraw(){if(!B.auto)return;wdl(62,()=>{LD('auto',AUTOX,62);if(seas()==0||true){const a=.25+.15*Math.sin(performance.now()/400);x.globalAlpha=a;rect(AUTOX+1,46,12,4,'#7dffa0');x.globalAlpha=1}})}
 window.autoDraw=autoDraw;
 function lotStart(){if(B.lotSt||B.lot||!P.j||eu<300)return;eu-=300;B.lotSt='ch';B.lotT=LOTD;q+=2;NOT=nUp(2);
 const us=Object.values(hist).filter(h=>h.st=='ok'&&h.v>0).sort(()=>Math.random()-.5).slice(0,3);us.forEach(h=>{h.sat=Math.min(100,(h.sat||50)+15);h.tj=(h.tj||0)+1});
@@ -2799,7 +2799,7 @@ W('draw',(o,a)=>{const r=o(...a);try{const A=AMB;if(!A||MEET)return r;const T=Da
  x.setTransform(2,0,0,2,OX*2,OY*2);
  const carry=A.ph=='back'||A.ph=='load';
  if(!carry&&A.ph!='out'){if(A.ph=='in'||A.ph=='walk'||A.ph=='care')lying(A.ci,A.px-5,A.py-1)}
- const c0_=A.crew[0],cx_=c0_.x+3.5,CR=carry?[{x:cx_-14,y:c0_.y+1,mv:c0_.mv,d:c0_.d},{x:cx_+14,y:c0_.y+1,mv:c0_.mv,d:c0_.d}]:A.crew;CR.forEach((c,j)=>{if(A.ph=='out'||A.ph=='in'||carry)return;if(A.ph=='load'&&A.t>.5)return;pc(AMBC[j],c.x,c.y,0,c.mv,c.d)});
+ const c0_=A.crew[0],cx_=c0_.x+3.5,CR=carry?[{x:cx_-14,y:c0_.y+1,mv:c0_.mv,d:c0_.d},{x:cx_+14,y:c0_.y+1,mv:c0_.mv,d:c0_.d}]:A.crew;CR.forEach((c,j)=>{if(A.ph=='out'||A.ph=='in'||carry||A.ph=='walk'||A.ph=='care')return;if(A.ph=='load'&&A.t>.5)return;pc(AMBC[j],c.x,c.y,0,c.mv,c.d)});
  if(false&&carry){const mx=cx_,my=c0_.y;x.save();x.translate(mx,my-5);x.rotate(-Math.PI/2);fs('bedh',-4.75,-9.75);x.restore();lying(A.ci,mx-2,my-7);CR.forEach((c,j)=>pc(AMBC[j],c.x,c.y,0,c.mv,c.d))}
  if(A.ph=='care'){const p=A.crew[0];x.font='6px sans-serif';x.fillText(((T*2)|0)%2?'💉':'🩺',p.x+3,p.y-12);x.font=LBL}
  x.restore()}catch(e){}return r});
@@ -2857,7 +2857,7 @@ const A30={
  nalox(H,X,Y){const R=H.R;R(X,Y,12,8,'#2a2433');R(X+1,Y+1,10,6,'#ff8a2a');R(X+1,Y+1,10,1,'#ffb36b');R(X+4,Y-3,3,7,'#2a2433');R(X+5,Y-2,1,5,'#ffffff');R(X+5,Y-4,1,2,'#cfd6e0');R(X+8,Y+3,2,2,'#ffffff')},
  bone(H,X,Y){const R=H.R;R(X,Y+1,12,2,'#f4efe2');R(X-1,Y,3,4,'#f4efe2');R(X+11,Y,3,4,'#f4efe2');R(X-1,Y,1,1,'#2a2433');R(X+13,Y+3,1,1,'#2a2433');R(X,Y+3,12,1,'#d8cfbd')},
  key(H,X,Y){const g=H.g;g.save();g.translate(X,Y);g.lineWidth=2.4;g.strokeStyle='#2a2433';g.beginPath();g.arc(0,0,5,0,7);g.stroke();g.lineWidth=1.4;g.strokeStyle='#ffd23f';g.beginPath();g.arc(0,0,5,0,7);g.stroke();
-  H.R(X+4,Y-1.5,14,3,'#2a2433');H.R(X+5,Y-.8,12,1.6,'#ffd23f');H.R(X+13,Y+1,2,4,'#2a2433');H.R(X+16,Y+1,2,3,'#2a2433');H.R(X+13.4,Y+1,1.2,3,'#e8b820');H.R(X+16.4,Y+1,1.2,2,'#e8b820');g.restore()},
+  H.R(4,-1.5,14,3,'#2a2433');H.R(5,-.8,12,1.6,'#ffd23f');H.R(13,1,2,4,'#2a2433');H.R(16,1,2,3,'#2a2433');H.R(13.4,1,1.2,3,'#e8b820');H.R(16.4,1,1.2,2,'#e8b820');g.restore()},
  aura(H,X,Y,T){const g=H.g;for(let i=0;i<3;i++){const r=9+i*3+Math.sin(T*3+i)*1.5;g.globalAlpha=.22-i*.06;g.fillStyle='#ffe27a';g.beginPath();g.ellipse(X,Y-12,r,r*1.2,0,0,7);g.fill()}g.globalAlpha=1;for(let i=0;i<4;i++){const a=T*2+i*1.57;H.R(X+Math.cos(a)*12,Y-12+Math.sin(a)*14,1.5,1.5,'#fff6b0')}},
  LO(H,n,X,YB){if(typeof LOM=='undefined')return;const r=LOM[n];if(r&&LOTI.complete)H.g.drawImage(LOTI,r[0],r[1],r[2],r[3],Math.round(X),Math.round(YB-r[3]),r[2],r[3])},
  grass(H){const g=H.g;if(TIL.complete)for(let X=0;X<200;X+=16)for(let Y=0;Y<104;Y+=16)g.drawImage(TIL,[0,1,2,3][seas()]*16,0,16,16,X,Y,16,16)},
@@ -4774,7 +4774,7 @@ function sparkle(mx,my,big){if(matchMedia('(prefers-reduced-motion:reduce)').mat
  wave(0,16,big?70:55);wave(380,12,big?55:42);wave(760,10,big?40:30);try{sfx('coin')}catch(_){};setTimeout(()=>{try{sfx('good')}catch(_){}},400)}
 window.flyMap=flyMap;window.sparkle=sparkle;
 // lieux sur le plan (x, y du plan entier)
-const FLYP={lv:[405,160],ax:[405,281],lot:[288,400],van:[392,250],auto:[237,105],g:[OX+204,OY+116],
+const FLYP={lv:[405,160],ax:[405,281],lot:[288,400],van:[392,250],auto:[210,105],g:[OX+204,OY+116],
  pb:[398,65],px:[290,65],pk:[181,412],po:[424,381],pe:[363,397],pj:[288,400]};
 const flyBuy=(key,ok)=>(o,a)=>{const was=ok(),r=o(...a);try{if(!was&&ok()){const p=FLYP[key];if(p)flyMap(p[0],p[1],1.6,()=>sparkle(p[0],p[1],1))}}catch(_){}return r};
 W('buyExt',(o,a)=>{const k=a[0],was=!!B[k],r=o(...a);try{if(!was&&B[k]){const p=FLYP[k];flyMap(p[0],p[1],1.6,()=>sparkle(p[0],p[1],1))}}catch(_){}return r});
@@ -5540,7 +5540,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v325b')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v327')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7017,6 +7017,39 @@ new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes){if(n.no
 // ===== v325 : épilogue — la rue du bas est piétonne pendant la fête (pas de voiture au milieu de la foule)
 {const _hf=window.HDFILTER;window.HDFILTER=(n,a)=>{try{if((n=='obb'||n=='wheels')&&window.FBC&&document.getElementById('epov')&&typeof a[0]=='string'&&/^car_l/.test(a[0]))return true;if(n=='wheels'&&window.FBC&&document.getElementById('epov')&&a[2]>260&&a[2]<300)return true}catch(_){}return _hf?_hf(n,a):false}}
 
+// ===== v327 : surdose — l'ambulance roule sur la route principale jusqu'à la halte, puis fait demi-tour et rentre à l'hôpital ;
+// les ambulanciers passent derrière les arbres ; le brancard suit le sens de la marche (dans l'axe des portes)
+{const HX0=AMBC_X-28,HXS=286.5,LY=276;
+ const roadClear=()=>{try{return !TRAF.some(c=>c.li==1&&c.X+c.w>HXS-12&&c.X<AMBC_X+34)}catch(_){return true}};
+ const _as=ambStart;ambStart=function(...a){const r=_as(...a);try{if(AMB){const S0=[HXS-5+26-OX,LY-36-(OY-EY)];AMB.P.splice(0,2,S0);AMB.crew.forEach((c,j)=>{c.x=S0[0]+(j?7:0);c.y=S0[1]+(j?1:0)});AMB.hz=0;AMB.hx=HX0;AMB.hd=-1}}catch(_){}return r};window.ambStart=ambStart;
+ const _st=ambStep;ambStep=function(...a){const A=AMB,dt=a[0]||0;if(!A)return;
+  if(A.ph=='in'){if(!A.hz){if((A.vy||0)>8||roadClear())return _st(...a);A.t+=dt;return}
+   A.t+=dt;A.hx=Math.max(HXS,A.hx-46*dt);if(A.hx<=HXS){A.ph='walk';A.k=0;A.t=0}return}
+  if(A.ph=='out'&&!A.hdone){A.t+=dt;A.hz=1;A.hd=1;A.hx=Math.min(HX0,A.hx+46*dt);if(A.hx>=HX0){A.hdone=1;A.hz=0;A.vy=0}return}
+  const r=_st(...a);return r};
+ // le passage de la verticale à la route : dès que le nez touche la chaussée, l'ambulance tourne
+ W('upd',(o,a)=>{const r=o(...a);try{const A=AMB;if(A&&A.ph=='in'&&!A.hz&&(A.vy||0)<=8&&roadClear()){A.hz=1;A.hd=-1;A.hx=HX0}}catch(_){}return r});
+ const _av=ambVeh;ambVeh=function(A,T){if(!A.hz)return _av(A,T);if(!AMBI.complete)return;const R_=A.hd>0,X=A.hx-5,Yt=LY-33.5,sx=R_?114:0;
+  x.drawImage(AMBI,sx,0,114,67,X,Yt,57,33.5);const ph=A.ph;if(ph=='walk'&&A._w==null)A._w=T;const on=ph=='in'||ph=='out'||(ph=='walk'&&T-A._w<2.5);
+  if(on){const f=((T*5)|0)%2,bars=R_?[4.5,36]:[20.5,52],bx=bars[f];x.globalAlpha=.55;x.fillStyle='#bfe6ff';x.fillRect(X+bx-1,Yt+.5,2,14);x.globalAlpha=.28;x.fillStyle='#4aa8ff';x.beginPath();x.arc(X+bx,Yt+3,6,0,7);x.fill();x.globalAlpha=1}};
+}
+// ---- les ambulanciers sont dessinés avec les passant·es (et l'arbre repasse devant quand ils sont derrière)
+function crewDraw(){const A=AMB;if(!A||MEET)return;if(A.ph!='walk'&&A.ph!='care')return;A.crew.forEach((c,j)=>pc(AMBC[j],c.x,c.y,0,c.mv,c.d))}
+// ---- brancard : dans le sens de la marche (vertical pour passer les portes, horizontal dans le couloir)
+carryDraw=function(){const A=AMB;if(!A||MEET)return;const carry=A.ph=='back'||A.ph=='load';if(!carry||(A.ph=='load'&&A.t>.5))return;
+ const c0=A.crew[0];if(c0.mv)A.vert=c0.d==0||c0.d==3;const cx=c0.x+3.5,my=c0.y;
+ if(!A.vert){x.save();x.translate(cx,my-5);x.rotate(-Math.PI/2);fs('bedh',-4.75,-9.75);x.restore();lying(A.ci,cx-2,my-7);pc(AMBC[0],cx-14,my+1,0,c0.mv,c0.d);pc(AMBC[1],cx+14,my+1,0,c0.mv,c0.d);return}
+ const cy=my-5,up=c0.d==3,top=cy-11,bot=cy+21;
+ pc(AMBC[up?0:1],cx-4,top,0,c0.mv,c0.d);
+ fs('bedh',cx-4.75,cy-9.75);
+ x.save();x.beginPath();x.rect(cx-6,cy-12,12,9);x.clip();pc(A.ci,cx-4,cy+4,0,0,0);x.restore();
+ x.fillStyle='#9fc3e6';x.fillRect(cx-3.5,cy-3.5,7,9);x.fillStyle='#7fa6cc';x.fillRect(cx-3.5,cy-3.5,7,1);
+ pc(AMBC[up?1:0],cx-4,bot,0,c0.mv,c0.d)};
+W('streetLayer',(o,a)=>{try{if(!MEET)crewDraw()}catch(_){}return o(...a)});
+{const _tf=treeFix;treeFix=function(){const A=AMB;if(A&&(A.ph=='walk'||A.ph=='care')){const sv=STF.slice();try{A.crew.forEach(c=>STF.push({off:0,px:c.x+3.5,py:c.y}));return _tf()}finally{STF.length=0;sv.forEach(z=>STF.push(z))}}
+ if(A&&A.vert&&(A.ph=='back'||A.ph=='load')){const c0=A.crew[0],cx=c0.x+3.5,cy=c0.y-5,sv=STF.slice();try{[cy-11,cy+10,cy+21].forEach(y=>STF.push({off:0,px:cx,py:y}));return _tf()}finally{STF.length=0;sv.forEach(z=>STF.push(z))}}
+ return _tf()}}
+
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
 W('upd',(o,a)=>{const r=o(...a);try{polTick(a[0]);orTick(a[0])}catch(e){console.error(e)}return r});
@@ -7065,7 +7098,7 @@ W('collect',(o,a)=>{const s0=DAS[0].l+DAS[1].l,r=o(...a);if(DAS[0].l+DAS[1].l<s0
 W('tourGo',(o,a)=>{const w=!!TOUR,r=o(...a);if(!w&&TOUR){B.tours=(B.tours||0)+1;B['t_'+TOUR.k]=(B['t_'+TOUR.k]||0)+1}return r});
 W('startWS',(o,a)=>{const w=!!WS,r=o(...a);if(!w&&WS)B.wsc=(B.wsc||0)+1;return r});
 W('endMeet',(o,a)=>{B.mt=(B.mt||0)+1;return o(...a)});})();
-</script><script>window.HSAV='hsa-v326'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
+</script><script>window.HSAV='hsa-v327'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
 var d=document.createElement('div');d.id='ioshint';d.innerHTML='<b>📲 Installer le jeu sur ton iPhone</b><br>Dans Safari, touche <b>Partager</b> (le carré avec une flèche ⬆️) puis <b>« Sur l’écran d’accueil »</b>. Le jeu s’ouvrira en plein écran, comme une appli.<button aria-label="Fermer">✕</button>';
 d.style.cssText='position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99999;max-width:min(92vw,420px);background:#fbf6e9;color:#3a3026;border:3px solid #6a5c4c;border-radius:12px;box-shadow:0 6px 0 #2a2433;padding:10px 34px 10px 12px;font:13px/1.35 system-ui,sans-serif';
 var b=d.querySelector('button');b.style.cssText='position:absolute;top:4px;right:6px;border:0;background:none;font-size:18px;color:#6a5c4c';b.onclick=function(){d.remove();try{localStorage.setItem('hsa-ioshint','1')}catch(e){}};
