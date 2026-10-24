@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v318')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v319')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -3219,8 +3219,8 @@ function isRain(){if(!started||MEET||seas()!=3)return 0;const o=(mo*5+YR*3)%7;re
 window.isRain=isRain;
 W('draw',(o,a)=>{WX.rain=isRain();WX.win=started&&!MEET&&seas()==0?1:0;WX.k+=((WX.rain?1:0)-WX.k)*.04;const r=o(...a);
  try{if(WX.k>.02&&!MEET){const W_=cv.width,H_=cv.height,t=performance.now()/1000;x.save();x.setTransform(1,0,0,1,0,0);
-  x.globalCompositeOperation='multiply';x.fillStyle=`rgba(160,170,200,${.32*WX.k})`;x.fillRect(0,0,W_,H_);x.globalCompositeOperation='source-over';
-  x.strokeStyle=`rgba(205,220,245,${.7*WX.k})`;x.lineWidth=1.6;x.beginPath();const n=Math.round(380*WX.k);
+  x.fillStyle=`rgba(70,80,120,${.2*WX.k})`;x.fillRect(0,0,W_,H_);
+  x.strokeStyle=`rgba(205,220,245,${.7*WX.k})`;x.lineWidth=1.6;x.beginPath();const n=Math.round((typeof SLOW!='undefined'&&SLOW?130:240)*WX.k);
   for(let i=0;i<n;i++){const s=(i*7919)%1000/1000,X=((i*97.3+t*140)%(W_+80))-40,Y=((s*H_+t*(620+s*180))%(H_+40))-20;x.moveTo(X,Y);x.lineTo(X-4,Y+13)}x.stroke();
   // petites éclaboussures au sol
   x.fillStyle=`rgba(220,230,250,${.45*WX.k})`;for(let i=0;i<40*WX.k;i++){const p=(t*3+i*.37)%1,X=(i*211)%W_,Y=(i*367)%H_;if(p<.25)x.fillRect(X-p*8,Y,p*16,1.5)}
@@ -5409,7 +5409,7 @@ setInterval(()=>{try{const now=performance.now(),dt=Math.min(.2,(now-doorT0)/100
  if(near)s.hold=.5;else s.hold=Math.max(0,s.hold-dt);
  if(s.f<8){if(s.f>0||s.hold>0)s.f=Math.min(7,s.f+dt*16);if(s.f>=7&&s.hold<=0)s.f=8}
  else if(s.hold>0)s.f=7;else{s.f+=dt*16;if(s.f>=DAN)s.f=0}})}catch(_){}},40);
-window.doorDraw=function(cx,by,i){if(!DOORA.complete)return false;const s=DST[i]||{f:0},k=Math.floor(s.f)%DAN,dh=15.5,dw=Math.round(DAW*dh/DAH*2)/2;x.drawImage(DOORA,k*DAW,0,DAW,DAH,Math.round((cx-dw/2)*2)/2,by-dh,dw,dh);return true};
+window.doorDraw=function(cx,by,i){if(!DOORA.complete)return false;const s=DST[i]||{f:0},k=Math.floor(s.f)%DAN,dh=15.5,dw=Math.round(DAW*dh/DAH*2)/2;if(k>0){const x0=Math.round((cx-dw/2)*2)/2+1,y0=by-dh+2,w0=dw-2,h0=dh-2;x.fillStyle='#b2924a';x.fillRect(x0,y0,w0,h0);x.fillStyle='#9e8142';for(let yy=y0+1;yy<y0+h0;yy+=3)x.fillRect(x0,yy,w0,.5);x.fillStyle='rgba(0,0,0,.25)';x.fillRect(x0,y0,w0,1.5)}x.drawImage(DOORA,k*DAW,0,DAW,DAH,Math.round((cx-dw/2)*2)/2,by-dh,dw,dh);return true};
 
 // ===== v203 : quiz — la réponse s'affiche sur une fiche qui apparaît par-dessus, avec un petit jingle
 (function(){
@@ -5538,7 +5538,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v318')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v319')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -6992,6 +6992,9 @@ window.radDraw=function(i,a,b,W_,dw){const r=FU.radiator;if(!r)return;const w=r[
   return L.some(q=>(!window._radRelax||q[1]<b+13)&&x0<q[0]+q[2]+1&&x1>q[0]-1&&y0<q[1]+q[3]+1&&y1>q[1]-1)};
  let X=-1;window._radRelax=0;for(let c=W_-w-2;c>=2;c--){if(!ov(c)){X=c;break}}if(X<0){window._radRelax=1;for(let c=W_-w-2;c>=2;c--){if(!ov(c)){X=c;break}}}window._radRelax=0;if(X<0)return;Q('radiator',a+X,b+20)};
 
+// ===== v319 : pas de bulle de dialogue pendant les réunions (tout passe par la boîte de dialogue)
+W('talk',(o,a)=>{if(MEET){try{LG.unshift(`<b>${a[0]}</b> : « ${a[1]} »`);LG.length=3}catch(_){}return}return o(...a)});
+
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
 W('upd',(o,a)=>{const r=o(...a);try{polTick(a[0]);orTick(a[0])}catch(e){console.error(e)}return r});
@@ -7040,7 +7043,7 @@ W('collect',(o,a)=>{const s0=DAS[0].l+DAS[1].l,r=o(...a);if(DAS[0].l+DAS[1].l<s0
 W('tourGo',(o,a)=>{const w=!!TOUR,r=o(...a);if(!w&&TOUR){B.tours=(B.tours||0)+1;B['t_'+TOUR.k]=(B['t_'+TOUR.k]||0)+1}return r});
 W('startWS',(o,a)=>{const w=!!WS,r=o(...a);if(!w&&WS)B.wsc=(B.wsc||0)+1;return r});
 W('endMeet',(o,a)=>{B.mt=(B.mt||0)+1;return o(...a)});})();
-</script><script>window.HSAV='hsa-v318'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
+</script><script>window.HSAV='hsa-v319'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
 var d=document.createElement('div');d.id='ioshint';d.innerHTML='<b>📲 Installer le jeu sur ton iPhone</b><br>Dans Safari, touche <b>Partager</b> (le carré avec une flèche ⬆️) puis <b>« Sur l’écran d’accueil »</b>. Le jeu s’ouvrira en plein écran, comme une appli.<button aria-label="Fermer">✕</button>';
 d.style.cssText='position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99999;max-width:min(92vw,420px);background:#fbf6e9;color:#3a3026;border:3px solid #6a5c4c;border-radius:12px;box-shadow:0 6px 0 #2a2433;padding:10px 34px 10px 12px;font:13px/1.35 system-ui,sans-serif';
 var b=d.querySelector('button');b.style.cssText='position:absolute;top:4px;right:6px;border:0;background:none;font-size:18px;color:#6a5c4c';b.onclick=function(){d.remove();try{localStorage.setItem('hsa-ioshint','1')}catch(e){}};
