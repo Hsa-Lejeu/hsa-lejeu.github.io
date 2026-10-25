@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v330')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v331')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5539,7 +5539,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v330')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v331')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7119,6 +7119,59 @@ const GLOSS=[[/\bHSA\b/,'c01'],[/\bDASRI\b/,'c05'],[/analyse de (drogues|produit
  const scan=()=>{try{const tb=$('tabsbody');if(!tb)return;tb.querySelectorAll('button').forEach(b=>{if(skip(b))return;const t=(b.textContent||'').replace(/\d+ ?€/g,'');const c=cardOf(t);if(!c)return;const q=document.createElement('span');q.className='gq';q.textContent='?';q.title='Qu’est-ce que c’est ? (ouvre la carte)';q.dataset.c=c;q.onclick=e=>glossOpen(c,e);q.onpointerdown=e=>e.stopPropagation();b.appendChild(q)})}catch(_){}};
  let tm=0;new MutationObserver(()=>{clearTimeout(tm);tm=setTimeout(scan,120)}).observe($('tabsbody')||document.body,{childList:true,subtree:true});setTimeout(scan,500)})();
 
+// ===== v331 : les messages ne s'écrasent plus — file d'attente (chaque message reste au moins 1,8 s), compteur « +n » des messages manqués, et journal en touchant la bulle de Camille
+(function(){const st=document.createElement('style');st.textContent=`#cam{pointer-events:none}#cbub{pointer-events:auto;cursor:pointer}
+#cbn{position:absolute;top:-11px;right:-6px;left:auto;width:auto;min-width:22px;height:22px;box-sizing:border-box;padding:0 6px;border:2px solid #2a2433;border-radius:9px;background:#e8780e;color:#fff;font:400 13px/18px Lilita,'Atkinson Hyperlegible',sans-serif;text-align:center;box-shadow:0 2px 0 #2a2433;pointer-events:auto;cursor:pointer}
+#cbn:empty{display:none}#cbn.pop{animation:cbnp .3s}@keyframes cbnp{0%{transform:scale(1.5)}100%{transform:scale(1)}}
+#msgh{position:absolute;left:8px;right:8px;z-index:9;background:#fffaf0;border:3px solid #2a2433;border-radius:12px;box-shadow:0 4px 0 rgba(0,0,0,.3);font:12.5px/1.3 'Atkinson Hyperlegible',sans-serif;color:#3a3026;display:flex;flex-direction:column;max-height:46vh;pointer-events:auto}
+#msgh .mgh{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-bottom:2px solid #e8e0d0;font-weight:700}#msgh .mgh span{font-weight:400;color:#2f6fb5;cursor:pointer}#msgh .mgh span+span{margin-left:12px}
+#msgh .mgl{overflow:auto;flex:1}#msgh .mgi{padding:6px 10px;border-bottom:1px solid #eee5d5}#msgh .mgi small{display:block;color:#8a8070;font-size:11px}#msgh .mgi.new{background:#fff3dc}#msgh .mgi.good{border-left:4px solid #2e9e4f}#msgh .mgi.bad{border-left:4px solid #c0392b}#msgh .mgi.cam{border-left:4px solid #5b6ee1}
+#msgh .mge{padding:12px;text-align:center;color:#8a8070}
+@media(orientation:landscape){#msgh{left:60px;right:auto;width:min(520px,calc(100vw - var(--sw) - 150px))}#app:not(.open) #msgh{width:min(520px,70vw)}}`;document.head.appendChild(st);
+ const MQ=[],MH=[];let unread=0,open=false;
+ const stamp=()=>{try{return 'J'+day+' · '+(MN[Math.mgin(mo,11)]||'')}catch(_){return ''}};
+ const chip=()=>{let c=$('cbn');if(!c){c=document.createElement('div');c.id='cbn';c.onclick=e=>{e.stopPropagation();toggle()};$('cbub').appendChild(c)}const t=unread>0?'+'+unread:'';if(c.textContent!==t){c.textContent=t;c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop')}};
+ const _cs=camSay;camSay=function(t,cls){if(!t)return;const now=performance.now();
+  if(t!==CAM.full){const last=MH[0];if(!last||last.t!==t)MH.unshift({t,cls:cls||'',s:stamp(),cam:/^(💬 )?Camille/.test(t),seen:false});if(MH.length>60)MH.length=60;
+   if(CAM.talk&&now<CAM.last+1800&&MQ.length<4){MQ.push([t,cls]);return}
+   if(CAM.talk&&now<CAM.until){const cur=MH.find(m=>m.t===CAM.full);if(cur&&!cur.seen){cur.seen=true;unread++;chip()}}}
+  return _cs.apply(this,arguments)};window.camSay=camSay;
+ setInterval(()=>{try{if(!MQ.length)return;const now=performance.now();if(!CAM.talk||now>=CAM.last+1800){const [t,cls]=MQ.shift();if(CAM.talk&&now<CAM.until){const cur=MH.find(m=>m.t===CAM.full);if(cur&&!cur.seen){cur.seen=true;unread++;chip()}}_cs(t,cls)}}catch(_){}},200);
+ function render(){const h=$('msgh');if(!h)return;const l=h.querySelector('.mgl');l.innerHTML=MH.length?MH.map((m,i)=>`<div class="mgi ${m.cls} ${m.cam?'cam':''} ${i<unread?'new':''}">${m.t}<small>${m.s}</small></div>`).join(''):'<div class="mge">Aucun message pour l’instant.</div>'}
+ function place(){const h=$('msgh'),c=$('cam');if(!h||!c)return;const r=c.getBoundingClientRect(),a=$('app').getBoundingClientRect();h.style.bottom=(a.bottom-r.top+8)+'px'}
+ function toggle(){let h=$('msgh');if(h){h.remove();open=false;return}h=document.createElement('div');h.id='msgh';h.innerHTML='<div class="mgh">📨 Messages <div><span class="clr">tout effacer</span><span class="x">fermer ✕</span></div></div><div class="mgl"></div>';$('app').appendChild(h);h.querySelector('.x').onclick=e=>{e.stopPropagation();toggle()};h.querySelector('.clr').onclick=e=>{e.stopPropagation();MH.length=0;unread=0;chip();render()};h.onclick=e=>e.stopPropagation();render();place();open=true;unread=0;chip();try{sfx('page')}catch(_){}}
+ window.msgLog=toggle;
+ setTimeout(()=>{try{const b=$('cbub');b.onclick=e=>{e.stopPropagation();toggle()};chip()}catch(_){}},300);
+ document.addEventListener('pointerdown',e=>{if(open&&!e.target.closest('#msgh')&&!e.target.closest('#cbub'))toggle()},true);
+ addEventListener('resize',()=>{if(open)place()});
+ setInterval(()=>{try{if(open){place();if(MEET||!$('m').hidden)toggle()}}catch(_){}},400);
+})();
+
+// ===== v331 : l'argent lisible — prévision du mois à côté du budget, seuil d'équilibre, comment gagner de l'argent
+function euFc(){const mult=YR>1?(.6+.6*Math.max(0,q)/100):1,c=Math.round(MS.acc*CITY*mult),a=MS.care*ARS,sal=SALT();const rate=MS.acc?MS.care/MS.acc:.4;const per=CITY*mult+ARS*rate;const need=per>0?Math.ceil(sal/per):0;return{c,a,sal,net:c+a-sal,need,mult}}
+window.euFc=euFc;
+(function(){const st=document.createElement('style');st.textContent=`#hud #euf{display:inline-block;margin-left:5px;font:400 13px/1 Lilita,'Atkinson Hyperlegible',sans-serif;white-space:nowrap;text-shadow:0 1px 0 #fff}#hud #euf.pos{color:#2f8a3e}#hud #euf.neg{color:#d23a2e}#hud #euf:empty{display:none}
+#hud div.euw{display:flex;align-items:center;justify-content:center;gap:2px;flex-wrap:nowrap}#hud div.euw>b{display:inline}`;document.head.appendChild(st);
+ setInterval(()=>{try{const e=$('eu');if(!e)return;let f=$('euf');if(!f){f=document.createElement('span');f.id='euf';e.parentNode.classList.add('euw');e.parentNode.appendChild(f)}
+  if(!started||ended||MEET){f.textContent='';return}const F=euFc();const t=(F.net>=0?'↗ +':'↘ −')+Math.abs(F.net);if(f.textContent!==t){f.textContent=t;f.className=F.net>=0?'pos':'neg'}
+  e.parentNode.title=`Prévu à la fin du mois : ville +${F.c} € (${MS.acc} pers. × ${CITY} €${F.mult!=1?' × tranquillité':''}), ARS +${F.a} € (${MS.care} soigné·es × ${ARS} €), salaires −${F.sal} €. Touche pour le détail.`}catch(_){}},1000)})();
+// ---- Finances : seuil d'équilibre et sources d'argent
+W('finModal',(o,a)=>{const r=o(...a);try{const mb=$('mb');if(!mb||!/Finances|comptes de la halte/.test(mb.innerHTML))return r;const FC=euFc();
+ const F_=(typeof F!="undefined"&&F)||{};const gp=(typeof GP=='number'?Math.round(Math.max(0,Math.min(1,GP))*100):0);
+ const h=`<div class="eubx" style="margin:8px 0;padding:8px 10px;border:2px solid #2a2433;border-radius:10px;background:#fff3dc;box-sizing:border-box;max-width:100%">
+ <p style="margin:0 0 6px;font-size:13px"><b>⚖️ Seuil d’équilibre ce mois</b><br>Les salaires (−${FC.sal} €) sont couverts à partir de <b>${FC.need} personne${FC.need>1?'s':''} accompagnée${FC.need>1?'s':''}</b> (${MS.acc} jusqu’ici${MS.acc>=FC.need?' ✔':''}). Chaque personne rapporte ${CITY} € de la ville${FC.mult!=1?' (× tranquillité à partir de l’an 2)':''}, et ${ARS} € de plus de l’ARS si elle est soignée.</p>
+ <p style="margin:0;font-size:13px"><b>💡 D’où vient l’argent</b><br>
+ 👥 <b>Accueillir plus de monde</b> : un accueil plus grand, la maraude, la notoriété (affiches, bus, fêtes) font venir des personnes.<br>
+ 📑 <b>Appels à projets</b> : ${F_&&F_.a?`Camille est formée ; prochain dossier déposé à <b>${gp} %</b> (plus vite si la tranquillité est bonne).`:`<b>pas encore</b> : il faut la formation « rédaction d’appels à projets » (Équipe › Formations, 100 €). Ensuite, un financement de 100 à 450 € arrive régulièrement.`}<br>
+ 🎁 <b>Dons</b> : seulement quand la tranquillité du quartier dépasse 40 %.<br>
+ 🎓 <b>Question du mois</b> : +90 € par bonne réponse, au bilan.<br>
+ 🏛️ <b>Aides</b> : aide au démarrage la 1re année, plans grand froid et canicule, dotation en fin d’année selon le bilan.</p></div>`;
+ const btn=[...mb.querySelectorAll('button')].find(b=>/Fermer/.test(b.textContent));if(btn)btn.insertAdjacentHTML('beforebegin',h);else mb.insertAdjacentHTML('beforeend',h)}catch(e){console.error(e)}return r});
+// ---- Bilan du mois négatif : ce qu'il faudrait pour équilibrer
+W('monthEnd',(o,a)=>{const n0=HM.length,r=o(...a);try{const h=HM[HM.length-1];if(HM.length>n0&&h&&h.net<0){const sal=SALT(),mult=YR>1?(.6+.6*Math.max(0,q)/100):1;const acc=+(($('mb').textContent.match(/👥 (\d+) personne/)||[])[1]||0);const per=CITY*mult+ARS*.4;const need=Math.ceil(sal/per);
+  const p=document.createElement('p');p.style.cssText='font-size:13px;margin:6px 0;padding:6px 9px;border:2px solid #2a2433;border-radius:10px;background:#fff3dc';p.innerHTML=`⚖️ <b>Pour équilibrer</b> : accueillir environ <b>${need} personnes par mois</b> (${acc} ce mois-ci), ou trouver d’autres financements — touche 💶 en haut à gauche pour voir d’où vient l’argent.`;
+  const b=$('mb').querySelector('button');$('mb').insertBefore(p,b)}}catch(_){}return r});
+
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
 W('upd',(o,a)=>{const r=o(...a);try{polTick(a[0]);orTick(a[0])}catch(e){console.error(e)}return r});
@@ -7167,7 +7220,7 @@ W('collect',(o,a)=>{const s0=DAS[0].l+DAS[1].l,r=o(...a);if(DAS[0].l+DAS[1].l<s0
 W('tourGo',(o,a)=>{const w=!!TOUR,r=o(...a);if(!w&&TOUR){B.tours=(B.tours||0)+1;B['t_'+TOUR.k]=(B['t_'+TOUR.k]||0)+1}return r});
 W('startWS',(o,a)=>{const w=!!WS,r=o(...a);if(!w&&WS)B.wsc=(B.wsc||0)+1;return r});
 W('endMeet',(o,a)=>{B.mt=(B.mt||0)+1;return o(...a)});})();
-</script><script>window.HSAV='hsa-v330'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
+</script><script>window.HSAV='hsa-v331'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
 var d=document.createElement('div');d.id='ioshint';d.innerHTML='<b>📲 Installer le jeu sur ton iPhone</b><br>Dans Safari, touche <b>Partager</b> (le carré avec une flèche ⬆️) puis <b>« Sur l’écran d’accueil »</b>. Le jeu s’ouvrira en plein écran, comme une appli.<button aria-label="Fermer">✕</button>';
 d.style.cssText='position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99999;max-width:min(92vw,420px);background:#fbf6e9;color:#3a3026;border:3px solid #6a5c4c;border-radius:12px;box-shadow:0 6px 0 #2a2433;padding:10px 34px 10px 12px;font:13px/1.35 system-ui,sans-serif';
 var b=d.querySelector('button');b.style.cssText='position:absolute;top:4px;right:6px;border:0;background:none;font-size:18px;color:#6a5c4c';b.onclick=function(){d.remove();try{localStorage.setItem('hsa-ioshint','1')}catch(e){}};
