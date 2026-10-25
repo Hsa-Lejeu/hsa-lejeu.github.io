@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v346')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v347')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5540,7 +5540,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v346')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v347')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7576,20 +7576,20 @@ function debStmtsDraw(T){const S=DS,st=S.ov.querySelector('.dstage'),r=st.getBou
   const x=cx+(ex-cx)*e+Math.sin(u*9+o.i)*6,y=cy+(ey-cy)*e,sc=.35+1.15*e,rot=(o.side?-1:1)*(4-8*u);
   o.el.style.setProperty('--tf',`translate(${x}px,${y}px) translate(-50%,-50%) rotate(${rot}deg) scale(${sc})`);if(!o.el.classList.contains('hit'))o.el.style.transform=`translate(${x}px,${y}px) translate(-50%,-50%) rotate(${rot}deg) scale(${sc})`;
   o.el.style.opacity=u<.08?u/.08:u>.9?(1-u)/.1:1})}
-function debSpeak(){const S=DS,D=DEB[S.r],st=S.ov.querySelector('.dstage');S.ph='speak';S.stmts.forEach(o=>o.el.remove());S.stmts=[];const gap=S.r>=2?1.35:1.8,dur=S.r>=2?2.4:3;
+function debSpeak(){if(!DS)return;const S=DS,D=DEB[S.r],st=S.ov.querySelector('.dstage');S.ph='speak';S.stmts.forEach(o=>o.el.remove());S.stmts=[];const gap=S.r>=2?1.35:1.8,dur=S.r>=2?2.4:3;
  const T=S.T;D.seg.forEach((txt,i)=>{const el=document.createElement('div');el.className='stmt'+(S.armed?' armed':'');el.style.setProperty('--fs',(S.r>=2?19:21)+'px');el.textContent=txt;el.dataset.i=i;el.style.opacity=0;st.appendChild(el);const o={el,i,t0:T+.4+i*gap,dur,side:i%2};S.stmts.push(o);
   el.onclick=ev=>{ev.stopPropagation();debTry(o)}});
  S.speakEnd=setTimeout(()=>{if(!DS||S.ph!='speak')return;debSpeechOver()},(0.4+(D.seg.length-1)*gap+dur)*1000+300)}
-function debSpeechOver(){const S=DS;if(S.first){S.first=0;S.ph='wait';debBub('cam','Attends… il y a quelque chose qui cloche dans ce qu’il dit. Je te fais confiance : utilise ce que tu as appris.',100,104,30,4200);
+function debSpeechOver(){if(!DS)return;const S=DS;if(S.first){S.first=0;S.ph='wait';debBub('cam','Attends… il y a quelque chose qui cloche dans ce qu’il dit. Je te fais confiance : utilise ce que tu as appris.',100,104,30,4200);
   setTimeout(()=>{if(!DS)return;debHand();debHint('Choisis une carte, puis touche la phrase fausse quand elle passe.');debSpeak()},4300)}
  else{S.loopN++;const L=['Il recommence son discours… Reste concentré·e.','Tiens bon, il va craquer !','La phrase fausse : touche-la avec la bonne carte quand elle passe.','L’avenir de la HSA dépend de toi !'];debBub('cam',L[S.loopN%L.length],100,104,30,2200);debSpeak()}}
-function debHand(){const S=DS,D=DEB[S.r],h=S.ov.querySelector('.hand');h.innerHTML='';S.armed=null;
+function debHand(){if(!DS)return;const S=DS,D=DEB[S.r],h=S.ov.querySelector('.hand');h.innerHTML='';S.armed=null;
  const own=CARDS.map(c=>c[0]).filter(id=>COL[id]&&id!=D.card&&!DEB.some(x=>x.card==id));const alts=D.alt.filter(id=>id!=D.card).slice();
  while(alts.length<4&&own.length){const id=own.splice(Math.floor(Math.random()*own.length),1)[0];if(!alts.includes(id))alts.push(id)}
  const hand=[D.card].concat(alts.slice(0,4)).sort(()=>Math.random()-.5);
  hand.forEach(id=>{const i=cIdx(id),c=CARDS[i];if(!c)return;const e=document.createElement('div');e.className='dcard'+(S.used[S.r+id]?' used':'');e.dataset.id=id;e.innerHTML=`<canvas width="120" height="70"></canvas><b>${c[3]}</b>`;const cv=e.querySelector('canvas'),gg=cv.getContext('2d');gg.imageSmoothingEnabled=false;const dr=()=>{try{gg.drawImage(CIMG,(cAT(i)%11)*120,Math.floor(cAT(i)/11)*70,120,70,0,0,120,70)}catch(_){}};if(CIMG.complete&&CIMG.naturalWidth)dr();else CIMG.addEventListener('load',dr,{once:true});
   e.onclick=()=>{h.querySelectorAll('.dcard').forEach(x=>x.classList.remove('sel'));e.classList.add('sel');S.armed=id;S.stmts.forEach(o=>o.el.classList.add('armed'));debHint(`« ${c[3]} » dégainée : touche la phrase qu’elle contredit !`);try{sfx('click')}catch(_){}};h.appendChild(e)})}
-function debTry(o){const S=DS,D=DEB[S.r];if(S.ph!='speak'||!S.armed||o.done)return;const ok=o.i==D.ok&&S.armed==D.card;
+function debTry(o){if(!DS)return;const S=DS,D=DEB[S.r];if(S.ph!='speak'||!S.armed||o.done)return;const ok=o.i==D.ok&&S.armed==D.card;
  if(ok){clearTimeout(S.speakEnd);S.ph='hit';S.won++;S.hitT=1;S.shake=.6;S.stmts.forEach(x=>{if(x!==o)x.el.style.opacity=0});o.el.classList.add('hit');try{sfx('fanfare')}catch(_){}
   // éclats de mots
   const st=S.ov.querySelector('.dstage'),rr=o.el.getBoundingClientRect(),sr=st.getBoundingClientRect();o.el.textContent.split(' ').forEach((w,k)=>{const f=document.createElement('div');f.className='frag';f.textContent=w;f.style.cssText=`left:${rr.left-sr.left+k*(rr.width/6)}px;top:${rr.top-sr.top}px;--dx:${(Math.random()-.5)*300}px;--dy:${80+Math.random()*200}px;--rt:${(Math.random()-.5)*160}deg`;st.appendChild(f);setTimeout(()=>f.remove(),1000)});
@@ -7600,7 +7600,7 @@ function debTry(o){const S=DS,D=DEB[S.r];if(S.ph!='speak'||!S.armed||o.done)retu
   if(S.hp<=0){clearTimeout(S.speakEnd);S.ph='lost';setTimeout(debEnd,1500)}else debHint('Raté… choisis une autre carte, le discours continue.')}}
 function debFlash(t){const f=DS.ov.querySelector('.dflash');f.innerHTML=`<b>${t}</b>`;setTimeout(()=>{f.innerHTML=''},1400)}
 // ---- interludes : avant chaque manche, Crotti s'énerve, grandit, et perd des soutiens
-function debInterlude(){const S=DS;S.ph='inter';S.ov.querySelector('.hand').innerHTML='';S.armed=null;debHint('');const r=S.r,q_=(f,d)=>setTimeout(()=>{if(DS)f()},d);
+function debInterlude(){if(!DS)return;const S=DS;S.ph='inter';S.ov.querySelector('.hand').innerHTML='';S.armed=null;debHint('');const r=S.r,q_=(f,d)=>setTimeout(()=>{if(DS)f()},d);
  S.ov.querySelector('.rnd').textContent=r==0?'Devant la halte':r==1?'Manche 2 · Il s’énerve':'Manche finale · Il explose';
  if(r==0){debBub('cro','Vous allez m’écouter, maintenant ! Je vais leur dire leurs quatre vérités.',S.cro.X,S.cro.Y,26,3000);q_(()=>debBub('fan','DEHORS LA HALTE !',S.fans[1].X,S.fans[1].Y,38,2000),800);q_(()=>debBub('fan','On veut des réponses !',S.fans[4].X,S.fans[4].Y,38,2000),1400);
   q_(()=>debBub('cam','Reste calme. Écoute-le d’abord : chaque mot compte.',100,104,30,3000),2600);q_(()=>{S.ov.querySelector('.rnd').textContent='Manche 1 · La sécurité';debSpeak()},5400)}
@@ -7618,7 +7618,7 @@ function debInterlude(){const S=DS;S.ph='inter';S.ov.querySelector('.hand').inne
  // les soutiens qui partent marchent vers les côtés
  if(!S.fanTick){S.fanTick=setInterval(()=>{if(!DS){clearInterval(S.fanTick);return}S.fans.forEach(f=>{if(f.walk&&!f.gone){f.X+=f.vx;if(f.X<-10||f.X>210)f.gone=1}})},40)}}
 // ---- les trois fins
-function debEnd(){const S=DS,n=S.won;S.ph='end';clearTimeout(S.speakEnd);S.stmts.forEach(o=>o.el.remove());S.stmts=[];S.ov.querySelector('.hand').innerHTML='';debHint('');B.debDone=1;B.deb=n;
+function debEnd(){if(!DS)return;const S=DS,n=S.won;S.ph='end';clearTimeout(S.speakEnd);S.stmts.forEach(o=>o.el.remove());S.stmts=[];S.ov.querySelector('.hand').innerHTML='';debHint('');B.debDone=1;B.deb=n;
  S.ov.querySelector('.rnd').textContent=n==3?'Victoire totale':n==2?'Victoire':'Défaite';const q_=(f,d)=>setTimeout(()=>{if(DS)f()},d);
  if(n==3){S.sweat=1;S.anger=3;S.shake=2;debFlash('TERMINÉ !');try{sfx('joy')}catch(_){}
   q_(()=>debBub('cro','Je… ce n’est pas… les chiffres…',S.cro.X,S.cro.Y,26*S.sc,2200),500);
@@ -7639,7 +7639,7 @@ function debEnd(){const S=DS,n=S.won;S.ph='end';clearTimeout(S.speakEnd);S.stmts
   d.innerHTML=n==3?'<b>3 discours démontés sur 3</b>Crotti repart seul, et loin. +15 de tranquillité, +10 de notoriété. Le quartier s’en souviendra au moment du dossier.':n==2?'<b>2 discours sur 3</b>Crotti s’en va, mais promet de revenir. +5 de tranquillité, +3 de notoriété.':'<b>'+n+' discours sur 3</b>Les manifestants sont entrés. −10 de tranquillité.'+tk;b.appendChild(d);
   const bt=document.createElement('div');bt.className='dbt';bt.innerHTML='<button class="go" onclick="debClose()">Continuer</button>';b.appendChild(bt)},n==3?9000:7000)}
 window.debClose=function(){try{clearInterval(DS.fanTick)}catch(_){}try{HDC.W=DS.HD0.W;HDC.H=DS.HD0.H}catch(_){}try{DS.ov.remove()}catch(_){}DS=null;paused=false;try{playMus(seas())}catch(_){}try{ui()}catch(_){}try{newsAdd('🎤',B.deb==3?'Débat gagné : Crotti repart seul':B.deb==2?'Débat gagné de justesse':'Débat perdu : la halte a été pillée')}catch(_){}};
-window.debOpen=debOpen;window.debTransition=debTransition;
+window.debOpen=debOpen;window.debTransition=debTransition;window.debOpenAt=function(r){debOpen();if(r){DS.r=r;DS.first=0;DS.won=r}};
 // la meilleure fin exige une victoire totale au débat (s'il a eu lieu)
 {const _ek3=endK;endK=function(){const k=_ek3.apply(this,arguments);try{if(k==2&&B.debDone&&(B.deb||0)<3)return 1}catch(_){}return k};window.endK=endK}
 // le dossier d'agrément compte le débat
@@ -7693,7 +7693,7 @@ W('collect',(o,a)=>{const s0=DAS[0].l+DAS[1].l,r=o(...a);if(DAS[0].l+DAS[1].l<s0
 W('tourGo',(o,a)=>{const w=!!TOUR,r=o(...a);if(!w&&TOUR){B.tours=(B.tours||0)+1;B['t_'+TOUR.k]=(B['t_'+TOUR.k]||0)+1}return r});
 W('startWS',(o,a)=>{const w=!!WS,r=o(...a);if(!w&&WS)B.wsc=(B.wsc||0)+1;return r});
 W('endMeet',(o,a)=>{B.mt=(B.mt||0)+1;return o(...a)});})();
-</script><script>window.HSAV='hsa-v346'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
+</script><script>window.HSAV='hsa-v347'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
 var d=document.createElement('div');d.id='ioshint';d.innerHTML='<b>📲 Installer le jeu sur ton iPhone</b><br>Dans Safari, touche <b>Partager</b> (le carré avec une flèche ⬆️) puis <b>« Sur l’écran d’accueil »</b>. Le jeu s’ouvrira en plein écran, comme une appli.<button aria-label="Fermer">✕</button>';
 d.style.cssText='position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99999;max-width:min(92vw,420px);background:#fbf6e9;color:#3a3026;border:3px solid #6a5c4c;border-radius:12px;box-shadow:0 6px 0 #2a2433;padding:10px 34px 10px 12px;font:13px/1.35 system-ui,sans-serif';
 var b=d.querySelector('button');b.style.cssText='position:absolute;top:4px;right:6px;border:0;background:none;font-size:18px;color:#6a5c4c';b.onclick=function(){d.remove();try{localStorage.setItem('hsa-ioshint','1')}catch(e){}};
