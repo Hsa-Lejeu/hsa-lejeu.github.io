@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v332')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v333')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5539,7 +5539,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v332')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v333')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7177,12 +7177,27 @@ const OFU={"o_desk": [0, 0, 18, 21], "o_desk2": [19, 0, 24, 21], "o_chair_g": [4
 {const _fs2=window.fs;window.fs=function(n,X,Y){const r=OFU[n];if(!r)return _fs2.apply(this,arguments);if(OFI.complete)x.drawImage(OFI,r[0],r[1],r[2],r[3],Math.round(X*2)/2,Math.round(Y*2)/2,r[2]/2,r[3]/2)};try{fs=window.fs}catch(_){}}
 try{IM[8]='o_printer'}catch(_){}
 
-// ===== v332 : le portrait de Camille parle vraiment — bouche qui s'ouvre et se ferme, petit hochement de tête, clignement des yeux (aussi avec un·e chef·fe personnalisé·e)
-{const _cd=camDraw;camDraw=function(){const c=$('ccv');if(!c)return;const g=c.getContext('2d'),T=performance.now();g.imageSmoothingEnabled=false;g.fillStyle='#e6d9b8';g.fillRect(0,0,18,20);g.fillStyle='rgba(255,255,255,.35)';g.fillRect(0,0,18,3);g.fillStyle='rgba(0,0,0,.13)';g.fillRect(0,15,18,5);
- const talk=!!CAM.talk,nod=talk?((T/260|0)%2):0;if(IMC.complete&&IMC.naturalWidth)g.drawImage(IMC,18*48+16,1,16,20,1,1+nod,16,20);
- const bl=(T%4200)<130;if(bl){g.fillStyle='rgb(250,197,154)';g.fillRect(6,13+nod,1,2);g.fillRect(11,13+nod,1,2);g.fillStyle='#3a2414';g.fillRect(6,14+nod,1,1);g.fillRect(11,14+nod,1,1)}
- const ph=talk?((T/120|0)%4):0;// 0 fermé, 1 entrouvert, 2 ouvert, 3 entrouvert
- if(ph==0){g.fillStyle='#8a3a2a';g.fillRect(8,15+nod,2,1)}else if(ph==2){g.fillStyle='#5a1a12';g.fillRect(7,14+nod,4,3);g.fillStyle='#e8796a';g.fillRect(8,16+nod,2,1);g.fillStyle='#fff';g.fillRect(8,14+nod,2,1)}else{g.fillStyle='#5a1a12';g.fillRect(8,15+nod,2,2);g.fillStyle='#e8796a';g.fillRect(8,16+nod,2,1)}};window.camDraw=camDraw}
+// ===== v332 : le portrait de Camille parle et a des émotions — bouche discrète, hochement léger, clignement ; joie, grande joie, inquiétude, tristesse selon le message
+window.CAMEMO={k:'',until:0};
+const EMO_RX=[[/💔|décéd|est mort|la halte ferme|sous le choc/i,'sad'],[/🚨|⚠️|❗|🥶|🥵|😔|😤|plainte|pétition|grève|amende|surdose|urgence|épuis|retard|insuffisant|manque|refus/i,'worry'],[/🎉|🏆|🕊️|🥳|record|félicitations|bravo|inaugur|dotation|gagné !/i,'joy'],[/💛|🎁|😊|✔|✅|📑|📰|merci|satisfaite|recruté|installé|formé|partenariat|don de|accepté/i,'happy']];
+function camEmo(t,cls){let k='';if(cls=='bad')k='worry';else if(cls=='good')k='happy';for(const[re,e]of EMO_RX){if(re.test(t)){k=e;break}}CAMEMO.k=k;CAMEMO.until=performance.now()+Math.min(6000,1500+String(t).length*40)}
+{const _cs2=camSay;camSay=function(t,cls){try{if(t&&t!==CAM.full)camEmo(t,cls)}catch(_){}return _cs2.apply(this,arguments)};window.camSay=camSay}
+{camDraw=function(){const c=$('ccv');if(!c)return;const g=c.getContext('2d'),T=performance.now();g.imageSmoothingEnabled=false;g.fillStyle='#e6d9b8';g.fillRect(0,0,18,20);g.fillStyle='rgba(255,255,255,.35)';g.fillRect(0,0,18,3);g.fillStyle='rgba(0,0,0,.13)';g.fillRect(0,15,18,5);
+ const talk=!!CAM.talk,emo=T<CAMEMO.until?CAMEMO.k:'',nod=talk?((T/900|0)%2):0;if(IMC.complete&&IMC.naturalWidth)g.drawImage(IMC,18*48+16,1,16,20,1,1+nod,16,20);
+ const P=(X,Y,col)=>{g.fillStyle=col;g.fillRect(X,Y+nod,1,1)};
+ let skin='rgb(250,197,154)';try{const d=g.getImageData(8,13+nod,1,1).data;if(d[3]>200)skin=`rgb(${d[0]},${d[1]},${d[2]})`}catch(_){}
+ const DK='#3a2414',LIP='#8a3a2a',LIP2='#6a2a1e';
+ const bl=(T%4200)<130&&emo!='joy';
+ if(emo=='joy'){[6,11].forEach(ex=>{P(ex,13,skin);P(ex,14,skin);P(ex-1,13,DK);P(ex,12,DK);P(ex+1,13,DK)});P(5,15,'#f2a0a0');P(12,15,'#f2a0a0')}
+ else if(bl){[6,11].forEach(ex=>{P(ex,13,skin);P(ex,14,DK)})}
+ if(emo=='worry'){P(5,11,DK);P(6,12,DK);P(12,11,DK);P(11,12,DK);P(13,12,'#9ad4ff');P(13,13,'#6fb8f0')}
+ if(emo=='sad'){P(6,12,DK);P(7,12,DK);P(10,12,DK);P(11,12,DK);P(6,15,'#9ad4ff')}
+ const ph=talk?((T/140|0)%3):0;
+ if(emo=='joy'){P(7,15,LIP);P(10,15,LIP);P(8,16,LIP);P(9,16,LIP);if(ph==2){P(8,15,LIP2);P(9,15,LIP2)}}
+ else if(emo=='happy'){P(7,15,LIP);P(10,15,LIP);P(8,16,LIP);P(9,16,LIP);if(ph==2){P(8,15,'#b5503c');P(9,15,'#b5503c')}}
+ else if(emo=='sad'){P(7,16,LIP);P(10,16,LIP);P(8,15,LIP);P(9,15,LIP)}
+ else if(emo=='worry'){P(8,15,LIP);P(9,16,LIP);P(10,15,LIP);if(ph==2)P(9,15,LIP2)}
+ else{if(ph==0){P(8,15,LIP);P(9,15,LIP)}else if(ph==1){P(8,15,LIP);P(9,15,LIP);P(8,16,'#b5503c');P(9,16,'#b5503c')}else{P(8,15,LIP2);P(9,15,LIP2);P(8,16,LIP2);P(9,16,LIP2)}}};window.camDraw=camDraw}
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
@@ -7232,7 +7247,7 @@ W('collect',(o,a)=>{const s0=DAS[0].l+DAS[1].l,r=o(...a);if(DAS[0].l+DAS[1].l<s0
 W('tourGo',(o,a)=>{const w=!!TOUR,r=o(...a);if(!w&&TOUR){B.tours=(B.tours||0)+1;B['t_'+TOUR.k]=(B['t_'+TOUR.k]||0)+1}return r});
 W('startWS',(o,a)=>{const w=!!WS,r=o(...a);if(!w&&WS)B.wsc=(B.wsc||0)+1;return r});
 W('endMeet',(o,a)=>{B.mt=(B.mt||0)+1;return o(...a)});})();
-</script><script>window.HSAV='hsa-v332'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
+</script><script>window.HSAV='hsa-v333'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
 var d=document.createElement('div');d.id='ioshint';d.innerHTML='<b>📲 Installer le jeu sur ton iPhone</b><br>Dans Safari, touche <b>Partager</b> (le carré avec une flèche ⬆️) puis <b>« Sur l’écran d’accueil »</b>. Le jeu s’ouvrira en plein écran, comme une appli.<button aria-label="Fermer">✕</button>';
 d.style.cssText='position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99999;max-width:min(92vw,420px);background:#fbf6e9;color:#3a3026;border:3px solid #6a5c4c;border-radius:12px;box-shadow:0 6px 0 #2a2433;padding:10px 34px 10px 12px;font:13px/1.35 system-ui,sans-serif';
 var b=d.querySelector('button');b.style.cssText='position:absolute;top:4px;right:6px;border:0;background:none;font-size:18px;color:#6a5c4c';b.onclick=function(){d.remove();try{localStorage.setItem('hsa-ioshint','1')}catch(e){}};
