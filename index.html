@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v342')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v343')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5540,7 +5540,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v342')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v343')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7343,7 +7343,9 @@ function chapOpen(k){const C=CHAP[k];if(!C)return;const txt={1:'Cette année, un
  2:'La halte tourne. Maintenant, c’est le quartier qui parle : un collectif de riverains s’est formé. En décembre, le conseil de quartier votera sur notre maintien. Chaque geste vers les voisins compte.',
  3:'Dernière année. Le quartier nous connaît ; il faut convaincre les institutions. L’ARS attend des résultats précis, l’évaluation finale aura lieu en juillet, et en décembre le ministère tranchera.'}[k];
  popWin({t:`Chapitre ${k}`,n:`${C.ic} ${C.n}`,d:'Camille : « '+txt+' »',keep:1,btns:[{t:k==3?'📁 Voir le dossier':'C’est parti',go:1,f:()=>{if(k==3)setTimeout(()=>{try{dossierModal()}catch(_){}},300)}}],
-  draw:(H,T)=>{if(k==2){H.street();[76,79,83].forEach((ci,i)=>H.spr(ci,24,60+i*30,86));H.spr(18,24,150,88)}else{H.room('w0','f1');H.F('desk',70,66);H.spr(18,24,92,82);if(k==3){H.R(120,60,22,16,'#f7f5ee');H.R(122,63,18,1,'#9aa');H.R(122,66,18,1,'#9aa');H.R(122,69,12,1,'#9aa')}}}})}
+  draw:(H,T)=>{const g=H.g;if(k==2){H.street();[76,79,83,85].forEach((ci,i)=>H.spr(ci,24,52+i*26,88+(i%2)*3));H.spr(18,T%1.2<.6?24:25,160,90);H.R(150,56,24,14,'#f7f5ee');H.R(152,58,20,10,'#e7f0d8');g.fillStyle='#2a2433';g.font='6px sans-serif';g.fillText('HSA ?',154,66)}
+   else if(k==1){H.room('w3','f2');H.F('o_chart',92,32);H.F('o_desk2',66,76);H.F('o_chair_ob',72,64);H.F('bookcase',124,58);H.F('plant_m',150,80);H.spr(18,24,92,96);const bx=Math.round(4*Math.sin(T*3));H.R(150+bx,84,14,10,'#c9a06a');H.R(152+bx,86,10,2,'#a87d4a');H.R(132,88,14,10,'#c9a06a');H.R(134,90,10,2,'#a87d4a')}
+   else{H.room('w0','f1');H.F('o_chart',92,32);H.F('o_desk2',62,76);H.F('o_printer',122,70);H.F('bookcase',40,58);H.F('o_chair_ob',68,64);H.spr(18,24,86,96);H.R(104,66,22,14,'#f7f5ee');H.R(106,69,18,1,'#9aa');H.R(106,72,18,1,'#9aa');H.R(106,75,12,1,'#9aa');[76,83].forEach((ci,i)=>H.spr(ci,24,142+i*20,98));H.R(148,76,5,7,'#f7f5ee');H.R(168,76,5,7,'#f7f5ee')}}})}
 window.chapOpen=chapOpen;
 W('tutEnd',(o,a)=>{const was=INTRO,r=o(...a);try{if(was&&!B.ch1){B.ch1=1;setTimeout(()=>chapOpen(1),900)}}catch(_){}return r});
 W('nextYear',(o,a)=>{const r=o(...a);try{const k=a[0];if(k==2&&!B.ch2){B.ch2=1;B.voix=35;setTimeout(()=>chapOpen(2),1200)}if(k==3&&!B.ch3){B.ch3=1;setTimeout(()=>chapOpen(3),1200)}}catch(_){}return r});
@@ -7417,6 +7419,29 @@ window.realModal=function(){if(!$('m').hidden)return;paused=true;
  <button class="go" onclick="closeH()">Fermer</button>`;$('m').className='modal';$('m').hidden=false};
 try{window.hasReportT=(lv,nx,nl)=>hasReport(lv,nx,nl,hasStats(),HASC[nx]);window.hasStatsT=()=>hasStats()}catch(_){}
 
+// ===== v343 : les petites scènes des fenêtres sont meublées (fenêtre, affiche, horloge, radiateur, plantes…) et la rue est vivante (passant·es, banc, poubelle, arbre)
+(function(){const prev=window.__mkH;
+ const hsh=s=>{let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))>>>0;return h};
+ window.__mkH=function(H){if(prev)H=prev(H);const g=H.g,room0=H.room,street0=H.street;
+  H.room=function(w,f){room0(w,f);try{const h=hsh(w+'|'+f),k=h%4;
+   // mur : fenêtre à gauche, affiche ou tableau, horloge ou liège, plinthe
+   H.F('window_w',14,34);
+   if(k==0)H.F('poster',62,30);else if(k==1)H.F('painting',60,30);else if(k==2)H.F('cork',56,30);else H.F('o_chart',58,32);
+   if(h%2)H.F('clock',104,26);
+   if(k==3)H.F('extinct',188,30);else H.F(k==1?'bookcase':'shelf',176,58);
+   // sol : radiateur sous la fenêtre, plante dans un coin, parfois un porte-manteau ou un petit meuble
+   H.F('radiator',16,46);
+   H.F(k==2?'palm':'plant_l',2,101);H.F(k==1?'plant_m':'plant',186,101);
+   if(k==0)H.F('bin',178,60);if(k==3)H.F('o_cooler',184,68)}catch(_){}};
+  H.street=function(){street0();try{const T=performance.now()/1000;
+   H.O('bush1',-6,66);H.O('fl1',30,64);H.O('fl2',22,68);H.O('bin',176,66);H.O('bench',110,70);H.O('bussign',58,58);H.O('flbush',130,70);
+   // un·e passant·e traverse l’arrière-plan, de temps en temps avec un chien
+   const per=14,ph=(T%per)/per,X=-20+ph*240,ci=[76,77,79,81,84][Math.floor(T/per)%5];
+   if(ph<1)H.spr(ci,12+((T*8)|0)%6,X,66);
+   // un oiseau sur le lampadaire
+   H.R(156,47+(Math.sin(T*2)>.9?-1:0),2,2,'#2a2433')}catch(_){}};
+  return H}})();
+
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
 W('upd',(o,a)=>{const r=o(...a);try{polTick(a[0]);orTick(a[0])}catch(e){console.error(e)}return r});
@@ -7465,7 +7490,7 @@ W('collect',(o,a)=>{const s0=DAS[0].l+DAS[1].l,r=o(...a);if(DAS[0].l+DAS[1].l<s0
 W('tourGo',(o,a)=>{const w=!!TOUR,r=o(...a);if(!w&&TOUR){B.tours=(B.tours||0)+1;B['t_'+TOUR.k]=(B['t_'+TOUR.k]||0)+1}return r});
 W('startWS',(o,a)=>{const w=!!WS,r=o(...a);if(!w&&WS)B.wsc=(B.wsc||0)+1;return r});
 W('endMeet',(o,a)=>{B.mt=(B.mt||0)+1;return o(...a)});})();
-</script><script>window.HSAV='hsa-v342'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
+</script><script>window.HSAV='hsa-v343'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
 var d=document.createElement('div');d.id='ioshint';d.innerHTML='<b>📲 Installer le jeu sur ton iPhone</b><br>Dans Safari, touche <b>Partager</b> (le carré avec une flèche ⬆️) puis <b>« Sur l’écran d’accueil »</b>. Le jeu s’ouvrira en plein écran, comme une appli.<button aria-label="Fermer">✕</button>';
 d.style.cssText='position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99999;max-width:min(92vw,420px);background:#fbf6e9;color:#3a3026;border:3px solid #6a5c4c;border-radius:12px;box-shadow:0 6px 0 #2a2433;padding:10px 34px 10px 12px;font:13px/1.35 system-ui,sans-serif';
 var b=d.querySelector('button');b.style.cssText='position:absolute;top:4px;right:6px;border:0;background:none;font-size:18px;color:#6a5c4c';b.onclick=function(){d.remove();try{localStorage.setItem('hsa-ioshint','1')}catch(e){}};
