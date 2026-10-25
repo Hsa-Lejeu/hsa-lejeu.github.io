@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v344')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v345')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -2918,7 +2918,7 @@ function twShow(go){const d=document.createElement('div');d.id='twv';d.innerHTML
  let done=false;const fin=()=>{if(done)return;done=true;d.classList.remove('on');setTimeout(()=>d.remove(),600);try{go()}catch(e){console.error(e)}};setTimeout(()=>d.onclick=fin,700);setTimeout(fin,9000)}
 window.twShow=twShow;
 function splBox(html){const o=document.createElement('div');o.id='splx';o.innerHTML='<div class="bx">'+html+'</div>';o.onclick=e=>{if(e.target===o)o.remove()};document.body.appendChild(o);return o}
-window.splCredits=function(){splBox('<h2>Crédits</h2><dl><dt>Graphismes</dt><dd><a href="https://limezu.itch.io/" target="_blank" rel="noopener">LimeZu</a> — Modern Interiors &amp; Modern Exteriors</dd></dl><div class="bt"><button class="go" onclick="$(\'splx\').remove()">Fermer</button></div>')};
+window.splCredits=function(){splBox('<h2>Crédits</h2><dl><dt>Graphismes</dt><dd><a href="https://limezu.itch.io/" target="_blank" rel="noopener">LimeZu</a> — Modern Interiors, Modern Exteriors &amp; Modern Office</dd><dt>Musique du débat</dt><dd><a href="https://johnwayne760.itch.io/32bit-music-collection" target="_blank" rel="noopener">johnwayne760</a> — 32bit Music Collection</dd></dl><div class="bt"><button class="go" onclick="$(\'splx\').remove()">Fermer</button></div>')};
 window.splWipe=function(){splBox('<h2>Tout effacer ?</h2><p>La partie en cours, les cartes débloquées, les médailles et les réglages seront supprimés. C’est définitif.</p><div class="bt"><button onclick="$(\'splx\').remove()">Annuler</button><button class="go" style="background:#c0392b;border-color:#c0392b" onclick="splWipeGo()">🗑️ Tout effacer</button></div>')};
 window.splWipeGo=function(){try{Object.keys(localStorage).filter(k=>/^hsa/.test(k)).forEach(k=>localStorage.removeItem(k))}catch(_){}location.reload()};
 (function(){const sb=document.querySelector('#splash .sbox');if(!sb)return;sb.querySelectorAll('small').forEach(s=>{if(/LimeZu/.test(s.innerHTML))s.remove()});
@@ -5540,7 +5540,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v344')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v345')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7443,6 +7443,138 @@ try{window.hasReportT=(lv,nx,nl)=>hasReport(lv,nx,nl,hasStats(),HASC[nx]);window
    H.R(156,47+(Math.sin(T*2)>.9?-1:0),2,2,'#2a2433')}catch(_){}};
   return H}})();
 
+// ===== v345 : Bertrand Vallée, l'adversaire politique — trois apparitions, puis le débat devant la halte (juin de l'an 3) : trois discours à démonter avec les cartes
+window.VAL={n:'Bertrand Vallée',ci:76,title:'conseiller municipal d’opposition'};
+try{MUS.src.debat='musique/debat.mp3'}catch(_){}
+const DEB=window.DEB=[
+ {th:'La sécurité',seg:['Depuis que la halte est là, la délinquance a explosé tout autour. Les chiffres sont là.','Les habitants ont peur de sortir le soir, et je les comprends.','On a tous vu des gens consommer dans la rue, c’est une réalité.','Mon programme, c’est la sécurité d’abord, pour tout le monde.'],ok:0,card:'c01',alt:['c40','c03','c22','c35'],
+  rep:'L’évaluation de l’Inserm, en 2021, est formelle : autour des haltes de Paris et de Strasbourg, moins d’injections dans la rue et aucune hausse de la délinquance.'},
+ {th:'La santé',seg:['Ces gens ont choisi leur vie, on ne peut plus rien pour eux.','Distribuer de la naloxone, c’est encourager à consommer toujours plus.','L’argent public irait mieux dans la prévention à l’école.','Il y a eu des overdoses dans ce quartier, ne l’oublions pas.'],ok:1,card:'c11',alt:['c12','c08','c19','c53'],
+  rep:'La naloxone est un antidote : elle ramène à la vie une personne en surdose, et rien ne montre qu’elle fasse consommer davantage. Elle a déjà sauvé des vies ici.'},
+ {th:'Le quartier',seg:['Les habitants n’ont pas été assez écoutés, c’est mon sentiment.','Un quartier, c’est fait pour les familles, pas pour ça.','Depuis l’ouverture, le nombre de seringues dans la rue a doublé.','Élu, je ferai fermer cet endroit dès le premier conseil.'],ok:2,card:'c40',alt:['c05','c50','c34','c78'],
+  rep:'C’est l’inverse : une halte récupère les seringues et en laisse moins dans la rue. Ici, l’équipe les ramasse et les DASRI sont vidés — ce sont nos chiffres, vérifiables.'}];
+// écharpe tricolore sur le sprite
+function valSpr(H,X,YB,col){H.spr(VAL.ci,col==null?24:col,X,YB);H.R(X-6,YB-15,3,2,'#2456c8');H.R(X-3,YB-13,3,2,'#f4f4f4');H.R(X,YB-11,3,2,'#d9302c')}
+window.valSpr=valSpr;
+// ---- les trois apparitions, le rappel des cartes, puis le débat
+W('monthEnd',(o,a)=>{const r=o(...a);try{const am=AMI();B.val=B.val||{};
+ const pop=(k,o_)=>{if(B.val[k])return;B.val[k]=1;setTimeout(()=>popWin(o_),2200)};
+ if(am==18)pop('a1',{t:'Dans la presse locale',n:'🗞️ Bertrand Vallée, conseiller d’opposition',d:'« Cette halte attire les dealers, les chiffres le prouvent. Élu maire, je la fermerai. » Camille : « Les chiffres ? Il n’en cite aucun. Garde nos cartes sous la main : un jour, il faudra lui répondre. »',keep:1,btns:[{t:'Continuer',go:1}],
+  draw:(H,T)=>{H.street();valSpr(H,100,90);H.R(60,56,36,26,'#f7f5ee');H.R(63,60,30,2,'#444');H.R(63,65,30,1,'#999');H.R(63,68,24,1,'#999');H.R(63,71,30,1,'#999');H.R(63,74,18,1,'#999');H.spr(82,24,150,92);H.R(154,70,8,6,'#2a2433');H.R(161,72,3,2,'#2a2433')}});
+ if(am==25)pop('a2',{t:'Visite surprise',n:'📺 Vallée devant la halte, caméra au poing',d:'« Regardez-moi ces seringues ! » Il en brandit une… sortie de sa propre poche, disent les voisins. Camille : « Il reviendra en juin avec la télévision. On a six mois pour être prêts. »',keep:1,btns:[{t:'Continuer',go:1}],
+  draw:(H,T)=>{H.street();valSpr(H,96,90,24);H.R(104,74,1,6,'#e8f4fa');H.R(103,73,3,2,'#f08c28');H.spr(82,24,140,92);H.R(144,70,8,6,'#2a2433');H.R(151,72,3,2,'#2a2433');const k=(T*2|0)%2;if(k)H.R(141,69,3,2,'#ff3030');[77,79].forEach((ci,i)=>H.spr(ci,24,40+i*22,92))}});
+ if(am==27)pop('a3',{t:'Dans les boîtes aux lettres',n:'📨 Le tract de Bertrand Vallée',d:'« La naloxone ? Un permis de se droguer. Rendez-vous en juin devant la halte : je dirai leurs quatre vérités. » Camille : « Juin. On sera prêts. Chaque carte de l’album est un argument. »',keep:1,btns:[{t:'Continuer',go:1}],
+  draw:(H,T)=>{H.room('w0','f1');H.F('o_desk2',70,80);H.F('o_chair_ob',80,66);H.spr(18,24,96,100);H.R(100,66,22,14,'#f7f5ee');H.R(102,68,18,3,'#2456c8');H.R(102,73,14,1,'#999');H.R(102,76,10,1,'#999');valSpr(H,172,90)}});
+ if(am==28&&!B.val.hint){B.val.hint=1;const miss=DEB.map(d=>d.card).filter(id=>!COL[id]);setTimeout(()=>{say(miss.length?'🤫 Camille : « Psssst ! Relis ça avant d’y aller, ça peut te servir ! Vallée sera devant la porte le mois prochain. »':'🤫 Camille : « Vallée sera devant la porte le mois prochain. Relis l’album : nos cartes sont nos arguments. »');miss.forEach((id,i)=>setTimeout(()=>{try{unlockCard(id)}catch(_){}},1200+i*1500))},2500)}
+ if(am==29&&!B.val.deb){B.val.deb=1;setTimeout(()=>{try{debStart()}catch(e){console.error(e)}},1500)}}catch(e){console.error(e)}return r});
+// ---- la scène devant la halte, puis la transition
+function debStart(){
+ popWin({t:'Devant la halte',n:'📣 Bertrand Vallée et ses manifestants bloquent l’entrée',d:'Pancartes, slogans, un camion de télévision : la file d’attente est coincée dehors. Vallée réclame un débat, là, maintenant, devant la caméra.',keep:1,snd:'alert',btns:[{t:'🎤 Aller leur répondre',go:1,f:()=>setTimeout(debTransition,200)}],
+  draw:(H,T)=>{H.street();[77,79,81,84,85].forEach((ci,i)=>{const X=30+i*22,bob=Math.round(Math.sin(T*4+i)*1.5);H.spr(ci,24,X,92+bob);H.R(X-7,66+bob,14,9,i%2?'#fff3c4':'#f7f5ee');H.R(X-6,68+bob,12,1,'#c0392b');H.R(X-6,71+bob,8,1,'#2a2433');H.R(X-1,75+bob,1,6,'#8a6a3a')});valSpr(H,150,92);H.O('camper_l',118,72);H.spr(82,24,176,94);H.R(180,72,8,6,'#2a2433');H.R(187,74,3,2,'#2a2433');if((T*2|0)%2)H.R(177,71,3,2,'#ff3030')}})}
+window.debStart=debStart;
+function debTransition(){const ov=document.createElement('div');ov.id='debtr';ov.innerHTML='<div class="dbn"><b>BERTRAND VALLÉE</b><span>veut en découdre</span></div>';document.body.appendChild(ov);try{sfx('alarm')}catch(_){}
+ setTimeout(()=>{try{debOpen()}catch(e){console.error(e)}},1500);setTimeout(()=>ov.remove(),2300)}
+(function(){const st=document.createElement('style');st.textContent=`
+#debtr{position:fixed;inset:0;z-index:260;pointer-events:none;background:radial-gradient(circle at 50% 50%,transparent 0,transparent var(--r,100%),#0b0816 calc(var(--r,100%) + 1px));animation:debwipe 1.3s ease-in forwards}
+@keyframes debwipe{from{--r:120%}to{--r:0%}}
+@property --r{syntax:'<percentage>';inherits:false;initial-value:120%}
+#debtr .dbn{position:absolute;left:0;right:0;top:40%;background:#d9302c;color:#fff;text-align:center;padding:10px 0;transform:skewY(-4deg);animation:debbn .5s .8s cubic-bezier(.2,1.4,.4,1) both;box-shadow:0 0 0 6px #2a2433}
+#debtr .dbn b{display:block;font:400 30px Lilita,sans-serif;letter-spacing:1px}#debtr .dbn span{font:700 14px 'Atkinson Hyperlegible',sans-serif}
+@keyframes debbn{from{transform:skewY(-4deg) translateX(-110%)}to{transform:skewY(-4deg) translateX(0)}}
+#debov{position:fixed;inset:0;z-index:255;background:#1f1a2e;color:#f2efe4;font:14px/1.35 'Atkinson Hyperlegible',sans-serif;display:flex;flex-direction:column;overflow:hidden}
+#debov .dhead{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#2a2433;border-bottom:3px solid #d9a400;font:400 16px Lilita,sans-serif}
+#debov .dhead .hp{color:#ff6f66;letter-spacing:2px}
+#debov .dstage{position:relative;background:#0b0816;flex:none}#debov .dstage canvas{display:block;width:100%;height:auto;image-rendering:pixelated;max-height:34vh;object-fit:contain;margin:auto}
+#debov .dflash{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+#debov .dflash b{font:400 clamp(34px,9vw,64px) Lilita,sans-serif;color:#fff;-webkit-text-stroke:2px #2a2433;text-shadow:4px 4px 0 #d9302c;transform:rotate(-8deg) scale(0);animation:dfl .9s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes dfl{to{transform:rotate(-8deg) scale(1)}}
+#debov .dbody{flex:1;overflow-y:auto;padding:8px 10px 12px;display:flex;flex-direction:column;gap:8px}
+#debov .dsay{background:#fffaf0;color:#2a2433;border:3px solid #2a2433;border-radius:12px;padding:8px 10px;font-size:14px;position:relative}
+#debov .dsay.cam{background:#e7f0d8;border-color:#2e9e4f}#debov .dsay small{display:block;font-weight:700;color:#7a4fb5;margin-bottom:2px}#debov .dsay.cam small{color:#2e7d32}
+#debov .segs{display:flex;flex-direction:column;gap:6px}
+#debov .seg{position:relative;background:#f7ecd8;color:#2a2433;border:2px solid #8a6a3a;border-radius:9px;padding:7px 10px 7px 30px;opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s,box-shadow .2s;font-size:13.5px}
+#debov .seg.on{opacity:1;transform:none}#debov .seg i{position:absolute;left:8px;top:6px;font:400 15px Lilita,sans-serif;color:#8a6a3a;font-style:normal}
+#debov .seg.pick{cursor:pointer;box-shadow:0 0 0 3px #ffd23f}#debov .seg.pick:active{transform:scale(.98)}
+#debov .seg.dead{opacity:.35;text-decoration:line-through}#debov .seg.gone{visibility:hidden}
+#debov .frag{position:absolute;overflow:hidden;background:#f7ecd8;border:2px solid #8a6a3a;border-radius:4px;pointer-events:none;animation:dfrag .9s ease-out forwards}
+@keyframes dfrag{to{transform:translate(var(--dx),var(--dy)) rotate(var(--rt));opacity:0}}
+#debov .hand{display:flex;gap:6px;overflow-x:auto;padding:4px 2px 6px;flex:none}
+#debov .dcard{flex:0 0 96px;background:#fff;color:#2a2433;border:3px solid #2a2433;border-radius:10px;padding:4px;cursor:pointer;transition:transform .15s,box-shadow .15s;text-align:center}
+#debov .dcard canvas{display:block;width:100%;height:auto;image-rendering:pixelated;border-radius:5px}#debov .dcard b{display:block;font-size:11px;line-height:1.15;margin-top:3px;min-height:26px}
+#debov .dcard.sel{transform:translateY(-6px);box-shadow:0 0 0 3px #ffd23f}#debov .dcard.used{opacity:.35;pointer-events:none}
+#debov .dhint{font-size:13px;color:#ffd98a;text-align:center}
+#debov .dbt{display:flex;gap:8px;justify-content:center}#debov .dbt button{font-size:15px}
+#debov .shake{animation:dshk .5s}@keyframes dshk{0%,100%{transform:none}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+@media (orientation:landscape){#debov .dmain{display:flex;flex:1;min-height:0}#debov .dstage{width:42%;flex:none}#debov .dstage canvas{max-height:none}#debov .dbody{flex:1}}
+`;document.head.appendChild(st)})();
+const STOCK_=()=>S;
+let DS=null;
+function debOpen(){paused=true;try{playMus('debat')}catch(_){}
+ const ov=document.createElement('div');ov.id='debov';ov.innerHTML=`<div class="dhead"><span>🎤 Le débat · <span class="rnd">Manche 1/3</span></span><span class="hp">❤️❤️❤️</span></div><div class="dmain"><div class="dstage"><canvas width="200" height="104"></canvas><div class="dflash"></div></div><div class="dbody"></div></div>`;document.body.appendChild(ov);
+ const g=ov.querySelector('canvas').getContext('2d');g.imageSmoothingEnabled=false;
+ DS={ov,g,H:mkH(g),r:0,hp:3,won:0,ph:'intro',t0:performance.now(),crowd:[77,79,81,84,85].map((ci,i)=>({ci,x:30+i*22,y:92,sign:1,gone:0})),valX:150,valY:92,sash:0,sweat:0,hitT:0,shk:0,end:null,fin:0};
+ requestAnimationFrame(debFrame);debRound()}
+function debFrame(now){const S=DS;if(!S)return;const T=(now-S.t0)/1000,H=S.H,g=S.g;try{H.street();
+ // foule
+ S.crowd.forEach((c,i)=>{if(c.gone)return;const bob=S.ph=='speak'||S.ph=='pick'?Math.round(Math.sin(T*4+i)*1.5):0;H.spr(c.ci,c.walk?12+((T*8|0)%6):24,c.x,c.y+bob);if(c.sign){H.R(c.x-7,66+bob,14,9,i%2?'#fff3c4':'#f7f5ee');H.R(c.x-6,68+bob,12,1,'#c0392b');H.R(c.x-6,71+bob,8,1,'#2a2433');H.R(c.x-1,75+bob,1,6,'#8a6a3a')}if(c.clap){const k=(T*6|0)%2;H.R(c.x-9+k,80,3,3,'#f7d2b0');H.R(c.x+6-k,80,3,3,'#f7d2b0')}});
+ // caméra
+ H.O('camper_l',118,72);H.spr(82,24,176,94);H.R(180,72,8,6,'#2a2433');H.R(187,74,3,2,'#2a2433');if((T*2|0)%2)H.R(177,71,3,2,'#ff3030');
+ // Camille
+ H.spr(18,24,112,96);
+ // Vallée
+ const sh=S.shk>0?Math.round(Math.sin(T*40)*2):0;if(S.shk>0)S.shk-=1/60;
+ if(!S.valGone){H.spr(VAL.ci,S.valWalk?6+((T*8|0)%6):24,S.valX+sh,S.valY);const sy=S.sash;H.R(S.valX+sh-6,S.valY-15+sy,3,2,'#2456c8');H.R(S.valX+sh-3,S.valY-13+sy,3,2,'#f4f4f4');H.R(S.valX+sh,S.valY-11+sy,3,2,'#d9302c');
+  if(S.sweat>0){for(let i=0;i<3;i++){const ph=(T*1.3+i/3)%1;g.globalAlpha=1-ph;H.R(S.valX+sh-8+i*7,S.valY-24+ph*8,2,3,'#9ad4ff')}g.globalAlpha=1}}
+ // halo du coup
+ if(S.hitT>0){g.globalAlpha=S.hitT*.6;g.fillStyle='#fff';g.fillRect(0,0,200,104);g.globalAlpha=1;S.hitT-=1/30}
+ if(S.end)S.end(T)}catch(e){}requestAnimationFrame(debFrame)}
+function debSay(who,txt,cls){const b=DS.ov.querySelector('.dbody');const d=document.createElement('div');d.className='dsay'+(cls?' '+cls:'');d.innerHTML=`<small>${who}</small>${txt}`;b.appendChild(d);b.scrollTop=b.scrollHeight;return d}
+function debRound(){const S=DS,D=DEB[S.r],b=S.ov.querySelector('.dbody');b.innerHTML='';S.ov.querySelector('.rnd').textContent=`Manche ${S.r+1}/3 · ${D.th}`;S.ph='speak';
+ debSay('Bertrand Vallée','<em>— prend le micro —</em>');
+ const segs=document.createElement('div');segs.className='segs';D.seg.forEach((t,i)=>{const e=document.createElement('div');e.className='seg';e.dataset.i=i;e.innerHTML=`<i>${i+1}</i>${t}`;segs.appendChild(e)});b.appendChild(segs);
+ D.seg.forEach((t,i)=>setTimeout(()=>{const e=segs.children[i];if(e){e.classList.add('on');try{sfx('page')}catch(_){}b.scrollTop=b.scrollHeight}if(i==D.seg.length-1)setTimeout(debPick,500)},500+i*1400))}
+function debPick(){const S=DS,D=DEB[S.r],b=S.ov.querySelector('.dbody');S.ph='pick';
+ const hint=document.createElement('div');hint.className='dhint';hint.textContent='Une de ces phrases est fausse. Choisis la carte qui la contredit, puis touche la phrase.';b.appendChild(hint);
+ // main : la bonne carte + 4 autres (de préférence des cartes collectionnées)
+ const own=CARDS.map(c=>c[0]).filter(id=>COL[id]&&id!=D.card&&!DEB.some(x=>x.card==id));const alts=D.alt.filter(id=>id!=D.card).slice();
+ while(alts.length<4&&own.length){const id=own.splice(Math.floor(Math.random()*own.length),1)[0];if(!alts.includes(id))alts.push(id)}
+ const hand=[D.card].concat(alts.slice(0,4)).sort(()=>Math.random()-.5);S.used=S.used||{};
+ const h=document.createElement('div');h.className='hand';hand.forEach(id=>{const i=cIdx(id),c=CARDS[i];if(!c)return;const e=document.createElement('div');e.className='dcard'+(S.used[S.r+id]?' used':'');e.dataset.id=id;e.innerHTML=`<canvas width="120" height="70"></canvas><b>${c[3]}</b>`;const cv=e.querySelector('canvas'),gg=cv.getContext('2d');gg.imageSmoothingEnabled=false;const dr=()=>{try{gg.drawImage(CIMG,(cAT(i)%11)*120,Math.floor(cAT(i)/11)*70,120,70,0,0,120,70)}catch(_){}};if(CIMG.complete&&CIMG.naturalWidth)dr();else CIMG.addEventListener('load',dr,{once:true});
+  e.onclick=()=>{h.querySelectorAll('.dcard').forEach(x=>x.classList.remove('sel'));e.classList.add('sel');S.sel=id;b.querySelectorAll('.seg:not(.dead)').forEach(s=>s.classList.add('pick'));hint.textContent=`« ${c[3]} » : ${c[5].slice(0,110)}… Touche la phrase qu’elle contredit.`;try{sfx('click')}catch(_){}};h.appendChild(e)});b.appendChild(h);b.scrollTop=b.scrollHeight;
+ b.querySelectorAll('.seg').forEach(s=>{s.onclick=()=>{if(!S.sel||s.classList.contains('dead')||S.ph!='pick')return;debTry(+s.dataset.i,s)}})}
+function debTry(i,el){const S=DS,D=DEB[S.r],ok=i==D.ok&&S.sel==D.card,b=S.ov.querySelector('.dbody');S.ph='res';
+ if(ok){S.won++;S.hitT=1;S.shk=.6;try{sfx('fanfare')}catch(_){}debShatter(el);debFlash('RÉFUTÉ !');
+  setTimeout(()=>{debSay('Camille',DEB[S.r].rep,'cam');S.crowd.forEach(c=>{if(Math.random()<.5)c.sign=0});},700);
+  setTimeout(()=>{S.r++;if(S.r>=3)debEnd();else debRound()},3600)}
+ else{S.hp--;S.ov.querySelector('.hp').textContent='❤️'.repeat(S.hp)+'🖤'.repeat(3-S.hp);S.used[S.r+S.sel]=1;b.querySelector('.dcard.sel')?.classList.add('used');b.querySelectorAll('.dcard').forEach(x=>x.classList.remove('sel'));b.querySelectorAll('.seg').forEach(x=>x.classList.remove('pick'));S.sel=null;S.ov.querySelector('.dstage').classList.add('shake');setTimeout(()=>S.ov.querySelector('.dstage').classList.remove('shake'),600);try{sfx('bad')}catch(_){}
+  if(i!=D.ok)el.classList.add('dead');
+  debSay('Le public',i!=D.ok?'<em>murmures…</em> Cette phrase-là, personne ne la conteste. Vallée sourit.':'<em>murmures…</em> La bonne phrase, mais pas la bonne carte : l’argument ne porte pas.');
+  if(S.hp<=0)setTimeout(debEnd,1800);else setTimeout(()=>{S.ph='pick';const hint=b.querySelector('.dhint');if(hint)hint.textContent='Essaie encore : choisis une autre carte.'},900)}}
+function debShatter(el){const r=el.getBoundingClientRect(),p=el.parentElement.getBoundingClientRect(),N=8;for(let k=0;k<N;k++){const f=document.createElement('div');f.className='frag';const w=r.width/4,h=r.height/2,x=(k%4)*w,y=Math.floor(k/4)*h;f.style.cssText=`left:${el.offsetLeft+x}px;top:${el.offsetTop+y}px;width:${w}px;height:${h}px;--dx:${(Math.random()-.5)*160}px;--dy:${40+Math.random()*120}px;--rt:${(Math.random()-.5)*120}deg`;el.parentElement.appendChild(f)}el.classList.add('gone');setTimeout(()=>el.parentElement.querySelectorAll('.frag').forEach(f=>f.remove()),1000)}
+function debFlash(t){const f=DS.ov.querySelector('.dflash');f.innerHTML=`<b>${t}</b>`;setTimeout(()=>{f.innerHTML=''},1400)}
+function debEnd(){const S=DS,b=S.ov.querySelector('.dbody'),n=S.won;S.ph='end';b.innerHTML='';B.debDone=1;B.deb=n;S.ov.querySelector('.rnd').textContent=n==3?'Victoire totale':n==2?'Victoire':'Défaite';
+ const T0=performance.now()/1000;let lines=[];
+ if(n==3){S.sweat=1;S.shk=1.2;debFlash('TERMINÉ !');lines=[['Bertrand Vallée','Je… ce n’est pas… les chiffres…'],['Le public','Un silence. Puis, un à un, les manifestants posent leurs pancartes.'],['Bertrand Vallée','Attendez ! Revenez ! On n’a pas fini !'],['La télévision','La caméra se tourne vers Camille. Les riverains applaudissent.'],['Camille','On ne gagne pas contre les gens. On gagne avec eux.']];
+  S.end=T=>{const t=T-(S.endT0||(S.endT0=T));S.crowd.forEach((c,i)=>{if(t>1.5+i*.9){c.sign=0;c.walk=1;c.x+=.5;if(c.x>215)c.gone=1}});if(t>2)S.sash=Math.min(16,(t-2)*6);if(t>7&&!S.valWalk){S.valWalk=1}if(S.valWalk){S.valX-=.35;if(S.valX<-12)S.valGone=1}};
+  q=Math.min(100,q+15);NOT=nUp(10);try{sfx('joy')}catch(_){}}
+ else if(n==2){lines=[['Bertrand Vallée','Vous avez gagné aujourd’hui. Mais pas la guerre.'],['Le public','La moitié des manifestants le suivent ; les autres restent, et discutent avec l’équipe.'],['Camille','On a tenu. On continue.']];
+  S.end=T=>{const t=T-(S.endT0||(S.endT0=T));if(t>1.5){S.valWalk=1;S.valX-=.4;if(S.valX<-12)S.valGone=1}S.crowd.forEach((c,i)=>{if(i%2==0){if(t>1.8){c.sign=0;c.walk=1;c.x-=.4;if(c.x<-12)c.gone=1}}else if(t>2.5){c.sign=0;c.clap=1}})};
+  q=Math.min(100,q+5);NOT=nUp(3)}
+ else{lines=[['Bertrand Vallée','Vous voyez ? Ils n’ont rien à répondre. Allons-y !'],['Le public','Les manifestants poussent la porte. Quand ils ressortent, il manque des choses.'],['Camille','On rachètera. Mais on se souviendra.']];
+  const cand=IT.map((t,k)=>[t,k]).filter(([t,k])=>B[k]&&t[0]<9&&!NR[k]).sort(()=>Math.random()-.5).slice(0,3);S.taken=cand.map(([t,k])=>{B[k]=0;return t[2]});try{const K=STOCK_();K.n=Math.floor((K.n||0)/2);K.s=Math.floor((K.s||0)/2)}catch(_){}
+  S.end=T=>{const t=T-(S.endT0||(S.endT0=T));S.crowd.forEach((c,i)=>{if(t>1+i*.5){c.sign=0;c.walk=1;const dx=95-c.x;if(Math.abs(dx)>1)c.x+=Math.sign(dx)*.6;else{c.y-=.6;if(c.y<70)c.gone=1}}})};
+  q=Math.max(0,q-10);try{sfx('sad')}catch(_){}}
+ lines.forEach((l,i)=>setTimeout(()=>{if(DS)debSay(l[0],l[1],l[0]=='Camille'?'cam':'')},600+i*1900));
+ setTimeout(()=>{if(!DS)return;const d=document.createElement('div');d.className='dsay';const tk=S.taken&&S.taken.length?`<br>Emporté : ${S.taken.join(', ')} — et la moitié du stock de naloxone et de matériel.`:'';
+  d.innerHTML=`<small>Bilan</small>${n==3?'<b>3 discours démontés sur 3.</b> Vallée repart seul. +15 de tranquillité, +10 de notoriété. Le quartier s’en souviendra au moment du dossier.':n==2?'<b>2 discours sur 3.</b> Vallée s’en va, mais promet de revenir. +5 de tranquillité, +3 de notoriété.':'<b>'+n+' discours sur 3.</b> −10 de tranquillité.'+tk}`;b.appendChild(d);
+  const bt=document.createElement('div');bt.className='dbt';bt.innerHTML='<button class="go" onclick="debClose()">Continuer</button>';b.appendChild(bt);b.scrollTop=b.scrollHeight},600+lines.length*1900+800)}
+window.debClose=function(){try{DS.ov.remove()}catch(_){}DS=null;paused=false;try{playMus(seas())}catch(_){}try{ui()}catch(_){}try{newsAdd('🎤',B.deb==3?'Débat gagné : Vallée repart seul':B.deb==2?'Débat gagné de justesse':'Débat perdu : la halte a été pillée')}catch(_){}};
+window.debOpen=debOpen;window.debTransition=debTransition;
+// la meilleure fin exige une victoire totale au débat (s'il a eu lieu)
+{const _ek3=endK;endK=function(){const k=_ek3.apply(this,arguments);try{if(k==2&&B.debDone&&(B.deb||0)<3)return 1}catch(_){}return k};window.endK=endK}
+// le dossier d'agrément compte le débat
+{const _dos=window.dossier;window.dossier=function(){const D=_dos();try{if(B.debDone||AMI()>=29)D.L.push(['🎤 Débat public gagné',B.deb||0,3]);D.met=D.L.filter(l=>l[1]>=l[2]).length}catch(_){}return D}}
+
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
 W('upd',(o,a)=>{const r=o(...a);try{polTick(a[0]);orTick(a[0])}catch(e){console.error(e)}return r});
@@ -7491,7 +7623,7 @@ W('collect',(o,a)=>{const s0=DAS[0].l+DAS[1].l,r=o(...a);if(DAS[0].l+DAS[1].l<s0
 W('tourGo',(o,a)=>{const w=!!TOUR,r=o(...a);if(!w&&TOUR){B.tours=(B.tours||0)+1;B['t_'+TOUR.k]=(B['t_'+TOUR.k]||0)+1}return r});
 W('startWS',(o,a)=>{const w=!!WS,r=o(...a);if(!w&&WS)B.wsc=(B.wsc||0)+1;return r});
 W('endMeet',(o,a)=>{B.mt=(B.mt||0)+1;return o(...a)});})();
-</script><script>window.HSAV='hsa-v344'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
+</script><script>window.HSAV='hsa-v345'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
 var d=document.createElement('div');d.id='ioshint';d.innerHTML='<b>📲 Installer le jeu sur ton iPhone</b><br>Dans Safari, touche <b>Partager</b> (le carré avec une flèche ⬆️) puis <b>« Sur l’écran d’accueil »</b>. Le jeu s’ouvrira en plein écran, comme une appli.<button aria-label="Fermer">✕</button>';
 d.style.cssText='position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99999;max-width:min(92vw,420px);background:#fbf6e9;color:#3a3026;border:3px solid #6a5c4c;border-radius:12px;box-shadow:0 6px 0 #2a2433;padding:10px 34px 10px 12px;font:13px/1.35 system-ui,sans-serif';
 var b=d.querySelector('button');b.style.cssText='position:absolute;top:4px;right:6px;border:0;background:none;font-size:18px;color:#6a5c4c';b.onclick=function(){d.remove();try{localStorage.setItem('hsa-ioshint','1')}catch(e){}};
