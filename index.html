@@ -302,7 +302,7 @@ const NM=['Karim','Sonia','Yann','Léa','Tamar','Inès','Amani','Nadia','Boyan',
 const NL={h:`Je dors dehors… vous avez un hébergement ?`,d:`Je m'y perds dans mes papiers...`,r:`J'ai faim, je n'ai pas mangé depuis 2 jours.`,y:`Ça fait des jours que je n’ai pas pu me laver ni laver mes affaires…`,o:`J’aimerais arrêter, ou au moins commencer un traitement de substitution. Vous pouvez m’aider ?`};
 const TH={h:`un lit pour ce soir, enfin !`,d:`mon dossier de droits est relancé !`,r:`un vrai repas chaud, ça fait du bien !`,y:`une douche chaude et des habits propres, je me sens revivre !`,o:`un rendez-vous au CSAPA la semaine prochaine. Je vais tenter le coup !`},PN={h:'Toit & Moi',d:'Droits Ouverts',r:'Les Fourneaux Solidaires',b:'la boulangerie et l’épicerie solidaire',k:'la maison de quartier',x:'les pharmacies du quartier',j:'le dispositif TAPAJ',v:'Véto Solidaire',y:'Bains-Douches du Canal',o:'CSAPA Horizon',e:'l’équipe ELSA de l’hôpital'},PC={h:250,d:150,r:150,b:120,k:100,x:90,j:150,v:80,y:100,o:150,e:120};
 function talk(n,t,p){LG.unshift(`<b>${n}</b> : « ${t} »`);LG.length=3;const v=p||V.find(x=>x.name==n)||{x:146,y:80},e=document.createElement('div');e.className='bub';e.innerHTML=`<b>${n}</b> ${t}`;$('stage').appendChild(e);BB.push({e,v,t:3.5+t.length/22});if(BB.length>2)BB.shift().e.remove()}
-function bub(dt){const W=cv.clientWidth,H=cv.clientHeight;BB=BB.filter(b=>{b.t-=dt;b.e.style.opacity=TR_.t>0?'.12':'1';if(b.t<=0){b.e.remove();return false}const hw=b.e.offsetWidth/2+4;const bx_=MEET?b.v.x/232*W:(b.v.x+OX)/WW*W,by_=MEET?(b.v.y*4+(WH*2-680)/2)/(WH*2)*H:(b.v.y+OY)/WH*H;b.e.style.left=Math.max(hw,Math.min(W-hw,bx_))+'px';b.e.style.top=Math.max(MEET?56:8,by_-34/(MEET?1:Z.s||1))+'px';return true})}
+function bub(dt){const now_=performance.now();if(!window._cvS||now_-window._cvS.t>1000)window._cvS={W:cv.clientWidth,H:cv.clientHeight,t:now_};const W=window._cvS.W,H=window._cvS.H;BB=BB.filter(b=>{b.t-=dt;const op=TR_.t>0?'.12':'1';if(b._op!==op){b.e.style.opacity=op;b._op=op}if(b.t<=0){b.e.remove();return false}if(b._hw==null||b._hwT!==b.e.textContent.length){b._hw=b.e.offsetWidth/2+4;b._hwT=b.e.textContent.length}const hw=b._hw;const bx_=MEET?b.v.x/232*W:(b.v.x+OX)/WW*W,by_=MEET?(b.v.y*4+(WH*2-680)/2)/(WH*2)*H:(b.v.y+OY)/WH*H;const l_=Math.round(Math.max(hw,Math.min(W-hw,bx_))*2)/2+'px',t_=Math.round(Math.max(MEET?56:8,by_-34/(MEET?1:Z.s||1))*2)/2+'px';if(b._l!==l_){b.e.style.left=l_;b._l=l_}if(b._t!==t_){b.e.style.top=t_;b._t=t_}return true})}
 const DL=[
 [`Je suis embêtée avec {U} : cette personne a besoin d’un suivi spécialisé à l’hôpital. Peut-on l’accompagner jusqu’à sa consultation ?`,`Professionnel·le absent·e 15 s`,t=>{t.off=15},`Merci pour l'accompagnement à l’hôpital : je me sens mieux!`,80,3],
 [`{U} appréhende d'aller à la préfecture pour sa demande de titre de séjour. Peut-on prendre du temps pour l’y accompagner ?`,`Professionnel·le absent·e 15 s`,t=>{t.off=15},`Mes papiers sont en règle, merci la team !`,60,3],
@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v357')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v358')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -1715,12 +1715,12 @@ if(HASV.includes(am+1)&&!(B.hasAnn||{})[am+1]){B.hasAnn=B.hasAnn||{};B.hasAnn[am
 dfMonth(am)}catch(e){console.error(e)}return r});
 // ---- défis des années 2 et 3
 const DF={
-bo:{at:15,dur:1,t:'😮‍💨 Épuisement dans l’équipe',d:'L’hiver est dur : une collègue s’effondre en larmes et part en arrêt, et toute l’équipe est fatiguée. Défi : organise un repas d’équipe et mets en place la supervision (👥 Équipe › Formations) avant la fin du mois.',
+bo:{at:22,dur:1,t:'😮‍💨 Épuisement dans l’équipe',d:'L’hiver est dur : une collègue s’effondre en larmes et part en arrêt, et toute l’équipe est fatiguée. Défi : organise un repas d’équipe et mets en place la supervision (👥 Équipe › Formations) avant la fin du mois.',
  start:()=>{const z=STF.slice().sort((a,b)=>a.e-b.e)[0];if(z){z.off=Math.max(z.off||0,45);B.dfz=z.n}STF.forEach(z=>z.e=Math.max(5,z.e-20));B.dfb={t:(B.nA||{}).t||0}},
  prog:()=>{const t=((B.nA||{}).t||0)-B.dfb.t;return[['Repas d’équipe',Math.min(1,t),1],['Supervision en place',XB.s?1:0,1]]},
  win:()=>{STF.forEach(z=>z.e=Math.min(100,z.e+25));return'L’équipe a repris des forces : on prend soin de celles et ceux qui prennent soin. Énergie +25 pour tout le monde.'},
  lose:()=>{STF.forEach(z=>z.e=Math.max(0,z.e-10));q-=3;return'L’équipe reste épuisée, et ça se sent dans l’accueil. Énergie −10, tranquillité −3.'}},
-pet:{at:17,dur:2,t:'🗳️ Pétition avant les municipales',d:'Des habitant·es font signer une pétition contre la halte, à quelques mois des élections. Le maire hésite à maintenir sa subvention. Défi : organise 2 réunions riverains et une fête de quartier en 2 mois.',
+pet:{at:17,dur:2,t:'🗳️ La pétition de Cédric Crotti',d:'Le collectif de Cédric Crotti fait signer une pétition contre la halte, en vue du vote du conseil de quartier en mars. Le maire hésite à maintenir sa subvention. Défi : organise 2 réunions riverains et une fête de quartier en 2 mois.',
  start:()=>{q-=12;B.dfb={r:B.nR||0,f:B.nF||0}},
  prog:()=>[['Réunions riverains',Math.min(2,(B.nR||0)-B.dfb.r),2],['Fête de quartier',Math.min(1,(B.nF||0)-B.dfb.f),1]],
  win:()=>{q+=10;NOT=nUp(5);eu+=300;return'La pétition s’essouffle : beaucoup de signataires sont venus aux réunions et à la fête. Le maire maintient la subvention et ajoute 300 €.'},
@@ -3183,10 +3183,10 @@ W('ob',(o,a)=>{const r=o(...a);try{if(NI.on){const n=a[0];if(n=='lamp')NI.lamps.
 W('world',(o,a)=>{const P_=dayPh();NI.on=(P_.night>0||P_.dawn>0)?1:0;NI.rec.length=0;NI.lamps.length=0;try{return o(...a)}finally{NI.on=0}});
 W('draw',(o,a)=>{const r=o(...a);try{if(MEET)return r;const P_=dayPh();if(!(P_.dawn>0||P_.gold>0||P_.night>0))return r;
  const W_=cv.width,H_=cv.height;x.save();x.setTransform(1,0,0,1,0,0);
- if(P_.gold>0){x.globalCompositeOperation='multiply';x.fillStyle=`rgba(255,190,120,${.38*P_.gold})`;x.fillRect(0,0,W_,H_);x.globalCompositeOperation='source-over'}
- if(P_.dawn>0){x.globalCompositeOperation='multiply';x.fillStyle=`rgba(255,170,150,${.45*P_.dawn})`;x.fillRect(0,0,W_,H_);x.globalCompositeOperation='source-over'}
+ if(window.NLAY&&(P_.gold>0||P_.dawn>0))NLAY.tint(P_);else if(P_.gold>0){x.globalCompositeOperation='multiply';x.fillStyle=`rgba(255,190,120,${.38*P_.gold})`;x.fillRect(0,0,W_,H_);x.globalCompositeOperation='source-over'}
+ if(P_.dawn>0&&!window.NLAY){x.globalCompositeOperation='multiply';x.fillStyle=`rgba(255,170,150,${.45*P_.dawn})`;x.fillRect(0,0,W_,H_);x.globalCompositeOperation='source-over'}
  const lit=Math.max(P_.night,P_.dawn*.8);
- if(lit>0){if(!NI.dk)NI.dk=document.createElement('canvas');const dk=NI.dk;if(dk.width!=(W_>>1)||dk.height!=(H_>>1)){dk.width=W_>>1;dk.height=H_>>1}const g=dk.getContext('2d');const _nk=W_+'x'+H_+'|'+Math.round(lit*60)+'|'+(P_.night>0?1:0)+'|'+(NI.lk||0).toFixed(2)+'|'+built.join('');const _fr=NI.dkK!==_nk||performance.now()-(NI.dkT||0)>160;if(_fr){NI.dkK=_nk;NI.dkT=performance.now();g.setTransform(.5,0,0,.5,0,0);g.globalCompositeOperation='source-over';g.clearRect(0,0,W_,H_);
+ if(lit>0){if(!NI.dk)NI.dk=document.createElement('canvas');const dk=NI.dk;if(dk.width!=(W_>>1)||dk.height!=(H_>>1)){dk.width=W_>>1;dk.height=H_>>1}const g=dk.getContext('2d');const _nk=W_+'x'+H_+'|'+Math.round(lit*60)+'|'+(P_.night>0?1:0)+'|'+(NI.lk||0).toFixed(2)+'|'+built.join('');const _fr=NI.dkK!==_nk||performance.now()-(NI.dkT||0)>300;if(_fr){NI.dkK=_nk;NI.dkT=performance.now();g.setTransform(.5,0,0,.5,0,0);g.globalCompositeOperation='source-over';g.clearRect(0,0,W_,H_);
   const al=P_.night>0?.6*P_.night:.32*P_.dawn;g.fillStyle=P_.night>0?`rgba(14,20,58,${al})`:`rgba(70,40,100,${al})`;g.fillRect(0,0,W_,H_);
   g.globalCompositeOperation='destination-out';const hole=(cx,cy,rad,k)=>{const gr=g.createRadialGradient(cx,cy,0,cx,cy,rad);gr.addColorStop(0,`rgba(0,0,0,${k})`);gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(cx-rad,cy-rad,rad*2,rad*2)};
   const lk=P_.night>0?1:P_.dawn;
@@ -3194,8 +3194,8 @@ W('draw',(o,a)=>{const r=o(...a);try{if(MEET)return r;const P_=dayPh();if(!(P_.d
   // la halte : les salles construites restent éclairées
   g.fillStyle=`rgba(0,0,0,${.75*lk})`;R.forEach((rr,i)=>{if(!built[i])return;g.fillRect((OX+rr[2])*2,(OYW+rr[3]+EY)*2,(RW[i]||56)*2,92)});
   g.fillRect((OX+174)*2,(OYW-4+EY)*2,124,100);
-  try{if(NI.lk>0){g.save();g.setTransform(1,0,0,1,0,EY);winClip(g);g.globalAlpha=.85*NI.lk;NI.rec.forEach(([n,X,Y,ch])=>{if(WMK[n])winDraw(g,n,X,Y,ch)});g.restore()}}catch(_){}try{if(window.SIGNR&&performance.now()-window.SIGNF<200){const q_=SIGNR;g.save();g.setTransform(1,0,0,1,0,EY);g.globalCompositeOperation='destination-out';g.fillStyle='rgba(0,0,0,.85)';g.fillRect(q_[0],q_[1],q_[2],q_[3]);g.restore()}}catch(_){}try{if(window.rshCut)rshCut(g,P_.night>0?`rgba(14,20,58,${al})`:`rgba(70,40,100,${al})`)}catch(_){}g.globalCompositeOperation='source-over'}x.imageSmoothingEnabled=true;x.drawImage(dk,0,0,W_,H_);x.imageSmoothingEnabled=false;try{window.nbPost&&nbPost()}catch(_){}
-  if(lit>.12){const k=Math.min(1,(lit-.12)/.4);if(!NI.mask&&OAT.complete&&OAT.naturalWidth)NI.mask=niMask(OAT,OAT.naturalWidth,OAT.naturalHeight);if(!NI.hm&&HIMG.complete)NI.hm=niMask(HIMG,244,232);
+  try{if(NI.lk>0){g.save();g.setTransform(1,0,0,1,0,EY);winClip(g);g.globalAlpha=.85*NI.lk;NI.rec.forEach(([n,X,Y,ch])=>{if(WMK[n])winDraw(g,n,X,Y,ch)});g.restore()}}catch(_){}try{if(window.SIGNR&&performance.now()-window.SIGNF<200){const q_=SIGNR;g.save();g.setTransform(1,0,0,1,0,EY);g.globalCompositeOperation='destination-out';g.fillStyle='rgba(0,0,0,.85)';g.fillRect(q_[0],q_[1],q_[2],q_[3]);g.restore()}}catch(_){}try{window.NLAY&&NLAY.bake(g,lk,P_,lit)}catch(_){}try{if(window.rshCut)rshCut(g,P_.night>0?`rgba(14,20,58,${al})`:`rgba(70,40,100,${al})`)}catch(_){}g.globalCompositeOperation='source-over'}if(window.NLAY)NLAY.veil(dk,_fr);else{x.imageSmoothingEnabled=true;x.drawImage(dk,0,0,W_,H_);x.imageSmoothingEnabled=false}try{window.nbPost&&nbPost()}catch(_){}
+  if(lit>.12&&!window.NLAY){const k=Math.min(1,(lit-.12)/.4);if(!NI.mask&&OAT.complete&&OAT.naturalWidth)NI.mask=niMask(OAT,OAT.naturalWidth,OAT.naturalHeight);if(!NI.hm&&HIMG.complete)NI.hm=niMask(HIMG,244,232);
    x.setTransform(2,0,0,2,0,EY*2);x.globalAlpha=.85*k;x.save();x.beginPath();x.rect(-10,-EY-10,WW+20,WH+20);try{for(const kk in BINT){const I=BINT[kk];if(I.on())x.rect(...I.r)}}catch(_){}x.clip('evenodd');
    if(0)NI.rec.forEach(([n,X,Y,ch])=>{const L=WINR[n];if(!L)return;const rr=OM[n],H0=rr?rr[3]:232,h=ch?Math.min(H0,ch*2):H0,cut=H0-h;L.forEach(([rx,ry,rw,rh],j)=>{if(ry<cut)return;const hs=((X*7+Y*13+j*31)|0)%10;if(hs<2)return;const wx=X+rx/2,wy=Y+(ry-cut)/2;x.fillStyle=hs<4?'#ffc96a':'#ffd98a';x.fillRect(wx,wy,rw/2,rh/2);x.fillStyle='rgba(255,246,210,.85)';x.fillRect(wx,wy,rw/2,.5)})});x.restore();
    x.globalAlpha=1;x.globalCompositeOperation='lighter';{if(!NI.glow){const c=document.createElement('canvas');c.width=52;c.height=52;const g=c.getContext('2d'),gr=g.createRadialGradient(26,26,0,26,26,26);gr.addColorStop(0,'rgba(255,200,110,.3)');gr.addColorStop(1,'rgba(255,200,110,0)');g.fillStyle=gr;g.fillRect(0,0,52,52);NI.glow=c}x.globalAlpha=k;NI.lamps.forEach(([X,Y])=>{x.drawImage(NI.glow,X+4-13,Y+5-13,26,26)});x.globalAlpha=1}}}
@@ -3569,7 +3569,7 @@ IT[22][6]=8;IT[22][7]=37;
 // ---- lampadaires : un rai de lumière qui descend jusqu'au trottoir, la nuit
 const LMP=[30,152,222,318,414].map(X=>[X+10.5,40,62]).concat([[49.5,129,151]]);
 W('world',(o,a)=>{const r=o(...a);try{if(NI.on)LMP.forEach(([hx,hy])=>{if(!(hy==129&&window.festOn&&festOn()))NI.lamps.push([hx-4+(hy==178&&B.g?6:0),hy-5])})}catch(_){}return r});
-W('draw',(o,a)=>{const r=o(...a);try{if(MEET)return r;const P_=dayPh(),k=Math.max(P_.night,P_.dawn*.5);if(k<=0)return r;
+W('draw',(o,a)=>{const r=o(...a);try{if(MEET||window.NLAY)return r;const P_=dayPh(),k=Math.max(P_.night,P_.dawn*.5);if(k<=0)return r;
  x.save();x.setTransform(2,0,0,2,0,EY*2);x.globalCompositeOperation='lighter';
  LMP.forEach(([hx,hy,gy])=>{if(hy==129&&window.festOn&&festOn())return;if(hy==178&&B.g)hx+=6;hy+=1.5;const g=x.createLinearGradient(0,hy,0,gy);g.addColorStop(0,`rgba(255,214,140,${.34*k})`);g.addColorStop(1,`rgba(255,214,140,${.06*k})`);x.fillStyle=g;
   x.beginPath();x.moveTo(hx-1.6,hy);x.lineTo(hx+1.6,hy);x.lineTo(hx+8,gy);x.lineTo(hx-8,gy);x.closePath();x.fill();
@@ -4305,10 +4305,10 @@ DF.hiv={at:8,dur:2,t:'❄️ Le premier hiver',d:'Les nuits sont glaciales. Déf
 DF.an1={at:13,dur:2,t:'🎂 Les un an de la halte',d:'La halte fête sa première année. Défi : organiser une fête de quartier et atteindre 50 % de tranquillité en deux mois, pour montrer à la ville que le quartier vit bien avec la halte.',
  start:()=>{B.dfb={f:B.nF||0}},prog:()=>[['Fête de quartier',Math.min(1,(B.nF||0)-B.dfb.f),1],['Tranquillité',Math.min(50,Math.round(q)),50]],
  win:()=>{NOT=nUp(6);eu+=250;return'La fête des un an rassemble riverains et usager·es. Le maire est venu : +250 € et une belle photo dans le journal.'},lose:()=>'La première année se termine sans fête, ou dans un quartier encore tendu. Dommage : la ville regarde.'};
-DF.sen={at:30,dur:2,t:'🏛️ Audition au Sénat',d:'Une commission du Sénat prépare la loi sur les HSA et veut auditionner la halte. Défi : atteindre 65 % de notoriété et avoir deux référent·es dans l’équipe en deux mois, pour peser dans le débat.',
+DF.sen={at:28,dur:2,t:'🏛️ Audition au Sénat',d:'Une commission du Sénat prépare la loi sur les HSA et veut auditionner la halte. Défi : atteindre 65 % de notoriété et avoir deux référent·es dans l’équipe en deux mois, pour peser dans le débat.',
  start:()=>{},prog:()=>[['Notoriété',Math.min(65,Math.round(NOT)),65],['Référent·es',Math.min(2,REFN),2]],
  win:()=>{B.senOK=1;NOT=nUp(8);eu+=300;return'L’audition est un succès : les sénateurs citent la halte en exemple. Ça comptera dans la décision finale (+300 €).'},lose:()=>'L’audition a lieu, mais la halte n’a pas assez de poids pour convaincre. Le débat continue sans elle.'};
-DF.parl={at:33,dur:2,t:'🗳️ Le vote approche',d:'Dernière ligne droite : le gouvernement décide dans deux mois. Tous les regards sont sur les haltes. Défi : garder 60 % de tranquillité et 60 % de satisfaction moyenne jusqu’au vote.',
+DF.parl={at:34,dur:1,t:'🗳️ La décision approche',d:'Dernière ligne droite : le gouvernement décide le mois prochain. Tous les regards sont sur les haltes. Défi : garder 60 % de tranquillité et 60 % de satisfaction moyenne jusqu’au vote.',
  start:()=>{},prog:()=>{const L=Object.values(hist).filter(h=>h.v),av=L.length?Math.round(L.reduce((t,h)=>t+Math.max(0,h.sat),0)/L.length):0;return[['Tranquillité',Math.min(60,Math.round(q)),60],['Satisfaction',Math.min(60,av),60]]},
  win:()=>{B.parlOK=1;return'La halte est irréprochable au moment où tout se décide. Ça pèsera.'},lose:()=>'Le quartier ou les personnes accompagnées ne sont pas au rendez-vous au moment du vote. Dommage.'};
 }catch(_){}
@@ -4387,7 +4387,7 @@ ribbon=function(H,X,Y,c,s){const P=rbnCol(c||'#d6283c');s=s||2;RBN.forEach((row,
 function badEnd(){try{saveClear()}catch(_){}const ov=document.createElement('div');ov.id='badov';ov.innerHTML=`<div class="bt">Retente, tu vas y arriver !</div>`;document.body.appendChild(ov);document.body.style.filter='';$('m').hidden=true;try{if(typeof musEl!='undefined'&&musEl)fadeTo(musEl,0,1500)}catch(_){}
  setTimeout(()=>ov.classList.add('on'),50);setTimeout(()=>{ov.classList.add('out');setTimeout(()=>location.reload(),700)},3600)}
 window.badEnd=badEnd;
-// ---- la grève (année 3) : conditions de travail dans le médico-social
+// ---- la grève (année 2, mai-juin) : conditions de travail dans le médico-social
 CARDS.push(["c101","equipe",2,"Le médico-social en grève","Fermer la halte pour manifester","Salaires qui ne suivent pas l’inflation, postes non remplacés, subventions qui baissent, équipes qui s’épuisent : le secteur médico-social est en crise. Quand une équipe ferme son service pour manifester, ce n’est pas contre les personnes accompagnées, c’est pour pouvoir continuer à les accueillir dignement.","Les « oubliés du Ségur » : en 2021-2022, des milliers de salarié·es du social et du médico-social ont manifesté pour obtenir les revalorisations accordées à l’hôpital. Beaucoup de structures de RDR peinent encore à recruter."]);
 const MANIF=['DES MOYENS !','SOIGNER, PAS PUNIR','ON TIENT PAS','HALTE AUX COUPES','NOUS DISONS OUI !'];
 function manifScene(H,T){const g=H.g;H.street();const pros=STF.map(z=>z.ci).concat([18]),us=Object.values(hist).filter(h=>h.v).slice(0,8).map(h=>h.ci),riv=[76,77,78,79,80];const cast=pros.concat(us,riv);
@@ -4396,15 +4396,15 @@ function manifScene(H,T){const g=H.g;H.street();const pros=STF.map(z=>z.ci).conc
  g.fillStyle='#d8262f';g.fillRect(40,14,120,14);g.fillStyle='#fff';g.font="700 8px Lilita,'Atkinson Hyperlegible',sans-serif";g.textAlign='center';g.fillText('HALTE AUX RESTRICTIONS',100,24.5);g.textAlign='left';
  if(((T*1.2)|0)%2){g.font='9px sans-serif';g.fillText('✊',8,40);g.fillText('✊',180,44)}}
 function strikeStart(){if(B.strike||B.strikeD)return;B.strikeD=1;
- popWin({t:'Ras-le-bol',n:'✊ L’équipe se réunit',d:`Trois ans de salaires qui n’ont pas bougé, de postes non remplacés, de subventions rabotées. En réunion d’équipe, ${STF[0]?STF[0].n:'quelqu’un'} lâche : « On ne peut plus. » Tout le monde est d’accord, Camille aussi. Décision collective : fermer la halte et descendre dans la rue contre les restrictions budgétaires du gouvernement.`,keep:1,
+ popWin({t:'Ras-le-bol',n:'✊ L’équipe se réunit',d:`Des années de salaires qui n’ont pas bougé, de postes non remplacés, de subventions rabotées. En réunion d’équipe, ${STF[0]?STF[0].n:'quelqu’un'} lâche : « On ne peut plus. » Tout le monde est d’accord, Camille aussi. Décision collective : fermer la halte et descendre dans la rue contre les restrictions budgétaires du gouvernement.`,keep:1,
   draw:(H,T)=>{H.room('w4','f5');H.F('wboard',70,38);STF.slice(0,5).forEach((z,i)=>H.spr(z.ci,24,40+i*28,92));H.spr(18,30,160,66);H.g.font='10px sans-serif';H.g.fillText('✊',150,40-Math.abs(Math.sin(T*4))*3)},
   btns:[{t:'Fermer la halte et manifester',go:1,f:()=>{B.strike={on:1};try{unlockCard('c101')}catch(_){}newsAdd('✊',`La halte ferme : l’équipe est en grève`);say(`✊ La halte est fermée. Sur la porte : « En grève pour pouvoir continuer à vous accueillir. » Les usager·es et les riverain·es sont venus avec leurs pancartes.`);ui();
    setTimeout(()=>{popWin({t:'Manifestation',n:'✊ Dans les rues du quartier',d:`Équipe, usager·es et riverain·es défilent ensemble jusqu’à la mairie. Les commerçant·es applaudissent sur le pas de leur porte. Pour une fois, personne ne parle de « nuisances ».`,dur:11,snd:'j_fete',draw:manifScene,onEnd:()=>setTimeout(strikeEnd,600)})},2200)}}]})}
-function strikeEnd(){B.strike=null;STF.forEach(z=>{z.e=100});q+=5;NOT=nUp(5);satAll(8);ui();
+function strikeEnd(){B.strike=null;STF.forEach(z=>{z.e=100});q+=5;NOT=nUp(5);satAll(8);try{window.voix&&voix(6,1)}catch(_){}ui();
  popWin({t:'Le lendemain',n:'📣 Communiqué',d:`La grève a ressoudé l’équipe, les usager·es et les riverain·es. Le gouvernement a entendu vos revendications, et propose…`,keep:1,html:0,draw:(H,T)=>{H.room('w4','f5');STF.slice(0,6).forEach((z,i)=>H.spr(z.ci,T>3.5?48:24,30+i*26,92));if(T>3.5){H.g.font='12px sans-serif';H.g.fillText('🧘',150,50)}},
   btns:[{t:'…',go:1,f:()=>{setTimeout(()=>popWin({t:'La réponse du gouvernement',n:'🧘 Une formation yoga',d:`… une formation yoga pour toute l’équipe. Pas un euro de plus. L’équipe rit jaune, puis rit pour de bon : énergie à 100 %, et un quartier entier derrière la halte. On continue.`,keep:1,draw:(H,T)=>{H.room('w6','f7');STF.slice(0,6).forEach((z,i)=>H.spr(z.ci,48,30+i*26,92-Math.abs(Math.sin(T*2+i))*2));H.spr(18,48,180,92);H.g.font='9px sans-serif';H.g.fillText('🧘',96,40)},btns:[{t:'On continue',go:1}]}),300)}}]})}
 {const _rc=roomClosed;roomClosed=function(i){if(B.strike&&built[i])return '✊ en grève';return _rc(i)};window.roomClosed=roomClosed}
-W('upd',(o,a)=>{const r=o(...a);try{if(!dilFree()||B.strikeD)return r;const am=AMI();if(YR>=3&&am>=28&&am<=30&&B.dilM!==am){B.dilM=am;strikeStart()}}catch(_){}return r});
+W('upd',(o,a)=>{const r=o(...a);try{if(!dilFree()||B.strikeD)return r;const am=AMI();if(YR==2&&am>=14&&am<=15&&B.dilM!==am){B.dilM=am;strikeStart()}}catch(_){}return r});
 Object.assign(window,{strikeStart,strikeEnd,manifScene});
 (function(){const st=document.createElement('style');st.textContent=`#badov{position:fixed;inset:0;z-index:300;background:#0c0b14;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .9s}#badov.on{opacity:1}#badov.out{opacity:0}#badov .bt{font:400 clamp(26px,6vw,54px) Lilita,sans-serif;color:#ffd23f;text-align:center;padding:0 20px;text-shadow:0 3px 0 #000}`;document.head.appendChild(st)})();
 
@@ -4490,7 +4490,7 @@ W('draw',(o,a)=>{const r=o(...a);try{const Mh=B.march;if(!Mh||MEET)return r;cons
  if(((t*1.5)|0)%2){x.font='5px sans-serif';x.fillText('✊',Mh.m[3]?Mh.m[3].x-2:40,Mh.m[3]?Mh.m[3].y-13:50)}
  x.restore()}catch(_){}return r});
 strikeStart=function(){if(B.strike||B.strikeD)return;B.strikeD=1;
- popWin({t:'Ras-le-bol',n:'✊ L’équipe se réunit',d:`Trois ans de salaires qui n’ont pas bougé, de postes non remplacés, de subventions rabotées. En réunion d’équipe, ${STF[0]?STF[0].n:'quelqu’un'} lâche : « On ne peut plus. » Tout le monde est d’accord, Camille aussi. Décision collective : fermer la halte et descendre dans la rue contre les restrictions budgétaires du gouvernement.`,keep:1,
+ popWin({t:'Ras-le-bol',n:'✊ L’équipe se réunit',d:`Des années de salaires qui n’ont pas bougé, de postes non remplacés, de subventions rabotées. En réunion d’équipe, ${STF[0]?STF[0].n:'quelqu’un'} lâche : « On ne peut plus. » Tout le monde est d’accord, Camille aussi. Décision collective : fermer la halte et descendre dans la rue contre les restrictions budgétaires du gouvernement.`,keep:1,
   draw:(H,T)=>{H.room('w4','f5');H.F('wboard',70,38);STF.slice(0,5).forEach((z,i)=>H.spr(z.ci,24,40+i*28,92));H.spr(18,30,160,66);H.g.font='10px sans-serif';H.g.fillText('✊',150,40-Math.abs(Math.sin(T*4))*3)},
   btns:[{t:'Fermer la halte et manifester',go:1,f:()=>{B.strike={on:1};try{unlockCard('c101')}catch(_){}newsAdd('✊',`La halte ferme : l’équipe est en grève`);say(`✊ La halte est fermée. Sur la porte : « En grève pour pouvoir continuer à vous accueillir. » Usager·es et riverain·es arrivent avec leurs pancartes.`);ui();setTimeout(marchStart,2600)}}]})};
 strikeEnd=function(){B.strike=null;STF.forEach(z=>{z.e=100});ui();
@@ -5540,7 +5540,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v357')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v358')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7129,7 +7129,7 @@ const GLOSS=[[/\bHSA\b/,'c01'],[/\bDASRI\b/,'c05'],[/analyse de (drogues|produit
 #msgh .mgl{overflow:auto;flex:1}#msgh .mgi{padding:6px 10px;border-bottom:1px solid #eee5d5}#msgh .mgi small{display:block;color:#8a8070;font-size:11px}#msgh .mgi.new{background:#fff3dc}#msgh .mgi.good{border-left:4px solid #2e9e4f}#msgh .mgi.bad{border-left:4px solid #c0392b}#msgh .mgi.cam{border-left:4px solid #5b6ee1}
 #msgh .mge{padding:12px;text-align:center;color:#8a8070}
 @media(orientation:landscape){#msgh{left:60px;right:auto;width:min(520px,calc(100vw - var(--sw) - 150px))}#app:not(.open) #msgh{width:min(520px,70vw)}}`;document.head.appendChild(st);
- const MQ=[],MH=[];let unread=0,open=false;
+ const MQ=[],MH=[];window.MH_=()=>MH;const _mhx=0;let unread=0,open=false;
  const stamp=()=>{try{return 'J'+day+' · '+(MN[Math.mgin(mo,11)]||'')}catch(_){return ''}};
  const chip=()=>{let c=$('cbn');if(!c){c=document.createElement('div');c.id='cbn';c.onclick=e=>{e.stopPropagation();toggle()};$('cbub').appendChild(c)}const t=unread>0?'+'+unread:'';if(c.textContent!==t){c.textContent=t;c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop')}};
  const _cs=camSay;camSay=function(t,cls){if(!t)return;const now=performance.now();
@@ -7335,13 +7335,13 @@ window.chapOf=()=>Math.max(1,Math.min(3,YR||1));
 (function(){const st=document.createElement('style');st.textContent=`#spw .r.chh{display:none!important}
 #chapc{flex:none;font:700 11px/1 'Atkinson Hyperlegible',sans-serif;color:#2a2433;background:#fff3c4;border:1.5px solid #2a2433;border-radius:7px;padding:3px 5px;white-space:nowrap;cursor:pointer;margin-right:2px}`;document.head.appendChild(st);
  setInterval(()=>{try{const ch=window.HARD?3:chapOf(),qf=$('qf'),sf=$('spf');const H=(el,h)=>{const r=el.closest('.r');if(!r)return;if(h)r.style.setProperty('display','none','important');else if(r.style.display=='none'&&!r.classList.contains('nhide'))r.style.removeProperty('display')};if(qf)H(qf,ch<2&&!(B&&B.qShow));if(sf)H(sf,ch<3);
-  const w=$('spw');if(w){let c=$('chapc');if(!c){c=document.createElement('span');c.id='chapc';c.onclick=e=>{e.stopPropagation();try{chapOf()==3?dossierModal():indModal()}catch(_){}};w.insertBefore(c,w.firstChild)}let t='';if(started&&!ended){const C=CHAP[chapOf()];c.title='Chapitre '+chapOf()+' · '+C.n;if(chapOf()==2&&B&&B.voix!=null)t='🗳️'+Math.round(B.voix)+'%';if(chapOf()==3&&window.dossier)t='📁'+dossier().met+'/'+dossier().L.length}c.textContent=t;c.style.display=t?'':'none'}}catch(_){}},600);
+  const w=$('spw');if(w){let c=$('chapc');if(!c){c=document.createElement('span');c.id='chapc';c.onclick=e=>{e.stopPropagation();try{chgShow(chapOf())}catch(_){}};w.insertBefore(c,w.firstChild)}let t='';if(started&&!ended){const C=CHAP[chapOf()];c.title='Chapitre '+chapOf()+' · '+C.n+' (toucher pour revoir les enjeux)';if(chapOf()==1)t='🏠 An 1';if(chapOf()==2&&B&&B.voix!=null)t='🗳️'+Math.round(B.voix)+'%';if(chapOf()==3&&window.dossier)t='📁'+dossier().met+'/'+dossier().L.length}c.textContent=t;c.style.display=t?'':'none'}}catch(_){}},600);
  // an 1 : si la tranquillité baisse vraiment, la barre apparaît quand même (avec un mot de Camille)
  setInterval(()=>{try{if(started&&!ended&&chapOf()==1&&!window.HARD&&q<45&&!(B.qShow)){B.qShow=1;say('🏘️ Camille : « Les voisins commencent à se plaindre. Regarde la barre 🏘️ en haut : c’est la tranquillité du quartier. Maraudes, seringues ramassées et DASRI vidés la font remonter. »')}}catch(_){}},2000)})();
 // ---- ouverture de chaque chapitre
 function chapOpen(k){const C=CHAP[k];if(!C)return;const txt={1:'Cette année, un seul objectif : que les gens entrent, soient bien reçus, et reviennent. On construit, on recrute, on apprend. Le reste attendra.',
- 2:'La halte tourne. Maintenant, c’est le quartier qui parle : un collectif de riverains s’est formé. En décembre, le conseil de quartier votera sur notre maintien. Chaque geste vers les voisins compte.',
- 3:'Dernière année. Le quartier nous connaît ; il faut convaincre les institutions. L’ARS attend des résultats précis, l’évaluation finale aura lieu en juillet, et en décembre le ministère tranchera.'}[k];
+ 2:'La halte tourne. Maintenant, c’est le quartier qui parle : un collectif de riverains s’est formé. En mars, le conseil de quartier votera sur notre maintien. Chaque geste vers les voisins compte.',
+ 3:'Dernière année. Le quartier nous connaît ; il faut convaincre les institutions. L’ARS attend des résultats précis, l’évaluation finale aura lieu en octobre, et en mars le ministère tranchera.'}[k];
  popWin({t:`Chapitre ${k}`,n:`${C.ic} ${C.n}`,d:'Camille : « '+txt+' »',keep:1,btns:[{t:k==3?'📁 Voir le dossier':'C’est parti',go:1,f:()=>{if(k==3)setTimeout(()=>{try{dossierModal()}catch(_){}},300)}}],
   draw:(H,T)=>{const g=H.g;if(k==2){H.street();[76,79,83,85].forEach((ci,i)=>H.spr(ci,24,52+i*26,88+(i%2)*3));H.spr(18,T%1.2<.6?24:25,160,90)}
    else if(k==1){H.room('w3','f2');H.F('o_chair_ob',80,66);H.F('o_desk2',70,80);H.F('bookcase',128,58);H.spr(18,24,96,100);[[146,96],[160,98],[152,88]].forEach(([X,Y])=>{H.R(X,Y-10,14,10,'#c9a06a');H.R(X,Y-10,14,2,'#a87d4a');H.R(X+6,Y-10,2,10,'#b08550')})}
@@ -7360,11 +7360,11 @@ W('buy',(o,a)=>{const k=a[0],b0=!!B[k],r=o(...a);try{if(!b0&&B[k]&&(k==16||k==20
 W('dres',(o,a)=>{const y=a[0],D=window.DC2||{},r=o(...a);try{if(y&&D.d){const t=String(D.d[0]);if(/riverains|voisins|journaliste|école/i.test(t))voix(5,1)}else if(!y&&D.d&&/riverains|voisins/i.test(String(D.d[0])))voix(-4,1)}catch(_){}return r});
 // chaque mois : les voix suivent la tranquillité (au-dessus de 55 on gagne, en dessous de 45 on perd), et le collectif agit au printemps et à l'été
 W('monthEnd',(o,a)=>{const r=o(...a);try{if(chapOf()!=2||B.voix==null)return r;const m=mo;B.voix=Math.max(0,Math.min(100,B.voix+(q>55?3:q<45?-4:0)));
- const ev={2:['📰 Le collectif de riverains publie une tribune dans la presse locale : « une halte, oui, mais pas ici ». Réponds par des actes : maraudes, ramassage, réunion de quartier.',-3],
-  5:['📜 Le collectif dépose une pétition en mairie. Les signatures dépendent de ce que les voisins voient chaque jour devant la halte.',q<50?-6:-2],
+ const ev={2:['',-3],
+  5:['',q<50?-6:-2],
   8:['🎤 Réunion publique à la maison de quartier. L’équipe y est allée, a écouté, a répondu. Ça compte.',q>=50?5:0],
-  10:['🗓️ Le conseil de quartier votera en décembre sur le maintien de la halte. Chaque voix compte.',0]}[m];
- if(ev){setTimeout(()=>say(ev[0]),1800);B.voix=Math.max(0,Math.min(100,B.voix+ev[1]))}}catch(_){}return r});
+  10:['🗓️ Le conseil de quartier votera fin mars sur le maintien de la halte. Chaque voix compte.',0]}[m];
+ if(ev){if(ev[0])setTimeout(()=>say(ev[0]),1800);B.voix=Math.max(0,Math.min(100,B.voix+ev[1]))}}catch(_){}return r});
 // décembre an 2 : le conseil de quartier vote, puis le bilan de l'année
 W('endGame',(o,a)=>{try{if(YR==2&&!B.cq&&B.voix!=null){B.cq=1;const v=Math.round(B.voix),win=v>=50;B.cqWin=win?1:0;$('m').hidden=true;
  popWin({t:'Conseil de quartier',n:win?'🗳️ Le quartier vote pour la halte':'🗳️ Le quartier vote contre',d:win?`${v} % des voix. Les habitant·es qui nous soutiennent l’ont emporté : la halte reste, et un riverain propose de donner un coup de main le samedi. La mairie ajoute un petit soutien pour l’année 3.`:`${v} % des voix seulement. La mairie ne ferme pas la halte, mais impose une médiation de quartier pour l’année 3 : 40 € par mois, prélevés sur le budget. Il faudra regagner la confiance des voisins.`,keep:1,btns:[{t:'Continuer',go:1,f:()=>setTimeout(()=>o(...a),250)}],
@@ -7378,7 +7378,7 @@ window.dossier=function(){const lc=(()=>{try{return Object.values(B.lc||{}).filt
  const L=[['🧪 Dépistages réalisés',CN.t||0,15],['💉 Vaccinations',CN.v||0,8],['🏠 Droits ouverts et hébergements',(CN.h||0)+(CN.d||0),6],['🤝 Suivis au long cours en cours',lc,2],['📋 Niveau HAS',B.has||0,2]];
  const met=L.filter(l=>l[1]>=l[2]).length;return{L,met}};
 window.dossierModal=function(){if(!$('m').hidden)return;paused=true;const D=dossier();
- $('mb').innerHTML=`<h2>📁 Le dossier d’agrément</h2><p style="font-size:13px">En décembre, le ministère décidera de l’avenir de la halte. L’ARS attend ces résultats sur l’année 3 :</p><div class="ind5">${D.L.map(l=>`<div class="ir"><span class="ii">${l[0].slice(0,2)}</span><span class="in">${l[0].slice(3)}</span><span class="iv" style="color:${l[1]>=l[2]?'#2e9e4f':'#c27a0e'}">${l[1]} / ${l[2]}</span><span class="ib"><span class="bb"><i style="width:${Math.min(100,l[1]/l[2]*100)}%;background:${l[1]>=l[2]?'#4cc46a':'#e0a020'}"></i></span></span></div>`).join('')}</div><p style="font-size:13px"><b>${D.met} objectif${D.met>1?'s':''} sur ${D.L.length}</b> atteint${D.met>1?'s':''}. ${D.met>=4?'Le dossier est solide.':D.met>=1?'Il reste du chemin : dépistages et vaccins passent par l’onglet 🩺 Soins, les droits par le bureau social, les suivis par les rencontres.':'Le dossier est encore vide : stock de tests et de vaccins, bureau social, suivis au long cours.'}</p><button class="go" onclick="closeH()">Fermer</button>`;$('m').className='modal';$('m').hidden=false};
+ $('mb').innerHTML=`<h2>📁 Le dossier d’agrément</h2><p style="font-size:13px">En mars, le ministère décidera de l’avenir de la halte. L’ARS attend ces résultats sur l’année 3 :</p><div class="ind5">${D.L.map(l=>`<div class="ir"><span class="ii">${l[0].slice(0,2)}</span><span class="in">${l[0].slice(3)}</span><span class="iv" style="color:${l[1]>=l[2]?'#2e9e4f':'#c27a0e'}">${l[1]} / ${l[2]}</span><span class="ib"><span class="bb"><i style="width:${Math.min(100,l[1]/l[2]*100)}%;background:${l[1]>=l[2]?'#4cc46a':'#e0a020'}"></i></span></span></div>`).join('')}</div><p style="font-size:13px"><b>${D.met} objectif${D.met>1?'s':''} sur ${D.L.length}</b> atteint${D.met>1?'s':''}. ${D.met>=4?'Le dossier est solide.':D.met>=1?'Il reste du chemin : dépistages et vaccins passent par l’onglet 🩺 Soins, les droits par le bureau social, les suivis par les rencontres.':'Le dossier est encore vide : stock de tests et de vaccins, bureau social, suivis au long cours.'}</p><button class="go" onclick="closeH()">Fermer</button>`;$('m').className='modal';$('m').hidden=false};
 // bloc dans l'onglet Soins (an 3 seulement)
 (function(){const st=document.createElement('style');st.textContent=`#dosb{margin:6px 0;padding:6px 9px;border:2px solid #2a2433;border-radius:10px;background:#fffaf0;font-size:13px;cursor:pointer}#dosb b{display:block;font-size:14px}#dosb small{color:#5a5060}`;document.head.appendChild(st);
  setInterval(()=>{try{const t1=$('t1');if(!t1)return;let d=$('dosb');const on=started&&!ended&&chapOf()==3;if(!on){if(d)d.remove();return}if(!d){d=document.createElement('div');d.id='dosb';d.onclick=()=>dossierModal();t1.insertBefore(d,t1.firstChild)}const D=dossier();d.innerHTML=`<b>📁 Dossier d’agrément : ${D.met}/${D.L.length}</b><small>${D.L.filter(l=>l[1]<l[2]).map(l=>l[0].slice(0,2)+' '+l[1]+'/'+l[2]).join(' · ')||'tous les objectifs sont atteints'} · toucher pour le détail</small>`}catch(_){}},1500)})();
@@ -7388,7 +7388,7 @@ W('endGame',(o,a)=>{const r=o(...a);try{if(YR==3){const mb=$('mb'),D=dossier();i
 // ---- HAS : trois visites. An 1 (septembre) : évaluation préliminaire, sans note ni conséquence. An 2 (mai) : première évaluation notée. An 3 (juillet) : évaluation finale. Une visite peut faire gagner plusieurs niveaux d'un coup.
 try{HASV.length=0;HASV.push(8,16,30)}catch(_){}
 window.HASPRE=0;
-setInterval(()=>{try{if(!window.HASPRE)return;const f=document.getElementById('fmo');if(!f)return;const n=f.querySelector('.fn');if(n&&n.textContent=='📋 La HAS rend son verdict'){f.querySelector('.ft').textContent='Première visite';n.textContent='📋 Les évaluatrices montrent leur grille';f.querySelector('.fd').textContent='Après leur tour, les deux évaluatrices retrouvent Camille dans son bureau et lui montrent leur grille : rien n’est noté aujourd’hui, mais tout sera regardé au printemps prochain.'}}catch(_){}},80);
+setInterval(()=>{try{if(!window.HASPRE)return;const f=document.getElementById('fmo');if(!f)return;const n=f.querySelector('.fn');if(n&&n.textContent=='📋 La HAS rend son verdict'){f.querySelector('.ft').textContent='Première visite';n.textContent='📋 Les évaluatrices montrent leur grille';f.querySelector('.fd').textContent='Après leur tour, les deux évaluatrices retrouvent Camille dans son bureau et lui montrent leur grille : rien n’est noté aujourd’hui, mais tout sera regardé l’an prochain, en août.'}}catch(_){}},80);
 {const _hv=hasVisit;hasVisit=function(){try{const am=AMI();if(!window.HARD&&(B.has||0)==0&&am<12&&!B.hasPre){B.hasPre=1;window.HASPRE=1}
  // meilleur niveau atteignable d'un coup
  const lv=B.has||0,S_=hasStats();let best=lv;for(let n=lv+1;n<=4;n++){const C=HASC[n];if(C&&C.every(([,k,v])=>k=='das'?S_.das:S_[k]>=v))best=n;else break}window.HASBEST=best}catch(_){}return _hv.apply(this,arguments)};window.hasVisit=hasVisit}
@@ -7396,7 +7396,7 @@ setInterval(()=>{try{if(!window.HASPRE)return;const f=document.getElementById('f
  const r=_hr.call(this,lv,nx,nl,S_,C);
  try{if(window.HASPRE){window.HASPRE=0;const mb=$('mb');const st=mb.querySelector('.hstamp');if(st){st.innerHTML='<b>—</b><span>Évaluation préliminaire</span>';st.classList.add('g0')}
   const sub=mb.querySelector('.hsub');if(sub)sub.textContent='Évaluation préliminaire · sans note ni conséquence';const h2=mb.querySelector('.hasr h2');if(h2)h2.textContent='📋 Première visite : la grille';
-  const fin=mb.querySelector('.hfin');if(fin)fin.innerHTML=`Les évaluatrices ont fait le tour et laissent leur grille : <b>voilà ce qu’elles regarderont quand ça comptera</b>, au printemps de l’année 2. Rien n’est noté aujourd’hui.<br><small>Dans la réalité, l’évaluation d’une structure médico-sociale a lieu tous les cinq ans, par un organisme accrédité qui applique le référentiel de la HAS (menu ☰ › 📚 Le jeu et la réalité).</small>`}
+  const fin=mb.querySelector('.hfin');if(fin)fin.innerHTML=`Les évaluatrices ont fait le tour et laissent leur grille : <b>voilà ce qu’elles regarderont quand ça comptera</b>, en août de l’année 2. Rien n’est noté aujourd’hui.<br><small>Dans la réalité, l’évaluation d’une structure médico-sociale a lieu tous les cinq ans, par un organisme accrédité qui applique le référentiel de la HAS (menu ☰ › 📚 Le jeu et la réalité).</small>`}
   // texte de l'annonce et de l'arrivée : des évaluatrices accréditées, référentiel HAS
  }catch(_){}return r};try{hasReport=window.hasReport}catch(_){}}
 // la visite préliminaire ne rapporte rien ; une visite notée peut sauter des niveaux (dotations cumulées)
@@ -7404,7 +7404,7 @@ setInterval(()=>{try{if(!window.HASPRE)return;const f=document.getElementById('f
 (function(){const st=document.createElement('style');st.textContent=`.hasr .hstamp.g0{background:#5a5060!important;color:#fff}`;document.head.appendChild(st)})();
 
 // ---- « Le jeu et la réalité » : les libertés prises
-W('indModal',(o,a)=>{const r=o(...a);try{const h2=$('mb').querySelector('h2');if(h2&&started){const C=CHAP[chapOf()];h2.insertAdjacentHTML('afterend',`<p style="font-size:13px;margin:2px 0 6px"><b>Chapitre ${chapOf()} · ${C.ic} ${C.n}</b> — ${{1:'cette année, on s’installe : accueillir, recruter, apprendre.',2:'cette année, le quartier décide : le conseil de quartier votera en décembre (🗳️ '+Math.round(B.voix||0)+' % des voix pour la halte).',3:'cette année, les institutions décident : dossier d’agrément et évaluation finale.'}[chapOf()]}</p>`)}}catch(_){}return r});
+W('indModal',(o,a)=>{const r=o(...a);try{const h2=$('mb').querySelector('h2');if(h2&&started){const C=CHAP[chapOf()];h2.insertAdjacentHTML('afterend',`<p style="font-size:13px;margin:2px 0 6px"><b>Chapitre ${chapOf()} · ${C.ic} ${C.n}</b> — ${{1:'cette année, on s’installe : accueillir, recruter, apprendre.',2:'cette année, le quartier décide : le conseil de quartier votera en mars (🗳️ '+Math.round(B.voix||0)+' % des voix pour la halte).',3:'cette année, les institutions décident : dossier d’agrément et évaluation finale.'}[chapOf()]}</p>`)}}catch(_){}return r});
 window.realModal=function(){if(!$('m').hidden)return;paused=true;
  $('mb').innerHTML=`<h2>📚 Le jeu et la réalité</h2><p style="font-size:13px">Ce jeu simplifie, compresse et invente pour rester jouable. Voici les principales libertés prises, pour ne pas vous tromper :</p>
  <ul style="font-size:13px;padding-left:18px;line-height:1.4">
@@ -7444,36 +7444,37 @@ try{window.hasReportT=(lv,nx,nl)=>hasReport(lv,nx,nl,hasStats(),HASC[nx]);window
   return H}})();
 
 // ===== v345 : Cédric Crotti, l'adversaire politique — trois apparitions, puis le débat devant la halte (juin de l'an 3) : trois discours à démonter avec les cartes
-window.VAL={n:'Cédric Crotti',ci:76,title:'conseiller municipal d’opposition'};
+window.VAL={n:'Cédric Crotti',ci:76,title:'porte-parole du collectif de riverains'};
 try{MUS.src.debat='musique/debat.mp3'}catch(_){}
 const DEB=window.DEB=[
  {th:'La sécurité',seg:['Depuis que la halte est là, la délinquance a explosé tout autour. Les chiffres sont là.','Les habitants ont peur de sortir le soir, et je les comprends.','On a tous vu des gens consommer dans la rue, c’est une réalité.','Mon programme, c’est la sécurité d’abord, pour tout le monde.'],ok:0,card:'c01',alt:['c40','c03','c22','c35'],
   rep:'L’évaluation de l’Inserm, en 2021, est formelle : autour des haltes de Paris et de Strasbourg, moins d’injections dans la rue et aucune hausse de la délinquance.'},
  {th:'La santé',seg:['Ces gens ont choisi leur vie, on ne peut plus rien pour eux.','Distribuer de la naloxone, c’est encourager à consommer toujours plus.','L’argent public irait mieux dans la prévention à l’école.','Il y a eu des overdoses dans ce quartier, ne l’oublions pas.'],ok:1,card:'c11',alt:['c12','c08','c19','c53'],
   rep:'La naloxone est un antidote : elle ramène à la vie une personne en surdose, et rien ne montre qu’elle fasse consommer davantage. Elle a déjà sauvé des vies ici.'},
- {th:'Le quartier',seg:['Les habitants n’ont jamais été consultés : la halte s’est imposée sans eux.','Un quartier, c’est fait pour les familles, pas pour ça.','Depuis l’ouverture, le nombre de seringues dans la rue a doublé.','Élu, je ferai fermer cet endroit dès le premier conseil.'],ok:2,card:'c40',alt:['c05','c50','c34','c78'],
+ {th:'Le quartier',seg:['Les habitants n’ont jamais été consultés : la halte s’est imposée sans eux.','Un quartier, c’est fait pour les familles, pas pour ça.','Depuis l’ouverture, le nombre de seringues dans la rue a doublé.','Le ministère m’écoutera : je ferai fermer cet endroit.'],ok:2,card:'c40',alt:['c05','c50','c34','c78'],
   rep:'C’est l’inverse : une halte récupère les seringues et en laisse moins dans la rue. Ici, l’équipe les ramasse et les DASRI sont vidés — ce sont nos chiffres, vérifiables.',
   ok2:0,card2:'c35',rep2:'Faux. Le comité de voisinage se réunit depuis le premier jour, les comptes rendus sont publics, et la loi impose à chaque halte un comité de suivi avec les riverains. Vous y étiez invité.'}];
 // écharpe tricolore sur le sprite
 function valSpr(H,X,YB,col){H.spr(VAL.ci,col==null?24:col,X,YB)}
+function dpk(g,k,X,YB,fl){const r=DEBM[k];if(!r||!DEBI.complete)return;g.save();if(fl){g.translate(X+r[2]/2,0);g.scale(-1,1);g.translate(-(X+r[2]/2),0)}g.drawImage(DEBI,r[0],r[1],r[2],r[3],X,YB-r[3],r[2],r[3]);g.restore()}
 window.valSpr=valSpr;
 // ---- les trois apparitions, le rappel des cartes, puis le débat
 W('monthEnd',(o,a)=>{const r=o(...a);try{const am=AMI();B.val=B.val||{};
  const pop=(k,o_)=>{if(B.val[k])return;B.val[k]=1;setTimeout(()=>popWin(o_),2200)};
- if(am==18)pop('a1',{t:'Dans la presse locale',n:'🗞️ Cédric Crotti, conseiller d’opposition',d:'« Cette halte attire les dealers, les chiffres le prouvent. Élu maire, je la fermerai. » Camille : « Les chiffres ? Il n’en cite aucun. Garde nos cartes sous la main : un jour, il faudra lui répondre. »',keep:1,btns:[{t:'Continuer',go:1}],
-  draw:(H,T)=>{H.street();valSpr(H,100,90);H.R(60,56,36,26,'#f7f5ee');H.R(63,60,30,2,'#444');H.R(63,65,30,1,'#999');H.R(63,68,24,1,'#999');H.R(63,71,30,1,'#999');H.R(63,74,18,1,'#999');H.spr(82,24,150,92);H.R(154,70,8,6,'#2a2433');H.R(161,72,3,2,'#2a2433')}});
- if(am==25)pop('a2',{t:'Visite surprise',n:'📺 Crotti devant la halte, caméra au poing',d:'« Regardez-moi ces seringues ! » Il en brandit une… sortie de sa propre poche, disent les voisins. Camille : « Il reviendra en juin avec la télévision. On a six mois pour être prêts. »',keep:1,btns:[{t:'Continuer',go:1}],
-  draw:(H,T)=>{H.street();valSpr(H,96,90,24);H.R(104,74,1,6,'#e8f4fa');H.R(103,73,3,2,'#f08c28');H.spr(82,24,140,92);H.R(144,70,8,6,'#2a2433');H.R(151,72,3,2,'#2a2433');const k=(T*2|0)%2;if(k)H.R(141,69,3,2,'#ff3030');[77,79].forEach((ci,i)=>H.spr(ci,24,40+i*22,92))}});
- if(am==27)pop('a3',{t:'Dans les boîtes aux lettres',n:'📨 Le tract de Cédric Crotti',d:'« La naloxone ? Un permis de se droguer. Rendez-vous en juin devant la halte : je dirai leurs quatre vérités. » Camille : « Juin. On sera prêts. Chaque carte de l’album est un argument. »',keep:1,btns:[{t:'Continuer',go:1}],
-  draw:(H,T)=>{H.room('w0','f1');H.F('o_desk2',70,80);H.F('o_chair_ob',80,66);H.spr(18,24,96,100);H.R(100,66,22,14,'#f7f5ee');H.R(102,68,18,3,'#2456c8');H.R(102,73,14,1,'#999');H.R(102,76,10,1,'#999');valSpr(H,172,90)}});
- if(am==28&&!B.val.hint){B.val.hint=1;const miss=DEB.flatMap(d=>[d.card,d.card2].filter(Boolean)).filter(id=>!COL[id]);setTimeout(()=>{say(miss.length?'🤫 Camille : « Psssst ! Relis ça avant d’y aller, ça peut te servir ! Crotti sera devant la porte le mois prochain. »':'🤫 Camille : « Crotti sera devant la porte le mois prochain. Relis l’album : nos cartes sont nos arguments. »');miss.forEach((id,i)=>setTimeout(()=>{try{unlockCard(id)}catch(_){}},1200+i*1500))},2500)}
- if(am==29&&!B.val.deb){B.val.deb=1;setTimeout(()=>{try{debStart()}catch(e){console.error(e)}},1500)}}catch(e){console.error(e)}return r});
+ if(am==14)pop('a1',{t:'Dans la presse locale',n:'🗞️ Cédric Crotti, porte-parole du collectif',d:'Tribune du collectif de riverains, signée Cédric Crotti, qui les représente au conseil de quartier : « Une halte, oui, mais pas ici. Elle attire les dealers, les chiffres le prouvent. En mars, le conseil votera. » Camille : « Les chiffres ? Il n’en cite aucun. Réponds par des actes : maraudes, ramassage, réunions. Et garde nos cartes sous la main : un jour, il faudra lui répondre. »',keep:1,btns:[{t:'Continuer',go:1}],
+  draw:(H,T)=>{const g=H.g;H.street();[76,79].forEach((ci,n)=>H.spr(ci,24,30+n*18,92));dpk(g,'mic',106,97);valSpr(H,94,92);dpk(g,'light',138,96,1);dpk(g,'cam1',156,96,1);H.spr(82,24,182,94);if((T*2|0)%2)H.R(158,77,2,2,'#ff3030')}});
+ if(am==26)pop('a2',{t:'Visite surprise',n:'📺 Crotti devant la halte, caméra au poing',d:'« Regardez-moi ces seringues ! » Il en brandit une… sortie de sa propre poche, disent les voisins. Camille : « Il prépare quelque chose pour cet hiver, avec la télévision, avant la décision du ministère. On a quelques mois pour être prêts. »',keep:1,btns:[{t:'Continuer',go:1}],
+  draw:(H,T)=>{const g=H.g;H.street();dpk(g,'light',20,94);[77,79].forEach((ci,n)=>H.spr(ci,24,52+n*16,92));valSpr(H,100,90);dpk(g,'cam1',130,94,1);H.spr(82,24,154,92);if((T*2|0)%2)H.R(132,75,2,2,'#ff3030')}});
+ if(am==32)pop('a3',{t:'Dans les boîtes aux lettres',n:'📨 Le tract de Cédric Crotti',d:'« La naloxone ? Un permis de se droguer. Rendez-vous en janvier devant la halte, devant les caméras : avant que le ministère décide, je dirai leurs quatre vérités. » Camille : « Janvier. On sera prêts. Chaque carte de l’album est un argument. »',keep:1,btns:[{t:'Continuer',go:1}],
+  draw:(H,T)=>{H.room('w0','f1');H.F('board',40,52);H.F('poster',120,44);H.F('o_desk2',70,84);H.F('o_chair_ob',80,70);H.spr(18,24,96,100);H.spr(stCi(0),24,150,98)}});
+ if(am==32&&!B.val.hint){B.val.hint=1;const _hd=5000;const miss=DEB.flatMap(d=>[d.card,d.card2].filter(Boolean)).filter(id=>!COL[id]);setTimeout(()=>{say(miss.length?'🤫 Camille : « Psssst ! Relis ça avant d’y aller, ça peut te servir ! Crotti sera devant la porte le mois prochain. »':'🤫 Camille : « Crotti sera devant la porte le mois prochain. Relis l’album : nos cartes sont nos arguments. »');miss.forEach((id,i)=>setTimeout(()=>{try{unlockCard(id)}catch(_){}},1200+i*1500))},_hd)}
+ if(am==33&&!B.val.deb){B.val.deb=1;setTimeout(()=>{try{debStart()}catch(e){console.error(e)}},1500)}}catch(e){console.error(e)}return r});
 // ---- la scène devant la halte, puis la transition
 function debStart(){
  popWin({t:'Devant la halte',n:'📣 Cédric Crotti et ses manifestants bloquent l’entrée',d:'Pancartes, slogans, affiches de campagne, une équipe de télévision : la file d’attente est coincée dehors. Crotti réclame un débat, là, maintenant, devant la caméra.',keep:1,snd:'alert',btns:[{t:'🎤 Aller leur répondre',go:1,f:()=>setTimeout(debTransition,200)}],
   draw:(H,T)=>{const g=H.g;H.street();
    // affiches de campagne collées sur les façades
-   [[30,22],[112,20],[172,24]].forEach(([x,y],i)=>{g.fillStyle='#2456c8';g.fillRect(x,y,14,18);g.fillStyle='#fff';g.fillRect(x+1,y+1,12,11);try{g.drawImage(IMA,24*16+2,VAL.ci*26+1,12,12,x+1,y+1,12,11)}catch(_){}g.fillStyle='#d9302c';g.fillRect(x,y+13,14,2);g.fillStyle='#fff';g.fillRect(x+2,y+15,10,1)});
+   [[30,40],[112,38],[172,42]].forEach(([x,y])=>H.F('poster',x,y));
    // l'équipe de télévision : caméra sur trépied et projecteur du pack
    const C=(k,X,YB,fl)=>{const r=DEBM[k];if(!r||!DEBI.complete)return;g.save();if(fl){g.translate(X+r[2]/2,0);g.scale(-1,1);g.translate(-(X+r[2]/2),0)}g.drawImage(DEBI,r[0],r[1],r[2],r[3],X,YB-r[3],r[2],r[3]);g.restore()};
    C('light',150,98);C('cam1',176,96,1);H.spr(82,24,194,97);if((T*2|0)%2)H.R(178,76,2,2,'#ff3030');
@@ -7632,7 +7633,7 @@ function debOpen(){paused=true;tab(-1);try{dsfxLoad()}catch(_){}try{if(AU.ctx){A
  const sl=ov.querySelector('.sl');sl.width=W0;sl.height=H0;
  const staff=STF.slice(0,4).map(z=>z.ci);
  DS={ov,hd,g,cam,HD0,staff,sl,slc:sl.getContext('2d'),slT:0,slCol:'#fff',r:0,hp:3,won:0,ph:'intro',t0:performance.now(),T:0,sc:1,scT:1,anger:0,fire:0,space:0,shake:0,hitT:0,gone:0,sashY:0,camTalk:0,
-  fans:[77,79,81,84,85,78].map((ci,i)=>({ci,X:[22,50,74,126,150,178][i],Y:[34,28,38,38,28,34][i],sign:1,gone:0,vx:0,walk:0,txt:['NON À LA SALLE DE SHOOT','PAS DANS MON QUARTIER','CROTTI MAIRE','SÉCURITÉ !','PAS ICI !','FERMEZ-LA !'][i]})),
+  fans:[77,79,81,84,85,78].map((ci,i)=>({ci,X:[22,50,74,126,150,178][i],Y:[34,28,38,38,28,34][i],sign:1,gone:0,vx:0,walk:0,txt:['NON À LA SALLE DE SHOOT','PAS DANS MON QUARTIER','CROTTI A RAISON','SÉCURITÉ !','PAS ICI !','FERMEZ-LA !'][i]})),
   cro:{X:100,Y:30},stmts:[],armed:null,used:{},loopN:0,first:1,end:null,fly:null};
  const loop=()=>{if(!DS||!ov.isConnected)return;try{debDraw()}catch(e){if(!DS._er){DS._er=1;console.error(e)}}requestAnimationFrame(loop)};requestAnimationFrame(loop);
  try{playMus('debat')}catch(_){}
@@ -7917,6 +7918,94 @@ window.debFinish=n=>{if(!DS||DS.ph=='end')return;DS.won=n;clearTimeout(DS.speakE
  window.fpsToggle=()=>{on=!on;try{localStorage.setItem('hsa-fps',on?'1':'')}catch(_){}if(on){el=el||document.createElement('div');el.id='fpsc';document.body.appendChild(el);el.textContent='…';n=0;d=0;t0=performance.now();hist=[];requestAnimationFrame(tick)}else if(el)el.remove()};
  try{if(localStorage.getItem('hsa-fps'))setTimeout(()=>{if(!on)fpsToggle()},1500)}catch(_){}})();
 
+// ===== v358 : la nuit sur des calques à part — le voile (avec halos, rais des lampadaires, fenêtres éclairées) est une image posée au-dessus du jeu, rafraîchie quelques fois par seconde ; la teinte du soir est un calque CSS ; les bulles de besoin passent au-dessus du voile
+(function(){const NL={f:0,st:null,gd:null,tp:null,tx:null,tpOn:0,pl:0,glow:null};
+ const place=e=>{e.style.left=cv.clientLeft+'px';e.style.top=cv.clientTop+'px';e.style.width=cv.clientWidth+'px';e.style.height=cv.clientHeight+'px'};
+ NL.ensure=()=>{if(NL.gd)return 1;const st=$('stage');if(!st)return 0;NL.st=st;const gd=document.createElement('div');gd.style.cssText='position:absolute;pointer-events:none;display:none;mix-blend-mode:multiply';const tp=document.createElement('canvas');tp.style.cssText='position:absolute;pointer-events:none;display:none;image-rendering:pixelated';st.appendChild(gd);st.appendChild(tp);NL.gd=gd;NL.tp=tp;NL.tx=tp.getContext('2d');return 1};
+ NL.placeAll=()=>{try{[NL.gd,NL.tp,NI.dk].forEach(e=>{if(e&&e.parentNode===NL.st)place(e)});NL.pl=performance.now()}catch(_){}};
+ NL.tint=P_=>{if(!NL.ensure())return;NL.f|=1;const c=P_.gold>=P_.dawn*1.2?`rgba(255,190,120,${(.38*P_.gold).toFixed(3)})`:`rgba(255,170,150,${(.45*P_.dawn).toFixed(3)})`;if(NL.gd._c!==c){NL.gd.style.background=c;NL.gd._c=c}if(NL.gd.style.display){NL.gd.style.display='';NL.placeAll()}};
+ NL.veil=(dk,fr)=>{if(!NL.ensure())return;NL.f|=2;if(dk.parentNode!==NL.st){dk.style.cssText='position:absolute;pointer-events:none';NL.st.insertBefore(dk,NL.tp);NL.placeAll()}if(dk.style.display){dk.style.display='';NL.placeAll()}if(performance.now()-NL.pl>1500)NL.placeAll()};
+ NL.bake=(g,lk,P_,lit)=>{g.save();g.setTransform(1,0,0,1,0,EY);const k=Math.max(P_.night,P_.dawn*.5);
+  if(k>0)LMP.forEach(([hx,hy,gy])=>{if(hy==129&&window.festOn&&festOn())return;if(hy==178&&B.g)hx+=6;hy+=1.5;const path=()=>{g.beginPath();g.moveTo(hx-1.6,hy);g.lineTo(hx+1.6,hy);g.lineTo(hx+8,gy);g.lineTo(hx-8,gy);g.closePath()};
+   let gr=g.createLinearGradient(0,hy,0,gy);gr.addColorStop(0,`rgba(0,0,0,${.6*k})`);gr.addColorStop(1,`rgba(0,0,0,${.15*k})`);g.globalCompositeOperation='destination-out';g.fillStyle=gr;path();g.fill();
+   gr=g.createLinearGradient(0,hy,0,gy);gr.addColorStop(0,`rgba(255,214,140,${.3*k})`);gr.addColorStop(1,`rgba(255,214,140,${.06*k})`);g.globalCompositeOperation='source-over';g.fillStyle=gr;path();g.fill();
+   g.save();g.translate(hx,gy);g.scale(1,.42);const e=g.createRadialGradient(0,0,0,0,0,10);e.addColorStop(0,`rgba(0,0,0,${.5*k})`);e.addColorStop(1,'rgba(0,0,0,0)');g.globalCompositeOperation='destination-out';g.fillStyle=e;g.fillRect(-10,-10,20,20);g.restore()});
+  if(lit>.12){const kk=Math.min(1,(lit-.12)/.4);if(!NL.glow){const c=document.createElement('canvas');c.width=52;c.height=52;const q=c.getContext('2d'),gr=q.createRadialGradient(26,26,0,26,26,26);gr.addColorStop(0,'rgba(255,200,110,.45)');gr.addColorStop(1,'rgba(255,200,110,0)');q.fillStyle=gr;q.fillRect(0,0,52,52);NL.glow=c}
+   g.globalCompositeOperation='source-over';g.globalAlpha=kk;NI.lamps.forEach(([X,Y])=>g.drawImage(NL.glow,X+4-13,Y+5-13,26,26));g.globalAlpha=1}
+  g.restore()};
+ const NEC={s:'#e0405a',m:'#7a4fb5',h:'#2f6fb5',d:'#2f6fb5',r:'#b07a3a',o:'#2e9e4f',y:'#2a9fd6',z:'#e8a060',a:'#c98a00'};
+ const nbDraw=(t,v)=>{const T=performance.now()/1000,bo=Math.round(Math.sin(T*2.6+v.x*.7)*1)/2,X=Math.round(v.x*2)/2-6,Y=v.y-29+bo,sa=(hist[v.name]||{}).sat||50,urg=sa<30&&((T*2.5)|0)%2,C=NEC[v.need]||'#2e9e4f';
+  t.drawImage(nbSpr(C,urg?'#c0392b':'#2a2433'),X,Y,12,12.5);t.font='5.5px sans-serif';t.textAlign='center';t.fillStyle='#000';t.fillText(NE[v.need],X+6,Y+6.2);t.textAlign='left'};
+ const _nbp=window.nbPost;window.nbPost=function(){if(!(NL.f&2))return _nbp&&_nbp.apply(this,arguments);const L=NBQ.splice(0);NL.f|=4;const tp=NL.tp,t=NL.tx;
+  if(!L.length||MEET){if(NL.tpOn){t.setTransform(1,0,0,1,0,0);t.clearRect(0,0,tp.width,tp.height);NL.tpOn=0;tp.style.display='none'}return}
+  if(tp.width!==cv.width||tp.height!==cv.height){tp.width=cv.width;tp.height=cv.height;NL.placeAll()}t.setTransform(1,0,0,1,0,0);t.clearRect(0,0,tp.width,tp.height);
+  if(!NL.tpOn){NL.tpOn=1;tp.style.display='';NL.placeAll()}t.setTransform(2,0,0,2,OX*2,OY*2);t.imageSmoothingEnabled=false;L.forEach(v=>{try{nbDraw(t,v)}catch(_){}})};
+ // chaque image : on cache ce qui n'a pas servi
+ W('draw',(o,a)=>{NL.f=0;const r=o(...a);try{if(NL.gd){if(!(NL.f&1)&&!NL.gd.style.display)NL.gd.style.display='none';const dk=NI.dk;if(!(NL.f&2)&&dk&&dk.parentNode===NL.st&&!dk.style.display)dk.style.display='none';if(!(NL.f&4)&&NL.tpOn){NL.tx.setTransform(1,0,0,1,0,0);NL.tx.clearRect(0,0,NL.tp.width,NL.tp.height);NL.tpOn=0;NL.tp.style.display='none'}}}catch(_){}return r});
+ addEventListener('resize',()=>setTimeout(()=>{try{NL.placeAll()}catch(_){}},200));
+ window.NLAY=NL})();
+
+// ===== v356 : chaque année a son titre et son petit guide de Camille (l'enjeu, ce qui change, comment avancer, le calendrier). On le revoit en touchant l'étiquette du chapitre dans le bandeau.
+(function(){const st=document.createElement('style');st.textContent=`
+#mb .chg{margin:-6px -4px 0}
+#mb .chg .chh{position:relative;margin:0 0 10px;padding:14px 14px 12px;border-radius:12px;color:#fff;background:var(--cc);box-shadow:0 4px 0 #2a2433;overflow:hidden;text-align:left}
+#mb .chg .chh:after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-12deg,rgba(255,255,255,.08) 0 10px,transparent 10px 22px);pointer-events:none}
+#mb .chg .chh small{display:block;font:700 12px/1 'Atkinson Hyperlegible',sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.9}
+#mb .chg .chh b{display:block;font:400 30px/1.05 Lilita,sans-serif;margin-top:4px;-webkit-text-stroke:1px rgba(0,0,0,.25);animation:chgin .5s cubic-bezier(.2,1.6,.4,1) both}
+#mb .chg .chh .ci{position:absolute;right:12px;top:8px;font-size:40px;animation:chgin .6s .1s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes chgin{from{opacity:0;transform:translateX(30px) scale(.8)}}
+#mb .chg .cs{display:none;animation:chgsl .25s ease-out}#mb .chg .cs.on{display:block}@keyframes chgsl{from{opacity:0;transform:translateX(16px)}}
+#mb .chg .cam{display:flex;gap:9px;align-items:flex-start;margin-bottom:9px}
+#mb .chg .cam canvas{width:40px;height:50px;image-rendering:pixelated;flex:none;border:2px solid #2a2433;border-radius:8px;background:#fff7e0}
+#mb .chg .cam p{margin:0;flex:1;position:relative;background:#fff;border:2px solid #2a2433;border-radius:10px;padding:8px 10px;font:700 14px/1.35 'Atkinson Hyperlegible',sans-serif;text-align:left}
+#mb .chg h3{margin:4px 0 6px;font:400 18px/1.1 Lilita,sans-serif;color:var(--cc);text-align:left}
+#mb .chg .rows{text-align:left}
+#mb .chg .rw{display:flex;gap:8px;align-items:flex-start;padding:5px 2px;border-bottom:1px dashed #d8d0c0;font-size:13.5px;line-height:1.3}
+#mb .chg .rw .i{flex:none;width:24px;text-align:center;font-size:17px}
+#mb .chg .rw.new{background:#fff3c4;border-radius:6px}#mb .chg .rw.new:before{content:'NOUVEAU';order:3;margin-left:auto;flex:none;font:700 9px/1 'Atkinson Hyperlegible',sans-serif;color:#fff;background:#d81f1f;padding:3px 4px;border-radius:4px;align-self:center}
+#mb .chg .tl{position:relative;margin:4px 0 0 10px;padding-left:16px;border-left:3px solid var(--cc);text-align:left}
+#mb .chg .tl div{position:relative;margin:0 0 8px;font-size:13.5px;line-height:1.3}
+#mb .chg .tl div:before{content:'';position:absolute;left:-23px;top:3px;width:11px;height:11px;border-radius:50%;background:#fff;border:3px solid var(--cc)}
+#mb .chg .tl div.big:before{background:var(--cc)}
+#mb .chg .tl div b{display:inline-block;min-width:74px;color:var(--cc)}
+#mb .chg .tl div.big{font-weight:700}
+#mb .chg .nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}
+#mb .chg .dots{display:flex;gap:5px}#mb .chg .dots i{width:8px;height:8px;border-radius:50%;background:#d8d0c0}#mb .chg .dots i.on{background:var(--cc)}
+#mb .chg .nav button{margin:0}#mb .chg .nav .pv{flex:none;width:52px;padding-left:0;padding-right:0}#mb .chg .nav .pv{background:#fffaf0;color:#2a2433}#mb .chg .nav .pv[disabled]{visibility:hidden}
+#mb .chg .tip{margin-top:8px;font-size:12px;color:#5a5060;text-align:left}`;document.head.appendChild(st)})();
+const CHG={
+ 1:{c:'#2e9e4f',y:'An 1',ic:'🏠',slides:[
+  {cam:'Bienvenue ! On ouvre la halte. Cette année, un seul objectif : que les gens entrent, soient bien reçus, et reviennent. On construit, on recrute, on apprend. Le reste attendra.'},
+  {h:'Ce qui compte cette année',cam:'Trois barres en haut de l’écran. Ce sont elles qui comptent pour l’instant.',rows:[['🤝','<b>Accompagnement social</b> : les droits ouverts, les démarches, les suivis.'],['😊','<b>Satisfaction</b> des personnes accueillies : on répond à leurs besoins, sans les faire trop attendre.'],['👥','<b>Équipe</b> : une équipe épuisée accueille mal. Recrute, fais des pauses.'],['🔒','La <b>tranquillité du quartier</b> et la <b>santé publique</b> viendront plus tard.']]},
+  {h:'Comment avancer',cam:'Concrètement, voilà ce qu’on fait au quotidien.',rows:[['🏗️','<b>Locaux</b> : construis des salles, aménage-les.'],['👤','<b>Équipe</b> : recrute les bons métiers pour les bonnes salles.'],['💬','Les <b>bulles</b> au-dessus des têtes disent ce dont chaque personne a besoin.'],['📖','Certaines personnes ont une histoire : propose-leur un <b>suivi au long cours</b>.'],['🃏','Chaque action débloque des <b>cartes</b> : ce sont nos arguments, tu en auras besoin.']]},
+  {h:'Ton année',cam:'Pas de pression : l’an 1 sert à apprendre. On ne sera noté·es sur rien. Notre année va d’avril à mars.',tl:[['Avril','🏠 Ouverture de la halte.'],['Fin août','🕯️ Journée internationale de sensibilisation aux overdoses.'],['Décembre','📋 Première visite d’évaluation : elles montrent leur grille, sans note.'],['Hiver','🎯 Défi : le premier hiver.'],['Fin mars','📊 Bilan de la première année.',1]]}]},
+ 2:{c:'#1f8a87',y:'An 2',ic:'🏘️',slides:[
+  {cam:'La halte tourne. Maintenant, c’est le quartier qui parle. Un collectif de riverains s’est formé, et il a un porte-parole : Cédric Crotti, qui les représente au conseil de quartier. Et au printemps, tout le médico-social se mobilise pour ses conditions de travail.'},
+  {h:'L’enjeu',cam:'À la fin de l’année, en mars, le conseil de quartier vote : la halte est-elle la bienvenue ? Il nous faut au moins la moitié des voix.',rows:[['🗳️','<b>Les voix</b> : le pourcentage du quartier qui nous soutient. Il est affiché en haut à gauche. <b>50 % en mars</b> pour gagner le vote.',1],['🏘️','<b>La tranquillité du quartier</b> apparaît. Au-dessus de 55, on gagne des voix chaque mois ; en dessous de 45, on en perd.',1]]},
+  {h:'Comment gagner des voix',cam:'Les voisins jugent ce qu’ils voient devant chez eux.',rows:[['🚐','Les <b>maraudes</b> et le <b>ramassage</b> des seringues.'],['🗑️','Vider les <b>DASRI</b> à temps.'],['🏪','L’<b>automate</b> d’échange de seringues, les <b>réunions de quartier</b>.'],['💬','Bien répondre aux <b>riverains</b> et aux journalistes.']]},
+  {h:'Ton année',cam:'Une année chargée. Les défis 🎯 ont un délai : relève-les à temps. Et garde nos cartes sous la main, Crotti va faire parler de lui.',tl:[['Mai','🎂 Les un an de la halte.'],['Juin','🗞️ Tribune de Crotti dans la presse.'],['Juin – juillet','✊ Le médico-social se mobilise : une grève est possible.'],['Août','📋 Visite d’évaluation, notée cette fois.',1],['Septembre','📜 La pétition de Crotti.'],['Décembre','⚠️ Alerte sanitaire, réunion publique.'],['Février','🎯 Défi : l’équipe s’épuise.'],['Fin mars','🗳️ Vote du conseil de quartier.',1]]}]},
+ 3:{c:'#2f5fb5',y:'An 3',ic:'🏛️',slides:[
+  {cam:'Dernière année. Le quartier nous connaît. Il faut maintenant convaincre ceux qui décident : l’ARS, qui nous finance, et le ministère, qui décidera en mars si la halte continue. Et Cédric Crotti n’a pas dit son dernier mot.'},
+  {h:'Ce qui change',cam:'Deux nouveautés en haut de l’écran.',rows:[['💚','<b>La santé publique</b> : dépistages, vaccins, naloxone, soins. C’est l’un des cinq scores du bilan final.',1],['📁','<b>Le dossier d’agrément</b> : les résultats que l’ARS attend de cette année. Affiché en haut à gauche et dans l’onglet Soins.',1]]},
+  {h:'Le dossier d’agrément',cam:'Ces objectifs comptent cette année seulement : les compteurs repartent de zéro.',rows:[['🧪','15 dépistages'],['💉','8 vaccinations'],['🏠','6 droits ouverts ou hébergements'],['🤝','2 suivis au long cours en cours'],['📋','Niveau 2 à l’évaluation']]},
+  {h:'Ton année',cam:'On a fait le plus dur. On termine en beauté.',tl:[['Mai','💸 La ville baisse sa subvention.'],['Juin','📺 Crotti débarque devant la halte avec une caméra.'],['Juillet','🧪 Alerte hépatite C.'],['Août','🏛️ Audition au Sénat.'],['Octobre','📋 Évaluation finale.',1],['Novembre','🏛️ Visite de la ministre.'],['Janvier','⚔️ Le grand débat public contre Cédric Crotti, devant la halte.',1],['Fin mars','🏛️ Décision du ministère et bilan final.',1]]}]}};
+function chgCam(c){try{const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.drawImage(IMC,18*48+16,1,16,20,0,0,16,20)}catch(_){}}
+function chgShow(k,first){const C=CHG[k],H=CHAP[k];if(!C||!H)return;if(!$('m').hidden&&!first)return;paused=true;let i=0;const n=C.slides.length;
+ const sl=C.slides.map((S,j)=>`<div class="cs${j?'':' on'}">${S.h?`<h3>${S.h}</h3>`:''}<div class="cam"><canvas width="16" height="20"></canvas><p>${S.cam}</p></div>${S.rows?`<div class="rows">${S.rows.map(r=>`<div class="rw${r[2]&&k>1?' new':''}"><span class="i">${r[0]}</span><span>${r[1]}</span></div>`).join('')}</div>`:''}${S.tl?`<div class="tl">${S.tl.map(t=>`<div class="${t[2]?'big':''}"><b>${t[0]}</b> ${t[1]}</div>`).join('')}</div>`:''}${j==n-1?'<p class="tip">💡 Touche l’étiquette en haut à gauche du bandeau pour revoir ces explications.</p>':''}</div>`).join('');
+ $('mb').innerHTML=`<div class="chg" style="--cc:${C.c}"><div class="chh"><small>Chapitre ${k} · ${C.y}</small><b>${H.n}</b><span class="ci">${C.ic}</span></div>${sl}<div class="nav"><button class="pv" disabled>←</button><span class="dots">${C.slides.map((_,j)=>`<i class="${j?'':'on'}"></i>`).join('')}</span><button class="go nx">Suivant →</button></div></div>`;
+ $('m').className='modal';$('m').hidden=false;const mb=$('mb');mb.querySelectorAll('.cam canvas').forEach(chgCam);
+ const S_=mb.querySelectorAll('.cs'),D=mb.querySelectorAll('.dots i'),pv=mb.querySelector('.pv'),nx=mb.querySelector('.nx');
+ const go=j=>{i=j;S_.forEach((e,q)=>e.classList.toggle('on',q==i));D.forEach((e,q)=>e.classList.toggle('on',q==i));pv.disabled=i==0;nx.textContent=i==n-1?(first?'C’est parti !':'Fermer'):'Suivant →';try{sfx('page')}catch(_){}};
+ pv.onclick=()=>{if(i>0)go(i-1)};nx.onclick=()=>{if(i<n-1)go(i+1);else{closeH();if(k==3&&first)setTimeout(()=>{try{dossierModal()}catch(_){}},300)}};
+ try{talk&&0}catch(_){}}
+window.chgShow=chgShow;
+// à l'ouverture d'un chapitre : on attend que l'écran soit libre (bilan fermé, pas d'autre fenêtre), puis le guide
+chapOpen=function(k){let n=0;const t=setInterval(()=>{n++;try{if(n>80){clearInterval(t);return}if(!started||ended)return;if($('m').hidden&&!document.getElementById('fmo')&&!document.getElementById('envo')&&!document.getElementById('debov')){clearInterval(t);chgShow(k,1)}}catch(_){clearInterval(t)}},400)};
+window.chapOpen=chapOpen;
+(function(){const st=document.createElement('style');st.textContent='#mb .chg .nav .pv{flex:none;width:52px;padding-left:0;padding-right:0}';document.head.appendChild(st)})();
+window.CRPtest=k=>{const am={a1:14,a2:26,a3:32}[k]-1;B.val={};YR=Math.floor(am/12)+1;mo=am%12;try{monthEnd()}catch(e){console.error(e)}};
+window.HASV_=()=>HASV;window.DF_=()=>DF;
+
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
 W('upd',(o,a)=>{const r=o(...a);try{polTick(a[0]);orTick(a[0])}catch(e){console.error(e)}return r});
@@ -7965,7 +8054,7 @@ W('collect',(o,a)=>{const s0=DAS[0].l+DAS[1].l,r=o(...a);if(DAS[0].l+DAS[1].l<s0
 W('tourGo',(o,a)=>{const w=!!TOUR,r=o(...a);if(!w&&TOUR){B.tours=(B.tours||0)+1;B['t_'+TOUR.k]=(B['t_'+TOUR.k]||0)+1}return r});
 W('startWS',(o,a)=>{const w=!!WS,r=o(...a);if(!w&&WS)B.wsc=(B.wsc||0)+1;return r});
 W('endMeet',(o,a)=>{B.mt=(B.mt||0)+1;return o(...a)});})();
-</script><script>window.HSAV='hsa-v357'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
+</script><script>window.HSAV='hsa-v358'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
 var d=document.createElement('div');d.id='ioshint';d.innerHTML='<b>📲 Installer le jeu sur ton iPhone</b><br>Dans Safari, touche <b>Partager</b> (le carré avec une flèche ⬆️) puis <b>« Sur l’écran d’accueil »</b>. Le jeu s’ouvrira en plein écran, comme une appli.<button aria-label="Fermer">✕</button>';
 d.style.cssText='position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99999;max-width:min(92vw,420px);background:#fbf6e9;color:#3a3026;border:3px solid #6a5c4c;border-radius:12px;box-shadow:0 6px 0 #2a2433;padding:10px 34px 10px 12px;font:13px/1.35 system-ui,sans-serif';
 var b=d.querySelector('button');b.style.cssText='position:absolute;top:4px;right:6px;border:0;background:none;font-size:18px;color:#6a5c4c';b.onclick=function(){d.remove();try{localStorage.setItem('hsa-ioshint','1')}catch(e){}};
