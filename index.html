@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v338')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v339')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -3283,7 +3283,7 @@ window.toMenu=function(){try{saveNow(true)}catch(_){}try{if(MUS.cur)MUS.cur.paus
 
 // ===== v142 : bulles d'appel au-dessus de tout, questions du mois dans un ordre aléatoire, réunion : diapos d'annonces, stocks, solutions de l'équipe
 // ---- les « ! » des professionnel·les qui appellent : dessinés en dernier, jamais sous les passant·es
-W('draw',(o,a)=>{const r=o(...a);try{if(!MEET){x.save();x.setTransform(2,0,0,2,OX*2,OY*2);STF.forEach(z=>{if(z.call&&z.px!=null&&!(z.off>0))bang(z.px,z.py-14,z.call.t<15?'#e03a2e':'#f2a20c')});x.restore()}}catch(_){}return r});
+W('draw',(o,a)=>{const r=o(...a);try{if(!MEET){x.save();x.setTransform(2,0,0,2,OX*2,OY*2);if(!window.BANG2)STF.forEach(z=>{if(z.call&&z.px!=null&&!(z.off>0))bang(z.px,z.py-14,z.call.t<15?'#e03a2e':'#f2a20c')});x.restore()}}catch(_){}return r});
 // ---- questions de fin de mois : ordre tiré au hasard pour chaque partie (gardé dans la sauvegarde)
 const QS0=QS.slice();
 function qShuffle(){try{if(!B.qord||B.qord.length!=QS0.length){B.qord=QS0.map((_,i)=>i);for(let i=B.qord.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[B.qord[i],B.qord[j]]=[B.qord[j],B.qord[i]]}}QS.splice(0,QS.length,...B.qord.map(i=>QS0[i]))}catch(_){}}
@@ -4463,14 +4463,14 @@ function seatsOf(i){const r=R[i],a=r[2],b=r[3],dw=Math.max(0,RW[i]-56),U=[];for(
 fltDraw=function(dt){if(!paused)FLT.forEach(f=>f.t+=dt);FLT=FLT.filter(f=>f.t<2.4);if(!FLT.length)return;const xo=window.fltCtx?window.fltCtx():x;xo.save();xo.textBaseline='middle';xo.lineJoin='round';
  const zs=(typeof Z!='undefined'&&Z.s)?Z.s:2,kz=Math.min(1,zs/2)/zs*2;
  FLT.forEach(f=>{const ox=f.o.x!=null?f.o.x:f.x,oy=f.o.y!=null?f.o.y:f.y,bub=!!(f.o&&f.o.need&&!f.o.done&&!(f.o.s=='in'&&f.o.r==7)),rise=(f.dy*.85+Math.min(1,f.t*2.2)*3+f.t*2)*kz,yy=bub?oy-11-rise:oy-11.5-4.2*kz-rise,m=f.txt.match(/^([^\w+\-−À-ÿ]*)\s*(.*)$/u),ic=(m?m[1]:'').trim(),tx=m?m[2]:f.txt,xp=/^[+\-−]?\s?\d/.test(tx);
-  const FT=xp?"7px Lilita,'Atkinson Hyperlegible',sans-serif":"700 5.4px 'Atkinson Hyperlegible',sans-serif";xo.font=FT;const wT=xo.measureText(tx).width;xo.font="5.4px sans-serif";const wI=ic?xo.measureText(ic).width:0,w0=wT+wI+(ic?1.5:0),W=(w0+(xp?0:5))*kz,sx=Math.max(W/2+2-OX,Math.min(WW-OX-W/2-2,bub?ox+6.5+W/2:ox)),yv=Math.max(6-OY,yy),
+  const FT=xp?"9px Lilita,'Atkinson Hyperlegible',sans-serif":"700 5.4px 'Atkinson Hyperlegible',sans-serif";xo.font=FT;const wT=xo.measureText(tx).width;xo.font="5.4px sans-serif";const wI=ic?xo.measureText(ic).width:0,w0=wT+wI+(ic?1.5:0),W=(w0+(xp?0:5))*kz,sx=Math.max(W/2+2-OX,Math.min(WW-OX-W/2-2,bub?ox+6.5+W/2:ox)),yv=Math.max(6-OY,yy),
   pt=Math.min(1,f.t/.25),sc=(pt<1?.5+.6*Math.sin(pt*Math.PI*.62)/Math.sin(Math.PI*.62):1)*kz;
   xo.globalAlpha=f.t>1.8?Math.max(0,(2.4-f.t)/.6):1;xo.save();xo.translate(Math.round(sx*4)/4,Math.round(yv*4)/4);xo.scale(sc,sc);
   let cx=-w0/2;
   if(!xp){const bw=w0+5,bh=8;xo.fillStyle='rgba(42,36,51,.9)';xo.fillRect(cx-2.5,-bh/2-.5,bw+1,bh+1);xo.fillStyle='rgba(255,250,240,.97)';xo.fillRect(cx-2,-bh/2,bw,bh);xo.fillStyle='rgba(42,36,51,.9)';xo.fillRect(-1.2,bh/2,2.4,1.1);xo.fillRect(-.5,bh/2+1.1,1,.9)}
   if(ic){xo.font="5.4px sans-serif";xo.textAlign='left';xo.fillStyle='#000';xo.fillText(ic,cx,.3);cx+=wI+1.5}
   xo.font=FT;xo.textAlign='left';
-  if(xp){xo.lineWidth=1;xo.strokeStyle='rgba(42,36,51,.38)';xo.strokeText(tx,cx,.6);xo.fillStyle=f.good?'#56cf73':'#ff6f66';xo.fillText(tx,cx,.6);xo.fillStyle=f.good?'rgba(220,255,226,.55)':'rgba(255,225,220,.55)';xo.save();xo.beginPath();xo.rect(cx-1,-3.2,wT+2,2.5);xo.clip();xo.fillText(tx,cx,.6);xo.restore()}
+  if(xp){xo.lineWidth=2.4;xo.lineJoin='round';xo.strokeStyle='#2a2433';xo.strokeText(tx,cx,.6);xo.fillStyle=f.good?'#8dff9e':'#ffa49c';xo.fillText(tx,cx,.6)}
   else{xo.fillStyle=f.good?'#2e7d32':'#b4322a';xo.fillText(tx,cx,.4)}
   xo.restore()});xo.restore();xo.font=LBL;xo.textBaseline='alphabetic'};window.fltDraw=fltDraw;
 // ---- la grève, version rue : la manifestation défile en vrai dans le quartier
@@ -5540,7 +5540,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v338')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v339')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -6842,8 +6842,8 @@ W('upd',(o,a)=>{const r=o(...a);try{if(!started||paused)return r;const dt=a[0]||
  STF.forEach(z=>{if(z.off<=0&&z.r<9&&caf[z.r])z.e=Math.min(100,z.e+dt*.2)});
  V.forEach(v=>{if(v.gone||v.r==null||!sat[v.r])return;if(v.s=='in'||(v.s=='wait'&&v.r>0)){const H=hist[v.name];if(H)H.sat=Math.min(100,H.sat+dt*Math.min(.6,sat[v.r]*2))}})}catch(_){}return r});
 // profondeur : quand quelqu'un passe DERRIÈRE un objet acheté (ou une poubelle DASRI), l'objet est redessiné devant lui
-function occFix(){const P_=[];V.forEach(v=>{if(v.x!=null&&!v.gone&&v.x<176)P_.push([v.x,v.y])});STF.forEach(z=>{if(z.off<=0&&z.px!=null)P_.push([z.px,z.py])});if(!P_.length)return;
- const hit=(L,T,Rr,Bt)=>P_.some(([px,py])=>px+3.5>L&&px-3.5<Rr&&py>T+1&&py<Bt-.5);
+function occFix(){const P_=[];V.forEach(v=>{if(v.x!=null&&!v.gone&&v.x<176)P_.push([v.x,v.y])});STF.forEach(z=>{if(z.off<=0&&z.px!=null&&!z.call)P_.push([z.px,z.py])});if(!P_.length)return;
+ const hit=(L,T,Rr,Bt)=>P_.some(([px,py])=>px+3.5>L&&px-3.5<Rr&&py>T+1&&py<Bt-3);
  R.forEach((r,i)=>{if(!built[i])return;const a=r[2],b=r[3],W_=RW[i],dw=W_-56;
   IT.forEach((t,k)=>{if(!B[k]||t[0]!=i||NR[k])return;const m=IM[k];if(!m||!FU[m])return;const w_=FU[m][2]/2,h_=FU[m][3]/2,X_=a+t[6]+(t[6]>=28?dw:0),yb=b+t[7];if(hit(X_,yb-h_,X_+w_,yb))fs(m,X_,yb-h_)});
   if(typeof DAS!="undefined"){DAS.map((d,j)=>[a+d.dx,b+d.dy,j,j?1:4]).filter(q=>q[3]==i).forEach(([X,Y,j])=>{if(hit(X-4,Y-11,X+4,Y))dasri(X,Y,DAS[j].l)})}})}
@@ -7194,6 +7194,9 @@ function camEmo(t,cls){let k='';if(cls=='bad')k='worry';else if(cls=='good')k='h
  if(emo=='worry'){P(5,11,DK);P(6,12,DK);P(12,11,DK);P(11,12,DK);P(13,12,'#9ad4ff');P(13,13,'#6fb8f0')}
  if(emo=='sad'){P(6,12,DK);P(7,12,DK);P(10,12,DK);P(11,12,DK);P(6,15,'#9ad4ff')}
  const ph=talk?((T/140|0)%3):0;
+ // visage personnalisé (barbe, moustache…) : pas de bouche dessinée, la mâchoire bouge d'un pixel
+ let bare=true;try{const sk=skin.match(/\d+/g).map(Number);[[8,15],[9,15],[8,16],[9,16]].forEach(([X,Y])=>{const d=g.getImageData(X,Y+nod,1,1).data;if(d[3]<200||Math.abs(d[0]-sk[0])+Math.abs(d[1]-sk[1])+Math.abs(d[2]-sk[2])>60)bare=false})}catch(_){}
+ if(!bare){if(talk&&ph==2&&IMC.complete&&IMC.naturalWidth)g.drawImage(IMC,18*48+16,15,16,6,1,16+nod,16,6);return}
  if(emo=='joy'){P(6,15,LIP);P(11,15,LIP);[7,8,9,10].forEach(X=>P(X,16,LIP));[7,8,9,10].forEach(X=>P(X,15,ph==2?LIP2:'#e8796a'))}
  else if(emo=='happy'){P(6,15,LIP);P(11,15,LIP);[7,8,9,10].forEach(X=>P(X,16,LIP));if(ph==2){P(8,15,'#e8796a');P(9,15,'#e8796a')}}
  else if(emo=='sad'){P(7,16,LIP);P(10,16,LIP);P(8,15,LIP);P(9,15,LIP)}
@@ -7283,7 +7286,9 @@ W('draw',(o,a)=>{const r=o(...a);try{if(MEET)return r;const now=performance.now(
  if(RBLINK&&now<RBLINK.until){const i=RBLINK.i,k=(RBLINK.until-now)/2200,p=.5+.5*Math.sin(now/120);x.save();x.setTransform(2,0,0,2,OX*2,OY*2);x.globalAlpha=Math.min(1,k*3)*(.45+.55*p);x.strokeStyle='#ffd23f';x.lineWidth=2;x.strokeRect(R[i][2]-2,R[i][3]-2,RW[i]+4,50);x.restore()}else if(RBLINK)RBLINK=null;
  if(ITPREV&&now<ITPREV.until){const P=ITPREV,t=IT[P.k],m=IM[P.k];x.save();x.setTransform(2,0,0,2,OX*2,OY*2);const p=.5+.5*Math.sin(now/150);x.globalAlpha=.55+.35*p;
   if(m&&FU[m]){const r=FU[m];fs(m,P.X,P.Y-r[3]/2);x.globalAlpha=.9;x.strokeStyle='#ffd23f';x.lineWidth=1;x.strokeRect(P.X-1.5,P.Y-r[3]/2-1.5,r[2]/2+3,r[3]/2+3)}else{x.font='8px sans-serif';x.fillText(t[1],P.X,P.Y)}
-  x.restore()}else if(ITPREV)ITPREV=null}catch(_){}return r});
+  x.restore()}else if(ITPREV)ITPREV=null;
+ // les « ! » des pros qui appellent : vraiment en dernier, au-dessus de tout le mobilier
+ window.BANG2=1;x.save();x.setTransform(2,0,0,2,OX*2,OY*2);STF.forEach(z=>{if(z.call&&z.px!=null&&!(z.off>0))bang(z.px,z.py-14,z.call.t<15?'#e03a2e':'#f2a20c')});x.restore()}catch(_){}return r});
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
@@ -7333,7 +7338,7 @@ W('collect',(o,a)=>{const s0=DAS[0].l+DAS[1].l,r=o(...a);if(DAS[0].l+DAS[1].l<s0
 W('tourGo',(o,a)=>{const w=!!TOUR,r=o(...a);if(!w&&TOUR){B.tours=(B.tours||0)+1;B['t_'+TOUR.k]=(B['t_'+TOUR.k]||0)+1}return r});
 W('startWS',(o,a)=>{const w=!!WS,r=o(...a);if(!w&&WS)B.wsc=(B.wsc||0)+1;return r});
 W('endMeet',(o,a)=>{B.mt=(B.mt||0)+1;return o(...a)});})();
-</script><script>window.HSAV='hsa-v338'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
+</script><script>window.HSAV='hsa-v339'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
 var d=document.createElement('div');d.id='ioshint';d.innerHTML='<b>📲 Installer le jeu sur ton iPhone</b><br>Dans Safari, touche <b>Partager</b> (le carré avec une flèche ⬆️) puis <b>« Sur l’écran d’accueil »</b>. Le jeu s’ouvrira en plein écran, comme une appli.<button aria-label="Fermer">✕</button>';
 d.style.cssText='position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99999;max-width:min(92vw,420px);background:#fbf6e9;color:#3a3026;border:3px solid #6a5c4c;border-radius:12px;box-shadow:0 6px 0 #2a2433;padding:10px 34px 10px 12px;font:13px/1.35 system-ui,sans-serif';
 var b=d.querySelector('button');b.style.cssText='position:absolute;top:4px;right:6px;border:0;background:none;font-size:18px;color:#6a5c4c';b.onclick=function(){d.remove();try{localStorage.setItem('hsa-ioshint','1')}catch(e){}};
