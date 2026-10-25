@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v341')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v342')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -1710,7 +1710,7 @@ function hasNextTxt(){const n=HASV.find(v=>v>AMI());if(n==null)return 'aucune av
 window.hasClose=()=>{$('m').hidden=true;paused=false;ui()};
 function hasSign(){}
 W('monthEnd',(o,a)=>{const r=o(...a);try{const am=AMI();
-if(HASV.includes(am+1)&&!(B.hasAnn||{})[am+1]){B.hasAnn=B.hasAnn||{};B.hasAnn[am+1]=1;setTimeout(()=>say(`📋 La Haute Autorité de Santé viendra évaluer la halte en ${MN[(am+1)%12].toLowerCase()} : salles, formations, partenaires, satisfaction, gestion des déchets, défibrillateur… Prépare-toi !`),1500)}
+if(HASV.includes(am+1)&&!(B.hasAnn||{})[am+1]){B.hasAnn=B.hasAnn||{};B.hasAnn[am+1]=1;setTimeout(()=>say(`📋 Des évaluatrices accréditées (référentiel HAS) viendront ${(B.has||0)==0&&am<12&&!window.HARD?'faire une première visite préliminaire':'évaluer la halte'} en ${MN[(am+1)%12].toLowerCase()} : salles, formations, partenaires, satisfaction, gestion des déchets, défibrillateur… Prépare-toi !`),1500)}
 {const hv=HASV.find(v=>v<=am&&v>=am-2&&!(B.hasDone||{})[v]);if(hv!=null){B.hasDone=B.hasDone||{};B.hasDone[hv]=1;try{hasArrive()}catch(_){hasVisit()}}}
 dfMonth(am)}catch(e){console.error(e)}return r});
 // ---- défis des années 2 et 3
@@ -2497,7 +2497,7 @@ function hasCSS(){if($('hascss'))return;const st=document.createElement('style')
 function hasArrive(){const lv=B.has||0;const rooms=built.map((b,i)=>b?i:-1).filter(i=>i>=0).sort(()=>Math.random()-.5).slice(0,6);
  B.hasI={k:0,ph:'walk',t:0,stops:rooms.map(i=>({i})).concat([{off:1}]),p:[{x:STREET.x,y:STREET.y},{x:STREET.x+9,y:STREET.y+2}],w:null,lv};
  hasPath();hasCSS();hasBan();try{sfx('alert')}catch(_){}
- say('📋 Les évaluatrices de la Haute Autorité de Santé sont arrivées ! Elles vont visiter chaque salle et prendre des notes. Montre-leur le meilleur de la halte…');
+ say('📋 Les évaluatrices sont arrivées ! Elles vont visiter chaque salle et prendre des notes. Montre-leur le meilleur de la halte…');
  newsAdd('📋','Visite de la HAS')}
 function hasDoor(s){if(s.off)return{x:OFF.x,y:OFF.y+4};const r=R[s.i];return{x:DX[s.i],y:r[3]<10?r[3]+41:r[3]+27,c:r[3]<10?55:r[3]-7}}
 const hasCor=y=>y<60?55:115;
@@ -5540,7 +5540,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v341')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v342')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7328,6 +7328,95 @@ W('settings',(o,a)=>{const r=o(...a);try{const mb=$('mb'),ref=mb.querySelector('
 // ---- écran allégé : pas deux fois le même flottant sur la même personne en moins d'une seconde ; la série est déjà affichée dans le bandeau
 W('flt',(o,a)=>{try{const[ob,txt]=a;if(ob&&FLT.some(f=>f.o===ob&&f.txt===txt&&f.t<1))return}catch(_){}return o(...a)});
 
+// ===== v342 : trois chapitres — An 1 « S'installer », An 2 « Le quartier », An 3 « Les institutions ». Barres qui apparaissent avec leur chapitre, HAS en trois visites (préliminaire, notée, finale), collectif de riverains et conseil de quartier, dossier d'agrément.
+window.CHAP=[null,{n:'S’installer',ic:'🏠'},{n:'Le quartier',ic:'🏘️'},{n:'Les institutions',ic:'🏛️'}];
+window.chapOf=()=>Math.max(1,Math.min(3,YR||1));
+// ---- barres du bandeau : an 1 → 🤝 😊 👥 ; an 2 → + 🏘️ ; an 3 → + 💚. Mode difficile : tout dès le départ.
+(function(){const st=document.createElement('style');st.textContent=`#spw .r.chh{display:none!important}
+#chapc{flex:none;font:700 11px/1 'Atkinson Hyperlegible',sans-serif;color:#2a2433;background:#fff3c4;border:1.5px solid #2a2433;border-radius:7px;padding:3px 5px;white-space:nowrap;cursor:pointer;margin-right:2px}`;document.head.appendChild(st);
+ setInterval(()=>{try{const ch=window.HARD?3:chapOf(),qf=$('qf'),sf=$('spf');const H=(el,h)=>{const r=el.closest('.r');if(!r)return;if(h)r.style.setProperty('display','none','important');else if(r.style.display=='none'&&!r.classList.contains('nhide'))r.style.removeProperty('display')};if(qf)H(qf,ch<2&&!(B&&B.qShow));if(sf)H(sf,ch<3);
+  const w=$('spw');if(w){let c=$('chapc');if(!c){c=document.createElement('span');c.id='chapc';c.onclick=e=>{e.stopPropagation();try{chapOf()==3?dossierModal():indModal()}catch(_){}};w.insertBefore(c,w.firstChild)}let t='';if(started&&!ended){const C=CHAP[chapOf()];c.title='Chapitre '+chapOf()+' · '+C.n;if(chapOf()==2&&B&&B.voix!=null)t='🗳️'+Math.round(B.voix)+'%';if(chapOf()==3&&window.dossier)t='📁'+dossier().met+'/'+dossier().L.length}c.textContent=t;c.style.display=t?'':'none'}}catch(_){}},600);
+ // an 1 : si la tranquillité baisse vraiment, la barre apparaît quand même (avec un mot de Camille)
+ setInterval(()=>{try{if(started&&!ended&&chapOf()==1&&!window.HARD&&q<45&&!(B.qShow)){B.qShow=1;say('🏘️ Camille : « Les voisins commencent à se plaindre. Regarde la barre 🏘️ en haut : c’est la tranquillité du quartier. Maraudes, seringues ramassées et DASRI vidés la font remonter. »')}}catch(_){}},2000)})();
+// ---- ouverture de chaque chapitre
+function chapOpen(k){const C=CHAP[k];if(!C)return;const txt={1:'Cette année, un seul objectif : que les gens entrent, soient bien reçus, et reviennent. On construit, on recrute, on apprend. Le reste attendra.',
+ 2:'La halte tourne. Maintenant, c’est le quartier qui parle : un collectif de riverains s’est formé. En décembre, le conseil de quartier votera sur notre maintien. Chaque geste vers les voisins compte.',
+ 3:'Dernière année. Le quartier nous connaît ; il faut convaincre les institutions. L’ARS attend des résultats précis, l’évaluation finale aura lieu en juillet, et en décembre le ministère tranchera.'}[k];
+ popWin({t:`Chapitre ${k}`,n:`${C.ic} ${C.n}`,d:'Camille : « '+txt+' »',keep:1,btns:[{t:k==3?'📁 Voir le dossier':'C’est parti',go:1,f:()=>{if(k==3)setTimeout(()=>{try{dossierModal()}catch(_){}},300)}}],
+  draw:(H,T)=>{if(k==2){H.street();[76,79,83].forEach((ci,i)=>H.spr(ci,24,60+i*30,86));H.spr(18,24,150,88)}else{H.room('w0','f1');H.F('desk',70,66);H.spr(18,24,92,82);if(k==3){H.R(120,60,22,16,'#f7f5ee');H.R(122,63,18,1,'#9aa');H.R(122,66,18,1,'#9aa');H.R(122,69,12,1,'#9aa')}}}})}
+window.chapOpen=chapOpen;
+W('tutEnd',(o,a)=>{const was=INTRO,r=o(...a);try{if(was&&!B.ch1){B.ch1=1;setTimeout(()=>chapOpen(1),900)}}catch(_){}return r});
+W('nextYear',(o,a)=>{const r=o(...a);try{const k=a[0];if(k==2&&!B.ch2){B.ch2=1;B.voix=35;setTimeout(()=>chapOpen(2),1200)}if(k==3&&!B.ch3){B.ch3=1;setTimeout(()=>chapOpen(3),1200)}}catch(_){}return r});
+// reprise d'une partie déjà en an 2/3 sans chapitre : on initialise sans fenêtre
+setInterval(()=>{try{if(!started)return;if(YR>=2&&B.voix==null)B.voix=35;if(YR>=2&&!B.ch2)B.ch2=1;if(YR>=3&&!B.ch3)B.ch3=1}catch(_){}},3000);
+
+// ---- an 2 : le collectif de riverains et le compteur de voix 🗳️ (quel pourcentage du quartier nous soutient)
+window.voix=(n,why)=>{try{if(!started||chapOf()!=2||B.voix==null)return;B.voix=Math.max(0,Math.min(100,B.voix+n));if(why)flt(OFF,'🗳️'+(n>0?'+':'')+n,n>0,8)}catch(_){}};
+W('act',(o,a)=>{const k=a[0],c0=eu,r=o(...a);try{if(eu<c0){if(k=='m')voix(4,1);if(k=='r')voix(6,1)}}catch(_){}return r});
+W('buy',(o,a)=>{const k=a[0],b0=!!B[k],r=o(...a);try{if(!b0&&B[k]&&(k==16||k==20))voix(3,1)}catch(_){}return r});
+{const _ba=buyAuto;buyAuto=function(){const b0=!!B.auto,r=_ba.apply(this,arguments);try{if(!b0&&B.auto)voix(5,1)}catch(_){}return r};window.buyAuto=buyAuto}
+W('dres',(o,a)=>{const y=a[0],D=window.DC2||{},r=o(...a);try{if(y&&D.d){const t=String(D.d[0]);if(/riverains|voisins|journaliste|école/i.test(t))voix(5,1)}else if(!y&&D.d&&/riverains|voisins/i.test(String(D.d[0])))voix(-4,1)}catch(_){}return r});
+// chaque mois : les voix suivent la tranquillité (au-dessus de 55 on gagne, en dessous de 45 on perd), et le collectif agit au printemps et à l'été
+W('monthEnd',(o,a)=>{const r=o(...a);try{if(chapOf()!=2||B.voix==null)return r;const m=mo;B.voix=Math.max(0,Math.min(100,B.voix+(q>55?3:q<45?-4:0)));
+ const ev={2:['📰 Le collectif de riverains publie une tribune dans la presse locale : « une halte, oui, mais pas ici ». Réponds par des actes : maraudes, ramassage, réunion de quartier.',-3],
+  5:['📜 Le collectif dépose une pétition en mairie. Les signatures dépendent de ce que les voisins voient chaque jour devant la halte.',q<50?-6:-2],
+  8:['🎤 Réunion publique à la maison de quartier. L’équipe y est allée, a écouté, a répondu. Ça compte.',q>=50?5:0],
+  10:['🗓️ Le conseil de quartier votera en décembre sur le maintien de la halte. Chaque voix compte.',0]}[m];
+ if(ev){setTimeout(()=>say(ev[0]),1800);B.voix=Math.max(0,Math.min(100,B.voix+ev[1]))}}catch(_){}return r});
+// décembre an 2 : le conseil de quartier vote, puis le bilan de l'année
+W('endGame',(o,a)=>{try{if(YR==2&&!B.cq&&B.voix!=null){B.cq=1;const v=Math.round(B.voix),win=v>=50;B.cqWin=win?1:0;$('m').hidden=true;
+ popWin({t:'Conseil de quartier',n:win?'🗳️ Le quartier vote pour la halte':'🗳️ Le quartier vote contre',d:win?`${v} % des voix. Les habitant·es qui nous soutiennent l’ont emporté : la halte reste, et un riverain propose de donner un coup de main le samedi. La mairie ajoute un petit soutien pour l’année 3.`:`${v} % des voix seulement. La mairie ne ferme pas la halte, mais impose une médiation de quartier pour l’année 3 : 40 € par mois, prélevés sur le budget. Il faudra regagner la confiance des voisins.`,keep:1,btns:[{t:'Continuer',go:1,f:()=>setTimeout(()=>o(...a),250)}],
+  draw:(H,T)=>{H.street();[76,77,79,83,85].forEach((ci,i)=>H.spr(ci,24,30+i*28,86));H.spr(18,24,172,88);if(win)for(let i=0;i<5;i++){const ph=(T*.7+i/5)%1;H.g.globalAlpha=1-ph;H.R(40+i*30,70-ph*30,3,3,'#ffd23f');H.g.globalAlpha=1}}});
+ if(win){q=Math.min(100,q+8);NOT=nUp(5);B.cqBonus=1}else B.cqMed=1;return}}catch(_){}return o(...a)});
+W('monthEnd',(o,a)=>{try{if(YR==3&&B.cqMed&&started){eu=Math.max(0,eu-40);LM.o['Médiation imposée par la mairie']=40;LY.o['Médiation imposée par la mairie']=(LY.o['Médiation imposée par la mairie']||0)+40}}catch(_){}return o(...a)});
+W('nextYear',(o,a)=>{const r=o(...a);try{if(a[0]==3&&B.cqBonus){eu+=200;recf('Soutien de la mairie (conseil de quartier)',200);setTimeout(()=>say('🏛️ La mairie verse 200 € de soutien après le vote du conseil de quartier. Un riverain, Marcel, vient donner un coup de main le samedi.'),2500)}}catch(_){}return r});
+
+// ---- an 3 : le dossier d'agrément (objectifs de l'année, visibles dans l'onglet Soins et dans le bandeau)
+window.dossier=function(){const lc=(()=>{try{return Object.values(B.lc||{}).filter(s=>s&&s.on).length}catch(_){return 0}})();
+ const L=[['🧪 Dépistages réalisés',CN.t||0,15],['💉 Vaccinations',CN.v||0,8],['🏠 Droits ouverts et hébergements',(CN.h||0)+(CN.d||0),6],['🤝 Suivis au long cours en cours',lc,2],['📋 Niveau HAS',B.has||0,2]];
+ const met=L.filter(l=>l[1]>=l[2]).length;return{L,met}};
+window.dossierModal=function(){if(!$('m').hidden)return;paused=true;const D=dossier();
+ $('mb').innerHTML=`<h2>📁 Le dossier d’agrément</h2><p style="font-size:13px">En décembre, le ministère décidera de l’avenir de la halte. L’ARS attend ces résultats sur l’année 3 :</p><div class="ind5">${D.L.map(l=>`<div class="ir"><span class="ii">${l[0].slice(0,2)}</span><span class="in">${l[0].slice(3)}</span><span class="iv" style="color:${l[1]>=l[2]?'#2e9e4f':'#c27a0e'}">${l[1]} / ${l[2]}</span><span class="ib"><span class="bb"><i style="width:${Math.min(100,l[1]/l[2]*100)}%;background:${l[1]>=l[2]?'#4cc46a':'#e0a020'}"></i></span></span></div>`).join('')}</div><p style="font-size:13px"><b>${D.met} objectif${D.met>1?'s':''} sur ${D.L.length}</b> atteint${D.met>1?'s':''}. ${D.met>=4?'Le dossier est solide.':D.met>=1?'Il reste du chemin : dépistages et vaccins passent par l’onglet 🩺 Soins, les droits par le bureau social, les suivis par les rencontres.':'Le dossier est encore vide : stock de tests et de vaccins, bureau social, suivis au long cours.'}</p><button class="go" onclick="closeH()">Fermer</button>`;$('m').className='modal';$('m').hidden=false};
+// bloc dans l'onglet Soins (an 3 seulement)
+(function(){const st=document.createElement('style');st.textContent=`#dosb{margin:6px 0;padding:6px 9px;border:2px solid #2a2433;border-radius:10px;background:#fffaf0;font-size:13px;cursor:pointer}#dosb b{display:block;font-size:14px}#dosb small{color:#5a5060}`;document.head.appendChild(st);
+ setInterval(()=>{try{const t1=$('t1');if(!t1)return;let d=$('dosb');const on=started&&!ended&&chapOf()==3;if(!on){if(d)d.remove();return}if(!d){d=document.createElement('div');d.id='dosb';d.onclick=()=>dossierModal();t1.insertBefore(d,t1.firstChild)}const D=dossier();d.innerHTML=`<b>📁 Dossier d’agrément : ${D.met}/${D.L.length}</b><small>${D.L.filter(l=>l[1]<l[2]).map(l=>l[0].slice(0,2)+' '+l[1]+'/'+l[2]).join(' · ')||'tous les objectifs sont atteints'} · toucher pour le détail</small>`}catch(_){}},1500)})();
+// le bilan final mentionne le dossier
+W('endGame',(o,a)=>{const r=o(...a);try{if(YR==3){const mb=$('mb'),D=dossier();if(mb&&!mb.querySelector('.dosf')){const h2=mb.querySelector('h2');const p=document.createElement('p');p.className='dosf';p.style.fontSize='13px';p.innerHTML=`📁 <b>Dossier d’agrément : ${D.met} objectif${D.met>1?'s':''} sur ${D.L.length}</b>${B.cqWin!=null?' · 🗳️ conseil de quartier '+(B.cqWin?'gagné':'perdu'):''}${B.has?' · 📋 HAS niveau '+B.has:''}. ${D.met>=4?'Le ministère salue un dossier complet.':D.met>=2?'Le ministère note des résultats partiels.':'Le ministère regrette un dossier incomplet.'}`;if(h2)h2.insertAdjacentElement('afterend',p)}}}catch(_){}return r});
+
+// ---- HAS : trois visites. An 1 (septembre) : évaluation préliminaire, sans note ni conséquence. An 2 (mai) : première évaluation notée. An 3 (juillet) : évaluation finale. Une visite peut faire gagner plusieurs niveaux d'un coup.
+try{HASV.length=0;HASV.push(8,16,30)}catch(_){}
+window.HASPRE=0;
+setInterval(()=>{try{if(!window.HASPRE)return;const f=document.getElementById('fmo');if(!f)return;const n=f.querySelector('.fn');if(n&&n.textContent=='📋 La HAS rend son verdict'){f.querySelector('.ft').textContent='Première visite';n.textContent='📋 Les évaluatrices montrent leur grille';f.querySelector('.fd').textContent='Après leur tour, les deux évaluatrices retrouvent Camille dans son bureau et lui montrent leur grille : rien n’est noté aujourd’hui, mais tout sera regardé au printemps prochain.'}}catch(_){}},80);
+{const _hv=hasVisit;hasVisit=function(){try{const am=AMI();if(!window.HARD&&(B.has||0)==0&&am<12&&!B.hasPre){B.hasPre=1;window.HASPRE=1}
+ // meilleur niveau atteignable d'un coup
+ const lv=B.has||0,S_=hasStats();let best=lv;for(let n=lv+1;n<=4;n++){const C=HASC[n];if(C&&C.every(([,k,v])=>k=='das'?S_.das:S_[k]>=v))best=n;else break}window.HASBEST=best}catch(_){}return _hv.apply(this,arguments)};window.hasVisit=hasVisit}
+{const _hr=hasReport;window.hasReport=function(lv,nx,nl,S_,C){try{if(!window.HASPRE&&window.HASBEST>nl){nl=window.HASBEST;nx=nl;C=HASC[nx]}if(window.HASPRE){nl=lv}}catch(_){}
+ const r=_hr.call(this,lv,nx,nl,S_,C);
+ try{if(window.HASPRE){window.HASPRE=0;const mb=$('mb');const st=mb.querySelector('.hstamp');if(st){st.innerHTML='<b>—</b><span>Évaluation préliminaire</span>';st.classList.add('g0')}
+  const sub=mb.querySelector('.hsub');if(sub)sub.textContent='Évaluation préliminaire · sans note ni conséquence';const h2=mb.querySelector('.hasr h2');if(h2)h2.textContent='📋 Première visite : la grille';
+  const fin=mb.querySelector('.hfin');if(fin)fin.innerHTML=`Les évaluatrices ont fait le tour et laissent leur grille : <b>voilà ce qu’elles regarderont quand ça comptera</b>, au printemps de l’année 2. Rien n’est noté aujourd’hui.<br><small>Dans la réalité, l’évaluation d’une structure médico-sociale a lieu tous les cinq ans, par un organisme accrédité qui applique le référentiel de la HAS (menu ☰ › 📚 Le jeu et la réalité).</small>`}
+  // texte de l'annonce et de l'arrivée : des évaluatrices accréditées, référentiel HAS
+ }catch(_){}return r};try{hasReport=window.hasReport}catch(_){}}
+// la visite préliminaire ne rapporte rien ; une visite notée peut sauter des niveaux (dotations cumulées)
+{const _hc=window.hasClose;window.hasClose=function(){return _hc.apply(this,arguments)}}
+(function(){const st=document.createElement('style');st.textContent=`.hasr .hstamp.g0{background:#5a5060!important;color:#fff}`;document.head.appendChild(st)})();
+
+// ---- « Le jeu et la réalité » : les libertés prises
+W('indModal',(o,a)=>{const r=o(...a);try{const h2=$('mb').querySelector('h2');if(h2&&started){const C=CHAP[chapOf()];h2.insertAdjacentHTML('afterend',`<p style="font-size:13px;margin:2px 0 6px"><b>Chapitre ${chapOf()} · ${C.ic} ${C.n}</b> — ${{1:'cette année, on s’installe : accueillir, recruter, apprendre.',2:'cette année, le quartier décide : le conseil de quartier votera en décembre (🗳️ '+Math.round(B.voix||0)+' % des voix pour la halte).',3:'cette année, les institutions décident : dossier d’agrément et évaluation finale.'}[chapOf()]}</p>`)}}catch(_){}return r});
+window.realModal=function(){if(!$('m').hidden)return;paused=true;
+ $('mb').innerHTML=`<h2>📚 Le jeu et la réalité</h2><p style="font-size:13px">Ce jeu simplifie, compresse et invente pour rester jouable. Voici les principales libertés prises, pour ne pas vous tromper :</p>
+ <ul style="font-size:13px;padding-left:18px;line-height:1.4">
+ <li><b>L’évaluation « HAS ».</b> Dans la réalité, les établissements et services médico-sociaux sont évalués <b>tous les cinq ans</b>, par un <b>organisme accrédité par le Cofrac</b> qui applique le référentiel national de la Haute Autorité de Santé — la HAS ne se déplace pas elle-même, et il n’y a ni étoiles ni lettre de A à D. Les trois visites du jeu (préliminaire, notée, finale) sont une mise en scène.</li>
+ <li><b>Le financement de l’ARS.</b> Dans le jeu, l’ARS paie par personne soignée. En réalité, les structures d’addictologie (CSAPA, CAARUD, haltes) reçoivent une <b>dotation globale annuelle</b> fixée par l’ARS et financée par l’Assurance maladie, indépendante du nombre de personnes vues.</li>
+ <li><b>Le financement de la ville.</b> Le paiement « par personne accueillie » est une invention du jeu. Les collectivités peuvent subventionner une halte, mais pas à l’acte.</li>
+ <li><b>« 3 ans pour convaincre ».</b> Les haltes soins addictions existent en France dans le cadre d’une expérimentation nationale encadrée par la loi, prolongée à plusieurs reprises. La décision ne se joue pas ville par ville sur trois ans.</li>
+ <li><b>Le temps.</b> Une journée de jeu dure quelques secondes ; les accompagnements, formations, travaux et procédures prennent en réalité des semaines ou des mois.</li>
+ <li><b>Les prix.</b> Salaires, travaux, matériel : les montants sont réduits d’environ cent fois pour rester lisibles, et leurs proportions ne sont qu’indicatives.</li>
+ <li><b>Le conseil de quartier, le collectif de riverains, le dossier d’agrément</b> sont des dispositifs de jeu inspirés de situations réelles (réunions publiques, pétitions, comités de suivi), mais aucun vote de quartier ne décide du sort d’une halte.</li>
+ <li><b>Ce qui est fidèle :</b> les missions (accueil sans condition, matériel stérile, soins, accès aux droits, orientation), la naloxone, les TROD, les DASRI, les partenariats, et les faits présentés dans les cartes à collectionner.</li></ul>
+ <button class="go" onclick="closeH()">Fermer</button>`;$('m').className='modal';$('m').hidden=false};
+try{window.hasReportT=(lv,nx,nl)=>hasReport(lv,nx,nl,hasStats(),HASC[nx]);window.hasStatsT=()=>hasStats()}catch(_){}
+
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
 W('upd',(o,a)=>{const r=o(...a);try{polTick(a[0]);orTick(a[0])}catch(e){console.error(e)}return r});
@@ -7376,7 +7465,7 @@ W('collect',(o,a)=>{const s0=DAS[0].l+DAS[1].l,r=o(...a);if(DAS[0].l+DAS[1].l<s0
 W('tourGo',(o,a)=>{const w=!!TOUR,r=o(...a);if(!w&&TOUR){B.tours=(B.tours||0)+1;B['t_'+TOUR.k]=(B['t_'+TOUR.k]||0)+1}return r});
 W('startWS',(o,a)=>{const w=!!WS,r=o(...a);if(!w&&WS)B.wsc=(B.wsc||0)+1;return r});
 W('endMeet',(o,a)=>{B.mt=(B.mt||0)+1;return o(...a)});})();
-</script><script>window.HSAV='hsa-v341'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
+</script><script>window.HSAV='hsa-v342'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
 var d=document.createElement('div');d.id='ioshint';d.innerHTML='<b>📲 Installer le jeu sur ton iPhone</b><br>Dans Safari, touche <b>Partager</b> (le carré avec une flèche ⬆️) puis <b>« Sur l’écran d’accueil »</b>. Le jeu s’ouvrira en plein écran, comme une appli.<button aria-label="Fermer">✕</button>';
 d.style.cssText='position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99999;max-width:min(92vw,420px);background:#fbf6e9;color:#3a3026;border:3px solid #6a5c4c;border-radius:12px;box-shadow:0 6px 0 #2a2433;padding:10px 34px 10px 12px;font:13px/1.35 system-ui,sans-serif';
 var b=d.querySelector('button');b.style.cssText='position:absolute;top:4px;right:6px;border:0;background:none;font-size:18px;color:#6a5c4c';b.onclick=function(){d.remove();try{localStorage.setItem('hsa-ioshint','1')}catch(e){}};
