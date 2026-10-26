@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v365')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v366')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5540,7 +5540,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v365')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v366')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -8242,6 +8242,60 @@ decoCheck=function(){if(!started||ended||MEET)return;B.decoY=B.decoY||{};for(con
  W('upd',(o,a)=>{try{V.forEach(v=>{if(v&&v.w)opt(v.w,v.x)});STF.forEach(z=>{if(z&&z.wp)opt(z.wp,z.x)})}catch(_){}return o(...a)});
  window.LCOR_opt=opt}
 
+// ===== v366 : moins de fenêtres plein écran
+// (1) plus de filtre gris sur toute la carte quand une fenêtre est ouverte (coûteux sur téléphone) : le voile sombre des fenêtres suffit
+{const st=document.createElement('style');st.textContent='body.gpz #stage,body.gpz #hud,body.gpz #tabs,body.gpz #lci{filter:none!important}';document.head.appendChild(st)}
+
+// (2) vignettes : les fenêtres sans choix (animations d'actions, formations, renforts, partenaires…) s'affichent dans un coin, sans mettre le jeu en pause ; on la touche pour l'agrandir
+{const st=document.createElement('style');st.textContent=`
+#vig{position:fixed;left:10px;bottom:calc(var(--tvb,90px) + 10px);width:min(236px,50vw);z-index:57;background:#fffaf0;border:3px solid #2a2433;border-radius:11px;box-shadow:0 4px 0 rgba(42,36,51,.35);padding:5px 6px 6px;font:12px/1.3 'Atkinson Hyperlegible',sans-serif;color:#2a2433;animation:vigin .35s cubic-bezier(.2,1.3,.4,1);cursor:pointer;box-sizing:border-box}
+body:has(#tvw) #vig{bottom:calc(var(--tvb,90px) + 150px)}
+@keyframes vigin{from{transform:translateX(-120%)}}#vig.out{transform:translateX(-125%);transition:transform .3s ease-in}
+#vig .vt{display:flex;align-items:center;gap:6px;font:400 13px/1.1 Lilita,'Atkinson Hyperlegible',sans-serif;color:#2e7d4f;padding-right:22px}
+#vig canvas{display:block;width:100%;height:auto!important;aspect-ratio:200/104;image-rendering:pixelated;border:2px solid #2a2433;border-radius:6px;margin:4px 0 3px;box-sizing:border-box}
+#vig b{display:block;font-size:12.5px;line-height:1.2}#vig .vd{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-size:11.5px;color:#4a4050;margin-top:2px}
+#vig .vx{position:absolute;right:4px;top:3px;width:22px;height:22px;border:2px solid #2a2433;border-radius:6px;background:#fff;font:700 12px/1 sans-serif;padding:0;display:flex;align-items:center;justify-content:center}
+#vig .vb{height:3px;background:#3fae5a;border-radius:2px;margin-top:4px;transform-origin:left;animation:vigbar linear forwards}@keyframes vigbar{to{transform:scaleX(0)}}
+#vig .vm{font-size:10.5px;color:#2f6fb5;margin-top:2px}
+body:has(#vig) #cam{left:calc(min(236px,50vw) + 18px)!important;max-width:calc(100vw - min(236px,50vw) - 26px)!important}`;document.head.appendChild(st);
+ const BIG=/verdict|Défi|Coupe budgétaire|Annonce du gouvernement|Alerte budget|Chapitre|Devant la halte|Ras-le-bol|Le lendemain|réponse du gouvernement|Un dilemme|Une question|Une proposition|Un refus|Imprévu|Rendez-vous de l’année|Avant de recruter|Une rencontre/i;
+ const ok=o=>{try{if(!o||o._full||!started||ended||MEET||INTRO||(typeof TI!='undefined'&&TI>=0))return false;if(o.btns&&(o.btns.length>1||o.btns.some(b=>typeof b.f=='function')))return false;if(BIG.test((o.t||'')+' '+(o.n||'')))return false;return typeof o.draw=='function'}catch(_){return false}};
+ const Q_=[];let cur=null;
+ const next=()=>{if(cur||!Q_.length)return;const o=Q_.shift();cur=o;const e=document.createElement('div');e.id='vig';const D=Math.max(6,(+o.dur||6)+(o.keep?3:1));
+  e.innerHTML=`<div class="vt"></div><button class="vx" title="Fermer">✕</button><canvas width="200" height="104"></canvas><b></b><div class="vd"></div><div class="vm">Toucher pour agrandir</div><div class="vb" style="animation-duration:${D}s"></div>`;
+  e.querySelector('.vt').textContent=o.t||'';e.querySelector('b').textContent=(o.n||'').replace(/<[^>]+>/g,'');if(o.nh)e.querySelector('b').innerHTML=o.nh;e.querySelector('.vd').textContent=String(o.d||'').replace(/<[^>]+>/g,'');
+  document.body.appendChild(e);const g=e.querySelector('canvas').getContext('2d');g.imageSmoothingEnabled=false;const H=mkH(g),t0=performance.now();let fin=false;if(o.snd)try{sfx(o.snd)}catch(_){}
+  const end=(cb,skipOn)=>{if(fin)return;fin=true;e.classList.add('out');setTimeout(()=>{e.remove();cur=null;try{if(!skipOn&&o.onEnd)o.onEnd()}catch(_){}try{cb&&cb()}catch(_){}setTimeout(next,300)},320)};
+  const fr=now=>{if(fin)return;const T=(now-t0)/1000;try{o.draw(H,T)}catch(_){}if(T>=D)end();else requestAnimationFrame(fr)};requestAnimationFrame(fr);
+  e.querySelector('.vx').onclick=ev=>{ev.stopPropagation();end()};
+  e.onclick=()=>{end(()=>{const c=Object.assign({},o,{_full:1,keep:1,btns:[{t:'Fermer',go:1}]});popWin(c)},true)}};
+ {const _pw=popWin;popWin=function(o){try{if(ended||document.getElementById('tvov')||document.getElementById('epov'))return}catch(_){}if(ok(o)){Q_.push(o);next();try{if(paused&&!B.march&&!(TR_&&TR_.t>0)&&$('tut').hidden)setTimeout(()=>{try{if(!B.march&&!(TR_&&TR_.t>0))paused=!$('m').hidden||!!MEET||!!document.getElementById('envo')||!!document.getElementById('fmo')||!!document.getElementById('debov')}catch(_){}},50)}catch(_){}return}return _pw.apply(this,arguments)};window.popWin=popWin}
+ window.VIGQ=Q_}
+
+// (3) bilan du mois : une fenêtre seulement à la fin de chaque trimestre (juin, septembre, décembre, mars) ou s'il y a un problème ; sinon un petit bandeau qu'on peut toucher
+{const st=document.createElement('style');st.textContent=`#mtst{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 92px);transform:translateX(-50%);z-index:58;background:#fffaf0;border:3px solid #2a2433;border-radius:20px;box-shadow:0 3px 0 rgba(42,36,51,.35);padding:5px 12px;font:700 12.5px/1.25 'Atkinson Hyperlegible',sans-serif;color:#2a2433;white-space:nowrap;max-width:calc(100vw - 24px);overflow:hidden;text-overflow:ellipsis;cursor:pointer;animation:mtin .35s cubic-bezier(.2,1.4,.4,1)}
+#mtst .pos{color:#2e7d32}#mtst .neg{color:#c0392b}#mtst small{font-weight:400;color:#2f6fb5;margin-left:6px}@keyframes mtin{from{transform:translate(-50%,-160%)}}#mtst.out{transform:translate(-50%,-180%);transition:transform .3s}`;document.head.appendChild(st);
+ let saved='';const toast=html=>{let t=$('mtst');if(t)t.remove();t=document.createElement('div');t.id='mtst';t.innerHTML=html+'<small>voir ›</small>';document.body.appendChild(t);
+  const close=()=>{t.classList.add('out');setTimeout(()=>t.remove(),320)};t.onclick=()=>{close();if(!$('m').hidden||!saved)return;$('mb').innerHTML=saved+'<button class="go" onclick="$(\'m\').hidden=true;paused=false;ui()">Fermer</button>';$('m').className='modal';$('m').hidden=false;paused=true};setTimeout(close,7000)};
+ W('monthEnd',(o,a)=>{const r=o(...a);try{const mb=$('mb'),h=mb&&mb.querySelector('h2');if($('m').hidden||!h||!/^📅 Bilan/.test(h.textContent))return r;
+   mb.querySelectorAll('button').forEach(b=>{if(/Question du mois/.test(b.textContent))b.remove()});
+   const pm=FIN?11:(mo+11)%12,quarter=[2,5,8,11].includes(pm),prob=/retard/.test(mb.textContent)||eu<250;
+   if(quarter&&HM.length>=2){const L=HM.slice(-3),tot=L.reduce((s,x)=>s+x.net,0);h.insertAdjacentHTML('afterend',`<p style="font-size:13px">📊 <b>Sur le trimestre</b> : <span class="${tot>=0?'pos':'neg'}">${tot>=0?'+':'−'}${Math.abs(tot)} €</span> (${L.map(x=>x.m.toLowerCase()+' '+(x.net>=0?'+':'−')+Math.abs(x.net)).join(' · ')})</p>`);h.textContent=h.textContent+' · fin du trimestre'}
+   if(FIN||quarter||prob)return r;
+   const c=mb.cloneNode(true);c.querySelectorAll('button').forEach(b=>b.remove());saved=c.innerHTML;
+   const mm=(mb.textContent||'').match(/Résultat du mois\s*:?\s*([+−-])\s*([\d\s]+?)\s*€/),sp=mm?{className:mm[1]=='+'?'pos':'neg',textContent:mm[1]+mm[2].trim()+' €'}:null;
+   const go=[...mb.querySelectorAll('button')].find(b=>/nextM/.test(b.getAttribute('onclick')||''));if(go)go.click();else{$('m').hidden=true;paused=false;try{resumeM()}catch(_){}}
+   toast(`📅 ${h.textContent.replace(/^📅\s*/,'')} : <span class="${sp&&sp.className||''}">${sp?sp.textContent:''}</span> · budget ${eu} €`)}catch(e){console.error(e)}return r})}
+
+// (4) la question du mois : une bulle ❓ au-dessus de Camille, à toucher quand on veut (une par mois)
+{const st=document.createElement('style');st.textContent=`#qbub{position:fixed;z-index:56;width:34px;height:34px;border-radius:50%;background:#ffd23f;border:3px solid #2a2433;box-shadow:0 3px 0 rgba(42,36,51,.4);font:400 20px/1 Lilita,sans-serif;color:#2a2433;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:qbob 1.6s ease-in-out infinite;padding:0}
+#qbub::after{content:'';position:absolute;bottom:-8px;left:50%;margin-left:-5px;border:5px solid transparent;border-top-color:#2a2433}@keyframes qbob{50%{transform:translateY(-4px)}}`;document.head.appendChild(st);
+ let QB=0;const can=()=>{try{return started&&!ended&&!FIN&&!MEET&&qi<QS.length&&B.qM!==AMI()&&AMI()>=1&&$('m').hidden&&!document.getElementById('fmo')&&$('tut').hidden&&!document.getElementById('debov')}catch(_){return false}};
+ setInterval(()=>{let b=$('qbub');if(!can()){if(b)b.remove();return}const c=$('ccv');if(!c)return;const r=c.getBoundingClientRect();if(!r.width)return;if(!b){b=document.createElement('button');b.id='qbub';b.title='Question du mois : bonus de financement';b.textContent='?';b.onclick=e=>{e.stopPropagation();if(!can())return;QB=1;b.remove();try{sfx('page')}catch(_){}showQ()};document.body.appendChild(b)}
+  b.style.left=Math.round(r.left+r.width/2-17)+'px';b.style.top=Math.round(r.top-44)+'px'},400);
+ W('ans',(o,a)=>{try{B.qM=AMI()}catch(_){}return o(...a)});
+ W('closeQ',(o,a)=>{if(QB){QB=0;$('m').hidden=true;paused=false;try{ui()}catch(_){}return}return o(...a)})}
+
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
 W('upd',(o,a)=>{const r=o(...a);try{polTick(a[0]);orTick(a[0])}catch(e){console.error(e)}return r});
@@ -8290,7 +8344,7 @@ W('collect',(o,a)=>{const s0=DAS[0].l+DAS[1].l,r=o(...a);if(DAS[0].l+DAS[1].l<s0
 W('tourGo',(o,a)=>{const w=!!TOUR,r=o(...a);if(!w&&TOUR){B.tours=(B.tours||0)+1;B['t_'+TOUR.k]=(B['t_'+TOUR.k]||0)+1}return r});
 W('startWS',(o,a)=>{const w=!!WS,r=o(...a);if(!w&&WS)B.wsc=(B.wsc||0)+1;return r});
 W('endMeet',(o,a)=>{B.mt=(B.mt||0)+1;return o(...a)});})();
-</script><script>window.HSAV='hsa-v365'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
+</script><script>window.HSAV='hsa-v366'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
 var d=document.createElement('div');d.id='ioshint';d.innerHTML='<b>📲 Installer le jeu sur ton iPhone</b><br>Dans Safari, touche <b>Partager</b> (le carré avec une flèche ⬆️) puis <b>« Sur l’écran d’accueil »</b>. Le jeu s’ouvrira en plein écran, comme une appli.<button aria-label="Fermer">✕</button>';
 d.style.cssText='position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99999;max-width:min(92vw,420px);background:#fbf6e9;color:#3a3026;border:3px solid #6a5c4c;border-radius:12px;box-shadow:0 6px 0 #2a2433;padding:10px 34px 10px 12px;font:13px/1.35 system-ui,sans-serif';
 var b=d.querySelector('button');b.style.cssText='position:absolute;top:4px;right:6px;border:0;background:none;font-size:18px;color:#6a5c4c';b.onclick=function(){d.remove();try{localStorage.setItem('hsa-ioshint','1')}catch(e){}};
