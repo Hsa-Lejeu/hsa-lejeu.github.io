@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v377')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v378')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5540,7 +5540,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v377')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v378')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -8546,24 +8546,28 @@ setInterval(()=>{try{let e=$('rdfx');const L=[];if(started&&!ended){const am=AMI
 
 // ===== v367 : la jauge du vote des riverains, verticale et bien visible sur le bord droit (année 2)
 {const st=document.createElement('style');st.textContent=`
-#vgauge{position:fixed;right:6px;top:calc(env(safe-area-inset-top,0px) + 128px);z-index:45;width:50px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 4px 6px;background:#fffaf0;border:3px solid #2a2433;border-radius:12px;box-shadow:0 3px 0 rgba(42,36,51,.35);cursor:pointer;font-family:'Atkinson Hyperlegible',sans-serif;color:#2a2433}
-#vgauge .vh{font:400 10px/1 Lilita,sans-serif;letter-spacing:.3px;color:#2e9e4f}
-#vgauge .vn{font:400 17px/1 Lilita,sans-serif}
-#vgauge .vt{position:relative;width:18px;height:min(26vh,170px);border:2px solid #2a2433;border-radius:9px;overflow:hidden;background:#d04a4a}
-#vgauge .vf{position:absolute;left:0;right:0;bottom:0;background:#2e9e4f;transition:height .8s cubic-bezier(.3,1.3,.5,1)}
-#vgauge .vf::after{content:'';position:absolute;left:0;right:0;top:0;height:2px;background:#fffaf0;opacity:.8}
-#vgauge .vmid{position:absolute;left:-2px;right:-2px;bottom:calc(50% - 1.5px);height:3px;background:#2a2433}
-#vgauge .vk{position:absolute;right:calc(100% + 2px);bottom:calc(50% - 6px);font:700 9px/12px 'Atkinson Hyperlegible',sans-serif}
-#vgauge .vc{font:400 10px/1 Lilita,sans-serif;color:#c0392b}
-#vgauge .vs{font:700 9px/1.15 'Atkinson Hyperlegible',sans-serif;text-align:center;max-width:44px}
-#vgauge .vd{position:absolute;left:-30px;bottom:30px;font:400 14px Lilita,sans-serif;opacity:0;pointer-events:none}
-#vgauge.up .vd{animation:vgd 1.4s;color:#2e9e4f}#vgauge.dn .vd{animation:vgd 1.4s;color:#c0392b}@keyframes vgd{15%{opacity:1;transform:translateY(0)}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
+#vgauge{position:fixed;right:6px;top:calc(env(safe-area-inset-top,0px) + 128px);z-index:45;width:52px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 4px 7px;background:linear-gradient(#fffaf0,#f3e7c9);border:3px solid #2a2433;border-radius:14px;box-shadow:0 4px 0 rgba(42,36,51,.4),inset 0 2px 0 #fff;cursor:pointer;font-family:'Atkinson Hyperlegible',sans-serif;color:#2a2433;transition:border-color .4s,box-shadow .4s}
+#vgauge.win{border-color:#1f7a3c;box-shadow:0 4px 0 rgba(42,36,51,.4),0 0 0 3px #9be37a,0 0 16px 4px rgba(155,227,122,.7)}
+#vgauge .vh{font:400 9px/1 Lilita,sans-serif;letter-spacing:.4px;color:#1f7a3c;text-align:center}
+#vgauge .vn{font:400 19px/1 Lilita,sans-serif;color:#1f7a3c;-webkit-text-stroke:0;text-shadow:0 2px 0 rgba(42,36,51,.15)}
+#vgauge .vt{position:relative;width:22px;height:min(26vh,170px);border:3px solid #2a2433;border-radius:12px;overflow:hidden;background:repeating-linear-gradient(135deg,#d65252 0 5px,#c24444 5px 10px);box-shadow:inset 0 3px 0 rgba(0,0,0,.18)}
+#vgauge .vf{position:absolute;left:0;right:0;bottom:0;background:repeating-linear-gradient(135deg,#3fb866 0 5px,#2e9e4f 5px 10px);background-size:14px 14px;animation:vgs 1.6s linear infinite;transition:height .9s cubic-bezier(.3,1.4,.5,1)}
+@keyframes vgs{to{background-position:0 -14px}}
+#vgauge .vf::before{content:'';position:absolute;left:3px;top:3px;bottom:3px;width:4px;border-radius:3px;background:rgba(255,255,255,.35)}
+#vgauge .vf::after{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:#eaffd8;box-shadow:0 0 6px #c8ff9e}
+#vgauge .vtk{position:absolute;right:0;width:5px;height:2px;background:rgba(42,36,51,.45)}
+#vgauge .vmid{position:absolute;left:-3px;right:-3px;bottom:calc(50% - 2px);height:4px;background:#ffd23f;border-top:1px solid #2a2433;border-bottom:1px solid #2a2433;box-shadow:0 0 6px rgba(255,210,63,.9)}
+#vgauge .vc{font:400 9px/1.05 Lilita,sans-serif;color:#b03030;text-align:center}
+#vgauge .vs{font:400 10px/1.15 Lilita,sans-serif;text-align:center;color:#1f7a3c}
+#vgauge .vd{position:absolute;left:-32px;bottom:34px;font:400 16px Lilita,sans-serif;opacity:0;pointer-events:none;-webkit-text-stroke:3px #2a2433;paint-order:stroke fill}
+#vgauge.up .vd{animation:vgd 1.5s;color:#9be37a}#vgauge.dn .vd{animation:vgd 1.5s;color:#ff8a8a}@keyframes vgd{15%{opacity:1;transform:translateY(0) scale(1.2)}80%{opacity:1}100%{opacity:0;transform:translateY(-14px)}}
 #vgauge.up .vn{animation:vgu .6s}#vgauge.dn .vn{animation:vgu .6s}@keyframes vgu{40%{transform:scale(1.35)}}
+#vgauge.up .vt{animation:vgf .5s}#vgauge.dn .vt{animation:vgf2 .5s}@keyframes vgf{30%{box-shadow:inset 0 3px 0 rgba(0,0,0,.18),0 0 12px 3px #9be37a}}@keyframes vgf2{30%{box-shadow:inset 0 3px 0 rgba(0,0,0,.18),0 0 12px 3px #ff8a8a}}
 body:has(#m:not([hidden])) #vgauge,body:has(#debov) #vgauge,body:has(#tvov) #vgauge,body:has(#epov) #vgauge{display:none}`;document.head.appendChild(st);
  let last=null;setInterval(()=>{try{let g=$('vgauge');const on=started&&!ended&&YR==2&&B.voix!=null;if(!on){if(g)g.remove();return}
-  if(!g){g=document.createElement('div');g.id='vgauge';g.title='Vote du collectif des riverains en mars : il faut 50 %';g.innerHTML='<div class="vd"></div><div class="vc"></div><div class="vt"><div class="vf"></div><div class="vmid"></div></div><div class="vh">🗳️ POUR</div><div class="vn"></div><div class="vs"></div>';g.onclick=()=>{try{chgShow(2)}catch(_){}};document.body.appendChild(g)}
+  if(!g){g=document.createElement('div');g.id='vgauge';g.title='Vote du collectif des riverains en mars : il faut 50 %';g.innerHTML='<div class="vd"></div><div class="vc"></div><div class="vt"><div class="vf"></div>'+[10,20,30,40,60,70,80,90].map(p=>`<div class="vtk" style="bottom:${p}%"></div>`).join('')+'<div class="vmid"></div></div><div class="vh">🏘️ POUR</div><div class="vn"></div><div class="vs"></div>';g.onclick=()=>{try{chgShow(2)}catch(_){}};document.body.appendChild(g)}
   const v=Math.max(0,Math.min(100,Math.round(B.voix)));g.querySelector('.vf').style.height=v+'%';g.querySelector('.vn').textContent=v+'%';g.querySelector('.vc').textContent='CONTRE '+(100-v)+'%';
-  const s=g.querySelector('.vs');s.innerHTML=v>=50?'✔ majorité':'';s.style.display=v>=50?'':'none';
+  const s=g.querySelector('.vs');s.innerHTML=v>=50?'✔ majorité':'';s.style.display=v>=50?'':'none';g.classList.toggle('win',v>=50);
   if(last!=null&&v!==last){const d=g.querySelector('.vd');d.textContent=(v>last?'+':'−')+Math.abs(v-last);g.classList.remove('up','dn');void g.offsetWidth;g.classList.add(v>last?'up':'dn')}last=v}catch(_){}},500)}
 
 // ===== v368 : la ville paie de façon dégressive (enveloppe mensuelle) : plein tarif jusqu'à 120 passages, moitié jusqu'à 200, un quart au-delà
