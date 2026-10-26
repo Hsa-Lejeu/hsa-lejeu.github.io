@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v371')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v372')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -1089,7 +1089,7 @@ b.style.left=cl(L,8,W-bw-8)+'px';b.style.top=cl(T,8,H-bh-8)+'px'}
 function tutNext(){TI++;if(TI>=TUT.length)return tutEnd();if(TUT[TI][0]=='map'){Z.s=0;homeZ()}$('tutx').innerHTML=TUT[TI][1];$('tun').textContent=(TI+1)+' / '+TUT.length;$('tunb').textContent=TI==TUT.length-1?'C’est parti ! ▶':'Suivant ▶';const b=$('tub');b.style.animation='none';b.offsetWidth;b.style.animation='';requestAnimationFrame(tutLay);if(typeof sfx=='function')try{sfx('page')}catch(e){}}
 function tutEnd(){$('tut').hidden=true;TI=-1;if(INTRO){INTRO=0;paused=false;say('Installe un accueil et une salle de consommation, et recrute quelqu\'un dans chacune : la halte ouvrira au public quand les deux seront prêtes.')}else paused=false}
 addEventListener('resize',()=>{if(TI>=0)setTimeout(tutLay,60)});
-function introNext(){const m=$('m');m.className='modal low';m.hidden=false;if(ii>=IN_.length){m.className='modal';m.hidden=true;tutStart();return}
+function introNext(){const m=$('m');m.className='modal low';m.hidden=false;if(ii>=IN_.length){m.className='modal';m.hidden=true;try{B.ch1=1;B.newIntro=1}catch(_){}tutEnd();return}
 $('mb').innerHTML=`<div class="vn">${ptHTML([18],'#e6d9b8')}<p class="quote vq"><b>Camille</b> <small>· chef·fe de service</small><br>« ${IN_[ii]} »</p></div><button class="go" onclick="introNext()">${ii<IN_.length-1?'Suivant ▶':'Commencer ▶'}</button>`;drawPts();ii++}
 function sup(k){if(eu<SPC[k])return;eu-=SPC[k];S[k]+=PK[k];say({s:'🩹 Trousse de soins réapprovisionnée (pansements, antalgiques, kits pour abcès).',t:'🧪 Tests TROD commandés : dépistage VIH/VHC possible sur place.',v:'💉 Vaccins commandés : la salle de soins peut vacciner.',c:'🛡️ Préservatifs commandés : distribution gratuite à la salle de soins.',n:'🆘 Naloxone commandée : la salle de consommation reste ouverte.'}[k]);ui()}
 function roster(){if(RL!=STF.length){RL=STF.length;$('roster').innerHTML=STF.map((s,k)=>`<div class="rs"><button class="rfire" type="button" data-k="${k}"></button><span id="rn${k}"></span><div class="bar"><i id="re${k}"></i></div><small id="rx${k}"></small><div class="bar xpb"><i id="rq${k}"></i></div></div>`).join('')}
@@ -1118,9 +1118,9 @@ const EV=[
 [1,`📰 Un article positif dans la presse locale : le quartier découvre le travail de l’équipe.`,()=>{q+=6}],
 [1,`🧹 Opération « quartier propre » avec des riverains volontaires.`,()=>{q+=5}],
 [1,`📑 Un appel à projets est remporté : +200 €.`,()=>{eu+=200;recf('Appels à projets',200)}],
-[0,`🗞️ Un article critique circule : la tranquillité du quartier baisse. Une réunion avec les riverains aiderait.`,()=>{q-=6}],
+[0,`🗞️ Un article critique circule : la tranquillité du quartier baisse.`,()=>{q-=6;return ulOn('ar')?' Une réunion avec les riverains aiderait.':' Ramasser les seringues autour de la halte rassurera les voisin·es.'}],
 [0,`🔧 Panne de chauffage : réparation urgente, −80 €.`,()=>{eu=Math.max(0,eu-80)}],
-[0,`📢 Une pétition de riverains inquiets circule ! Organise une réunion avec eux avant 30 s.`,()=>{pet=30}],
+[0,`📢 Une pétition de riverains inquiets circule ! Organise une réunion avec eux dans les 12 jours.`,()=>{petStart()}],
 [2,`⚠️ Alerte : un produit très dangereux circule. `,()=>{if(st[1]){q+=3;return`L’équipe de la salle de consommation prévient tout le monde.`}q-=3;return`Personne en salle de consommation pour informer.`}]];
 function event(){const e=rc(EV.filter(e=>F.a||!e[1].includes('appel à projets'))),r=e[2]();$('ev').className=e[0]==0||(e[0]==2&&!st[1])?'bad':'good';$('ev').textContent=e[1]+(r||'')}
 function hireX(role){const n=STF.filter(z=>z.role==role).length;if(eu<cost()||n>=(role=='med'?3:role=='doc'?1:2))return;if(role=='doc'&&!(Y2()&&(built[1]||built[4]||built[5])))return;if(role=='int'&&!Y2())return;eu-=cost();STF.push({n:rc(NMS.filter(m=>!STF.some(s=>s.n==m)))||'Alex',r:9,role,title:role=='med'?'Médiateur·rice':role=='doc'?'Médecin':'Interprète',e:100,off:0,ci:pickSci(role)});say(role=='doc'?'🩺 Un·e médecin rejoint l’équipe : il·elle circule entre la salle de consommation, les soins et le bureau psy.':role=='med'?'🤝 Un·e médiateur·rice rejoint l’équipe : il·elle réconforte les personnes qui attendent.':'🗣️ Un·e interprète rejoint l’équipe : on peut enfin comprendre toutes les langues !');ui()}
@@ -2077,9 +2077,9 @@ function lcSit(P,S){const ch=P.ch[S.ch];return lcV(ch.sit,S)}
 function lcAct(k,a){const P=LCP[k],S=lcS(k);if(!S||S.lost||S.fin)return;const ch=P.ch[S.ch],sit=lcSit(P,S);S.cd=S.cd||{};
  if(LCA[a]){const A=LCA[a];if(!A.ok(P,S,sit,ch)||(S.cd[a]||0)>GT)return;const z=lcPro();if(!z)return;lcBusy(z,A.busy,a=='call'?'📞 '+P.n:'🚶 '+P.n);S.cd[a]=GT+A.cd;
   if(a=='rdv'){S.rdv=S.rdv||{};S.rdv[S.ch]=1}
-  const add=()=>{S.lk=Math.min(100,S.lk+A.lk)};if(A.delay)setTimeout(add,A.delay*1000);else add();
+  const g_=Math.round(A.lk*lcDim(S)),add=()=>{S.lk=Math.min(100,S.lk+g_)};if(A.delay)setTimeout(add,A.delay*1000);else add();
   const msg={call:`📞 ${z.n} appelle ${P.n}. Ça lui fait du bien d’entendre une voix connue.`,letter:`✉️ ${z.n} écrit à ${P.n} : des nouvelles du quartier, quelques mots d’encouragement.`,visit:`🚶 ${z.n} part rendre visite à ${P.n}.`,rdv:`🤝 ${z.n} accompagne ${P.n} : « ${ch.rdv} ».`}[a];say(msg);try{sfx('good')}catch(_){}}
- else if(LCB[a]){const Bb=LCB[a];S.buy=S.buy||{};if(!Bb.ok(P,S,sit,ch)||(!Bb.rep&&S.buy[a])||eu<Bb.c||((S.cd[a]||0)>GT))return;const z=lcPro();if(!z)return;eu-=Bb.c;try{LM.o['Suivi au long cours']=(LM.o['Suivi au long cours']||0)+Bb.c}catch(_){}S.buy[a]=1;if(a=='sim')S.sim=1;if(Bb.rep)S.cd[a]=GT+60;lcBusy(z,20,'🎁 '+P.n);S.lk=Math.min(100,S.lk+Bb.lk);say(`${Bb.t.split(' ')[0]} ${z.n} apporte à ${P.n} : ${Bb.t.slice(Bb.t.indexOf(' ')+1).toLowerCase()}.`);try{sfx('buy')}catch(_){}}
+ else if(LCB[a]){const Bb=LCB[a];S.buy=S.buy||{};if(!Bb.ok(P,S,sit,ch)||(!Bb.rep&&S.buy[a])||eu<Bb.c||((S.cd[a]||0)>GT))return;const z=lcPro();if(!z)return;eu-=Bb.c;try{LM.o['Suivi au long cours']=(LM.o['Suivi au long cours']||0)+Bb.c}catch(_){}S.buy[a]=1;if(a=='sim')S.sim=1;if(Bb.rep)S.cd[a]=GT+60;lcBusy(z,20,'🎁 '+P.n);S.lk=Math.min(100,S.lk+Math.round(Bb.lk*lcDim(S)));say(`${Bb.t.split(' ')[0]} ${z.n} apporte à ${P.n} : ${Bb.t.slice(Bb.t.indexOf(' ')+1).toLowerCase()}.`);try{sfx('buy')}catch(_){}}
  ui();lcIcons();lcMenu(k)}
 // ---- pages du livre
 function lcPage(k,i){const P=LCP[k],S=lcS(k),ch=P.ch[i];S.pg=S.pg||[];if(S.pg.some(p=>p.i==i))return;S.pg.push({i,am:AMI()});S.unread=1;if(lcV(ch.sit,S)=='prison')S.prz=1;const cd=lcV(ch.card,S);if(cd)try{unlockCard(cd)}catch(_){}
@@ -2112,7 +2112,7 @@ function lcMenu(k){if(!$('m').hidden&&!$('lcm')&&!$('lcbook'))return;const P=LCP
  if(!S.fin){for(const a in LCA){const A=LCA[a];if(a=='rdv'&&!ch.rdv)continue;if(a=='rdv'&&(S.rdv||{})[S.ch])continue;const lab=typeof A.t=='function'?A.t(sit,ch,P):A.t,okS=A.ok(P,S,sit,ch),cdl=(S.cd[a]||0)>GT;acts+=ab(a,lab,A.sub,okS&&!cdl&&!!z,!okS?(A.no?A.no(P,S,sit):''):cdl?'⏳ un peu de patience…':'Personne de disponible dans l’équipe')}
   for(const b in LCB){const Bb=LCB[b];if(!Bb.ok(P,S,sit,ch))continue;const done=!Bb.rep&&(S.buy||{})[b],cdl=(S.cd[b]||0)>GT;acts+=ab(b,`${Bb.t} · ${Bb.c} €`,`+${Bb.lk} de lien · un·e pro va lui apporter`,!done&&!cdl&&eu>=Bb.c&&!!z,done?'✔ déjà fait':cdl?'⏳ un peu de patience…':eu<Bb.c?'Pas assez d’argent':'Personne de disponible')}}
  $('mb').innerHTML=`<div id="lcm"><div class="lch"><canvas width="18" height="20" id="lcpc"></canvas><div style="flex:1"><h2 style="margin:0">${P.n}</h2><div style="font-size:13px">${S.lost?'🌫️ Perdu·e de vue':S.fin?'📕 Son histoire est écrite':'📍 '+LCSIT[sit]+' · chapitre '+(S.ch+1)+' : '+lcV(ch.t,S)}</div><div class="lkb"><i style="width:${p*100}%;background:${c}"></i></div><div style="font-size:12px">Lien : ${Math.round(S.lk)} / 100${S.lk<35&&!S.fin?' · ⚠️ le lien s’effiloche':''}</div></div></div>
- ${S.fin?'':`<p class="hint" style="margin:8px 0 0">Chaque action mobilise un·e professionnel·le de l’équipe pendant un moment.</p><div class="acts">${acts}</div>`}
+ ${S.fin?'':`<p class="hint" style="margin:8px 0 0">Chaque action mobilise un·e professionnel·le de l’équipe pendant un moment.${((S.rg||[]).filter(t=>GT-t<7*DAYL).length)?' Plusieurs gestes la même semaine comptent moins : le lien se construit dans la durée.':''}</p><div class="acts">${acts}</div>${lcAskHTML(k)}`}
  <div style="display:flex;gap:8px;margin-top:10px"><button class="go" onclick="lcBook('${k}')">📖 Lire son histoire${S.unread?' (nouvelle page)':''}</button><button onclick="$('m').hidden=true;paused=false">Fermer</button></div></div>`;
  $('m').className='modal';$('m').hidden=false;lcPortrait($('lcpc'),P.ci,P.col+'33')}
 // ---- le livre
@@ -4211,7 +4211,7 @@ window.closeRoom2=closeRoom2;
 // contrat DASRI : les conteneurs sont vidés trois fois par mois
 W('upd',(o,a)=>{const r=o(...a);try{if(DCT&&started&&!ended&&(day==10||day==20)){const k=AMI()+'-'+day;if(B.dasK!==k){B.dasK=k;if(DAS.some(d=>d.l>0)){DAS.forEach(d=>d.l=0);flt(OFF,'🟡 DASRI vidés (contrat)',1)}}}}catch(_){}return r});
 // ---- vies : la fin dépend du lien ; retrouvailles après une perte de vue
-function lcEndOf(S){const rd=Object.keys(S.rdv||{}).length;if(S.lk>=60)return 'good';if(S.lk<30)return 'bad';if(rd>=2)return 'good';return Math.random()<.5?'good':'bad'}
+function lcEndOf(S){const rd=Object.keys(S.rdv||{}).length+(S.cs||0);if(S.lk>=60)return 'good';if(S.lk<30)return 'bad';if(rd>=2)return 'good';return Math.random()<.5?'good':'bad'}
 function lcBack(){try{if(!started||ended||paused||!$('m').hidden||document.getElementById('fmo')||MEET)return;const am=AMI();for(const k in LCP){const P=LCP[k],S=(B.lc||{})[k];if(!S||!S.lost||S.back||S.lostAm==null)continue;if(am<S.lostAm+3||day<10)continue;if(S.backM===am)continue;S.backM=am;if(Math.random()>.5)continue;
  const nxt=S.ch+1,canGo=nxt<P.ch.length;popWin({t:'Des nouvelles',n:`${P.fem?'👩':'👨'} ${P.n}`,d:`${P.n} est passé·e au CAARUD de l’autre bout de la ville et a demandé des nouvelles de l’équipe. ${P.fem?'Elle':'Il'} n’a pas osé revenir : « J’ai honte d’avoir disparu comme ça. » La porte est restée ouverte : reprendre contact ?`,keep:1,draw:(H,T)=>{H.street();H.spr(P.ci,24,70,78);{const X_=Math.max(96,150-T*12);H.spr(stCi(0),X_>96?6+(((T*9)|0)%6):30+(((T*4)|0)%6),X_,78)}},
   btns:[{t:'Reprendre contact (lien 30)',go:1,f:()=>{S.back=1;S.lost=0;S.fin=!canGo;S.lk=30;S.pg=(S.pg||[]).filter(p=>p.i!=-1);S.unread=1;newsAdd('🤝',`${P.n} est de retour`);say(`🤝 ${P.n} revient à la halte, un peu gêné·e. Personne ne lui fait de reproche : on reprend là où on s’était arrêtés.`);lcIcons()}},{t:'Laisser faire',f:()=>{S.back=1}}]});break}}catch(_){}}
@@ -4628,13 +4628,13 @@ function gdStart(){if(GD||started||built[0]||B.gdDone)return;GD={k:'',raf:0};con
 function gdEnd(){if(!GD)return;cancelAnimationFrame(GD.raf);clearTimeout(GD.to);GD=null;B.gdDone=1;document.body.classList.remove('gdon');['gdr','gdb'].forEach(i=>{const e=$(i);if(e)e.remove()})}
 function gdLoop(){if(!GD)return;GD.raf=requestAnimationFrame(gdLoop);let S;try{S=gdState()}catch(_){return}const r=$('gdr'),b=$('gdb'),W_=innerWidth,H_=innerHeight;
  if(S.k!==GD.k){GD.k=S.k;b.querySelector('p').innerHTML=S.t;b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop');try{sfx('page')}catch(_){}
-  if(S.k=='rb0'||S.k=='hire'||S.k=='hire2')setTimeout(()=>{try{S.e.scrollIntoView({block:'nearest',behavior:'smooth'})}catch(_){}},80);
-  if(S.k=='name'){setTimeout(()=>{try{if(GD&&GD.k=='name')camTw(camN(),()=>camOn(OX+R[0][2]+RW[0]/2,OY+R[0][3]+20,1.6),900)}catch(_){}},350)}
+  if(/^(rb\d|hire)/.test(S.k))setTimeout(()=>{try{S.e.scrollIntoView({block:'nearest',behavior:'smooth'})}catch(_){}},80);
+  if(/^name/.test(S.k)){const li=S.lab||0,kk=S.k;setTimeout(()=>{try{if(GD&&GD.k==kk)camTw(camN(),()=>camOn(OX+R[li][2]+RW[li]/2,OY+R[li][3]+20,1.6),900)}catch(_){}},350)}
   if(S.k=='fin'){const k_=b.querySelector('.sk');k_.textContent='D’accord ▶';k_.classList.add('go');GD.to=setTimeout(gdEnd,14000)}}
  let t=null;try{t=S.lab!=null?gdLab(S.lab):gdEl(S.e)}catch(_){}
  const hide=!!(!$('m').hidden||document.getElementById('fmo')||(document.getElementById('tut')&&!$('tut').hidden));b.style.visibility=hide?'hidden':'';
  if(t&&!hide){const p=5;r.style.display='block';r.style.left=(t.l-p)+'px';r.style.top=(t.t-p)+'px';r.style.width=(t.r-t.l+2*p)+'px';r.style.height=(t.b-t.t+2*p)+'px'}else r.style.display='none';
- try{const av=S.k=='ghost'?$('ghb'):(S.k=='rb0'||S.k=='hire')?($('side')||$('app')):null;if(av&&t){const q=av.getBoundingClientRect();if(q.width>0)t={l:Math.min(t.l,q.left),t:Math.min(t.t,q.top),r:Math.max(t.r,q.right),b:Math.max(t.b,q.bottom)}}}catch(_){}
+ try{const av=/^ghost/.test(S.k)?$('ghb'):/^(rb\d|hire_1$|hire$)/.test(S.k)?($('side')||$('app')):null;if(av&&t){const q=av.getBoundingClientRect();if(q.width>0)t={l:Math.min(t.l,q.left),t:Math.min(t.t,q.top),r:Math.max(t.r,q.right),b:Math.max(t.b,q.bottom)}}}catch(_){}
  const bw=b.offsetWidth,bh=b.offsetHeight,cl=(v,a,z)=>Math.max(a,Math.min(z,v));let L,T;
  if(!t){L=(W_-bw)/2;T=H_-bh-12}else{const cx=(t.l+t.r)/2,cy=(t.t+t.b)/2;if(H_-t.b>=bh+40){T=t.b+34;L=cx-bw/2}else if(t.t>=bh+24){T=t.t-18-bh;L=cx-bw/2}else if(W_-t.r>=bw+20){L=t.r+14;T=cy-bh/2}else if(t.l>=bw+20){L=t.l-14-bw;T=cy-bh/2}else{L=(W_-bw)/2;T=t.t>H_/2?8+(Z.hh||40):H_-bh-10}}
  b.style.left=cl(L,8,W_-bw-8)+'px';b.style.top=cl(T,8,H_-bh-8)+'px'}
@@ -5540,7 +5540,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v371')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v372')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -8269,6 +8269,48 @@ decoCheck=function(){if(!started||ended||MEET)return;B.decoY=B.decoY||{};for(con
  W('upd',(o,a)=>{try{V.forEach(v=>{if(v&&v.w)opt(v.w,v.x)});STF.forEach(z=>{if(z&&z.wp)opt(z.wp,z.x)})}catch(_){}return o(...a)});
  window.LCOR_opt=opt}
 
+// ===== v372 A3 : « Ce qui coince » — Camille explique pourquoi des personnes repartent sans aide (bilan mensuel)
+window.DGN={u:{},miss0:0,ex:0,ext:0};
+const DGSANS={s:'soins',m:'voir de psychologue',a:'analyse de produit',h:'hébergement',d:'aide pour leurs papiers',r:'repas',y:'douche',o:'traitement',z:'lit'};
+const DGLAB={s:'des soins',m:'un·e psychologue',a:'une analyse de produit',h:'un hébergement',d:'de l’aide pour leurs papiers',r:'un repas',y:'une douche',o:'un traitement (CSAPA)',z:'un lit pour se reposer'};
+window.pAv=n=>{const e=$('p'+n);return !!e&&!e.dataset.ulh&&e.style.display!='none'};
+window.dgCause=v=>{const n=v.need,d=v.dg||[];if(v.lang&&!v.itp)return'lang';
+ if(n=='s'){if(!built[4])return'b4';if(!STF.some(z=>z.role=='inf'||z.r==4))return'inf';if(!hasR('inf'))return'infoff';if(d[0]=='p'&&!(F.p&&DOC()))return'prep';if(d[0]=='v'&&!DOC())return'vac';if(d[0]=='t'&&!F.t)return'ftrod';if(d[0]=='c'&&!F.x)return'fsex';if(S[d[0]]<d[1])return'stk'+d[0];return'busy'}
+ if(n=='m'){if(!built[5])return'b5';if(!STF.some(z=>z.role=='psy'||z.r==5))return'psy';if(!hasR('psy'))return'psyoff';return'busy'}
+ if(n=='a')return built[8]?'busy':'b8';
+ if(n&&'hdryo'.includes(n))return P[n]?'busy':'p';
+ return'busy'};
+window.dgAdvice=(k,n)=>{const STK={t:'tests TROD',v:'vaccins',c:'préservatifs',s:'matériel de soin'};
+ if(k=='lang')return Y2()?'personne ne parlait leur langue : recrute un·e interprète (👥 Équipe)':'personne ne parlait leur langue : un·e interprète pourra être recruté·e en 2e année';
+ if(k=='b4')return ulOn('r4')?'il n’y a pas encore de salle de soins (🏗️ Locaux)':'la salle de soins se débloquera bientôt';
+ if(k=='inf')return'la salle de soins n’a pas d’infirmier·ère : touche la salle pour recruter';
+ if(k=='infoff')return'l’infirmier·ère était absent·e (formation, accompagnement…) : un·e deuxième éviterait ça';
+ if(k=='prep')return'la PrEP demande un·e médecin et la formation PrEP';
+ if(k=='vac')return Y2()?'les vaccins demandent un·e médecin (touche la salle de soins pour recruter)':'les vaccins demandent un·e médecin : possible en 2e année';
+ if(k=='ftrod')return'il manque la formation TROD (👥 Équipe › Formations)';
+ if(k=='fsex')return'il manque la formation santé sexuelle (👥 Équipe › Formations)';
+ if(k.startsWith('stk'))return`il n’y avait plus de ${STK[k.slice(3)]||'matériel'} : recommande-en (🩺 Soins)`;
+ if(k=='b5')return ulOn('r5')?'il n’y a pas encore de bureau psy (🏗️ Locaux)':'le bureau psy se débloquera plus tard';
+ if(k=='psy')return'le bureau psy n’a pas de psychologue : touche la salle pour recruter';
+ if(k=='psyoff')return'la psychologue était absente : patience, ou un·e deuxième';
+ if(k=='b8')return'le laboratoire d’analyse arrivera plus tard dans la partie';
+ if(k=='p')return pAv(n)?`pas de partenaire pour ça : signe avec ${PN[n]||'un partenaire'} (🌳 Quartier › Partenaires)`:'ce partenariat se débloquera plus tard dans la partie';
+ return'la salle était pleine ou le personnel occupé : plus de place ou un·e collègue de plus'};
+W('outc',(o,a)=>{const v=a[0],u0=un;let c=null;try{if(v&&v.need)c=dgCause(v)}catch(_){}const r=o(...a);try{if(un>u0&&c){const key=c+'|'+(c=='p'?v.need:c=='busy'?v.need:'');DGN.u[key]=(DGN.u[key]||0)+1}}catch(_){}return r});
+setInterval(()=>{try{if(!started||ended||paused||!STF.length)return;DGN.ext++;const e=STF.reduce((s,z)=>s+(z.e||0),0)/STF.length;if(e<35)DGN.ex++}catch(_){}},2000);
+window.DGBAD=0;
+W('monthEnd',(o,a)=>{const r=o(...a);window.DGBAD=0;try{const mb=$('mb'),h=mb&&mb.querySelector('h2');if(!$('m').hidden&&h&&/^📅 Bilan/.test(h.textContent)){
+  const L=[];const mi=Math.max(0,miss-(DGN.miss0||0));DGN.miss0=miss;
+  const pl=n=>n>1?n+' personnes sont reparties':'1 personne est repartie';
+  if(mi>0)L.push([mi*1.5,`${pl(mi)} faute de quelqu’un à l’accueil : recrute un·e agent·e d’accueil ou un·e médiateur·rice (👥 Équipe)`]);
+  const agg={};for(const key in DGN.u){const[c,n]=key.split('|');const nd=c=='busy'||c=='p'?n:({b4:'s',inf:'s',infoff:'s',prep:'s',vac:'s',ftrod:'s',fsex:'s',b5:'m',psy:'m',psyoff:'m',b8:'a',lang:''}[c]??(c.startsWith('stk')?'s':''));const t=c=='lang'?`${pl(DGN.u[key])} sans être comprise${DGN.u[key]>1?'s':''} : ${dgAdvice(c,n)}`:`${pl(DGN.u[key])} sans ${DGSANS[nd]||'aide'} : ${dgAdvice(c,n)}`;L.push([DGN.u[key],t])}
+  if(DGN.ext>8&&DGN.ex/DGN.ext>.4)L.push([3,'L’équipe a fini le mois épuisée : salle de repos, repas d’équipe, ou un·e collègue de plus']);
+  L.sort((x,y)=>y[0]-x[0]);const tot=L.reduce((s,x)=>s+x[0],0);
+  let html;if(L.length)html=`<div class="dgn"><b>🔎 Ce qui coince${tot>=3?' ce mois-ci':''}</b><ul>${L.slice(0,3).map(x=>`<li>${x[1]}</li>`).join('')}</ul></div>`;
+  else if(MS&&(MS.acc||0)>0)html=`<div class="dgn ok">🔎 Rien ne coince : toutes les personnes venues ce mois-ci ont trouvé de l’aide.</div>`;
+  if(html)h.insertAdjacentHTML('afterend',html);window.DGBAD=tot>=3?1:0}}catch(e){console.error(e)}DGN.u={};DGN.ex=0;DGN.ext=0;return r});
+{const st=document.createElement('style');st.textContent=`.dgn{background:#fff4e0;border:2px solid #e0a020;border-radius:10px;padding:8px 10px;margin:6px 0 8px;font-size:13px;text-align:left}.dgn ul{margin:4px 0 0;padding-left:18px}.dgn li{margin:3px 0}.dgn.ok{background:#eaf7ee;border-color:#2e9e4f}`;document.head.appendChild(st)}
+
 // ===== v366 : moins de fenêtres plein écran
 // (1) plus de filtre gris sur toute la carte quand une fenêtre est ouverte (coûteux sur téléphone) : le voile sombre des fenêtres suffit
 {const st=document.createElement('style');st.textContent='body.gpz #stage,body.gpz #hud,body.gpz #tabs,body.gpz #lci{filter:none!important}';document.head.appendChild(st)}
@@ -8306,7 +8348,7 @@ body:has(#vig) #cam{left:calc(min(236px,50vw) + 18px)!important;max-width:calc(1
   const close=()=>{t.classList.add('out');setTimeout(()=>t.remove(),320)};t.onclick=()=>{close();if(!$('m').hidden||!saved)return;$('mb').innerHTML=saved+'<button class="go" onclick="$(\'m\').hidden=true;paused=false;ui()">Fermer</button>';$('m').className='modal';$('m').hidden=false;paused=true};setTimeout(close,7000)};
  W('monthEnd',(o,a)=>{const r=o(...a);try{const mb=$('mb'),h=mb&&mb.querySelector('h2');if($('m').hidden||!h||!/^📅 Bilan/.test(h.textContent))return r;
    mb.querySelectorAll('button').forEach(b=>{if(/Question du mois/.test(b.textContent))b.remove()});
-   const pm=FIN?11:(mo+11)%12,quarter=[2,5,8,11].includes(pm),prob=/retard/.test(mb.textContent)||eu<250;
+   const pm=FIN?11:(mo+11)%12,quarter=[2,5,8,11].includes(pm),prob=/retard/.test(mb.textContent)||eu<250||window.DGBAD;
    if(quarter&&HM.length>=2){const L=HM.slice(-3),tot=L.reduce((s,x)=>s+x.net,0);h.insertAdjacentHTML('afterend',`<p style="font-size:13px">📊 <b>Sur le trimestre</b> : <span class="${tot>=0?'pos':'neg'}">${tot>=0?'+':'−'}${Math.abs(tot)} €</span> (${L.map(x=>x.m.toLowerCase()+' '+(x.net>=0?'+':'−')+Math.abs(x.net)).join(' · ')})</p>`);h.textContent=h.textContent+' · fin du trimestre'}
    if(FIN||quarter||prob)return r;
    const c=mb.cloneNode(true);c.querySelectorAll('button').forEach(b=>b.remove());saved=c.innerHTML;
@@ -8536,6 +8578,123 @@ W('monthEnd',(o,a)=>{const r=o(...a);try{if(B.raise&&started){const extra=Math.r
 #debov .hint:empty{display:none}
 #debov .hand{bottom:118px!important}#debov .hint{font-size:12.5px!important;padding:6px 12px 6px 32px!important}
 @media (orientation:landscape){#debov .hand{bottom:84px!important}}`;document.head.appendChild(st)}
+
+
+// ===== v372 A1 : la pétition débloque la réunion riverains ; délai en jours, compte à rebours cliquable
+window.petStart=function(){pet=30;try{if(!ulOn('ar')){const e=UL.find(x=>x.k=='ar');if(e)ulReveal(e)}ulApply()}catch(_){}};
+{const el=document.createElement('button');el.id='petc';el.onclick=()=>{try{if(!$('m').hidden)return;tab(3)}catch(_){}};document.body.appendChild(el);
+ const st=document.createElement('style');st.textContent=`#petc{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 58px);transform:translateX(-50%);z-index:40;background:#c0392b;color:#fff;border:2px solid #fff;border-radius:999px;padding:4px 12px;font:700 13px 'Atkinson Hyperlegible',sans-serif;box-shadow:0 2px 0 #0005;display:none;white-space:nowrap}#petc.on{display:block;animation:petp 1.4s ease-in-out infinite}@keyframes petp{50%{transform:translateX(-50%) scale(1.06)}}`;document.head.appendChild(st);
+ setInterval(()=>{try{const on=started&&!ended&&pet>0&&!MEET&&!document.body.classList.contains('trn');el.classList.toggle('on',on);if(on){const j=Math.max(1,Math.ceil(pet/DAYL)),t=`📢 Pétition : réunion riverains dans ${j} jour${j>1?'s':''} ›`;if(el.textContent!==t)el.textContent=t}}catch(_){}},400)}
+
+// ===== v372 A2 : aucun défi ne réclame une action encore verrouillée (on la débloque au lancement du défi)
+{const NEED={hiv:['soc'],hep:['trn','fib'],sub:['trn'],sen:['trn']};for(const k in NEED){const d=(window.DF||{})[k];if(!d)continue;const o=d.start;d.start=function(){try{NEED[k].forEach(u=>{if(!ulOn(u)){const e=UL.find(x=>x.k==u);if(e)ulReveal(e)}});ulApply()}catch(_){}return o?o.apply(this,arguments):undefined}}}
+
+// ===== v372 A4 : toucher la bulle de besoin d'une personne → ce qui manque, et où aller
+window.needHelp=v=>{const n=v.need,nm=v.name,c=dgCause(v),bt=(t,f)=>({t,f});
+ const tb=i=>()=>{$('m').hidden=true;tab(i)},room=i=>()=>{try{roomWheel(i)}catch(_){tab(0)}};
+ const lab=DGLAB[n]||'de l’aide';let t,b=null;
+ if(c=='lang'){t=`${nm} ne parle pas français. ${Y2()?'Il faut un·e interprète.':'Un·e interprète pourra être recruté·e en 2e année.'}`;if(Y2())b=bt('👥 Recruter',tb(0))}
+ else if(c=='b4'){t=`${nm} a besoin ${n=='s'?'de soins':'d’aide'}. ${ulOn('r4')?'Il faut construire une salle de soins.':'La salle de soins se débloquera bientôt : en attendant, la personne repartira sans soins.'}`;if(ulOn('r4'))b=bt('🏗️ Construire',tb(4))}
+ else if(c=='inf'){t=`${nm} attend des soins, mais la salle de soins n’a pas d’infirmier·ère.`;b=bt('👥 Recruter',room(4))}
+ else if(c=='infoff'||c=='psyoff'){t=`${nm} attend ${lab}, mais ${c=='infoff'?'l’infirmier·ère':'la psychologue'} est absent·e pour le moment. Il ou elle revient bientôt.`}
+ else if(c=='prep')t=`${nm} vient pour la PrEP : il faut un·e médecin et la formation PrEP.`;
+ else if(c=='vac')t=`${nm} vient se faire vacciner : il faut un·e médecin${Y2()?'':' (possible en 2e année)'}.`;
+ else if(c=='ftrod'||c=='fsex'){t=`${nm} voudrait ${c=='ftrod'?'un dépistage rapide (TROD)':'parler santé sexuelle'} : l’équipe n’est pas encore formée.`;b=bt('🎓 Formations',tb(0))}
+ else if(c.startsWith('stk')){t=`${nm} a besoin de soins, mais le stock est vide.`;b=bt('🩺 Commander',tb(1))}
+ else if(c=='b5'){t=`${nm} voudrait parler à un·e psychologue. ${ulOn('r5')?'Il faut construire le bureau psy.':'Le bureau psy se débloquera plus tard.'}`;if(ulOn('r5'))b=bt('🏗️ Construire',tb(4))}
+ else if(c=='psy'){t=`${nm} voudrait parler à un·e psychologue, mais le bureau n’a personne.`;b=bt('👥 Recruter',room(5))}
+ else if(c=='b8')t=`${nm} voudrait faire analyser son produit : le laboratoire arrivera plus tard.`;
+ else if(c=='p'){if(pAv(n)){t=`${nm} cherche ${lab}. Il n’y a pas encore de partenaire pour ça : ${PN[n]||'un partenaire'} pourrait aider.`;b=bt('🤝 Partenaires',tb(3))}else t=`${nm} cherche ${lab}. Ce partenariat se débloquera plus tard dans la partie.`}
+ else t=`${nm} attend ${lab}. Rien ne manque : son tour arrive.${hist[nm]&&hist[nm].sat<35?' Mais la patience s’use : un·e médiateur·rice peut aider à attendre.':''}`;
+ return{t,b}};
+{const box=document.createElement('div');box.id='nbx';document.body.appendChild(box);
+ const st=document.createElement('style');st.textContent=`#nbx{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 86px);transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:45;width:min(92vw,380px);background:#fffaf0;border:3px solid #2a2433;border-radius:12px;padding:9px 11px;box-shadow:0 4px 0 #0004;font:14px/1.35 'Atkinson Hyperlegible',sans-serif;color:#2a2433;transition:.2s}#nbx.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}#nbx .r{display:flex;gap:8px;justify-content:flex-end;margin-top:7px}#nbx button{font:700 13px 'Atkinson Hyperlegible',sans-serif;padding:5px 10px;border-radius:8px}`;document.head.appendChild(st);
+ let to=0;window.nbShow=v=>{const H=needHelp(v);box.innerHTML=`<div>${NE[v.need]||'💬'} ${H.t}</div><div class="r">${H.b?'<button class="go nbgo">'+H.b.t+'</button>':''}<button class="nbx">OK</button></div>`;box.classList.add('on');clearTimeout(to);to=setTimeout(()=>box.classList.remove('on'),9000);
+  box.querySelector('.nbx').onclick=()=>box.classList.remove('on');const g=box.querySelector('.nbgo');if(g)g.onclick=()=>{box.classList.remove('on');try{H.b.f()}catch(_){}}};
+ const pick=(lx,ly)=>V.filter(v=>v.need&&!v.leaving&&!v.done&&Math.abs(lx-(v.x+.5))<=8&&ly>=v.y-33&&ly<=v.y-14).sort((a,b)=>Math.abs(lx-a.x)-Math.abs(lx-b.x))[0];
+ const hit=e=>{try{if(!started||ended||!$('m').hidden||document.getElementById('fmo')||MEET||(typeof Z!='undefined'&&Z.moved))return null;const r=cv.getBoundingClientRect(),lx=(e.clientX-r.left)/r.width*WW-OX,ly=(e.clientY-r.top)/r.height*WH-OY;return pick(lx,ly)}catch(_){return null}};
+ cv.addEventListener('click',e=>{const v=hit(e);if(!v)return;e.stopImmediatePropagation();e.preventDefault();nbShow(v);try{(B.tips=B.tips||{}).bub=1}catch(_){}},true)}
+
+// ===== v372 B5 : démarrage court — Camille guide la construction des DEUX salles, puis expliquera le reste au bon moment
+window.gdRoom=i=>{const app=$('app'),open=app.classList.contains('open')?app.dataset.t:'',nm=R[i][0],job=R[i][1].toLowerCase(),first=i==0;
+ if(built[i]){
+  if(i==1&&S.n<1){const bn=$('bn');if(open==='1'&&bn)return{k:'nal',e:bn,t:'Touche <b>Naloxone</b> pour en commander. Ensuite, on pourra recruter.'};return{k:'naltab',e:TB(1),t:'Avant d’ouvrir la salle de consommation, il nous faut de la <b>naloxone</b>, l’antidote des surdoses. Touche l’onglet <b>🩺 Soins</b>.'}}
+  const hb=[...document.querySelectorAll('#staff button')].find(b=>(b.getAttribute('onclick')||'')==`hire(${i})`);
+  if(open==='0'&&hb)return{k:i?'hire_1':'hire',e:hb.querySelector('.pr')||hb,t:`Recrute un·e <b>${job}</b> : touche l’<b>étiquette verte</b> avec le prix.${first?' Ce sera la première personne de ton équipe !':''}`};
+  const fi=$('rwf');if(fi&&/Équipe/.test((fi.querySelector('h4')||{}).textContent||'')){const tb=fi.querySelector('.rwtabs span[data-t="0"]');if(tb&&!tb.classList.contains('on'))return{k:'rtab'+i,e:tb,t:'Ouvre l’onglet <b>Recrutement</b>.'};
+   const hb2=[...fi.querySelectorAll('.rwlist>button')].find(b=>b.textContent.includes(R[i][1].split('·')[0]))||fi.querySelector('.rwlist>button');if(hb2)return{k:i?'hire2_1':'hire2',e:hb2.querySelector('.pr')||hb2,t:`Recrute un·e <b>${job}</b> : touche l’<b>étiquette verte</b> avec le prix.`}}
+  const rw=document.querySelector('#rw .sg[data-p="staff"]')||document.querySelector('#rw .sg[data-k="0"]');if(rw)return{k:'wheel'+i,e:rw,t:'Voici la roue de la salle : tout ce qu’on peut y faire. Choisis <b>👥 Équipe</b> pour recruter.'};
+  return{k:i?'name1':'name',lab:i,t:`${first?'L’accueil':'La salle de consommation'} est construit${first?'':'e'} ! Sur le plan, le <b>nom d’une salle</b> se touche. Touche <b>${nm.toUpperCase()}</b>.`}}
+ if(sel==i&&$('ghb')){const g=$('ghb').querySelector('button.go');return{k:i?'ghost1':'ghost',e:g||$('ghb'),t:'Un aperçu apparaît sur le plan. Déplace-le avec les flèches ou en touchant une case libre, puis touche <b>✔ Construire ici</b>.'}}
+ if(open==='4'){const b=$('rb'+i);return{k:'rb'+i,e:b,t:`Choisis <b>${nm}</b> dans la liste.`}}
+ return{k:i?'tab1':'tab',e:TB(4),t:first?'Commençons par l’<b>accueil</b>, là où chaque personne est reçue. Touche l’onglet <b>🏗️ Locaux</b>.':'Bravo, l’accueil est prêt ! 🎉 Maintenant la <b>salle de consommation</b> : on y consomme avec du matériel propre, sous le regard de l’équipe. Touche <b>🏗️ Locaux</b>.'}};
+gdState=function(){const ok=i=>st[i]>0||STF.some(z=>z.r==i);if(!ok(0))return gdRoom(0);if(!ok(1))return gdRoom(1);
+ return{k:'fin',t:'Tout est prêt : la halte ouvre ! 🎉 Les premières personnes vont arriver.'}};
+setInterval(()=>{try{if(started&&B.newIntro&&B.gdDone&&!B.tipHi&&$('m').hidden)setTimeout(()=>{if(!B.tipHi)tipHello()},1500)}catch(_){}},1000);
+window.tipHello=()=>{try{if(B.tipHi)return;B.tipHi=1;B.q0=q;ctip('hi','La halte est ouverte ! Pour le reste, je t’expliquerai au fur et à mesure, quand ça se présentera. Cette année, un seul objectif : que les gens entrent, soient bien reçu·es, et reviennent. (Le tutoriel complet est dans ☰.)')}catch(_){}};
+// conseils de Camille, au moment où la situation se présente (une seule fois chacun)
+{const box=document.createElement('div');box.id='ctip';box.innerHTML='<div class="pt" id="ctpt"></div><div class="tx"><b>Camille</b><p></p><button class="go">Compris</button></div>';document.body.appendChild(box);
+ const st=document.createElement('style');st.textContent=`#ctip{position:fixed;left:8px;right:8px;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);margin:auto;max-width:440px;z-index:46;display:flex;gap:9px;align-items:flex-start;background:#fffaf0;border:3px solid #2a2433;border-radius:14px;padding:9px 10px;box-shadow:0 4px 0 #0005;transform:translateY(140%);transition:transform .3s;font:14px/1.35 'Atkinson Hyperlegible',sans-serif;color:#2a2433}#ctip.on{transform:none}#ctip .pt{width:48px;height:54px;flex:none;overflow:hidden;border-radius:8px}#ctip .pt>*{width:48px!important;height:54px!important;margin:0!important}#ctip .pt canvas{width:48px!important;height:54px!important;display:block}#ctip .tx{flex:1}#ctip p{margin:2px 0 6px}#ctip button{float:right;font:700 13px 'Atkinson Hyperlegible',sans-serif;padding:5px 12px}.ctpulse{animation:ctpu 1s ease-in-out infinite!important;position:relative;z-index:3}@keyframes ctpu{50%{box-shadow:0 0 0 4px #ffd23f,0 0 14px 4px #ffd23f}}`;document.head.appendChild(st);
+ const Q=[];let cur=null,hl=null;const free=()=>started&&!ended&&$('m').hidden&&!document.getElementById('fmo')&&!MEET&&!(typeof GD!='undefined'&&GD)&&$('tut').hidden&&!document.body.classList.contains('trn');
+ const show=()=>{if(cur||!Q.length||!free())return;cur=Q.shift();box.querySelector('p').innerHTML=cur.t;try{$('ctpt').innerHTML=ptHTML([18],'#e6d9b8');drawPts()}catch(_){}box.classList.add('on');try{sfx('page')}catch(_){}try{hl=cur.e&&cur.e();if(hl)hl.classList.add('ctpulse')}catch(_){hl=null}};
+ box.querySelector('button').onclick=()=>{box.classList.remove('on');if(hl)hl.classList.remove('ctpulse');hl=null;cur=null;setTimeout(show,700)};
+ window.ctip=(k,t,e)=>{B.tips=B.tips||{};if(B.tips[k]||!B.newIntro)return;B.tips[k]=1;Q.push({t,e});show()};setInterval(show,800);
+ const T_=[
+  ['bub',()=>V.some(v=>v.need&&v.s=='wait'),'💬 Les bulles au-dessus des têtes disent ce dont chaque personne a besoin. <b>Touche une bulle</b> : je te dirai ce qui manque, et où aller.'],
+  ['acc',()=>acc>=1,'👥 Une première personne repart contente ! Ce compteur en haut suit toutes les personnes accompagnées : touche-le pour voir leurs parcours.',()=>$('ac')&&$('ac').parentNode],
+  ['eu',()=>mo>=1||eu<700,'💶 Le budget : touche-le pour voir d’où vient l’argent (la ville paie pour chaque personne accueillie, l’ARS pour chaque soin) et où il part (les salaires, chaque fin de mois).',()=>$('eu')&&$('eu').parentNode],
+  ['unl',()=>B.unl&&Object.keys(B.unl).length>0,'🔴 Une nouveauté ! Une pastille rouge la signale. Le bouton 🔗 montre tout ce qui pourra se débloquer pendant les trois ans.'],
+  ['syr',()=>SYR.length>0,'💉 Une seringue traîne dehors. <b>Touche-la</b> pour la ramasser : le quartier appréciera.'],
+  ['q',()=>pet>0||q<(B.q0??q)-4,'🏘️ La barre 🏘️ en haut, c’est la tranquillité du quartier. Elle bouge dès maintenant : maraudes, seringues ramassées et réunions avec les riverains la font remonter. Elle comptera dans la note à partir de la 2e année.'],
+  ['wheel',()=>acc>=3,'🛞 Astuce : toucher une salle sur le plan ouvre sa roue : recruter, acheter, lancer des actions… tout ce qui concerne cette salle.'],
+  ['spd',()=>acc>=5,'⏩ Quand tout roule, le bouton ⏩ en haut accélère le temps.'],
+  ['card',()=>Object.keys(COL||{}).length>0&&acc>=2,'📚 Tu débloques des cartes en jouant : elles expliquent la réalité derrière le jeu. Ton album se garde d’une partie à l’autre.'],
+  ['yr',()=>mo>=1,'🏠 Le badge de l’année, en haut à gauche, rappelle les enjeux de l’année. Touche-le quand tu veux.',()=>$('chapc')]];
+ setInterval(()=>{try{if(!B.newIntro||!B.tipHi||!free())return;for(const[k,c,t,e]of T_){if((B.tips||{})[k])continue;let ok=false;try{ok=c()}catch(_){}if(ok){ctip(k,t,e);break}}}catch(_){}},1500)}
+
+// ===== v372 C7 : suivis au long cours — un choix propre à chaque chapitre, et le lien qui monte moins vite si on enchaîne
+window.lcDim=S=>{S.rg=(S.rg||[]).filter(t=>GT-t<7*DAYL);const f=[1,.6,.35,.2][Math.min(3,S.rg.length)];S.rg.push(GT);return f};
+const LCQ={
+ jess:{0:{q:'Jess a parlé de sa fille, Lily, puis s’est refermée.',o:[['« Tu veux m’en parler ? »','prendre le temps, sans pousser · un·e pro occupé·e un moment',{lk:10,cs:1,off:20,r:'Jess parle de Lily pendant une heure. Elle a les yeux qui brillent.'}],['Lui laisser le numéro de la halte','sans insister',{lk:5,r:'Jess range le numéro dans sa poche.'}],['Lui parler tout de suite de ses droits de mère','l’ASE, le juge des enfants…',{lk:-8,r:'Trop tôt. Jess se lève : « Vous êtes comme les autres. »'}]]},
+  1:{q:'Jess demande une attestation : « Écrivez que je viens tous les jours. » Elle vient deux fois par semaine.',o:[['Écrire la vérité','deux passages par semaine, un vrai suivi',{lk:4,cs:1,r:'Jess est déçue, puis comprend : « Au moins c’est du solide. »'}],['Écrire « tous les jours »','pour l’aider… au risque d’être démenti·es',{rnd:[.6,{lk:10,r:'L’attestation passe sans question.'},{lk:-10,q:-3,r:'L’avocate de la partie civile relève l’incohérence. La parole de la halte en prend un coup.'}]}],['En parler d’abord en équipe','la réponse attendra quelques jours',{lk:-4,r:'Jess s’inquiète : « Vous allez me lâcher ? »'}]]},
+  3:{q:'Jess voudrait apporter quelque chose à Lily pour la visite, mais elle n’a rien.',o:[['Lui avancer 30 €','elle choisit elle-même le cadeau',{eu:30,lk:10,cs:1,r:'Jess revient avec un livre de dinosaures : « Elle adorait ça, petite. »'}],['Le fabriquer ensemble à l’atelier','un bracelet, un dessin · un·e pro occupé·e',{lk:8,cs:1,off:25,r:'Jess passe l’après-midi sur un bracelet de perles. Elle le refait trois fois.'}],['« Le plus beau cadeau, c’est que tu sois là »','',{lk:2,r:'Jess hoche la tête, pas convaincue.'}]]},
+  4:{q:'Ses horaires de chantier tombent pile pendant les heures d’ouverture de la halte.',o:[['Lui ouvrir un créneau tôt le matin','un·e pro commence plus tôt · fatigue de l’équipe',{lk:10,cs:1,en:-6,r:'7 h 15, Jess passe avec son café et sa tenue de chantier.'}],['Passer le relais au CSAPA près du chantier','plus d’autonomie, moins de liens avec la halte',{lk:-5,cs:1,r:'Jess accepte. Elle passera quand même dire bonjour, de temps en temps.'}],['« Viens quand tu peux »','',{lk:2,r:'Jess vient moins souvent.'}]]}},
+ jawad:{0:{q:'Jawad demande s’il peut dormir quelques heures à la halte, dans la journée.',o:[['Un fauteuil au calme','la salle de repos, ou un coin tranquille',{lk:10,cs:1,sat:-1,r:'Jawad dort trois heures d’affilée. La première fois depuis des semaines.'}],['Appeler le 115','le 115 est saturé : la place sera loin du parc',{lk:4,r:'Une place pour une nuit, à l’autre bout de la ville. Il n’y va pas.'}],['Non : la halte n’est pas un hébergement','',{lk:-8,r:'Jawad repart vers le parc.'}]]},
+  1:{q:'Jawad ne veut pas d’un interprète de son pays : il a peur qu’on répète ce qu’il dira.',o:[['Chercher un autre interprète','interprétariat à distance, quitte à décaler · −40 €',{eu:40,lk:10,cs:1,r:'Un interprète par téléphone, à Lyon. Jawad parle enfin.'}],['Garder l’interprète prévu','',{lk:-5,r:'Jawad répond par oui ou par non, et regarde le sol.'}]]},
+  2:{q:'À la préfecture, il faut faire la queue dès 5 h du matin.',o:[['Un·e pro fait la queue avec lui','absent·e une matinée entière',{lk:10,cs:1,off:60,r:'Trois heures de file, des cafés en thermos, et le dossier est enregistré.'}],['Lui expliquer la démarche et lui prêter un téléphone','',{lk:4,r:'Jawad y va seul. Il faudra revenir deux fois.'}]]},
+  3:{q:'Jawad voudrait raconter son histoire à quelqu’un de l’équipe, pour s’entraîner avant l’OFPRA.',o:[['Une séance avec la psychologue ou un·e éducateur·rice','un·e pro occupé·e',{lk:10,cs:1,off:35,r:'Il raconte tout. C’est dur. Mais le jour de l’entretien, les dates seront là.'}],['L’orienter vers l’association spécialisée','',{lk:4,r:'L’association a trois semaines d’attente.'}]]},
+  4:{q:'Jawad propose d’aider les nouveaux arrivants qui ne parlent pas français, à la halte.',o:[['Accepter, avec l’équipe en appui','',{lk:8,sat:3,cs:1,r:'Deux nouveaux arrivants comprennent enfin ce qu’on leur propose. Jawad rayonne.'}],['Refuser : il doit d’abord souffler','',{lk:-2,r:'Jawad comprend, un peu vexé.'}]]}},
+ patrick:{0:{q:'« Les jeunes me piquent mes affaires. » Patrick voudrait laisser son traitement à la halte.',o:[['Le garder au coffre de l’infirmerie','il passe le prendre chaque jour · un peu plus de travail',{lk:10,cs:1,en:-4,r:'Patrick passe chaque matin. « Comme à la banque. »'}],['Lui offrir un petit coffre cadenassé','−25 €',{eu:25,lk:6,r:'Il le cache dans sa cave, sous un carton.'}],['Lui dire de voir avec son centre méthadone','',{lk:-5,r:'« C’est ça. Encore un guichet. »'}]]},
+  1:{q:'Patrick refuse les urgences. L’infirmière pourrait soigner sa jambe ici, en attendant.',o:[['Soigner ici et continuer à négocier','l’infirmerie occupée chaque jour',{lk:8,cs:1,en:-4,r:'Chaque matin, un pansement et quelques mots. Il dit qu’il réfléchit.'}],['Appeler le SAMU, même contre son avis','',{lk:-15,r:'Patrick sort par la porte de derrière. Il ne revient pas pendant une semaine.'}],['Respecter son refus','',{lk:3,r:'« Merci de pas me faire la morale. »'}]]},
+  3:{q:'Les LHSS interdisent l’alcool. Patrick boit trois bières par jour depuis trente ans.',o:[['Négocier une réduction des risques avec les LHSS','un·e pro occupé·e',{lk:10,cs:1,off:30,r:'Accord trouvé : deux bières, dans la cour, comptées. Patrick reste.'}],['Lui demander de respecter le règlement','',{lk:-6,r:'Il tient quatre jours, puis boit en cachette.'}]]},
+  4:{q:'Patrick voudrait faire quelque chose pour Jacky.',o:[['Un moment de souvenir à la halte, avec les copains','−30 €',{eu:30,lk:10,sat:4,cs:1,r:'Une photo de Jacky, des chips, des histoires. Patrick rit et pleure.'}],['L’accompagner à l’enterrement','un·e pro absent·e longtemps',{lk:12,cs:1,off:60,r:'Ils étaient six au cimetière. Patrick tenait à ce que quelqu’un de la halte soit là.'}],['Un mot dans le cahier de la halte','',{lk:3,r:'Patrick écrit trois lignes.'}]]}},
+ lola:{0:{q:'Lola demande du matériel et des préservatifs en quantité, pour les autres filles de la rocade.',o:[['Lui en donner pour toutes','une partie du stock',{lk:10,cs:1,stk:['c',6],r:'« Elles vont halluciner. » Le lendemain, deux filles passent à la halte.'}],['Proposer que les autres viennent elles-mêmes','',{lk:-5,r:'« Elles viendront pas. Elles travaillent, elles. »'}]]},
+  1:{q:'Lola demande si Nouba peut entrer à la halte.',o:[['Oui : un coin pour Nouba, une gamelle','quelques riverains râleront',{lk:10,cs:1,q:-2,r:'Nouba s’installe sous la table de l’accueil. Tout le monde la caresse.'}],['Seulement attachée dehors','',{lk:3,r:'Lola reste dix minutes, l’œil sur la porte.'}],['Non, c’est le règlement','',{lk:-10,r:'Lola tourne les talons.'}]]},
+  2:{q:'Lola n’a plus de téléphone. Pour elle, la nuit, c’est dangereux.',o:[['Lui offrir un téléphone d’occasion','−30 €',{eu:30,lk:10,cs:1,r:'Elle enregistre le numéro de la halte en premier.'}],['Lui laisser le téléphone de la halte quand elle passe','',{lk:5,r:'Elle passe un appel, puis repart.'}]]},
+  4:{q:'Lola veut un logement où Nouba est acceptée, et où elle peut rentrer tard.',o:[['Chercher avec elle, quitte à attendre plus longtemps','un·e pro occupé·e',{lk:10,cs:1,off:35,r:'Trois bailleurs appelés, deux refus, une piste.'}],['Lui conseiller le parcours de sortie','',{lk:-10,r:'« Toi aussi ? » Lola ne répond plus aux messages pendant dix jours.'}]]}},
+ samba:{0:{q:'Samba demande qu’on lui garde son sac le temps de faire ses courses.',o:[['Garder son sac à l’accueil','une étagère, une étiquette · d’autres demanderont aussi',{lk:12,cs:1,en:-4,r:'Samba revient avec ses courses : « Merci. Personne ne m’a suivi dans le magasin. »'}],['Expliquer que la halte ne garde pas d’affaires','assurance, règlement',{lk:-8,r:'« Même ici. » Il repart avec son sac.'}],['L’orienter vers la bagagerie solidaire','',{lk:3,r:'La bagagerie est à deux kilomètres, et ferme à 17 h.'}]]},
+  1:{q:'À la pharmacie, le vigile lui demande encore de laisser son sac à l’entrée.',o:[['Appeler la pharmacienne pour en parler','un·e pro occupé·e',{lk:8,cs:1,q:2,off:20,r:'La pharmacienne n’avait rien vu. Elle parle au vigile.'}],['Lui donner son matériel ici, pour qu’il n’ait plus à y aller','',{lk:5,r:'Pratique. Mais un jour, il faudra bien retourner en pharmacie.'}],['Lui conseiller une autre pharmacie','',{lk:2,r:'Plus loin. Il n’y va pas.'}]]},
+  3:{q:'Samba hésite à saisir le Défenseur des droits.',o:[['L’encourager et monter le dossier avec lui','un·e pro occupé·e',{lk:8,cs:1,off:30,r:'Samba signe. « Pour les suivants. »'}],['Respecter son choix, sans insister','',{lk:5,r:'Il dit qu’il y repensera.'}],['Saisir le Défenseur sans lui en parler','',{lk:-15,r:'Samba l’apprend par courrier : « Vous avez décidé pour moi. »'}]]},
+  4:{q:'Après son intervention, le conseil de quartier invite Samba à reparler, devant les élus.',o:[['Préparer son intervention avec lui, et l’accompagner','un·e pro occupé·e',{lk:8,q:3,cs:1,off:25,r:'Il parle cinq minutes. Une élue vient lui serrer la main.'}],['Le laisser y aller seul, à sa façon','',{rnd:[.5,{lk:6,q:4,r:'Il fait rire la salle, puis la fait taire. Gros succès.'},{lk:3,q:-2,r:'Un élu le coupe. Samba quitte la salle en colère.'}]}],['Lui conseiller de ne pas trop s’exposer','son titre de séjour est fragile',{lk:-3,r:'Il comprend, mais il est déçu.'}]]}},
+ sylvie:{0:{q:'Sylvie veut rester toute la journée. Elle parle fort, et les autres sont gêné·es.',o:[['Un·e pro reste avec elle dans un coin calme','un·e pro occupé·e',{lk:10,cs:1,sat:-2,off:30,r:'Au bout de deux heures, Sylvie s’endort sur un fauteuil.'}],['Lui demander de revenir demain, plus calme','',{lk:-8,r:'Elle claque la porte.'}]]},
+  1:{q:'Sylvie accepte d’y aller si elle peut garder ses vêtements et son téléphone.',o:[['Appeler l’hôpital pour le négocier avant','un·e pro occupé·e',{lk:10,cs:1,off:25,r:'L’interne accepte. Sylvie dit : « D’accord. On y va. »'}],['Lui dire qu’on ne peut rien promettre','',{lk:2,r:'Elle hésite longtemps.'}]]},
+  3:{q:'Sylvie a honte : elle préférerait que la réunion ait lieu sans elle.',o:[['Insister doucement : rien sur elle sans elle','',{lk:8,cs:1,r:'Elle vient, et parle la première.'}],['Faire la réunion sans elle, puis lui raconter','',{lk:3,r:'Elle écoute le compte rendu, les bras croisés.'}]]},
+  4:{q:'Sylvie voudrait que la halte garde un double de ses clés et de son plan de crise.',o:[['Accepter, avec un protocole écrit','un·e pro occupé·e',{lk:10,cs:1,off:20,r:'Une enveloppe à son nom, dans le coffre. Sylvie est soulagée.'}],['Lui proposer de les confier à sa sœur','',{lk:3,r:'Sa sœur habite à 300 km.'}]]}}};
+window.lcAskHTML=k=>{try{const P=LCP[k],S=lcS(k),Q=(LCQ[k]||{})[S.ch];if(!Q||S.fin||S.lost||(S.ans||{})[S.ch]!=null)return'';
+ return `<div class="lcq"><b>🤔 ${Q.q}</b>${Q.o.map((o,i)=>`<button onclick="lcAsk('${k}',${i})">${o[0]}${o[1]?`<small>${o[1]}</small>`:''}</button>`).join('')}</div>`}catch(_){return''}};
+window.lcAsk=(k,i)=>{const P=LCP[k],S=lcS(k),Q=(LCQ[k]||{})[S.ch];if(!Q||(S.ans||{})[S.ch]!=null)return;let E=Q.o[i][2];if(E.eu&&eu<E.eu){say('💶 Pas assez d’argent pour ça.');return}
+ if(E.rnd)E=Math.random()<E.rnd[0]?E.rnd[1]:E.rnd[2];S.ans=S.ans||{};S.ans[S.ch]=i;
+ if(E.eu){eu-=E.eu;try{LM.o['Suivi au long cours']=(LM.o['Suivi au long cours']||0)+E.eu}catch(_){}}
+ if(E.off){const z=lcPro();if(z)lcBusy(z,E.off,'🤝 '+P.n)}if(E.en)STF.forEach(z=>z.e=Math.max(5,z.e+E.en));if(E.sat)satAll(E.sat);if(E.q)q=Math.max(0,Math.min(100,q+E.q));if(E.stk){try{S[E.stk[0]]=Math.max(0,S[E.stk[0]]-E.stk[1])}catch(_){}}
+ if(E.lk)S.lk=Math.max(1,Math.min(100,S.lk+E.lk));if(E.cs)S.cs=(S.cs||0)+E.cs;
+ say(`${E.lk>0?'💛':'💬'} ${P.n} : ${E.r}`);try{sfx(E.lk>0?'good':'bad')}catch(_){}ui();lcIcons();lcMenu(k)};
+{const st=document.createElement('style');st.textContent=`.lcq{margin-top:10px;padding:8px;border:2px dashed #b07a3a;border-radius:10px;background:#fff6e6;text-align:left}.lcq b{display:block;font-size:14px;margin-bottom:6px}.lcq button{display:block;width:100%;text-align:left;margin:4px 0;padding:6px 9px}.lcq small{display:block;font-weight:400;opacity:.75;font-size:12px}`;document.head.appendChild(st)}
+// fiche « Dossier de suivi » : la question du chapitre en haut, et les gains de lien réels affichés
+window.lcDimPeek=S=>{const n=(S.rg||[]).filter(t=>GT-t<7*DAYL).length;return[1,.6,.35,.2][Math.min(3,n)]};
+{const _lm=window.lcMenu;window.lcMenu=function(k){const r=_lm.apply(this,arguments);try{const m=$('lcm');if(m&&!m.querySelector('.lcq')){const S=lcS(k),f=lcDimPeek(S);
+ if(f<1){m.querySelectorAll('button small').forEach(s=>{s.innerHTML=s.innerHTML.replace(/\+(\d+) ❤️/,(x,n)=>'+'+Math.max(1,Math.round(n*f))+' ❤️')});const h4=[...m.querySelectorAll('h4')].find(h=>/nouvelles/i.test(h.textContent));if(h4)h4.insertAdjacentHTML('afterend','<p class="lcdim">Plusieurs gestes la même semaine comptent moins : le lien se construit dans la durée.</p>')}
+ const qh=lcAskHTML(k);if(qh){const an=m.querySelector('.lcrdv')||m.querySelector('h4');if(an)an.insertAdjacentHTML('beforebegin',qh)}}}catch(_){}return r}}
+{const st=document.createElement('style');st.textContent=`.lcdim{font-size:12px;margin:-2px 0 6px;color:#8a5a20}`;document.head.appendChild(st)}
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
