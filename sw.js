@@ -1,4 +1,4 @@
-const CACHE='hsa-v373';
+const CACHE='hsa-v374';
 const ASSETS=['./','index.html','manifest.webmanifest','icon-192-v2.png','icon-512-v2.png','icon-maskable-512-v2.png','apple-touch-icon-v2.png',
  'musique/hiver.mp3','musique/printemps.mp3','musique/ete.mp3','musique/automne.mp3','musique/reunions.mp3','musique/debat.mp3'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting()))});
