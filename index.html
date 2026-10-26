@@ -420,7 +420,7 @@ function openCall(z){if(paused||!$('m').hidden||ended)return;const c=z.call,d=c.
 $('mb').innerHTML=`<div class="vn">${ptHTML([s0.ci],s0.r<9?WB[s0.r]:'#cfe3ea')}<p class="quote vq"><b>${s0.n}</b> <small>(${s0.title}${s0.r<9?' · '+R[s0.r][0].toLowerCase():''})</small><br><i>« Camille ! ${d[0].replace('{U}',u)} »</i></p></div><button class="go" onclick="dres(1)">✅ Accepter <small>(${DLS[DL.indexOf(d)]||d[1]})</small></button><button onclick="dres(0)">🙅 Refuser</button>`;$('m').hidden=false;drawPts()}
 function dres(y){$('m').hidden=true;paused=false;const e=$('ev');if(y&&DL.indexOf(DC.d)<2){const v=V.find(w=>w.name==DC.u&&!w.leaving&&!w.gone);if(v)escort(v,DC.s0)}if(y){{const z_=DC.s0,o_=z_.off||0;DC.d[2](z_);if(z_.off>o_&&!z_.fst&&!z_.trn&&!z_.van&&!z_.mis)z_.acc=/prévention|intervention|stand|atelier/i.test(DC.d[0])?2:1}LT.push({t:30+Math.random()*20,d:DC.d,u:DC.u});e.className='good';e.textContent=`🤝 Tu as accepté la demande de ${DC.s0.n}.`}else{e.className='bad';e.textContent='🙅 Tu as refusé la demande.'}ui()}
 
-NL.m='Ma vie ne vaut rien. À quoi bon continuer...';NL.z='Je suis épuisé·e... je pourrais me reposer ici ?';NL.a='J\'ai eu des effets bizarres en consommant ça : on peut l\'analyser?';const NMS=['Clara','Hugo','Samia','Théo','Anouk','Ibrahim','Manon','Lucas','Yasmine','Pierre','Maël','Noor','Sacha','Lina'],SPC={s:40,t:60,v:80,c:20,n:40},PK={s:5,t:5,v:5,c:10,n:5},DG=[['p',0,'On m’a parlé de la PrEP, un traitement pour ne pas attraper le VIH. C’est possible ici ?','PrEP prescrite par le médecin, avec un suivi régulier'],['s',1,'J’ai mal à la tête depuis deux jours et une plaie au doigt.','Soins : pansement et antalgique'],['s',2,'J’ai une douleur sur un point d\'injection... C\'est un abcès, non ?','abcès cutané soigné avant qu’il se complique'],['t',1,'Je voudrais faire un test de dépistage, VIH et hépatites.','dépistage TROD réalisé, résultat rendu avec des conseils'],['v',1,'Je voudrais me faire vacciner !','vaccination réalisée'],['c',1,'Est-ce que vous auriez des préservatifs ?','préservatifs remis, avec des conseils de prévention']],cnt=i=>STF.filter(s=>s.r==i).length,hasR=r=>STF.some(x=>x.role==r&&x.off<=0),NE={h:'🏠',d:'📄',r:'🍲',s:'🩹',m:'🧠',a:'⚗️',z:'😴',y:'🚿',o:'🌱'},cap=r=>r<3?(r==0&&!st[0]?0:st[r]*2+CB[r]+2*RSZ[r]):r==6?(st[r]?4+2*RSZ[r]:0):r==7?(st[r]?bedsN():0):st[r];
+NL.m='Ma vie ne vaut rien. À quoi bon continuer...';NL.z='Je suis épuisé·e... je pourrais me reposer ici ?';NL.a='J\'ai eu des effets bizarres en consommant ça : on peut l\'analyser?';const NMS=['Clara','Hugo','Samia','Théo','Anouk','Ibrahim','Manon','Lucas','Yasmine','Pierre','Maël','Noor','Sacha','Lina'],SPC={s:40,t:60,v:80,c:20,n:40},PK={s:5,t:5,v:5,c:10,n:5},DG=[['p',0,'On m’a parlé de la PrEP, un traitement pour ne pas attraper le VIH. C’est possible ici ?','PrEP prescrite par le médecin, avec un suivi régulier'],['s',1,'J’ai mal à la tête depuis deux jours et une plaie au doigt.','Soins : pansement et antalgique'],['s',2,'J’ai une douleur sur un point d\'injection... C\'est un abcès, non ?','abcès cutané soigné avant qu’il se complique'],['t',1,'Je voudrais faire un test de dépistage, VIH et hépatites.','dépistage TROD réalisé, résultat rendu avec des conseils'],['v',1,'Je voudrais me faire vacciner !','vaccination réalisée'],['c',1,'Est-ce que vous auriez des préservatifs ?','préservatifs remis, avec des conseils de prévention']],cnt=i=>STF.filter(s=>s.r==i).length,hasR=r=>STF.some(x=>x.role==r&&x.off<=0),NE={h:'🏠',d:'📄',r:'🍲',s:'🩹',m:'🧠',a:'⚗️',z:'😴',y:'🚿',o:'🌱'},cap=r=>r<3?(r==0&&(!st[0]||(window.HCLOSE&&HCLOSE()))?0:st[r]*2+CB[r]+2*RSZ[r]):r==6?(st[r]?4+2*RSZ[r]:0):r==7?(st[r]?bedsN():0):st[r];
 const IT=[[0,'☕','Machine à café',70,0,.1,44,20],[0,'🪴','Plantes vertes',40,0,.1,4,44],[0,'🪑','Chaises confortables',90,1,0,24,44],
 [1,'🧴','Matériel de RDR neuf',120,1,.2,46,44],[1,'🧼','Point d’eau et hygiène',80,0,.2,4,44],
 [2,'🛋️','Canapé en plus',100,1,0,4,20],[2,'🌸','Fleurs fraîches',40,0,.1,46,20],[2,'📚','Coin lecture',60,0,.1,24,44],
@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v366')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v367')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -4205,7 +4205,7 @@ W('monthEnd',(o,a)=>{const am0=AMI(),rc=B.rclose;let saved=0;if(rc&&am0<rc.until
   if(B.lateS>=3&&STF.length>3&&!B.lateQ&&(B.lateQAm==null||AMI()-B.lateQAm>=4)){B.lateQ=1;B.lateQAm=AMI();const z=STF.filter(z=>!z.stg&&!(z.r==0&&STF.filter(y=>y.r==0&&!y.stg).length<=1)).sort((a,b)=>a.e-b.e)[0];if(z)setTimeout(()=>{stfLeave(z,`Trois mois de salaire en retard, c’est trop : ${z.n} a trouvé un poste ailleurs. « J’adorais ce travail, mais j’ai un loyer. » Sans budget, l’équipe se disperse : surveille les finances (💶 en haut à gauche).`);B.lateQ=0},900)}
   const am=AMI();if(B.rclose&&am>=B.rclose.until){const i=B.rclose.i;B.rclose=null;say(`🔓 La salle ${R[i][0].toLowerCase()} rouvre ses portes après deux mois de fermeture.`);newsAdd('🔓',`La salle ${R[i][0].toLowerCase()} rouvre`)}
  }catch(_){}return r});
-{const _rc=roomClosed;roomClosed=function(i){if(B.rclose&&B.rclose.i==i&&AMI()<B.rclose.until)return 'fermée 2 mois (budget)';const w=_rc(i);if(w=='personne pour ouvrir'){const z=STF.find(z=>z.r==i&&z.off>0);if(z)return z.trn?'🎓 en formation':z.mis||z.acc==1?'🤝 en accompagnement':z.acc==2?'🎤 en intervention':z.dos?'📝 dossier en cours':z.hos?'🏥 à l’hôpital':z.van?'🚐 en tournée':z.fst?'🎪 au festival':'🤒 en arrêt';return '👥 à recruter'}return w};window.roomClosed=roomClosed}
+{const _rc=roomClosed;roomClosed=function(i){if(B.rclose&&B.rclose.i==i&&AMI()<B.rclose.until)return B.rclose.why||'fermée 2 mois (budget)';const w=_rc(i);if(w=='personne pour ouvrir'){const z=STF.find(z=>z.r==i&&z.off>0);if(z)return z.trn?'🎓 en formation':z.mis||z.acc==1?'🤝 en accompagnement':z.acc==2?'🎤 en intervention':z.dos?'📝 dossier en cours':z.hos?'🏥 à l’hôpital':z.van?'🚐 en tournée':z.fst?'🎪 au festival':'🤒 en arrêt';return '👥 à recruter'}return w};window.roomClosed=roomClosed}
 function closeRoom2(i){B.rclose={i,until:AMI()+2};say(`🔒 La salle ${R[i][0].toLowerCase()} est fermée pour deux mois. L’équipe de cette salle est en chômage partiel : la moitié de son salaire est économisée.`);ui()}
 window.closeRoom2=closeRoom2;
 // contrat DASRI : les conteneurs sont vidés trois fois par mois
@@ -5540,7 +5540,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v366')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v367')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7367,7 +7367,7 @@ setInterval(()=>{try{if(!started)return;if(YR>=2&&B.voix==null)B.voix=35;if(YR>=
 
 // ---- an 2 : le collectif de riverains et le compteur de voix 🗳️ (quel pourcentage du quartier nous soutient)
 window.voix=(n,why)=>{try{if(!started||chapOf()!=2||B.voix==null)return;B.voix=Math.max(0,Math.min(100,B.voix+n));if(why)flt(OFF,'🗳️'+(n>0?'+':'')+n,n>0,8)}catch(_){}};
-W('act',(o,a)=>{const k=a[0],c0=eu,r=o(...a);try{if(eu<c0){if(k=='m')voix(4,1);if(k=='r')voix(6,1)}}catch(_){}return r});
+W('act',(o,a)=>{const k=a[0],c0=eu,r=o(...a);try{if(eu<c0&&(k=='m'||k=='r')){const am=AMI();B.vAct=B.vAct||{};const key=k+am,n=B.vAct[key]||0;B.vAct[key]=n+1;const g=(k=='r'?[3,1,0]:[2,1,0])[Math.min(2,n)];if(g)voix(g,1)}}catch(_){}return r});
 W('buy',(o,a)=>{const k=a[0],b0=!!B[k],r=o(...a);try{if(!b0&&B[k]&&(k==16||k==20))voix(3,1)}catch(_){}return r});
 {const _ba=buyAuto;buyAuto=function(){const b0=!!B.auto,r=_ba.apply(this,arguments);try{if(!b0&&B.auto)voix(5,1)}catch(_){}return r};window.buyAuto=buyAuto}
 W('dres',(o,a)=>{const y=a[0],D=window.DC2||{},r=o(...a);try{if(y&&D.d){const t=String(D.d[0]);if(/riverains|voisins|journaliste|école/i.test(t))voix(5,1)}else if(!y&&D.d&&/riverains|voisins/i.test(String(D.d[0])))voix(-4,1)}catch(_){}return r});
@@ -8261,7 +8261,7 @@ body:has(#vig) #cam{left:calc(min(236px,50vw) + 18px)!important;max-width:calc(1
  const BIG=/verdict|Défi|Coupe budgétaire|Annonce du gouvernement|Alerte budget|Chapitre|Devant la halte|Ras-le-bol|Le lendemain|réponse du gouvernement|Un dilemme|Une question|Une proposition|Un refus|Imprévu|Rendez-vous de l’année|Avant de recruter|Une rencontre/i;
  const ok=o=>{try{if(!o||o._full||!started||ended||MEET||INTRO||(typeof TI!='undefined'&&TI>=0))return false;if(o.btns&&(o.btns.length>1||o.btns.some(b=>typeof b.f=='function')))return false;if(BIG.test((o.t||'')+' '+(o.n||'')))return false;return typeof o.draw=='function'}catch(_){return false}};
  const Q_=[];let cur=null;
- const next=()=>{if(cur||!Q_.length)return;const o=Q_.shift();cur=o;const e=document.createElement('div');e.id='vig';const D=Math.max(6,(+o.dur||6)+(o.keep?3:1));
+ const next=()=>{if(cur||!Q_.length)return;try{if(document.getElementById('fmo')||!$('m').hidden||MEET){setTimeout(next,800);return}}catch(_){}const o=Q_.shift();cur=o;const e=document.createElement('div');e.id='vig';const D=Math.max(6,(+o.dur||6)+(o.keep?3:1));
   e.innerHTML=`<div class="vt"></div><button class="vx" title="Fermer">✕</button><canvas width="200" height="104"></canvas><b></b><div class="vd"></div><div class="vm">Toucher pour agrandir</div><div class="vb" style="animation-duration:${D}s"></div>`;
   e.querySelector('.vt').textContent=o.t||'';e.querySelector('b').textContent=(o.n||'').replace(/<[^>]+>/g,'');if(o.nh)e.querySelector('b').innerHTML=o.nh;e.querySelector('.vd').textContent=String(o.d||'').replace(/<[^>]+>/g,'');
   document.body.appendChild(e);const g=e.querySelector('canvas').getContext('2d');g.imageSmoothingEnabled=false;const H=mkH(g),t0=performance.now();let fin=false;if(o.snd)try{sfx(o.snd)}catch(_){}
@@ -8269,7 +8269,7 @@ body:has(#vig) #cam{left:calc(min(236px,50vw) + 18px)!important;max-width:calc(1
   const fr=now=>{if(fin)return;const T=(now-t0)/1000;try{o.draw(H,T)}catch(_){}if(T>=D)end();else requestAnimationFrame(fr)};requestAnimationFrame(fr);
   e.querySelector('.vx').onclick=ev=>{ev.stopPropagation();end()};
   e.onclick=()=>{end(()=>{const c=Object.assign({},o,{_full:1,keep:1,btns:[{t:'Fermer',go:1}]});popWin(c)},true)}};
- {const _pw=popWin;popWin=function(o){try{if(ended||document.getElementById('tvov')||document.getElementById('epov'))return}catch(_){}if(ok(o)){Q_.push(o);next();try{if(paused&&!B.march&&!(TR_&&TR_.t>0)&&$('tut').hidden)setTimeout(()=>{try{if(!B.march&&!(TR_&&TR_.t>0))paused=!$('m').hidden||!!MEET||!!document.getElementById('envo')||!!document.getElementById('fmo')||!!document.getElementById('debov')}catch(_){}},50)}catch(_){}return}return _pw.apply(this,arguments)};window.popWin=popWin}
+ {const _pw=popWin;popWin=function(o){try{const L=window._pwlog||(window._pwlog=[]);L.push([AMI(),(o&&o.t)||'',ok(o)?'v':'w']);if(L.length>400)L.shift()}catch(_){}try{if(ended||document.getElementById('tvov')||document.getElementById('epov'))return}catch(_){}if(ok(o)){Q_.push(o);next();try{if(paused&&!B.march&&!(TR_&&TR_.t>0)&&$('tut').hidden)setTimeout(()=>{try{if(!B.march&&!(TR_&&TR_.t>0))paused=!$('m').hidden||!!MEET||!!document.getElementById('envo')||!!document.getElementById('fmo')||!!document.getElementById('debov')}catch(_){}},50)}catch(_){}return}return _pw.apply(this,arguments)};window.popWin=popWin}
  window.VIGQ=Q_}
 
 // (3) bilan du mois : une fenêtre seulement à la fin de chaque trimestre (juin, septembre, décembre, mars) ou s'il y a un problème ; sinon un petit bandeau qu'on peut toucher
@@ -8295,6 +8295,201 @@ body:has(#vig) #cam{left:calc(min(236px,50vw) + 18px)!important;max-width:calc(1
   b.style.left=Math.round(r.left+r.width/2-17)+'px';b.style.top=Math.round(r.top-44)+'px'},400);
  W('ans',(o,a)=>{try{B.qM=AMI()}catch(_){}return o(...a)});
  W('closeQ',(o,a)=>{if(QB){QB=0;$('m').hidden=true;paused=false;try{ui()}catch(_){}return}return o(...a)})}
+
+// ===== v367 : la grève a lieu à coup sûr en octobre de l'année 2 (dès que l'écran est libre, au plus tard en décembre)
+setInterval(()=>{try{if(!started||ended||paused||MEET||YR!=2||B.strikeD)return;const am=AMI();if(am<18||am>20)return;if(!$('m').hidden||document.getElementById('fmo')||document.getElementById('envo')||document.getElementById('debov')||B.march||(B.rdvFx&&B.rdvFx.t>0)||(TR_&&TR_.t>0))return;strikeStart()}catch(_){}},1500);
+
+// ===== v367 : ANNÉE 2 — LES RIVERAINS. Des dilemmes chaque mois (à la place des défis), le vote du collectif sur les façades, la subvention qui suit l'humeur du quartier, la cagnotte des voisins
+// ---- plus de défis en année 2 : ce sont les riverains qui font l'année
+try{['an1','pet','od','bo'].forEach(k=>{delete window.DF[k]})}catch(_){}
+{const st=document.createElement('style');st.textContent=`
+#fmo.rdl .fc{max-height:94vh;overflow:auto}#fmo.rdl .fd.clip{display:block!important;-webkit-line-clamp:unset!important;max-height:none!important}#fmo.rdl .fmore{display:none!important}#fmo.rdl .fc canvas{max-height:24vh;object-fit:cover}body:has(#fmo) #vig,body:has(#m:not([hidden])) #vig{visibility:hidden}#fmo.rdl .fd{text-align:left;color:#3a3040;font-size:13px;padding:0 14px 8px}#fmo.rdl .fd p{margin:0 0 6px}
+#fmo.rdl .fd ul{list-style:none;margin:0;padding:0}#fmo.rdl .fd li{border:2px solid #e4d6bd;background:#fff8ea;border-radius:8px;padding:4px 7px;margin:4px 0;line-height:1.3}#fmo.rdl .fd li b{display:inline-block;min-width:16px;color:#2a2433}#fmo.rdl .fd li i{display:block;font-style:normal;font-size:12px;color:#7a3a2a}
+#fmo.rdl .fd li.no{opacity:.5}#fmo.rdl .fbt{flex-wrap:wrap}#fmo.rdl .fbt button{flex:1 1 30%;min-width:88px;font-size:13px;padding:7px 8px}#fmo.rdl .fbt button:disabled{opacity:.4}
+#rdfx{position:fixed;left:8px;top:calc(env(safe-area-inset-top,0px) + 124px);z-index:44;display:flex;flex-direction:column;gap:3px;max-width:min(58vw,260px);pointer-events:none}
+#rdfx span{background:rgba(255,250,240,.94);border:2px solid #2a2433;border-radius:8px;padding:1px 6px;font:700 11px/1.3 'Atkinson Hyperlegible',sans-serif;color:#2a2433;box-shadow:0 2px 0 rgba(42,36,51,.3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body:has(#m:not([hidden])) #rdfx,body:has(#fmo) #rdfx,body:has(#debov) #rdfx{display:none}`;document.head.appendChild(st)}
+
+const RD={};
+RD.V=n=>{try{if(B.voix!=null)B.voix=Math.max(0,Math.min(100,B.voix+n));flt(OFF,'🗳️'+(n>0?'+':'')+n,n>0,8)}catch(_){}};
+RD.M=n=>{eu=Math.max(0,eu-n);try{LM.o['Demandes des riverains']=(LM.o['Demandes des riverains']||0)+n}catch(_){}};
+RD.Q=n=>{q=Math.max(0,Math.min(100,q+n))};
+RD.free=role=>{const c=STF.filter(z=>z.off<=0&&!z.stg&&(!role||z.role==role));const n=i=>STF.filter(y=>y.r==i&&y.off<=0).length;c.sort((a,b)=>n(b.r)-n(a.r));return c[0]||null};
+RD.off=(days,why,role)=>{const z=RD.free(role);if(!z)return null;z.off=Math.max(z.off,days*DAYL);z.acc=2;try{say(`🎤 ${z.n} ${why} (${days>=1?Math.round(days)+' jour'+(days>=2?'s':''):'quelques heures'}).`)}catch(_){}return z};
+RD.lose=(n,f)=>{const L=Object.values(hist).filter(h=>h.v>0&&!['gone','envol','hosp'].includes(h.st)&&h.vol==null&&(!f||f(h))).sort(()=>Math.random()-.5).slice(0,n);L.forEach(h=>{try{usrGone(h)}catch(_){}h.back=1e12;h.lost=1});return L};
+RD.rec=(o)=>{B.rdR=B.rdR||[];B.rdR.push(Object.assign({next:GT+(o.first!=null?o.first:1)*DAYL},o))};
+RD.mon=(o)=>{B.rdMo=B.rdMo||[];B.rdMo.push(o)};
+RD.delRoom=i=>{try{let eq=0;IT.forEach((it,j)=>{if(it[0]==i&&B[j]){B[j]=0;CB[it[0]]-=it[4];QB-=it[5]}});HEAT[i]=0;COOL[i]=0;evac(i);built[i]=0;RINV[i]=0;RSZ[i]=0;RW[i]=56;STF.forEach(z=>{if(z.r==i)z.r=0});B.roomBan=B.roomBan||{};B.roomBan[i]=1;ui()}catch(e){console.error(e)}};
+RD.until=()=>24; // fin de l'année 2
+// salle interdite tant qu'on n'a pas l'annexe
+{const _rl=window.RLOCK2;window.RLOCK2=i=>{try{if((B.roomBan||{})[i]&&!built[i]&&!B.ax)return true}catch(_){}return _rl?_rl(i):false};const _rh=window.RLHINT;window.RLHINT=i=>{try{if((B.roomBan||{})[i]&&!B.ax)return '🔒 Fermée à la demande des voisins : on pourra la reconstruire dans l’annexe.'}catch(_){}return _rh?_rh(i):''}}
+// fermeture anticipée (sortie d'école) : l'accueil ne fait plus entrer personne en fin de journée
+window.HCLOSE=()=>{try{return !!(B.hClose&&AMI()<B.hClose.until&&dayT/DAYL>.6)}catch(_){return false}};
+W('world',(o,a)=>{const r=o(...a);try{if(window.HCLOSE&&HCLOSE())wdl(9000,()=>ens('FERMÉ À 15 H 30',OX+177,OY-EY+48,'#c0392b'))}catch(_){}return r});
+// partenaires perdus pour de bon
+W('prpDo',(o,a)=>{if((B.lostP||{})[a[0]])return;return o(...a)});
+try{const _mo=BINT.mus.on;BINT.mus.on=()=>!B.lostMus&&_mo()}catch(_){}
+setInterval(()=>{try{if((B.lostP||{}).x){P.x=0;PC.x=-1}if(B.gBan)B.g=0}catch(_){}},1500);
+{const _bg=buyG;buyG=function(){if(B.gBan){say('🔒 Le jardin a été fermé à la demande des riverains.');return}return _bg.apply(this,arguments)};window.buyG=buyG}
+// camion : stationnement limité ou amendes
+{const _tg=tourGo;tourGo=function(){try{if(B.vanLim&&AMI()<B.vanLim.until){if(B.vanM===AMI()){say('🚐 Une seule tournée par mois : on a promis aux commerçants de libérer leurs places.');return}B.vanM=AMI()}if(B.vanFine&&AMI()<B.vanFine.until){RD.M(135);say('🚓 Amende de 135 € : le camion était garé sur une place de livraison.')}}catch(_){}return _tg.apply(this,arguments)};window.tourGo=tourGo}
+// l'enseigne
+{const _hs=window.hsaSign;window.hsaSign=function(n,tf){if(B.signOff)return;if(B.signSmall)return _hs(n,Math.min(2,tf!=null?tf:NOTT()));return _hs(n,tf)}}
+// effets récurrents (pros absents chaque semaine, etc.)
+setInterval(()=>{try{if(!started||ended||paused||MEET)return;const am=AMI();
+ B.rdR=(B.rdR||[]).filter(r=>{if(am>=r.until)return false;if(GT>=r.next){r.next=GT+r.every*DAYL;if(r.dur)RD.off(r.dur,r.why,r.role);if(r.eu)RD.M(r.eu);if(r.v)RD.V(r.v);if(r.once)return false}return true});
+ if(B.rdPerm&&am<B.rdPerm.until){let z=STF.find(y=>y.n==B.rdPerm.n);if(!z){z=RD.free();if(z)B.rdPerm.n=z.n}if(z){z.off=Math.max(z.off,3);z.acc=2}}
+ if(B.comite&&q<50)q=50;
+ if(B.rivBen&&typeof SYR!='undefined'&&SYR.length&&Math.random()<.05)SYR.shift()}catch(_){}},1000);
+
+// ---- la subvention suit l'humeur du quartier ; la cagnotte des voisins quand la halte est dans le rouge
+W('monthEnd',(o,a)=>{let acc0=0,q0=q;try{acc0=MS.acc}catch(_){}const r=o(...a);try{if(YR<2||B.voix==null)return r;const v=B.voix;
+  // charges mensuelles des dilemmes
+  B.rdMo=(B.rdMo||[]).filter(m=>{if(m.eu)RD.M(m.eu);if(m.v)RD.V(m.v);if(m.en)STF.forEach(z=>z.e=Math.max(5,Math.min(100,z.e+m.en)));if(m.sat)satAll(m.sat);if(m.q)RD.Q(m.q);m.n--;return m.n>0});
+  const c=Math.round(acc0*CITY*(.6+.6*Math.max(0,q0)/100));let pct=v<25?.2:v<40?.1:0;if(B.subCut&&AMI()<=B.subCut.until)pct+=B.subCut.pct;
+  if(c>0&&pct>0){const cut=Math.round(c*pct);RD.M(cut);try{recf('Financement de la ville',-cut)}catch(_){}const mb=$('mb'),h=mb&&mb.querySelector('h2');if(h&&!$('m').hidden)h.insertAdjacentHTML('afterend',`<p style="font-size:13px;color:#a03020">🗳️ Sous la pression des riverains, la mairie a réduit sa subvention : <b>−${cut} €</b></p>`);try{say(`🏛️ Camille : « La mairie a baissé notre subvention de ${Math.round(pct*100)} % ce mois-ci (−${cut} €). Les riverains sont trop mécontents. »`)}catch(_){}}
+  if(v>=55&&eu<400&&AMI()-(B.cagL==null?-9:B.cagL)>=3){B.cagL=AMI();const amt=200+Math.round(Math.random()*20)*10;eu+=amt;try{recf('Dons',amt)}catch(_){}try{newsAdd('💌','Cagnotte du quartier : +'+amt+' €')}catch(_){}
+   popWin({t:'Les voisins',n:'💌 La cagnotte du quartier',d:`Les riverains ont appris que la halte avait du mal à boucler le mois. Ils ont fait passer une enveloppe dans les immeubles : ${amt} €, avec un petit mot : « Tenez bon. »`,dur:7,snd:'joy',draw:(H,T)=>{H.street();H.spr(RIVC[3],24,60,92);H.spr(RIVC[5],24,84,94);H.spr(stCi(0),30,140,92);const k=Math.min(1,T/2);H.R(96+k*24,70,10,7,'#f2efe4');H.R(96+k*24,70,10,1,'#c9b49a');if(T>2)heartPx(H,120,40-Math.min(8,(T-2)*5))}})}
+  const t=$('mtst');if(t)t.innerHTML=t.innerHTML.replace(/budget \d+ €/,'budget '+eu+' €')}catch(e){console.error(e)}return r});
+
+// ---- les façades montrent le vote en année 2 ; les paliers changent vraiment quelque chose
+{const _rl=rivLvl;rivLvl=function(){try{if(chapOf()==2&&B.voix!=null){const v=B.voix;return v<25?-3:v<35?-2:v<45?-1:v<55?0:v<65?2:4}}catch(_){}return _rl()}}
+setInterval(()=>{try{if(!started||ended||YR!=2||B.voix==null)return;const v=B.voix;B.vt=B.vt||{};
+ if(v>=45&&!B.vt.a){B.vt.a=1;B.rivBen=1;say('🧹 Camille : « Regarde l’immeuble d’en face : ils ont décroché le dernier drap ! Et un voisin, Michel, propose de ramasser les seringues du square chaque semaine. »');try{newsAdd('🧹','Un riverain devient bénévole')}catch(_){}}
+ if(v>=55&&!B.vt.b){B.vt.b=1;eu+=200;try{recf('Soutien de la mairie (conseil de quartier)',200)}catch(_){}say('🌼 Camille : « Des jardinières aux fenêtres, et la pétition qui s’essouffle… La mairie nous verse 200 € de soutien ! »');try{newsAdd('🌼','La mairie soutient la halte : +200 €')}catch(_){}}
+ if(v>=65&&!B.vt.c){B.vt.c=1;B.comite=1;say('💚 Camille : « Un drap « HSA ♥ » en haut de l’immeuble ! Les voisins créent un comité de suivi avec nous : la tranquillité ne descendra plus sous 50 %. »');try{newsAdd('💚','Un comité de voisinage soutient la halte')}catch(_){}}
+ if(v<25&&!B.vt.d){B.vt.d=1;NOT=Math.max(0,NOT-5);say('📰 Camille : « Trois draps de protestation, et la presse locale relaie la pétition… Il faut regagner la confiance des voisins, vite. »');try{newsAdd('📰','La pétition contre la halte dans la presse')}catch(_){}}}catch(_){}},2000);
+
+// ---- les effets en cours, visibles en haut à gauche
+setInterval(()=>{try{let e=$('rdfx');const L=[];if(started&&!ended){const am=AMI(),left=u=>{const n=u-am;return n<=1?'ce mois-ci':n+' mois'};
+  if(B.hClose&&am<B.hClose.until)L.push('⏰ Fermeture à 15 h 30 · '+left(B.hClose.until));
+  (B.rdR||[]).forEach(r=>{if(r.lbl&&am<r.until)L.push(r.lbl+' · '+left(r.until))});
+  (B.rdMo||[]).forEach(m=>{if(m.lbl)L.push(m.lbl+' · '+m.n+' mois')});
+  if(B.rdPerm&&am<B.rdPerm.until)L.push('☎️ '+B.rdPerm.n+' tient la ligne des riverains · '+left(B.rdPerm.until));
+  if(B.vanLim&&am<B.vanLim.until)L.push('🚐 1 tournée par mois · '+left(B.vanLim.until));
+  if(B.vanFine&&am<B.vanFine.until)L.push('🚓 Amende à chaque tournée');
+  if(B.subCut&&am<=B.subCut.until)L.push('🏛️ Subvention −10 % (plainte)')}
+ if(!L.length){if(e)e.remove();return}if(!e){e=document.createElement('div');e.id='rdfx';document.body.appendChild(e)}const h=L.slice(0,5).map(t=>`<span>${t}</span>`).join('');if(e.innerHTML!==h)e.innerHTML=h}catch(_){}},1000);
+
+// ---- les dilemmes des riverains
+{const S_=(bg,ci,ic,props)=>(H,T)=>{try{if(bg=='street')H.street();else H.room(bg[0],bg[1]);(props||[]).forEach(p=>{try{if(p[0]=='O')H.O(p[1],p[2],p[3]);else H.F(p[1],p[2],p[3])}catch(_){}});
+  const k=Math.min(1,T/1.6),X=200-(200-74)*k;H.spr(ci,k<1?6+(((T*9)|0)%6):24,X,94);H.spr(stCi(0),T>1.8?30:24,128,94);if(T>1.7){H.g.font='12px sans-serif';H.g.fillText(ic,X-6,52-Math.abs(Math.sin(T*3))*2)}}catch(_){}};
+ const ok=()=>true,stf=role=>()=>RD.free(role)?true:(role=='med'?'il faut un·e médiateur·rice dans l’équipe':'personne de disponible'),cash=n=>()=>eu>=n?true:'pas assez d’argent';
+ const until=()=>RD.until(),am=()=>AMI();
+ const DL2=[
+ {k:'hall',ci:91,who:'Sylvie, aide-soignante de nuit',ic:'💉',bg:'street',story:'En rentrant de sa garde à 6 h, Sylvie trouve des seringues dans le hall du 12. Sa fille de 8 ans les a vues avant elle. « Je ne suis pas contre vous. Mais je ne veux pas qu’elle grandisse avec ça. »',
+  o:[['Ramasser chaque matin','👤 un·e pro absent·e chaque matin pendant 1 mois · 🗳️ +5',stf(),()=>{RD.V(5);RD.rec({lbl:'🧹 Ramassage du hall chaque matin',until:am()+1,every:1,dur:.4,why:'part ramasser dans le hall du 12'})}],
+     ['Récupérateur scellé','−350 € · 🗳️ +4 · 🩺 un point de collecte sûr',cash(350),()=>{RD.M(350);RD.V(4);try{CN.c=(CN.c||0)+3}catch(_){}}],
+     ['Lui donner un kit','gratuit · 🗳️ −6 : Sylvie signe la pétition',ok,()=>{RD.V(-6)}]]},
+ {k:'boul',ci:80,who:'Nadia, la boulangère',ic:'🥖',bg:'street',props:[['O','shop1',4,58]],c:()=>!!(B.prp||{}).bou,story:'Nadia livre nos petits-déjeuners depuis des mois. Mais ses clientes âgées n’osent plus passer devant la file d’attente. « Je perds des clientes. Je ne peux pas continuer comme ça. »',
+  o:[['Abri et bancs','−250 € · 🗳️ +4 : la file est réorganisée côté halte',cash(250),()=>{RD.M(250);RD.V(4)}],
+     ['Limiter la file','🗳️ +6 · 🚪 3 personnes renvoyées ne reviendront plus',ok,()=>{RD.V(6);RD.lose(3);satAll(-6)}],
+     ['Ne rien changer','🤝 Nadia arrête pour de bon les petits-déjeuners solidaires · 🗳️ −3',ok,()=>{RD.V(-3);B.prp.bou=0;delete B.prp.bou;B.lostP=B.lostP||{};B.lostP.bou=1;try{newsAdd('🥖','La boulangerie arrête le partenariat')}catch(_){}}]]},
+ {k:'ecole',ci:83,who:'Marc, parent délégué de l’école',ic:'🏫',bg:'street',story:'Le chemin de l’école passe devant la halte. Marc a reçu une vingtaine de messages de parents inquiets. « On ne demande pas que vous partiez. On demande que nos enfants ne voient pas ça à 16 h 30. »',
+  o:[['Fermer à 15 h 30','⏰ la halte ferme plus tôt pendant 3 mois : moins de monde accueilli · 🗳️ +8',ok,()=>{RD.V(8);B.hClose={until:am()+3}}],
+     ['Maraude école','👤 un·e médiateur·rice absent·e chaque jour (entrée et sortie) pendant 3 mois · 🗳️ +5',stf('med'),()=>{RD.V(5);RD.rec({lbl:'🚸 Maraude aux heures d’école',until:am()+3,every:1,dur:.35,role:'med',why:'tient la maraude devant l’école'})}],
+     ['Prévention en classe','👤 un·e pro absent·e une semaine · 🗳️ +3',stf(),()=>{RD.V(3);RD.off(7,'anime une semaine de prévention dans les classes')}]]},
+ {k:'nuit',ci:77,who:'Jean, retraité, ancien éducateur',ic:'🌙',bg:'street',props:[['O','bench',120,96]],story:'Jean ne dort plus. Chaque nuit, un groupe consomme dans le square sous ses fenêtres. « J’ai été éducateur trente ans. Je sais que ce sont des gamins perdus. Mais j’ai 74 ans et je n’en peux plus. »',
+  o:[['Médiateur de nuit','💶 −200 € par mois pendant 3 mois · 🗳️ +6 · 🏘️ +',ok,()=>{RD.V(6);RD.Q(4);RD.mon({lbl:'🌙 Médiateur de nuit (−200 €/mois)',n:3,eu:200})}],
+     ['Ouvrir plus tard','💶 +80 € de salaires par mois et équipe fatiguée, pendant 3 mois · 🗳️ +3 · 😊 +',ok,()=>{RD.V(3);RD.mon({lbl:'🕘 Ouverture le soir (+80 €/mois)',n:3,eu:80,en:-10,sat:4})}],
+     ['Appeler la police','🗳️ +3 · 😊 −15 · 🚪 2 personnes perdues · le groupe se déplace',ok,()=>{RD.V(3);satAll(-15);RD.lose(2);RD.mon({n:1,q:-6})}]]},
+ {k:'camera',ci:84,who:'Mme Lefèvre, présidente de la copropriété',ic:'📹',bg:'street',story:'Mme Lefèvre a été cambriolée l’an dernier. Le conseil syndical vote l’installation d’une caméra braquée sur l’entrée de la halte. « On ne vous accuse de rien. On veut juste savoir qui passe. »',
+  o:[['Accepter','🗳️ +7 · 🚪 5 personnes ne viendront plus (peur d’être fichées) · 😊 −',ok,()=>{RD.V(7);RD.lose(5);satAll(-8)}],
+     ['Refuser','🗳️ −5 : l’anonymat est la base de l’accueil',ok,()=>{RD.V(-5);satAll(3)}],
+     ['Comité de suivi','👤 un·e pro absent·e 2 jours chaque mois jusqu’à la fin de l’année · 🗳️ +4',stf(),()=>{RD.V(4);RD.rec({lbl:'🤝 Comité avec la copropriété',until:until(),every:30,dur:2,why:'prépare le comité de suivi avec la copropriété'})}]]},
+ {k:'tabac',ci:79,who:'Karim, le buraliste',ic:'🚬',bg:'street',props:[['O','shop2',130,58]],story:'On a volé la caisse de Karim deux fois ce mois-ci. Il est sûr que ce sont des usagers de la halte. « Je travaille seul, quinze heures par jour. Qui va me rembourser ? »',
+  o:[['Rembourser','−300 € · 🗳️ +3',cash(300),()=>{RD.M(300);RD.V(3)}],
+     ['Médiation','👤 un·e pro absent·e une semaine · 🗳️ +3 · 😊 +',stf(),()=>{RD.V(3);satAll(3);RD.off(7,'mène la médiation avec Karim')}],
+     ['Contester','🗳️ −5 : rien ne prouve que ce sont nos usagers',ok,()=>{RD.V(-5);satAll(3)}]]},
+ {k:'sable',ci:82,who:'La maman de Léa, 4 ans',ic:'🏖️',bg:'street',props:[['O','bench',30,96]],story:'Léa a ramassé une seringue dans le bac à sable. Elle ne s’est pas piquée. Sa mère est en larmes à l’accueil. « Vous dites que vous protégez les gens. Et ma fille ? »',
+  o:[['Grand nettoyage','−400 € · 🗳️ +8 : nettoyage complet et récupérateur fixe',cash(400),()=>{RD.M(400);RD.V(8);try{SYR.length=0}catch(_){}}],
+     ['Ramassage hebdo','👤 un·e pro bloqué·e un jour par semaine jusqu’à la fin de l’année · 🗳️ +5',stf(),()=>{RD.V(5);RD.rec({lbl:'🧤 Ramassage hebdo du square',until:until(),every:7,dur:1,why:'ramasse dans le square et le bac à sable'})}],
+     ['Communiqué','🗳️ −3 : vécu comme du mépris',ok,()=>{RD.V(-3)}]]},
+ {k:'rinaldi',ci:31,who:'Mme Rinaldi, 82 ans',ic:'👵',bg:['w3','f2'],props:[['F','sofa_red',30,86]],story:'Mme Rinaldi est veuve. Depuis l’ouverture de la halte, elle n’ose plus sortir le soir. Elle a signé la pétition « parce que tout le monde l’a signée ». Sa fille appelle la halte.',
+  o:[['Visites à domicile','👤 une travailleuse paire absente une semaine · 🗳️ +4, puis +2 par mois pendant 3 mois',stf(),()=>{RD.V(4);RD.off(7,'rend visite à Mme Rinaldi');RD.mon({lbl:'👵 Mme Rinaldi parle de nous',n:3,v:2})}],
+     ['Ses courses du samedi','👤 un·e pro absent·e un jour par semaine pendant 2 mois · 🗳️ +6',stf(),()=>{RD.V(6);RD.rec({lbl:'🛒 Courses de Mme Rinaldi',until:am()+2,every:7,dur:1,why:'accompagne Mme Rinaldi au marché'})}],
+     ['Laisser le numéro','🗳️ +1',ok,()=>{RD.V(1)}]]},
+ {k:'fete',ci:78,who:'Le comité des fêtes',ic:'🎉',bg:'street',story:'La fête des voisins a lieu samedi. Pour la première fois, la halte est invitée. Certains voisins ont prévenu : « S’ils viennent avec leurs usagers, on part. »',
+  o:[['Tenir un stand','−150 € · 👤 un·e pro absent·e 2 jours · 🗳️ +5',()=>eu<150?'pas assez d’argent':RD.free()?true:'personne de disponible',()=>{RD.M(150);RD.off(2,'tient le stand de la fête des voisins');RD.V(5)}],
+     ['Venir avec des usagers','🎲 70 % : 🗳️ +10 · 30 % : un incident, 🗳️ −6',ok,()=>{if(Math.random()<.7){RD.V(10);satAll(6);say('🎉 Camille : « Malik a fait danser tout le monde. Une voisine m’a dit : « Je les imaginais autrement. » »')}else{RD.V(-6);say('😬 Camille : « Ça s’est mal fini : un usager ivre, une dispute… Les voisins hostiles ont eu leur photo. »')}}],
+     ['Ne pas y aller','🗳️ −2',ok,()=>{RD.V(-2)}]]},
+ {k:'repos',ci:81,who:'M. et Mme Diallo, juste au-dessus',ic:'🛏️',bg:['w6','f7'],props:[['F','bed',40,80]],c:()=>!!built[2],story:'Les Diallo vivent au-dessus de la salle de repos. Leur bébé a trois mois et se réveille toutes les nuits : portes, voix, quintes de toux. « On a tout essayé. On va finir par déménager. »',
+  o:[['Fermer la salle','🧱 la salle de repos ferme (on ne pourra la reconstruire que dans l’annexe) · 🗳️ +8',ok,()=>{RD.delRoom(2);RD.V(8);try{newsAdd('🛏️','La salle de repos ferme à la demande des voisins')}catch(_){}}],
+     ['Insonoriser','−600 € · salle fermée un mois pendant les travaux · 🗳️ +4',cash(600),()=>{RD.M(600);B.rclose={i:2,until:am()+1,why:'🔧 travaux d’insonorisation'};RD.V(4)}],
+     ['Garder la salle','🗳️ −8 · plainte en mairie : subvention −10 % pendant 3 mois',ok,()=>{RD.V(-8);B.subCut={pct:.1,until:am()+3}}]]},
+ {k:'chiens',ci:85,who:'Des parents du square',ic:'🐕',bg:'street',story:'Un chien a sauté sur un enfant dans le square. Pas de morsure, mais une grosse peur. Les parents demandent que les chiens de la halte soient tenus.',
+  o:[['Chenil à la halte','−250 € · 🗳️ +4',cash(250),()=>{RD.M(250);RD.V(4);B[20]=1}],
+     ['Laisse et muselière','🗳️ +5 · 🚪 4 personnes avec chien ne viendront plus',ok,()=>{RD.V(5);RD.lose(4,h=>!!(window.DOGS||{})[h.n])}],
+     ['Ne rien faire','🗳️ −4',ok,()=>{RD.V(-4)}]]},
+ {k:'tapaj',ci:88,who:'Patrick, usager, et trois copains',ic:'🧹',bg:'street',story:'Patrick propose que des usagers nettoient le quartier contre une petite paie, comme le fait TAPAJ ailleurs. Les riverains ont entendu parler du projet et l’attendent.',
+  o:[['Financer 4 usagers','−120 € par mois pendant 3 mois · 👤 un·e encadrant·e un jour par semaine · 🗳️ +3 par mois',stf(),()=>{RD.mon({lbl:'🧹 TAPAJ (−120 €/mois)',n:3,eu:120,v:3});RD.rec({lbl:'🧹 Encadrement TAPAJ',until:am()+3,every:7,dur:1,why:'encadre l’équipe TAPAJ'});try{unlockCard('c29')}catch(_){}}],
+     ['Pas maintenant','😊 −5 · 🗳️ −3 : les riverains comptaient dessus',ok,()=>{satAll(-5);RD.V(-3)}]]},
+ {k:'marche',ci:80,who:'Le placier du marché',ic:'🛍️',bg:'street',props:[['O','fruit_s',30,92]],story:'Le marché du samedi est le cœur du quartier. Le placier propose un stand à la halte : informer, répondre aux questions, rassurer.',
+  o:[['Chaque samedi','−80 € par semaine · 👤 un·e pro absent·e un jour par semaine pendant 3 mois · 🗳️ +2 par semaine',stf(),()=>{RD.rec({lbl:'🛍️ Stand du marché chaque samedi',until:am()+3,every:7,dur:1,eu:80,v:2,why:'tient le stand du marché'})}],
+     ['Une seule fois','−120 € · 🗳️ +2',cash(120),()=>{RD.M(120);RD.V(2)}],
+     ['Non','🗳️ −1',ok,()=>{RD.V(-1)}]]},
+ {k:'ligne',ci:78,who:'Le conseil de quartier',ic:'☎️',bg:['w4','f5'],props:[['F','ktable',90,86]],story:'Les habitants veulent pouvoir joindre quelqu’un quand il se passe quelque chose, même la nuit. Le conseil de quartier demande une ligne dédiée.',
+  o:[['Jour et nuit','👤 un·e pro retiré·e des salles jusqu’à la fin de l’année · 🗳️ +10',stf(),()=>{const z=RD.free();if(z){B.rdPerm={n:z.n,until:until()};z.off=3;z.acc=2}RD.V(10)}],
+     ['Aux heures d’ouverture','👤 un·e pro absent·e 2 jours par semaine jusqu’à la fin de l’année · 🗳️ +5',stf(),()=>{RD.V(5);RD.rec({lbl:'☎️ Ligne des riverains',until:until(),every:7,dur:2,why:'tient la ligne des riverains'})}],
+     ['Une adresse mail','🗳️ +1',ok,()=>{RD.V(1)}]]},
+ {k:'pharma',ci:44,who:'Le pharmacien partenaire',ic:'💊',bg:['w2','f1'],props:[['F','counter_pc',56,62]],c:()=>!!P.x,story:'Ses clients se plaignent de croiser des usagers au comptoir, et deux d’entre eux sont partis à la pharmacie d’en face. « Je vous ai soutenus. Mais je dois faire vivre mon officine. »',
+  o:[['Le laisser arrêter','🤝 partenariat pharmacie perdu définitivement · 🗳️ +5',ok,()=>{B.lostP=B.lostP||{};B.lostP.x=1;P.x=0;RD.V(5);try{newsAdd('💊','La pharmacie arrête le partenariat')}catch(_){}}],
+     ['Borne dehors','−500 € · 🗳️ +2 : le matériel est distribué par une borne',cash(500),()=>{RD.M(500);RD.V(2)}],
+     ['Défendre avec l’ARS','👤 un·e pro absent·e une semaine, puis une chance sur deux de garder le partenariat',stf(),()=>{RD.off(7,'défend le partenariat avec l’ARS');RD.rec({until:am()+3,every:7,first:7,once:1,why:'',dur:0,f:'pharma'});B.rdPharma=1}]]},
+ {k:'musee',ci:77,who:'La directrice du musée',ic:'🖼️',bg:['w9','f3'],props:[['F','painting',60,40],['F','portrait',110,40]],c:()=>{try{return BINT.mus.on()}catch(_){return false}},story:'L’exposition des usagers attire du monde, mais des visiteurs se plaignent : « On vient voir de l’art, pas des toxicomanes. » Le conseil d’administration menace de couper les crédits du musée.',
+  o:[['Retirer l’exposition','🤝 partenariat avec le musée perdu · 😊 −10 · 🗳️ +5',ok,()=>{B.lostMus=1;satAll(-10);RD.V(5);try{newsAdd('🖼️','Le musée retire l’exposition des usagers')}catch(_){}}],
+     ['La maintenir','🗳️ −6 · la mairie retire 300 €',ok,()=>{RD.V(-6);RD.M(300)}],
+     ['Débat public','−100 € · 👤 un·e pro absent·e 3 jours · 🎲 une chance sur deux : 🗳️ +6, sinon 🗳️ −4',()=>eu<100?'pas assez d’argent':RD.free()?true:'personne de disponible',()=>{RD.M(100);RD.off(3,'prépare le débat au musée');if(Math.random()<.5){RD.V(6);say('🖼️ Camille : « Salle comble. Des voisins ont pris la parole pour nous défendre. »')}else{RD.V(-4);say('🖼️ Camille : « Le débat a tourné au pugilat. On a perdu du terrain. »')}}]]},
+ {k:'odeurs',ci:84,who:'Mme Benali, voisine asthmatique',ic:'🍳',bg:['w6','f7'],props:[['F','stove',40,70]],c:()=>!!built[6],story:'Les odeurs de friture de la cuisine remontent chez Mme Benali, asthmatique. Elle a fait deux crises ce mois-ci. « J’aime l’idée que ces gens mangent chaud. Mais je ne respire plus. »',
+  o:[['Fermer la cuisine','⏰ cuisine fermée 2 mois, le temps de trouver une solution · 🗳️ +4',ok,()=>{B.rclose={i:6,until:am()+2,why:'🍳 fermée (odeurs)'};RD.V(4)}],
+     ['Installer une hotte','−700 € · 🗳️ +3',cash(700),()=>{RD.M(700);RD.V(3)}],
+     ['Ne rien faire','🗳️ −5',ok,()=>{RD.V(-5)}]]},
+ {k:'camion',ci:79,who:'Les commerçants de la rue',ic:'🚐',bg:'street',props:[['O','camper_r',10,80]],c:()=>!!B.van,story:'Le camion de maraude se gare sur les places de livraison. Les commerçants perdent des clients et le font savoir : « Votre camion nous bloque trois matins par semaine. »',
+  o:[['Ne plus stationner','🚐 une seule tournée par mois pendant 3 mois · 🗳️ +4',ok,()=>{B.vanLim={until:am()+3};RD.V(4)}],
+     ['Louer une place','−80 € par mois jusqu’à la fin de l’année · 🗳️ +2',ok,()=>{RD.mon({lbl:'🅿️ Place de parking (−80 €/mois)',n:Math.max(1,until()-am()),eu:80});RD.V(2)}],
+     ['Ignorer','🚓 une amende de 135 € à chaque tournée jusqu’à la fin de l’année · 🗳️ −3',ok,()=>{B.vanFine={until:until()};RD.V(-3)}]]},
+ {k:'exclu',ci:78,who:'Une riveraine, insultée devant la halte',ic:'🧑',bg:'street',c:()=>!!usrPick(),story:'',dyn:1,
+  o:[['L’exclure 3 mois','🧑 son parcours recule, et il ou elle peut ne jamais revenir · 🗳️ +6 · 😊 −',ok,()=>{const H=B.rdTony&&hist[B.rdTony];if(H){usrGone(H);H.back=Math.random()<.4?1e12:GT+90*DAYL;H.sat=Math.max(0,(H.sat||50)-30);try{const ks=Object.keys(H.ok||{});if(ks.length)delete H.ok[ks[ks.length-1]]}catch(_){}}RD.V(6);satAll(-6)}],
+     ['Médiation','👤 un·e pro absent·e une semaine · 🗳️ +2',stf(),()=>{RD.off(7,'organise la médiation et les excuses');RD.V(2)}],
+     ['Refuser','🗳️ −7 : on n’exclut pas pour un mot de trop',ok,()=>{RD.V(-7);satAll(4)}]]},
+ {k:'enseigne',ci:83,who:'Le syndic de l’immeuble',ic:'🪧',bg:'street',c:()=>NOTT()>=3,story:'La grande enseigne lumineuse « Halte Soins Addictions » s’allume sous les fenêtres. « Les appartements ne se vendent plus. Tout le monde sait ce qu’il y a en bas. »',
+  o:[['Retirer l’enseigne','📣 notoriété en baisse : moins de nouvelles personnes viennent · 🗳️ +5',ok,()=>{B.signOff=1;NOT=Math.max(0,NOT-12);RD.V(5)}],
+     ['Plus discrète','−200 € · 🗳️ +2',cash(200),()=>{RD.M(200);B.signSmall=1;RD.V(2)}],
+     ['La garder','🗳️ −4',ok,()=>{RD.V(-4)}]]},
+ {k:'jardin',ci:82,who:'Les riverains du jardin',ic:'🌳',bg:'street',props:[['O','tree1',30,90]],c:()=>!!B.g&&!B.gBan,story:'Le soir, le jardin de la halte devient un lieu de rassemblement. Les voisins demandent qu’il soit fermé. « Le jour, c’est joli. La nuit, on a peur de passer devant. »',
+  o:[['Le fermer','🧱 le jardin ferme définitivement · 😊 − · 🗳️ +5',ok,()=>{B.gBan=1;B.g=0;satAll(-8);RD.V(5)}],
+     ['Cadenas à 18 h','👤 un·e pro bloqué·e un jour par semaine jusqu’à la fin de l’année · 🗳️ +3',stf(),()=>{RD.V(3);RD.rec({lbl:'🔒 Ronde du jardin',until:until(),every:7,dur:1,why:'fait la ronde de fermeture du jardin'})}],
+     ['Le laisser ouvert','🗳️ −5',ok,()=>{RD.V(-5)}]]}];
+ window.DL2=DL2;
+ // ARS / pharmacie : verdict une semaine plus tard
+ setInterval(()=>{try{if(B.rdPharma&&!(B.rdR||[]).some(r=>r.f=='pharma')){B.rdPharma=0;if(Math.random()<.5){RD.V(2);say('💊 Camille : « L’ARS a convaincu le pharmacien : le partenariat continue. »')}else{B.lostP=B.lostP||{};B.lostP.x=1;P.x=0;RD.V(-3);say('💊 Camille : « Malgré l’ARS, le pharmacien arrête. On a perdu la pharmacie. »')}}}catch(_){}},2000);
+ const show=d=>{let story=d.story;if(d.dyn){const H=usrPick();if(!H)return false;B.rdTony=H.n;story=`${H.n} a insulté une riveraine qui lui demandait de ne pas uriner contre son mur. Elle a porté plainte. Une trentaine de voisins signent une lettre : « Nous exigeons son exclusion de la halte. »`}
+  const st=d.o.map(o=>{const c=o[2]();return c===true?null:c});
+  const html=`<p>${story}</p><ul>${d.o.map((o,i)=>`<li class="${st[i]?'no':''}"><b>${'ABC'[i]}</b> ${o[0]}<i>${o[1]}${st[i]?' — 🚫 '+st[i]:''}</i></li>`).join('')}</ul>`;
+  const t='Les riverains',n=d.ic+' '+d.who;
+  popWin({t,n,d:html,html:1,keep:1,snd:'alert',draw:S_(d.bg,d.ci,d.ic,d.props),btns:d.o.map((o,i)=>({t:'ABC'[i]+' · '+o[0],go:i==0?1:0,f:()=>{if(st[i])return;try{o[3]()}catch(e){console.error(e)}try{newsAdd(d.ic,d.who.split(',')[0]+' : '+o[0].toLowerCase())}catch(_){}ui()}}))});
+  let n_=0;const tm=setInterval(()=>{n_++;const f=document.getElementById('fmo');if(f&&f.querySelector('.ft')&&f.querySelector('.ft').textContent==t&&!f.dataset.rd){f.dataset.rd=1;f.classList.add('rdl');try{const fd=f.querySelector('.fd');fd&&fd.classList.remove('clip');f.querySelectorAll('.fmore').forEach(e=>e.remove())}catch(_){}const bs=f.querySelectorAll('.fbt button');st.forEach((s,i)=>{if(s&&bs[i]){bs[i].disabled=true;bs[i].title=s}});clearInterval(tm)}if(n_>600)clearInterval(tm)},100);return true};
+ window.rdShow=k=>{const d=DL2.find(x=>x.k==k);if(d)show(d)};
+ window.rdTick=()=>{try{if(!started||ended||paused||MEET||YR!=2||B.voix==null)return;const a=AMI();if(a<12||a>23||a==18||B.strike||B.march)return;B.rdM=B.rdM||{};if(B.rdM[a]||day<6)return;
+  if(!$('m').hidden||document.getElementById('fmo')||document.getElementById('envo')||document.getElementById('debov')||(TR_&&TR_.t>0))return;
+  B.rdU=B.rdU||{};const L=DL2.filter(d=>!B.rdU[d.k]&&(!d.c||d.c()));if(!L.length){B.rdM[a]=1;return}const d=L[Math.random()*L.length|0];if(show(d)){B.rdM[a]=1;B.rdU[d.k]=1}}catch(e){console.error(e)}};setInterval(window.rdTick,1500);
+}
+
+// ===== v367 : la jauge du vote des riverains, verticale et bien visible sur le bord droit (année 2)
+{const st=document.createElement('style');st.textContent=`
+#vgauge{position:fixed;right:6px;top:calc(env(safe-area-inset-top,0px) + 132px);z-index:45;width:34px;display:flex;flex-direction:column;align-items:center;gap:3px;pointer-events:auto;cursor:pointer;font-family:Lilita,'Atkinson Hyperlegible',sans-serif}
+#vgauge .vi{font-size:17px;line-height:1;filter:drop-shadow(0 1px 0 #2a2433)}
+#vgauge .vt{position:relative;width:20px;height:min(38vh,230px);background:#2a2433;border:3px solid #2a2433;border-radius:12px;box-shadow:0 3px 0 rgba(42,36,51,.35);overflow:hidden}
+#vgauge .vf{position:absolute;left:0;right:0;bottom:0;border-radius:8px;transition:height .8s cubic-bezier(.3,1.3,.5,1),background .6s}
+#vgauge .vm{position:absolute;left:-2px;right:-2px;height:2px;background:rgba(255,250,240,.55)}#vgauge .vm.goal{height:3px;background:#ffd23f;box-shadow:0 0 6px #ffd23f}
+#vgauge .vn{font-size:14px;color:#fffaf0;-webkit-text-stroke:3px #2a2433;paint-order:stroke fill;line-height:1}
+#vgauge .vl{font:700 8.5px/1 'Atkinson Hyperlegible',sans-serif;color:#fffaf0;background:#2a2433;border-radius:4px;padding:2px 3px;text-align:center}
+#vgauge.up .vn{animation:vgu .6s}#vgauge.dn .vn{animation:vgd .6s}@keyframes vgu{40%{transform:scale(1.5);color:#9be37a}}@keyframes vgd{40%{transform:scale(1.5);color:#ff8a8a}}
+body:has(#m:not([hidden])) #vgauge,body:has(#debov) #vgauge,body:has(#tvov) #vgauge,body:has(#epov) #vgauge{display:none}`;document.head.appendChild(st);
+ let last=null;setInterval(()=>{try{let g=$('vgauge');const on=started&&!ended&&YR==2&&B.voix!=null;if(!on){if(g)g.remove();return}
+  if(!g){g=document.createElement('div');g.id='vgauge';g.title='Vote du collectif des riverains en mars : il faut 50 %';g.innerHTML='<div class="vi">🗳️</div><div class="vn"></div><div class="vt"><div class="vf"></div>'+[25,35,45,55,65].map(p=>`<div class="vm" style="bottom:${p}%"></div>`).join('')+'<div class="vm goal" style="bottom:50%"></div></div><div class="vl">vote<br>riverains</div>';g.onclick=()=>{try{chgShow(2)}catch(_){}};document.body.appendChild(g)}
+  const v=Math.round(B.voix),f=g.querySelector('.vf');f.style.height=v+'%';f.style.background=v<35?'linear-gradient(#ff8a6a,#c0392b)':v<50?'linear-gradient(#ffd27a,#e0a020)':'linear-gradient(#9be37a,#2e9e4f)';g.querySelector('.vn').textContent=v+'%';
+  if(last!=null&&v!==last){g.classList.remove('up','dn');void g.offsetWidth;g.classList.add(v>last?'up':'dn')}last=v}catch(_){}},500)}
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
@@ -8344,7 +8539,7 @@ W('collect',(o,a)=>{const s0=DAS[0].l+DAS[1].l,r=o(...a);if(DAS[0].l+DAS[1].l<s0
 W('tourGo',(o,a)=>{const w=!!TOUR,r=o(...a);if(!w&&TOUR){B.tours=(B.tours||0)+1;B['t_'+TOUR.k]=(B['t_'+TOUR.k]||0)+1}return r});
 W('startWS',(o,a)=>{const w=!!WS,r=o(...a);if(!w&&WS)B.wsc=(B.wsc||0)+1;return r});
 W('endMeet',(o,a)=>{B.mt=(B.mt||0)+1;return o(...a)});})();
-</script><script>window.HSAV='hsa-v366'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
+</script><script>window.HSAV='hsa-v367'</script><script>if('serviceWorker' in navigator){var hadC=!!navigator.serviceWorker.controller;addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(e){}}).catch(()=>{}));navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||window.__swr)return;window.__swr=1;try{if(typeof started!=='undefined'&&started){try{saveNow(1)}catch(e){}}}catch(e){}location.reload()})}</script><script>(function(){try{var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;if(!ios||st)return;if(localStorage.getItem('hsa-ioshint'))return;
 var d=document.createElement('div');d.id='ioshint';d.innerHTML='<b>📲 Installer le jeu sur ton iPhone</b><br>Dans Safari, touche <b>Partager</b> (le carré avec une flèche ⬆️) puis <b>« Sur l’écran d’accueil »</b>. Le jeu s’ouvrira en plein écran, comme une appli.<button aria-label="Fermer">✕</button>';
 d.style.cssText='position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99999;max-width:min(92vw,420px);background:#fbf6e9;color:#3a3026;border:3px solid #6a5c4c;border-radius:12px;box-shadow:0 6px 0 #2a2433;padding:10px 34px 10px 12px;font:13px/1.35 system-ui,sans-serif';
 var b=d.querySelector('button');b.style.cssText='position:absolute;top:4px;right:6px;border:0;background:none;font-size:18px;color:#6a5c4c';b.onclick=function(){d.remove();try{localStorage.setItem('hsa-ioshint','1')}catch(e){}};
