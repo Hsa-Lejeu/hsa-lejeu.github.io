@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v397')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v398')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5540,7 +5540,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v397')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v398')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7455,7 +7455,7 @@ try{window.hasReportT=(lv,nx,nl)=>hasReport(lv,nx,nl,hasStats(),HASC[nx]);window
    H.O('flbush',30,62);H.O('bussign',70,58);H.O('bench',112,70);H.O('flbush',140,70);H.O('bin',184,66);
    // un·e passant·e traverse l’arrière-plan, de temps en temps avec un chien
    const per=14,ph=(T%per)/per,X=-20+ph*240,ci=[76,77,79,81,84][Math.floor(T/per)%5];
-   if(ph<1)H.spr(ci,12+((T*8)|0)%6,X,66);
+   if(ph<1&&!window._noWalk)H.spr(ci,12+((T*8)|0)%6,X,66);
    // un oiseau sur le lampadaire
    H.R(156,47+(Math.sin(T*2)>.9?-1:0),2,2,'#2a2433')}catch(_){}};
   return H}})();
@@ -7489,16 +7489,22 @@ W('monthEnd',(o,a)=>{const r=o(...a);try{const am=AMI();B.val=B.val||{};
 // ---- la scène devant la halte, puis la transition
 function debStart(){
  popWin({t:'Devant la halte',n:'📺 Le débat des municipales : Cédric Crotti face à la halte',d:'Crotti est candidat à la mairie, et la halte est devenue son thème de campagne. Une chaîne locale organise le débat en direct, devant l’entrée : pancartes, affiches « Votez Crotti », caméras. La file d’attente est coincée dehors. À nous de répondre.',keep:1,snd:'alert',btns:[{t:'🎤 Aller leur répondre',go:1,f:()=>setTimeout(debTransition,200)}],
-  draw:(H,T)=>{const g=H.g;H.street();
-   // affiches de campagne collées sur les façades
-   [[30,40],[112,38],[172,42]].forEach(([x,y])=>H.F('poster',x,y));
-   // l'équipe de télévision : caméra sur trépied et projecteur du pack
+  draw:(H,T)=>{const g=H.g;window._noWalk=1;H.street();window._noWalk=0;
+   // la banderole de campagne, tendue entre deux poteaux
+   g.fillStyle='#6b5a4a';g.fillRect(58,22,2,52);g.fillRect(150,22,2,52);g.strokeStyle='#2a2433';g.lineWidth=.6;g.beginPath();g.moveTo(59,24);g.lineTo(66,27);g.moveTo(151,24);g.lineTo(144,27);g.stroke();
+   const sw=Math.sin(T*1.6)*.8;g.fillStyle='#1d3f9a';g.fillRect(66,24+sw,78,15);g.fillStyle='#c0392b';g.fillRect(66,24+sw,78,2.2);g.fillRect(66,36.8+sw,78,2.2);g.strokeStyle='#2a2433';g.lineWidth=1;g.strokeRect(66.5,24.5+sw,77,14);
+   g.fillStyle='#fff';g.font="400 9px Lilita,sans-serif";g.textAlign='center';g.fillText('VOTEZ CROTTI !',105,35+sw);g.textAlign='left';
+   // l'estrade et les haut-parleurs
+   H.R(88,92,34,6,'#8a5a2b');H.R(88,92,34,1.5,'#b07a3f');
+   const SPK=(X)=>{H.R(X+3,70,1.5,24,'#3a3540');H.R(X,92,8,1.5,'#3a3540');H.R(X-1,58,10,13,'#2a2433');H.R(X,59,8,11,'#4a4552');g.fillStyle='#15121a';g.beginPath();g.arc(X+4,63,2.6,0,7);g.fill();g.beginPath();g.arc(X+4,68,1.6,0,7);g.fill();
+    const p=(T*3)%1;g.strokeStyle=`rgba(255,255,255,${.7-p*.7})`;g.lineWidth=1;g.beginPath();g.arc(X+4,63,4+p*6,X<100?Math.PI*.6:-Math.PI*.4,X<100?Math.PI*1.4:Math.PI*.4);g.stroke()};
+   SPK(70);SPK(132);
+   // l'équipe de télévision
    const C=(k,X,YB,fl)=>{const r=DEBM[k];if(!r||!DEBI.complete)return;g.save();if(fl){g.translate(X+r[2]/2,0);g.scale(-1,1);g.translate(-(X+r[2]/2),0)}g.drawImage(DEBI,r[0],r[1],r[2],r[3],X,YB-r[3],r[2],r[3]);g.restore()};
-   C('light',150,98);C('cam1',176,96,1);H.spr(82,24,194,97);if((T*2|0)%2)H.R(178,76,2,2,'#ff3030');
-   // manifestants avec de vraies pancartes
-   const SG=[['NON','#c0392b'],['PAS ICI','#c0392b'],['CROTTI','#2456c8'],['STOP','#c0392b'],['NON','#c0392b']];
-   [77,79,81,84,85].forEach((ci,i)=>{const X=14+i*17,bob=Math.round(Math.sin(T*4+i)*1.5);H.spr(ci,24,X,96+bob);g.fillStyle='#8a6a3a';g.fillRect(X-1,70+bob,2,8);g.fillStyle='#fffaf0';g.fillRect(X-8,62+bob,16,9);g.strokeStyle='#2a2433';g.lineWidth=1;g.strokeRect(X-7.5,62.5+bob,15,8);g.fillStyle=SG[i][1];g.font='bold 5px sans-serif';g.textAlign='center';g.fillText(SG[i][0],X,68.5+bob);g.textAlign='left'});
-   valSpr(H,105,92)}})}
+   C('light',160,98);C('cam1',176,96,1);H.spr(82,24,194,97);if((T*2|0)%2)H.R(178,76,2,2,'#ff3030');
+   // le public du meeting, de dos, face à l'estrade
+   [77,79,81,84,85,80].forEach((ci,i)=>{const X=16+i*13+(i>2?96:0),bob=(i%2)&&((T*2+i)|0)%2?-1:0;H.spr(ci,42,X,104+bob)});
+   valSpr(H,105,90)}})}
 window.debStart=debStart;
 function debTransition(){const ov=document.createElement('div');ov.id='debtr';ov.innerHTML='<div class="dbn"><b>CÉDRIC CROTTI</b><span>veut en découdre</span></div>';document.body.appendChild(ov);try{sfx('alarm')}catch(_){}
  setTimeout(()=>{try{debOpen()}catch(e){console.error(e)}},1500);setTimeout(()=>ov.remove(),2300)}
@@ -7531,7 +7537,7 @@ const DEBI=new Image();DEBI.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA
 #debov .ph:before{content:'';position:absolute;left:var(--tx);bottom:-11px;margin-left:-6px;border:6px solid transparent;border-top:12px solid #fff;border-bottom:0;z-index:1}
 #debov .ph.cri{--cp:polygon(50% 0,58% 9%,68% 2%,72% 12%,84% 6%,84% 18%,97% 16%,91% 28%,100% 36%,91% 44%,100% 56%,90% 62%,97% 76%,84% 74%,86% 88%,72% 82%,66% 96%,56% 88%,50% 100%,43% 88%,33% 96%,27% 82%,14% 88%,16% 74%,3% 76%,10% 62%,0 56%,9% 44%,0 36%,9% 28%,3% 16%,16% 18%,16% 6%,28% 12%,32% 2%,42% 9%);border:0;border-radius:0;box-shadow:none;background:#111;clip-path:var(--cp);padding:7px;max-width:70%;animation:phin .22s cubic-bezier(.2,1.6,.4,1) both,crishk .09s .22s 8 alternate}#debov .ph.cri .in{display:block;clip-path:var(--cp);background:#fff;padding:26px 30px;font:400 18px/1.1 Lilita,sans-serif;color:#d81f1f;-webkit-text-stroke:.4px #7a0b0b}@keyframes crishk{from{translate:-3px 0}to{translate:3px 0}}
 #debov .ph.cri:after,#debov .ph.cri:before{display:none}
-#debov .ph.fan{font-weight:700;font-size:14px;background:#fbfbfb}#debov .ph.cam{background:#fffaf0;border-color:#1f6b33;box-shadow:4px 4px 0 #1f6b33;max-width:min(78%,440px)}#debov .ph.cam:after{border-top-color:#1f6b33}#debov .ph.cam:before{border-top-color:#fffaf0}
+#debov .ph.fan{font-weight:700;font-size:14px;background:#fbfbfb}#debov .ph.cam{max-width:min(78%,440px)}
 #debov .ph.out{animation:phout .25s forwards}@keyframes phin{from{transform:translate(-50%,calc(-100% - 14px)) scale(.4);opacity:0}}@keyframes phout{to{opacity:0;transform:translate(-50%,calc(-100% - 30px)) scale(.9)}}
 #debov .cut{position:absolute;left:-6%;right:-6%;z-index:8;display:flex;align-items:center;gap:8px;padding:12px 8% 12px 6%;background:#111;color:#fff;border-top:5px solid #fff;border-bottom:5px solid #fff;transform:skewY(-5deg);animation:cutin .3s cubic-bezier(.2,1.3,.4,1) both;overflow:visible;box-shadow:0 10px 0 rgba(0,0,0,.5)}
 #debov .cut.out{animation:cutout .3s forwards}@keyframes cutin{from{transform:skewY(-4deg) translateX(-105%)}}@keyframes cutout{to{transform:skewY(-4deg) translateX(105%)}}
@@ -7569,7 +7575,7 @@ const DEBI=new Image();DEBI.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA
 #debov .bullet{position:absolute;z-index:9;pointer-events:none;width:70px;height:98px;border:3px solid #111;border-radius:8px;background:#fffaf0;transform:translate(-50%,-50%) rotate(-30deg);box-shadow:0 0 0 3px #ffd23f,0 0 18px #ffd23f}
 #debov .bullet.go{transition:left .22s cubic-bezier(.3,0,1,.6),top .22s cubic-bezier(.3,0,1,.6),transform .22s}
 #debov .trail{position:absolute;z-index:8;pointer-events:none;height:6px;background:linear-gradient(90deg,transparent,#ffd23f,#fff);transform-origin:0 50%;animation:trl .35s forwards}@keyframes trl{to{opacity:0}}
-#debov .objx{position:absolute;left:50%;top:36%;z-index:11;pointer-events:none;width:min(94vw,560px);aspect-ratio:2.3;transform:translate(-50%,-50%) rotate(-7deg) scale(0);animation:objin .25s cubic-bezier(.2,1.8,.4,1) forwards;display:flex;align-items:center;justify-content:center}
+#debov .objx{position:absolute;left:50%;top:36%;z-index:11;pointer-events:none;width:min(94vw,560px);aspect-ratio:2.9;transform:translate(-50%,-50%) rotate(-7deg) scale(0);animation:objin .25s cubic-bezier(.2,1.8,.4,1) forwards;display:flex;align-items:center;justify-content:center}
 #debov .objx:before,#debov .objx:after{content:'';position:absolute;inset:0;clip-path:polygon(0 34%,10% 30%,5% 8%,22% 20%,28% 0,38% 18%,50% 4%,56% 20%,70% 2%,73% 22%,90% 8%,86% 30%,100% 28%,92% 48%,100% 66%,86% 68%,93% 94%,76% 80%,66% 100%,58% 82%,44% 98%,38% 80%,22% 96%,22% 76%,3% 88%,12% 64%,0 58%,9% 46%)}
 #debov .objx:before{background:#111;transform:scale(1.04)}#debov .objx:after{background:radial-gradient(circle at 50% 50%,#ff5a3c,#d4170c 70%);inset:3%}
 #debov .objx b{position:relative;z-index:1;font:400 clamp(40px,12vw,84px)/1 Lilita,sans-serif;color:#fff;-webkit-text-stroke:5px #111;paint-order:stroke fill;text-shadow:5px 5px 0 #111;letter-spacing:1px;transform:skewX(-10deg)}
@@ -7633,11 +7639,28 @@ function debJingle(){try{if(!AU.ctx||AU.s<=0||!AU.fx)return;const t=AU.ctx.curre
 function debWhoosh(){try{if(!AU.ctx||AU.s<=0||!AU.fx)return;const t=AU.ctx.currentTime+.01;noise(t,.5,.6,400,3000,'bandpass')}catch(_){}}
 function debBoom(){try{dsfx(Math.random()<.5?'boom':'boom2',.95,.9+Math.random()*.2)}catch(_){}try{if(!AU.ctx||AU.s<=0||!AU.fx)return;const t=AU.ctx.currentTime+.01;tone(110,t,.5,'sine',.25,AU.fx,40);noise(t,.6,.6,200,60,'lowpass')}catch(_){}}
 // ---- transition façon jeu de combat : flashs, volets, écran VS
-debTransition=function(){const ov=document.createElement('div');ov.id='debtr';let bars='';for(let k=0;k<8;k++)bars+=`<div class="bar" style="top:${k*12.5}%;--from:${k%2?'105%':'-105%'};--k:${k}"></div>`;
- ov.innerHTML=`<div class="fl"></div>${bars}<div class="vs"><div class="l"><canvas width="16" height="20"></canvas><b>CAMILLE</b></div><div class="r"><canvas width="16" height="20"></canvas><b>C. CROTTI</b></div></div><div class="vsx">VS</div>`;document.body.appendChild(ov);
- const cs=ov.querySelectorAll('canvas');try{const a=cs[0].getContext('2d');a.imageSmoothingEnabled=false;a.drawImage(IMC,18*48+16,1,16,20,0,0,16,20);const b=cs[1].getContext('2d');b.imageSmoothingEnabled=false;b.drawImage(IMA,24*16,VAL.ci*26,16,20,0,0,16,20)}catch(_){}
- try{if(MUS.cur)MUS.cur.pause()}catch(_){}debJingle();setTimeout(debBoom,1250);
- setTimeout(()=>{try{debOpen()}catch(e){console.error(e)}},2700);setTimeout(()=>{ov.classList.add('out');try{dsfx('launch',.5)}catch(_){}},2780);setTimeout(()=>ov.remove(),3700)};
+debTransition=function(){paused=true;try{if(MUS.cur)MUS.cur.pause()}catch(_){}
+ // 1. l'image se fige
+ document.body.classList.add('dfrz');const fl=document.createElement('div');fl.id='dfrzf';document.body.appendChild(fl);try{dsfx('launch',.4)}catch(_){}
+ // 2. tourbillon jusqu'à Crotti, avec l'alarme
+ setTimeout(()=>{const ov=document.createElement('div');ov.id='debtr';ov.className='swirl';ov.innerHTML=`<div class="sp"></div><div class="rf"></div><div class="fc"><canvas width="16" height="20"></canvas></div><div class="nm"><b>CÉDRIC CROTTI</b><span>veut en découdre</span></div>`;document.body.appendChild(ov);
+  try{const c=ov.querySelector('canvas').getContext('2d');c.imageSmoothingEnabled=false;c.drawImage(IMA,24*16,VAL.ci*26,16,20,0,0,16,20)}catch(_){}
+  const al=()=>{try{sfx('alarm')}catch(_){}};al();setTimeout(al,700);setTimeout(al,1400);
+  setTimeout(()=>{try{debBoom()}catch(_){}},1700);
+  setTimeout(()=>{try{debOpen()}catch(e){console.error(e)}document.body.classList.remove('dfrz');fl.remove()},2700);
+  setTimeout(()=>ov.classList.add('out'),2800);setTimeout(()=>ov.remove(),3500)},650)};
+{const st=document.createElement('style');st.textContent=`body.dfrz #stage,body.dfrz #hud,body.dfrz #tabs,body.dfrz #lci,body.dfrz #cam{filter:grayscale(1) contrast(1.25) brightness(.85)!important;transition:filter .12s}
+#dfrzf{position:fixed;inset:0;z-index:250;pointer-events:none;background:#fff;animation:dfz .5s ease-out forwards}@keyframes dfz{0%{opacity:.9}100%{opacity:0}}
+#debtr.swirl{position:fixed;inset:0;z-index:260;pointer-events:none;overflow:hidden;background:#140404;animation:swin .3s both}@keyframes swin{from{opacity:0}}
+#debtr.swirl .sp{position:absolute;left:50%;top:50%;width:260vmax;height:260vmax;margin:-130vmax 0 0 -130vmax;background:repeating-conic-gradient(from 0deg,#c0392b 0 10deg,#1a0a0a 10deg 20deg);opacity:.85;animation:swsp 2.4s cubic-bezier(.5,0,.8,.6) both;-webkit-mask:radial-gradient(circle,transparent 6%,#000 22%);mask:radial-gradient(circle,rgba(0,0,0,.25) 6%,#000 22%)}
+@keyframes swsp{from{transform:rotate(0) scale(1.6)}to{transform:rotate(900deg) scale(.6)}}
+#debtr.swirl .rf{position:absolute;inset:0;background:#ff1e1e;mix-blend-mode:screen;animation:swal .7s steps(2) infinite}@keyframes swal{0%{opacity:.0}50%{opacity:.35}}
+#debtr.swirl .fc{position:absolute;left:50%;top:44%;width:120px;height:150px;margin:-75px 0 0 -60px;animation:swfc 1.8s cubic-bezier(.6,0,.4,1) both}
+#debtr.swirl .fc canvas{width:100%;height:100%;image-rendering:pixelated;filter:drop-shadow(0 0 0 #fff) drop-shadow(4px 0 0 #fff) drop-shadow(-4px 0 0 #fff) drop-shadow(0 4px 0 #fff) drop-shadow(0 -4px 0 #fff)}
+@keyframes swfc{0%{transform:scale(.04) rotate(0)}75%{transform:scale(1.9) rotate(1080deg)}88%{transform:scale(1.7) rotate(1080deg)}100%{transform:scale(1.8) rotate(1080deg)}}
+#debtr.swirl .nm{position:absolute;left:0;right:0;top:72%;text-align:center;color:#fff;font:400 clamp(26px,8vw,54px)/1 Lilita,sans-serif;white-space:nowrap;-webkit-text-stroke:3px #111;paint-order:stroke fill;text-shadow:0 5px 0 #111;animation:swnm .4s 1.7s both}
+#debtr.swirl .nm span{display:block;font-size:.5em;color:#ffd23f;margin-top:6px}@keyframes swnm{from{opacity:0;transform:scale(2.4)}}
+#debtr.swirl.out{animation:swout .6s forwards}@keyframes swout{to{opacity:0}}`;document.head.appendChild(st)}
 window.debTransition=debTransition;
 // ---- l'écran du débat
 function debOpen(){paused=true;tab(-1);try{dsfxLoad()}catch(_){}try{if(AU.ctx){AU.sg.gain.value=Math.min(1,AU.s*1.15);if(!AU.dg){AU.dg=AU.ctx.createGain();AU.dg.connect(AU.ctx.destination)}AU.dg.gain.value=Math.min(1,AU.s*1.4)}}catch(_){}
@@ -7661,7 +7684,7 @@ function debXY(X,Y,h){const S=DS,[sx,sy]=S.hd.proj(X,Y,h||0);return[sx/HDC.W*inn
 // phylactère au-dessus d'un personnage
 function debPh(cls,txt,X,Y,h,dur){const S=DS;if(!S)return;let[x,y]=debXY(X,Y,h||26);const x0=x;x=Math.max(innerWidth*.3,Math.min(innerWidth*.7,x));if(cls=='fan')y-=Math.round(innerHeight*.07);y=Math.max(cls=='cri'?110:90,Math.min(innerHeight*.75,y));
  txt=String(txt).replace(/ ([!?:;»])/g,' $1').replace(/« /g,'« ');const b=document.createElement('div');b.className='ph '+cls;if(cls=='cri'){const i_=document.createElement('span');i_.className='in';i_.textContent=txt;b.appendChild(i_)}else b.textContent=txt;b.style.setProperty('--tx',Math.max(14,Math.min(86,50+(x0-x)/Math.max(120,innerWidth*.3)*100))+'%');debVoice(cls=='cri'?'cro':cls,txt);b.style.left=x+'px';b.style.top=y+'px';S.ov.appendChild(b);
- setTimeout(()=>b.classList.add('out'),dur||2600);setTimeout(()=>b.remove(),(dur||2600)+300);return b}
+ if(cls=='cam'){S.camTalk=1;clearTimeout(S._ct);S._ct=setTimeout(()=>{if(DS)DS.camTalk=0},dur||2600)}setTimeout(()=>b.classList.add('out'),dur||2600);setTimeout(()=>b.remove(),(dur||2600)+300);return b}
 // incrustation manga : Camille (ou Crotti) regarde le joueur et parle
 function debCut(who,txt,dur,top){const S=DS;if(!S)return;S.ov.querySelectorAll('.cut').forEach(c=>c.remove());const d=document.createElement('div');d.className='cut '+(who=='cro'?'cro':'cam');d.style.top=(who=='cro'||top)?(who=='cro'?'52px':Math.round(Math.min(innerHeight*.16,140)+innerHeight*.09)+'px'):'';d.style.bottom=(who=='cro'||top)?'':'170px';
  d.innerHTML=`<canvas width="16" height="20"></canvas><div class="cb"><small>${who=='cro'?'CÉDRIC CROTTI':'CAMILLE'}</small>${txt}</div>`;S.ov.appendChild(d);
@@ -7784,8 +7807,8 @@ function debDraw(){const S=DS,g=S.g,hd=S.hd,cam=S.cam;const now=performance.now(
    // la rue se fissure sous ses pieds
    if(S.croScr&&t>.3){const[cx,cy]=S.croScr;g.strokeStyle=`rgba(255,120,40,${(t-.3)*1.4})`;g.lineWidth=3;g.beginPath();for(let i=0;i<7;i++){const a_=Math.PI*(.05+i*.13);g.moveTo(cx,cy);g.lineTo(cx+Math.cos(a_)*HDC.W*.45*t*(i%2?1:-1),cy+Math.sin(a_)*40*t)}g.stroke()}}
   if(ph=='front'){debRain(T,S.stv||0);
-   const n=S.staff.length,joy=S.ph=='end'&&S.won==3&&S.party;const oj=S.objJump?(performance.now()-S.objJump)/1000:9;S.staff.forEach((ci,i)=>{const X=36+i*(128/Math.max(1,n-1)),Y=98+(i%2)*3,jj=oj<1.5?-Math.abs(Math.sin(oj*7+i*.8))*9*(1-oj/1.5):0,hop=(joy?-Math.abs(Math.sin(T*6+i))*3:0)+jj;if(oj<1.5&&!joy&&IMPok(ci))S.useP=Math.min(5,((oj*10+i*2)|0)%6);const r_=debSpr(ci,joy?24:42,X,Y+hop,1)});
-   const ojc=S.objJump?(performance.now()-S.objJump)/1000:9,jc=ojc<1.5?-Math.abs(Math.sin(ojc*7+2.4))*9*(1-ojc/1.5):0,hop=(joy?-Math.abs(Math.sin(T*7))*3:0)+jc;if(ojc<1.5&&!joy&&IMPok(18))S.useP=Math.min(5,((ojc*10+5)|0)%6);debSpr(18,S.camTalk||joy?24:42,100,104+hop,1.05);
+   const n=S.staff.length,joy=S.ph=='end'&&S.won==3&&S.party;const oj=S.objJump?(performance.now()-S.objJump)/1000:9;S.staff.forEach((ci,i)=>{const X=36+i*(128/Math.max(1,n-1)),Y=98+(i%2)*3,jj=oj<2.2?-Math.abs(Math.sin(oj*7+i*.8))*14*(1-oj/2.2):0,hop=(joy?-Math.abs(Math.sin(T*6+i))*3:0)+jj;if(oj<2.2&&!joy&&IMPok(ci))S.useP=Math.min(5,((oj*10+i*2)|0)%6);const r_=debSpr(ci,joy?24:42,X,Y+hop,1)});
+   const ojc=S.objJump?(performance.now()-S.objJump)/1000:9,jc=ojc<2.2?-Math.abs(Math.sin(ojc*7+2.4))*14*(1-ojc/2.2):0,hop=(joy?-Math.abs(Math.sin(T*7))*3:0)+jc;if(ojc<2.2&&!joy&&IMPok(18))S.useP=Math.min(5,((ojc*10+5)|0)%6);debSpr(18,S.camTalk||joy?24:42,100,104+hop,1.05);
    if(S.hitT>0){g.globalAlpha=Math.max(0,S.hitT)*.8;g.fillStyle='#fff';g.fillRect(0,0,HDC.W,HDC.H);g.globalAlpha=1;S.hitT-=dt*1.8}
    if(S.ring){const t=T-S.ring;if(t<1){const[x,y]=hd.proj(100,100,10);g.strokeStyle='#fff';g.lineWidth=12*(1-t);g.globalAlpha=1-t;g.beginPath();g.ellipse(x,y,t*HDC.W*.9,t*HDC.H*.35,0,0,7);g.stroke();g.globalAlpha=1}}
    if(S.confetti){for(let i=0;i<70;i++){const x=(i*97.3+Math.sin(T+i)*30)%HDC.W,y=((T*80+i*53)%HDC.H);g.fillStyle=['#ff6b8a','#ffd23f','#3fa7ff','#46c46a','#fff'][i%5];g.fillRect(x,y,5,8)}}
@@ -7907,7 +7930,7 @@ function debInterlude(){if(!DS)return;const S=DS;S.ph='inter';S.ov.querySelector
 function debEnd(){if(!DS)return;const S=DS,n=S.won;S.ph='end';S.slAlways=0;clearTimeout(S.speakEnd);S.stmts.forEach(o=>o.el.remove());S.stmts=[];S.ov.querySelector('.hand').innerHTML='';debHint('');B.debDone=1;B.deb=n;
  S.ov.querySelector('.rnd').textContent=n==3?'Victoire totale':n==2?'Victoire':'Défaite';const q_=(f,d)=>setTimeout(()=>{if(DS)f()},d);let endAt=7000;
  if(n==3){endAt=19000;S.sweat=1;S.anger=3;S.shake=1.5;debOno('K.O. !',innerWidth/2,innerHeight*.3,{s:96,c:'#ffd23f',r:-10,dur:3200});debSpeed(1.5);
-  q_(()=>{const L=S.fans.filter(f=>!f.gone&&!f.joined&&!f.join),lst=L[L.length-1];L.forEach((f,i)=>{if(f===lst&&L.length>1){setTimeout(()=>{if(!DS)return;f.sign=0;f.stay=1;debPh('fan','Oh bonne mère ! Il est fada, lui !',f.X,f.Y,38,3200)},i*200+900);return}setTimeout(()=>{if(DS)debJoin(f)},i*200)})},300);
+  q_(()=>{const L=S.fans.filter(f=>!f.gone&&!f.joined&&!f.join),lst=L[L.length-1];L.forEach((f,i)=>{if(f===lst&&L.length>=1){setTimeout(()=>{if(!DS)return;f.sign=0;f.stay=1;debPh('fan','Oh bonne mère ! Il est fada, lui !',f.X,f.Y,38,3200)},i*200+900);return}setTimeout(()=>{if(DS)debJoin(f)},i*200)});if(!L.length)setTimeout(()=>{if(DS)debPh('fan','Oh bonne mère ! Il est fada, lui !',158,96,30,3200)},1100)},300);
   q_(()=>debPh('cri','Je… ce n’est pas… les chiffres… LES CHIFFRES…',S.cro.X,S.cro.Y,26*S.sc,2400),1200);
   q_(()=>{S.crack=1;debOno('CRIIIC',innerWidth*.6,innerHeight*.25,{s:50,c:'#fff',r:12});debGlass()},3200);
   q_(()=>{debCut('cro','C’EST PAS FINI ! VOUS M’ENTENDEZ ? C’EST PAS…',2600)},4200);
