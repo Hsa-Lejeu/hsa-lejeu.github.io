@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v384')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v385')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5540,7 +5540,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v384')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v385')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7381,7 +7381,7 @@ W('monthEnd',(o,a)=>{const r=o(...a);try{if(chapOf()!=2||B.voix==null)return r;c
  if(ev){if(ev[0])setTimeout(()=>say(ev[0]),1800);{const q0=q;q=Math.max(0,Math.min(100,q+ev[1]));window.QFREE=(window.QFREE||0)+(q-q0)}}}catch(_){}return r});
 // décembre an 2 : le conseil de quartier vote, puis le bilan de l'année
 W('endGame',(o,a)=>{try{if(YR==2&&!B.cq&&B.voix!=null){B.cq=1;const v=Math.round(B.voix),win=v>=50;B.cqWin=win?1:0;$('m').hidden=true;
- popWin({t:'Conseil de quartier',n:win?'🏘️ Le quartier dit oui à la halte':'🏘️ Le quartier n’est pas convaincu',d:win?`Tranquillité du quartier : ${v} %. Les habitant·es ont vu la différence : le conseil de quartier soutient la halte. Elle reste, et un riverain propose de donner un coup de main le samedi. La mairie ajoute un petit soutien pour l’année 3.`:`Tranquillité du quartier : ${v} % seulement. La mairie ne ferme pas la halte, mais impose une médiation de quartier pour l’année 3 : 40 € par mois, prélevés sur le budget. Il faudra regagner la confiance des voisins.`,keep:1,btns:[{t:'Continuer',go:1,f:()=>setTimeout(()=>o(...a),250)}].concat(!win&&window.chapHas&&chapHas(2)?[{t:'↩️ Rejouer l’année 2',f:()=>chapRestart(2)}]:[]),
+ popWin({t:'Conseil de quartier',n:win?'🏘️ Le quartier dit oui à la halte':'🏘️ Le quartier n’est pas convaincu',d:win?`Cédric Crotti parle le premier : « Cette salle n’a rien à faire ici. » Mais la tranquillité du quartier est à ${v} %, et les habitant·es ont vu la différence : le conseil de quartier soutient la halte. En sortant, Crotti glisse à Camille : « Ça ne fait que commencer. » La halte reste, et un riverain propose de donner un coup de main le samedi. La mairie ajoute un petit soutien pour l’année 3.`:`Cédric Crotti parle le premier, et la salle l’applaudit : la tranquillité du quartier n’est qu’à ${v} %. La mairie ne ferme pas la halte, mais impose une médiation de quartier pour l’année 3 : 40 € par mois, prélevés sur le budget. Il faudra regagner la confiance des voisins.`,keep:1,btns:[{t:'Continuer',go:1,f:()=>setTimeout(()=>o(...a),250)}].concat(!win&&window.chapHas&&chapHas(2)?[{t:'↩️ Rejouer l’année 2',f:()=>chapRestart(2)}]:[]),
   draw:(H,T)=>{H.street();[76,77,79,83,85].forEach((ci,i)=>H.spr(ci,24,30+i*28,86));H.spr(18,24,172,88);if(win)for(let i=0;i<5;i++){const ph=(T*.7+i/5)%1;H.g.globalAlpha=1-ph;H.R(40+i*30,70-ph*30,3,3,'#ffd23f');H.g.globalAlpha=1}}});
  if(win){q=Math.min(100,q+8);NOT=nUp(5);B.cqBonus=1}else B.cqMed=1;return}}catch(_){}return o(...a)});
 W('monthEnd',(o,a)=>{try{if(YR==3&&B.cqMed&&started){eu=Math.max(0,eu-40);LM.o['Médiation imposée par la mairie']=40;LY.o['Médiation imposée par la mairie']=(LY.o['Médiation imposée par la mairie']||0)+40}}catch(_){}return o(...a)});
@@ -7485,7 +7485,7 @@ W('monthEnd',(o,a)=>{const r=o(...a);try{const am=AMI();B.val=B.val||{};
  if(am==33&&!B.val.deb){B.val.deb=1;setTimeout(()=>{try{debStart()}catch(e){console.error(e)}},1500)}}catch(e){console.error(e)}return r});
 // ---- la scène devant la halte, puis la transition
 function debStart(){
- popWin({t:'Devant la halte',n:'📣 Cédric Crotti et ses manifestants bloquent l’entrée',d:'Pancartes, slogans, affiches de campagne, une équipe de télévision : la file d’attente est coincée dehors. Crotti réclame un débat, là, maintenant, devant la caméra.',keep:1,snd:'alert',btns:[{t:'🎤 Aller leur répondre',go:1,f:()=>setTimeout(debTransition,200)}],
+ popWin({t:'Devant la halte',n:'📺 Le débat des municipales : Cédric Crotti face à la halte',d:'Crotti est candidat à la mairie, et la halte est devenue son thème de campagne. Une chaîne locale organise le débat en direct, devant l’entrée : pancartes, affiches « Votez Crotti », caméras. La file d’attente est coincée dehors. À nous de répondre.',keep:1,snd:'alert',btns:[{t:'🎤 Aller leur répondre',go:1,f:()=>setTimeout(debTransition,200)}],
   draw:(H,T)=>{const g=H.g;H.street();
    // affiches de campagne collées sur les façades
    [[30,40],[112,38],[172,42]].forEach(([x,y])=>H.F('poster',x,y));
@@ -8545,7 +8545,7 @@ setInterval(()=>{try{let e=$('rdfx');const L=[];if(started&&!ended){const am=AMI
   const img=(window.DLIMG||{})[d.k],who=d.who,first=who.split(',')[0].replace(/^(Le |La |Les |M\. et Mme |Mme |M\. )/,'').split(' ')[0];
   const fx=t=>t.split(' · ').map(c=>{const neg=/[−-]\s?\d|perdu|ferme|absent|bloqu|amende|plainte|baisse|ne viendront|recule|retir|renvoy|arrête|fatigu/.test(c),pos=!neg&&/\+/.test(c);return `<span class="ch${neg?' neg':pos?' pos':''}">${c}</span>`}).join('');
   const LT=d.dyn?(window.dlExclu?dlExclu(B.rdTony||'Une personne'):null):(window.DLTX||{})[d.k];const nb=t=>t.replace(/« /g,'« ').replace(/ »/g,' »').replace(/ ([?!:;])/g,' $1');
-  const body=LT?`<span class="dlhi">${LT[0]}</span><br>${nb(LT[1])}`:nb(story),sig=LT?LT[2]:(d.dyn?'des voisin·es du quartier':first);
+  const ps=B.crMent&&!d.dyn&&d.k!='tapaj'?(B.crMent=0,`<br><span class="dlps">P.-S. : M. Crotti est passé nous voir. Il dit que vous allez « ramener toute la misère de la ville ici ». Je ne sais plus quoi penser.</span>`):'';const body=(LT?`<span class="dlhi">${LT[0]}</span><br>${nb(LT[1])}`:nb(story))+ps,sig=LT?LT[2]:(d.dyn?'des voisin·es du quartier':first);
   $('mb').innerHTML=`<div id="dlc"><div class="dlp"><div class="dlL">
    <div class="dlh"><span class="dlt">Courrier de doléances</span><span class="dld">Reçu le ${day|0} ${(typeof MN!='undefined'?MN[mo]:'').toLowerCase()}, an ${YR}</span></div>
    <div class="dlm"><div><b>De :</b> ${d.ic} ${who}</div><div><b>À :</b> Halte Soins Addictions, à l’attention de Camille</div></div>
@@ -8576,7 +8576,7 @@ setInterval(()=>{try{let e=$('rdfx');const L=[];if(started&&!ended){const am=AMI
 #dlc .dlimg{position:relative;margin:4px 6px 10px;transform:rotate(1deg)}#dlc .dlimg img{width:100%;display:block;filter:drop-shadow(0 3px 3px rgba(42,36,51,.3))}
 #dlc .dlimg.px canvas{width:100%;display:block;image-rendering:pixelated;border:5px solid #fff;box-shadow:0 3px 6px rgba(0,0,0,.3);box-sizing:border-box}
 #dlc .tp{position:absolute;width:62px;height:18px;background:rgba(236,221,170,.85);box-shadow:0 1px 2px rgba(0,0,0,.15)}#dlc .tp.a{left:-8px;top:2px;transform:rotate(-28deg)}#dlc .tp.b{right:-8px;top:2px;transform:rotate(26deg)}
-#dlc .dls{font:italic 15px/1.55 Georgia,serif;margin:4px 0 2px}#dlc .dlhi{display:inline-block;margin-bottom:3px}
+#dlc .dls{font:italic 15px/1.55 Georgia,serif;margin:4px 0 2px}#dlc .dlhi{display:inline-block;margin-bottom:3px}#dlc .dlps{display:inline-block;margin-top:6px;font-size:13.5px;color:#6a3a2a}
 #dlc .dlsg{text-align:right;font:italic 15px Georgia,serif;margin-bottom:8px}
 #dlc .dlq{font:400 14px Lilita,sans-serif;color:#2f5f9a;border-top:2px dashed rgba(47,95,154,.35);padding-top:7px;margin:4px 0 5px}#dlc .dlq small{font:12px 'Atkinson Hyperlegible',sans-serif;color:#6a5a40}
 #dlc .dlo{display:flex;flex-direction:column;gap:6px}
@@ -8840,6 +8840,63 @@ window.EMB={};window.emoBmp=e=>{if(EMB[e])return EMB[e];const c=document.createE
  let d;try{d=g.getImageData(0,0,96,96).data}catch(_){return EMB[e]=c}let x0=96,y0=96,x1=-1,y1=-1;for(let y=0;y<96;y++)for(let x=0;x<96;x++)if(d[(y*96+x)*4+3]>20){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
  if(x1<0)return EMB[e]=c;const w=x1-x0+1,h=y1-y0+1,s=Math.max(w,h),o=document.createElement('canvas');o.width=o.height=s;o.getContext('2d').drawImage(c,x0,y0,w,h,(s-w)/2,(s-h)/2,w,h);return EMB[e]=o};
 try{NE.s='🩺';NE.d='📋'}catch(_){}
+
+// ===== v385 : Cédric Crotti monte en puissance — une silhouette en an 1, du porte-à-porte en an 2, des affiches en an 3
+{const CR=76,am_=()=>(YR-1)*12+mo,free=()=>started&&!ended&&!MEET&&!(B.march)&&!document.body.classList.contains('trn');
+ const LP=['Vous en avez pas marre de ces racailles ?','On va passer la ville au Kärcher !','Tous ces drogués polluent notre belle ville.','Signez, c’est pour vos enfants !','Une salle de shoot ici ? Jamais !','Votre quartier mérite mieux que ça.','Ils vous ont demandé votre avis, eux ?'];
+ window.CRW=null;
+ // bulle de BD (canvas monde)
+ const bub=(t,X,Y)=>{x.save();x.font="400 5.2px Lilita,'Atkinson Hyperlegible',sans-serif";const w=Math.min(78,x.measureText(t).width+6);const words=t.split(' '),lines=[];let cur='';words.forEach(wd=>{const s_=cur?cur+' '+wd:wd;if(x.measureText(s_).width>w-6&&cur){lines.push(cur);cur=wd}else cur=s_});lines.push(cur);
+  const h=lines.length*6+4,bx=Math.round((()=>{const[l,rr]=crVis();return Math.max(l+2,Math.min(rr-w-2,X-w/2))})()),by=Math.round(Y-h-6);x.fillStyle='#2a2433';x.fillRect(bx-1,by-1,w+2,h+2);x.fillStyle='#fff';x.fillRect(bx,by,w,h);x.fillStyle='#2a2433';x.beginPath();x.moveTo(X-2,by+h);x.lineTo(X+2,by+h);x.lineTo(X,by+h+4);x.fill();x.fillStyle='#fff';x.fillRect(X-1,by+h-1,2,2);
+  x.fillStyle='#c0392b';x.textAlign='center';x.textBaseline='top';lines.forEach((l,i)=>x.fillText(l,bx+w/2,by+2.5+i*6));x.restore()};
+ // dessin (dans le repère du monde)
+ W('draw',(o,a)=>{const r=o(...a);try{if(!started||ended||MEET)return r;const now=performance.now();
+  // an 1, février : un homme photographie la file depuis le trottoir d'en face
+  if(YR==1&&mo==10&&day>=4&&day<=26){x.save();x.setTransform(2,0,0,2,0,EY*2);const X=window.CRPX||250,Y=window.CRPY||64;pc(CR,X,Y,0,0,3);if(((now/1600)|0)%3==0&&(now%1600)<140){x.fillStyle='rgba(255,255,255,.9)';x.fillRect(X-1,Y-12,4,3)}x.restore()}
+  // an 2 : porte-à-porte
+  const W_=window.CRW;if(W_){const dt=Math.min(.1,(now-W_.last)/1000);W_.last=now;if(!paused){if(W_.stop>0){W_.stop-=dt;if(W_.stop<=0){W_.si++;W_.say=null}}else{W_.x+=13*dt;const nx=W_.stops[W_.si];if(nx!=null&&W_.x>=nx){W_.x=nx;W_.stop=2.8;W_.say=LP[(W_.li++)%LP.length]}}}
+   x.save();x.setTransform(2,0,0,2,0,EY*2);pc(CR,W_.x,W_.y,0,W_.stop>0?0:1,W_.stop>0?3:2);if(W_.say)bub(W_.say,W_.x,W_.y-13);x.restore();
+   if(W_.x>(W_.end||WW+20)){window.CRW=null;crAfter()}}
+ }catch(e){console.error(e)}return r});
+ const crAfter=()=>{B.crR={until:GT+10*DAYL};B.crDrap=GT+15*DAYL;B.crMent=1;try{newsAdd('🚪','Crotti fait du porte-à-porte dans le quartier')}catch(_){}say('📣 Camille : « Crotti vient de faire tout l’immeuble. Si on ne va pas rassurer les voisins vite fait, ça va laisser des traces. Une maraude ou une réunion de rue, dans les 10 jours ! »')};
+ const crVis=()=>{try{const r=cv.getBoundingClientRect();let R=innerWidth;const g=document.getElementById('vgauge');if(g){const gr=g.getBoundingClientRect();if(gr.width>0&&gr.left>innerWidth*.6)R=gr.left-4}return[Math.max(0,-r.left/r.width*WW),Math.min(WW,(R-r.left)/r.width*WW)]}catch(_){return[0,WW]}};
+ window.crWalk=()=>{const[l,rr]=crVis();window.CRW={x:l-14,end:rr+16,y:window.CRWY||63,stops:[.14,.38,.62,.86].map(f=>l+(rr-l)*f),si:0,stop:0,li:Math.random()*LP.length|0,last:performance.now(),say:null}};
+ // la riposte : une maraude ou une réunion dans les 10 jours
+ W('act',(o,a)=>{const k=a[0],e0=eu,r=o(...a);try{if(B.crR&&eu<e0&&(k=='m'||k=='r')){B.crR=null;B.crDrap=0;q=Math.min(100,q+2);window.QFREE=(window.QFREE||0)+2;say('🤝 Camille : « Bien joué. Les voisins ont vu qu’on ne se cache pas : les draps de Crotti redescendent. »')}}catch(_){}return r});
+ {const _rl=rivLvl;rivLvl=function(){let L=_rl();try{if(B.crDrap&&GT<B.crDrap)L=Math.max(-3,L-2)}catch(_){}return L}}
+ // chip de riposte
+ {const el=document.createElement('button');el.id='crc';el.onclick=()=>{try{if($('m').hidden)tab(3)}catch(_){}};document.body.appendChild(el);const st=document.createElement('style');st.textContent=`#crc{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 92px);transform:translateX(-50%);z-index:40;background:#7a2a8a;color:#fff;border:2px solid #fff;border-radius:999px;padding:4px 12px;font:700 13px 'Atkinson Hyperlegible',sans-serif;box-shadow:0 2px 0 #0005;display:none;white-space:nowrap}#crc.on{display:block}body:has(#app.open) #crc{visibility:hidden}`;document.head.appendChild(st);
+  setInterval(()=>{try{const on=started&&!ended&&!MEET&&B.crR&&GT<B.crR.until;el.classList.toggle('on',!!on);if(on){const j=Math.max(1,Math.ceil((B.crR.until-GT)/DAYL));el.textContent=`🚪 Crotti est passé : rassure les voisins (${j} j) ›`}}catch(_){}},500)}
+ // calendrier
+ setInterval(()=>{try{if(!free())return;const a=am_();B.crS=B.crS||{};
+  if(B.crR&&GT>=B.crR.until){B.crR=null;q=Math.max(0,q-5);say('😟 Camille : « Personne n’est allé voir les voisins après le passage de Crotti. Ses arguments ont fait leur chemin. »')}
+  if(YR==1&&mo==11&&day>=15&&!B.crS.lt){B.crS.lt=1;try{newsAdd('🗞️','Lettre ouverte d’un commerçant, C. Crotti : « Qui a demandé cette salle ? »')}catch(_){}}
+  if(YR==2&&[13,15,17,19,21,23].includes(a)&&day>=8&&!B.crS['w'+a]&&!window.CRW&&!paused&&$('m').hidden&&!document.getElementById('fmo')&&!B.strike){B.crS['w'+a]=1;crWalk()}
+  if(YR==2&&a==17&&day>=14&&!B.crS.cq&&!paused&&$('m').hidden&&!document.getElementById('fmo')){B.crS.cq=1;crConseil()}}catch(e){console.error(e)}},1000);
+ // la photo en an 1 : on peut le toucher
+ cv.addEventListener('click',e=>{try{if(!(YR==1&&mo==10&&day>=4&&day<=26)||!$('m').hidden)return;const r=cv.getBoundingClientRect(),wx=(e.clientX-r.left)/r.width*WW,wy=(e.clientY-r.top)/r.height*WH-EY,X=window.CRPX||250,Y=window.CRPY||64;if(Math.abs(wx-X)<8&&wy>Y-16&&wy<Y+3){e.stopImmediatePropagation();say('📸 Un commerçant du quartier, Cédric Crotti, photographie la file d’attente. Il ne dit rien. Il prend des notes.')}}catch(_){}},true);
+ // an 2 : le conseil de quartier élit Crotti
+ window.crConseil=()=>{try{popWin({t:'Conseil de quartier',n:'🏛️ Crotti élu porte-parole du collectif',d:'Salle comble à la maison de quartier. Cédric Crotti se présente comme porte-parole du collectif de riverains : « Je ne suis pas contre les malades. Je suis pour les habitants. » Il est élu à main levée. La moitié de la salle applaudit, l’autre regarde ses chaussures. Camille, au fond : « Il sait parler aux gens. Il va falloir parler mieux que lui. »',keep:1,snd:'alert',btns:[{t:'On continue',go:1}],
+  draw:(H,T)=>{H.room('w0','f3');try{H.F('board',90,30)}catch(_){};const P=[77,78,79,80,81,82,83,84,85];P.forEach((ci,i)=>{const X=24+(i%5)*36,Y=78+((i/5)|0)*16,cl=i%2==0&&((T*4+i)|0)%2;H.spr(ci,cl?60:42,X,Y)});H.spr(CR,(T*3|0)%2?24:30,100,52);if(T>1.5){H.g.fillStyle='#c0392b';H.g.font='8px sans-serif';H.g.fillText('👏',40+((T*2)|0)%3*40,60)}}})}catch(e){console.error(e)}};
+ // an 3 : affiches « FERMEZ LA HSA » puis « VOTEZ CROTTI »
+ const PS=window.CRPS||[[184,38],[141,34],[282,12],[110,12],[257,34],[298,16],[124,16],[100,36]];
+ const nP=()=>{const a=am_();if(YR!=3||a<24)return 0;return Math.min(PS.length,1+(a-24))};
+ const ourP=()=>Math.min(nP(),(B.ourP||0));
+ const poster=(X,Y,kind)=>{x.save();const w=11,h=14;x.fillStyle='rgba(0,0,0,.25)';x.fillRect(X+1,Y+1,w,h);
+  if(kind=='fre'){const C=['#e85d75','#f2a541','#4fb874','#3f9ae0','#a46bff'];for(let i=0;i<5;i++){x.fillStyle=C[i];x.fillRect(X,Y+i*h/5,w,h/5+.3)}x.fillStyle='#fff';x.fillRect(X+3,Y+4,5,5);x.restore();return}
+  x.fillStyle=kind=='our'?'#e9f7ec':'#fffaf0';x.fillRect(X,Y,w,h);x.fillStyle=kind=='our'?'#2e9e4f':'#c0392b';x.fillRect(X,Y,w,2.6);
+  x.font="400 2.6px Lilita,sans-serif";x.textAlign='center';x.textBaseline='top';
+  if(kind=='our'){x.fillStyle='#fff';x.fillText('HSA',X+w/2,Y+.2);x.fillStyle='#1f6b33';x.fillText('SOIGNER,',X+w/2,Y+4.5);x.fillText('PAS',X+w/2,Y+7.3);x.fillText('PUNIR',X+w/2,Y+10.1)}
+  else if(kind=='vote'){x.fillStyle='#fff';x.fillText('VOTEZ',X+w/2,Y+.2);try{if(IMAok())x.drawImage(IMA,24*16+4,CR*26+2,8,9,X+3,Y+3,5,5.5)}catch(_){}x.fillStyle='#c0392b';x.fillText('CROTTI',X+w/2,Y+10.4)}
+  else{x.fillStyle='#fff';x.fillText('NON !',X+w/2,Y+.2);x.fillStyle='#2a2433';x.fillText('FERMEZ',X+w/2,Y+4.5);x.fillText('LA',X+w/2,Y+7.3);x.fillText('HSA',X+w/2,Y+10.1)}x.restore()};
+ W('draw',(o,a)=>{const r=o(...a);try{const n=nP();if(!n||MEET)return r;x.save();x.setTransform(2,0,0,2,0,EY*2);const us=ourP(),fre=((B.prjN||{}).fre||0)>0?2:0;
+  for(let i=0;i<n;i++){const[X,Y]=PS[i];const kind=i<fre?'fre':i<fre+us?'our':(i%2==1?'vote':'non');poster(X,Y,kind)}x.restore()}catch(_){}return r});
+ // riposte : coller nos affiches
+ setInterval(()=>{try{const host=$('am')&&$('am').parentNode;if(!host)return;let b=$('acp');const show=started&&YR==3&&nP()>0;if(!b){b=document.createElement('button');b.id='acp';b.onclick=()=>{if(eu<60||ourP()>=nP())return;eu-=60;try{LM.o['Affiches']=(LM.o['Affiches']||0)+60}catch(_){}B.ourP=(B.ourP||0)+3;q=Math.min(100,q+2);NOT=nUp(2);say('🪧 Les bénévoles collent des affiches « Soigner, pas punir » par-dessus celles de Crotti.');try{sfx('buy')}catch(_){}ui()};host.appendChild(b)}
+  b.style.display=show?'':'none';if(show){const t=`🪧 Affiches « Soigner, pas punir »<br><i>60 € · recouvre 3 affiches de Crotti</i>`;if(b._t!==t){b._t=t;b.innerHTML=t}b.disabled=eu<60||ourP()>=nP()}}catch(_){}},1500);
+}
+// le débat devient le débat télévisé des municipales
+try{VAL.title='candidat à la mairie'}catch(_){}
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
