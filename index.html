@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v405')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v406')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5540,7 +5540,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v405')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v406')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7286,7 +7286,7 @@ setInterval(()=>{try{const e=$('eu');if(!e||!window.PAYNOW||!started)return;cons
   hb.disabled=!nh||eu<nh*HC;hb.querySelector('small').textContent=nh?nh+' salle'+(nh>1?'s':'')+' · plus personne n’a froid l’hiver':'toutes les salles sont chauffées';hb.querySelector('.pr').textContent=nh?nh*HC+' €':'✔';
   cb.disabled=!nc||eu<nc*CC;cb.querySelector('small').textContent=nc?nc+' salle'+(nc>1?'s':'')+' · de la fraîcheur pendant la canicule':'toutes les salles sont climatisées';cb.querySelector('.pr').textContent=nc?nc*CC+' €':'✔'}
  // le panneau « Nouveau ! » ne passe jamais par-dessus le menu ouvert (en paysage, il se décale à gauche du panneau)
- setInterval(()=>{try{const u=$('ulp');if(!u)return;const app=$('app'),sd=$('side');if(app.classList.contains('open')&&matchMedia('(orientation:landscape)').matches&&sd&&sd.offsetWidth){u.style.right=(sd.offsetWidth+16)+'px'}else u.style.right=''}catch(_){}},200);
+ setInterval(()=>{try{const u=$('ulp');if(!u)return;const app=$('app'),sd=$('side');if(app.classList.contains('open')&&matchMedia('(orientation:landscape)').matches&&sd&&sd.offsetWidth){u.style.setProperty('right',(sd.offsetWidth+(window.LSCOL&&LSCOL()?70:16))+'px','important')}else if(window.LSCOL&&LSCOL())u.style.setProperty('right','62px','important');else if(u.style.getPropertyValue('right')&&u.style.getPropertyValue('right')!=='8px')u.style.setProperty('right','8px','important')}catch(_){}},200);
  window.heatAll=()=>{const L=R.map((r,i)=>i).filter(i=>built[i]&&!HEAT[i]);if(!L.length||eu<L.length*HC)return;eu-=L.length*HC;L.forEach(i=>HEAT[i]=1);try{sfx('build')}catch(_){}say(`🔥 Chauffage installé dans ${L.length} salle${L.length>1?'s':''} (discret, dans les murs) : plus personne n’aura froid cet hiver.`);ui()};
  window.coolAll=()=>{const L=R.map((r,i)=>i).filter(i=>built[i]&&!COOL[i]);if(!L.length||eu<L.length*CC)return;eu-=L.length*CC;L.forEach(i=>COOL[i]=1);try{sfx('build')}catch(_){}say(`❄️ Climatiseurs installés dans ${L.length} salle${L.length>1?'s':''} (discrets, dans les combles) : un peu de fraîcheur pendant la canicule.`);ui()};
  W('ui',(o,a)=>{const r=o(...a);try{build();state()}catch(e){console.error(e)}return r});setTimeout(()=>{try{build();state()}catch(_){}},1000)})();
@@ -7905,7 +7905,7 @@ function debInterlude(){if(!DS)return;const S=DS;S.ph='inter';S.ov.querySelector
   leave=(k,txt,dir,d)=>[()=>debFanLeave(k,txt,dir,d-550),d],cam=(txt,d)=>[()=>debCut('cam',txt,d-450),d],crc=(txt,d)=>[()=>debCut('cro',txt,d-450),d],act=(f,d)=>[f,d||0];
  let end;
  if(r==0){end=seq([act(()=>debOno('DÉBAT !',innerWidth/2,innerHeight*.3,{s:70,c:'#ffd23f',r:-6,dur:2200}),1300),
-   cro('Vous allez m’écouter ! Je vais leur dire leurs QUATRE VÉRITÉS !',3000),fan(1,'DEHORS LA HALTE !',2200),fan(4,'On veut des réponses !',2200),fan(3,'Crotti ! Crotti !',2000),
+   cro('Taper sur la HSA, c’est une AUBAINE pour séduire de nouveaux électeurs !',3000),fan(1,'DEHORS LA HALTE !',2200),fan(4,'On veut des réponses !',2200),fan(3,'Crotti ! Crotti !',2000),
    cam('Respire. Écoute-le d’abord jusqu’au bout : chaque mot compte.',3600)]);
   q_(()=>{S.ov.querySelector('.rnd').textContent='Manche 1 · La sécurité';debSpeak()},end)}
  else if(r==1){end=seq([act(()=>debGrow(1.6,'GRRR !'),1600),cro('C’est… c’est de la MANIPULATION !',2800),
@@ -7931,16 +7931,16 @@ function debInterlude(){if(!DS)return;const S=DS;S.ph='inter';S.ov.querySelector
 // ---- les trois fins
 function debEnd(){if(!DS)return;const S=DS,n=S.won;S.ph='end';S.slAlways=0;clearTimeout(S.speakEnd);S.stmts.forEach(o=>o.el.remove());S.stmts=[];S.ov.querySelector('.hand').innerHTML='';debHint('');B.debDone=1;B.deb=n;
  S.ov.querySelector('.rnd').textContent=n==3?'Victoire totale':n==2?'Victoire':'Défaite';const q_=(f,d)=>setTimeout(()=>{if(DS)f()},d);let endAt=7000;
- if(n==3){endAt=19000;S.sweat=1;S.anger=3;S.shake=1.5;debOno('K.O. !',innerWidth/2,innerHeight*(innerWidth>innerHeight?.64:.3),{s:96,c:'#ffd23f',r:-10,dur:3200});debSpeed(1.5);
+ if(n==3){endAt=21600;S.sweat=1;S.anger=3;S.shake=1.5;debOno('K.O. !',innerWidth/2,innerHeight*(innerWidth>innerHeight?.64:.3),{s:96,c:'#ffd23f',r:-10,dur:3200});debSpeed(1.5);
   q_(()=>{const L=S.fans.filter(f=>!f.gone&&!f.joined&&!f.join),lst=L[L.length-1];L.forEach((f,i)=>{if(f===lst&&L.length>1){setTimeout(()=>{if(DS){f.sign=0;f.stay=1}},i*200+900);return}setTimeout(()=>{if(DS)debJoin(f)},i*200)})},300);
   q_(()=>debPh('cri','Je… ce n’est pas… les chiffres… LES CHIFFRES…',S.cro.X,S.cro.Y,26*S.sc,2400),1200);
   q_(()=>{S.crack=1;S.shake=1.2;debOno('GRRRR !',innerWidth*.62,innerHeight*.25,{s:56,c:'#ff5a3c',r:10});try{dsfx('miss2',.6,.7)}catch(_){}},3200);
   q_(()=>{debCut('cro','C’EST PAS FINI ! VOUS M’ENTENDEZ ? C’EST PAS…',2600)},4200);
-  q_(()=>debCut('cam','Si. C’est fini.',2200),7000);
-  q_(()=>{S.ring=S.T;S.hitT=1.2;S.shake=2;debBoom();dsfx('ko',1);setTimeout(()=>dsfx('chain',.8),300);if(S.croScr){const x_=S.croScr[0]/HDC.W*innerWidth,y_=S.croScr[1]/HDC.H*innerHeight;debFX('nuke',x_,y_-innerHeight*.12,Math.min(innerWidth*1.1,520),12,4);[[-.25,-.2],[.25,-.3],[0,-.45]].forEach(([dx,dy],i)=>setTimeout(()=>debFX('circ',x_+dx*innerWidth,y_+dy*innerHeight,180,16,8),300+i*250))}debOno('BAOUM !',innerWidth/2,innerHeight*.45,{s:110,c:'#fff',r:-6,dur:1600});debSpeed(2)},9300);
-  q_(()=>{S.fly={t0:S.T,s0:S.sc};debOno('AAAAAH…',innerWidth*.68,innerHeight*.22,{s:40,c:'#fff',r:-20,dur:2400})},9700);
-  q_(()=>{S.party=1;S.confetti=1;try{playMus('gen')}catch(_){}debVictory('VICTOIRE !','Victoire totale · 3 sur 3')},12500);
-  q_(()=>debCut('cam','On ne gagne pas contre les gens. On gagne avec eux. Merci… vraiment.',4200),14000);
+  q_(()=>debCamPower(),7000);
+  q_(()=>{S.ring=S.T;S.hitT=1.2;S.shake=2;debBoom();dsfx('ko',1);setTimeout(()=>dsfx('chain',.8),300);if(S.croScr){const x_=S.croScr[0]/HDC.W*innerWidth,y_=S.croScr[1]/HDC.H*innerHeight;debFX('nuke',x_,y_-innerHeight*.12,Math.min(innerWidth*1.1,520),12,4);[[-.25,-.2],[.25,-.3],[0,-.45]].forEach(([dx,dy],i)=>setTimeout(()=>debFX('circ',x_+dx*innerWidth,y_+dy*innerHeight,180,16,8),300+i*250))}debSpeed(2)},12000);
+  q_(()=>{S.fly={t0:S.T,s0:S.sc};debOno('AAAAAH…',innerWidth*.68,innerHeight*.22,{s:40,c:'#fff',r:-20,dur:2400})},12400);
+  q_(()=>{S.party=1;S.confetti=1;try{playMus('gen')}catch(_){}debVictory('VICTOIRE !','Victoire totale · 3 sur 3')},15100);
+  q_(()=>debCut('cam','On ne gagne pas contre les gens. On gagne avec eux. Merci… vraiment.',4200),16600);
   q=Math.min(100,q+15);NOT=nUp(10);try{sfx('joy')}catch(_){}}
  else if(n==2){endAt=12500;S.anger=1;q_(()=>{try{playMus('gen')}catch(_){}debVictory('VICTOIRE','2 sur 3 · Crotti bat en retraite')},300);q_(()=>debCut('cro','Vous avez gagné aujourd’hui. Mais pas la guerre. Je reviendrai !',3200),4200);
   S.end=T=>{if(!S.endT0)S.endT0=T;const t=T-S.endT0;if(t>7.6){S.cro.X-=.5;if(S.cro.X<-14)S.gone=1;S.fans.forEach((f,i)=>{if(f.gone||f.joined||f.join||f.walk)return;if(i%2==0){f.sign=0;f.walk=1;f.vx=-.5}else debJoin(f)})}};
@@ -9216,7 +9216,7 @@ W('tourGo',(o,a)=>{const r=o(...a);try{if(TOUR&&TOUR.res){const cr=TOUR.crew.map
 #app #hud>button#tsb{right:84px!important}#app #hud>button:nth-of-type(2){right:45px!important}#app #hud>button:nth-of-type(3){right:6px!important}
 #app #tabs{top:50%!important;transform:translateY(-50%)}
 #vgauge{left:168px!important;top:6px!important;transform:scale(.62);transform-origin:top left}
-#lci{left:168px!important}
+#lci{left:172px!important}
 #app #side{top:50px!important;bottom:8px!important;max-height:none!important}
 }`;document.head.appendChild(st)}
 
@@ -9227,7 +9227,7 @@ window.LSCOL=()=>{try{return matchMedia('(orientation:landscape) and (max-height
 W('ui',(o,a)=>{const r=o(...a);try{if(innerWidth<innerHeight){const p=$('pl');if(p&&/ · An \d/.test(p.textContent)){const t=p.textContent.replace(/\s*·\s*An \d(\/3)?\s*$/,'');if(t!==p.textContent)p.textContent=t}if(p&&innerWidth<430){const t2=p.textContent.replace(/\s*·\s*J/,' J').replace(/^[^\wÀ-ÿ]+\s*/,'');if(t2!==p.textContent)p.textContent=t2;p.style.whiteSpace='nowrap'}}}catch(_){}return r});
 
 // v403 : paysage — les effets en cours (TAPAJ, fermeture…) sous la colonne des compteurs
-setInterval(()=>{try{const e=document.getElementById('rdfx');if(!e)return;if(window.LSCOL&&LSCOL()){const h=$('hud').getBoundingClientRect();const t=Math.round(h.bottom+6)+'px';if(e.style.top!==t){e.style.setProperty('top',t,'important');e.style.setProperty('left','6px','important');e.style.setProperty('max-width','156px','important')}}else if(e.style.top){['top','left','max-width'].forEach(k=>e.style.removeProperty(k))}}catch(_){}},500);
+setInterval(()=>{try{const e=document.getElementById('rdfx');if(!e)return;if(window.LSCOL&&LSCOL()){const h=$('hud').getBoundingClientRect();const t=Math.round(h.bottom+6)+'px';if(e.style.top!==t){e.style.setProperty('top',t,'important');e.style.setProperty('left','6px','important');e.style.setProperty('max-width','156px','important')}}else{let y=$('hud').getBoundingClientRect().bottom+8;['hasb','ulp','dfb'].forEach(id=>{const b=document.getElementById(id);if(!b)return;const cs=getComputedStyle(b);if(cs.display=='none'||cs.visibility=='hidden')return;const r=b.getBoundingClientRect();if(r.height>0)y=Math.max(y,r.bottom+6)});const L=document.getElementById('lci');let x=8;if(L&&L.children.length){const r=L.getBoundingClientRect();if(r.width>0)x=r.right+6}const t=Math.round(y)+'px',l=Math.round(x)+'px';if(e.style.top!==t)e.style.setProperty('top',t,'important');if(e.style.left!==l)e.style.setProperty('left',l,'important');e.style.setProperty('max-width','calc(100vw - '+(Math.round(x)+10)+'px)','important')}}catch(_){}},400);
 // v403 : la tranquillité ne dépasse jamais 100 %
 setInterval(()=>{try{if(typeof q=='number'){if(q>100)q=100;else if(q<0)q=0}}catch(_){}},300);
 // v403 : débat — les phrases de Crotti sur un fond sombre (lisibles même devant les pancartes) ; en paysage, la main de cartes plus basse et plus petite
@@ -9246,6 +9246,78 @@ setInterval(()=>{try{if(typeof q=='number'){if(q>100)q=100;else if(q<0)q=0}}catc
  W('monthEnd',(o,a)=>{const L=angL;angL=[];const r=o(...a);try{if(L.length&&!ended){const n=L.length,nm=L.slice(0,3).join(', ')+(n>3?'…':'');setTimeout(()=>{try{oc(n==1?`😞 ${L[0]} est reparti·e en colère ce mois-ci : trop d’attente ou un besoin sans réponse.`:`😞 ${n} personnes sont reparties en colère ce mois-ci (${nm}) : trop d’attente ou des besoins sans réponse.`,'bad')}catch(_){}},2500)}}catch(_){}return r})}
 // ===== v405 : la fatigue des pros se voit — alerte sous 25 % d'énergie (une fois), le·la pro souffle sur le plan
 const TW=[];setInterval(()=>{try{if(!started||ended||paused)return;STF.forEach(z=>{if(z.off>0)return;if(z.e>=40)z.tw=0;if(z.e<25){if(z.x!=null&&(!z.twT||GT-z.twT>1.6)){z.twT=GT;flt({x:z.x,y:z.y},'😮‍💨',0)}if(!z.tw)TW.push(z)}});const tw=[...new Set(TW)];TW.length=0;if(tw.length&&GT-(B.twG??-1e9)>10*DAYL){B.twG=GT;tw.forEach(z=>z.tw=1);const nm=tw.slice(0,3).map(z=>z.n).join(', ');camSay(tw.length==1?`😮‍💨 ${nm} est à bout d’énergie. Un repas d’équipe, une machine à café ou un coin repos l’aideraient… sinon c’est l’arrêt maladie.`:`😮‍💨 ${nm} sont à bout d’énergie. Un repas d’équipe, une machine à café ou un coin repos les aideraient… sinon c’est l’arrêt maladie.`,'bad')}}catch(_){}},700);
+
+// ===== v406 : débat — en paysage, les bandeaux de dialogue deviennent de simples rectangles
+{const st=document.createElement('style');st.textContent=`@media (orientation:landscape) and (max-height:600px){
+#debov .cut{left:auto!important;right:auto!important;width:min(52vw,520px);padding:7px 12px!important;transform:none!important;border:3px solid #fff!important;border-radius:10px;box-shadow:0 5px 0 rgba(0,0,0,.45)!important;gap:10px}
+#debov .cut:before{border-radius:8px}
+#debov .cut.cam{left:12px!important;top:46px!important;bottom:auto!important}
+#debov .cut.cro{right:12px!important;top:46px!important;bottom:auto!important}
+#debov .cut canvas{width:46px!important;height:52px!important;transform:none!important;box-shadow:3px 3px 0 #d9302c!important}
+#debov .cut.cro canvas{box-shadow:3px 3px 0 #2456c8!important}
+#debov .cut .cb,#debov .cut.cro .cb{transform:none!important;font-size:13.5px!important;line-height:1.25!important;padding:0!important}
+#debov .cut .cb small{font-size:12px!important;margin:0 0 3px 0!important;transform:none!important}
+#debov .cut.cro .cb small{margin:0 0 3px auto!important}
+#debov .cut,#debov .cut.cro{animation-name:cutinL!important}
+@keyframes cutinL{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+}`;document.head.appendChild(st)}
+// ===== v406 : K.O. — Camille passe en mode super-pouvoir : « Laisse… notre HSA… tranquille !!! », yeux verts, flammes vertes, envol et FATALITY
+{const st=document.createElement('style');st.textContent=`
+#debov .cpw{position:absolute;left:-4%;right:-4%;top:50%;height:min(46vh,380px);z-index:31;overflow:hidden;transform:translateY(-50%) scaleY(0);background:#07140c;border-top:6px solid #fff;border-bottom:6px solid #fff;box-shadow:0 0 0 4px #2bd65a,0 18px 40px rgba(0,0,0,.6);animation:cpwin .28s cubic-bezier(.2,1.4,.4,1) forwards}
+@media (orientation:landscape) and (max-height:600px){#debov .cpw{height:72vh}}
+#debov .cpw.out{animation:cpwout .3s forwards}
+@keyframes cpwin{to{transform:translateY(-50%) scaleY(1)}}@keyframes cpwout{from{transform:translateY(-50%) scaleY(1)}to{transform:translateY(-50%) scaleY(0)}}
+#debov .cpw .sl{position:absolute;left:0;right:0;top:-50%;bottom:-50%;background:repeating-linear-gradient(90deg,transparent 0 22px,rgba(255,255,255,.16) 22px 25px,transparent 25px 53px,rgba(120,255,160,.22) 53px 55px,transparent 55px 80px);animation:cpsl .18s linear infinite}
+#debov .cpw .sl2{animation-duration:.11s;opacity:.6;background:repeating-linear-gradient(90deg,transparent 0 37px,rgba(255,255,255,.25) 37px 39px,transparent 39px 91px)}
+@keyframes cpsl{from{transform:translateY(-12%)}to{transform:translateY(12%)}}
+#debov .cpw .gl{position:absolute;left:50%;top:50%;width:70vmin;height:70vmin;margin:-35vmin 0 0 -35vmin;border-radius:50%;background:radial-gradient(circle,rgba(60,255,110,.55),rgba(60,255,110,0) 62%);opacity:0;transition:opacity .25s}
+#debov .cpw.pw .gl{opacity:1;animation:cpgl .35s ease-in-out infinite alternate}@keyframes cpgl{to{transform:scale(1.15)}}
+#debov .cpw .fc{position:absolute;left:50%;top:50%;transform-origin:50% 68%;transform:translate(-50%,-50%) scale(var(--z,1));transition:transform .32s cubic-bezier(.2,1.6,.4,1);image-rendering:pixelated;z-index:2}
+#debov .cpw.pw .fc{filter:drop-shadow(0 0 10px #3cff6a) drop-shadow(0 0 22px #3cff6a);animation:cpshk .07s linear infinite}
+@keyframes cpshk{0%{margin-left:-3px}50%{margin-left:3px}}
+#debov .cpw canvas.fl{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:1}
+#debov .cpw .tx{position:absolute;left:0;right:0;bottom:7%;text-align:center;font:400 clamp(34px,10vw,84px)/1 Lilita,sans-serif;color:#fff;-webkit-text-stroke:3px #0a3a18;text-shadow:0 5px 0 #0a3a18,0 0 24px #3cff6a;letter-spacing:.02em;z-index:3}
+#debov .cpw .tx span{display:inline-block;animation:cptx .35s cubic-bezier(.2,1.8,.4,1) both}@keyframes cptx{from{transform:scale(2.6) rotate(-8deg);opacity:0}}
+#debov .cfly{position:absolute;z-index:32;width:min(28vh,190px);height:min(35vh,238px);left:0;top:0;pointer-events:none;filter:drop-shadow(0 0 10px #3cff6a) drop-shadow(0 0 20px #3cff6a);will-change:transform}
+#debov .cfly canvas.cf{position:relative;width:100%;height:100%;image-rendering:pixelated;z-index:2}
+#debov .cfly canvas.fl{position:absolute;left:-40%;top:55%;width:180%;height:130%;z-index:1}
+#debov .fatal{position:absolute;left:0;right:0;top:34%;z-index:33;text-align:center;font:400 clamp(48px,13vw,130px)/1 Lilita,sans-serif;color:#ffd23f;-webkit-text-stroke:4px #3a0000;text-shadow:0 6px 0 #3a0000,0 0 30px #ff2a2a,0 0 60px #3cff6a;letter-spacing:.06em;animation:fatal 1.9s ease-out forwards;pointer-events:none}
+@keyframes fatal{0%{transform:scale(3);opacity:0}12%{transform:scale(.9);opacity:1}20%{transform:scale(1.05)}80%{transform:scale(1);opacity:1}100%{transform:scale(1.15);opacity:0}}
+#debov .cpw canvas,#debov .cfly canvas{border:0!important;box-shadow:none!important;background:none!important;outline:0!important;border-radius:0!important}
+#debov .gflash{position:absolute;inset:0;z-index:34;background:#eaffef;pointer-events:none;animation:gfl .5s ease-out forwards}@keyframes gfl{from{opacity:.95}to{opacity:0}}`;document.head.appendChild(st)}
+function camFace(c,green){const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,16,20);try{g.drawImage(IMC,18*48+16,1,16,20,0,0,16,20)}catch(_){}if(green){g.fillStyle='#3cff6a';g.fillRect(5,13,1,2);g.fillRect(10,13,1,2);g.fillStyle='#d8ffe2';g.fillRect(5,13,1,1);g.fillRect(10,13,1,1)}}
+function greenFire(cv,T,n,base){try{if(!FXI.complete)return;const W=cv.clientWidth||200,H=cv.clientHeight||200;if(cv.width!==W)cv.width=W;if(cv.height!==H)cv.height=H;const g=cv.getContext('2d');g.clearRect(0,0,W,H);g.save();g.filter='hue-rotate(95deg) saturate(1.7) brightness(1.15)';const F=FXM.fire;for(let j=0;j<n;j++){const f=F[((T*14|0)+j*2)%F.length],fh=H*(base||.42),fw=fh*f[2]/f[3],x=W*(j+.5)/n-fw/2;g.drawImage(FXI,f[0],f[1],f[2],f[3],x,H-fh,fw,fh)}g.restore()}catch(_){}}
+function debCamPower(){const S=DS;if(!S)return;S.ov.querySelectorAll('.cut,.cpw').forEach(e=>e.remove());const b=document.createElement('div');b.className='cpw';b.innerHTML='<div class="sl"></div><div class="sl sl2"></div><div class="gl"></div><canvas class="fl"></canvas><canvas class="fc" width="16" height="20"></canvas><div class="tx"></div>';S.ov.appendChild(b);
+ const fc=b.querySelector('.fc'),fl=b.querySelector('canvas.fl'),tx=b.querySelector('.tx');let green=0;{const bh=b.getBoundingClientRect().height||b.offsetHeight||300;const hh=Math.round(Math.max(bh,parseFloat(getComputedStyle(b).height)||0)*.86);fc.style.height=hh+'px';fc.style.width=Math.round(hh*.8)+'px'}camFace(fc,0);try{dsfx('shing',.8)}catch(_){}
+ const t0=performance.now();const loop=()=>{if(!b.isConnected)return;const T=(performance.now()-t0)/1000;camFace(fc,green);if(green)greenFire(fl,T,7,.55);requestAnimationFrame(loop)};loop();
+ const W_=['LAISSE…','NOTRE HSA…','TRANQUILLE !!!'],Z=[1,1.5,2.25];
+ W_.forEach((w,i)=>setTimeout(()=>{if(!DS||!b.isConnected)return;fc.style.setProperty('--z',Z[i]);tx.innerHTML='<span>'+w+'</span>';try{dsfx(i==2?'boom2':'impact',i==2?.9:.7,i==2?.8:1.1+i*.1)}catch(_){}S.shake=.4+i*.3;if(i==2){green=1;b.classList.add('pw');try{dsfx('fire',.8)}catch(_){}}},150+i*900));
+ setTimeout(()=>{if(!DS)return;b.classList.add('out');setTimeout(()=>b.remove(),320);debCamFly()},3100)}
+function debCamFly(){const S=DS;if(!S)return;const e=document.createElement('div');e.className='cfly';e.innerHTML='<canvas class="fl"></canvas><canvas class="cf" width="16" height="20"></canvas>';S.ov.appendChild(e);const cf=e.querySelector('.cf'),fl=e.querySelector('.fl');camFace(cf,1);
+ const sc=S.croScr||[HDC.W/2,HDC.H*.6,0,0,HDC.H*.3],tx=Math.max(innerWidth*.2,Math.min(innerWidth*.8,sc[0]/HDC.W*innerWidth)),ty=Math.max(innerHeight*.22,Math.min(innerHeight*.6,(sc[1]-sc[4]*.6)/HDC.H*innerHeight));
+ const w=e.getBoundingClientRect().width||100,h=w*1.25,x0=innerWidth*.12,y0=innerHeight+h;try{dsfx('launch',.9,.8)}catch(_){}
+ const t0=performance.now();const P1=650,P2=250,P3=520;let hit=0;
+ const loop=()=>{if(!e.isConnected||!DS)return;const t=performance.now()-t0,T=t/1000;greenFire(fl,T,3,.9);let x,y,r=0,s=1;
+  if(t<P1){const u=t/P1,k=1-Math.pow(1-u,2);x=x0+(innerWidth*.32-x0)*k;y=y0+(-h*1.4-y0)*k;r=-10*u}
+  else if(t<P1+P2){x=tx-w/2;y=-h*1.4;e.style.opacity=0}
+  else if(t<P1+P2+P3){e.style.opacity=1;const u=(t-P1-P2)/P3,k=u*u;x=tx-w/2;y=-h*1.4+(ty-h*.6+h*1.4)*k;r=180*k;s=1+.5*k}
+  else{if(!hit){hit=1;debFatality(tx,ty)}x=tx-w/2;y=ty-h*.6;s=1.5;r=180;e.style.opacity=Math.max(0,1-(t-P1-P2-P3)/350);if(t>P1+P2+P3+400){e.remove();return}}
+  e.style.transform=`translate(${x}px,${y}px) rotate(${r}deg) scale(${s})`;requestAnimationFrame(loop)};loop()}
+function debFatality(x,y){const S=DS;if(!S)return;const f=document.createElement('div');f.className='gflash';S.ov.appendChild(f);setTimeout(()=>f.remove(),520);
+ const t=document.createElement('div');t.className='fatal';t.textContent='FATALITY';S.ov.appendChild(t);setTimeout(()=>t.remove(),2000);S.shake=2.2;S.hurt={t0:S.T};try{dsfx('ko',1,.85);dsfx('impact',1,.7)}catch(_){}try{debFX('circ',x,y,220,16,8)}catch(_){}}
+
+// ===== v406 : une seule formation par mois
+W('train',(o,a)=>{try{const k=a[0];if(!F[k]&&B.trnM===AMI()){say('🎓 Une formation est déjà en cours ce mois-ci : la prochaine pourra commencer le mois prochain.');return}}catch(_){}const had={...F};const r=o(...a);try{if(F[a[0]]&&!had[a[0]])B.trnM=AMI()}catch(_){}return r});
+W('ui',(o,a)=>{const r=o(...a);try{const busy=B.trnM===AMI();Object.keys(FM).forEach(k=>{const b=$('f'+k);if(!b||F[k])return;if(busy){b.disabled=true;b.dataset.trb=1;const i=b.querySelector('i');if(i)i.textContent='⏳ une formation par mois : le mois prochain'}else if(b.dataset.trb){delete b.dataset.trb}})}catch(_){}return r});
+// ===== v406 : sur grand écran (ordinateur), l'interface est agrandie pour rester lisible
+{const st=document.createElement('style');st.textContent=`@media (pointer:fine) and (min-width:1200px) and (min-height:700px){
+#m .box,#fmo>div,#petov>div,#xpov .xpw{zoom:var(--uiz,1.25)}
+#app #hud{zoom:var(--uiz,1.25)}
+#app #tabs{zoom:var(--uiz,1.25)}
+#app #side{zoom:var(--uiz,1.15)}
+#app #cam{zoom:var(--uiz2,1.15)}
+}`;document.head.appendChild(st);
+ const f=()=>{try{const k=Math.max(1,Math.min(1.5,Math.min(innerWidth/1250,innerHeight/720)));document.documentElement.style.setProperty('--uiz',(k*1.0).toFixed(2));document.documentElement.style.setProperty('--uiz2',Math.min(1.3,k).toFixed(2))}catch(_){}};f();addEventListener('resize',f)}
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
