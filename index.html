@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v412')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v413')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -1584,12 +1584,19 @@ window.ghostBuild=ghBuild;window.ghBuild=ghBuild;window.ghMove=(a,b)=>ghMove(a,b
 function ghBar(){if(!GH||sel<0)return ghEnd();let b=$('ghb');if(!b){b=document.createElement('div');b.id='ghb';document.body.appendChild(b)}
 const n=SZ+2,ok=ghFits(GH.zi,GH.c,n),free=ghFree(GH.zi,GH.c,n),cost=ghCost(),poor=cost>0&&eu<cost,nm=R[sel][0][0]+R[sel][0].slice(1).toLowerCase();
 const Bt=(t,f,cls,dis)=>`<button class="${cls||''}" ${dis?'disabled':''} onclick="${f}">${t}</button>`;
-const h_=`<div class="gt">${REMO[sel]} ${MV?'Déplacer':''} ${nm} · salle ${SZN[SZ]} (${n} cases)<small>${MV?(cost>0?'agrandir : '+cost+' €':cost<0?(-cost)+' € récupérés':'gratuit')+' · l’équipe suit la salle':cost+' €'} · ${ok?n+' cases libres ici ✔':n+' cases nécessaires · '+free+' libre'+(free>1?'s':'')+' ici ✖'}</small></div>
-<div class="gr">${Bt('◀','ghMove(-1,0)')}${Bt('▶','ghMove(1,0)')}${Bt('▲','ghMove(0,-1)')}${Bt('▼','ghMove(0,1)')}</div>
-<div class="gr">${['Petite','Moyenne','Grande'].map((t,k)=>Bt(t,'ghSize('+k+')',k==SZ?'on':'',(!MV&&eu<rc_(sel,k))||(sel==2&&WS&&!WS.done))).join('')}</div>
-<div class="gr">${Bt((MV?'✔ Déplacer ici':'✔ Construire ici')+(cost>0?' ('+cost+' €)':''),'ghBuild()','go',!ok||poor)}${Bt('✖ Annuler','cancelSel()')}</div>`;if(b._h!==h_){b._h=h_;b.innerHTML=h_}}
-function ghScroll(){if(!GH)return;const Z_=ZONES()[GH.zi],r=cv.getBoundingClientRect(),k=r.height/WH,top=r.top+(OY+Z_.y)*k,bot=top+46*k,b=$('ghb'),lim=(b?b.getBoundingClientRect().top:innerHeight)-8,hud=(Z.hh||40)+8;
-let dy=0;if(bot>lim)dy=lim-bot;else if(top<hud)dy=hud-top;const left=r.left+(OX+Z_.x0+GH.c*CW)*r.width/WW,right=left+((SZ+2)*CW)*r.width/WW;let dx=0;if(right>innerWidth-8)dx=innerWidth-8-right;else if(left<8)dx=8-left;
+const ar=(t,f,c)=>`<button class="ga ${c}" onclick="${f}" aria-label="déplacer">${t}</button>`;
+const h_=`<div class="gsz">${['P','M','G'].map((t,k)=>Bt(t,'ghSize('+k+')',k==SZ?'on':'',(!MV&&eu<rc_(sel,k))||(sel==2&&WS&&!WS.done))).join('')}</div>${Bt('✔'+(cost>0?' '+cost+' €':''),'ghBuild()','go gok',!ok||poor)}${Bt('✖','cancelSel()','gx')}${!ok?`<div class="gw">Pas assez de place ici</div>`:poor?`<div class="gw">Il manque ${cost-eu} €</div>`:''}
+<div class="garr">${ar('◀','ghMove(-1,0)','al')}${ar('▶','ghMove(1,0)','ar')}${ar('▲','ghMove(0,-1)','au')}${ar('▼','ghMove(0,1)','ad')}</div>`;if(b._h!==h_){b._h=h_;b.innerHTML=h_}b.classList.add('fl');ghPos();if(!b._lp){b._lp=1;const lp=()=>{if(!b.isConnected)return;try{ghPos()}catch(_){}requestAnimationFrame(lp)};requestAnimationFrame(lp)}}
+// v413 : la barre de placement flotte à côté de la salle fantôme (dessous, sinon dessus, sinon sur le côté)
+function ghBot(){const t=$('tabs');if(t){const q=t.getBoundingClientRect();if(q.height>0&&q.top>innerHeight*.5)return q.top}return innerHeight}
+function ghLeft(){try{if(window.LSCOL&&LSCOL())return $('hud').getBoundingClientRect().right}catch(_){}return 0}
+function ghPos(){const b=$('ghb');if(!GH||!b)return;const Z_=ZONES()[GH.zi],r=cv.getBoundingClientRect(),kx=r.width/WW,ky=r.height/WH,gL=r.left+(OX+Z_.x0+GH.c*CW)*kx,gR=gL+(SZ+2)*CW*kx,gT=r.top+(OY+Z_.y)*ky,gB=gT+46*ky,bw=b.offsetWidth,bh=b.offsetHeight;window.GHR={l:gL,t:gT,r:gR,b:gB};const top0=(Z.hh||40)+6,bot0=ghBot()-6,l0=ghLeft()+6,r0=innerWidth-6;
+ let x=(gL+gR)/2-bw/2,y,d;if(gB+40+bh<=bot0){y=gB+40;d='dn'}else if(gT-40-bh>=top0){y=gT-40-bh;d='up'}else{y=(gT+gB)/2-bh/2;if(gR+12+bw<=r0){x=gR+12;d='rt'}else{x=gL-12-bw;d='lf'}}
+ x=Math.max(l0,Math.min(r0-bw,x));y=Math.max(top0,Math.min(bot0-bh,y));b.style.left=Math.round(x)+'px';b.style.top=Math.round(y)+'px';
+ const ax=Math.max(14,Math.min(bw-14,(gL+gR)/2-x)),ay=Math.max(14,Math.min(bh-14,(gT+gB)/2-y));b.style.setProperty('--ax',ax+'px');b.style.setProperty('--ay',ay+'px');if(b.dataset.d!==d)b.dataset.d=d;
+ const A=b.querySelector('.garr');if(A){const P=(c,X,Y)=>{const e=A.querySelector('.'+c);if(e){e.style.left=Math.round(X-x-15)+'px';e.style.top=Math.round(Y-y-15)+'px'}};const my=(gT+gB)/2,mx=(gL+gR)/2;P('al',gL-20,my);P('ar',gR+20,my);P('au',mx,gT-20);P('ad',mx,gB+20)}}
+function ghScroll(){if(!GH)return;const Z_=ZONES()[GH.zi],r=cv.getBoundingClientRect(),k=r.height/WH,top=r.top+(OY+Z_.y)*k,bot=top+46*k,b=$('ghb'),lim=(b?ghBot()-b.offsetHeight-52:innerHeight-8),hud=(Z.hh||40)+40;
+let dy=0;if(bot>lim)dy=lim-bot;else if(top<hud)dy=hud-top;const left=r.left+(OX+Z_.x0+GH.c*CW)*r.width/WW,right=left+((SZ+2)*CW)*r.width/WW;let dx=0;const tb_=$('tabs')&&$('tabs').getBoundingClientRect(),rl_=tb_&&tb_.height>innerHeight*.5&&tb_.left>innerWidth/2?tb_.left:innerWidth,ll_=ghLeft()+44;if(right>rl_-44)dx=rl_-44-right;else if(left<ll_)dx=ll_-left;
 if(dx||dy){Z.x+=dx;Z.y+=dy;try{clampZ()}catch(_){}applyZ()}}
 const _ct=cellTap;window.cellTap=cellTap=function(lx,ly){if(sel<0)return false;for(let zi=0;zi<ZONES().length;zi++){const Z_=ZONES()[zi];if(ly<Z_.y||ly>=Z_.y+46||lx<Z_.x0||lx>=Z_.x0+Z_.n*CW)continue;const col=Math.floor((lx-Z_.x0)/CW),n=SZ+2;let best=-1;for(let s_=Math.max(0,col-n+1);s_<=Math.min(col,Z_.n-n);s_++){if(ghFits(zi,s_,n)&&(best<0||Math.abs(s_+n/2-col-.5)<Math.abs(best+n/2-col-.5)))best=s_}
 if(!GH)ghInit();GH.zi=zi;GH.c=best>=0?best:col-Math.floor(n/2);ghClamp();ghBar();ghScroll();return true}return false};
@@ -4620,8 +4627,8 @@ function gdState(){const app=$('app'),open=app.classList.contains('open')?app.da
    const hb2=[...fi.querySelectorAll('.rwlist>button')].find(b=>b.textContent.includes(R[0][1].split('·')[0]))||fi.querySelector('.rwlist>button');if(hb2)return{k:'hire2',e:hb2.querySelector('.pr')||hb2,t:`Recrute un·e <b>${R[0][1].toLowerCase()}</b> : touche l’<b>étiquette verte</b> avec le prix. Ce sera la première personne de ton équipe !`}}
   const rw=document.querySelector('#rw .sg[data-p="staff"]')||document.querySelector('#rw .sg[data-k="0"]');if(rw)return{k:'wheel',e:rw,t:'Voici la roue de la salle : tout ce qu’on peut y faire. Choisis <b>👥 Équipe</b> pour recruter.'};
   return{k:'name',lab:0,t:'L’accueil est construit ! Astuce : sur le plan, le <b>nom d’une salle</b> se touche. Touche <b>ACCUEIL</b>.'}}
- if(sel==0&&$('ghb')){const g=$('ghb').querySelector('button.go');return{k:'ghost',e:g||$('ghb'),t:'Un aperçu apparaît sur le plan. Déplace-le avec les flèches ou en touchant une case libre, puis touche <b>✔ Construire ici</b>.'}}
- if(open==='4'){const b=$('rb0');return{k:'rb0',e:b,t:'Choisis <b>🛎️ Accueil</b> dans la liste.'.replace('🛎️',REMO[0]||'')}}
+ if(sel==0&&$('ghb')){const g=$('ghb').querySelector('button.go');return{k:'ghost',e:g||$('ghb'),t:'Un aperçu apparaît sur le plan. Déplace-le avec les flèches ou en touchant une case libre, puis touche le bouton vert <b>✔</b>.'}}
+ if(open==='4'){const b=document.querySelector('#rbx .rbc[onclick="rbPick(0)"]')||$('rb0');return{k:'rb0',e:b,t:'Choisis <b>🛎️ Accueil</b> dans la liste.'.replace('🛎️',REMO[0]||'')}}
  return{k:'tab',e:TB(4),t:'Commençons par l’<b>accueil</b>, là où chaque personne est reçue. Touche l’onglet <b>🏗️ Locaux</b>.'}}
 function gdStart(){if(GD||started||built[0]||B.gdDone)return;GD={k:'',raf:0};const r=document.createElement('div');r.id='gdr';const b=document.createElement('div');b.id='gdb';b.innerHTML=`<div class="pt" id="gdpt"></div><div class="tx"><b>Camille</b><p></p><div class="bt"><button class="sk">Passer le guide</button></div></div>`;document.body.append(r,b);document.body.classList.add('gdon');
  try{$('gdpt').innerHTML=ptHTML([18],'#e6d9b8');drawPts()}catch(_){}b.querySelector('.sk').onclick=gdEnd;GD.raf=requestAnimationFrame(gdLoop)}
@@ -4635,6 +4642,7 @@ function gdLoop(){if(!GD)return;GD.raf=requestAnimationFrame(gdLoop);let S;try{S
  const hide=!!(!$('m').hidden||document.getElementById('fmo')||(document.getElementById('tut')&&!$('tut').hidden));b.style.visibility=hide?'hidden':'';
  if(t&&!hide){const p=5;r.style.display='block';r.style.left=(t.l-p)+'px';r.style.top=(t.t-p)+'px';r.style.width=(t.r-t.l+2*p)+'px';r.style.height=(t.b-t.t+2*p)+'px'}else r.style.display='none';
  try{const av=/^ghost/.test(S.k)?$('ghb'):/^(rb\d|hire_1$|hire$)/.test(S.k)?($('side')||$('app')):null;if(av&&t){const q=av.getBoundingClientRect();if(q.width>0)t={l:Math.min(t.l,q.left),t:Math.min(t.t,q.top),r:Math.max(t.r,q.right),b:Math.max(t.b,q.bottom)}}}catch(_){}
+ try{if(/^ghost/.test(S.k)&&window.GHR&&t){const g=GHR;t={l:Math.min(t.l,g.l),t:Math.min(t.t,g.t),r:Math.max(t.r,g.r),b:Math.max(t.b,g.b)}}}catch(_){}
  const bw=b.offsetWidth,bh=b.offsetHeight,cl=(v,a,z)=>Math.max(a,Math.min(z,v));let L,T;
  if(!t){L=(W_-bw)/2;T=H_-bh-12}else{const cx=(t.l+t.r)/2,cy=(t.t+t.b)/2;if(H_-t.b>=bh+40){T=t.b+34;L=cx-bw/2}else if(t.t>=bh+24){T=t.t-18-bh;L=cx-bw/2}else if(W_-t.r>=bw+20){L=t.r+14;T=cy-bh/2}else if(t.l>=bw+20){L=t.l-14-bw;T=cy-bh/2}else{L=(W_-bw)/2;T=t.t>H_/2?8+(Z.hh||40):H_-bh-10}}
  if(W_>H_&&t){const lc=(window.LSCOL&&LSCOL())?Math.round($('hud').getBoundingClientRect().right+8):8,cx=(t.l+t.r)/2;if(cx>W_/2){L=lc;T=H_-bh-10}else{L=W_-bw-70;T=H_-bh-10}if(!(L+bw<t.l||L>t.r||T+bh<t.t||T>t.b))T=8}
@@ -5541,7 +5549,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v412')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v413')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -8727,8 +8735,8 @@ window.gdRoom=i=>{const app=$('app'),open=app.classList.contains('open')?app.dat
    const hb2=[...fi.querySelectorAll('.rwlist>button')].find(b=>b.textContent.includes(R[i][1].split('·')[0]))||fi.querySelector('.rwlist>button');if(hb2)return{k:i?'hire2_1':'hire2',e:hb2.querySelector('.pr')||hb2,t:`Recrute un·e <b>${job}</b> : touche l’<b>étiquette verte</b> avec le prix.`}}
   const rw=document.querySelector('#rw .sg[data-p="staff"]')||document.querySelector('#rw .sg[data-k="0"]');if(rw)return{k:'wheel'+i,e:rw,t:'Voici la roue de la salle : tout ce qu’on peut y faire. Choisis <b>👥 Équipe</b> pour recruter.'};
   return{k:i?'name1':'name',lab:i,t:`${first?'L’accueil':'La salle de consommation'} est construit${first?'':'e'} ! Sur le plan, le <b>nom d’une salle</b> se touche. Touche <b>${nm.toUpperCase()}</b>.`}}
- if(sel==i&&$('ghb')){const g=$('ghb').querySelector('button.go');return{k:i?'ghost1':'ghost',e:g||$('ghb'),t:'Un aperçu apparaît sur le plan. Déplace-le avec les flèches ou en touchant une case libre, puis touche <b>✔ Construire ici</b>.'}}
- if(open==='4'){const b=$('rb'+i);return{k:'rb'+i,e:b,t:`Choisis <b>${nm}</b> dans la liste.`}}
+ if(sel==i&&$('ghb')){const g=$('ghb').querySelector('button.go');return{k:i?'ghost1':'ghost',e:g||$('ghb'),t:'Un aperçu apparaît sur le plan. Déplace-le avec les flèches ou en touchant une case libre, puis touche le bouton vert <b>✔</b>.'}}
+ if(open==='4'){const b=document.querySelector('#rbx .rbc[onclick="rbPick('+i+')"]')||$('rb'+i);return{k:'rb'+i,e:b,t:`Choisis <b>${nm}</b> dans la liste.`}}
  return{k:i?'tab1':'tab',e:TB(4),t:first?'Commençons par l’<b>accueil</b>, là où chaque personne est reçue. Touche l’onglet <b>🏗️ Locaux</b>.':'Bravo, l’accueil est prêt ! 🎉 Maintenant la <b>salle de consommation</b> : on y consomme avec du matériel propre, sous le regard de l’équipe. Touche <b>🏗️ Locaux</b>.'}};
 gdState=function(){const ok=i=>st[i]>0||STF.some(z=>z.r==i);if(!ok(0))return gdRoom(0);if(!ok(1))return gdRoom(1);
  return{k:'fin',t:'Tout est prêt : la halte ouvre ! 🎉 Les premières personnes vont arriver.'}};
@@ -9374,6 +9382,59 @@ window.tipHello=()=>{try{B.tipHi=1}catch(_){}};
 #cgen .ft{margin-top:2px}
 #cgen .ft button{padding-top:5px;padding-bottom:5px}}`;document.head.appendChild(st)}
 {const st=document.createElement('style');st.textContent=`@media (orientation:landscape) and (max-height:600px){#cgen .row .ar,#cgen .rot button,#cgen .pr button,#cgen .rnd{min-height:0!important;height:31px!important;padding-top:0!important;padding-bottom:0!important}#cgen .ft button{min-height:0!important;height:38px!important}#cgen .opts h2{font-size:19px!important;margin:0!important}#cgen .opts{gap:3px!important}#cgen input{padding:2px 8px}}`;document.head.appendChild(st)}
+// ===== v413 : placement d'une salle — petit menu flottant (taille, valider, annuler) et flèches autour de la salle, comme la roue des salles
+{const st=document.createElement('style');st.textContent=`
+#ghb.fl{left:0;top:0;bottom:auto!important;transform:none!important;width:max-content;max-width:none;padding:4px;gap:4px;border-radius:999px;flex-wrap:nowrap;align-items:center;justify-content:flex-start;box-shadow:0 4px 0 rgba(0,0,0,.28)}
+#ghb.fl button{min-width:0;height:30px;padding:0 10px;border-radius:999px;font:700 13px/1 'Atkinson Hyperlegible',sans-serif;box-shadow:none;margin:0}
+#ghb.fl .gsz{display:flex;background:#efe6d6;border-radius:999px;padding:2px;gap:2px}
+#ghb.fl .gsz button{width:26px;height:26px;padding:0;border:0;background:transparent;color:#2a2433}
+#ghb.fl .gsz button.on{background:#2f6fb5;color:#fff}
+#ghb.fl .gsz button:disabled{opacity:.35}
+#ghb.fl .gok{background:#2e9e4f;color:#fff;white-space:nowrap}
+#ghb.fl .gx{width:30px;padding:0;background:#fff}
+#ghb.fl .gw{position:absolute;left:50%;transform:translateX(-50%);top:calc(100% + 5px);white-space:nowrap;background:#c0392b;color:#fff;font:700 11px/1 'Atkinson Hyperlegible',sans-serif;padding:4px 9px;border-radius:999px;border:2px solid #2a2433;pointer-events:none}
+#ghb.fl[data-d=up] .gw{top:auto;bottom:calc(100% + 5px)}
+#ghb.fl .garr{position:absolute;left:0;top:0;width:0;height:0}
+#ghb.fl .ga{position:absolute;width:30px;height:30px;padding:0;border-radius:50%;background:#fffaf0;color:#2a2433;border:3px solid #2a2433;box-shadow:0 3px 0 rgba(0,0,0,.3);font-size:11px;display:flex;align-items:center;justify-content:center}
+#ghb.fl .ga:active{transform:translateY(2px)}`;document.head.appendChild(st)}
+// ===== v413 : gestionnaire de mise en page — les petites fenêtres ne se chevauchent plus
+{const st=document.createElement('style');st.textContent=`
+body.cmbxh #cmbx{visibility:hidden!important}
+body.cmbxon #cam{visibility:hidden!important}
+body.bigm #ulp,body.bigm #mtst,body.bigm #vig,body.bigm #qbub{visibility:hidden!important}
+body.lsc #vig{animation:vigf .3s ease-out!important;width:min(220px,30vw)!important}@keyframes vigf{from{opacity:0}}
+@media (orientation:portrait){body:has(#vig) #cam{left:8px!important;max-width:calc(100vw - 16px)!important}}
+@media (orientation:landscape) and (max-height:600px){body:has(#vig) #app #cam{left:6px!important;max-width:calc(100vw - 92px)!important}}
+`;document.head.appendChild(st)}
+{const vis=e=>{if(!e||!e.isConnected||e.hidden)return null;const c=getComputedStyle(e);if(c.display=='none'||c.visibility=='hidden'||+c.opacity<.1)return null;const r=e.getBoundingClientRect();return r.width>2&&r.height>2?r:null};
+ const ov=(a,b)=>a&&b&&a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
+ setInterval(()=>{try{
+  const land=innerWidth>innerHeight,lscol=!!(window.LSCOL&&LSCOL());
+  // 1. la bulle de Camille « camion » s'efface derrière les vraies fenêtres, et ne recouvre plus les onglets
+  const cm=document.getElementById('cmbx');
+  let mt=0;try{mt=!!MEET}catch(_){}const big=mt||!$('m').hidden||['fmo','xpov','dlc','lettr','debov','epov','petov','cgen','tut','mtg'].some(id=>{const e=document.getElementById(id);return e&&!e.hidden&&getComputedStyle(e).display!='none'});
+  const apo=!!(document.getElementById('app')&&$('app').classList.contains('open'));document.body.classList.toggle('cmbxh',!!(cm&&(big||apo)));document.body.classList.toggle('bigm',!!big);document.body.classList.toggle('lsc',lscol);document.body.classList.toggle('cmbxon',!!(cm&&!big&&!apo));
+  if(cm&&!land){const tb=vis(document.getElementById('tabs'));cm.style.bottom=tb&&tb.top>innerHeight*.6?Math.round(innerHeight-tb.top+8)+'px':''}
+  // 2. la vignette d'histoire : au-dessus de la bulle de Camille (portrait), à droite du panneau des scores (paysage)
+  const vg=document.getElementById('vig');
+  if(vg){if(lscol){const tb=vis(document.getElementById('tabs')),up=vis(document.getElementById('ulp'));vg.style.left='auto';vg.style.right=Math.round(tb&&tb.left>innerWidth/2?innerWidth-tb.left+8:70)+'px';vg.style.top=Math.round(up?up.bottom+8:8)+'px';vg.style.bottom='auto'}
+   else if(!land){const c=cm&&!big&&!apo?vis(cm):vis(document.getElementById('cam'));vg.style.left='';vg.style.right='';vg.style.top='';vg.style.bottom=c?Math.round(innerHeight-c.top+8)+'px':''}
+   else{vg.style.left='';vg.style.right='';vg.style.top='';vg.style.bottom=''}}
+  // 3. les pastilles du haut (HAS, bilan, Crotti…) s'empilent au lieu de se superposer
+  window.STK2=1;let prev=null;['hasb','mtst','crc','odc'].forEach(id=>{const e=document.getElementById(id);if(!e)return;if(e._pt!=null&&e._pt!=='x'){}const r=vis(e);if(!r){if(e._sh){e._sh=0;e.style.removeProperty('top')}return}
+   const top0=r.top-(e._sh||0);let sh=0;if(prev&&prev.bottom+4>top0&&prev.left<r.right&&prev.right>r.left)sh=Math.round(prev.bottom+4-top0);
+   if(sh!==(e._sh||0)){e._sh=sh;if(sh)e.style.setProperty('top',Math.round(top0+sh)+'px','important');else e.style.removeProperty('top')}
+   prev={left:r.left,right:r.right,top:top0+sh,bottom:top0+sh+r.height}});
+  // 4. l'annonce « Nouveau ! » : sous la carte d'info ou le bandeau, puis sous les pastilles qu'elle cacherait
+  const u=document.getElementById('ulp');
+  if(u){let base;const c=document.getElementById('ctoast');if(c&&c.classList.contains('on')&&!land){const r=c.getBoundingClientRect();if(r.bottom>0&&r.height>0)base=r.bottom+8}if(base==null)base=Math.max(Math.round($('hud').getBoundingClientRect().bottom),0)+10;
+   const ru=vis(u);let low=0;if(ru){const r0={left:ru.left,right:ru.right,top:base,bottom:base+ru.height};
+    ['mtst','hasb','crc','odc','dfb'].forEach(id=>{const r=vis(document.getElementById(id));if(r&&ov(r0,r)&&r.bottom>low)low=r.bottom});
+    document.querySelectorAll('#lci > *').forEach(p=>{const r=vis(p);if(r&&ov(r0,r)&&r.bottom>low)low=r.bottom});
+    if(!(low&&low+6+ru.height<innerHeight-120))low=0}
+   const want=Math.round(low?low+6:base);if(want!==u._w){u._w=want;u.style.setProperty('top',want+'px','important')}}
+ }catch(_){}},200);}
+
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
