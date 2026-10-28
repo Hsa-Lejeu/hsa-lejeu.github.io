@@ -319,7 +319,7 @@ var RDESC=['Le premier contact, sans jugement ni condition : on y est accueilli�
 'Cuisiner et manger ensemble : pour renforcer les liens dans une approche de santé communautaire.',
 'Quelques lits pour dormir une nuit en sécurité, comme à la HSA de Strasbourg.',
 'L’analyse de produits (« drug checking ») : les usagers peuvent tester leurs produits. Le dispositif participe à une veille sanitaire sur les nouveaux produits en circulation.'];
-const SALD=120,NDOC=()=>STF.filter(z=>z.role=='doc').length,SALT=()=>(SAL+8*(YR-1))*(STF.length-NDOC()-STF.filter(z=>z.free).length)+(SALD+15*(YR-1))*NDOC();
+const SALD=120,NDOC=()=>STF.filter(z=>z.role=='doc').length,SXP=()=>STF.reduce((t,z)=>z.free?t:t+(z.role=='doc'?[0,10,20,30]:[0,6,12,20])[Math.min(3,z.lv||0)],0),SALT=()=>(SAL+8*(YR-1))*(STF.length-NDOC()-STF.filter(z=>z.free).length)+(SALD+15*(YR-1))*NDOC()+SXP();window.SXP=SXP;
 let NW1=0;function docAlert(t){const z=STF.find(z=>z.role=='doc'&&z.off<=0);if(!z)return;talk(z.n,'🩺 '+t,{x:z.x,y:z.y});const e=$('ev');e.className='bad';e.textContent=`🩺 ${z.n} (médecin) : « ${t} »`;sfx('alert')}
 const DOC=()=>STF.some(z=>z.role=='doc'&&z.off<=0);const DTALK=['Comment va la santé ? On fait le point ?','Tout va bien ici? C\'est super!','On peut parler de la PrEP, si tu veux.','Je te prescris ça, et on se revoit la semaine prochaine.'];
 const DLS=['un·e pro absent·e 15 s','un·e pro absent·e 12 s','−60 €','énergie de l’équipe −25','tranquillité −3','−70 €'];
@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v409')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v410')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -4565,7 +4565,7 @@ function xpShow(done){const P=XPP;XPP=null;if(!P||!P.L.length){done();return}
  document.body.appendChild(ov);try{drawPts()}catch(_){}
  const rows=[...ov.querySelectorAll('.xpr')],D=1700,t0=performance.now()+350;let fin=false,raf=0;const ups=new Set();
  const paint=k=>{rows.forEach((row,i)=>{const e=P.L[i],xp=e.xp0+(e.xp1-e.xp0)*k,{l:l0_,f}=xpLvFrac(xp),l=Math.max(l0_,k>=1?(e.lv1||0):(e.lv0||0));row.querySelector('.xpb i').style.width=(f*100).toFixed(1)+'%';row.querySelector('.xps').textContent=LVN[l];row.classList.toggle('max',l>=3);
-   if(l>e.lv0&&!ups.has(i)){ups.add(i);row.querySelector('.xpu').textContent='PROMU·E CE MOIS-CI !';row.classList.add('up');try{xpLvFx(row)}catch(_){}try{sfx('fanfare')}catch(_){try{sfx('good')}catch(__){}}}})};
+   if(l>e.lv0&&!ups.has(i)){ups.add(i);row.querySelector('.xpu').textContent='PROMU·E ! Salaire en hausse';row.classList.add('up');try{xpLvFx(row)}catch(_){}try{sfx('fanfare')}catch(_){try{sfx('good')}catch(__){}}}})};
  const step=now=>{if(!ov.isConnected)return;const k=Math.max(0,Math.min(1,(now-t0)/D)),e_=1-Math.pow(1-k,3);paint(e_);if(k<1)raf=requestAnimationFrame(step);else fin=true};
  try{sfx('coin')}catch(_){}raf=requestAnimationFrame(step);
  const btn=ov.querySelector('.xpbt button');btn.onclick=()=>{if(!fin){cancelAnimationFrame(raf);paint(1);fin=true;return}if(ov.dataset.cl)return;ov.dataset.cl=1;ov.classList.add('out');setTimeout(()=>{ov.remove();done()},250)}}
@@ -5540,7 +5540,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v409')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v410')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -5646,7 +5646,7 @@ window.finModal=function(){if(!$('m').hidden)return;paused=true;
  const pl=(n,s,p)=>n+' '+(n>1?(p||s+'s'):s);
  const inc=[['🏛️','La ville',`${CITY} € par personne accompagnée · ${pl(MS.acc,'personne')} ce mois-ci`+(YR>1?` · quartier ${mult>=1?'apaisé':'tendu'} ×${mult.toFixed(2).replace('.',',')}`:''),c],['🩺','L’ARS',`${ARS} € par personne soignée · ${pl(MS.care,'soin')} ce mois-ci`,a]];
  try{(window.finExtra?finExtra():[]).forEach(x=>inc.push([x[0],x[1],x[2],x[3]]))}catch(_){}
- const out=[['💼','Les salaires',`${pl(ns,'salarié·e')} × ${ps} €`+(nd?` + ${pl(nd,'médecin')} × ${pd} €`:''),sal]];try{(window.finPend?finPend():[]).forEach(x=>out.push(x))}catch(_){}
+ const out=[['💼','Les salaires',`${pl(ns,'salarié·e')} × ${ps} €`+(nd?` + ${pl(nd,'médecin')} × ${pd} €`:'')+(SXP()?` + ${SXP()} € liés à l’expérience`:''),sal]];try{(window.finPend?finPend():[]).forEach(x=>out.push(x))}catch(_){}
  const it=(L,cl)=>L.map(([e,t,s,v])=>`<div class="it"><span class="e">${e}</span><span class="t">${t}<small>${s}</small></span><span class="v ${cl}">${cl=='pos'?'+':'−'}${fmt(v)} €</span></div>`).join('');
  const ex=inc.slice(2).reduce((t,x)=>t+x[3],0),outT=out.reduce((t,x)=>t+x[3],0),tot=Math.max(1,c+a+ex+outT),bal=c+a+ex-outT,end=eu+(window.PAYNOW?0:c+a)+ex-outT;
  let h=`<div class="fin2"><div class="fh"><h2>💶 Les comptes de la halte</h2><small>${MN[Math.min(mo,11)]} · année ${YR}</small></div>
