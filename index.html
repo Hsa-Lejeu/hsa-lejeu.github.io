@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v413')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v414')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5549,7 +5549,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v413')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v414')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7491,7 +7491,7 @@ W('monthEnd',(o,a)=>{const r=o(...a);try{const am=AMI();B.val=B.val||{};
  if(am==33&&!B.val.deb){B.val.deb=1;setTimeout(()=>{try{debStart()}catch(e){console.error(e)}},1500)}}catch(e){console.error(e)}return r});
 // ---- la scène devant la halte, puis la transition
 function debStart(){
- popWin({t:'Devant la halte',n:'📺 Le débat des municipales : Cédric Crotti face à la halte',d:'Crotti est candidat à la mairie, et la halte est devenue son thème de campagne. Une chaîne locale organise le débat en direct, devant l’entrée : pancartes, affiches « Votez Crotti », caméras. La file d’attente est coincée dehors. À nous de répondre.',keep:1,snd:'alert',btns:[{t:'🎤 Aller leur répondre',go:1,f:()=>setTimeout(debTransition,200)}],
+ popWin({t:'Devant la halte',n:'📺 Le débat des municipales : Cédric Crotti face à la halte',d:'Cédric Crotti, candidat à la mairie, surfe sur l’inquiétude des riverains. Il tient son meeting à côté de la HSA… Les médias sont présents.',keep:1,snd:'alert',btns:[{t:'🎤 Aller leur répondre',go:1,f:()=>setTimeout(debTransition,200)}],
   draw:(H,T)=>{const g=H.g;window._noWalk=1;H.street();window._noWalk=0;
    // la banderole de campagne, tendue entre deux poteaux
    g.fillStyle='#6b5a4a';g.fillRect(58,22,2,52);g.fillRect(150,22,2,52);g.strokeStyle='#2a2433';g.lineWidth=.6;g.beginPath();g.moveTo(59,24);g.lineTo(66,27);g.moveTo(151,24);g.lineTo(144,27);g.stroke();
@@ -7675,7 +7675,7 @@ function debOpen(){paused=true;tab(-1);try{dsfxLoad()}catch(_){}try{if(AU.ctx){A
  // le plus grand zoom qui garde Crotti géant (manche finale) entièrement à l'écran
  const zk=HDC.W/640;let s0=(port?4.6:3.4)*zk;for(;s0>(port?3.2:2.7)*zk;s0-=.06){cam.s0=s0;cam.cy=fitCy();const top=hd.proj(100,26,26*2.9)[1];if(top>HDC.H*.13)break}cam.cy=fitCy();DS_CY=cam.cy;
  const sl=ov.querySelector('.sl');sl.width=W0;sl.height=H0;
- const staff=(()=>{const L=STF.filter(z=>z.ci!==18).slice(0,4).map(z=>z.ci);L.splice(Math.min(2,L.length),0,18);return L})();
+ const staff=(()=>{const L=STF.filter(z=>z.ci!==18).slice(0,4).map(z=>z.ci);return L})();
  DS={ov,hd,g,cam,HD0,staff,sl,slc:sl.getContext('2d'),slT:0,slCol:'#fff',r:0,hp:3,won:0,ph:'intro',t0:performance.now(),T:0,sc:1,scT:1,anger:0,fire:0,space:0,shake:0,hitT:0,gone:0,sashY:0,camTalk:0,
   fans:[77,79,81,84,85,78].map((ci,i)=>({ci,X:[22,50,74,126,150,178][i],Y:[34,28,38,38,28,34][i],sign:1,gone:0,vx:0,walk:0,txt:['NON À LA SALLE DE SHOOT','PAS DANS MON QUARTIER','CROTTI A RAISON','SÉCURITÉ !','PAS ICI !','FERMEZ-LA !'][i]})),
   cro:{X:100,Y:30},stmts:[],armed:null,used:{},loopN:0,first:1,end:null,fly:null};
@@ -7686,7 +7686,7 @@ function debOpen(){paused=true;tab(-1);try{dsfxLoad()}catch(_){}try{if(AU.ctx){A
 function debXY(X,Y,h){const S=DS,[sx,sy]=S.hd.proj(X,Y,h||0);return[sx/HDC.W*innerWidth,sy/HDC.H*innerHeight]}
 // phylactère au-dessus d'un personnage
 function debPh(cls,txt,X,Y,h,dur){const S=DS;if(!S)return;let[x,y]=debXY(X,Y,h||26);const x0=x;x=Math.max(innerWidth*.3,Math.min(innerWidth*.7,x));if(cls=='fan')y-=Math.round(innerHeight*.07);y=Math.max(cls=='cri'?110:90,Math.min(innerHeight*.75,y));
- txt=String(txt).replace(/ ([!?:;»])/g,' $1').replace(/« /g,'« ');const b=document.createElement('div');b.className='ph '+cls;if(cls=='cri'){const i_=document.createElement('span');i_.className='in';i_.textContent=txt;b.appendChild(i_)}else b.textContent=txt;b.style.setProperty('--tx',Math.max(14,Math.min(86,50+(x0-x)/Math.max(120,innerWidth*.3)*100))+'%');debVoice(cls=='cri'?'cro':cls,txt);b.style.left=x+'px';b.style.top=y+'px';S.ov.appendChild(b);try{if(cls!='fan'&&cls!='cam'){const need=b.offsetHeight+18+((S.sc||1)>2.4?Math.max(110,innerHeight*.12):60);if(y<need){y=Math.min(innerHeight*.72,need);b.style.top=y+'px'}}}catch(_){}
+ txt=String(txt).replace(/ ([!?:;»])/g,' $1').replace(/« /g,'« ');const b=document.createElement('div');b.className='ph '+cls;if(cls=='cri'){const i_=document.createElement('span');i_.className='in';i_.textContent=txt;b.appendChild(i_)}else b.textContent=txt;b.style.setProperty('--tx',Math.max(14,Math.min(86,50+(x0-x)/Math.max(120,innerWidth*.3)*100))+'%');debVoice(cls=='cri'||cls=='crn'?'cro':cls,txt);b.style.left=x+'px';b.style.top=y+'px';S.ov.appendChild(b);try{if(cls!='fan'&&cls!='cam'){const need=b.offsetHeight+18+((S.sc||1)>2.4?Math.max(110,innerHeight*.12):60);if(y<need){y=Math.min(innerHeight*.72,need);b.style.top=y+'px'}}}catch(_){}
  if(cls=='cam'){S.camTalk=1;clearTimeout(S._ct);S._ct=setTimeout(()=>{if(DS)DS.camTalk=0},dur||2600)}setTimeout(()=>b.classList.add('out'),dur||2600);setTimeout(()=>b.remove(),(dur||2600)+300);return b}
 // incrustation manga : Camille (ou Crotti) regarde le joueur et parle
 function debCut(who,txt,dur,top){const S=DS;if(!S)return;S.ov.querySelectorAll('.cut').forEach(c=>c.remove());const d=document.createElement('div');d.className='cut '+(who=='cro'?'cro':'cam');d.style.top=(who=='cro'||top)?(who=='cro'?'52px':(innerHeight>innerWidth?'56px':Math.round(Math.min(innerHeight*.16,140)+innerHeight*.09)+'px')):'';d.style.bottom=(who=='cro'||top)?'':'170px';
@@ -7696,7 +7696,7 @@ function debCut(who,txt,dur,top){const S=DS;if(!S)return;S.ov.querySelectorAll('
  S.camTalk=who=='cam'?1:0;debSwish();debVoice(who,txt);
  setTimeout(()=>{d.classList.add('out');if(DS)DS.camTalk=0},dur||3000);setTimeout(()=>d.remove(),(dur||3000)+320);return d}
 function debHint(t){const h=DS&&DS.ov.querySelector('.hint');if(h)h.textContent=t||''}
-function debOno(txt,x,y,o){const S=DS;if(!S)return;o=o||{};const e=document.createElement('div');e.className='ono';e.textContent=txt;e.style.left=(x==null?innerWidth/2:x)+'px';e.style.top=(y==null?innerHeight*.4:y)+'px';if(o.s)e.style.setProperty('--s',o.s+'px');if(o.c)e.style.setProperty('--c',o.c);if(o.r!=null)e.style.setProperty('--r',o.r+'deg');if(o.keep)e.style.setProperty('--o',1);if(o.calm)e.classList.add('calm');S.ov.appendChild(e);setTimeout(()=>{e.classList.add('off');setTimeout(()=>e.remove(),350)},Math.max(1200,(o.dur||1600)*.72));return e}
+function debOno(txt,x,y,o){const S=DS;if(!S)return;o=o||{};const e=document.createElement('div');e.className='ono';e.textContent=txt;e.style.left=(x==null?innerWidth/2:x)+'px';e.style.top=(y==null?innerHeight*.4:y)+'px';if(o.s)e.style.setProperty('--s',o.s+'px');if(o.c)e.style.setProperty('--c',o.c);if(o.r!=null)e.style.setProperty('--r',o.r+'deg');if(o.keep)e.style.setProperty('--o',1);if(o.calm)e.classList.add('calm');S.ov.appendChild(e);setTimeout(()=>{e.classList.add('off');setTimeout(()=>e.remove(),350)},Math.max(650,(o.dur||1600)*.42));return e}
 // lignes de vitesse manga
 function debSpeed(dur,col,cx,cy){const S=DS;if(!S)return;S.slT=dur||.8;S.slD=dur||.8;S.slCol=col||'#fff';S.slC=[cx==null?innerWidth/2:cx,cy==null?innerHeight*.42:cy]}
 function debHLines(dur,bg,cols){const S=DS;if(!S)return;S.hl={t:dur||1.6,d:dur||1.6,bg:bg||'rgba(30,10,60,.55)',cols:cols||['#ff3fa4','#3fd0ff','#ffd23f','#fff','#a46bff'],seed:Math.random()*1000}}
@@ -7775,7 +7775,8 @@ function debDraw(){const S=DS,g=S.g,hd=S.hd,cam=S.cam;const now=performance.now(
     // comètes
     for(let i=0;i<3;i++){const per=5+i*2.3,t=((T+i*1.7)%per)/per;if(t<.45){const x=HDC.W*(1.1-t*2.6)+i*60,y=HDC.H*(.05+t*.6)+i*40;g.strokeStyle='rgba(255,255,255,.9)';g.lineWidth=3;g.beginPath();g.moveTo(x,y);g.lineTo(x+70,y-26);g.stroke();g.strokeStyle='rgba(160,220,255,.4)';g.lineWidth=7;g.beginPath();g.moveTo(x+6,y-2);g.lineTo(x+110,y-40);g.stroke();g.fillStyle='#fff';g.beginPath();g.arc(x,y,5,0,7);g.fill()}}}
    else{ // la rue derrière : maisons, arbres, lampadaires (en relief, derrière la foule)
-    if(!S.bgUse){[['b_terr',-20,12,.26],['b_house',50,12,.24],['b_condo',118,12,.24],['b_post',185,12,.26],['tree1',-8,20,.5],['tree2',196,20,.5],['tree0',26,19,.5],['lamp',40,24,.7],['lamp',160,24,.7],['bin',62,24,.7],['bench',140,24,.7],['hydrant',14,24,.7],['bush1',100,22,.6]].forEach(([n,X,Y,sc])=>debObj(n,X,Y,sc));
+    if(S.toSpace)try{debAscend(T)}catch(_){}
+    if(!S.bgUse&&!(S.toSpace&&T-S.toSpace.t0>.9)){[['b_terr',-20,12,.26],['b_house',50,12,.24],['b_condo',118,12,.24],['b_post',185,12,.26],['tree1',-8,20,.5],['tree2',196,20,.5],['tree0',26,19,.5],['lamp',40,24,.7],['lamp',160,24,.7],['bin',62,24,.7],['bench',140,24,.7],['hydrant',14,24,.7],['bush1',100,22,.6]].forEach(([n,X,Y,sc])=>debObj(n,X,Y,sc));
     // kakémonos de campagne, caméra et projecteur de la télé
     }
     // projecteurs braqués sur lui : cônes de lumière
@@ -7790,8 +7791,8 @@ function debDraw(){const S=DS,g=S.g,hd=S.hd,cam=S.cam;const now=performance.now(
    const ojf=S.objJump?(performance.now()-S.objJump)/1000:9;S.fans.forEach((f,i)=>{if(f.gone)return;const bob=(S.ph=='speak'?Math.round(Math.sin(T*5+i)*1):0)+(f.joined&&ojf<1.5?-Math.abs(Math.sin(ojf*7+i))*8*(1-ojf/1.5):0);const hold=f.sign&&!(f.walk||f.join||f.mv)&&IMHok(f.ci);if(hold)DS.useH=1;const[sx,sy,k,w,h]=debSpr(f.ci,f.walk||f.join||f.mv?6+((T*8|0)%6):f.joined&&!S.party?42:24,f.X,f.Y+(f.joined?(S.party?-Math.abs(Math.sin(T*6+i))*3:0):bob),1,null,(f.walk||f.join||f.mv)&&f.vx>0);
     if(f.sign)debSign(sx,sy-h*1.02,w*1.75,h*.5,f.txt,Math.sin(T*3+i)*(hold?.025:.08))});
    if(!S.gone){const bob=S.ph=='speak'?Math.sin(T*6)*1.2:0,ang=S.anger,fx=S.fly;let X=S.cro.X,Y=S.cro.Y;
-    if(fx){const t=T-fx.t0;X+=t*10;Y-=t*t*3.2;S.sc=S.scT=Math.max(.05,fx.s0*(1-t/3.6));S.scV=0;S.fire=Math.max(0,1-t/1.2)}
-    if(fx){const[px,py]=hd.proj(X,Y,0);g.save();g.translate(px,py-13*hd.proj(X,Y,0)[2]*S.sc);g.rotate((T-fx.t0)*7);g.translate(-px,-(py-13*hd.proj(X,Y,0)[2]*S.sc))}
+    if(fx){const t=T-fx.t0;X+=t*7;Y-=t*t*1.1;S.sc=S.scT=Math.max(.05,fx.s0*(1-t/9));S.scV=0;S.fire=Math.max(0,1-t/1.2)}
+    if(fx){const[px,py]=hd.proj(X,Y,0);g.save();g.translate(px,py-13*hd.proj(X,Y,0)[2]*S.sc);g.rotate((T-fx.t0)*2.6);g.translate(-px,-(py-13*hd.proj(X,Y,0)[2]*S.sc))}
     const hu=S.hurt?(T-S.hurt.t0):9;let hr_=0;if(hu<3.8&&!fx){const[px,py]=hd.proj(X,Y,0);const a=hu<.4?-(hu/.4)*1.42:hu<3?-1.42+Math.sin(hu*9)*.04*(3-hu)/1.5:-1.42*Math.max(0,1-(hu-3)/.8);g.save();g.translate(px,py);g.rotate(a);g.translate(-px,-py);hr_=1}
     const[sx,sy,k,w,h]=debSpr(VAL.ci,24,X+(ang>1?Math.sin(T*30)*ang*.4:0),Y+bob,S.sc,hu<1.8?'rgba(255,60,40,.35)':ang>0?`rgba(220,40,20,${Math.min(.4,ang*.14)})`:null);
     
@@ -7809,12 +7810,10 @@ function debDraw(){const S=DS,g=S.g,hd=S.hd,cam=S.cam;const now=performance.now(
     if(fx&&S.sc<=.06){S.gone=1;S.star={t0:T,x:sx,y:sy-h*.5};try{tone(1800,AU.ctx.currentTime,.25,'sine',.06,AU.fx,2600)}catch(_){}}}
    if(S.star){const t=T-S.star.t0;if(t<2.2){const r=6+Math.sin(t*20)*3;g.fillStyle='#fff';g.save();g.translate(S.star.x,S.star.y);g.rotate(t*3);g.beginPath();for(let i=0;i<8;i++){const a=i*Math.PI/4,rr=i%2?r*.35:r*1.6;g.lineTo(Math.cos(a)*rr,Math.sin(a)*rr)}g.fill();g.restore()}}
   }
-  if(ph=='front'&&S.toSpace){const t=Math.min(1,(T-S.toSpace.t0)/S.toSpace.d);g.fillStyle=`rgba(20,6,30,${t*.55})`;g.fillRect(0,0,HDC.W,HDC.H);g.fillStyle='#fff';for(let i=0;i<60;i++){g.globalAlpha=t*(.4+.6*Math.abs(Math.sin(T*2+i)));g.fillRect((i*97.3)%HDC.W,(i*53.1)%(HDC.H*.45),2,2)}g.globalAlpha=1;
-   // la rue se fissure sous ses pieds
-   if(S.croScr&&t>.3){const[cx,cy]=S.croScr;g.strokeStyle=`rgba(255,120,40,${(t-.3)*1.4})`;g.lineWidth=3;g.beginPath();for(let i=0;i<7;i++){const a_=Math.PI*(.05+i*.13);g.moveTo(cx,cy);g.lineTo(cx+Math.cos(a_)*HDC.W*.45*t*(i%2?1:-1),cy+Math.sin(a_)*40*t)}g.stroke()}}
+  if(ph=='front'&&S.toSpace){const t=Math.min(1,(T-S.toSpace.t0)/S.toSpace.d);g.fillStyle=`rgba(20,6,30,${t*.2})`;g.fillRect(0,0,HDC.W,HDC.H);try{debCracks(T,t)}catch(_){}}
   if(ph=='front'){debRain(T,S.stv||0);
    const n=S.staff.length,joy=S.ph=='end'&&S.won==3&&S.party;const oj=S.objJump?(performance.now()-S.objJump)/1000:9;S.staff.forEach((ci,i)=>{if(ci===18&&S.camOut)return;const X=36+i*(128/Math.max(1,n-1)),Y=98+(i%2)*3,jj=oj<2.2?-Math.abs(Math.sin(oj*7+i*.8))*14*(1-oj/2.2):0,hop=(joy?-Math.abs(Math.sin(T*6+i))*3:0)+jj;if(oj<2.2&&!joy&&IMPok(ci))S.useP=Math.min(5,((oj*10+i*2)|0)%6);const r_=debSpr(ci,joy?24:42,X,Y+hop,1)});
-   const ojc=S.objJump?(performance.now()-S.objJump)/1000:9,jc=ojc<2.2?-Math.abs(Math.sin(ojc*7+2.4))*14*(1-ojc/2.2):0,hop=(joy?-Math.abs(Math.sin(T*7))*3:0)+jc;if(ojc<2.2&&!joy&&IMPok(18))S.useP=Math.min(5,((ojc*10+5)|0)%6);debSpr(18,S.camTalk||joy?24:42,100,104+hop,1.05);
+   const ojc=S.objJump?(performance.now()-S.objJump)/1000:9,jc=ojc<2.2?-Math.abs(Math.sin(ojc*7+2.4))*14*(1-ojc/2.2):0,hop=(joy?-Math.abs(Math.sin(T*7))*3:0)+jc;if(ojc<2.2&&!joy&&IMPok(18))S.useP=Math.min(5,((ojc*10+5)|0)%6);if(!S.camOut)debSpr(18,S.camTalk||joy?24:42,100,104+hop,1.05);
    if(S.hitT>0){g.globalAlpha=Math.max(0,S.hitT)*.8;g.fillStyle='#fff';g.fillRect(0,0,HDC.W,HDC.H);g.globalAlpha=1;S.hitT-=dt*1.8}
    if(S.ring){const t=T-S.ring;if(t<1){const[x,y]=hd.proj(100,100,10);g.strokeStyle='#fff';g.lineWidth=12*(1-t);g.globalAlpha=1-t;g.beginPath();g.ellipse(x,y,t*HDC.W*.9,t*HDC.H*.35,0,0,7);g.stroke();g.globalAlpha=1}}
    if(S.confetti){for(let i=0;i<70;i++){const x=(i*97.3+Math.sin(T+i)*30)%HDC.W,y=((T*80+i*53)%HDC.H);g.fillStyle=['#ff6b8a','#ffd23f','#3fa7ff','#46c46a','#fff'][i%5];g.fillRect(x,y,5,8)}}
@@ -7837,7 +7836,7 @@ function debSpeak(){if(!DS)return;const S=DS,D=DEB[S.r];S.ph='speak';S.stmts.for
  const T=S.T;D.seg.forEach((txt,i)=>{const el=document.createElement('div');el.className='stmt'+(S.armed?' armed':'');el.style.setProperty('--fs',(S.r>=2?21:23)+'px');el.textContent=txt;el.dataset.i=i;el.style.opacity=0;S.ov.appendChild(el);const o={el,i,t0:T+.4+i*gap,dur,side:i%2};S.stmts.push(o);setTimeout(()=>{if(DS&&S.ph=='speak'){debSwish();dsfx('launch',.35,1.6);debVoice('cro',txt)}},(.4+i*gap)*1000);
   el.onclick=ev=>{ev.stopPropagation();debTry(o)}});
  S.speakEnd=setTimeout(()=>{if(!DS||S.ph!='speak')return;debSpeechOver()},(0.4+(D.seg.length-1)*gap+dur)*1000+300)}
-function debSpeechOver(){if(!DS)return;const S=DS;if(S.first){S.first=0;S.ph='wait';debPh('cam','Mais… il MENT !! Choisis une carte et dégaine-la sur sa phrase fausse !',100,104,30,3600);
+function debSpeechOver(){if(!DS)return;const S=DS;if(S.first){S.first=0;S.ph='wait';debPh('cam','On peut pas le laisser dire ça… On va le contredire en direct live ! Trouve un argument !',100,104,30,3800);
   setTimeout(()=>{if(!DS)return;debHand();debHint('Touche une carte pour la lire, puis « Dégainer ». Ensuite, touche la phrase fausse quand elle passe, ou fais glisser la carte vers le haut au bon moment.');setTimeout(debSpeak,600)},3900)}
  else{S.loopN++;const L=['Il recommence. Reste concentré·e, je suis là.','Tiens bon, il va craquer !','La bonne carte, la bonne phrase. Tu peux le faire.','L’avenir de la HSA dépend de toi !'];debPh('cam',L[S.loopN%L.length],100,104,30,2400);setTimeout(debSpeak,900)}}
 // ---- la main de cartes : de vraies cartes à jouer, en éventail
@@ -7896,7 +7895,7 @@ function debTry(o){if(!DS)return;const S=DS;let D=debD();if(S.ph!='speak'||!S.ar
 // ---- Crotti grandit : animation élastique, lignes de vitesse rouges, cri
 function debGrow(to,txt){const S=DS;if(!S)return;S.scT=to;S.scV=.06;S.shake=1;debRoar();debGrowSfx(to);dsfx('grow',.8,.85);if(S.fire>0)dsfx('fire',.6);S.steam=performance.now();debBoom();const rf=document.createElement('div');rf.className='redfl';S.ov.appendChild(rf);setTimeout(()=>rf.remove(),900);
  if(txt){const[x,y]=S.croScr?[S.croScr[0]/HDC.W*innerWidth,(S.croScr[1]-S.croScr[4]*.6)/HDC.H*innerHeight]:[innerWidth/2,innerHeight*.3];debOno(txt,x,Math.max(120,y),{s:72,c:'#ff3b1f',r:8,dur:2000})}}
-const DJS=[[58,92],[142,92],[80,90],[120,90],[44,93],[156,93],[100,89],[30,94]];
+const DJS=[[76,92],[142,92],[90,96],[120,90],[22,95],[158,94],[110,97],[172,96]];
 function debJoin(f){const S=DS;if(!S||!f||f.gone||f.join||f.joined)return;f.sign=0;f.walk=0;const sl=DJS[(S.jn=(S.jn||0)+1)-1]||[100+((S.jn*37)%60-30),92];const ex=f.X<100?-10:210;f.join={x:sl[0],y:sl[1],wp:[[ex,f.Y],[ex,85],[sl[0],85]]}}
 window.debJoin=debJoin;window.DS_fans=()=>DS?DS.fans:[];
 function debFanLeave(k,txt,dir,dur){const S=DS,f=S.fans[k];if(!f||f.gone)return;debPh('fan',txt,f.X,f.Y,38,dur||2200);f.sign=0;setTimeout(()=>{if(DS)debJoin(f)},700)}
@@ -7908,13 +7907,18 @@ function debInterlude(){if(!DS)return;const S=DS;S.ph='inter';S.ov.querySelector
  const cro=(txt,d)=>[()=>debPh('cri',txt,S.cro.X,S.cro.Y,26*S.sc,d-550),d],fan=(k,txt,d)=>[()=>{const f=S.fans[k];if(f&&!f.gone)debPh('fan',txt,f.X,f.Y,38,d-550)},d],
   leave=(k,txt,dir,d)=>[()=>debFanLeave(k,txt,dir,d-550),d],cam=(txt,d)=>[()=>debCut('cam',txt,d-450),d],crc=(txt,d)=>[()=>debCut('cro',txt,d-450),d],act=(f,d)=>[f,d||0];
  let end;
- if(r==0){end=seq([act(()=>debPh('fan','On est en direct dans… 3…',54,76,30,950),1000),act(()=>debPh('fan','2…',54,76,30,750),800),act(()=>debPh('fan','1…',54,76,30,750),800),act(()=>{debPh('fan','… 0 ! On tourne !',54,76,30,1100);try{debLive()}catch(_){}},1200),act(()=>debOno('DÉBAT !',innerWidth/2,innerHeight*.3,{s:70,c:'#ffd23f',r:-6,dur:1300}),1100),
-   cro('Taper sur la HSA, c’est une AUBAINE pour séduire de nouveaux électeurs !',3000),fan(1,'DEHORS LA HALTE !',2200),fan(4,'On veut des réponses !',2200),fan(3,'Crotti ! Crotti !',2000),
-   cam('Respire. Écoute-le d’abord jusqu’au bout : chaque mot compte.',3600)]);
+ if(r==0){const crn=(txt,d)=>[()=>debPh('crn',txt,S.cro.X,S.cro.Y,26*S.sc,d-550),d],tv=(txt,d)=>[()=>debPh('fan',txt,54,76,30,d-200),d];end=seq([
+   crn('Taper sur la HSA… quelle aubaine pour récolter des voix !',3200),
+   fan(0,'Crotti à la mairie !',1700),fan(4,'Cédric, c’est chic !',1700),fan(2,'Crotti, je t’aime !',1700),fan(5,'Siamo tutti pour Cédric Crotti !',2200),
+   tv('On est en direct dans… 3…',1000),tv('2…',800),tv('1…',800),act(()=>{debPh('fan','… 0 ! On tourne !',54,76,30,1100);try{debLive()}catch(_){}},1200),act(()=>debOno('DÉBAT !',innerWidth/2,innerHeight*.3,{s:64,c:'#ffd23f',r:-6,dur:1300}),900),
+   crn('Chers concitoyens, je suis comme vous…',2800),crn('Je veux me balader en ville en sécurité.',2700),crn('Et pour cela, je promets, dès mon élection…',2900),
+   act(()=>{debPh('cri','DE FERMER CETTE SATANÉE HSA !!!',S.cro.X,S.cro.Y,26*S.sc,2500);S.shake=.9;try{debBoom()}catch(_){}},3000),
+   cam('Allez, c’est parti… ça nous tombe dessus.',3000),
+   fan(1,'À bas la HSA !',1800),fan(3,'Dehors les drogués !',1900),fan(4,'Crotti à la mairie ! Pas de tox devant ma boulangerie !',2800)]);
   q_(()=>{S.ov.querySelector('.rnd').textContent='Manche 1 · La sécurité';debSpeak()},end)}
  else if(r==1){end=seq([act(()=>debGrow(1.6,'GRRR !'),1600),cro('C’est… c’est de la MANIPULATION !',2800),
    leave(1,'Mouais… je suis pas convaincu, moi.',-.5,2800),leave(4,'Starfoullah, c’est chaud le débat…',.5,2800),
-   cro('Restez ! Vous avez signé la pétition !',2800),act(()=>{S.anger=1.5;S.fire=.4;debGrow(1.9,'ROAAR')},1800),
+   cro('Restez ! Vous avez signé la pétition !',2800),act(()=>{S.anger=1.5;S.fire=.4;debGrow(1.9,'ROAAR')},1800),act(()=>debPh('fan','Cool, les flammes. Attention au matos quand même.',54,76,30,2700),3000),
    cam('Tu vois ? Il perd pied. Tiens bon, il va craquer.',3200)]);
   q_(()=>{S.ov.querySelector('.rnd').textContent='Manche 2 · La santé';debHand();debHint('Il repart. La carte, puis la phrase fausse.');setTimeout(debSpeak,500)},end)}
  else{end=seq([act(()=>{S.anger=2;debGrow(2.5,'ASSEZ !!')},1800),cro('ASSEZ ! VOUS M’ENTENDEZ ? ASSEZ !',2800),
@@ -7928,23 +7932,30 @@ function debInterlude(){if(!DS)return;const S=DS;S.ph='inter';S.ov.querySelector
    act(()=>{debGrow(4.0,'!!!');debRumble(3)},1400),
    fan(5,'Wesh… on est où, là ?!',2200),
    act(()=>{S.space=1;S.toSpace=null;S.fire=1;S.anger=2.5;S.slAlways=1;S.cro.Y=26;S.hitT=1.2;S.shake=1.5;debBoom();try{const a=MUS.els&&MUS.els.debat;if(a){a.currentTime=178;const p=a.play();p&&p.catch&&p.catch(()=>{})}}catch(_){}},1200),
-   crc('JE SUIS LA LOI, ICI ! JE SUIS… L’UNIVERS !',3200),
+   act(()=>debPh('fan','On est dans l’espace ? Cool. Heureusement, j’avais prévu des rallonges pour les câbles.',54,76,30,3400),3800),crc('JE SUIS LA LOI, ICI ! JE SUIS… L’UNIVERS !',3200),
    cam('Peu importe où il nous emmène. L’avenir de la HSA dépend de toi : une dernière fois !',3800)]);
   q_(()=>{S.ov.querySelector('.rnd').textContent='Manche finale · Le quartier';debHand();debHint('Dernière manche. Plus vite, plus fort : ne le lâche pas.');setTimeout(debSpeak,500)},end)}
 }
 // ---- les trois fins
 function debEnd(){if(!DS)return;const S=DS,n=S.won;S.ph='end';S.slAlways=0;clearTimeout(S.speakEnd);S.stmts.forEach(o=>o.el.remove());S.stmts=[];S.ov.querySelector('.hand').innerHTML='';debHint('');B.debDone=1;B.deb=n;
  S.ov.querySelector('.rnd').textContent=n==3?'Victoire totale':n==2?'Victoire':'Défaite';const q_=(f,d)=>setTimeout(()=>{if(DS)f()},d);let endAt=7000;
- if(n==3){endAt=21600;S.sweat=1;S.anger=3;S.shake=1.5;debOno('K.O. !',innerWidth/2,innerHeight*(innerWidth>innerHeight?.64:.3),{s:96,c:'#ffd23f',r:-10,dur:3200});debSpeed(1.5);
+ if(n==3){endAt=37500;S.sweat=1;S.anger=3;S.shake=1.5;debOno('K.O. !',innerWidth/2,innerHeight*(innerWidth>innerHeight?.64:.3),{s:96,c:'#ffd23f',r:-10,dur:3200});debSpeed(1.5);
   q_(()=>{const L=S.fans.filter(f=>!f.gone&&!f.joined&&!f.join),lst=L[L.length-1];L.forEach((f,i)=>{if(f===lst&&L.length>1){setTimeout(()=>{if(DS){f.sign=0;f.stay=1}},i*200+900);return}setTimeout(()=>{if(DS)debJoin(f)},i*200)})},300);
   q_(()=>debPh('cri','Je… ce n’est pas… les chiffres… LES CHIFFRES…',S.cro.X,S.cro.Y,26*S.sc,2400),1200);
   q_(()=>{S.crack=1;S.shake=1.2;debOno('GRRRR !',innerWidth*.62,innerHeight*.25,{s:56,c:'#ff5a3c',r:10});try{dsfx('miss2',.6,.7)}catch(_){}},3200);
   q_(()=>{debCut('cro','C’EST PAS FINI ! VOUS M’ENTENDEZ ? C’EST PAS…',2600)},4200);
   q_(()=>debCamPower(),7000);
   q_(()=>{S.ring=S.T;S.hitT=1.2;S.shake=2;debBoom();dsfx('ko',1);setTimeout(()=>dsfx('chain',.8),300);if(S.croScr){const x_=S.croScr[0]/HDC.W*innerWidth,y_=S.croScr[1]/HDC.H*innerHeight;debFX('nuke',x_,y_-innerHeight*.12,Math.min(innerWidth*1.1,520),12,4);[[-.25,-.2],[.25,-.3],[0,-.45]].forEach(([dx,dy],i)=>setTimeout(()=>debFX('circ',x_+dx*innerWidth,y_+dy*innerHeight,180,16,8),300+i*250))}debSpeed(2)},12000);
-  q_(()=>{S.fly={t0:S.T,s0:S.sc};debOno('AAAAAH…',innerWidth*.68,innerHeight*.22,{s:40,c:'#fff',r:-20,dur:2400})},12400);
-  q_(()=>{S.party=1;S.confetti=1;try{playMus('gen')}catch(_){}debVictory('VICTOIRE !','Victoire totale · 3 sur 3')},15100);
-  q_(()=>debCut('cam','On ne gagne pas contre les gens. On gagne avec eux. Merci… vraiment.',4200),16600);
+  q_(()=>{S.fly={t0:S.T,s0:S.sc};debOno('AAAAAH…',innerWidth*.68,innerHeight*.22,{s:40,c:'#fff',r:-20,dur:1800})},12400);
+  const fz=k=>{const L=S.fans.filter(f=>!f.gone);return L.length?L[k%L.length]:null},fs=(k,txt,d)=>{const f=fz(k);if(f)debPh('fan',txt,f.X,f.Y,38,d)};
+  q_(()=>debPh('cam','Je suis contre la violence, d’habitude.',100,104,30,2700),15600);
+  q_(()=>fs(0,'La première des violences, c’est la violence sociale.',3000),18600);
+  q_(()=>fs(3,'C’est pas faux.',1800),21900);
+  q_(()=>fs(1,'La HSA, ça répond à un problème social, en fait.',2900),24000);
+  q_(()=>fs(4,'Oh con, il parle bien, le minot !',2300),27200);
+  q_(()=>{S.objJump=performance.now();S.party=1;S.confetti=1;debPh('fan','VIVE LA HSA !!!',100,92,40,2300);try{dsfx('crowd',.8)}catch(_){}try{sfx('joy')}catch(_){}},29800);
+  q_(()=>debPh('fan','OK, coupé ! C’est dans la boîte !',54,76,30,2400),32400);
+  q_(()=>{try{playMus('gen')}catch(_){}debVictory('VICTOIRE !','Victoire totale · 3 sur 3')},35000);
   q=Math.min(100,q+15);NOT=nUp(10);try{sfx('joy')}catch(_){}}
  else if(n==2){endAt=12500;S.anger=1;q_(()=>{try{playMus('gen')}catch(_){}debVictory('VICTOIRE','2 sur 3 · Crotti bat en retraite')},300);q_(()=>debCut('cro','Vous avez gagné aujourd’hui. Mais pas la guerre. Je reviendrai !',3200),4200);
   S.end=T=>{if(!S.endT0)S.endT0=T;const t=T-S.endT0;if(t>7.6){S.cro.X-=.5;if(S.cro.X<-14)S.gone=1;S.fans.forEach((f,i)=>{if(f.gone||f.joined||f.join||f.walk)return;if(i%2==0){f.sign=0;f.walk=1;f.vx=-.5}else debJoin(f)})}};
@@ -9303,7 +9314,7 @@ function debCamPower(){const S=DS;if(!S)return;S.ov.querySelectorAll('.cut,.cpw'
  W_.forEach((w,i)=>setTimeout(()=>{if(!DS||!b.isConnected)return;fc.style.setProperty('--z',Z[i]);tx.innerHTML='<span>'+w+'</span>';try{dsfx(i==2?'boom2':'impact',i==2?.9:.7,i==2?.8:1.1+i*.1)}catch(_){}S.shake=.4+i*.3;if(i==2){green=1;b.classList.add('pw');try{dsfx('fire',.8)}catch(_){}}},150+i*900));
  setTimeout(()=>{if(!DS)return;b.classList.add('out');setTimeout(()=>b.remove(),320);debCamFly()},3100)}
 function debCamFly(){const S=DS;if(!S)return;const e=document.createElement('div');e.className='cfly';e.innerHTML='<canvas class="fl"></canvas><canvas class="cf" width="16" height="26"></canvas>';S.ov.appendChild(e);const cf=e.querySelector('.cf'),fl=e.querySelector('.fl');{const g=cf.getContext('2d');g.imageSmoothingEnabled=false;try{g.drawImage(IMA,24*16,18*26,16,26,0,0,16,26)}catch(_){}g.fillStyle='#3cff6a';g.fillRect(5,13,1,2);g.fillRect(10,13,1,2)}
- let sx0=innerWidth*.5,sy0=innerHeight*.9;try{const n=S.staff.length,i=Math.max(0,S.staff.indexOf(18)),X=36+i*(128/Math.max(1,n-1)),Y=98+(i%2)*3,pr=S.hd.proj(X,Y,0);sx0=pr[0]/HDC.W*innerWidth;sy0=pr[1]/HDC.H*innerHeight}catch(_){}S.camOut=1;
+ let sx0=innerWidth*.5,sy0=innerHeight*.9;try{const n=S.staff.length,X=100,Y=104,pr=S.hd.proj(X,Y,0);sx0=pr[0]/HDC.W*innerWidth;sy0=pr[1]/HDC.H*innerHeight}catch(_){}S.camOut=1;
  const sc=S.croScr||[HDC.W/2,HDC.H*.6,0,0,HDC.H*.3],tx=Math.max(innerWidth*.2,Math.min(innerWidth*.8,sc[0]/HDC.W*innerWidth)),ty=Math.max(innerHeight*.22,Math.min(innerHeight*.6,(sc[1]-sc[4]*.6)/HDC.H*innerHeight));
  const w=e.getBoundingClientRect().width||100,h=w*1.625,x0=sx0-w/2,y0=sy0-h;try{dsfx('launch',.9,.8)}catch(_){}
  const t0=performance.now();const P1=900,P2=250,P3=520;let hit=0;
@@ -9435,6 +9446,29 @@ body.lsc #vig{animation:vigf .3s ease-out!important;width:min(220px,30vw)!import
    const want=Math.round(low?low+6:base);if(want!==u._w){u._w=want;u.style.setProperty('top',want+'px','important')}}
  }catch(_){}},200);}
 
+// ===== v414 : débat — Crotti parle « normalement » (bulle bleue), onomatopées plus brèves, arrachement du sol vers l'espace
+{const st=document.createElement('style');st.textContent=`
+#debov .ph.crn{border-color:#1d3f9a;box-shadow:4px 4px 0 #1d3f9a;color:#14244f}
+#debov .ph.crn:after{border-top-color:#1d3f9a}
+#debov .ono:not(.calm):not(.off){animation-duration:.42s!important}
+#debov .ono.off{animation-duration:.25s!important}`;document.head.appendChild(st)}
+const SSt=u=>u<0?0:u>1?1:u*u*(3-2*u);
+// le fond pendant l'arrachement : le plan de la halte vu d'en haut qui s'éloigne, puis les nuages, puis l'espace
+function debBack(g,T,t,W,H,cy){const S=DS;
+ if(!S.msnap){try{const src=(typeof cv!='undefined'&&cv)||document.querySelector('canvas'),k=Math.min(1,1000/src.width),c=document.createElement('canvas');c.width=Math.round(src.width*k);c.height=Math.round(src.height*k);c.getContext('2d').drawImage(src,0,0,c.width,c.height);S.msnap=c}catch(_){S.msnap=-1}}
+ const n=SSt(t/.9);g.fillStyle=`rgb(${Math.round(120-110*n)},${Math.round(170-160*n)},${Math.round(225-200*n)})`;g.fillRect(0,0,W,H);
+ const m=S.msnap;if(m&&m!==-1){const a=(1-SSt((t-.5)/.25))*SSt(t/.08);if(a>0){const z=1.6*Math.pow(.15,SSt(t/.68)),dw=Math.max(W,H*1.4)*z,dh=dw*m.height/m.width;g.globalAlpha=a;g.imageSmoothingEnabled=false;g.drawImage(m,W/2-dw/2,cy-dh/2,dw,dh);g.globalAlpha=1}}
+ const cu=(t-.28)/.5;if(cu>0&&cu<1){for(let i=0;i<12;i++){const im=CLDL[i%3];if(!im.complete||!im.naturalWidth)continue;const sc=Math.max(W,H)/320*(1.6+(i%3)*.7),w=im.naturalWidth*sc,h=im.naturalHeight*sc,x=((i*.29)%1)*(W+w)-w*.6,y=-h+((cu*1.7+i*.19)%1.3)*(H+h*2);g.globalAlpha=Math.sin(Math.PI*cu)*.95;g.drawImage(im,x,y,w,h)}g.globalAlpha=1}
+ const sp=SSt((t-.6)/.4);if(sp>0){g.fillStyle=`rgba(5,3,15,${sp})`;g.fillRect(0,0,W,H);for(let i=0;i<80;i++){g.globalAlpha=sp*(.4+.6*Math.abs(Math.sin(T*2+i)));g.fillStyle=i%7?'#fff':'#bcd8ff';g.fillRect((i*97.3)%W,(i*53.1)%H,2,2)}g.globalAlpha=1}}
+function debAscend(T){const S=DS;if(!S||!S.toSpace)return;const g=S.g,W=HDC.W,t=Math.min(1,(T-S.toSpace.t0)/S.toSpace.d),hy=Math.max(20,S.hd.proj(100,0,0)[1]);
+ g.save();g.setTransform(1,0,0,1,0,0);g.beginPath();g.rect(0,0,W,hy);g.clip();debBack(g,T,t,W,hy,hy*.55);g.restore()}
+// le sol se fissure sous ses pieds : crevasses sombres et cailloux qui sautent
+function debCracks(T,t){const S=DS;if(!S||!S.croScr)return;const g=S.g,[cx,cy]=S.croScr,u=SSt(t/.45),W=HDC.W;if(u<=0)return;g.save();g.lineCap='round';g.lineJoin='round';
+ for(let i=0;i<9;i++){const dir=i%2?1:-1,len=W*(.14+((i*.37)%1)*.34)*u,drop=(6+((i*13)%5)*6)*(i%3==0?-.35:1);let pts=[[cx,cy]];for(let k=1;k<=7;k++){const f=k/7;pts.push([cx+dir*len*f+Math.sin(i*7.3+k*3.1)*5,cy+drop*f*u+Math.cos(i*5.1+k*2.3)*3])}
+  g.strokeStyle='#1b1418';g.lineWidth=Math.max(2,4.5*u*(1-i*.04));g.beginPath();pts.forEach((p,k)=>k?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]));g.stroke();
+  g.strokeStyle='rgba(255,235,200,.35)';g.lineWidth=1;g.beginPath();pts.forEach((p,k)=>k?g.lineTo(p[0]+1.5,p[1]+1.5):g.moveTo(p[0]+1.5,p[1]+1.5));g.stroke()}
+ for(let i=0;i<16;i++){const ph=((T*1.3)+i*.137)%1,px=cx+Math.sin(i*4.7)*W*.32*u,py=cy-ph*44*u+Math.cos(i)*6;g.globalAlpha=(1-ph)*u*.85;g.fillStyle=i%3?'#8a7f72':'#4f453d';g.fillRect(Math.round(px),Math.round(py),3,3)}g.restore()}
+window.DS_=()=>DS;
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
