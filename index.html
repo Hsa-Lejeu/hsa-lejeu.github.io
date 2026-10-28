@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v411')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v412')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -2752,7 +2752,7 @@ function introZoom(){try{const v=$('view'),VW=v.clientWidth,VH=v.clientHeight,mb
  Z.s=k;Z.x=ax0+(aw-(fx(rc[2])-fx(rc[0]))*k)/2-fx(rc[0])*k;Z.y=ay0+(ah-(fy(rc[3])-fy(rc[1]))*k)/2-fy(rc[1])*k;applyZ()}catch(e){}}
 W('introNext',(o,a)=>{const r=o(...a);try{if(!$('m').hidden&&INTRO){ISP=1;requestAnimationFrame(introZoom);setTimeout(introZoom,400);setTimeout(introZoom,900)}else ISP=0}catch(_){}return r});
 W('tutStart',(o,a)=>{ISP=0;try{homeZ()}catch(_){}return o(...a)});
-W('draw',(o,a)=>{const r=o(...a);try{if(!ISP||MEET||!INTRO||$('m').hidden){if(ISP&&(!INTRO))ISP=0;return r}x.save();x.setTransform(2,0,0,2,0,0);const hx=OX+174,hy=OY-3,hw=60,hh=52;
+W('draw',(o,a)=>{const r=o(...a);try{if(!ISP||MEET||!INTRO||($('m').hidden&&!(typeof FLY!='undefined'&&FLY.on))){if(ISP&&(!INTRO))ISP=0;return r}x.save();x.setTransform(2,0,0,2,0,0);const hx=OX+174,hy=OY-3,hw=60,hh=52;
  [[.86,0],[.55,3],[.3,6]].forEach(([al,g],j)=>{x.fillStyle=`rgba(20,16,28,${j==0?al:al*.5})`;x.beginPath();x.rect(-60,-60,WW+120,WH+120);x.rect(hx-g,hy-g,hw+g*2,hh+g*2);x.fill('evenodd')});
  x.restore()}catch(_){}return r});
 // ---- ouverture : accueil ET salle de consommation
@@ -5541,7 +5541,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v411')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v412')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -6376,24 +6376,18 @@ function flyDraw(p,out){const g=FLY.g,W=FLY.W,H=FLY.H;g.clearRect(0,0,W,H);
 function flyCover(done){flyCanvas();FLY.cl=flyClouds();FLY.ph='in';const t0=performance.now(),D=1000;try{sfx('page')}catch(_){}
  const f=()=>{const p=Math.min(1,(performance.now()-t0)/D);flyDraw(p,0);if(p<1)requestAnimationFrame(f);else done()};f()}
 function flyTarget(){try{const s=Z.s,xx=Z.x,yy=Z.y;window.introZoom();const T={s:Z.s,x:Z.x,y:Z.y};Z.s=s;Z.x=xx;Z.y=yy;return T}catch(_){return{s:Z.s,x:Z.x,y:Z.y}}}
-function flyRun(){FLY.ph='out';document.body.classList.add('fly');const t0=performance.now(),DO=1600,HOLD=1100,DZ=3600,v=$('view');
+function flyRun(){FLY.ph='out';document.body.classList.add('fly');const t0=performance.now(),DO=1700;
  const c=FLY.c;c.onpointerdown=()=>{FLY.skip=1};
  const e3=t=>t<0?0:t>1?1:1-Math.pow(1-t,3);
  const f=()=>{const t=window.FLYT!=null?window.FLYT:performance.now()-t0,sk=FLY.skip;
-  // caméra : toute la ville vue de haut, puis on descend vers le bureau
-  const T=flyTarget(),VW=v.clientWidth,VH=v.clientHeight,Px=VW/2,Py=(Z.hh+VH)/2,s0=Math.min(VW/Z.cw,(VH-Z.hh)/Z.ch)*.96,x0=Px-Z.cw*s0/2,y0=Py-Z.ch*s0/2;
-  let q=sk?1:Math.max(0,Math.min(1,(t-HOLD)/DZ));q=q<.5?4*q*q*q:1-Math.pow(-2*q+2,3)/2;
-  const w0x=(Px-x0)/s0,w0y=(Py-y0)/s0,w1x=(Px-T.x)/T.s,w1y=(Py-T.y)/T.s,s=s0*Math.pow(T.s/s0,q),wx=w0x+(w1x-w0x)*q,wy=w0y+(w1y-w0y)*q;
-  Z.s=s;Z.x=Px-wx*s;Z.y=Py-wy*s;applyZ();
-  // ciel et nuages : ils s'écartent jusqu'au bord de la ville, puis s'effacent pendant la descente
-  const g=FLY.g,W=FLY.W,H=FLY.H,k=4,vr=v.getBoundingClientRect(),rL=(vr.left+Z.x)/k,rT=(vr.top+Z.y)/k,rR=rL+Z.cw*Z.s/k,rB=rT+Z.ch*Z.s/k,cx=(rL+rR)/2,cy=(rT+rB)/2;
-  g.clearRect(0,0,W,H);const pd=sk?1:e3(t/DO),fa=Math.max(0,1-q*1.8);
-  if(fa>0){g.globalAlpha=fa;g.fillStyle='#bfe3ff';g.fillRect(0,0,W,Math.max(0,rT));g.fillRect(0,rB,W,H-rB);g.fillRect(0,rT,Math.max(0,rL),rB-rT);g.fillRect(rR,rT,W-rR,rB-rT);g.globalAlpha=1}
+  // v412 : la caméra est déjà calée sur le bureau ; seuls les nuages s'écartent
+  const T=flyTarget();Z.s=T.s;Z.x=T.x;Z.y=T.y;applyZ();
+  const g=FLY.g,W=FLY.W,H=FLY.H,cx=W/2,cy=H/2;g.clearRect(0,0,W,H);const pd=sk?1:e3(t/DO);
   const bg=Math.max(0,1-pd*2.5);if(bg>0){g.globalAlpha=bg;g.fillStyle='#eef5fc';g.fillRect(0,0,W,H);g.globalAlpha=1}
-  if(fa>0)FLY.cl.forEach(c_=>{const dx=c_.tx-cx,dy=c_.ty-cy,L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L;
-    const ex=Math.min(ux?((ux>0?rR:rL)-cx)/ux:1e9,uy?((uy>0?rB:rT)-cy)/uy:1e9)+c_.r*1.05,d0=Math.max(L,ex),d=L+(d0-L)*pd+q*Math.max(W,H)*.6;
-    FLY._p=c_.puffs;flyBlob(g,cx+ux*d,cy+uy*d,c_.r,fa*(pd<1?1:1))});
-  if(sk||(t>=HOLD+DZ&&window.FLYT==null))return flyEnd();requestAnimationFrame(f)};f()}
+  const fa=1-Math.max(0,(pd-.75)/.25);
+  if(fa>0)FLY.cl.forEach(c_=>{const dx=c_.tx-cx,dy=c_.ty-cy,L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L,d=L+pd*(Math.max(W,H)*.75+c_.r*1.5);
+    FLY._p=c_.puffs;flyBlob(g,cx+ux*d,cy+uy*d,c_.r,fa)});
+  if(sk||(t>=DO&&window.FLYT==null))return flyEnd();requestAnimationFrame(f)};f()}
 function flyEnd(){FLY.on=0;FLY.ph='';const c=$('flyc');if(c)c.remove();document.body.classList.add('flyo');document.body.classList.remove('fly');setTimeout(()=>document.body.classList.remove('flyo'),800);
  const m=$('m');m.style.transition='opacity .45s';m.style.visibility='';requestAnimationFrame(()=>{m.style.opacity=1});setTimeout(()=>{m.style.transition=''},600);
  try{window.introZoom()}catch(_){}}
@@ -9367,6 +9361,19 @@ window.dfHelp=()=>{try{const D=DF[B.dfK];if(!D||!$('m').hidden)return;const P=D.
 @media (orientation:landscape) and (max-height:600px){#dfb{left:172px!important;top:8px!important}}`;document.head.appendChild(st)}
 // ===== v411 : Camille présente les trois chapitres dès le début ; la fenêtre « je t'expliquerai au fur et à mesure » disparaît
 window.tipHello=()=>{try{B.tipHi=1}catch(_){}};
+// ===== v412 : création du personnage en paysage — aperçu à gauche, réglages sur deux colonnes, tout tient dans l'écran
+{const st=document.createElement('style');st.textContent=`@media (orientation:landscape) and (max-height:600px){
+#cgen{padding:6px}
+#cgen .card{flex-direction:row!important;align-items:center!important;max-width:min(840px,100%)!important;padding:8px 12px!important;gap:12px!important}
+#cgen .pv canvas{width:78px!important;height:127px!important}
+#cgen .pv{gap:4px}
+#cgen .opts{gap:4px}
+#cgen h2{font-size:19px;margin:0 0 2px}
+#cgen .opts .sel{grid-template-columns:1fr 1fr!important;gap:3px 14px!important}
+#cgen .row b{width:64px}
+#cgen .ft{margin-top:2px}
+#cgen .ft button{padding-top:5px;padding-bottom:5px}}`;document.head.appendChild(st)}
+{const st=document.createElement('style');st.textContent=`@media (orientation:landscape) and (max-height:600px){#cgen .row .ar,#cgen .rot button,#cgen .pr button,#cgen .rnd{min-height:0!important;height:31px!important;padding-top:0!important;padding-bottom:0!important}#cgen .ft button{min-height:0!important;height:38px!important}#cgen .opts h2{font-size:19px!important;margin:0!important}#cgen .opts{gap:3px!important}#cgen input{padding:2px 8px}}`;document.head.appendChild(st)}
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
