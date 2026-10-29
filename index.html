@@ -9625,9 +9625,11 @@ window.hWc=function(H,ci,X,YB,v,row){try{const g=H.g;if(WCI.complete)g.drawImage
 // Agnès vient tôt dans la partie, et repart tant que l'entrée n'est pas accessible
 W('newV',(o,a)=>{const v=o(...a);try{if(v&&v.name==WCU){if(window.FORCEN==WCU)window.FORCEN=null;if(!B.pmr)v.wcb=1}}catch(_){}return v});
 setInterval(()=>{try{if(!started||ended||paused)return;const am=AMI();const h=hist[WCU];if(am>=3&&!B.wcF&&!(h&&(h.v>0||h.wcb))&&!V.some(v=>v.name==WCU)){B.wcF=1;window.FORCEN=WCU}
- V.forEach(v=>{if(!v.wcb||v.wcbD||v.leaving||v.gone)return;if((v.door&&(!v.w||!v.w.length||(v.w.length<=1&&Math.hypot(v.x-v.w[0][0],v.y-v.w[0][1])<8)))||v.inroom||v.s=='in'){v.wcbD=1;unq(v);if(v.s=='in'||v.inroom)occ[v.r]=Math.max(0,occ[v.r]-1);v.s='walk';v.door=v.inroom=v.after=false;v.leaving=true;v.w=exW(v);
+ V.forEach(v=>{if(!v.wcb||v.wcbD||v.leaving||v.gone)return;if((v.door&&(!v.w||!v.w.length||(v.w.length<=1&&Math.hypot(v.x-v.w[0][0],v.y-v.w[0][1])<8)))||v.inroom||v.s=='in'){wcBlock(v)}})}catch(e){console.error(e)}},400);
+window.wcBlock=function(v){try{v.wcbD=1;unq(v);if(v.s=='in'||v.inroom)occ[v.r]=Math.max(0,occ[v.r]-1);v.s='walk';v.door=v.inroom=v.after=false;v.leaving=true;v.w=exW(v);
   const H=hist[v.name];if(H){H.un=(H.un||0)+1;H.wcb=(H.wcb||0)+1;H.sat=Math.max(0,(H.sat==null?50:H.sat)-12);H.lv=GT}un++;talk(v.name,'Une marche, pas de rampe… Encore un endroit où je ne peux pas entrer.',v);
-  if(!B.wcT){B.wcT=1;setTimeout(()=>{try{say('♿ Camille : « Agnès est repartie : avec son fauteuil, elle ne peut pas franchir la marche de l’entrée. Il faut rendre la halte accessible (🏗️ Locaux › Couloir › Accessibilité). »')}catch(_){}},1500)}}})}catch(e){console.error(e)}},400);
+  if(!B.wcT){B.wcT=1;setTimeout(()=>{try{say('♿ Camille : « Agnès est repartie : avec son fauteuil, elle ne peut pas franchir la marche de l’entrée. Il faut rendre la halte accessible (🏗️ Locaux › Couloir › Accessibilité). »')}catch(_){}},1500)}}catch(e){console.error(e)}};
+W('enter',(o,a)=>{const v=a[0];try{if(v&&v.wcb&&!B.pmr&&!v.wcbD){wcBlock(v);return}}catch(_){}return o(...a)});
 // une assistante sociale en fauteuil : la première recrutée
 W('hire',(o,a)=>{const n0=STF.length,r=o(...a);try{if(!B.wcStaff&&a[0]==3&&STF.length>n0){B.wcStaff=STF[STF.length-1].n}}catch(_){}return r});
 // l'accès PMR
