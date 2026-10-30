@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v459')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v460')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v459')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v460')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -6205,7 +6205,7 @@ button.ptb:disabled .ptg{background:#9a9088;box-shadow:0 2px 0 #6e665f}
 :root[data-theme="dark"] .xgrp>h3{color:#ffd98a!important}
 #cnt{color:#2a2433!important}
 `;document.head.appendChild(st);
-const VERB=oc=>/^train|^xpBuy\('[rlem]'/.test(oc)?'Former':/^partner|^siaoSign|^dasContract/.test(oc)?'Signer':/^startWS/.test(oc)?'Organiser':/^act\(|^tourOpen|^lotStart/.test(oc)?'Lancer':/^inf\(/.test(oc)?'Informer':/^collect/.test(oc)?'Payer':/^buyExt/.test(oc)?'Valider':/^selT/.test(oc)?'Placer':'Acheter';
+const VERB=oc=>/^train|^xpBuy\('[rlem]'/.test(oc)?'Former':/^partner|^siaoSign|^dasContract|^prpDo/.test(oc)?'Signer':/^startWS/.test(oc)?'Organiser':/^act\(|^tourOpen|^lotStart|^prjDo/.test(oc)?'Lancer':/^inf\(/.test(oc)?'Informer':/^collect/.test(oc)?'Payer':/^buyExt/.test(oc)?'Valider':/^selT/.test(oc)?'Placer':'Acheter';
 const PR=/^\s*(\d+)\s*€\s*(\/\s*mois)?\s*$/;
 function prep(b){ // prix en fin de texte (« · 40 € ») : on l'isole dans un <i class="pp">
  if(b.querySelector('i'))return;const sm=b.querySelector(':scope>small');if(sm&&PR.test(sm.textContent)&&!sm.children.length){const i=document.createElement('i');i.className='pp';i.textContent=sm.textContent.trim();sm.textContent='';sm.appendChild(i);return}
@@ -9793,6 +9793,24 @@ W('talk',(o,a)=>{try{const n=a[0],p=a[2];const v=p||V.find(x=>x.name==n&&!x.gone
 // v459 : au début d'une partie, la fiche « Chapitre 1 · S'installer » s'affiche d'abord, puis le guide de Camille (et non l'inverse)
 W('tutEnd',(o,a)=>{let first=false;try{first=!!INTRO&&!started&&!built[0]&&!B.gdDone}catch(_){}if(first){B.gdDone=1;B.chSeen1=1;B.ch1=1}const r=o(...a);
  if(first){const go=()=>{try{B.gdDone=0;gdStart()}catch(_){}};setTimeout(()=>{try{chgShow(1,1)}catch(_){go()}},500);let n=0;const t=setInterval(()=>{n++;try{if(n>900){clearInterval(t);go();return}if(n>4&&$('m').hidden){clearInterval(t);setTimeout(go,300)}}catch(_){clearInterval(t)}},300)}return r});
+
+// v460 : paysage — les portraits (Jess, Samba…) et la jauge du quartier rejoignent la colonne de droite, sous les onglets
+{const st=document.createElement('style');st.textContent=`@media (orientation:landscape){#app #tabs{top:calc(var(--hh,44px) + 8px)!important;transform:none!important}}`;document.head.appendChild(st);
+ const land=()=>matchMedia('(orientation:landscape)').matches&&innerWidth>innerHeight;
+ const Z_=el=>{try{return parseFloat(getComputedStyle(el).zoom)||1}catch(_){return 1}};
+ const SP=(el,k,v)=>{if(el.style.getPropertyValue(k)!==v)el.style.setProperty(k,v,'important')};
+ setInterval(()=>{try{const tb=$('tabs'),li=$('lci'),vg=$('vgauge');if(!tb)return;
+  if(!land()){[li,vg].forEach(e=>{if(e&&e.dataset.col){e.dataset.col='';['left','right','top','transform','transform-origin'].forEach(k=>e.style.removeProperty(k))}});return}
+  const r=tb.getBoundingClientRect();if(r.height<60||r.right<innerWidth*.5)return;let y=r.bottom+8;const right=Math.max(0,innerWidth-r.right);
+  if(li){const z=Z_(li);li.dataset.col='1';SP(li,'left','auto');SP(li,'right',(right/z)+'px');SP(li,'top',(y/z)+'px');SP(li,'flex-direction','column');const rl=li.getBoundingClientRect();if(li.children.length)y=rl.bottom+8}
+  if(vg&&getComputedStyle(vg).display!='none'){const z=Z_(vg);vg.dataset.col='1';SP(vg,'left','auto');SP(vg,'right',(right/z)+'px');SP(vg,'top',(y/z)+'px');SP(vg,'transform-origin','top right');
+   const h0=vg.offsetHeight*z;const avail=innerHeight-y-8;const sc=Math.max(.55,Math.min(1,avail/Math.max(1,h0)));SP(vg,'transform',sc<1?`scale(${sc.toFixed(3)})`:'none')}
+ }catch(_){}},300)}
+// v460 : les projets et partenaires créés par prjUI ont un onclick en attribut → ils prennent la mise en page « ligne pleine + étiquette de prix » comme les autres boutons
+setInterval(()=>{try{document.querySelectorAll('button[id^="prj_"],button[id^="prp_"]').forEach(b=>{if(b.getAttribute('onclick'))return;const k=b.id.slice(4),fn=b.id.startsWith('prj_')?'prjDo':'prpDo';b.onclick=null;b.setAttribute('onclick',`${fn}('${k}')`)})}catch(_){}},700);
+// v460 : lisibilité — texte un peu plus grand dans les panneaux et les fenêtres ; les fenêtres des actions (maraude, réunion…) ne répètent le long texte que la première fois
+{const st=document.createElement('style');st.textContent=`body{font-size:15px}#fmo .fd,.fd{font-size:14px}.hint{font-size:13.5px}#mb p{font-size:15px}`;document.head.appendChild(st);
+ W('actScene',(o,a)=>{const k=a[0];let sv=null;try{if(SCN[k]&&((B.nA||{})[k]||0)>=1){sv=SCN[k][1];const m=/^(.*?[.!?…])\s/.exec(sv);if(m&&m[1].length<sv.length-20)SCN[k][1]=m[1]}}catch(_){}try{return o(...a)}finally{if(sv!=null)SCN[k][1]=sv}})}
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
