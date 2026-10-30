@@ -447,7 +447,7 @@ sw:{n:'swahili',hi:'Hujambo',h:'Ninalala nje. Mna mahali pa kulala?',d:'Ninahita
 bg:{n:'bulgare',hi:'Здравейте',h:'Спя на улицата. Имате ли място за нощувка?',d:'Имам нужда от помощ с документите си.',r:'Гладен съм, не съм ял от два дни.',s:'Боли ме. Може ли медицинска сестра да ме види?',m:'Не мога да спя и ми е тежко.'}};
 LP.ar.a='هل يمكنكم تحليل منتجي؟';LP.ka.a='შეგიძლიათ ჩემი პროდუქტის გაანალიზება?';LP.sw.a='Mnaweza kuchunguza bidhaa yangu?';LP.bg.a='Можете ли да анализирате продукта ми?';
 LP.ar.z='أنا متعب جدًا، أحتاج إلى النوم قليلًا';LP.ka.z='ძალიან დავიღალე, ცოტა ხნით მძინება მჭირდება';LP.sw.z='Nimechoka sana, nahitaji kulala kidogo';LP.bg.z='Много съм уморен, трябва да поспя малко';LP.ar.y='أريد أن أستحم وأغسل ملابسي.';LP.ar.o='أريد أن أتوقف عن التعاطي، هل يمكنكم مساعدتي؟';LP.ka.y='მინდა დავიბანო და ტანსაცმელი გავრეცხო.';LP.ka.o='მინდა შევწყვიტო მოხმარება. შეგიძლიათ დამეხმაროთ?';LP.sw.y='Ninataka kuoga na kufua nguo zangu.';LP.sw.o='Ninataka kuacha kutumia. Mnaweza kunisaidia?';LP.bg.y='Искам да се изкъпя и да изпера дрехите си.';LP.bg.o='Искам да спра да употребявам. Можете ли да ми помогнете?';
-function greet(v){const H=hist[v.name],b=H.v?'Content·e de vous revoir ! ':'',fr=b+(v.need?NE[v.need]+' '+(v.need=='s'?v.dg[2]:NL[v.need]):H.ok.h?'Depuis mon hébergement, ça va mieux, merci !':rc(['Bonjour ! Je viens boire un café et me poser un moment.','Bonjour à toute l’équipe !']));
+function greet(v){const H=hist[v.name],b=H.v&&v.need!='m'?'Content·e de vous revoir ! ':'',fr=b+(v.need?NE[v.need]+' '+(v.need=='s'?v.dg[2]:NL[v.need]):H.ok.h?'Depuis mon hébergement, ça va mieux, merci !':rc(['Bonjour ! Je viens boire un café et me poser un moment.','Bonjour à toute l’équipe !']));
 if(v.lang){const L=LP[v.lang],ok=!!v.itp;v.nolang=!ok;return talk(v.name,`🌍 <span dir="${v.lang=='ar'?'rtl':'ltr'}">${NE[v.need]||'👋'} ${L[v.need||'hi']}</span><br><small>${ok?'🗣️ Interprète : « '+fr+' »':'❓ Langue : '+L.n+' — personne ne comprend. Recrute un·e interprète !'}</small>`)}
 talk(v.name,fr)}
 function traj(){return Object.values(hist).filter(h=>h.v).sort((a,b)=>b.v-a.v).slice(0,4).map(h=>{const o=[];if(h.ok.h)o.push('hébergé·e grâce à Toit & Moi');if(h.ok.d)o.push('droits rouverts');if(h.ok.r)o.push('repas assurés');if(h.s)o.push('soigné·e à la halte');if(h.m)o.push('suivi psychologique');return `<li><b>${h.n}</b> : ${h.v} passage${h.v>1?'s':''} · ${o.length?o.join(', '):'écouté·e, toujours en attente d’une solution'}</li>`}).join('')}
@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v457')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v458')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v457')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v458')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -9628,7 +9628,7 @@ W('newV',(o,a)=>{const v=o(...a);try{if(v&&v.name==WCU){if(window.FORCEN==WCU)wi
 setInterval(()=>{try{if(!started||ended||paused)return;const am=AMI();const h=hist[WCU];if(am>=3&&!B.wcF&&!(h&&(h.v>0||h.wcb))&&!V.some(v=>v.name==WCU)){B.wcF=1;window.FORCEN=WCU}
  V.forEach(v=>{if(!v.wcb||v.wcbD||v.leaving||v.gone)return;if((v.door&&(!v.w||!v.w.length||(v.w.length<=1&&Math.hypot(v.x-v.w[0][0],v.y-v.w[0][1])<8)))||v.inroom||v.s=='in'){wcBlock(v)}})}catch(e){console.error(e)}},400);
 window.wcBlock=function(v){try{v.wcbD=1;unq(v);if(v.s=='in'||v.inroom)occ[v.r]=Math.max(0,occ[v.r]-1);v.s='walk';v.door=v.inroom=v.after=false;v.leaving=true;v.w=exW(v);
-  const H=hist[v.name];if(H){H.un=(H.un||0)+1;H.wcb=(H.wcb||0)+1;H.sat=Math.max(0,(H.sat==null?50:H.sat)-12);H.lv=GT}un++;talk(v.name,'Une marche, pas de rampe… Encore un endroit où je ne peux pas entrer.',v);
+  const H=hist[v.name];if(H){H.un=(H.un||0)+1;H.wcb=(H.wcb||0)+1;H.sat=Math.max(0,(H.sat==null?50:H.sat)-12);H.lv=GT}un++;talk(v.name,[ 'Une marche, pas de rampe… Encore un endroit où je ne peux pas entrer.','Toujours cette marche. Vous m’attendez dehors, ou vous m’oubliez ?','Je reviens à chaque fois, et à chaque fois je reste sur le trottoir.','Une rampe, ce n’est pas la lune. Je repasserai.'][Math.min(3,((H&&H.wcb)||1)-1)],v);
   if(!B.wcT){B.wcT=1;setTimeout(()=>{try{say('♿ Camille : « Agnès est repartie : avec son fauteuil, elle ne peut pas franchir la marche de l’entrée. Il faut rendre la halte accessible (🏗️ Locaux › Couloir › Accessibilité). »')}catch(_){}},1500)}}catch(e){console.error(e)}};
 W('enter',(o,a)=>{const v=a[0];try{if(v&&v.wcb&&!B.pmr&&!v.wcbD){wcBlock(v);return}}catch(_){}return o(...a)});
 // une assistante sociale en fauteuil : la première recrutée
@@ -9685,7 +9685,7 @@ W('roomFurn',(o,a)=>{const r=o(...a);try{const Dc=B.deco,i=a[0];if(Dc&&i<=8&&bui
 // v456 : le comité de voisinage tient vraiment la tranquillité à 45 % minimum (plus de 43 % affiché)
 W('upd',(o,a)=>{const r=o(...a);try{if(B.comite&&q<45)q=45}catch(_){}return r});
 // v456 : la règle des partenariats (un tous les deux mois) est annoncée avant de signer
-setInterval(()=>{try{const par=$('par');if(!par)return;let h=$('parhint');if(!h){h=document.createElement('p');h.id='parhint';h.className='hint';par.parentNode.insertBefore(h,par)}const L=window.parLeft?parLeft():0;const t=L>0?`⏳ Un partenariat se met en place sur deux mois : prochain partenariat possible dans <b>${L} jours</b>.`:'🤝 Un partenariat se met en place sur deux mois : <b>après une signature, il faudra attendre 2 mois avant le suivant</b>. Choisis celui qui répond aux besoins les plus urgents.';if(h._t!==t){h._t=t;h.innerHTML=t}}catch(_){}},1000);
+setInterval(()=>{try{const par=$('par');if(!par)return;let h=$('parhint');if(!h){h=document.createElement('div');h.id='parhint';h.style.cssText='margin:4px 0 8px;padding:6px 9px;border:2px solid #e0c070;border-radius:9px;background:#fff6dc;font-size:12.5px;line-height:1.35;color:#3a2e24';par.parentNode.insertBefore(h,par)}const L=window.parLeft?parLeft():0;const t=L>0?`⏳ Un partenariat se met en place sur deux mois : prochain partenariat possible dans <b>${L} jours</b>.`:'🤝 Un partenariat se met en place sur deux mois : <b>après une signature, il faudra attendre 2 mois avant le suivant</b>. Choisis celui qui répond aux besoins les plus urgents.';if(h._t!==t){h._t=t;h.innerHTML=t}}catch(_){}},1000);
 
 // v457 : personne ne passe plus dans l'étroit passage entre la halte et les cordons de la file :
 // pour changer de rangée de salles, on prend toujours le couloir de gauche
@@ -9698,6 +9698,49 @@ setInterval(()=>{try{const par=$('par');if(!par)return;let h=$('parhint');if(!h)
   if(zs&&!gs){const zr=z.y>=100?115:55;return[174,zr]}
   if(!zs&&gs){const tr=gy>=100?115:55;if(cyy(z.y)!=tr){if(Math.abs(z.x-LX)<1.5)return[LX,tr];return[LX,cyy(z.y)]}}
  }catch(_){}return o(...a)})}
+
+// v458 : journée de repos — la halte ferme un jour, toute l'équipe souffle (+40 d'énergie), une fois tous les deux mois
+{AC.d=[0,150];cd.d=0;fx.d=0;try{ATH.ad='eq'}catch(_){}
+ try{const at=$('at');if(at&&!$('ad')){const b=document.createElement('button');b.id='ad';b.setAttribute('onclick',"act('d')");b.innerHTML='🌴 Journée de repos<br><small>la halte ferme un jour, l’équipe souffle</small><br><i></i>';at.after(b)}}catch(_){}
+ window.restOn=()=>!!(B.rest&&GT<B.rest.until);
+ {const _rc=window.roomClosed;window.roomClosed=function(i){if(restOn()&&built[i])return '🌴 repos';return _rc(i)};roomClosed=window.roomClosed}
+ W('act',(o,a)=>{const k=a[0];if(k!=='d')return o(...a);try{if(cd.d>0||!STF.length||restOn()||B.strike)return;cd.d=AC.d[1];B.nA=B.nA||{};B.nA.d=(B.nA.d||0)+1;
+   B.rest={until:GT+DAYL};STF.forEach(z=>{z.e=Math.min(100,z.e+40)});try{Object.values(hist).forEach(h=>{if(h.v)h.sat=Math.max(0,Math.min(100,h.sat-3))})}catch(_){}
+   try{V.forEach(v=>{if(!v.leaving&&!v.gone&&(v.s=='q'||v.s=='wait')&&v.r>=0&&v.x>=176){/* la file attend dehors, elle reviendra demain */}})}catch(_){}
+   try{say('🌴 Journée de repos : la halte est fermée aujourd’hui, l’équipe souffle. Sur la porte : « On revient demain, reposé·es. »')}catch(_){}try{newsAdd('🌴','Journée de repos : la halte ferme un jour')}catch(_){}
+   popWin({t:'Journée de repos',n:'🌴 La halte ferme un jour',d:'Pas d’accueil aujourd’hui : l’équipe part marcher au parc, boire un café, dormir. Les usager·es trouvent la porte fermée (satisfaction −3), mais demain tout le monde sera là, reposé. Énergie +40 pour toute l’équipe.',keep:1,snd:'good',btns:[{t:'Continuer',go:1}],
+    draw:(H,T)=>{try{const g=H.g;if(TIL.complete)for(let y=0;y<104;y+=16)for(let x0=0;x0<200;x0+=16)g.drawImage(TIL,[0,1,2,3][seas()]*16,0,16,16,x0,y,16,16);H.O('tree'+seas(),-6,60);H.O('tree'+seas(),170,56);H.O('bench',100,70);
+     STF.slice(0,5).forEach((z,i)=>H.spr(z.ci,24+(((T*2+i)|0)%2)*6,30+i*34,80+(i%2)*10));g.font='10px sans-serif';g.fillText('☕',118,62-Math.abs(Math.sin(T*3))*2);g.fillText('💤',150,60-Math.abs(Math.sin(T*2+1))*3)}catch(_){}}});
+   ui()}catch(e){console.error(e)}});
+ W('ui',(o,a)=>{const r=o(...a);try{const b=$('ad');if(b){const on=restOn();b.disabled=cd.d>0||!STF.length||on||!!B.strike;b.querySelector('i').textContent=on?'🌴 halte fermée aujourd’hui':cd.d>0?Math.ceil(cd.d)+' s':!STF.length?'il faut une équipe':'0 €'}}catch(_){}return r});
+ W('upd',(o,a)=>{const r=o(...a);try{if(B.rest&&GT>=B.rest.until){B.rest=null;say('🔓 La halte rouvre : l’équipe est de retour, reposée.');ui()}}catch(_){}return r});
+ // le défi « épuisement » demande maintenant un repas d'équipe ET une journée de repos
+ try{const D=window.DF||{};if(D.bo){const os=D.bo.start;D.bo.start=()=>{os();B.dfb=B.dfb||{};B.dfb.d=(B.nA||{}).d||0};
+  D.bo.d=D.bo.d.replace(/Défi :[^]*$/,'Défi : organise un repas d’équipe et offre une journée de repos à l’équipe avant la fin du mois.');
+  D.bo.prog=()=>{const t=((B.nA||{}).t||0)-(B.dfb.t||0),d=((B.nA||{}).d||0)-(B.dfb.d||0);return[['Repas d’équipe',Math.min(1,t),1],['Journée de repos',Math.min(1,d),1]]};
+  D.bo.how=[['Quartier › Actions : « Repas d’équipe ».',3],['Quartier › Actions : « Journée de repos » : la halte ferme un jour, l’équipe souffle.',3]]}}catch(_){}
+}
+
+// v458 : perf — ui() (mise à jour du DOM) était appelé à chaque image depuis upd() ; depuis la boucle de jeu, on le limite à 10 fois par seconde.
+// Les clics et les événements appellent toujours ui() tout de suite.
+{let lastUi=0,inUpd=0;
+ W('upd',(o,a)=>{inUpd++;try{return o(...a)}finally{inUpd--}});
+ W('ui',(o,a)=>{if(inUpd>0){const n=performance.now();if(n-lastUi<100)return;lastUi=n}return o(...a)});
+}
+// v458 : perf — beaucoup d'écritures DOM répétées chaque image avec la même valeur (textContent, classList.add, className…) :
+// chacune déclenchait un recalcul de style et les observateurs de mutations. On ignore les écritures qui ne changent rien.
+try{
+ const td=Object.getOwnPropertyDescriptor(Node.prototype,'textContent');
+ Object.defineProperty(Node.prototype,'textContent',{configurable:true,get:td.get,set(v){try{if(this.nodeType===1){const c=this.firstChild;if(c&&!c.nextSibling&&c.nodeType===3){if(c.data===String(v))return}else if(!c&&(v==null||v===''))return}}catch(_){}return td.set.call(this,v)}});
+ const ad=DOMTokenList.prototype.add,rm=DOMTokenList.prototype.remove;
+ DOMTokenList.prototype.add=function(...t){for(let i=0;i<t.length;i++)if(!this.contains(t[i]))return ad.apply(this,t)};
+ DOMTokenList.prototype.remove=function(...t){for(let i=0;i<t.length;i++)if(this.contains(t[i]))return rm.apply(this,t)};
+ const cd_=Object.getOwnPropertyDescriptor(Element.prototype,'className');
+ Object.defineProperty(Element.prototype,'className',{configurable:true,get:cd_.get,set(v){if(cd_.get.call(this)===String(v))return;return cd_.set.call(this,v)}});
+ const sa=Element.prototype.setAttribute;Element.prototype.setAttribute=function(n,v){if(this.getAttribute(n)===String(v))return;return sa.call(this,n,v)};
+}catch(_){}
+// v458 : une seule bulle par personne — une nouvelle réplique remplace la précédente au lieu de se superposer
+W('talk',(o,a)=>{try{const n=a[0],p=a[2];const v=p||V.find(x=>x.name==n&&!x.gone);if(v){for(let i=BB.length-1;i>=0;i--){const b=BB[i];if(b.v===v||(!p&&b.v&&b.v.name===n)){b.e.remove();BB.splice(i,1)}}}}catch(_){}return o(...a)});
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
