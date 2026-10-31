@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v461')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v462')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -715,7 +715,7 @@ function xpBuy(k){const g=XG[k];if(!STF.length)return;if(k=='s'){XB.s=!XB.s;say(
 const INVK=[['🏘️','La maison de quartier demande à {N} d’animer une soirée d’information sur les drogues pour les parents du quartier.',120,6,15],['🏘️','La maison de quartier demande à {N} une sensibilisation aux consommations pour ses animateur·rices jeunesse.',140,5,15],['🏘️','La maison de quartier invite {N} à un café-débat « Drogues : parlons-en sans tabou » avec les habitant·es.',90,8,12]];
 const INVD=[['🎤','Un congrès national de réduction des risques invite {N} à présenter le travail de la halte.',100,10,25],['🧑‍🏫','Le CCAS de la ville demande à {N} d’animer une formation sur l’accueil inconditionnel pour ses agent·es.',220,4,20],['🧑‍🏫','Un centre d’hébergement voisin demande à {N} une formation à la réduction des risques pour son équipe.',190,4,20],['🧑‍🏫','Les pharmacies du quartier demandent à {N} d’animer une soirée de formation à la naloxone.',160,5,15],['🎓','Un institut de formation en travail social invite {N} à donner un cours aux futur·es professionnel·les.',190,5,20],['🏛️','Un colloque régional sur les addictions invite {N} à intervenir en table ronde.',130,8,25],['🧑‍🏫','Une association de prévention du quartier demande à {N} d’animer une formation pour ses bénévoles.',160,4,15]];
 function invOpen(){const rs=STF.filter(z=>(z.lv||0)>=3&&z.off<=0);if(!rs.length)return;const z=rc(rs),d=rc(P.k?INVD.concat(INVK,INVK):INVD);INV={z,d};paused=true;const t=d[1].replace('{N}',z.n);
-$('mb').innerHTML=`<div class="vn">${ptHTML([z.ci],z.r<9?WB[z.r]:'#cfe3ea')}<p class="quote vq"><b>${d[0]} Invitation pour ${z.n}</b> <small>(🌟 référent·e · ${z.title})</small><br><i>${t}</i><br><small>${d[2]?`+${d[2]} € pour la halte · `:''}+${d[3]} de notoriété · ${z.n} sera absent·e pendant ${d[4]}&nbsp;s</small></p></div><button onclick="invRes(1)">✅ Accepter</button><button onclick="invRes(0)">🙅 Décliner</button>`;$('m').hidden=false;drawPts();sfx('open')}
+$('mb').innerHTML=`<div class="vn">${ptHTML([z.ci],z.r<9?WB[z.r]:'#cfe3ea')}<p class="quote vq"><b>${d[0]} Invitation pour ${z.n}</b> <small>(🌟 référent·e · ${z.title})</small><br><i>${t}</i><br><small>${d[2]?`+${d[2]} € pour la halte · `:''}+${d[3]} de notoriété · ${z.n} sera absent·e pendant ${Math.max(1,Math.round(d[4]/DAYL))} jours</small></p></div><button onclick="invRes(1)">✅ Accepter</button><button onclick="invRes(0)">🙅 Décliner</button>`;$('m').hidden=false;drawPts();sfx('open')}
 function invRes(y){$('m').hidden=true;paused=false;const I=INV;INV=null;if(!I)return;const {z,d}=I,e=$('ev');if(y){z.off=d[4];z.mis=1;if(d[2]){eu+=d[2];recf('Interventions des référent·es',d[2])}NOT=nUp(d[3]);CN.inv=(CN.inv||0)+1;flt(OFF,(d[2]?'💶+'+d[2]+'€ ':'')+'📣+'+d[3],1);e.className='good';e.textContent=`${d[0]} ${z.n} part ${d[0]=='🎤'||d[0]=='🏛️'?'intervenir':'former d’autres professionnel·les'} : la halte se fait connaître (+${d[3]} de notoriété${d[2]?`, +${d[2]} €`:''}).`}else{e.className='';e.textContent=`🙅 ${z.n} décline l’invitation pour rester auprès des personnes accueillies.`}RL=-1;ui()}
 const OFF={x:196,y:46},STREET={x:200,y:96};let FLT=[];function flt(o,txt,good,dy){if(!o)return;const ax=o.x,ay=o.y,k=FLT.filter(f=>f.t<1.1&&(f.o===o||(Math.abs((f.o.x!=null?f.o.x:f.x)-ax)<26&&Math.abs((f.o.y!=null?f.o.y:f.y)-ay)<22))).length;FLT.push({o,x:ax,y:ay,txt,good,t:0,dy:k*12.5});if(FLT.length>8)FLT.shift()}
 function snapS(){return{q,eu,n:NOT,e:STF.length?STF.reduce((a,z)=>a+z.e,0)/STF.length:0}}
@@ -878,7 +878,7 @@ lhss:{t:'🛏️ Des soins tous les jours',need:()=>{const a=orFree(ISINF);retur
  done:H=>{H.s=(H.s||0)+2;H.sat=Math.min(100,H.sat+20);H.st='hosp';H.back=GT+120;MS.care+=2;payARS(2);aid+=2;B.lhss=(B.lhss||0)+1;return `🛏️ Bonne nouvelle : ${H.n} est admis·e en LHSS. Il·elle va pouvoir se soigner au calme, avec des soins chaque jour.`}},
 act:{t:'🏠 Un appartement pour se soigner',need:()=>{const a=orFree(ISINF),b=orFree(ISEDU,a);return a&&b?[a,b]:null},off:30,wait:80,
  ask:(H,S)=>[[S[1],`${H.n} vit avec une hépatite C et n’arrive pas à suivre son traitement à la rue. Une place en <b>Appartement de Coordination Thérapeutique</b> (ACT) changerait tout.`],[S[0],`Je m’occupe de la partie médicale du dossier. Il faudra du temps à nous deux.`]],
- btn:S=>`📝 Monter le dossier ACT <small>(${S[0].n} et ${S[1].n} absent·es 30 s)</small>`,
+ btn:S=>`📝 Monter le dossier ACT <small>(${S[0].n} et ${S[1].n} absent·es 12 jours)</small>`,
  done:H=>{H.ok=H.ok||{};H.ok.h=1;H.s=(H.s||0)+1;H.sat=Math.min(100,H.sat+25);B.act=(B.act||0)+1;CN.h=(CN.h||0)+1;return `🏠 ${H.n} obtient une place en ACT : un appartement, et une équipe pour l’aider à suivre ses soins.`}},
 apt:{t:'🌱 Consolider son rétablissement',need:()=>{const a=orFree(ISEDU);return a?[a]:null},off:25,wait:70,
  ask:(H,S)=>[[S[0],`${H.n} a beaucoup avancé dans ses soins et voudrait quitter la rue pour de bon. Je propose une candidature en <b>appartement thérapeutique</b>, avec le CSAPA. Il faut préparer le dossier et les entretiens.`]],
@@ -2752,7 +2752,7 @@ window.roomClosed=roomClosed;
 function tapeL(x0,y0,x1,y1,T){const L=Math.hypot(x1-x0,y1-y0),an=Math.atan2(y1-y0,x1-x0);x.save();x.translate(x0,y0);x.rotate(an);x.fillStyle='rgba(0,0,0,.22)';x.fillRect(0,1.6,L,2.6);
  for(let s=0;s<L;s+=3.5){const w=Math.min(3.5,L-s),wy=Math.sin(T*2.2+s*.12)*.25;x.fillStyle=((s/3.5)|0)%2?'#f7f5ee':'#d8262f';x.fillRect(s,-1.2+wy,w,2.6)}x.fillStyle='#8a1a20';x.fillRect(-.6,-1.8,1.4,3.8);x.fillRect(L-.8,-1.8,1.4,3.8);x.restore()}
 W('draw',(o,a)=>{const r=o(...a);try{if(MEET||ENDING)return r;const T=Date.now()/1000;x.save();x.setTransform(2,0,0,2,OX*2,OY*2);
- for(let i=0;i<9;i++){const why=roomClosed(i);if(!why)continue;const A=R[i][2],Bb=R[i][3],w=RW[i];
+ for(let i=0;i<9;i++){const why=roomClosed(i);if(!why)continue;const A=R[i][2],Bb=R[i][3],w=RW[i];if(window.CLST&&CLST!='tape'&&window.clDraw){try{clDraw(CLST,i,A,Bb,w,why,T)}catch(_){}continue}
   x.fillStyle='rgba(30,24,36,.28)';x.fillRect(A,Bb+11,w,35);
   tapeL(A+2,Bb+16,A+w-2,Bb+40,T);tapeL(A+2,Bb+40,A+w-2,Bb+16,T+1.3);
   try{if(typeof LD=='function'){LD('cone',A+1,Bb+46);LD('cone',A+w-8,Bb+46)}}catch(_){}
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v461')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v462')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -9845,6 +9845,50 @@ Object.assign(LCSIT,{hop:'À l’hôpital',lhss:'En lits halte soins santé (LHS
  window.wcDraw=function(ci,px,py,dir,row){const S=wcSheet(ci,row|0);if(!S)return false;const d=dir|0,cell=[0,1,2,3][d];
   x.drawImage(S,cell*32,0,32,40,Math.round((px-8)*2)/2,Math.round((py-18.5)*2)/2,16,20);return true}}
 window.hWc=function(H,ci,X,YB,v,row){try{const S=wcSheet(ci,row|0);if(!S)return;const cell=v==1?2:v==2?1:v==3?3:0;H.g.drawImage(S,cell*32,0,32,40,Math.round(X-16),Math.round(YB-38),32,40)}catch(_){}};
+
+// v462 : fenêtres de choix — boutons de même taille, conséquence en petit sous le choix ; la conséquence dit quelle salle ferme (ou perd un·e pro) et combien de temps
+{const st=document.createElement('style');st.textContent=`#fmo .fbt.eq{display:grid!important;grid-template-columns:repeat(var(--nb,2),minmax(0,1fr));gap:8px;align-items:stretch}
+#fmo .fbt.eq.col{grid-template-columns:1fr}
+#fmo .fbt.eq>button{width:100%!important;max-width:none!important;margin:0!important;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;line-height:1.2}
+#fmo .fbt.eq>button .cq{display:block;font:400 12px/1.25 'Atkinson Hyperlegible',sans-serif;opacity:.85}`;document.head.appendChild(st);
+ const ROOMF={SOINS:1,CONSO:1,REPOS:1,CUISINE:1};
+ const roomOf=z=>{try{const r=z&&z.r;if(r==null||r<0||!R[r]||!built[r])return null;const k=R[r][0];return {r,k,n:(typeof HFN!='undefined'&&HFN[k])||k,f:!!ROOMF[k]}}catch(_){return null}};
+ const days=t=>String(t).replace(/(\d+)\s*(?:&nbsp;| )?s\b/g,(m,n)=>{const d=Math.max(1,Math.round(+n/DAYL));return d+(d>1?' jours':' jour')});
+ window.cqPhrase=function(zs,dur){try{zs=zs.filter(Boolean);if(!zs.length)return null;const rm=roomOf(zs[0]);if(!rm)return null;
+   const left=STF.filter(y=>!zs.includes(y)&&y.r===rm.r&&!(y.off>0)).length;dur=days(dur||'').trim();
+   const pd=/^(\d|un|une|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|quelques)\b/.test(dur)?'pendant '+dur:dur;return left==0?`🔒 ${rm.n} fermé${rm.f?'e':''} ${pd}`:`👥 ${rm.n} : un·e pro en moins ${pd}, la salle reste ouverte`}catch(_){return null}};
+ const guess=()=>{try{if(window._cqDC&&typeof DC!='undefined'&&DC&&DC.s0&&!(DC.s0.off>0))return DC.s0;const c=STF.filter(z=>z.off<=0&&!z.stg);const n=i=>STF.filter(y=>y.r==i&&y.off<=0).length;c.sort((a,b)=>n(b.r)-n(a.r));return c[0]||null}catch(_){return null}};
+ const VERB='(?:y passe|y va, absent·e|y va, occupé·e|absent·es?|occupé·e|sera absent·e pendant)';
+ window.cqText=function(t){if(!t||!/absent|occupé|y passe|y va/.test(t))return t;let out=t;
+  try{const names=STF.map(z=>z.n).filter(Boolean).sort((a,b)=>b.length-a.length);
+   for(const n of names){const re=new RegExp(n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?: et ([\\p{L}\\-]+))? '+VERB+' ([^)·<\\n]+)','u');const m=re.exec(out);if(!m)continue;
+    const z=STF.find(y=>y.n==n),z2=m[1]?STF.find(y=>y.n==m[1]):null,ph=cqPhrase([z,z2],m[2]);if(ph)out=out.replace(m[0],ph)}
+   const g=/(?:👤 )?(?:un·e pro|Professionnel·le|un·e professionnel·le|une travailleuse paire) (?:absent·e|occupé·e) ([^)·<\n]*)/u.exec(out);
+   if(g){const ph=cqPhrase([guess()],g[1]);if(ph)out=out.replace(g[0],ph)}}catch(_){}return out};
+ const fixTextNodes=root=>{try{window._cqDC=!!root.querySelector('[onclick^="dres"]');const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const L=[];while(w.nextNode())L.push(w.currentNode);L.forEach(n=>{const v=n.nodeValue;if(n._cq===v)return;const nv=cqText(v);n._cq=nv;if(nv!==v)n.nodeValue=nv})}catch(_){}};
+ const eqBtns=f=>{try{const bt=f.querySelector('.fbt');if(!bt||bt._eq)return;const bs=[...bt.querySelectorAll(':scope>button')];if(bs.length<2)return;bt._eq=1;
+   bs.forEach(b=>{if(b.querySelector('.cq'))return;const t=b.textContent.trim();const m=/^(.*?)\s*\(([^()]+)\)\s*$/.exec(t);if(m){b.textContent='';const s1=document.createElement('span');s1.textContent=m[1];const s2=document.createElement('span');s2.className='cq';s2.textContent=m[2];b.append(s1,s2)}});
+   const long=bs.length>=3||bs.some(b=>b.textContent.length>70);bt.classList.add('eq');if(long&&innerWidth<600)bt.classList.add('col');bt.style.setProperty('--nb',String(Math.min(bs.length,innerWidth<600?2:3)));if(bs.length>=3&&innerWidth<600)bt.classList.add('col')}catch(_){}};
+ let pend=0;const run=()=>{pend=0;['fmo','m','rdov'].forEach(id=>{const e=document.getElementById(id);if(e&&!(e.hidden)){fixTextNodes(e);if(id=='fmo')eqBtns(e)}});document.querySelectorAll('#vig').forEach(fixTextNodes)};
+ new MutationObserver(()=>{if(!pend){pend=1;requestAnimationFrame(run)}}).observe(document.body,{childList:true,subtree:true,characterData:false});
+}
+
+// v462 : autres représentations possibles d'une salle fermée (au choix : window.CLST = 'nuit' | 'gris' | 'porte' | 'hachures' ; 'tape' = rubalise actuelle)
+window.clDraw=function(k,i,A,Bb,w,why,T){
+ const pill=(cx,cy,txt,col)=>{x.font="700 4.6px 'Atkinson Hyperlegible',sans-serif";const tw=x.measureText(txt).width;x.fillStyle='#2a2433';x.fillRect(cx-tw/2-3.5,cy-4.5,tw+7,8.5);x.fillStyle=col||'#fffaf0';x.fillRect(cx-tw/2-3,cy-4,tw+6,7.5);x.fillStyle='#2a2433';x.fillText(txt,cx-tw/2,cy+1.6);x.font=LBL};
+ const sign=(cx,cy)=>{x.fillStyle='#6a4a2a';x.fillRect(cx-.3,cy-6,.6,3);x.fillRect(cx-5,cy-3.2,10,.5);x.fillStyle='#2a2433';x.fillRect(cx-9.5,cy-3,19,8);x.fillStyle='#c0392b';x.fillRect(cx-9,cy-2.5,18,7);x.fillStyle='#fff';x.font="700 4.6px Lilita,'Atkinson Hyperlegible',sans-serif";const t='FERMÉ',tw=x.measureText(t).width;x.fillText(t,cx-tw/2,cy+2.9);x.font=LBL};
+ const cx=A+w/2,doorX=DX[i],top=Bb<10,doorY=top?Bb+45:Bb+11;
+ if(k=='nuit'){x.fillStyle='rgba(14,18,46,.58)';x.fillRect(A,Bb+11,w,35);
+  for(let s=0;s<3;s++){const p=(T*.4+s/3)%1;x.globalAlpha=Math.sin(p*Math.PI)*.8;x.fillStyle='#cfe0ff';x.font="700 5px sans-serif";x.fillText('z',cx+12+p*5,Bb+24-p*8)}x.globalAlpha=1;
+  sign(cx,Bb+20);pill(cx,Bb+35,why)}
+ else if(k=='gris'){x.save();x.globalCompositeOperation='saturation';x.fillStyle='#808080';x.fillRect(A,Bb,w,46);x.restore();x.fillStyle='rgba(235,235,240,.28)';x.fillRect(A,Bb+11,w,35);
+  x.font='8px sans-serif';x.fillText('🔒',cx-4,Bb+29);pill(cx,Bb+37,why)}
+ else if(k=='porte'){x.fillStyle='rgba(30,24,36,.32)';x.fillRect(A,Bb+11,w,35);
+  const dy=top?Bb+38:Bb+8;x.fillStyle='#2a2433';x.fillRect(doorX-6.5,dy,13,top?9:9);x.fillStyle='#9a6a3a';x.fillRect(doorX-6,dy+.5,12,8);x.fillStyle='#7a4f28';x.fillRect(doorX-6,dy+.5,.6,8);x.fillRect(doorX-.3,dy+.5,.6,8);x.fillStyle='#e0b04a';x.fillRect(doorX+3.5,dy+4,1,1);
+  sign(doorX,top?Bb+33:Bb+21);pill(cx,top?Bb+22:Bb+36,why)}
+ else if(k=='hachures'){x.save();x.beginPath();x.rect(A,Bb+11,w,35);x.clip();x.fillStyle='rgba(255,255,255,.32)';for(let s=-40;s<w+40;s+=7){x.beginPath();x.moveTo(A+s,Bb+11);x.lineTo(A+s+3,Bb+11);x.lineTo(A+s-32,Bb+46);x.lineTo(A+s-35,Bb+46);x.fill()}x.restore();
+  x.fillStyle='rgba(30,24,36,.18)';x.fillRect(A,Bb+11,w,35);pill(cx,Bb+20,'⛔ '+why,'#ffe2dc')}
+};
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
