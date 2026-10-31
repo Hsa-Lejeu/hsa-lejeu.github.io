@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v479')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v480')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -1056,11 +1056,11 @@ BINS.forEach(b=>{corbeille(b.x,b.y+1,b.l);rect(b.x-3,b.y+2,6,1,'#0007');rect(b.x
 SYR.forEach(o=>{const pl=.5+.5*Math.sin(Date.now()/200);x.globalAlpha=.2+.3*pl;x.fillStyle='#ffe27a';x.beginPath();x.ellipse(o.x,o.y,6+pl,4+pl*.6,0,0,7);x.fill();x.globalAlpha=1;syr(o.x,o.y);});x.font=LBL;
 if(ENDING)endScene();const se=seas(),t=Date.now()/1000;if(se==2){{const sx=WW-OX-14,sy=-OY+4;rect(sx,sy,8,8,'#ffd54a');rect(sx-2,sy+3,2,2,'#ffd54a');rect(sx+8,sy+3,2,2,'#ffd54a');rect(sx+3,sy-2,2,2,'#ffd54a');rect(sx+3,sy+8,2,2,'#ffd54a')}}
 else{const c=['#fff','#f7b6d0',0,'#e08a2b'][se];for(let k=0;k<50;k++)rect((k*37+Math.sin(t+k)*5+t*(se==3?4:1))%WW-OX,(t*(7+k%4*3)+k*23)%WH-OY,se==0?1:2,1,c)}}
-const IN_=['Bonjour ! Je suis <b>Camille</b>, chef·fe de service. Le ministère nous confie un défi : ouvrir une <b>Halte Soins Addictions</b> dans ce quartier.','La ville nous prête ce local vide et 1 600 € pour démarrer. Le quartier est tendu : on a <b>trois ans</b> pour convaincre. Allons-y !'];let ii=0;
+const IN_=['Bonjour ! Je suis <b>Camille</b>, chef·fe de service. Le président vient d’autoriser l’ouverture d’une <b>Halte Soins Addictions</b> dans ce quartier : c’est à nous de la faire vivre.','La ville nous prête ce local vide et 1 600 € pour démarrer. Le quartier est tendu : on a <b>trois ans</b> pour convaincre. Allons-y !'];let ii=0;
 
 const HB=k=>document.querySelector('#hud button[onclick="'+k+'()"]'),TB=i=>document.querySelectorAll('#tabs button')[i];
 const TUT=[
-[null,"Petit tour de l’écran avant d’ouvrir ! On commence avec un <b>accueil</b> et une <b>salle de consommation</b> ; le reste viendra en jouant. Ce tutoriel se revoit avec le bouton ☰."],
+[null,"Petit tour de l’écran avant d’ouvrir ! L’<b>accueil</b> est déjà installé, juste à côté de l’entrée ; il nous faut une <b>salle de consommation</b>, le reste viendra en jouant. Ce tutoriel se revoit avec le bouton ☰."],
 [()=>$('eu').parentNode,"💶 Le <b>budget</b> de la halte. Touche-le pour voir le détail : la ville et l’ARS financent notre travail, et chaque mois il faut payer les salaires."],
 [()=>$('ac').parentNode,"👥 Le nombre de <b>personnes accompagnées</b>. Touche-le pour suivre le <b>parcours</b> de chacun·e : confiance, soins, droits, un toit, un projet… jusqu’à l’envol 🕊️."],
 [()=>$('qf').closest('.r')||$('qf').closest('#hud>div'),"🏘️ La <b>tranquillité du quartier</b>. Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues et dialogue avec les habitant·es la font remonter."],
@@ -2029,7 +2029,7 @@ function ulNext(){const e=ULQ.shift();if(!e)return;let p=$('ulp');if(!p){p=docum
 
 // clic sur le nom d'une salle : ouvre ses équipements
 {const oc=cv.onclick;cv.onclick=e=>{try{if(!Z.moved&&!ended&&!paused&&$('m').hidden&&sel<0){const r=cv.getBoundingClientRect(),lx=(e.clientX-r.left)/r.width*WW-OX,ly=(e.clientY-r.top)/r.height*WH-OY;x.save();x.font="4.5px Lilita,'Atkinson Hyperlegible',sans-serif";
- {const wb=Math.ceil(x.measureText('BUREAU · CAMILLE').width)+6;if(lx>=178&&lx<=180+wb&&ly>=2&&ly<=12){x.restore();tab(0);try{document.querySelector('#t0 .subt button[data-k="2"]').click()}catch(_){}return}}
+ {const wb=Math.ceil(x.measureText('BUREAU · CAMILLE').width)+6;if(false&&lx>=178&&lx<=180+wb&&ly>=2&&ly<=12){x.restore();tab(0);try{document.querySelector('#t0 .subt button[data-k="2"]').click()}catch(_){}return}}
  for(let i=0;i<9;i++){if(!built[i])continue;const a=R[i][2],b=R[i][3],w=Math.ceil(x.measureText(R[i][0]).width)+6;if(lx>=a+2&&lx<=a+4+w&&ly>=b&&ly<=b+10){x.restore();roomWheel(i,e.clientX,e.clientY);return}}x.restore()}}catch(_){}return oc(e)}}
 // roues des voitures qui tournent
 const WHL={car_r1:[[15,32],[47,32]],car_r2:[[17,35],[62,35]],car_l1:[[14,32],[46,32]],car_l2:[[13,32],[54,32]],camper_r:[[24,51],[72,51]],camper_l:[[20,51],[68,51]]};
@@ -4633,11 +4633,11 @@ function gdState(){const app=$('app'),open=app.classList.contains('open')?app.da
   const fi=$('rwf');if(fi&&/Équipe/.test((fi.querySelector('h4')||{}).textContent||'')){const tb=fi.querySelector('.rwtabs span[data-t="0"]');if(tb&&!tb.classList.contains('on'))return{k:'rtab',e:tb,t:'Ouvre l’onglet <b>Recrutement</b>.'};
    const hb2=[...fi.querySelectorAll('.rwlist>button')].find(b=>b.textContent.includes(R[0][1].split('·')[0]))||fi.querySelector('.rwlist>button');if(hb2)return{k:'hire2',e:hb2.querySelector('.pr')||hb2,t:`Recrute un·e <b>${R[0][1].toLowerCase()}</b> : touche l’<b>étiquette verte</b> avec le prix. Ce sera la première personne de ton équipe !`}}
   const rw=document.querySelector('#rw .sg[data-p="staff"]')||document.querySelector('#rw .sg[data-k="0"]');if(rw)return{k:'wheel',e:rw,t:'Voici la roue de la salle : tout ce qu’on peut y faire. Choisis <b>👥 Équipe</b> pour recruter.'};
-  return{k:'name',lab:0,t:'L’accueil est construit ! Astuce : sur le plan, le <b>nom d’une salle</b> se touche. Touche <b>ACCUEIL</b>.'}}
+  return{k:'name',lab:0,t:'Voici l’<b>accueil</b>, là où chaque personne est reçue : il est déjà installé, juste à côté de l’entrée. Sur le plan, le <b>nom d’une salle</b> se touche. Touche <b>ACCUEIL</b>.'}}
  if(sel==0&&$('ghb')){const g=$('ghb').querySelector('button.go');return{k:'ghost',e:g||$('ghb'),t:'Un aperçu apparaît sur le plan. Déplace-le avec les flèches ou en touchant une case libre, puis touche le bouton vert <b>✔</b>.'}}
  if(open==='4'){const b=document.querySelector('#rbx .rbc[onclick="rbPick(0)"]')||$('rb0');return{k:'rb0',e:b,t:'Choisis <b>🛎️ Accueil</b> dans la liste.'.replace('🛎️',REMO[0]||'')}}
  return{k:'tab',e:TB(4),t:'Commençons par l’<b>accueil</b>, là où chaque personne est reçue. Touche l’onglet <b>🏗️ Locaux</b>.'}}
-function gdStart(){if(GD||started||built[0]||B.gdDone)return;GD={k:'',raf:0};const r=document.createElement('div');r.id='gdr';const b=document.createElement('div');b.id='gdb';b.innerHTML=`<div class="pt" id="gdpt"></div><div class="tx"><b>Camille</b><p></p><div class="bt"><button class="sk">Passer le guide</button></div></div>`;document.body.append(r,b);document.body.classList.add('gdon');
+function gdStart(){if(GD||started||st[0]>0||STF.some(z=>z.r==0)||B.gdDone)return;GD={k:'',raf:0};const r=document.createElement('div');r.id='gdr';const b=document.createElement('div');b.id='gdb';b.innerHTML=`<div class="pt" id="gdpt"></div><div class="tx"><b>Camille</b><p></p><div class="bt"><button class="sk">Passer le guide</button></div></div>`;document.body.append(r,b);document.body.classList.add('gdon');
  try{$('gdpt').innerHTML=ptHTML([18],'#e6d9b8');drawPts()}catch(_){}b.querySelector('.sk').onclick=gdEnd;GD.raf=requestAnimationFrame(gdLoop)}
 function gdEnd(){if(!GD)return;cancelAnimationFrame(GD.raf);clearTimeout(GD.to);GD=null;B.gdDone=1;if(!B.chSeen1&&YR==1){B.chSeen1=1;setTimeout(()=>{try{chapOpen(1)}catch(_){}},800)}document.body.classList.remove('gdon');['gdr','gdb'].forEach(i=>{const e=$(i);if(e)e.remove()})}
 function gdLoop(){if(!GD)return;GD.raf=requestAnimationFrame(gdLoop);let S;try{S=gdState()}catch(_){return}const r=$('gdr'),b=$('gdb'),W_=innerWidth,H_=innerHeight;
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v479')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v480')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -6989,7 +6989,7 @@ window.saleFx=function(cx,top,w){const t=performance.now()/1000,k=.5+.5*Math.sin
  P(cx-5,Y-11,10,9,'#2a2433');P(cx-7,Y-2,14,2,'#2a2433');P(cx-5,Y,10,2,'#2a2433');P(cx-3,Y+2,6,2,'#2a2433');P(cx-1,Y+4,2,2,'#2a2433');
  P(cx-4,Y-10,8,7,'#ffd23f');P(cx-6,Y-3,12,2,'#ffd23f');P(cx-4,Y-1,8,2,'#ffd23f');P(cx-2,Y+1,4,2,'#ffd23f');P(cx-1,Y+3,2,1,'#ffd23f');
  x.fillStyle='#2a2433';x.font="400 6px Lilita,'Atkinson Hyperlegible',sans-serif";x.textAlign='center';x.fillText('€',cx,Y-4);x.textAlign='left';x.font=LBL};
-W('world',(o,a)=>{const r=o(...a);try{if(started&&!MEET&&!ENDING){if(window.vanSale&&vanSale())saleFx(392,152,20);if(lvSale())saleFx(408,108,26)}}catch(_){}return r});
+W('world',(o,a)=>{const r=o(...a);try{if(started&&!MEET&&!ENDING){if(0){}}}catch(_){}return r});
 window.lvMenu=function(){if(!lvSale())return;paused=true;tab(-1);const ok=eu>=450;$('mb').innerHTML=`<div id="vsm"><h2 style="margin:0 0 6px">🏢 Local voisin à louer</h2>
  <p>Le local d’à côté est à louer. La ville soutient la halte : en le louant, on gagne <b>4 cases</b> pour aménager de nouvelles salles (cuisine, dortoir, labo…).</p>
  <p class="hint" style="margin:4px 0">450 € de travaux, puis 40 €/mois de loyer. Les salles s’aménagent ensuite dans l’onglet 🏗️ Locaux.</p>
@@ -7318,7 +7318,7 @@ W('draw',(o,a)=>{const r=o(...a);try{if(MEET)return r;const now=performance.now(
   if(m&&FU[m]){const r=FU[m];fs(m,P.X,P.Y-r[3]/2);x.globalAlpha=.9;x.strokeStyle='#ffd23f';x.lineWidth=1;x.strokeRect(P.X-1.5,P.Y-r[3]/2-1.5,r[2]/2+3,r[3]/2+3)}else{x.font='8px sans-serif';x.fillText(t[1],P.X,P.Y)}
   x.restore()}else if(ITPREV)ITPREV=null;
  // les « ! » des pros qui appellent : vraiment en dernier, au-dessus de tout le mobilier
- window.BANG2=1;x.save();x.setTransform(2,0,0,2,OX*2,OY*2);STF.forEach(z=>{if(z.call&&z.px!=null&&!(z.off>0))bang(z.px,z.py-14,z.call.t<15?'#e03a2e':'#f2a20c')});x.restore()}catch(_){}return r});
+ window.BANG2=1}catch(_){}return r});
 
 // ===== v340 : demandes de l'équipe plus variées (16 situations au lieu de 5), refuser a un coût, mode difficile, écran allégé
 // ---- nouvelles demandes : [texte, étiquette du coût, coût(z), remerciement, € plus tard, tranquillité plus tard] ; esc = la personne est raccompagnée
@@ -8120,7 +8120,7 @@ W('outc',(o,a)=>{try{const v=a[0];if(v&&v.lang&&!v.itp)v.nolang=1}catch(_){}retu
 
 // ===== v363 : tutoriel adapté aux règles par année (enjeux, scores qui s'ajoutent, salles qui se débloquent)
 try{const f=k=>TUT.findIndex(s=>typeof s[1]=='string'&&s[1].includes(k)),set=(k,t,g)=>{const i=f(k);if(i>=0){TUT[i][1]=t;if(g)TUT[i][0]=g}return i};
- set('Petit tour de l’écran',"Petit tour de l’écran avant d’ouvrir ! On a <b>trois ans</b> pour convaincre. Chaque année va d’<b>avril à mars</b> et a ses propres enjeux. On commence avec un <b>accueil</b> et une <b>salle de consommation</b> ; le reste viendra en jouant. Ce tutoriel se revoit avec le bouton ☰.");
+ set('Petit tour de l’écran',"Petit tour de l’écran avant d’ouvrir ! On a <b>trois ans</b> pour convaincre. Chaque année va d’<b>avril à mars</b> et a ses propres enjeux. L’<b>accueil</b> est déjà installé, juste à côté de l’entrée ; il nous faut une <b>salle de consommation</b>, le reste viendra en jouant. Ce tutoriel se revoit avec le bouton ☰.");
  const iq=f('tranquillité du quartier</b>. Si'),is=f('La <b>santé publique</b> :');[is,iq].sort((a,b)=>b-a).forEach(i=>{if(i>=0)TUT.splice(i,1)});
  set('Les autres scores du bilan',"🤝 😊 👥 Les scores de cette <b>première année</b> : l’<b>accompagnement social</b> (hébergements, droits, repas), la <b>satisfaction</b> des personnes accueillies et l’<b>équipe</b> (moral, formations, salaires). L’an prochain s’ajoutera 🏘️ la <b>tranquillité du quartier</b>, puis en troisième année 💚 la <b>santé publique</b>.",()=>['acf','saf','eqf'].map(k=>$(k)&&($(k).closest('.r')||$(k).parentNode)).filter(Boolean));
  set('La <b>date</b>',"📅 La <b>date</b>. La barre avance pendant le mois : à la fin de chaque mois on fait le point, et en mars arrive le <b>bilan de l’année</b>.");
@@ -10485,10 +10485,37 @@ window.pathTo=function(from,tx,ty){const P=[];try{const cur=roomAt(from.x,from.y
  vw.addEventListener('pointerdown',e=>{try{D=null;if(!started||ended||paused||!$('m').hidden||MEET||(e.target&&e.target!==cv))return;const r=cv.getBoundingClientRect(),lx=(e.clientX-r.left)/r.width*WW-OX,ly=(e.clientY-r.top)/r.height*WH-OY;
    let best=null,bd=9;dogs().forEach(([X,Y])=>{const d=Math.hypot(lx-X,ly-(Y-2));if(d<bd){bd=d;best=[X,Y]}});if(best)D={p:best,x:e.clientX,y:e.clientY,t:performance.now()}}catch(_){}},true);
  vw.addEventListener('pointerup',e=>{try{if(!D)return;const d=D;D=null;if(performance.now()-d.t>450||Math.hypot(e.clientX-d.x,e.clientY-d.y)>8)return;bark();try{flt({x:d.p[0],y:d.p[1]-4},'❤️',1)}catch(_){}window._stmTap=performance.now()}catch(_){}},true);}
+// v480 : tout en dernier — les flèches « à louer / à vendre » passent au-dessus des passant·es, et les « ! » des pros au-dessus de tous les meubles (poubelle DASRI comprise)
+W('draw',(o,a)=>{const r=o(...a);try{if(MEET||ENDING)return r;
+  x.save();x.setTransform(2,0,0,2,0,EY*2);try{if(started){if(window.vanSale&&vanSale())saleFx(392,152,20);if(window.lvSale&&lvSale())saleFx(408,108,26)}}catch(_){}x.restore();
+  x.save();x.setTransform(2,0,0,2,OX*2,OY*2);STF.forEach(z=>{if(z.call&&z.px!=null&&!(z.off>0))bang(z.px,z.py-14,z.call.t<15?'#e03a2e':'#f2a20c')});x.restore()}catch(_){}return r});
 // v479 : quand une fenêtre couvre le jeu, l'image est figée — plus rien ne se dessine par-dessus (sinon les feuilles, la vapeur… laissaient de longues traînées orange visibles à la fermeture)
 {let fz2=0;W('draw',(o,a)=>{try{if(document.body.classList.contains('gpz')&&!MEET&&!(window.EPON)){if(++fz2>3)return}else fz2=0}catch(_){}return o(...a)})}
 // pendant la descente des nuages vers le bureau, aucun autre recadrage ne s'intercale
 W('camOn',(o,a)=>{if(window._flyOn)return;return o(...a)});
+
+// v480 : plus de bureau de Camille — l'accueil prend sa place, juste à côté de l'entrée et de la file, dès le début du jeu ; taille fixe ;
+// il disparaît des menus de construction (seule la salle de consommation reste à construire pour ouvrir) et libère une place dans la halte
+{const AX=176,AY=2;
+ const ensureAcc=(msg)=>{try{if(built[0]&&R[0][2]===AX&&R[0][3]===AY&&RW[0]===56)return;const was=built[0]&&(R[0][2]!==AX||R[0][3]!==AY);let refund=0;
+   if(was){try{refund=Math.max(0,rinv(0))}catch(_){}}
+   built[0]=1;putRoom(0,AX,AY,0);RINV[0]=0;try{for(let k=0;k<SO.length;k++)if(SO[k]===0)SO[k]=-1}catch(_){}
+   try{STF.forEach(z=>{if(z.r===0){z.x=null;z.rk=null}})}catch(_){}
+   if(was&&msg){if(refund>0)eu+=refund;try{say(`🛎️ L’accueil a déménagé juste à côté de l’entrée, à la place de l’ancien bureau. Sa place dans la halte est libre${refund>0?` (+${refund} € récupérés)`:''}.`)}catch(_){}}
+   try{ui()}catch(_){}}catch(e){console.error(e)}};
+ window.ensureAcc=ensureAcc;
+ W('startGame',(o,a)=>{ensureAcc(0);return o(...a)});
+ setInterval(()=>ensureAcc(1),1000);
+ // plus de bureau dessiné ; la barre de la subvention passe sur le mur de l'accueil (tableau à la place de l'affiche)
+ W('drawBureau',(o,a)=>{try{if(built[0]&&R[0][2]===AX){const a_=AX,b_=AY;rect(a_-1,b_-1.5,58,1.5,'#4a3f35');rect(a_+56,b_-1.5,1.5,49.5,'#4a3f35')}}catch(_){}});
+ W('roomFurn',(o,a)=>{const r=o(...a);try{if(a[0]==0&&typeof hasGrant=='function'&&hasGrant()){const A=a[1],Bb=a[2];Q('o_line',A+2,Bb+20);rect(A+4,Bb+20.6,11,2.2,'#2a2433');rect(A+4.5,Bb+21.1,10*Math.max(0,Math.min(1,GP)),1.2,'#5b6ee1')}}catch(_){}return r});
+ // l'accueil n'est ni à construire, ni à déplacer, ni à agrandir
+ {const st=document.createElement('style');st.textContent='#rb0,#rbx .rbc[onclick="rbPick(0)"]{display:none!important}';document.head.appendChild(st)}
+ W('roomMenu',(o,a)=>{if(a[0]===0){try{say('🛎️ L’accueil reste à côté de l’entrée : c’est là que la file arrive. Il ne se déplace pas et garde sa taille.')}catch(_){}return}return o(...a)});
+ W('roomAct',(o,a)=>{if(a[0]===0)return;return o(...a)});
+ W('pick',(o,a)=>{if(a[0]===0)return;return o(...a)});
+ W('rbPick',(o,a)=>{if(a[0]===0)return;return o(...a)});
+}
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
