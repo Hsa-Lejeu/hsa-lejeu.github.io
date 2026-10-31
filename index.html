@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v478')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v479')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -558,7 +558,7 @@ const gy=H-22;g.fillStyle='#c9d7ea';for(let k=0;k<W;k+=14){const h=10+((k*37)%23
 g.fillStyle='#8fcf6a';g.fillRect(0,gy,W,22);g.fillStyle='#7cbf5a';for(let k=0;k<W;k+=5)g.fillRect(k,gy+((k*3)%4),1,2);g.fillStyle='#e6d5a8';g.fillRect(0,gy+9,W,9);g.fillStyle='#d8c38f';for(let k=((t*4)|0)%8;k<W;k+=8)g.fillRect(k,gy+13,3,1);
 for(let k=0;k<W;k+=36){g.fillStyle='#6b4a2b';g.fillRect(k+10,gy-3,2,4);g.fillStyle=['#e86a8a','#f2c230','#ff9a3c','#a98bf0'][(k/36|0)%4];g.fillRect(k+9,gy-5+Math.round(Math.sin(t*2+k)*.6),4,3)}
 SPL.walk.forEach(w=>{w.x+=w.v*dt;if(w.v>0&&w.x>W+12)w.x=-12;if(w.v<0&&w.x<-12)w.x=W+12;const f=[0,1,2,1][Math.floor(t*6+w.ph)%4],dir=w.v<0?1:2,yy=gy+(w.v>0?3:-1);
-if(w.dog){drawSplDog(g,w.x,yy+14,w.v<0,t)}else if(IMC.complete&&IMC.naturalWidth)g.drawImage(IMC,w.ci*48+f*16,dir*26,16,26,Math.round(w.x-8),Math.round(yy-12),16,26)});
+if(w.dog){if(IMD.complete&&IMD.naturalWidth){const df=[0,1,2,1][Math.floor(t*8+w.ph)%4];g.drawImage(IMD,48+df*16,(w.v<0?1:2)*16,16,16,Math.round(w.x-8),Math.round(yy-1),16,16)}else drawSplDog(g,w.x,yy+14,w.v<0,t)}else if(IMC.complete&&IMC.naturalWidth)g.drawImage(IMC,w.ci*48+f*16,dir*26,16,26,Math.round(w.x-8),Math.round(yy-12),16,26)});
 if(Math.random()<dt*1.4)SPL.sp.push({x:Math.random()*W,y:gy,v:6+Math.random()*6,a:1,c:['#ff6b8a','#ffb300','#7fd36b','#6bb8ff'][Math.random()*4|0],h:Math.random()<.6});
 SPL.sp=SPL.sp.filter(p=>{p.y-=p.v*dt;p.a-=dt*.22;if(p.a<=0)return false;g.globalAlpha=p.a;const X=Math.round(p.x+Math.sin(p.y*.12)*3),Y=Math.round(p.y);if(p.h)splHeart(g,X,Y,p.c);else{g.fillStyle=p.c;g.fillRect(X,Y-1,1,3);g.fillRect(X-1,Y,3,1)}g.globalAlpha=1;return true});
 requestAnimationFrame(splLoop)}
@@ -1055,7 +1055,7 @@ if(WATER&&window.EVw){[[108,58],[200,103]].forEach(([wx,wy])=>EVw('eau',wx-4,wy+
 BINS.forEach(b=>{corbeille(b.x,b.y+1,b.l);rect(b.x-3,b.y+2,6,1,'#0007');rect(b.x-3,b.y+2,Math.min(6,b.l/5*6),1,b.l>=5?'#c0392b':'#e0a020');if(b.l>=5)bang(b.x,b.y-10,'#e03a2e');else if(b.l>=4)bang(b.x,b.y-10,'#f2a20c')});
 SYR.forEach(o=>{const pl=.5+.5*Math.sin(Date.now()/200);x.globalAlpha=.2+.3*pl;x.fillStyle='#ffe27a';x.beginPath();x.ellipse(o.x,o.y,6+pl,4+pl*.6,0,0,7);x.fill();x.globalAlpha=1;syr(o.x,o.y);});x.font=LBL;
 if(ENDING)endScene();const se=seas(),t=Date.now()/1000;if(se==2){{const sx=WW-OX-14,sy=-OY+4;rect(sx,sy,8,8,'#ffd54a');rect(sx-2,sy+3,2,2,'#ffd54a');rect(sx+8,sy+3,2,2,'#ffd54a');rect(sx+3,sy-2,2,2,'#ffd54a');rect(sx+3,sy+8,2,2,'#ffd54a')}}
-else if(se!=3){const c=['#fff','#f7b6d0',0,'#e08a2b'][se],c2=['#dfe8ff','#ffd1e1',0,'#f2a541'][se];for(let k=0;k<(se==0?50:34);k++){const X=(k*37+Math.sin(t+k)*5+t)%WW-OX,Y=(t*(7+k%4*3)+k*23)%WH-OY;if(se==1&&X>-2&&X<234&&Y>-2&&Y<172)continue;if(se==0)rect(X,Y,1,1,c);else{const ph=((t*2.5+k)|0)%4;rect(X,Y,2,2,c);rect(ph==0?X+2:ph==1?X+1:ph==2?X-1:X,ph==0?Y:ph==1?Y+2:ph==2?Y+1:Y-1,1,1,c2)}}}}
+else{const c=['#fff','#f7b6d0',0,'#e08a2b'][se];for(let k=0;k<50;k++)rect((k*37+Math.sin(t+k)*5+t*(se==3?4:1))%WW-OX,(t*(7+k%4*3)+k*23)%WH-OY,se==0?1:2,1,c)}}
 const IN_=['Bonjour ! Je suis <b>Camille</b>, chef·fe de service. Le ministère nous confie un défi : ouvrir une <b>Halte Soins Addictions</b> dans ce quartier.','La ville nous prête ce local vide et 1 600 € pour démarrer. Le quartier est tendu : on a <b>trois ans</b> pour convaincre. Allons-y !'];let ii=0;
 
 const HB=k=>document.querySelector('#hud button[onclick="'+k+'()"]'),TB=i=>document.querySelectorAll('#tabs button')[i];
@@ -2764,7 +2764,7 @@ function introZoom(){try{const v=$('view'),VW=v.clientWidth,VH=v.clientHeight,mb
  const ax0=8+((window.LSCOL&&LSCOL())?Math.round($('hud').getBoundingClientRect().right):0),ay0=Z.hh+8,ax1=land?m.left-12:VW-8,ay1=land?VH-8:Math.max(ay0+120,m.top-8),aw=ax1-ax0,ah=ay1-ay0,rc=[170,-4,238,54],
  fx=X=>(OX+X)/WW*Z.cw,fy=Y=>(OY+Y)/WH*Z.ch,k=Math.min(innerWidth>innerHeight?6:4,aw/(fx(rc[2])-fx(rc[0])),ah/(fy(rc[3])-fy(rc[1])));
  Z.s=k;Z.x=ax0+(aw-(fx(rc[2])-fx(rc[0]))*k)/2-fx(rc[0])*k;Z.y=ay0+(ah-(fy(rc[3])-fy(rc[1]))*k)/2-fy(rc[1])*k;applyZ()}catch(e){}}
-W('introNext',(o,a)=>{const r=o(...a);try{if(!$('m').hidden&&INTRO){ISP=1;requestAnimationFrame(introZoom);setTimeout(introZoom,400);setTimeout(introZoom,900)}else ISP=0}catch(_){}return r});
+W('introNext',(o,a)=>{const r=o(...a);try{if(!$('m').hidden&&INTRO){ISP=1;if(!window._flyOn){requestAnimationFrame(introZoom);setTimeout(()=>{if(!window._flyOn)introZoom()},400);setTimeout(()=>{if(!window._flyOn)introZoom()},900)}}else ISP=0}catch(_){}return r});
 W('tutStart',(o,a)=>{ISP=0;try{homeZ()}catch(_){}return o(...a)});
 W('draw',(o,a)=>{const r=o(...a);try{if(!ISP||MEET||!INTRO||($('m').hidden&&!(typeof FLY!='undefined'&&FLY.on))){if(ISP&&(!INTRO))ISP=0;return r}x.save();x.setTransform(2,0,0,2,0,0);const hx=OX+174,hy=OY-3,hw=60,hh=52;
  [[.86,0],[.55,3],[.3,6]].forEach(([al,g],j)=>{x.fillStyle=`rgba(20,16,28,${j==0?al:al*.5})`;x.beginPath();x.rect(-60,-60,WW+120,WH+120);x.rect(hx-g,hy-g,hw+g*2,hh+g*2);x.fill('evenodd')});
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v478')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v479')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -6403,13 +6403,13 @@ function flyRun(){FLY.ph='out';document.body.classList.add('fly');const t0=perfo
   if(fa>0)FLY.cl.forEach(c_=>{const dx=c_.tx-cx,dy=c_.ty-cy,L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L,d=L+pd*(Math.max(W,H)*.75+c_.r*1.5);
     FLY._p=c_.puffs;flyBlob(g,cx+ux*d,cy+uy*d,c_.r,fa)});
   if(sk||(t>=DO&&window.FLYT==null))return flyEnd();requestAnimationFrame(f)};f()}
-function flyEnd(){FLY.on=0;FLY.ph='';const c=$('flyc');if(c)c.remove();document.body.classList.add('flyo');document.body.classList.remove('fly');setTimeout(()=>document.body.classList.remove('flyo'),800);
+function flyEnd(){FLY.on=0;window._flyOn=0;FLY.ph='';const c=$('flyc');if(c)c.remove();document.body.classList.add('flyo');document.body.classList.remove('fly');setTimeout(()=>document.body.classList.remove('flyo'),800);
  const m=$('m');m.style.transition='opacity .45s';m.style.visibility='';requestAnimationFrame(()=>{m.style.opacity=1});setTimeout(()=>{m.style.transition=''},600);
  try{window.introZoom()}catch(_){}}
 // pendant le vol, la première bulle de Camille attend (cachée) : sa place sert à calculer le cadrage final
 W('introNext',(o,a)=>{const r=o(...a);try{if(FLY.on){const m=$('m');m.style.visibility='hidden';m.style.opacity=0}}catch(_){}return r});
 W('draw',(o,a)=>{if(!FLY.on)return o(...a);const m=$('m'),h0=m.hidden;m.hidden=true;try{return o(...a)}finally{m.hidden=h0}});
-W('chefCreate',(o,a)=>{const r=o(...a);try{const spl=document.getElementById('splash');if(spl&&spl.style.opacity!=='0'){const cg=$('cgen'),ok=cg&&cg.querySelector('.ok');if(ok)cg.addEventListener('click',e=>{if(!e.target.closest||!e.target.closest('.ok')||cg._fly)return;e.stopPropagation();e.preventDefault();cg._fly=1;FLY.on=1;FLY.skip=0;
+W('chefCreate',(o,a)=>{const r=o(...a);try{const spl=document.getElementById('splash');if(spl&&spl.style.opacity!=='0'){const cg=$('cgen'),ok=cg&&cg.querySelector('.ok');if(ok)cg.addEventListener('click',e=>{if(!e.target.closest||!e.target.closest('.ok')||cg._fly)return;e.stopPropagation();e.preventDefault();cg._fly=1;FLY.on=1;FLY.skip=0;window._flyOn=1;
   flyCover(()=>{try{ok.onclick()}catch(err){console.error(err)}setTimeout(flyRun,60)})},true)}}catch(_){}return r});
 // ---- album : le tampon « NOUVELLE » bien visible (au milieu de l'image, plus coupé par le bord) + contour qui pulse
 {const st=document.createElement('style');st.textContent=`.aslot.anew{box-shadow:0 0 0 3px #f28a1e,0 0 12px 3px rgba(242,138,30,.7)!important;animation:anFlip .7s ease both,anGlow 1.2s ease-in-out .7s infinite alternate!important}
@@ -10440,26 +10440,34 @@ try{const P=CanvasRenderingContext2D.prototype,d=Object.getOwnPropertyDescriptor
 
 // v478 : nouveau début — plus de lettre du ministère : une allocution télévisée du président (même mise en scène que la finale) qui autorise l'ouverture de la halte, puis on choisit la personne
 window.tvIntro=function(done){const ov=document.createElement('div');ov.id='tvov';ov.classList.add('intro');
- ov.innerHTML=`<div class="tvset"><div class="tvscr"><canvas width="200" height="104"></canvas><div class="tvtop">ÉDITION SPÉCIALE</div><div class="tvlive">● EN DIRECT</div><div class="tvsub"></div><div class="tvtick"><span>ALLOCUTION DU PRÉSIDENT DE LA RÉPUBLIQUE, M. MANUEL MACARON · UNE NOUVELLE HALTE SOINS ADDICTIONS · ALLOCUTION DU PRÉSIDENT DE LA RÉPUBLIQUE, M. MANUEL MACARON · UNE NOUVELLE HALTE SOINS ADDICTIONS ·</span></div><div class="tvscan"></div></div><div class="tvfoot"></div></div><div class="tvbtns"><button class="tvskip">Passer ⏩</button><button class="tvgo" hidden>Choisir la personne ▶</button></div>`;
+ ov.innerHTML=`<div class="tvset"><div class="tvscr"><canvas width="200" height="104"></canvas><div class="tvtop">ÉDITION SPÉCIALE</div><div class="tvlive">● EN DIRECT</div><div class="tvsub"></div><div class="tvtick"><span>ALLOCUTION DU PRÉSIDENT DE LA RÉPUBLIQUE, M. MANUEL MACARON · UNE NOUVELLE HALTE SOINS ADDICTIONS · ALLOCUTION DU PRÉSIDENT DE LA RÉPUBLIQUE, M. MANUEL MACARON · UNE NOUVELLE HALTE SOINS ADDICTIONS ·</span></div><div class="tvscan"></div></div><div class="tvfoot"></div></div><div class="tvbtns"><button class="tvskip">Passer ⏩</button></div>`;
+ // la musique du menu s'arrête, l'audio du jeu démarre (le joueur vient de toucher l'écran) : la Marseillaise peut jouer
+ try{const am=$('splm');if(am&&!am.paused){let v=am.volume;const iv=setInterval(()=>{v-=.08;if(v<=0){clearInterval(iv);am.pause()}else am.volume=v},40)}}catch(_){}
+ try{auInit()}catch(_){}
  const f=document.createElement('div');f.id='tvfade';document.body.appendChild(f);
  setTimeout(()=>{f.remove();document.body.appendChild(ov);try{sfx('page')}catch(_){}
-  const cv2=ov.querySelector('canvas'),g=cv2.getContext('2d');g.imageSmoothingEnabled=false;const H=mkH(g),sub=ov.querySelector('.tvsub'),go=ov.querySelector('.tvgo'),sk=ov.querySelector('.tvskip');
+  const cv2=ov.querySelector('canvas'),g=cv2.getContext('2d');g.imageSmoothingEnabled=false;const H=mkH(g),sub=ov.querySelector('.tvsub'),sk=ov.querySelector('.tvskip');
   const L=['Mes chers compatriotes,','depuis 2021, notre pays expérimente les haltes soins addictions.','Moins de surdoses, moins de seringues dans la rue, des personnes enfin soignées : les premières haltes ont fait leurs preuves.','J’ai donc décidé d’autoriser, pour trois ans, l’ouverture d’une nouvelle Halte Soins Addictions dans votre quartier.','Sa réussite dépendra de son équipe… et de la personne qui la dirigera.'];
   const FIN='Cette personne, c’est vous.';
-  let zoom=1,zt=1,t0=performance.now(),tm=[],over=false;const later=(fn,d)=>tm.push(setTimeout(fn,d));
-  const frame=()=>{if(!ov.isConnected)return;const T=(performance.now()-t0)/1000;zoom+=(zt-zoom)*.025;g.setTransform(1,0,0,1,0,0);g.fillStyle='#1a2340';g.fillRect(0,0,200,104);
-   g.setTransform(zoom,0,0,zoom,100-100*zoom,62-62*zoom);H.room('w3','f1');g.fillStyle='#17305f';g.fillRect(34,10,132,74);g.fillStyle='#1f4288';g.fillRect(38,14,124,66);g.fillStyle='#2a56a8';for(let Y=18;Y<78;Y+=8)g.fillRect(40,Y,120,1);g.fillStyle='#6a5c4c';g.fillRect(154,22,2,60);[['#2f4fa8',0],['#f4f4f8',1],['#d8323c',2]].forEach(([c,i])=>{g.fillStyle=c;g.fillRect(156+i*5,22,5,24)});
+  // zoom centré sur le visage du président (tête vers 100,52)
+  let zoom=1,zt=1,t0=performance.now(),tm=[],over=false,closed=false;const later=(fn,d)=>tm.push(setTimeout(fn,d));const FX=100,FY=56;
+  const frame=()=>{if(!ov.isConnected)return;const T=(performance.now()-t0)/1000;zoom+=(zt-zoom)*.03;g.setTransform(1,0,0,1,0,0);g.fillStyle='#1a2340';g.fillRect(0,0,200,104);
+   const k=Math.min(1,(zoom-1)/1.8),cx=100+(FX-100)*k,cyy=62+(FY-62)*k,sy=62+(36-62)*k;
+   g.setTransform(zoom,0,0,zoom,100-cx*zoom,sy-cyy*zoom);H.room('w3','f1');g.fillStyle='#17305f';g.fillRect(34,10,132,74);g.fillStyle='#1f4288';g.fillRect(38,14,124,66);g.fillStyle='#2a56a8';for(let Y=18;Y<78;Y+=8)g.fillRect(40,Y,120,1);g.fillStyle='#6a5c4c';g.fillRect(154,22,2,60);[['#2f4fa8',0],['#f4f4f8',1],['#d8323c',2]].forEach(([c,i])=>{g.fillStyle=c;g.fillRect(156+i*5,22,5,24)});
    [36,62,124,150].forEach((X,i)=>tvSpr(g,i%2?'drp2':'drp',X,32));tvSpr(g,'lit',6,92);tvSpr(g,'lit',176,92,true);
    H.spr(15,24+((T*5)|0)%6,100,73);tvSpr(g,'pod',92,96);
-   g.setTransform(1,0,0,1,0,0);tvSpr(g,'cam',14,106);tvSpr(g,'cam',170,106,true);requestAnimationFrame(frame)};
+   g.setTransform(1,0,0,1,0,0);if(zoom<1.6){tvSpr(g,'cam',14,106);tvSpr(g,'cam',170,106,true)}requestAnimationFrame(frame)};
   requestAnimationFrame(frame);
-  const type=(txt,big,cb)=>{sub.classList.toggle('big',!!big);sub.textContent='';let i=0;const it=setInterval(()=>{if(!ov.isConnected){clearInterval(it);return}sub.textContent=txt.slice(0,++i);if(i>=txt.length){clearInterval(it);cb&&cb()}},big?55:30);tm.push(it)};
-  const finale=()=>{if(over)return;over=true;tm.forEach(t=>{clearTimeout(t);clearInterval(t)});zt=1.55;sub.classList.add('big');sub.textContent=FIN;sk.hidden=true;try{mrsStop()}catch(_){}
-   try{hasJingle('A')}catch(_){}ov.querySelector('.tvfoot').textContent='📜 Ouverture autorisée pour trois ans';ov.classList.add('k2');setTimeout(()=>{go.hidden=false;go.focus()},1200)};
-  const seq=i=>{if(i<L.length-1){type(L[i],0,()=>later(()=>seq(i+1),1000));return}
-   type(L[i],0,()=>{zt=1.3;later(()=>{try{mrsStop()}catch(_){}sub.textContent='';type(FIN,1,()=>{over=false;finale()})},1600)})};
-  later(()=>{try{mrsPlay()}catch(_){}},900);later(()=>seq(0),1300);
-  sk.onclick=()=>finale();go.onclick=()=>{try{mrsStop()}catch(_){}ov.classList.add('out');setTimeout(()=>{ov.remove();done&&done()},400)}},520)};
+  // sous-titres : mot à mot
+  const type=(txt,big,cb)=>{sub.classList.toggle('big',!!big);sub.textContent='';const W_=txt.split(' ');let i=0;const it=setInterval(()=>{if(!ov.isConnected){clearInterval(it);return}i++;sub.textContent=W_.slice(0,i).join(' ');if(i>=W_.length){clearInterval(it);cb&&cb()}},big?320:210);tm.push(it)};
+  const close=()=>{if(closed)return;closed=true;tm.forEach(t=>{clearTimeout(t);clearInterval(t)});try{mrsStop()}catch(_){}ov.classList.add('out');setTimeout(()=>{ov.remove();done&&done()},400)};
+  const finale=()=>{if(over)return;over=true;tm.forEach(t=>{clearTimeout(t);clearInterval(t)});tm=[];zt=2.8;sk.hidden=true;
+   const show=()=>{sub.classList.add('big');ov.querySelector('.tvfoot').textContent='📜 Ouverture autorisée pour trois ans';ov.classList.add('k2');later(close,2600)};
+   if(sub.textContent!==FIN){sub.textContent='';type(FIN,1,show)}else show()};
+  const seq=i=>{if(i<L.length-1){type(L[i],0,()=>later(()=>seq(i+1),900));return}
+   type(L[i],0,()=>{zt=1.9;later(()=>{sub.textContent='';type(FIN,1,()=>{zt=2.8;finale()})},1400)})};
+  try{mrsPlay()}catch(_){}later(()=>seq(0),1300);
+  sk.onclick=()=>{sk.hidden=true;finale()}},520)};
 
 // v478 : chemins — un·e pro qui va en pause, en revient, ou qu'on a déposé·e ailleurs passe par la porte et les couloirs, jamais à travers les murs
 window.pathTo=function(from,tx,ty){const P=[];try{const cur=roomAt(from.x,from.y),tr=roomAt(tx,ty);let x0=from.x,y0=from.y,row=null;
@@ -10477,6 +10485,10 @@ window.pathTo=function(from,tx,ty){const P=[];try{const cur=roomAt(from.x,from.y
  vw.addEventListener('pointerdown',e=>{try{D=null;if(!started||ended||paused||!$('m').hidden||MEET||(e.target&&e.target!==cv))return;const r=cv.getBoundingClientRect(),lx=(e.clientX-r.left)/r.width*WW-OX,ly=(e.clientY-r.top)/r.height*WH-OY;
    let best=null,bd=9;dogs().forEach(([X,Y])=>{const d=Math.hypot(lx-X,ly-(Y-2));if(d<bd){bd=d;best=[X,Y]}});if(best)D={p:best,x:e.clientX,y:e.clientY,t:performance.now()}}catch(_){}},true);
  vw.addEventListener('pointerup',e=>{try{if(!D)return;const d=D;D=null;if(performance.now()-d.t>450||Math.hypot(e.clientX-d.x,e.clientY-d.y)>8)return;bark();try{flt({x:d.p[0],y:d.p[1]-4},'❤️',1)}catch(_){}window._stmTap=performance.now()}catch(_){}},true);}
+// v479 : quand une fenêtre couvre le jeu, l'image est figée — plus rien ne se dessine par-dessus (sinon les feuilles, la vapeur… laissaient de longues traînées orange visibles à la fermeture)
+{let fz2=0;W('draw',(o,a)=>{try{if(document.body.classList.contains('gpz')&&!MEET&&!(window.EPON)){if(++fz2>3)return}else fz2=0}catch(_){}return o(...a)})}
+// pendant la descente des nuages vers le bureau, aucun autre recadrage ne s'intercale
+W('camOn',(o,a)=>{if(window._flyOn)return;return o(...a)});
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
