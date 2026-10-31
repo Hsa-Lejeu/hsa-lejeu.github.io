@@ -432,7 +432,7 @@ function outW(v){const r=roomAt(v.x,v.y);if(r<0)return[];return[[v.x,inY(r)],[DX
 const freeInt=()=>STF.find(z=>z.role=='int'&&z.off<=0&&!z.follow);
 function wpFor(z,gx,gy){const zs=z.x>=176,gs=gx>=176;if(zs==gs&&(zs||cy(z.y)==cy(gy)))return[gx,gy];if(zs&&!gs)return[174,cy(gy)];return[178,cy(z.y)]}
 function exW(v){const o=outW(v),y=o.length?o[o.length-1][1]:v.y;return o.concat(cy(y)==55?[[WW-OX+6,55]]:[[178,115],[178,55],[WW-OX+6,55]])}
-function spot(v){const r=v.r,k=WL[r].indexOf(v);if(r==0)return window.QSP(k);if(benchR(r)&&k<4)return[DX[r]+8+k*7,rowC(r)+1];const o=[0,9,-9,18,-18,27][Math.min(Math.max(k,0),5)];return[Math.max(DX[r]>232?240:6,Math.min(DX[r]>232?350:170,DX[r]+o)),rowC(r)]}
+function spot(v){const r=v.r,k=WL[r].indexOf(v);if(r==0)return window.QSP(k);if(benchR(r)&&k<4)return[benX(r)-8+k*7,rowC(r)+1];const o=[0,9,-9,18,-18,27][Math.min(Math.max(k,0),5)];return[Math.max(DX[r]>232?240:6,Math.min(DX[r]>232?350:170,DX[r]+o)),rowC(r)]}
 function unq(v){WL.forEach(l=>{const i=l.indexOf(v);if(i>=0)l.splice(i,1)});v.cm=0}
 const POPF={};function popFx(X,YB,w,h,T_){if(T_>1.8)return;const cx=X+w/2,cy=YB-h/2;x.save();
 if(T_<.35){const a=1-T_/.35;x.globalAlpha=a*.5;const gr=x.createLinearGradient(0,cy-40,0,YB);gr.addColorStop(0,'rgba(255,246,194,0)');gr.addColorStop(1,'rgba(255,246,194,1)');x.fillStyle=gr;x.fillRect(cx-w/2-2,cy-40,w+4,YB-cy+40)}
@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v460')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v461')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -1342,7 +1342,7 @@ if(isGF()&&!HEAT[i]){x.globalAlpha=.16;f(0,8,W_,38,'#6fa8dc');x.globalAlpha=1;if
 if(isCN()&&!COOL[i]){x.globalAlpha=.12;f(0,8,W_,38,'#ff9a3c');x.globalAlpha=1;if(!st[i]){x.font='7px sans-serif';x.fillText('🥵',(i==1&&B[window.DFI])?a+W_-20:a+W_-9,b+7);x.font=LBL}}
 if(VOL[i]){if(window.volDraw)volDraw(i,a,b,W_,hist[VOL[i]].ci);else{pc(hist[VOL[i]].ci,a+W_-14,b+32,0,0,0);x.font='6px sans-serif';x.fillText('🤝',a+W_-17,b+14);x.font=LBL}}if(i==6)try{kitDraw(a,b,W_)}catch(_){}IT.forEach((t,k)=>{if(B[k]&&t[0]==i&&!NR[k]){const m=IM[k],X_=a+t[6]+(t[6]>=28?dw:0),YB_=b+t[7]+(m?FU[m][3]/2:0)-(m?FU[m][3]/2:0),age=POPF[k]?(performance.now()-POPF[k])/1000:9;if(m&&IMF.complete){const w_=FU[m][2]/2,h_=FU[m][3]/2,yb=b+t[7];if(age<.5){const e=age/.5,sc=e<.6?e/.6*1.25:1.25-(e-.6)/.4*.25;x.save();x.translate(X_+w_/2,yb);x.scale(Math.max(.05,sc),Math.max(.05,sc));fs(m,-w_/2,-h_);x.restore()}else fs(m,X_,yb-h_);if(age<1.8)popFx(X_,yb,w_,h_,age);else delete POPF[k]}else{x.font='8px sans-serif';x.fillText(t[1],a+t[6],b+t[7]);if(age<1.8)popFx(a+t[6],b+t[7]+1,8,8,age);else delete POPF[k]}}});window._acLog=null;x.font=LBL;if(!st[i]){x.fillStyle='#0004';x.fillRect(a,b+8,W_,38)}
 STF.filter(z=>z.r==i&&z.off<=0).forEach((z,k)=>{if(z.x==null){z.x=a+12+k*14;z.y=b+28}if(i==6&&!z.mv&&z.y>=b+26&&z.y<=b+30)z.y=b+24;z.px=z.x;z.py=z.y;if((i==3||i==5)&&z.seat&&z.ci<NIMA&&IMAok()){if(z.seat=='dn'){pc(z.ci,z.x,z.y,0,0,1)}else if(z.seat=='sitLc')sitDraw(z.ci,z.x,z.y,true,0,k*2);else pcPose(z.ci,z.x,z.y,z.seat,260,k*2)}else pc(z.ci,z.x,z.y,0,z.mv,z.dir||0);if(i==6&&z.y<b+27){Q('stove',a+10,b+27);Q('kcounter',a+18,b+27)}});if(i==0){const td=b>=10,dxl=DX[0]-a,ok_=(cx,w)=>!td||cx+w<=dxl-6||cx>=dxl+6;let cx=4;const cw=FU.counter[2]/2,pw=FU.counter_pc[2]/2;if(ok_(cx,cw))Q('counter',a+cx,b+38);cx+=cw;if(!ok_(cx,pw)){cx=dxl+6}Q('counter_pc',a+cx,b+38);cx+=pw;while(cx<(window.QCW?QCW(W_):W_)-10){if(ok_(cx,cw))Q('counter',a+cx,b+38);cx+=cw}try{QSEATS().forEach(s=>seatC(s[0],s[1],true))}catch(_){}try{IT.forEach((t,k)=>{if(B[k]&&t[0]==0&&!NR[k]&&t[7]>=40&&IM[k]&&FU[IM[k]]&&!(window.POPF&&POPF[k])){const m=IM[k];fs(m,a+t[6]+(t[6]>=28?W_-56:0),b+t[7]-FU[m][3]/2)}})}catch(_){}try{STF.filter(z=>z.r==0&&z.off<=0&&z.px!=null).forEach(z=>{if(IT.some((t,k)=>{if(!(B[k]&&t[0]==0&&!NR[k]&&t[7]>=40&&IM[k]&&FU[IM[k]]))return false;const ix=a+t[6]+(t[6]>=28?W_-56:0),iw=FU[IM[k]][2]/2;return z.py>=b+t[7]-2&&z.px>ix-8&&z.px<ix+iw+8}))pc(z.ci,z.px,z.py,0,z.mv,z.dir||0)})}catch(_){}}});
-drawBureau();Object.keys(BEN).forEach(k=>{const r=BEN[k];if(B[k]&&r>0&&built[r]){const n_=r%2?'x_wait':'x_wait2',q_=window.XFU&&XFU[n_];if(q_&&XAI.complete)x.drawImage(XAI,q_[0],q_[1],q_[2],q_[3],Math.round((DX[r]+16-q_[2]/4)*2)/2,Math.round((rowC(r)+2-q_[3]/2)*2)/2,q_[2]/2,q_[3]/2);else os('bench',DX[r]+16,rowC(r)+2)}});
+drawBureau();Object.keys(BEN).forEach(k=>{const r=BEN[k];if(B[k]&&r>0&&built[r]){const n_=r%2?'x_wait':'x_wait2',q_=window.XFU&&XFU[n_];if(q_&&XAI.complete)x.drawImage(XAI,q_[0],q_[1],q_[2],q_[3],Math.round((benX(r)-q_[2]/4)*2)/2,Math.round((rowC(r)+2-q_[3]/2)*2)/2,q_[2]/2,q_[3]/2);else os('bench',benX(r),rowC(r)+2)}});
 STF.filter(z=>z.role=='med'||z.role=='int'||z.role=='pair'||z.role=='doc').filter(z=>z.off<=0).forEach((z,k)=>{if(z.x==null){z.x=184+k*12;z.y=64}z.px=z.x;z.py=z.y;pc(z.ci,z.x,z.y,0,z.mv,z.dir||0);x.font='6px sans-serif';x.fillText(z.role=='med'?'🤝':z.role=='pair'?'💚':z.role=='doc'?'🩺':'🗣️',z.px-3,z.py-15);if((z.role=='pair'||z.role=='doc')&&z.vt>0&&z.vr>=0){x.globalAlpha=.15+.08*Math.sin(Date.now()/250);rect(R[z.vr][2],R[z.vr][3]+8,RW[z.vr],38,z.role=='doc'?'#8ec8ff':'#7fdc8a');x.globalAlpha=1}x.font=LBL});
 if(fx.r>0||fx.f>0)for(let k=0;k<(fx.f>0?5:3);k++)person(184+k*9,100-(k%2)*3,SK[k%4],CO[(k+2)%6],fx.f>0);
 if(fx.m>0){const mx=216-((fx.m*6)%50);person(mx,88,'#f1c9a0','#2f6fb5');person(mx+4,88,SK[1],CO[3])}
@@ -4240,7 +4240,7 @@ const CPEND=[];let CPM=-1,CPN=0,CPT=-99;
  window.camSay=function(t,cls){try{const s=String(t||'');if(/payés en retard/.test(s)){const k='late'+AMI();B.csm=B.csm||{};if(B.csm[k])return;B.csm[k]=1}
   for(const [r,k] of TH){if(r.test(s)){B.csn=B.csn||{};B.csn[k]=(B.csn[k]||0)+1;if(B.csn[k]>2&&B.csn[k]%3!=0)return;break}}}catch(_){}return oc(t,cls)}})();
 // ---- files d'attente : pas deux personnes sur la même case
-{const _sp=spot;function spotK(r,k){if(r==0)return window.QSP(k);if(benchR(r)&&k<4)return[DX[r]+8+k*7,rowC(r)+1];const o=[0,9,-9,18,-18,27,-27,36][Math.min(Math.max(k,0),7)];return[Math.max(DX[r]>232?240:6,Math.min(DX[r]>232?350:170,DX[r]+o)),rowC(r)]}
+{const _sp=spot;function spotK(r,k){if(r==0)return window.QSP(k);if(benchR(r)&&k<4)return[benX(r)-8+k*7,rowC(r)+1];const o=[0,9,-9,18,-18,27,-27,36][Math.min(Math.max(k,0),7)];return[Math.max(DX[r]>232?240:6,Math.min(DX[r]>232?350:170,DX[r]+o)),rowC(r)]}
  spot=function(v){try{const r=v.r,idx=Math.max(0,WL[r].indexOf(v));if(r==0)return window.QSP(idx);const used=WL[r].filter(o=>o!==v&&o.w&&o.w.length).map(o=>o.w[o.w.length-1]);for(let k=0;k<12;k++){const c=spotK(r,k);if(!used.some(u=>Math.abs(u[0]-c[0])<4&&Math.abs(u[1]-c[1])<4))return c}return spotK(r,idx)}catch(_){return _sp(v)}};window.spot=spot}
 // ---- portrait : quand un panneau s'ouvre, la halte reste visible au-dessus
 W('tab',(o,a)=>{const r=o(...a);try{if(1)return r;const app=$('app');if(!app.classList.contains('open'))return r;const v=$('view'),VH=v.clientHeight,top=Z.hh||0,vis=VH-VH*.52-62;const yc=top+Math.max(60,vis-top)/2;const a0=camN();camTw(a0,()=>{Z.y=yc-(OY+70)/WH*Z.ch*Z.s;applyZ()},450)}catch(_){}return r});
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v460')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v461')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -8314,10 +8314,11 @@ decoCheck=function(){if(!started||ended||MEET)return;B.decoY=B.decoY||{};for(con
  window.rdvGo=rdvGo;window.rdvAsk=rdvAsk}
 
 // ===== v365 : un couloir à gauche de la halte — on passe d'une rangée de salles à l'autre sans repasser par l'entrée ; des bancs pour s'asseoir
-{const LX=-7;
+window.LCBI=new Image();LCBI.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAgCAYAAAAbifjMAAABaUlEQVR42sVVv0vDUBD+0iiG5hlSEYolDjrYwVUUuxYFF7Gu4mb/Kv8Ld2cXB1fnhCKipqQvJQ191EGvJOS9/Gj9ccvBXfje991d7jRIrNO5mA23TdhuCJVnzEIcT7SaDIAxC5fNTVyf7sLxdfR6V3N/MBmje3IGzgMIMYUUgGwwa8NrCADAy/4WAOBpZ2+eF0LcSAG8hsCdbqRihmWmPNmKDMDxdRw2o68PWg4C/qFkmSuhjCkBwnGUicmYFDIgzVEQVpdgsY3CuBLArBvL1SDZRnpRxuj3uiAd8fChOgBV/1xEyzGQzcXf1KA7GgIA7tdtcPM4M1CFAO9vrz/XhYUBkj8RSSoN8LhWzwAl56FW9uX/rUFeVxZiMIpX8wFoldNSBYDpwCsvwfF16QZqac/Va0AvO76eok6mqW4jYxY4D1BwI/tKBnTKSA552w3Bj9qw3VB9mZLUOQ/6355St8mCKq9z0uflPgEIxZR+SyfzzQAAAABJRU5ErkJggg==';
+{const LX=-5.5;
  window.lcorDraw=function(se){try{rect(-15,49,15,72,'#4a3f35');FT('f7',-14,50,14,70);rect(-14,50,14,1,'#00000022');rect(-1,60,1,50,'#4a3f35');
   // bancs le long du mur
-  if(window.LCB2!==false&&IMF.complete){fs('bench_b',-15,62);fs('bench_w',-15,88)}else [[-12.5,70],[-12.5,92]].forEach(([X,Y])=>{rect(X,Y,4,12,'#2a2433');rect(X+.5,Y+.5,3,11,'#c9934f');rect(X+.5,Y+.5,3,1,'#e3b273');rect(X+3,Y+1,1,10,'#8a5a2a')});
+  if(window.LCBI&&LCBI.complete&&LCBI.naturalWidth){[62,86].forEach(Y=>x.drawImage(LCBI,0,0,16,32,-16.5,Y,8,16))}else [[-12.5,70],[-12.5,92]].forEach(([X,Y])=>{rect(X,Y,4,12,'#2a2433');rect(X+.5,Y+.5,3,11,'#c9934f');rect(X+.5,Y+.5,3,1,'#e3b273');rect(X+3,Y+1,1,10,'#8a5a2a')});
   if(se!=0)os('fl1',-4,64);os('plant',-3,110)}catch(_){}};
  const opt=(w,x0)=>{if(!w||w._lc||!w.length)return;w._lc=1;for(let i=0;i<w.length-1;i++){const p=w[i],q=w[i+1];if(p[0]===178&&q[0]===178&&p[1]!==q[1]&&(p[1]==55||p[1]==115)&&(q[1]==55||q[1]==115)){const xp=i>0?w[i-1][0]:x0,xn=w[i+2]?w[i+2][0]:178;if(xp<176&&xn<176&&Math.abs(xp-LX)+Math.abs(xn-LX)<Math.abs(xp-178)+Math.abs(xn-178)){w[i]=[LX,p[1]];w[i+1]=[LX,q[1]]}i++}}};
  W('upd',(o,a)=>{try{V.forEach(v=>{if(v&&v.w)opt(v.w,v.x)});STF.forEach(z=>{if(z&&z.wp)opt(z.wp,z.x)})}catch(_){}return o(...a)});
@@ -9660,7 +9661,7 @@ setInterval(()=>{try{const b=$('pmrb');if(!b)return;const C_=pmrCost();b.disable
 // cartes d'album
 try{[["c113","droit",2,"L’accessibilité","Rendre la halte accessible","Une marche, une porte trop étroite, des toilettes trop petites : pour une personne en fauteuil, c’est une porte fermée. Et l’accessibilité ne concerne pas que le fauteuil : signalétique lisible, accueil des personnes sourdes ou malentendantes, explications simples.","Depuis la loi du 11 février 2005, les établissements recevant du public doivent être accessibles aux personnes handicapées, quel que soit leur handicap. Beaucoup de lieux ne le sont toujours pas, y compris des structures sociales et médico-sociales."],
  ["c114","droit",2,"La MDPH et l’AAH","Faire reconnaître le handicap d’Agnès","La Maison départementale des personnes handicapées (MDPH) reconnaît le handicap et ouvre des droits : allocation aux adultes handicapés (AAH), carte mobilité inclusion, orientation vers un service adapté. Le dossier est long et complexe, encore plus sans adresse fixe.","Selon le baromètre de la CNSA, il faut en moyenne plus de quatre mois pour obtenir une réponse de la MDPH. Le handicap psychique, fréquent chez les personnes à la rue, peut lui aussi être reconnu."],
- ["c115","vies",2,"Le validisme","Rencontrer Agnès","Le validisme, c’est considérer les personnes valides comme la norme, et les personnes handicapées comme moins capables. Il se glisse partout : parler à l’accompagnant plutôt qu’à la personne, décider à sa place, aider sans demander.","Les personnes handicapées sont aussi des professionnel·les, des pair-aidant·es, des militant·es. « Rien sur nous sans nous » est le mot d’ordre historique du mouvement pour les droits des personnes handicapées."]].forEach(c=>{if(!CARDS.some(x=>x[0]==c[0]))CARDS.push(c)});
+ ["c115","droit",2,"Le validisme","Rencontrer Agnès","Le validisme, c’est considérer les personnes valides comme la norme, et les personnes handicapées comme moins capables. Il se glisse partout : parler à l’accompagnant plutôt qu’à la personne, décider à sa place, aider sans demander.","Les personnes handicapées sont aussi des professionnel·les, des pair-aidant·es, des militant·es. « Rien sur nous sans nous » est le mot d’ordre historique du mouvement pour les droits des personnes handicapées."]].forEach(c=>{if(!CARDS.some(x=>x[0]==c[0]))CARDS.push(c)});
  CCOND.c113=()=>!!B.pmr;CCOND.c114=()=>!!B.wcMdOk;CCOND.c115=()=>!!(B.wcT||B.wcStaff||(hist[WCU]&&hist[WCU].v>0));
  Object.assign(CSC,{c113:H=>{H.street?H.street():H.room('w3','f2');hWc(H,wcCi(),100,100,1,0)},c114:H=>{H.room('w0','f3');H.F('o_desk2',70,84);hWc(H,wcCi(),130,96,2,0)},c115:H=>{H.room('w3','f2');H.F('plant_m',30,60);try{const z=STF.find(z=>z.n==B.wcStaff);hWc(H,z?z.ci:wcCi(),80,96,1,3);H.spr(RIVC[2]||77,54,128,94)}catch(_){}}})}catch(e){console.error(e)}
 // v450 : ordinateur — icônes des onglets bien centrées, interface plus grande sur grand écran
@@ -9690,7 +9691,7 @@ setInterval(()=>{try{const par=$('par');if(!par)return;let h=$('parhint');if(!h)
 
 // v457 : personne ne passe plus dans l'étroit passage entre la halte et les cordons de la file :
 // pour changer de rangée de salles, on prend toujours le couloir de gauche
-{const LX=-7,cyy=y=>y>=110?115:55;
+{const LX=-5.5,cyy=y=>y>=110?115:55;
  const opt2=w=>{if(!w||w._lc2||!w.length)return;w._lc2=1;for(let i=0;i<w.length-1;i++){const p=w[i],q=w[i+1];if(p[0]===178&&q[0]===178&&p[1]!==q[1]&&(p[1]==55||p[1]==115)&&(q[1]==55||q[1]==115)){w[i]=[LX,p[1]];w[i+1]=[LX,q[1]];i++}}};
  W('upd',(o,a)=>{try{V.forEach(v=>{if(v&&v.w)opt2(v.w)});STF.forEach(z=>{if(z&&z.wp)opt2(z.wp)})}catch(_){}return o(...a)});
  W('wpFor',(o,a)=>{try{const[z,gx,gy]=a,zs=z.x>=176,gs=gx>=176;
@@ -9811,6 +9812,39 @@ setInterval(()=>{try{document.querySelectorAll('button[id^="prj_"],button[id^="p
 // v460 : lisibilité — texte un peu plus grand dans les panneaux et les fenêtres ; les fenêtres des actions (maraude, réunion…) ne répètent le long texte que la première fois
 {const st=document.createElement('style');st.textContent=`body{font-size:15px}#fmo .fd,.fd{font-size:14px}.hint{font-size:13.5px}#mb p{font-size:15px}`;document.head.appendChild(st);
  W('actScene',(o,a)=>{const k=a[0];let sv=null;try{if(SCN[k]&&((B.nA||{})[k]||0)>=1){sv=SCN[k][1];const m=/^(.*?[.!?…])\s/.exec(sv);if(m&&m[1].length<sv.length-20)SCN[k][1]=m[1]}}catch(_){}try{return o(...a)}finally{if(sv!=null)SCN[k][1]=sv}})}
+
+// v461 : les bancs d'attente des salles ne bouchent plus aucune porte — placés au premier endroit libre du couloir, loin de toutes les portes
+window.benX=function(r){try{const row=rowC(r),doors=[];R.forEach((q,i)=>{if(built[i]&&rowC(i)==row&&DX[i]!=null)doors.push(DX[i])});
+ const used=[];let res=DX[r]+16;
+ for(const k of Object.keys(BEN)){const rr=BEN[k];if(!(B[k]&&rr>0&&built[rr]&&rowC(rr)==row))continue;
+  let c=null;for(const o of [20,-20,28,-28,36,-36,44,-44]){const X=DX[rr]+o;if(X<10||X>166)continue;if(doors.some(d=>Math.abs(X-d)<16))continue;if(used.some(u=>Math.abs(X-u)<17))continue;c=X;break}
+  if(c==null)c=DX[rr]+20;used.push(c);if(rr==r)res=c}
+ return res}catch(_){return DX[r]+16}};
+// v461 : l'illustration de la 4e hospitalisation de Sylvie — plus de bulle incompréhensible : elle est attachée au lit (contention)
+{const o_=LCD.img;LCD.img=(H,T,ci,o)=>{o_(H,T,ci,o);try{if(o&&o.i==46&&SIMG.complete){const g=H.g,c=g.canvas,sx=(46%10)*200,sy=Math.floor(46/10)*104;
+  g.drawImage(SIMG,sx+160,sy+20,40,30,112,20,40,30);g.drawImage(c,126,36,16,20,94,36,16,20);
+  [74,83].forEach(y=>{g.fillStyle='#4a3428';g.fillRect(91,y,17,2);g.fillStyle='#7a5a3e';g.fillRect(91,y,17,1)})}}catch(_){}}}
+// v461 : situations manquantes dans le dossier de suivi (« undefined »)
+Object.assign(LCSIT,{hop:'À l’hôpital',lhss:'En lits halte soins santé (LHSS)',pension:'En pension de famille'});
+
+// v461 : fauteuils roulants — une feuille de sprites dédiée par personnage (fauteuil + personne assise, 4 directions), composée une fois puis mise en cache
+{const WCSH={};
+ window.wcSheet=function(ci,row){const k=ci+'|'+row;if(WCSH[k])return WCSH[k];if(!WCI.complete||!WCI.naturalWidth||!IMAok())return null;
+  const c=document.createElement('canvas');c.width=128;c.height=40;const g=c.getContext('2d');g.imageSmoothingEnabled=false;const Y0=8;
+  const chair=(v,dx,cut)=>{cut=cut||0;g.drawImage(WCI,v*32,row*32+cut,32,32-cut,dx,Y0+cut,32,32-cut)},
+        body=(col,dx,dy)=>g.drawImage(IMA,col*16,ci*26,16,26,dx,Y0+dy,16,26);
+  // face (vers le bas)
+  chair(0,0);body(24,8,-6);g.drawImage(WCI,0,row*32+10,9,22,0,Y0+10,9,22);g.drawImage(WCI,23,row*32+10,9,22,23,Y0+10,9,22);
+  // vers la droite (case 2), puis miroir pour la gauche (case 1)
+  const r=document.createElement('canvas');r.width=32;r.height=40;const gr=r.getContext('2d');gr.imageSmoothingEnabled=false;
+  gr.drawImage(WCI,32,row*32,32,32,0,Y0,32,32);gr.drawImage(IMA,48*16,ci*26,16,26,6,Y0-1,16,26);gr.drawImage(WCI,32,row*32+16,32,16,0,Y0+16,32,16);
+  g.drawImage(r,64,0);g.save();g.translate(64,0);g.scale(-1,1);g.drawImage(r,0,0);g.restore();
+  // de dos
+  g.drawImage(IMA,42*16,ci*26,16,26,96+8,Y0-8,16,26);g.drawImage(WCI,0,row*32,32,32,96,Y0,32,32);
+  return WCSH[k]=c};
+ window.wcDraw=function(ci,px,py,dir,row){const S=wcSheet(ci,row|0);if(!S)return false;const d=dir|0,cell=[0,1,2,3][d];
+  x.drawImage(S,cell*32,0,32,40,Math.round((px-8)*2)/2,Math.round((py-18.5)*2)/2,16,20);return true}}
+window.hWc=function(H,ci,X,YB,v,row){try{const S=wcSheet(ci,row|0);if(!S)return;const cell=v==1?2:v==2?1:v==3?3:0;H.g.drawImage(S,cell*32,0,32,40,Math.round(X-16),Math.round(YB-38),32,40)}catch(_){}};
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
