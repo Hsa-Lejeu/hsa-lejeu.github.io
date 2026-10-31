@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v464')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v465')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -1135,7 +1135,7 @@ $('gh').textContent=B.g?'Le jardin est ouvert : équipe-le pour le rendre agréa
 R.forEach((r,i)=>{const h=$('hb'+i),c=$('cb'+i);$('clw'+i).style.display=HOK||COK?'':'none';h.style.display=HOK?'':'none';c.style.display=COK?'':'none';h.disabled=!!HEAT[i]||eu<HC;h.querySelector('i').textContent=HEAT[i]?'✔':HC+' €';c.disabled=!!COOL[i]||eu<CC;c.querySelector('i').textContent=COOL[i]?'✔':CC+' €'})}
 IT.forEach((t,i)=>{const b=$('s'+i);if(i==PHI)b.style.display=DOC()||B[i]?'':'none';b.disabled=!!B[i]||eu<t[3]||!(t[0]==9?B.g:built[t[0]]);b.querySelector('i').textContent=B[i]?'✔ installé':t[3]+' €'});['h','d','r','b','k','x','j','v','y','o','e'].forEach(k=>{const b=$('p'+k);if(!b)return;b.disabled=!!P[k]||eu<PC[k]||(k=='j'&&!ULK('tpj'));b.querySelector('i').textContent=P[k]?'✔ Partenaire'+(k=='h'?' · '+Math.floor(hp)+' places':k=='b'?(built[6]?' · '+(S.f||0)+' denrées en cuisine':' · paniers repas'):''):(k=='j'&&!ULK('tpj'))?'🔒 pas encore débloqué':PC[k]+' €'});$('un').textContent=un;['m','r','f','t','a'].forEach(k=>{const b=$('a'+k);b.disabled=eu<AC[k][0]||cd[k]>0;b.querySelector('i').textContent=cd[k]>0?'⏳ '+Math.ceil(cd[k]/DAYL)+' j':AC[k][0]+' €'});{const b=$('atour');if(b){b.hidden=!B.van;b.disabled=!!TOUR||(B.tcd||0)>0||eu<TCOST||!tourAvail().length;b.querySelector('i').textContent=TOUR?'🚐 en tournée… '+Math.max(0,Math.ceil(TOUR.t/DAYL))+' j':(B.tcd||0)>0?'de retour, plein dans '+Math.ceil(B.tcd/DAYL)+' j':TCOST+' €'}}
 const a=qi<QS.length&&acc>=3*(qi+1),b=$('q');b.disabled=!a;b.className='go'+(a?' pulse':'');b.textContent=a?'🎓 Formation prête : répondre au quiz !':`🎓 Prochaine formation à ${3*(qi+1)} accompagnés`}
-function newV(){const GA=NM.filter(n=>{const h=hist[n];if(WS&&!WS.done&&WS.parts.some(p=>p.n==n))return false;if(LANG[n]&&!EXA)return false;if(h&&h.forced>GT&&Math.random()<.6)return false;return !h||(h.vol==null&&h.st!='envol'&&((h.st!='gone'&&h.st!='hosp')||h.back<=GT))}),nm=window.FORCEN||rc(GA.length?GA:(NM.filter(n=>!hist[n]||hist[n].st!='envol').length?NM.filter(n=>!hist[n]||hist[n].st!='envol'):NM)),H=hist[nm]||(hist[nm]={n:nm,v:0,ok:{},un:0,sat:50,st:'ok',ci:CIN[NM.indexOf(nm)]}),_0=H.st=='gone'&&(H.st='ok',H.sat=35,H.ret=1),_1=H.st=='hosp'&&(H.st='ok',H.ret=2),c2=['h','d','r','o'].filter(k=>!H.ok[k]).concat(['s','m','s','y'],(built[8]&&st[8])?['a','a']:[],(built[7]&&st[7])?['z','z','z']:[],(built[6]&&st[6])?['r','r','r']:[]),nd=c2.length&&Math.random()<.8?rc(c2):null;return{x:WW-OX+6,y:55,r:-1,path:nd=='z'?[0,7]:nd?[0,1,2,nd=='s'?4:nd=='m'?5:nd=='a'?8:nd=='z'?7:(nd=='r'&&built[6]&&st[6])?6:(nd=='h'&&built[7]&&st[7]&&Math.random()<.85)?7:3]:[0,1,2],name:nm,need:nd,dg:rc(DG.filter(d=>(d[0]!='p'||(F.p&&DOC()))&&(d[0]!='v'||DOC()))),lang:LANG[nm],dog:DOGS[nm],pi:-1,w:[],cared:0,skin:rc(SK),col:rc(CO),s:'walk',first:true}}
+function newV(){const GA=NM.filter(n=>{const h=hist[n];if(n==window.WCU&&((YR-1)*12+mo)<3)return false;if(WS&&!WS.done&&WS.parts.some(p=>p.n==n))return false;if(LANG[n]&&!EXA)return false;if(h&&h.forced>GT&&Math.random()<.6)return false;return !h||(h.vol==null&&h.st!='envol'&&((h.st!='gone'&&h.st!='hosp')||h.back<=GT))}),nm=window.FORCEN||rc(GA.length?GA:(NM.filter(n=>!hist[n]||hist[n].st!='envol').length?NM.filter(n=>!hist[n]||hist[n].st!='envol'):NM)),H=hist[nm]||(hist[nm]={n:nm,v:0,ok:{},un:0,sat:50,st:'ok',ci:CIN[NM.indexOf(nm)]}),_0=H.st=='gone'&&(H.st='ok',H.sat=35,H.ret=1),_1=H.st=='hosp'&&(H.st='ok',H.ret=2),c2=['h','d','r','o'].filter(k=>!H.ok[k]).concat(['s','m','s','y'],(built[8]&&st[8])?['a','a']:[],(built[7]&&st[7])?['z','z','z']:[],(built[6]&&st[6])?['r','r','r']:[]),nd=c2.length&&Math.random()<.8?rc(c2):null;return{x:WW-OX+6,y:55,r:-1,path:nd=='z'?[0,7]:nd?[0,1,2,nd=='s'?4:nd=='m'?5:nd=='a'?8:nd=='z'?7:(nd=='r'&&built[6]&&st[6])?6:(nd=='h'&&built[7]&&st[7]&&Math.random()<.85)?7:3]:[0,1,2],name:nm,need:nd,dg:rc(DG.filter(d=>(d[0]!='p'||(F.p&&DOC()))&&(d[0]!='v'||DOC()))),lang:LANG[nm],dog:DOGS[nm],pi:-1,w:[],cared:0,skin:rc(SK),col:rc(CO),s:'walk',first:true}}
 function next(v){v.pi++;if(v.pi>=v.path.length)return leave(v);const r=v.path[v.pi];v.r=r;if(!st[r]||(r==1&&(S.n<1||DASFULL()))){if(r==0)return fail(v);return next(v)}WL[r].push(v);v.s='wait';v.w=[spot(v)]}
 function enter(v){if(v.r==0)greet(v);else if(v.r<9&&Math.random()<.35){if(isGF()&&!HEAT[v.r])setTimeout(()=>talk(v.name,'🥶 Brrr, il fait froid ici…',v),700);else if(isCN()&&!COOL[v.r])setTimeout(()=>talk(v.name,'🥵 Qu’il fait chaud…',v),700)}const H_=hist[v.name];if(v.dog&&[1,3,4,5].includes(v.r)&&!B[20]&&!v.dgw){v.dgw=1;H_.sat-=P.v?5:10;talk(v.name,'🐕 Je n’aime pas laisser mon chien seul dehors…',v)}occ[v.r]++;const r=R[v.r];if(v.r==7){const u=V.filter(w=>w!==v&&w.r==7&&(w.s=='in'||w.inroom)).map(w=>w.bed);v.bed=[...Array(bedsN()).keys()].find(k=>!u.includes(k));if(v.bed==null)v.bed=0}v.w=[[DX[v.r],inY(v.r)],v.r==7?[r[2]+9.5+v.bed*18,r[3]+27]:v.r==0?[r[2]+8+Math.random()*((window.QCW?QCW(RW[0]):RW[0])-16),r[3]+42+Math.random()*3]:inPos(v,r)];if(v.qin){v.w.shift();v.qin=0}v.inroom=true;v.s='walk'}
 function leave(v){v.leaving=true;v.done=true;v.w=exW(v);acc++;MS.acc++;NOT=nUp(.35);q+=1.2+QB;outc(v)}
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v464')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v465')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -8934,7 +8934,7 @@ try{NE.s='🩺';NE.d='📋'}catch(_){}
  // an 3 : affiches « FERMEZ LA HSA » puis « VOTEZ CROTTI »
  const PS=window.CRPS||[[184,38],[141,34],[257,34],[35,32],[426,34],[144,10],[182,12],[252,10]];
  const nP=()=>{const a=am_();if(YR!=3||a<24)return 0;return Math.min(PS.length,1+(a-24))};
- const ourP=()=>Math.min(nP(),(B.ourP||0));
+ const ourP=()=>Math.min(nP(),(B.ourP||0));window.CRP_={nP,ourP,PS};
  const poster=(X,Y,kind)=>{x.save();const w=11,h=14;x.fillStyle='rgba(0,0,0,.25)';x.fillRect(X+1,Y+1,w,h);
   if(kind=='fre'){const C=['#e85d75','#f2a541','#4fb874','#3f9ae0','#a46bff'];for(let i=0;i<5;i++){x.fillStyle=C[i];x.fillRect(X,Y+i*h/5,w,h/5+.3)}x.fillStyle='#fff';x.fillRect(X+3,Y+4,5,5);x.restore();return}
   x.fillStyle=kind=='our'?'#e9f7ec':'#fffaf0';x.fillRect(X,Y,w,h);x.fillStyle=kind=='our'?'#2e9e4f':'#c0392b';x.fillRect(X,Y,w,2.6);
@@ -8943,7 +8943,7 @@ try{NE.s='🩺';NE.d='📋'}catch(_){}
   else if(kind=='vote'){x.fillStyle='#fff';x.fillText('VOTEZ',X+w/2,Y+.2);try{if(IMAok())x.drawImage(IMA,24*16+4,CR*26+2,8,9,X+3,Y+3,5,5.5)}catch(_){}x.fillStyle='#c0392b';x.fillText('CROTTI',X+w/2,Y+10.4)}
   else{x.fillStyle='#fff';x.fillText('NON !',X+w/2,Y+.2);x.fillStyle='#2a2433';x.fillText('FERMEZ',X+w/2,Y+4.5);x.fillText('LA',X+w/2,Y+7.3);x.fillText('HSA',X+w/2,Y+10.1)}x.restore()};
  W('draw',(o,a)=>{const r=o(...a);try{const n=nP();if(!n||MEET)return r;x.save();x.setTransform(2,0,0,2,0,EY*2);const us=ourP(),fre=((B.prjN||{}).fre||0)>0?2:0;
-  for(let i=0;i<n;i++){const[X,Y]=PS[i];const kind=i<fre?'fre':i<fre+us?'our':(i%2==1?'vote':'non');poster(X,Y,kind)}x.restore()}catch(_){}return r});
+  for(let i=0;i<n;i++){const[X,Y]=PS[i];const kind=i<fre?'fre':i<fre+us?'our':(i%2==1?'vote':'non');if(kind!='fre'&&kind!='our'&&window.crTornOn&&crTornOn(i)){try{crTornDraw(X,Y)}catch(_){}}else poster(X,Y,kind)}x.restore()}catch(_){}return r});
  // riposte : coller nos affiches
  setInterval(()=>{try{const host=$('am')&&$('am').parentNode;if(!host)return;let b=$('acp');const show=started&&YR==3&&nP()>0;if(!b){b=document.createElement('button');b.id='acp';b.onclick=()=>{if(eu<60||ourP()>=nP())return;eu-=60;try{LM.o['Affiches']=(LM.o['Affiches']||0)+60}catch(_){}B.ourP=(B.ourP||0)+3;q=Math.min(100,q+2);NOT=nUp(2);say('🪧 Les bénévoles collent des affiches « Soigner, pas punir » par-dessus celles de Crotti.');try{sfx('buy')}catch(_){}ui()};host.appendChild(b)}
   b.style.display=show?'':'none';if(show){const t=`🪧 Affiches « Soigner, pas punir »<br><i>60 € · recouvre 3 affiches de Crotti</i>`;if(b._t!==t){b._t=t;b.innerHTML=t}b.disabled=eu<60||ourP()>=nP()}}catch(_){}},1500);
@@ -9899,6 +9899,205 @@ window.CLST='final';
  x.font="700 4.4px 'Atkinson Hyperlegible',sans-serif";const txt='⛔ '+why,tw=x.measureText(txt).width,bw=tw+6;
  let px=A+3+pw+8,py=Bb+1;if(px+bw>A+w-1){px=A+3;py=Bb+10}
  x.fillStyle='#2a2433';x.fillRect(px-.5,py-.5,bw+1,8);x.fillStyle='#ffe2dc';x.fillRect(px,py,bw,7);x.fillStyle='#2a2433';x.fillText(txt,px+3,py+5.1);x.font=LBL}}
+
+// ===== v465 : sigles soulignés — on les touche pour voir leur signification dans une petite bulle
+{const G={DASRI:'Déchets d’activités de soins à risques infectieux : seringues, aiguilles… jetés dans des conteneurs jaunes, collectés à part.',
+ TROD:'Test rapide d’orientation diagnostique : dépistage du VIH ou de l’hépatite C en quelques minutes, au bout du doigt.',
+ CSAPA:'Centre de soins, d’accompagnement et de prévention en addictologie : suivi, traitements de substitution.',
+ CAARUD:'Centre d’accueil et d’accompagnement à la réduction des risques pour usagers de drogues.',
+ RDR:'Réduction des risques : limiter les dommages liés aux consommations, sans exiger l’arrêt.',RdR:'Réduction des risques : limiter les dommages liés aux consommations, sans exiger l’arrêt.',
+ HSA:'Halte soins addictions : lieu où l’on consomme ses produits sous la supervision de soignant·es, avec un accompagnement.',
+ SCMR:'Salle de consommation à moindre risque : l’ancien nom des haltes soins addictions.',
+ LHSS:'Lits halte soins santé : lits médicalisés pour des personnes sans domicile qui ont besoin de soins.',
+ ACT:'Appartement de coordination thérapeutique : logement avec un accompagnement médical et social.',
+ AERLI:'Accompagnement et éducation aux risques liés à l’injection : un·e soignant·e observe et conseille le geste.',
+ MDPH:'Maison départementale des personnes handicapées : reconnaissance du handicap, AAH, carte mobilité inclusion.',
+ AAH:'Allocation aux adultes handicapés : un revenu minimum pour les personnes handicapées.',
+ PMR:'Personne à mobilité réduite (fauteuil roulant, béquilles, poussette…).',
+ ARS:'Agence régionale de santé : finance et contrôle les établissements de santé de la région.',
+ SIAO:'Service intégré d’accueil et d’orientation : il gère les places d’hébergement d’urgence (le 115).',
+ PrEP:'Prophylaxie pré-exposition : un médicament qui protège du VIH, pris avant les rapports.',
+ VIH:'Virus de l’immunodéficience humaine : sans traitement, il conduit au sida.',VHC:'Virus de l’hépatite C : il abîme le foie, mais se guérit aujourd’hui en quelques semaines.',
+ OFPRA:'Office français de protection des réfugiés et apatrides : il décide d’accorder ou non l’asile.',
+ CRA:'Centre de rétention administrative : lieu d’enfermement avant une expulsion du territoire.',
+ CADA:'Centre d’accueil pour demandeurs d’asile : hébergement pendant la procédure.',
+ HAS:'Haute Autorité de santé : elle fixe les référentiels de qualité des établissements de santé.',
+ ELSA:'Équipe de liaison et de soins en addictologie : elle intervient dans les services de l’hôpital.',
+ PMI:'Protection maternelle et infantile : suivi des femmes enceintes et des enfants de moins de 6 ans.',
+ TAPAJ:'Travail alternatif payé à la journée : quelques heures de travail, payées le jour même.',
+ GEM:'Groupe d’entraide mutuelle : une association gérée par et pour les personnes concernées.',
+ CVS:'Conseil de la vie sociale : les usager·es y donnent leur avis sur le fonctionnement de la halte.',
+ IGAS:'Inspection générale des affaires sociales : elle évalue les politiques sociales et de santé.',
+ TSO:'Traitement de substitution aux opiacés : méthadone ou buprénorphine.',
+ SAMU:'Service d’aide médicale urgente : le 15.',AME:'Aide médicale d’État : couverture santé des personnes sans titre de séjour.',
+ OQTF:'Obligation de quitter le territoire français.',CMI:'Carte mobilité inclusion : facilite le stationnement et l’accès aux transports.'};
+ window.GLOSS=G;
+ const RE=new RegExp('(^|[^\\p{L}\\p{N}])('+Object.keys(G).sort((a,b)=>b.length-a.length).join('|')+')(?![\\p{L}\\p{N}])','gu');
+ const st=document.createElement('style');st.textContent=`abbr.sg{text-decoration:none;border-bottom:1.5px dotted #2f6fb5;cursor:help;color:inherit}
+#sgtip{position:fixed;z-index:2147483600;max-width:min(280px,86vw);background:#fffaf0;border:2.5px solid #2a2433;border-radius:10px;padding:7px 10px;box-shadow:0 4px 0 rgba(0,0,0,.25);font:400 13.5px/1.35 'Atkinson Hyperlegible',sans-serif;color:#2a2433;pointer-events:none;animation:sgin .15s ease-out}
+#sgtip b{color:#2f6fb5}@keyframes sgin{from{opacity:0;transform:translateY(4px)}}`;document.head.appendChild(st);
+ const SKIP='BUTTON,SCRIPT,STYLE,CANVAS,TEXTAREA,INPUT,SELECT,ABBR,SVG,svg,TITLE';
+ const wrap=root=>{try{const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||!n.nodeValue||n.nodeValue.length<3)return NodeFilter.FILTER_REJECT;if(p.closest(SKIP.split(',').join(','))||p.closest('.ptg,#sgtip,[data-nosg]'))return NodeFilter.FILTER_REJECT;RE.lastIndex=0;return RE.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+   const L=[];while(w.nextNode())L.push(w.currentNode);
+   L.forEach(n=>{const v=n.nodeValue;RE.lastIndex=0;const f=document.createDocumentFragment();let last=0,m;while((m=RE.exec(v))){const s=m.index+m[1].length;f.append(document.createTextNode(v.slice(last,s)));const a=document.createElement('abbr');a.className='sg';a.textContent=m[2];f.append(a);last=s+m[2].length}f.append(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)})}catch(_){}};
+ const IDS=['m','fmo','vig','petov','toasts','dfb','lcbook','cmbx','rdov','xpov','debov','envo'];
+ let pend=0;const run=()=>{pend=0;IDS.forEach(id=>{const e=document.getElementById(id);if(e&&!e.hidden)wrap(e)});const sd=document.getElementById('side');if(sd)sd.querySelectorAll('.hint,p,h2,h3,h4,li').forEach(e=>{if(!e.closest('button'))wrap(e)})};
+ new MutationObserver(()=>{if(!pend){pend=1;setTimeout(run,60)}}).observe(document.body,{childList:true,subtree:true,characterData:true});
+ let tip=null;const hide=()=>{if(tip){tip.remove();tip=null}};
+ const show=(a)=>{hide();const k=a.textContent,d=G[k];if(!d)return;tip=document.createElement('div');tip.id='sgtip';tip.innerHTML=`<b>${k}</b> : ${d}`;document.body.appendChild(tip);const r=a.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight;let L=Math.max(8,Math.min(innerWidth-tw-8,r.left+r.width/2-tw/2)),T=r.top-th-8;if(T<8)T=r.bottom+8;tip.style.left=L+'px';tip.style.top=T+'px';clearTimeout(show._t);show._t=setTimeout(hide,7000)};
+ ['pointerdown','click'].forEach(ev=>window.addEventListener(ev,e=>{const a=e.target&&e.target.closest&&e.target.closest('abbr.sg');if(a){e.preventDefault();e.stopPropagation();if(ev=='click')show(a);return}if(ev=='pointerdown')hide()},true));
+}
+
+// ===== v465 : une personne qui repart sans aide montre ce qui lui a manqué (icône du besoin)
+W('upd',(o,a)=>{const r=o(...a);try{for(const v of V){if(!v.leaving||v._lvC)continue;v._lvC=1;if(v.need&&!v.done&&!v.wcbD&&NE[v.need])flt(v,NE[v.need]+' ?',0)}}catch(_){}return r});
+
+// ===== v465 : Agnès n'arrive pas par hasard avant le 4e mois (elle est attendue en juillet de l'an 1)
+W('newV',(o,a)=>{let v=o(...a);try{let n=0;while(v&&v.name==WCU&&window.FORCEN!==WCU&&AMI()<3&&!(B.wcF)&&n<6){n++;v=o(...a)}}catch(_){}return v});
+
+// ===== v465 : jauges du bandeau légendées (nom + pourcentage dans la barre)
+{const st=document.createElement('style');st.textContent=`#spw .r .bar{position:relative}#spw .r .blab{position:absolute;left:4px;right:3px;top:50%;transform:translateY(-50%);font:700 9.5px/1 'Atkinson Hyperlegible',sans-serif;color:#fff;text-shadow:1px 0 0 #2a2433,-1px 0 0 #2a2433,0 1px 0 #2a2433,0 -1px 0 #2a2433;white-space:nowrap;overflow:hidden;text-overflow:clip;pointer-events:none;display:flex;justify-content:space-between;gap:3px;z-index:3}
+#spw .r .bar.lb{height:13px!important;min-height:13px;overflow:hidden}#spw .r .bar.lb>i{height:100%!important}`;document.head.appendChild(st);
+ const LB={spf:'Santé',qf:'Quartier',acf:'Social',saf:'Satisfaction',eqf:'Équipe'};
+ setInterval(()=>{try{for(const id in LB){const f=document.getElementById(id);if(!f)continue;const bar=f.parentElement;let l=bar.querySelector('.blab');if(!l){l=document.createElement('span');l.className='blab';l.setAttribute('data-nosg','1');bar.appendChild(l)}const p=Math.round(parseFloat(f.style.width)||0),bw=bar.getBoundingClientRect().width,t=bw>=135?`<span>${LB[id]}</span><span>${p}%</span>`:bw>=40?`<span></span><span>${p}%</span>`:'';if(l._t!==t){l._t=t;l.innerHTML=t;bar.classList.toggle('lb',!!t)}}}catch(_){}},600)}
+
+// ===== v465 : objectifs — trois prochaines étapes, toujours visibles d'un geste (🎯 dans le bandeau)
+{const OB=[
+ {k:'soin',t:'Construire la salle de soins',ok:()=>built[4],av:()=>!RLOCK(4),tab:2},
+ {k:'inf',t:'Recruter un·e infirmier·ère en salle de soins',ok:()=>STF.some(z=>z.r==4),av:()=>built[4],tab:0},
+ {k:'mar',t:'Lancer une maraude',ok:()=>((B.nA||{}).m||0)>0,av:()=>ulOn('am'),tab:3},
+ {k:'soc',t:'Construire le bureau social',ok:()=>built[3],av:()=>!RLOCK(3),tab:2},
+ {k:'as',t:'Recruter un·e assistant·e social·e',ok:()=>STF.some(z=>z.r==3),av:()=>built[3],tab:0},
+ {k:'par',t:'Signer un premier partenariat',ok:()=>Object.values(P).some(Boolean),av:()=>built[3],tab:3},
+ {k:'frm',t:'Former un·e pro (Équipe › Formations)',ok:()=>Object.keys(F).some(k=>F[k]),av:()=>STF.length>=2,tab:0},
+ {k:'rep',t:'Offrir un repas d’équipe',ok:()=>((B.nA||{}).t||0)>0,av:()=>ulOn('at'),tab:3},
+ {k:'rps',t:'Construire la salle de repos',ok:()=>built[2],av:()=>!RLOCK(2),tab:2},
+ {k:'psy',t:'Construire le bureau de la psychologue',ok:()=>built[5],av:()=>!RLOCK(5),tab:2},
+ {k:'aff',t:'Lancer une campagne d’affichage',ok:()=>((B.nA||{}).a||0)>0,av:()=>ulOn('aa'),tab:3},
+ {k:'pmr',t:'Rendre la halte accessible aux fauteuils',ok:()=>!!B.pmr,av:()=>AMI()>=3,tab:2},
+ {k:'riv',t:'Organiser une réunion avec les riverains',ok:()=>(B.nR||0)>0,av:()=>YR>=2&&ulOn('ar'),tab:3},
+ {k:'fet',t:'Organiser une fête de quartier',ok:()=>(B.nF||0)>0,av:()=>YR>=2&&ulOn('af'),tab:3},
+ {k:'cui',t:'Construire la cuisine',ok:()=>built[6],av:()=>!RLOCK(6),tab:2},
+ {k:'dor',t:'Construire le dortoir',ok:()=>built[7],av:()=>!RLOCK(7),tab:2}];
+ const safe=f=>{try{return !!f()}catch(_){return false}};
+ const cur=()=>OB.filter(o=>!safe(o.ok)&&safe(o.av)).slice(0,3);
+ const st=document.createElement('style');st.textContent=`#obc{display:inline-flex;align-items:center;gap:2px;margin-left:4px;padding:1px 6px;border:2px solid #2a2433;border-radius:9px;background:#fff6dc;font:700 12px/1.2 'Atkinson Hyperlegible',sans-serif;color:#2a2433;cursor:pointer;flex:none}#obc.new{animation:obp .8s ease-in-out 3}@keyframes obp{50%{transform:scale(1.18);background:#ffe08a}}
+#obp{position:fixed;z-index:80;left:8px;top:calc(var(--hh,90px) + 6px);width:min(320px,92vw);background:#fffaf0;border:3px solid #2a2433;border-radius:12px;box-shadow:0 5px 0 rgba(0,0,0,.25);padding:9px 11px;font:400 14px/1.3 'Atkinson Hyperlegible',sans-serif;color:#2a2433}
+#obp h4{margin:0 0 6px;font:400 17px Lilita,'Atkinson Hyperlegible',sans-serif}#obp .it{display:flex;align-items:center;gap:7px;padding:6px 0;border-top:1px dashed #d8c9a8}#obp .it span{flex:1}#obp .it button{font:700 12px 'Atkinson Hyperlegible',sans-serif;padding:3px 8px;border-radius:7px}#obp .x{position:absolute;right:6px;top:4px;border:0;background:none;font-size:16px;cursor:pointer;box-shadow:none;min-width:0;padding:2px 6px}`;document.head.appendChild(st);
+ let done0=null,open=false;
+ const panel=()=>{let p=$('obp');if(p){p.remove();open=false;return}open=true;p=document.createElement('div');p.id='obp';const L=cur();
+  p.innerHTML=`<button class="x" aria-label="Fermer">✕</button><h4>🎯 Prochaines étapes</h4>${L.length?L.map((o,i)=>`<div class="it"><b>${i+1}.</b><span>${o.t}</span><button class="go" data-t="${o.tab}">Y aller ›</button></div>`).join(''):'<p>Tout est en place pour l’instant. Bravo ! Continue de suivre les besoins des personnes.</p>'}`;
+  document.body.appendChild(p);p.querySelector('.x').onclick=()=>{p.remove();open=false};p.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{p.remove();open=false;try{tab(+b.dataset.t)}catch(_){}})};
+ window.obPanel=panel;
+ setInterval(()=>{try{const sp=$('spw');if(!sp)return;let c=$('obc');const ok=started&&!ended&&!(window.gdK&&gdK()!='none');
+  if(!c){c=document.createElement('span');c.id='obc';c.title='Prochaines étapes';c.addEventListener('click',e=>{e.stopPropagation();panel()});const ch=$('chapc');if(ch)ch.after(c);else sp.prepend(c)}
+  c.style.display=ok?'':'none';if(!ok)return;const L=cur(),t='🎯 '+L.length;if(c.textContent!==t)c.textContent=t;
+  const dn=OB.filter(o=>safe(o.ok)).map(o=>o.k);if(done0==null){done0=dn;return}
+  const nw=dn.filter(k=>!done0.includes(k));if(nw.length){done0=dn;const o=OB.find(x=>x.k==nw[0]);const nx=L[0];try{say(`🎯 Étape réussie : ${o.t.charAt(0).toLowerCase()+o.t.slice(1)} !${nx?' Prochaine : '+nx.t.charAt(0).toLowerCase()+nx.t.slice(1)+'.':''}`)}catch(_){}c.classList.remove('new');void c.offsetWidth;c.classList.add('new')}
+  if(open&&$('obp')&&!$('obp')._r){}}catch(_){}},1000)}
+
+// ===== v465 : les affiches de Crotti s'arrachent d'un geste ; tant qu'elles restent, le quartier se crispe un peu chaque jour
+{window.crTornOn=i=>{try{return !!(B.crTorn&&B.crTorn[i]&&GT<B.crTorn[i])}catch(_){return false}};
+ window.crTornDraw=(X,Y)=>{x.fillStyle='rgba(0,0,0,.18)';x.fillRect(X+1,Y+1,11,4);x.fillStyle='#fffaf0';x.beginPath();x.moveTo(X,Y);x.lineTo(X+11,Y);x.lineTo(X+11,Y+3);x.lineTo(X+8,Y+5);x.lineTo(X+5,Y+3);x.lineTo(X+2,Y+5.5);x.lineTo(X,Y+3.5);x.fill();x.fillStyle='#c0392b';x.fillRect(X,Y,11,1.6)};
+ const crotti=()=>{try{const C=window.CRP_;if(!C)return [];const n=C.nP();if(!n)return [];const fre=((B.prjN||{}).fre||0)>0?2:0,us=C.ourP(),L=[];for(let i=fre+us;i<n;i++)if(!crTornOn(i))L.push(i);return L}catch(_){return []}};
+ window.crottiL=crotti;
+ let lastD=null;setInterval(()=>{try{if(!started||ended||paused)return;const k=YR+'|'+mo+'|'+day;if(k===lastD)return;lastD=k;const n=crotti().length;if(n)q=Math.max(0,q-0.02*n)}catch(_){}},500);
+ window.addEventListener('click',e=>{try{if(!started||ended||!$('m').hidden||document.getElementById('fmo'))return;if(!(e.target&&e.target.tagName=='CANVAS'))return;const C=window.CRP_;if(!C)return;const r=cv.getBoundingClientRect(),wx=(e.clientX-r.left)/r.width*(cv.width/2),wy=(e.clientY-r.top)/r.height*(cv.height/2)-EY;
+   for(const i of crotti()){const[X,Y]=C.PS[i];if(wx>=X-3&&wx<=X+14&&wy>=Y-3&&wy<=Y+17){B.crTorn=B.crTorn||{};B.crTorn[i]=GT+10*DAYL;q=Math.min(100,q+0.6);try{sfx('click')}catch(_){}try{flt({x:X-OX+5,y:Y+EY-OY},'✋ arrachée',1)}catch(_){}
+     if(!B.crTornT){B.crTornT=1;say('✋ Affiche de Crotti arrachée. Son équipe en recollera d’autres dans une dizaine de jours : garde l’œil ouvert.')}e.stopPropagation();e.preventDefault();return}}}catch(_){}},true)}
+
+// v465 : quand une personne repart sans avoir été aidée, l'icône de son besoin s'affiche au-dessus d'elle (barrée)
+W('upd',(o,a)=>{const r=o(...a);try{for(const v of V){if(v._lf||!v.leaving||v.done||v.gone)continue;v._lf=1;if(v.wcbD)continue;const ic=v.lang&&!v.itp?'🗣️':(v.need&&NE[v.need]);if(ic)flt(v,ic+' ✗',0)}}catch(_){}return r});
+
+// v465 : objectifs — après le guide, trois objectifs à la fois pour donner un fil conducteur, selon l'année
+{const nP=()=>{try{return Object.keys(P).filter(k=>P[k]).length+Object.keys(B.prp||{}).length}catch(_){return 0}},nA=k=>((B.nA||{})[k]||0),has=f=>{try{return !!f()}catch(_){return false}};
+ const OBJ={1:[
+  ['acc20','Accueillir 20 personnes',()=>acc>=20,null],
+  ['b4','Construire la salle de soins',()=>built[4],2],
+  ['inf','Recruter un·e infirmier·ère en salle de soins',()=>STF.some(z=>z.r==4),0],
+  ['mar','Lancer une maraude',()=>nA('m')>=1,3],
+  ['par','Signer un premier partenariat',()=>nP()>=1,3],
+  ['b3','Construire le bureau social',()=>built[3],2],
+  ['soc','Recruter un·e assistant·e social·e',()=>STF.some(z=>z.r==3),0],
+  ['frm','Former quelqu’un de l’équipe',()=>Object.keys(F).some(k=>F[k]),0],
+  ['b2','Construire la salle de repos',()=>built[2],2],
+  ['acc100','Accueillir 100 personnes',()=>acc>=100,null]],
+ 2:[
+  ['riv','Organiser une réunion avec les riverains',()=>nA('r')>=1,3],
+  ['q50','Faire remonter la tranquillité à 50 %',()=>q>=50,3],
+  ['fete','Organiser une fête de quartier',()=>nA('f')>=1,3],
+  ['par3','Avoir 3 partenaires',()=>nP()>=3,3],
+  ['b5','Construire le bureau de la psychologue',()=>built[5],2],
+  ['med','Recruter un·e médiateur·rice',()=>STF.some(z=>z.role=='med'),0],
+  ['acc300','Accueillir 300 personnes',()=>acc>=300,null]],
+ 3:[
+  ['ref','Avoir un·e référent·e dans l’équipe',()=>REFN>=1,0],
+  ['has2','Atteindre le niveau 2 de l’évaluation HAS',()=>(B.has||0)>=2,null],
+  ['not60','Faire monter la notoriété à 60',()=>NOT>=60,3],
+  ['par5','Avoir 5 partenaires',()=>nP()>=5,3],
+  ['acc600','Accueillir 600 personnes',()=>acc>=600,null]]};
+ const cur=()=>{const L=OBJ[Math.min(3,Math.max(1,YR||1))]||[];B.objD=B.objD||{};return L.filter(o=>!B.objD[o[0]]).slice(0,3)};
+ const st=document.createElement('style');st.textContent=`#objp{position:fixed;left:50%;transform:translateX(-50%);top:calc(var(--hh,44px) + 8px);z-index:44;max-width:min(70vw,360px);background:#fffaf0;border:2px solid #2a2433;border-radius:999px;padding:4px 12px;font:700 12.5px/1.3 'Atkinson Hyperlegible',sans-serif;color:#2a2433;box-shadow:0 3px 0 rgba(0,0,0,.2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}#objp b{color:#2e9e4f}#objp.pop{animation:objpop .6s}@keyframes objpop{30%{transform:translateX(-50%) scale(1.12)}}
+ body:has(#app.open) #objp,body:has(#dfb) #objp,body:has(#fmo) #objp{display:none}
+ .objl{list-style:none;padding:0;margin:8px 0}.objl li{display:flex;align-items:center;gap:8px;border:2px solid #e0c070;border-radius:10px;padding:7px 9px;margin:6px 0;background:#fffaf0}.objl li span{flex:1}.objl li button{margin:0;padding:4px 10px;font-size:13px}`;document.head.appendChild(st);
+ window.objOpen=()=>{try{if(!$('m').hidden)return;paused=true;const L=cur();
+  $('mb').innerHTML=`<h2>🎯 Objectifs de l’année ${YR}</h2><p class="hint">Pas obligatoires : ce sont des pistes pour faire grandir la halte.</p><ul class="objl">${L.map(o=>`<li><span>⬜ ${o[1]}</span>${o[3]!=null?`<button class="go" onclick="$('m').hidden=true;paused=false;tab(${o[3]})">Y aller ›</button>`:''}</li>`).join('')||'<li><span>✅ Tous les objectifs de l’année sont atteints !</span></li>'}</ul><button onclick="$('m').hidden=true;paused=false">Fermer</button>`;$('m').className='modal';$('m').hidden=false}catch(e){console.error(e)}};
+ setInterval(()=>{try{let p=$('objp');const show=started&&!ended&&(B.gdDone||built[0]&&built[1])&&!(typeof GD!='undefined'&&GD)&&!MEET;if(!show){if(p)p.remove();return}
+  B.objD=B.objD||{};B.objI=B.objI||{};const Y_=Math.min(3,Math.max(1,YR||1));if(!B.objI[Y_]){B.objI[Y_]=1;(OBJ[Y_]||[]).forEach(o=>{if(has(o[2]))B.objD[o[0]]=1})}const L0=cur();for(const o of L0){if(has(o[2])){B.objD[o[0]]=1;try{say('🎯 Objectif atteint : '+o[1].charAt(0).toLowerCase()+o[1].slice(1)+' !')}catch(_){}try{sfx('good')}catch(_){}if(p){p.classList.remove('pop');void p.offsetWidth;p.classList.add('pop')}}}
+  const L=cur();if(!p){p=document.createElement('div');p.id='objp';p.onclick=()=>objOpen();document.body.appendChild(p)}
+  const all=(OBJ[Math.min(3,Math.max(1,YR||1))]||[]).length,done=all-(OBJ[Math.min(3,Math.max(1,YR||1))]||[]).filter(o=>!B.objD[o[0]]).length;
+  const h=L.length?`🎯 <b>${done}/${all}</b> · ${L[0][1]}`:`🎯 <b>${all}/${all}</b> · objectifs de l’année atteints`;if(p._h!==h){p._h=h;p.innerHTML=h}}catch(_){}},1000)}
+
+// v465 : glossaire — les sigles sont soulignés en pointillés ; on les touche pour une explication courte dans une bulle flottante
+{const GL={DASRI:'Déchets d’activités de soins à risques infectieux : seringues, aiguilles, pansements souillés. Ils vont dans des boîtes jaunes, collectées à part.',
+ TROD:'Test rapide d’orientation diagnostique : dépistage du VIH ou des hépatites en quelques minutes, avec une goutte de sang.',
+ CSAPA:'Centre de soins, d’accompagnement et de prévention en addictologie : suivi médical, psychologique et social, traitements de substitution.',
+ CAARUD:'Centre d’accueil et d’accompagnement à la réduction des risques pour usagers de drogues : matériel stérile, accueil, conseils.',
+ LHSS:'Lits halte soins santé : un hébergement temporaire avec des soins, pour des personnes sans domicile malades.',
+ ACT:'Appartements de coordination thérapeutique : un logement avec un suivi médical, pour des personnes gravement malades.',
+ AERLI:'Accompagnement et éducation aux risques liés à l’injection : un·e pro accompagne la personne pendant qu’elle s’injecte, pour éviter abcès et surdoses.',
+ MDPH:'Maison départementale des personnes handicapées : reconnaît le handicap et ouvre des droits (AAH, carte mobilité inclusion…).',
+ AAH:'Allocation aux adultes handicapés : un revenu minimum pour les personnes handicapées qui ne peuvent pas ou peu travailler.',
+ RDR:'Réduction des risques : limiter les dommages liés aux drogues (infections, surdoses, exclusion), sans exiger d’arrêter.',
+ HSA:'Halte soins addictions : un lieu où l’on peut consommer ses produits avec du matériel stérile, sous le regard de professionnel·les, et être accompagné·e.',
+ ARS:'Agence régionale de santé : représente l’État pour la santé dans la région. Elle finance et contrôle la halte.',
+ HAS:'Haute Autorité de santé : publie les référentiels qui servent à évaluer la qualité des soins et des accompagnements.',
+ PrEP:'Prophylaxie pré-exposition : un traitement préventif qui protège du VIH.',
+ VIH:'Virus de l’immunodéficience humaine, responsable du sida. Bien traité, il ne se transmet plus.',
+ VHC:'Virus de l’hépatite C, très transmis par le partage de matériel d’injection. Il se guérit aujourd’hui en quelques semaines.',
+ SIAO:'Service intégré d’accueil et d’orientation : il gère les places d’hébergement d’urgence, joignable au 115.',
+ CRA:'Centre de rétention administrative : des personnes étrangères y sont enfermées en attendant une expulsion.',
+ OFPRA:'Office français de protection des réfugiés et apatrides : il décide des demandes d’asile.',
+ CADA:'Centre d’accueil pour demandeurs d’asile : un hébergement et un accompagnement pendant la demande d’asile.',
+ PMI:'Protection maternelle et infantile : suivi médical gratuit des femmes enceintes et des jeunes enfants.',
+ ELSA:'Équipe de liaison et de soins en addictologie : des soignant·es spécialisé·es en addictions, à l’hôpital.',
+ TAPAJ:'Travail alternatif payé à la journée : quelques heures de travail, payées le jour même, sans engagement.',
+ GEM:'Groupe d’entraide mutuelle : une association de personnes concernées qui s’entraident et décident ensemble.',
+ PMR:'Personne à mobilité réduite : fauteuil roulant, béquilles, poussette… L’accès PMR, ce sont rampes, ascenseurs, portes larges.',
+ CVS:'Conseil de la vie sociale : les usager·es y donnent leur avis sur le fonctionnement de la halte.',
+ IGAS:'Inspection générale des affaires sociales : elle contrôle et évalue les politiques sociales et de santé.',
+ TSO:'Traitement de substitution aux opioïdes : méthadone ou buprénorphine, pour remplacer l’héroïne sans être en manque.',
+ AME:'Aide médicale de l’État : la couverture santé des personnes sans titre de séjour.',
+ PASS:'Permanence d’accès aux soins de santé : des soins à l’hôpital pour les personnes sans couverture santé.',
+ naloxone:'L’antidote des surdoses d’opioïdes (héroïne, morphine…), en spray nasal ou en injection. Elle ne fait aucun effet sur une personne qui n’a pas consommé d’opioïdes.',
+ méthadone:'Un traitement de substitution aux opioïdes : un sirop pris chaque jour, qui supprime le manque.',
+ Naloxone:'L’antidote des surdoses d’opioïdes (héroïne, morphine…), en spray nasal ou en injection.',Méthadone:'Un traitement de substitution aux opioïdes : un sirop pris chaque jour, qui supprime le manque.', benzodiazépines:'Des médicaments contre l’anxiété et pour dormir. Mélangés à l’alcool ou aux opioïdes, ils augmentent fortement le risque de surdose.'};
+ const keys=Object.keys(GL).sort((a,b)=>b.length-a.length),RE=new RegExp('(^|[^\\p{L}\\d])('+keys.join('|')+')(?![\\p{L}\\d])','u');
+ const st=document.createElement('style');st.textContent=`.gl{border-bottom:1.5px dotted #2f6fb5;cursor:help;background:rgba(47,111,181,.07);border-radius:2px}#glt{position:fixed;z-index:2147483600;max-width:min(300px,86vw);background:#fffaf0;border:2px solid #2a2433;border-radius:10px;padding:8px 10px;font:14px/1.35 'Atkinson Hyperlegible',sans-serif;color:#2a2433;box-shadow:0 4px 0 rgba(0,0,0,.25)}#glt b{color:#2f6fb5}`;document.head.appendChild(st);
+ const SKIP=n=>{for(let e=n.parentElement;e;e=e.parentElement){const t=e.tagName;if(t=='SCRIPT'||t=='STYLE'||t=='TEXTAREA'||t=='INPUT'||t=='CANVAS'||t=='SELECT'||e.classList.contains('gl')||e.id=='glt'||e.isContentEditable)return true;if(e.id=='m'||e.id=='fmo'||e.id=='side'||e.id=='app')break}return false};
+ const wrap=root=>{try{const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const L=[];while(w.nextNode()){const n=w.currentNode;if(n._gl===n.nodeValue)continue;n._gl=n.nodeValue;if(RE.test(n.nodeValue)&&!SKIP(n))L.push(n)}
+   L.forEach(n=>{let t=n.nodeValue;const f=document.createDocumentFragment();let m;while((m=RE.exec(t))){const i=m.index+m[1].length;if(i>0)f.appendChild(document.createTextNode(t.slice(0,i)));const s=document.createElement('span');s.className='gl';s.dataset.g=m[2];s.textContent=m[2];f.appendChild(s);t=t.slice(i+m[2].length)}if(t)f.appendChild(document.createTextNode(t));if(n.parentNode)n.parentNode.replaceChild(f,n)})}catch(_){}};
+ window.glWrap=wrap;
+ const hide=()=>{const t=document.getElementById('glt');if(t)t.remove()};
+ document.addEventListener('click',e=>{const g=e.target.closest&&e.target.closest('.gl');if(!g){hide();return}e.stopPropagation();e.preventDefault();hide();const k=g.dataset.g,d=GL[k];if(!d)return;
+  const t=document.createElement('div');t.id='glt';t.innerHTML=`<b>${k}</b> — ${d}`;document.body.appendChild(t);const r=g.getBoundingClientRect(),tw=t.offsetWidth,th=t.offsetHeight;
+  let L=Math.max(8,Math.min(innerWidth-tw-8,r.left+r.width/2-tw/2)),T=r.top-th-8;if(T<8)T=r.bottom+8;t.style.left=L+'px';t.style.top=T+'px';clearTimeout(window._glT);window._glT=setTimeout(hide,9000)},true);
+ let pend=0;const run=()=>{pend=0;['m','fmo','side','vig','toasts','dfb'].forEach(id=>{const e=document.getElementById(id);if(e&&!e.hidden)wrap(e)});document.querySelectorAll('#cmbx,#petov,#lcbook').forEach(wrap)};
+ new MutationObserver(()=>{if(!pend){pend=1;setTimeout(()=>requestAnimationFrame(run),60)}}).observe(document.body,{childList:true,subtree:true,characterData:true})}
+
+// v465 : les affiches de Crotti se repèrent — tant qu'on n'en a jamais arraché, elles clignotent doucement et Camille explique le geste
+W('draw',(o,a)=>{const r=o(...a);try{if(B.crTornT||MEET||ENDING||!window.crottiL||!window.CRP_)return r;const L=crottiL();if(!L.length)return r;
+ if(!B.crHint&&started&&!paused){B.crHint=1;try{say('✋ Camille : « Crotti a collé des affiches contre la halte. Touche-les pour les arracher, sinon le quartier se crispe. »')}catch(_){}}
+ const T=performance.now()/1000,p=(T*1.3)%1;x.save();x.setTransform(2,0,0,2,0,EY*2);for(const i of L){const P_=CRP_.PS[i];if(!P_)continue;const[X,Y]=P_;x.globalAlpha=(1-p)*.85;x.strokeStyle='#ffd54a';x.lineWidth=1;x.beginPath();x.arc(X+5.5,Y+7,7+p*7,0,7);x.stroke()}x.restore()}catch(_){}return r});
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
