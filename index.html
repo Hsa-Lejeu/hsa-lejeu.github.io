@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v467')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v468')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v467')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v468')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -10142,6 +10142,36 @@ W('draw',(o,a)=>{const r=o(...a);try{if(B.crTornT||MEET||ENDING||!window.crottiL
    close()}catch(err){console.error(err)}});
  // une astuce, une fois, quand le quartier commence à compter
  setInterval(()=>{try{if(B.bldTip||!started||ended||paused||!B.gdDone)return;if(((YR-1)*12+mo)<1)return;B.bldTip=1;say('🏘️ Astuce : touche les bâtiments du quartier (pharmacie, épicerie, hôpital…) pour agir directement là-bas.')}catch(_){}},4000)}
+
+// v468 : la même action répétée de près s'use — l'effet baisse (100 %, 60 %, 35 %, 20 %) si on l'a déjà lancée dans les 40 derniers jours ; varier, c'est plus efficace
+{const WIN=()=>40*DAYL,MUL=[1,.6,.35,.2],LAB={a:'la campagne d’affichage',t:'le repas d’équipe',f:'la fête de quartier'};
+ window.actUse=k=>{try{const L=((B.actH||{})[k]||[]).filter(t=>GT-t<WIN());return L.length}catch(_){return 0}};
+ W('act',(o,a)=>{const k=a[0];if(!LAB[k])return o(...a);const c0=cd[k],n=actUse(k),m=MUL[Math.min(3,n)],q0=q,N0=NOT,R0=B.notRaw||0,E0=STF.map(z=>z.e);
+  const r=o(...a);try{if(cd[k]>(c0||0)){B.actH=B.actH||{};B.actH[k]=(B.actH[k]||[]).filter(t=>GT-t<WIN()).concat([GT]);
+   if(m<1){if(q>q0)q=q0+(q-q0)*m;if(NOT>N0)NOT=N0+(NOT-N0)*m;if((B.notRaw||0)>R0)B.notRaw=R0+(B.notRaw-R0)*m;STF.forEach((z,i)=>{if(E0[i]!=null&&z.e>E0[i])z.e=E0[i]+(z.e-E0[i])*m});
+    setTimeout(()=>{try{say(`↘️ Camille : « On a déjà fait ${LAB[k]} il y a peu : l’effet est moins fort (${Math.round(m*100)} %). Varions les actions ! »`)}catch(_){}},400)}}}catch(_){}return r});
+ // le bouton prévient avant de cliquer
+ W('ui',(o,a)=>{const r=o(...a);try{['a','t','f'].forEach(k=>{const b=$('a'+k);if(!b)return;const n=actUse(k);let s=b.querySelector('.ause');if(n>0&&!(cd[k]>0)){if(!s){s=document.createElement('small');s.className='ause';s.style.cssText='display:block;color:#b5651d;font-weight:700';const br=b.querySelector('br');br?br.after(s):b.appendChild(s)}const t=`↘️ effet ${Math.round(MUL[Math.min(3,n)]*100)} % (déjà fait récemment)`;if(s.textContent!==t)s.textContent=t}else if(s)s.remove()})}catch(_){}return r})}
+
+// v468 : certains choix reviennent des mois plus tard — les décisions ont des suites
+{const EC={
+  alc_y:{d:4,t:'Des nouvelles de Gérard',n:'🍷 Gérard revient, avec deux copains du parc',x:'Gérard boit moins, mange le midi à la halte et vient voir l’infirmière chaque semaine. Il a amené deux copains : « Ici on ne vous fait pas la morale. »',fx:()=>{bump(3);NOT=Math.min(100,NOT+2);try{V.push(newV(),newV())}catch(_){}},eff:'😊 +3 · 📣 +2 · 2 nouvelles personnes',sc:'park'},
+  alc_n:{d:3,t:'Des nouvelles de Gérard',n:'🚑 Gérard retrouvé dans le parc',x:'Les pompiers ont retrouvé Gérard en plein sevrage, seul sur un banc. Il est hospitalisé. Camille : « Il était venu nous demander de l’aide. »',fx:()=>{q=Math.max(0,q-2);NOT=Math.max(0,NOT-2)},eff:'🏘️ −2 · 📣 −2',sc:'street'},
+  deal_x:{d:3,t:'Des suites',n:'💊 Le trafic s’est déplacé',x:'Les riverains ont revu {N} deux rues plus loin, à revendre. Le trafic n’a pas disparu : il s’est déplacé, et la halte n’a plus aucun contact avec {N}.',fx:()=>{q=Math.max(0,q-3)},eff:'🏘️ −3',sc:'street'},
+  deal_k:{d:3,t:'Des suites',n:'🤝 {N} a tenu le cadre',x:'{N} n’a plus jamais revendu devant la halte. Il·elle a commencé un traitement de substitution et ne revend plus du tout. Les riverains l’ont remarqué.',fx:()=>{q=Math.min(100,q+4);bump(4);try{const h=hist[ECN];if(h)h.sat=Math.min(100,(h.sat||50)+20)}catch(_){}},eff:'🏘️ +4 · 😊 +4',sc:'room'},
+  ch_y:{d:5,t:'Des suites',n:'📜 La charte a laissé des traces',x:'Plusieurs personnes ne sont jamais revenues depuis la charte d’abstinence. L’une d’elles a fait une surdose, seule, dans un parking. La fondation, elle, publie un bilan « encourageant ».',fx:()=>{bump(-4);NOT=Math.max(0,NOT-3)},eff:'😊 −4 · 📣 −3',sc:'street'},
+  ch_n:{d:4,t:'Une bonne surprise',n:'✉️ Une autre fondation écrit',x:'Une fondation a entendu parler du refus de la charte. Elle propose un don sans aucune condition : « Nous soutenons l’accueil inconditionnel. »',fx:()=>{eu+=400;try{LM.i['Fondation (sans condition)']=(LM.i['Fondation (sans condition)']||0)+400}catch(_){}},eff:'💶 +400 €',sc:'room'}};
+ let ECN=null;const bump=d=>{try{Object.values(hist).forEach(h=>{if(h.v)h.sat=Math.max(0,Math.min(100,(h.sat||50)+d))})}catch(_){}};
+ const sched=(k,nm)=>{B.echo=B.echo||[];if(B.echo.some(e=>e.k==k))return;B.echo.push({k,at:AMI()+EC[k].d,nm:nm||null})};
+ W('popWin',(o,a)=>{const p=a[0];try{if(p&&p.btns&&p.btns.length>=2){const n=String(p.n||''),t=String(p.t||'');let map=null,nm=null;
+   if(/^🍷 Gérard/.test(n))map=['alc_y','alc_n'];
+   else if(t=='Un dilemme'&&/^💊 .+ revend$/.test(n)){map=['deal_x','deal_k'];nm=n.replace(/^💊 /,'').replace(/ revend$/,'')}
+   else if(/^💼 Une fondation privée/.test(n))map=['ch_y','ch_n'];
+   if(map)p.btns.forEach((b,i)=>{if(!map[i])return;const f=b.f;b.f=function(){const r=f&&f.apply(this,arguments);try{sched(map[i],nm)}catch(_){}return r}})}}catch(_){}return o(...a)});
+ setInterval(()=>{try{if(!started||ended||paused||!$('m').hidden||document.getElementById('fmo')||MEET||!B.echo||!B.echo.length)return;const am=AMI();const i=B.echo.findIndex(e=>am>=e.at);if(i<0)return;const e=B.echo.splice(i,1)[0],E=EC[e.k];if(!E)return;ECN=e.nm;
+   const N=s=>s.replace(/\{N\}/g,e.nm||'la personne');try{E.fx()}catch(_){}try{newsAdd('🔁',N(E.n).replace(/^\S+\s/,''))}catch(_){}
+   const ci=e.nm&&hist[e.nm]?hist[e.nm].ci:44;
+   popWin({t:E.t,n:N(E.n),d:N(E.x)+' ('+E.eff+')',keep:1,btns:[{t:'Continuer',go:1,f:()=>{}}],draw:(H,T)=>{try{if(E.sc=='park'){const g=H.g;if(TIL.complete)for(let y=0;y<104;y+=16)for(let x0=0;x0<200;x0+=16)g.drawImage(TIL,[0,1,2,3][seas()]*16,0,16,16,x0,y,16,16);H.O('tree'+seas(),-6,60);H.O('bench',110,72);H.spr(44,24,90,88);H.spr(stCi(0),24,130,90)}else if(E.sc=='street'){H.street();H.spr(ci,24,100,90)}else{H.room('w3','f2');H.spr(ci,24,90,90);H.spr(stCi(0),30,124,90)}}catch(_){}}});ui()}catch(err){console.error(err)}},2000)}
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
