@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v470')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v471')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -908,7 +908,7 @@ const spr=(c,col,X,YB)=>{if(IMAok())g.drawImage(IMA,col*16,c*26,16,26,Math.round
 const SX=WW_-70,GY=HH-50,HX=Math.max(4,WW_*.08);
 const birds=[...Array(7)].map((_,k)=>({x:SX-60+k*16,y:GY-50+(k%3)*8,s:.6+(k%4)*.15,ph:k}));
 const conf=[...Array(90)].map((_,k)=>({x:(k*53.7)%WW_,y:-((k*37)%HH),v:22+(k%5)*8,c:['#ff6b8a','#ffd54a','#7fd36b','#6fb7ff','#ffffff'][k%5],w:Math.sin(k)*2}));
-function frame(now){if(fin)return;const T=(now-t0)/1000,e=Math.min(1,T/DUR);
+function frame(now){if(fin)return;const T=(now-t0)/1000,e=Math.min(1,T/(DUR*(window.ENVX||1)));
 const sky=['#2b2350','#4a3274','#7a3f7e','#c4587a','#f08a5d','#ffb46b','#ffd98f','#ffeab0'];{const bh=Math.ceil((GY+12)/8);for(let i=0;i<8;i++)R(0,i*bh,WW_,bh+1,sky[i])}
 const sy=GY-10-Math.min(1,T/4)*70;g.fillStyle='rgba(255,243,192,.25)';g.beginPath();g.arc(SX,sy,36+Math.sin(T*3)*2,0,7);g.fill();g.fillStyle='#fff3c0';g.beginPath();g.arc(SX,sy,24,0,7);g.fill();
 {const tl=(n,X,Y)=>g.drawImage(TERI,n*16,0,16,16,X,Y,16,16);if(TERI.complete)for(let X=0;X<WW_;X+=16){tl(0,X,GY-10);tl(1,X,GY+6);tl(2,X,GY+22);tl(3,X,GY+38);for(let Y=GY+54;Y<HH;Y+=16)tl(0,X,Y)}}
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v470')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v471')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -8219,13 +8219,14 @@ body:has(#envo) #fmo,body:has(#envo) #ulp,body:has(#envo) #ctoast{visibility:hid
 #envo .ecard b{font:400 19px/1.1 Lilita,'Atkinson Hyperlegible',sans-serif;display:block}#envo .ecard .what{font-size:13.5px;margin-top:2px}
 #envo .ecard .ch{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0 4px}#envo .ecard .ch span{background:#fff;border:1.5px solid #c9b49a;border-radius:20px;padding:2px 8px;font-size:12.5px;opacity:0;animation:ecin .4s ease forwards}
 #envo .ecard q{display:block;font-style:italic;margin-top:6px;color:#5a3e6a}
+#envo .ecard .ex{margin-top:8px;padding:7px 9px;background:#fff6d8;border:1.5px solid #e0c070;border-radius:9px;font-size:12.5px;line-height:1.35;text-wrap:pretty;opacity:0;animation:exin .5s ease 3.4s forwards}#envo .ecard .ex b{font:700 12.5px/1.35 'Atkinson Hyperlegible',sans-serif;display:inline}@keyframes exin{to{opacity:1}}
 @keyframes ecin{to{opacity:1;transform:translate(-50%,0)}}#envo .ecard .ch span{transform:none}`;document.head.appendChild(st);
  const OKN={h:'🏠 un toit',d:'📄 ses droits',s:'🩹 des soins',m:'🧠 un soutien psy',o:'🌱 un traitement',r:'🍲 des repas',y:'🚿 l’hygiène',a:'⚗️ des analyses',z:'😴 du repos',t:'🔬 un dépistage'};
  const QUO=['Merci de ne jamais m’avoir lâché·e.','Ici, personne ne m’a jugé·e.','Je repasserai vous dire bonjour, promis.','Vous m’avez gardé·e en vie, le reste a suivi.','Un café, une chaise, et quelqu’un qui écoute : ça a tout changé.'];
- const _ea=envolAnim;envolAnim=function(H,done){const t=document.createElement('div');t.id='envT';document.body.appendChild(t);try{sfx('page')}catch(_){}
+ const _ea=envolAnim;envolAnim=function(H,done){if(!B.envEx){window.ENVX=2.3;const d0=done;done=(...q)=>{window.ENVX=1;return d0&&d0(...q)}}const t=document.createElement('div');t.id='envT';document.body.appendChild(t);try{sfx('page')}catch(_){}
   setTimeout(()=>{_ea(H,done);try{const ov=$('envo');if(ov){const out=H.ok&&H.ok.o?'entre dans un centre de soins résidentiel, pour prendre soin de soi à son rythme.':(H.tj||0)>=2?'signe un contrat dans une entreprise d’insertion.':'emménage dans un petit studio en pension de famille.';
     const oks=Object.keys(H.ok||{}).filter(k=>H.ok[k]&&OKN[k]).map((k,i)=>`<span style="animation-delay:${2.6+i*.25}s">${OKN[k]}</span>`).join('');
-    const c=document.createElement('div');c.className='ecard';c.innerHTML=`<div class="row"><canvas width="16" height="26"></canvas><div><b>${H.n}</b><div class="what">${out}</div></div></div>${oks?`<div class="ch">${oks}</div>`:''}<div style="font-size:12.5px;color:#5a5060">🤝 ${Math.max(1,H.v||1)} passage${(H.v||1)>1?'s':''} à la halte avant de prendre son envol</div><q>${QUO[(H.n.length+(H.v||0))%QUO.length]}</q>`;
+    const c=document.createElement('div');c.className='ecard';c.innerHTML=`<div class="row"><canvas width="16" height="26"></canvas><div><b>${H.n}</b><div class="what">${out}</div></div></div>${oks?`<div class="ch">${oks}</div>`:''}<div style="font-size:12.5px;color:#5a5060">🤝 ${Math.max(1,H.v||1)} passage${(H.v||1)>1?'s':''} à la halte avant de prendre son envol</div><q>${QUO[(H.n.length+(H.v||0))%QUO.length]}</q>${B.envEx?'':`<div class="ex">💡 <b>Prendre son envol</b>, c’est quand une personne n’a plus besoin de la halte au quotidien. Il faut qu’au fil de ses passages elle ait <b>📄 retrouvé ses droits</b>, <b>🏠 un toit</b> et <b>🧹 un projet</b> (travail ou traitement), et qu’elle se sente bien accueillie (barre de satisfaction sous ses pieds, au moins 70&nbsp;%). La bulle au-dessus de sa tête dit ce qu’il lui manque encore. Chaque envol rapporte 🏘️ +5 · 📣 +5 · 💶 +100&nbsp;€.</div>`}`;B.envEx=1;
     ov.insertBefore(c,ov.querySelector('.es'));const g=c.querySelector('canvas').getContext('2d');g.imageSmoothingEnabled=false;const d=()=>{if(IMAok())g.drawImage(IMA,24*16,H.ci*26,16,26,0,0,16,26);else setTimeout(d,200)};d()}}catch(e){console.error(e)}
    t.classList.add('out');setTimeout(()=>t.remove(),700)},760)};window.envolAnim=envolAnim}
 
@@ -10179,7 +10180,7 @@ W('draw',(o,a)=>{const r=o(...a);try{if(B.crTornT||MEET||ENDING||!window.crottiL
  W('upd',(o,a)=>{const dt=a[0]||0;try{for(const z of STF){if(z.pause&&z.off>0&&z.off<=dt*1.05+1e-4){z.off=0;z.pause=0;const rk=1+(B[0]?.15:0)+(B[5]||B[7]?.15:0)+(B[13]?.1:0);const g=(built[2]?40:20)*rk;z.e=Math.min(100,z.e+g);try{if(z.x!=null)flt({x:z.x,y:z.y},'☕ +'+Math.round(g),1)}catch(_){}}}}catch(_){}
   const r=o(...a);
   try{if(!started||ended)return r;for(const z of STF){if(z.off>0||z.pause||z.stg&&false)continue;if(z.e>=35||z.call||z.follow||z.van)continue;if(z.pzT&&GT-z.pzT<DAYL*3)continue;
-    z.pause=1;z.pzT=GT;const tg=window.pzTarget?pzTarget(z):null;const dist=tg&&z.x!=null?Math.abs(tg[0]-z.x)+Math.abs(tg[1]-z.y)+60:0;z.off=PZ()+dist/40;try{if(window.pzStart)pzStart(z,tg)}catch(_){}try{if(z.x!=null)flt({x:z.x,y:z.y},'☕ pause',1)}catch(_){}
+    z.pause=1;z.pzT=GT;const tg=window.pzTarget?pzTarget(z):null;const dist=tg&&z.x!=null?Math.abs(tg[0]-z.x)+Math.abs(tg[1]-z.y)+60:0;z.off=PZ()+dist/75;try{if(window.pzStart)pzStart(z,tg)}catch(_){}try{if(z.x!=null)flt({x:z.x,y:z.y},'☕ pause',1)}catch(_){}
     const alone=z.r<9&&!STF.some(y=>y!==z&&y.r===z.r&&!(y.off>0));
     if(!B.pzTip){B.pzTip=1;try{say(`☕ ${z.n} est fatigué·e et part souffler ${built[2]?'en salle de repos':'un moment (sans salle de repos, la pause récupère moins)'}.${alone?' Seul·e dans sa salle, la salle ferme le temps de la pause : un·e deuxième pro éviterait ça.':''}`)}catch(_){}}}}catch(_){}return r});
  {const _rc=window.roomClosed;window.roomClosed=function(i){const w=_rc(i);if(w==='personne pour ouvrir'&&STF.some(z=>z.r===i&&z.pause))return '☕ pause';return w};roomClosed=window.roomClosed}}
@@ -10207,7 +10208,7 @@ W('draw',(o,a)=>{const r=o(...a);try{if(B.crTornT||MEET||ENDING||!window.crottiL
    return [bx+2+(n%2)*5,by-1,"bench"]}catch(_){return null}};
  window.pzStart=(z,tg)=>{if(!tg||z.x==null)return;PW.set(z,{x:z.x,y:z.y,tg,at:0,dir:0,mv:1})};
  W('upd',(o,a)=>{const dt=a[0]||0,r=o(...a);try{for(const[z,w]of PW){if(!z.pause||!STF.includes(z)){if(STF.includes(z)&&w.x!=null){z.x=w.x;z.y=w.y}PW.delete(z);continue}
-   const back=z.off<=(Math.abs(w.x0!=null?w.x0-w.x:0))/22+DAYL*.1&&false;const T_=w.tg;const[wx,wy]=wpFor(w,T_[0],T_[1]);const dx=wx-w.x,dy=wy-w.y,d=Math.hypot(dx,dy),m=40*dt;
+   const back=z.off<=(Math.abs(w.x0!=null?w.x0-w.x:0))/22+DAYL*.1&&false;const T_=w.tg;const[wx,wy]=wpFor(w,T_[0],T_[1]);const dx=wx-w.x,dy=wy-w.y,d=Math.hypot(dx,dy),m=75*dt;
    if(d<=m){w.x=wx;w.y=wy;if(wx==T_[0]&&wy==T_[1])w.mv=0}else{w.x+=dx/d*m;w.y+=dy/d*m;w.mv=1;w.dir=Math.abs(dx)>Math.abs(dy)?(dx<0?1:2):(dy<0?3:0)}}}catch(_){}return r});
  W('draw',(o,a)=>{const r=o(...a);try{if(!PW.size||MEET||ENDING)return r;x.save();x.setTransform(2,0,0,2,OX*2,OY*2);
    for(const[z,w]of PW){if(w.tg[2]=='bench2'&&!w.mv){os('bench',w.tg[0],w.tg[1]-1)}
