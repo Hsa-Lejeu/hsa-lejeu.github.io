@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v496')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v497')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v496')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v497')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -10937,8 +10937,8 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
  function psLoad(){try{const a=AC();Object.keys(PSND).forEach(k=>{if(PSB[k])return;PSB[k]=1;const bin=atob(PSND[k].split(',')[1]),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);const pr=a.decodeAudioData(u.buffer,b=>{PSB[k]=b},()=>{PSB[k]=0});if(pr&&pr.then)pr.then(b=>{PSB[k]=b}).catch(()=>{PSB[k]=0})})}catch(_){}}
  function psfx(k,vol,rate){try{const a=AC();if(typeof AU!=='undefined'&&AU.ctx===a&&AU.s<=0)return;psLoad();const b=PSB[k];if(!b||b===1)return;const src=a.createBufferSource(),gn=a.createGain();src.buffer=b;if(rate)src.playbackRate.value=rate;gn.gain.value=(vol==null?.8:vol)*VK();src.connect(gn);gn.connect(OUT(a));src.start()}catch(_){}}
  let ac=null;const AC=()=>{let c=null;try{if(typeof AU!=='undefined'){if(!AU.ctx&&typeof auInit==='function')auInit();c=AU.ctx}}catch(_){}c=c||(ac=ac||new (window.AudioContext||window.webkitAudioContext)());try{if(c.state!=='running')c.resume()}catch(_){}return c};
- const OUT=a=>{try{if(typeof AU!=='undefined'&&AU.ctx===a&&AU.sg)return AU.sg}catch(_){}return a.destination};
- const VK=()=>{try{if(typeof AU!=='undefined'&&AU.ctx&&AU.sg)return 2.4}catch(_){}return 1};
+ const OUT=a=>{try{if(typeof AU!=='undefined'&&AU.ctx===a&&AU.sg){if(!AU.pg){AU.pg=a.createGain();AU.pg.connect(a.destination)}AU.pg.gain.value=Math.min(1,Math.max(0,AU.s)*1.2);return AU.pg}}catch(_){}return a.destination};
+ const VK=()=>{try{if(typeof AU!=='undefined'&&AU.ctx&&AU.sg)return 3}catch(_){}return 1};
  ['pointerdown','pointerup','touchend','click','keydown'].forEach(ev=>document.addEventListener(ev,e=>{try{if(e.target&&e.target.closest&&e.target.closest('#peta'))AC()}catch(_){}},true));
  window.petaSndState=()=>{try{const a=AC();if(typeof AU!=='undefined'&&AU.ctx===a&&AU.s<=0)return['off','🔇 effets sonores coupés dans les réglages du jeu'];return a.state==='running'?['ok','🔊 son activé']:['blk','🔇 son bloqué par le navigateur, touche encore l’écran']}catch(e){return['err','🔇 pas de son : '+String(e).slice(0,60)]}};
  function tone(f,d,type,vol){try{const a=AC(),o=a.createOscillator(),gn=a.createGain();o.type=type;o.frequency.value=f;gn.gain.setValueAtTime(vol*VK(),a.currentTime);gn.gain.exponentialRampToValueAtTime(.001,a.currentTime+d);o.connect(gn).connect(OUT(a));o.start();o.stop(a.currentTime+d+.01)}catch(_){}}
@@ -10988,7 +10988,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
   ov.innerHTML=`<div class="card0"><h2>🎳 Le tournoi de pétanque du quartier</h2>
   Avant le vote du conseil de quartier, le comité de voisinage et la halte organisent un tournoi au square. Une seule règle : <b>chaque triplette mélange riverains et usager·es de la halte</b>.<br><br>
   En face, le club de la Boule d’en face, qui ne perd jamais. Tout le quartier sera là : une belle partie peut faire changer bien des avis avant le vote.
-  <div class="sline"><span id="qslt">🔈 Son : touche « Tester le son » pour vérifier les bruitages.</span><button class="sec" id="qsnt">🔊 Tester le son</button><small>v494</small></div>
+  <div class="sline"><span id="qslt">🔈 Son : touche « Tester le son » pour vérifier les bruitages.</span><button class="sec" id="qsnt">🔊 Tester le son</button><small>v497</small></div>
   <div class="btns"><button class="sec" id="qpsk">Laisser l’équipe jouer sans moi</button><button id="qpgo">Composer l’équipe</button></div></div>`;
   $('#qpgo').onclick=selScreen;
   $('#qsnt').onclick=()=>{try{if(typeof AU!=='undefined'&&AU.s<=0){AU.s=.7;try{auVol()}catch(_){}try{localStorage.setItem('hsa-vol',JSON.stringify({m:AU.m,s:AU.s}))}catch(_){}}}catch(_){}const a=AC();psLoad();okS();setTimeout(()=>{psfx('magic',.9);try{dsfx('shing',.8)}catch(_){}},150);setTimeout(()=>{const st=petaSndState();const e=$('#qslt');if(e)e.textContent=st[1]+(st[0]==='ok'?' — tu devrais avoir entendu un « ding » et un coup de magie.':'')},500)};$('#qpsk').onclick=()=>{const w=Math.random()<.55,s0=w?5+(Math.random()*4|0):2+(Math.random()*4|0),s1=w?Math.max(0,s0-1-(Math.random()*4|0)):s0+1+(Math.random()*3|0);result(s0,s1,true)};
@@ -11035,7 +11035,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     d.querySelector('#qact').onclick=()=>{if(i>=0){pick.splice(i,1);tone(330,.08,'square',.05)}else if(pick.length<3){pick.push(p);okS();const b=d.querySelector('.big');b.classList.add('pop')}else{tone(160,.12,'square',.05);return}ref();closeCut()}}
    function closeCut(){open=false;const d=ov.querySelector('.cin');if(d){d.classList.add('out');setTimeout(()=>d.remove(),260)}retarget();blip()}
    const toC2=e=>{const r=cv2.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*H}};
-   cv2.addEventListener('pointerdown',e=>{if(open)return;const q=toC2(e);let best=null,bd=16;PP.forEach(o=>{const d=Math.hypot(q.x-o.x,q.y-(o.y-12));if(d<bd){bd=d;best=o}});if(best){cutin(best.p)}else if(foc){foc=null;retarget()}});
+   cv2.addEventListener('pointerdown',e=>{if(open)return;const q=toC2(e);let best=null,bd=e.pointerType==='touch'?34:22;PP.forEach(o=>{const d=Math.hypot(q.x-o.x,q.y-(o.y-12));if(d<bd){bd=d;best=o}});if(best){cutin(best.p)}else if(foc){foc=null;retarget()}});
    function ref(){const r=pick.filter(p=>p.grp==='r').length,u=pick.length-r,ok=pick.length===3&&r&&u;$('#qcnt').innerHTML=`<b>${pick.length}</b> / 3`;$('#qpok').hidden=!ok;
     $('#qfoot').textContent=ok?'Équipe prête !':pick.length===3?'Il faut au moins un riverain et un usager : retire quelqu’un.':pick.length?`Encore ${3-pick.length} joueur${3-pick.length>1?'s':''}.`:'Touche quelqu’un sur le banc.';retarget()}
    window.__pickSel=id=>{const p=ALL.find(q=>q.id===id);if(!p)return;const i=pick.indexOf(p);if(i>=0)pick.splice(i,1);else if(pick.length<3)pick.push(p);ref()};
@@ -11078,11 +11078,11 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     L.slice(0,8).forEach((ci,i)=>crowd.push({ci,x:(i<4?78+i*20:200+(i-4)*20)+(i%2?3:0),y:37,o:i*1.7}))}
    const S={score:[0,0],us:pick.map(p=>({...p,left:2})),them:AIT.map(p=>({...p,left:2,grp:'x'}))};
    let balls=[],phase='wait',curP=null,mode='P',lastGrp=null,aiIdx=0,starter=0,lastTeam=0,meneN=1,chain=0;
-   let FX,jauge=[0,0],pending=null,afterRoll=null,rollT=0,showScore=null,aim=null,powArm=null,giantNext=0,perfectNext=false,cannon=false;
+   let svOut=0;let FX,jauge=[0,0],pending=null,afterRoll=null,rollT=0,showScore=null,aim=null,powArm=null,giantNext=0,perfectNext=false,cannon=false;
    let itchK=0,parts=[],windT=0,windD={x:0,y:0},GULL=null,joker=false,slow=false,throwAnim=0,last=performance.now(),stats={car:0,ban:0,duo:0,cmb:0};
    const coch=()=>balls.find(b=>b.team===-1),live=t=>balls.filter(b=>b.alive&&b.team===t),leftOf=t=>(t===0?S.us:S.them).reduce((a,p)=>a+p.left,0);
    let quit=false;
-   function pmenu(){if($('#qpm'))return;const d=document.createElement('div');d.id='qpm';d.className='pmenu';d.innerHTML=`<div class="pm"><h3>Pause</h3><button id="qpm0">▶ Reprendre la partie</button><button id="qpm1" class="sec">🔊 Tester le son</button><button id="qpm2" class="sec">Laisser l’équipe finir sans moi</button><button id="qpm3" class="sec">🏳️ Abandonner la partie</button><small>Manche ${Math.min(meneN,3)} / 3 — ${S.score[0]} à ${S.score[1]} — v494</small></div>`;ov.appendChild(d);blip();
+   function pmenu(){if($('#qpm'))return;const d=document.createElement('div');d.id='qpm';d.className='pmenu';d.innerHTML=`<div class="pm"><h3>Pause</h3><button id="qpm0">▶ Reprendre la partie</button><button id="qpm1" class="sec">🔊 Tester le son</button><button id="qpm2" class="sec">Laisser l’équipe finir sans moi</button><button id="qpm3" class="sec">🏳️ Abandonner la partie</button><small>Manche ${Math.min(meneN,3)} / 3 — ${S.score[0]} à ${S.score[1]} — v497</small></div>`;ov.appendChild(d);blip();
     const stop=()=>{quit=true;cancelAnimationFrame(raf);try{roll&&roll.sN.stop()}catch(_){}clearInterval(hb);try{rollSet(0)}catch(_){}d.remove()};
     $('#qpm0').onclick=()=>{d.remove();blip()};
     $('#qpm1').onclick=()=>{AC();psLoad();okS();setTimeout(()=>{psfx('magic',.9);try{dsfx('shing',.8)}catch(_){}},150);setTimeout(()=>{const st=petaSndState();$('#qpm1').textContent=st[1]},500)};
@@ -11168,7 +11168,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
      const dx=c.x-a.x,dy=c.y-a.y,d=Math.hypot(dx,dy),md=a.r+c.r;
      if(d>0&&d<md){const ia=a.stuck?0:1/a.m,ic=c.stuck?0:1/c.m,im=ia+ic;if(!im)continue;const nx=dx/d,ny=dy/d,ovl=md-d;
       a.x-=nx*ovl*ia/im;a.y-=ny*ovl*ia/im;c.x+=nx*ovl*ic/im;c.y+=ny*ovl*ic/im;
-      const rv=(c.vx-a.vx)*nx+(c.vy-a.vy)*ny;if(rv<0){const jm=-1.86*rv/im;a.vx-=jm*nx*ia;a.vy-=jm*ny*ia;c.vx+=jm*nx*ic;c.vy+=jm*ny*ic;if(Math.abs(rv)>25){clack();spark((a.x+c.x)/2,(a.y+c.y)/2);if(pending&&pending.ball&&(a===pending.ball||c===pending.ball||a.hitBy===pending.ball||c.hitBy===pending.ball)){const o=a===pending.ball?c:a;if(!o.hitT||performance.now()-o.hitT>400){o.hitT=performance.now();o.hitBy=pending.ball;pending.hits=(pending.hits||0)+1;const n=pending.hits;addJ(pending.team,n>=2?8:5);if(n>=2){ono('COMBO ×'+n,(a.x+c.x)/2,(a.y+c.y)/2-16,'#ffd23f',1,'combo',250);Z('circ',(a.x+c.x)/2,(a.y+c.y)/2,26+n*8,20);psfx('multi',.7,1+n*.08);tone(520+n*120,.09,'square',.06);setTimeout(()=>tone(780+n*120,.12,'square',.06),90);if(n>=3)cheer(false)}}}if(Math.abs(rv)>70)ono(pickL(['CLAC !','TCHAC !','CLING !']),(a.x+c.x)/2,(a.y+c.y)/2-10,'#fff3b0',Math.abs(rv)>160,'clac',260);if(a.r>RB||c.r>RB)shake(2,.25)}}}
+      const rv=(c.vx-a.vx)*nx+(c.vy-a.vy)*ny;if(rv<0){const jm=-1.86*rv/im;a.vx-=jm*nx*ia;a.vy-=jm*ny*ia;c.vx+=jm*nx*ic;c.vy+=jm*ny*ic;if(Math.abs(rv)>25){clack();if(Math.abs(rv)>110)psfx('hit',.35,1.25+Math.random()*.2);spark((a.x+c.x)/2,(a.y+c.y)/2);if(pending&&pending.ball&&(a===pending.ball||c===pending.ball||a.hitBy===pending.ball||c.hitBy===pending.ball)){const o=a===pending.ball?c:a;if(!o.hitT||performance.now()-o.hitT>400){o.hitT=performance.now();o.hitBy=pending.ball;pending.hits=(pending.hits||0)+1;const n=pending.hits;addJ(pending.team,n>=2?8:5);if(n>=2){ono('COMBO ×'+n,(a.x+c.x)/2,(a.y+c.y)/2-16,'#ffd23f',1,'combo',250);Z('circ',(a.x+c.x)/2,(a.y+c.y)/2,26+n*8,20);psfx('multi',.7,1+n*.08);tone(520+n*120,.09,'square',.06);setTimeout(()=>tone(780+n*120,.12,'square',.06),90);if(n>=3)cheer(false)}}}if(Math.abs(rv)>70)ono(pickL(['CLAC !','TCHAC !','CLING !']),(a.x+c.x)/2,(a.y+c.y)/2-10,'#fff3b0',Math.abs(rv)>160,'clac',260);if(a.r>RB||c.r>RB)shake(2,.25)}}}
     }
    }
    function simulate(b0){const b={...b0,alive:true},pts=[];let land=null;for(let i=0;i<900;i++){const wa=b.air>0;step([b],1/60,false);if(wa&&!b.air)land={x:b.x,y:b.y};if(i%3===0)pts.push({x:b.x,y:b.y,air:b.air>0});if(!b.vx&&!b.vy)break}pts.push({x:b.x,y:b.y,air:false});return{pts,land}}
@@ -11351,7 +11351,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     if(phase!=='select')return;if(menuOpen){menuOpen=false;sub=null;renderCmd();hint()}aim={sx:p.x,sy:p.y,x:p.x,y:p.y,cx:e.clientX,cy:e.clientY,ex:e.clientX,ey:e.clientY,R:cv.getBoundingClientRect()};try{cv.setPointerCapture(e.pointerId)}catch(_){}});
    cv.addEventListener('pointermove',e=>{if(aim){const r=aim.R;aim.x=(e.clientX-r.left)/r.width*W;aim.y=(e.clientY-r.top)/r.height*H;aim.ex=e.clientX;aim.ey=e.clientY}});
    const PULLS=()=>Math.max(110,Math.min(190,Math.min(window.innerWidth,window.innerHeight)*.42));
-   function aimVec(now){if(!aim)return null;const px=aim.cx-aim.ex,py=aim.cy-aim.ey,len=Math.hypot(px,py);if(len<8||px<3)return null;let a=Math.atan2(py,px)*AG;if(FX.itch[0])a+=Math.sin(now/70)*.16;const k=Math.min(1,len/PULLS());return{x:Math.cos(a),y:Math.sin(a),k,L:k*LMAX}}
+   function aimVec(now){if(!aim)return null;const px=aim.cx-aim.ex,py=aim.cy-aim.ey,len=Math.hypot(px,py);if(len<8||px<3)return null;let a=Math.atan2(py,px)*AG;if(FX.itch[0])a+=Math.sin(now/70)*.16;const k=Math.min(1,len/Math.min(PULLS(),Math.max(50,aim.cx-14)));return{x:Math.cos(a),y:Math.sin(a),k,L:k*LMAX}}
    cv.addEventListener('pointerup',()=>{if(!aim)return;const v=aimVec(performance.now());aim=null;if(v&&phase==='select')throwBall(0,curP,mode,{x:v.x,y:v.y},v.L)});
    cv.addEventListener('pointercancel',()=>aim=null);
    // ---------- rendu ----------
@@ -11548,8 +11548,8 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     drawFx(g,now);
     {const w_=$('.wrap');if(w_)w_.classList.toggle('aim3',!!(aim&&phase==='select'))}
     {const tirTurn=(phase==='select'&&mode==='T'),inAir=pending&&pending.m==='T'&&(phase==='throw'||(phase==='roll'&&pending.ball&&pending.ball.air>0));const tg=(tirTurn||inAir)?1:0;
-     sv+=(tg-sv)*Math.min(1,dt*(tg?4:2.5));if(sv<.005)sv=0;
-     if(sv>0){sideView(now,sv,v,sm3);g.globalAlpha=Math.min(1,sv*5);g.drawImage(c3,0,0);g.globalAlpha=1}}
+     if(tg){sv+=(1-sv)*Math.min(1,dt*4);svOut=0}else if(sv>0){svOut+=dt;sv=Math.max(0,1-svOut/.22);if(sv<.005)sv=0}
+     if(sv>0){sideView(now,tg?sv:1,v,sm3);g.globalAlpha=tg?Math.min(1,sv*5):sv;g.drawImage(c3,0,0);g.globalAlpha=1}}
     raf=requestAnimationFrame(frame);
    }
    gauges();newMene();raf=requestAnimationFrame(frame);
@@ -11572,9 +11572,9 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
  };
  try{MUS.src.peta='musique/petanque.mp3';MUS.src.petac='musique/petanque_choix.mp3'}catch(_){}
  const PM={el:null,k:''};
- window.petaMusSlow=function(on){try{const a=PM.el;if(!a)return;a.preservesPitch=false;a.mozPreservesPitch=false;a.webkitPreservesPitch=false;a.playbackRate=on?.62:1;fadeTo(a,on?musVol()*.45:musVol(),300)}catch(_){}};
+ window.petaMusSlow=function(on){try{const a=PM.el;if(!a)return;a.preservesPitch=false;a.mozPreservesPitch=false;a.webkitPreservesPitch=false;a.playbackRate=on?.62:1;fadeTo(a,on?musVol()*.4:musVol()*.72,300)}catch(_){}};
  window.petaMus=function(k){try{if(PM.k===k&&PM.el&&!PM.el.paused)return;const old=PM.el;if(old){const o=old;fadeTo(o,0,600,()=>{try{o.pause()}catch(_){}})}
-   PM.k=k||'';PM.el=null;if(!k||AU.m<=0)return;const a=new Audio(MUS.src[k]);a.loop=true;a.volume=0;PM.el=a;const pr=a.play();if(pr&&pr.catch)pr.catch(()=>{});fadeTo(a,musVol(),900)}catch(_){}};
+   PM.k=k||'';PM.el=null;if(!k||AU.m<=0)return;const a=new Audio(MUS.src[k]);a.loop=true;a.volume=0;PM.el=a;const pr=a.play();if(pr&&pr.catch)pr.catch(()=>{});fadeTo(a,musVol()*.72,900)}catch(_){}};
  setInterval(()=>{try{if(document.getElementById('peta')){paused=true;const keep=PM.el;const all=[...document.querySelectorAll('audio')];try{Object.values(MUS.els||{}).forEach(a=>all.push(a))}catch(_){}
    all.forEach(a=>{if(a!==keep&&!a.paused&&!a._pf){a._pf=1;fadeTo(a,0,400,()=>{try{a.pause()}catch(_){}a._pf=0})}})}else if(PM.el){petaMus(null)}}catch(_){}},250);
  try{W('playMus',(o,a)=>{if(document.getElementById('peta'))return;return o(...a)})}catch(_){}
