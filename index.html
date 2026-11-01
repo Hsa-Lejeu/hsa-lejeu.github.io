@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v507')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v508')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5560,7 +5560,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v507')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v508')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -9509,7 +9509,7 @@ W('train',(o,a)=>{const r=o(...a);try{B.unl=B.unl||{};if(F[a[0]]&&!B.unl.all&&!B
   return R_};
  window.soleDbg=el=>{try{return [...rooms(el)]}catch(e){return String(e)}};
  setInterval(()=>{try{if(!started||ended)return;
-  document.querySelectorAll('#mb button,#mb li,#fmo button,#rwf button,#app button,#side button,#lcm button,.ptb').forEach(el=>{if(!el.offsetParent)return;const R_=rooms(el);if(!R_.size){if(el.dataset.solew)delete el.dataset.solew;return}
+  document.querySelectorAll('#mb button,#mb li,#fmo button,#rwf button,#app button,#side button,#lcm button,.ptb').forEach(el=>{if(!el.offsetParent)return;const R_=/→ (🔒|👥)/.test(el.textContent)?new Set():rooms(el);if(!R_.size){if(el.dataset.solew)delete el.dataset.solew;return}
    const msg=R_.has(-2)?'⚠️ Toute l’équipe disponible est seule dans sa salle : une salle fermera pendant l’absence.':'⚠️ '+[...R_].map(r=>RNM[r]).join(' et ')+(R_.size>1?' fermeront':' fermera')+' pendant l’absence.';
    if(el.dataset.solew!==msg)el.dataset.solew=msg})}catch(e){window.soleErr=String(e)}},400)}
 // ===== v417 : (3) maraudes et réunions plus variées, effet réduit si on les répète le même mois
@@ -9869,15 +9869,17 @@ window.hWc=function(H,ci,X,YB,v,row){try{const S=wcSheet(ci,row|0);if(!S)return;
  const ROOMF={SOINS:1,CONSO:1,REPOS:1,CUISINE:1};
  const roomOf=z=>{try{const r=z&&z.r;if(r==null||r<0||!R[r]||!built[r])return null;const k=R[r][0];return {r,k,n:(typeof HFN!='undefined'&&HFN[k])||k,f:!!ROOMF[k]}}catch(_){return null}};
  const days=t=>String(t).replace(/(\d+)\s*(?:&nbsp;| )?s\b/g,(m,n)=>{const d=Math.max(1,Math.round(+n/DAYL));return d+(d>1?' jours':' jour')});
- window.cqPhrase=function(zs,dur){try{zs=zs.filter(Boolean);if(!zs.length)return null;const rm=roomOf(zs[0]);if(!rm)return null;
-   const left=STF.filter(y=>!zs.includes(y)&&y.r===rm.r&&!(y.off>0)).length;dur=days(dur||'').trim();
-   const pd=/^(\d|un|une|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|quelques)\b/.test(dur)?'pendant '+dur:dur;const who=zs[0]&&zs[0].n?zs.map(z=>z.n).join(' et ')+(zs.length>1?' s’absentent → ':' s’absente → '):'';return left==0?`${who}🔒 ${rm.n} fermé${rm.f?'e':''} ${pd}`:`${who}👥 ${rm.n} : un·e pro en moins ${pd}, la salle reste ouverte`}catch(_){return null}};
+ window.cqPhrase=function(zs,dur){try{zs=zs.filter(Boolean);if(!zs.length)return null;const rms=[];zs.forEach(z=>{const r=roomOf(z);if(r&&!rms.some(x=>x.r===r.r))rms.push(r)});if(!rms.length)return null;
+   dur=days(dur||'').trim();const pd=/^(\d+|un|une|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|quelques)\b/.test(dur)?'pendant '+dur:dur;const who=zs.map(z=>z.n).join(' et ')+(zs.length>1?' s’absentent → ':' s’absente → ');
+   const cl=rms.filter(rm=>!STF.some(y=>!zs.includes(y)&&y.r===rm.r&&!(y.off>0))),op=rms.filter(rm=>!cl.includes(rm));const nm=L=>L.map((rm,k)=>k?rm.n.charAt(0).toLowerCase()+rm.n.slice(1):rm.n).join(' et ');const parts=[];
+   if(cl.length)parts.push(`🔒 ${nm(cl)} ${cl.length>1?(cl.every(r=>r.f)?'fermées':'fermés'):'fermé'+(cl[0].f?'e':'')} ${pd}`);if(op.length)parts.push(`👥 ${nm(op)} : un·e pro en moins ${pd}, ${op.length>1?'les salles restent ouvertes':'la salle reste ouverte'}`);
+   return who+parts.join(' · ')}catch(_){return null}};
  const guess=()=>{try{if(window._cqDC&&typeof DC!='undefined'&&DC&&DC.s0&&!(DC.s0.off>0))return DC.s0;const c=STF.filter(z=>z.off<=0&&!z.stg);const n=i=>STF.filter(y=>y.r==i&&y.off<=0).length;c.sort((a,b)=>n(b.r)-n(a.r));return c[0]||null}catch(_){return null}};
  const VERB='(?:y passe|y va, absent·e|y va, occupé·e|absent·es?|occupé·e|sera absent·e pendant)';
  window.cqText=function(t){if(!t||!/absent|occupé|y passe|y va/.test(t))return t;let out=t;
   try{const names=STF.map(z=>z.n).filter(Boolean).sort((a,b)=>b.length-a.length);
-   for(const n of names){const re=new RegExp(n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?: et ([\\p{L}\\-]+))? '+VERB+' ([^)·<\\n]+)','u');const m=re.exec(out);if(!m)continue;
-    const z=STF.find(y=>y.n==n),z2=m[1]?STF.find(y=>y.n==m[1]):null,ph=cqPhrase([z,z2],m[2]);if(ph)out=out.replace(m[0],ph)}
+   for(const n of names){const re=new RegExp('(?:([\\p{L}\\-]+) et )?'+n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?: et ([\\p{L}\\-]+))? '+VERB+' ([^)·<\\n]+)','u');const m=re.exec(out);if(!m)continue;
+    const z0=m[1]?STF.find(y=>y.n==m[1]):null,z=STF.find(y=>y.n==n),z2=m[2]?STF.find(y=>y.n==m[2]):null,ph=cqPhrase([z0,z,z2],m[3]);if(ph)out=out.replace(z0||!m[1]?m[0]:m[0].slice(m[1].length+4),ph)}
    const g=/(?:👤 )?(?:un·e pro|Professionnel·le|un·e professionnel·le|une travailleuse paire) (?:absent·e|occupé·e) ([^)·<\n]*)/u.exec(out);
    if(g){const gz=guess();try{window._cqG=gz&&gz.n}catch(_){}const ph=cqPhrase([gz],g[1]);if(ph)out=out.replace(g[0],ph)}}catch(_){}return out};
  const fixTextNodes=root=>{try{window._cqDC=!!root.querySelector('[onclick^="dres"]');const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const L=[];while(w.nextNode())L.push(w.currentNode);L.forEach(n=>{const v=n.nodeValue;if(n._cq===v)return;const nv=cqText(v);n._cq=nv;if(nv!==v)n.nodeValue=nv})}catch(_){}};
@@ -11994,6 +11996,23 @@ setInterval(()=>{try{if(YR!==1||document.getElementById('m').hidden)return;const
  const patch=()=>{try{const p=document.getElementById('pl');if(!p||p._buf)return;p._buf=1;let pend=null,q_=0;
   Object.defineProperty(p,'textContent',{configurable:true,get(){return pend!=null?pend:real.get.call(this)},set(v){pend=String(v);if(!q_){q_=1;queueMicrotask(()=>{q_=0;const v2=pend;pend=null;if(v2!=null&&real.get.call(p)!==v2)real.set.call(p,v2)})}}})}catch(_){}};
  patch();setInterval(patch,2000);
+})();
+// ===== v508 : téléphone — plafond automatique à 30 images/s quand le dessin peine, mode économie, bandeau rafraîchi au plus 4 fois/s
+(function(){
+ try{window.ECO=localStorage.getItem('hsa-eco')==='1'}catch(_){window.ECO=false}
+ window.ecoToggle=()=>{window.ECO=!window.ECO;try{localStorage.setItem('hsa-eco',ECO?'1':'0')}catch(_){}try{closeH()}catch(_){}setTimeout(()=>{try{hudMenu()}catch(_){}},60)};
+ // mesure du coût réel d'une image dessinée (intervalle entre l'image dessinée et la suivante), avec hystérésis
+ let prevT=0,drewPrev=false,ema=16,cap=false,lastDraw=0,capSince=0;
+ const _bg=window.BGTH;
+ window.BGTH=()=>{const now=performance.now();try{if(drewPrev&&prevT){const dt=now-prevT;if(dt<200)ema=ema*.9+dt*.1}prevT=now;
+   if(!cap&&ema>22){cap=true;capSince=now}else if(cap&&ema<13&&now-capSince>15000)cap=false;window.FPSCAP=cap;
+   if(_bg&&_bg()){drewPrev=false;return true}
+   if(MEET){drewPrev=true;lastDraw=now;return false}
+   if((cap||window.ECO)&&now-lastDraw<31){drewPrev=false;return true}
+   drewPrev=true;lastDraw=now;return false}catch(_){drewPrev=true;return false}};
+ // bandeau et panneaux : ui() regroupé (immédiat, puis au plus une fois par 250 ms ; 500 ms en mode économie)
+ const _ui=window.ui;if(typeof _ui==='function'){let last=0,tm=null;const run=()=>{tm=null;last=performance.now();try{_ui()}catch(e){console.error(e)}};
+  window.ui=function(){const now=performance.now(),gap=window.ECO?500:250;if(now-last>=gap&&!tm){last=now;return _ui.apply(this,arguments)}if(!tm)tm=setTimeout(run,Math.max(0,gap-(now-last)))};try{ui=window.ui}catch(_){}}
 })();
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
