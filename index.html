@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v516')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v517')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5560,7 +5560,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v516')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v517')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -10922,7 +10922,9 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
   'aimant+gabian':{nm:'Le gabian dressé',ds:'Le goéland dépose le cochonnet tout contre notre meilleure boule.',tgt:false},
   'aimant+mistral':{nm:'Mistral magnétique',ds:'Une rafale qui ne souffle que sur les boules d’en face, loin du cochonnet.',tgt:false},
   'geante+sardine':{nm:'La bouillabaisse',ds:'Boule géante lancée parfaitement, et la sardine balaie les boules d’en face loin du cochonnet.',tgt:false},
-  'pastis+mistral':{nm:'La marée de pastis',ds:'Une immense flaque autour du cochonnet : les boules qui arrivent filent au-delà.',tgt:false}};
+  'pastis+mistral':{nm:'La tournée générale',ds:'Le mistral fait voler le pastis jusqu’à l’équipe d’en face : leurs 3 prochains lancers partent n’importe où.',tgt:false},
+  'pastis+sardine':{nm:'La sardinade arrosée',ds:'Le joueur d’en face qui a le plus de boules en main part à la sardinade : il ne joue plus de la manche.',tgt:false},
+  'pastis+gabian':{nm:'La cuite du gabian',ds:'Le goéland a trop bu : il vole de travers et lâche 2 nouveaux cochonnets près de nos boules. Chaque boule compte au cochonnet le plus proche.',tgt:false}};
  const RIV=[{id:'nad',nm:'Nadia',ci:80,grp:'r',role:'La boulangère',P:.86,T:.34,pw:'geante'},
   {id:'lef',nm:'Mme Lefèvre',ci:84,grp:'r',role:'Présidente de la copro',P:.62,T:.58,pw:'aimant'},
   {id:'kar',nm:'Karim',ci:79,grp:'r',role:'Le buraliste',P:.52,T:.74,pw:'pastis'}];
@@ -10988,7 +10990,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
  const blip=()=>tone(780,.04,'square',.035),okS=()=>{tone(660,.06,'square',.05);setTimeout(()=>tone(1046,.09,'square',.05),60)},heart=()=>{tone(55,.12,'sine',.22);setTimeout(()=>tone(48,.14,'sine',.18),170)};
  const impact=()=>{tone(70,.4,'sine',.25);noise(.4,1200,200,.7,.14)};
  const pickL=a=>a[Math.random()*a.length|0],short=n=>String(n).replace(/^(Mme|M\.) /,'');
- const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y),sdist=(b,c)=>Math.max(0,dist(b,c)-b.r),gauss=()=>(Math.random()+Math.random()+Math.random()-1.5)/1.5;
+ const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y),SDX={b:null},sdist=(b,c)=>{let d=Math.max(0,dist(b,c)-b.r);if(c&&c.team===-1&&SDX.b)for(const j of SDX.b)if(j.team===-2&&j.alive)d=Math.min(d,Math.max(0,dist(b,j)-b.r));return d},gauss=()=>(Math.random()+Math.random()+Math.random()-1.5)/1.5;
 
  window.petaShow=function(force){
   if(document.getElementById('peta'))return;if(!force&&B.peta)return;B.peta={st:'on'};
@@ -11174,7 +11176,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
    $('#qmenu').onclick=pmenu;
    function setMn(){$('#qmn').innerHTML=meneN<=3?`<b>Manche ${meneN} / 3</b>total des points`:`<b>La belle !</b>égalité`}
    function newMene(){
-    balls=[];FX={mag:[],holes:[],oil:[],itch:[0,0],slip:[false,false],sard:[],mud:[]};giantNext=0;perfectNext=false;cannon=false;
+    balls=[];SDX.b=balls;S.them.forEach(p=>p.sard=0);FX={mag:[],holes:[],oil:[],itch:[0,0],slip:[false,false],sard:[],mud:[]};giantNext=0;perfectNext=false;cannon=false;
     S.us.forEach(p=>p.left=2);S.them.forEach(p=>p.left=2);setMn();
     balls.push({x:175+Math.random()*100,y:T.y+22+Math.random()*(T.h-44),vx:0,vy:0,r:RC,m:.35,team:-1,alive:true,air:0});
     phase='wait';renderP();readyGo(meneN<=3?`MANCHE ${meneN}`:'LA BELLE !',()=>startTurn(starter));
@@ -11341,6 +11343,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
      g.globalAlpha=1;requestAnimationFrame(fr)};
     requestAnimationFrame(fr)}
    function freeSpot(){for(let i=0;i<40;i++){const p={x:T.x+100+Math.random()*(T.w-116),y:T.y+12+Math.random()*(T.h-24)};if(balls.every(b=>b.team<0||dist(b,p)>b.r+6))return p}return{x:230,y:95}}
+   function gullGo2(drop,after){GULL={st:1,t:0,x:W+12,y:4,p:{x:W+12,y:4},c:{x:W+12,y:10},drop,after,nc:1,drunk:1};phase='anim';gullCry()}
    function gullGo(drop,after){const c=coch();c.vx=c.vy=0;GULL={st:0,t:0,x:W+12,y:4,from:{x:W+12,y:4},c,drop,after};phase='anim';gullCry()}
    function back(){phase='select';menuOpen=true;sub=null;mIdx=0;renderP();hint()}
    function usePower(team,pl,tgt){const prev=phase;phase='anim';powCine([pl],pl.pw,POW[pl.pw].nm,team,()=>{if(quit)return;phase=prev;usePower0(team,pl,tgt);if(team===0&&phase==='select'){menuOpen=false;renderCmd();hint();setTimeout(()=>{if(phase==='select'&&!aim&&!menuOpen){menuOpen=true;renderCmd();hint()}},1300)}})}
@@ -11362,26 +11365,26 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     renderP();
    }
    const cKey=(a,b)=>{const r=a.grp==='r'?a:b,u=a.grp==='r'?b:a;return r.pw+'+'+u.pw};
-   const partner=p=>{const c=S.us.filter(q=>q.grp!==p.grp);return c.find(q=>COMBOS[cKey(p,q)])||c[0]};
-   function duoInfo(p){const q=partner(p);if(!q)return null;const k=cKey(p,q),cb=COMBOS[k];return cb?{q,k,...cb}:{q,k:'gen',nm:'Double coup fourré',ds:`${POW[p.pw].nm} et ${POW[q.pw].nm} en même temps, en plus fort.`,tgt:POW[p.pw].tgt||POW[q.pw].tgt}}
+   const partner=p=>{const c=S.us.filter(q=>q.grp!==p.grp);return c.find(q=>COMBOS[cKey(p,q)])||null};
+   function duoInfo(p){const q=partner(p);if(!q)return null;const k=cKey(p,q),cb=COMBOS[k];return cb?{q,k,...cb}:null}
    function useDuo(p,tgt){const d=duoInfo(p);phase='anim';powCine([p,d.q],null,d.nm,0,()=>{if(quit)return;phase='select';useDuo0(p,tgt);if(phase==='select'){menuOpen=false;renderCmd();hint();setTimeout(()=>{if(phase==='select'&&!aim&&!menuOpen){menuOpen=true;renderCmd();hint()}},1800)}},d.q)}
    function useDuo0(p,tgt){
     const d=duoInfo(p),q=d.q,c=coch();jauge[0]=0;gauges();stats.duo++;flash('#fff');shake(2,.4);
     setTimeout(()=>{Z('nuke',T.x+T.w/2,T.y+T.h/2-8,160,10);[0,80,160,240].forEach((dl,i)=>bolt(T.x+40+i*66,T.y+T.h-6,dl,96));shake(3,.6);psfx('vapor',.9);try{dsfx('ko',.9)}catch(_){}},650);setTimeout(()=>{banner(d.nm+' !');fanfare();confetti();cheer(true)},700);
-    [p.pw,q.pw].forEach(k=>{if(k!=='mistral'&&k!=='gabian'&&tgt)powFx(k,p,tgt,0)});if(!tgt)[p.pw,q.pw].forEach(k=>{if(k==='aimant')powFx(k,p,{x:c.x,y:c.y},0);if(k==='pastis')powFx(k,p,{x:C.x+12,y:C.y-4},0)});if(d.k==='geante+sardine')powFx('geante',p,null,0);if(d.k==='pastis+mistral'){const cc=coch();powFx('pastis',p,{x:cc.x,y:cc.y},0)}
+    if(d.k==='aimant+gabian'||d.k==='aimant+mistral')powFx('aimant',p,{x:c.x,y:c.y},0);if(d.k==='geante+sardine')powFx('geante',p,null,0);
     say(short(p.nm)+' & '+short(q.nm),pickL(['« À deux, on est imbattables ! »','« Riverains, usagers : même combat ! »','« Un, deux, trois… maintenant ! »']),'u');
     const best=()=>live(0).sort((a,b)=>sdist(a,c)-sdist(b,c))[0];
     if(d.k==='aimant+gabian'){const m=best();let drop=freeSpot();if(m){const dx=C.x-m.x,dy=C.y-m.y,l=Math.hypot(dx,dy)||1;drop={x:m.x-dx/l*(m.r+3),y:m.y-dy/l*(m.r+3)}}gullGo(drop,()=>{say('Mme Lefèvre','« Brave bête. Personne n’a rien vu. »','r');back()});return}
     if(d.k==='aimant+mistral'){live(1).forEach(b=>{if(b.stuck)return;const dx=b.x-c.x,dy=b.y-c.y,l=Math.hypot(dx,dy)||1;b.vx+=dx/l*150;b.vy+=dy/l*150});windT=performance.now();windD={x:1,y:0};phase='roll';rollT=0;afterRoll=back;return}
     if(d.k==='geante+sardine'){giantNext=10;perfectNext=true;cannon=true;live(1).forEach(b=>{if(b.stuck)return;const dx=b.x-c.x,dy=b.y-c.y,l=Math.hypot(dx,dy)||1;b.vx+=dx/l*130;b.vy+=dy/l*130});FX.sard.push({x:c.x+14,y:c.y});windT=performance.now();windD={x:1,y:0};phase='roll';rollT=0;afterRoll=back;return}
-    else if(d.k==='pastis+mistral'){FX.oil.push({x:c.x,y:c.y,r:30,s:3})}
-    else{let roll=false,gul=false;
-     [p,q].forEach((pl,i)=>{const k=pl.pw,t=tgt?{x:tgt.x+(i?10:0),y:tgt.y}:null;
-      if(k==='geante')giantNext=11;else if(k==='aimant'){const cc=coch();FX.mag.push({x:cc.x,y:cc.y,coch:1,team:0,k:1.7})}else if(k==='pastis')FX.itch[1]=2;else if(k==='sardine'&&t)FX.sard.push({x:t.x,y:t.y});else if(k==='gabian')gul=true;
-      else if(k==='mistral'){const dx=t.x-(T.x+T.w/2),dy=t.y-(T.y+T.h/2),l=Math.hypot(dx,dy)||1;windD={x:dx/l,y:dy/l};roll=true}});
-     const blow=()=>{balls.forEach(b=>{if(b.alive&&!b.stuck){b.vx+=windD.x*150;b.vy+=windD.y*150}});windT=performance.now();phase='roll';rollT=0;afterRoll=back};
-     if(gul){const m=best();gullGo(m?{x:m.x+12,y:m.y+(Math.random()-.5)*10}:freeSpot(),()=>{if(roll)blow();else back()});return}
-     if(roll){blow();return}}
+    if(d.k==='pastis+mistral'){FX.itch[1]=3;windD={x:-1,y:0};windT=performance.now();for(let i=0;i<22;i++)P(C.x+20+Math.random()*60,C.y-10-Math.random()*30,{vx:-40-Math.random()*60,vy:(Math.random()-.5)*20,t:1.2,c:'#ffd23f',s:2});ono('GLOU GLOU GLOU !',W*.7,T.y+20,'#ffe36a',1);
+     setTimeout(()=>{say('Karim','« Allez, c’est ma tournée ! Trois pastis pour la table d’en face ! »','r');back()},900);return}
+    if(d.k==='pastis+sardine'){const av=S.them.filter(o=>o.left>0).sort((a,b)=>b.left-a.left)[0];
+     if(av){FX.sard.push({x:T.x+T.w-14,y:T.y+T.h-8});ono('SARDINADE !',W*.6,T.y+24,'#9fd0ff',1);setTimeout(()=>{av.left=0;av.sard=1;if(curAI===av)curAI=null;say(short(av.nm),pickL(['« Une sardinade avec un pastis ? J’arrive, les gars ! »','« Bon, je vous laisse, ça sent la sardine grillée… »','« Gardez-moi ma place… ou pas ! »']),'t');banner(short(av.nm)+' part à la sardinade !');back()},700)}else back();return}
+    if(d.k==='pastis+gabian'){const ours=live(0).sort((a,b)=>sdist(a,c)-sdist(b,c));
+     const spot=i=>{const m=ours[i]||ours[0];if(!m)return freeSpot();for(let k=0;k<12;k++){const an=Math.random()*6.28,p2={x:m.x+Math.cos(an)*(m.r+5),y:m.y+Math.sin(an)*(m.r+5)};if(p2.x>T.x+6&&p2.x<T.x+T.w-6&&p2.y>T.y+6&&p2.y<T.y+T.h-6&&balls.every(b=>!b.alive||dist(b,p2)>b.r+RC+1))return p2}return{x:m.x+m.r+5,y:m.y}};
+     ono('HIPS !',W-30,20,'#ffe36a',1);
+     gullGo2(spot(0),()=>gullGo2(spot(1),()=>{say('',pickL(['« Trois cochonnets ?! On n’a jamais vu ça ! »','« Ce gabian, il est plein comme une huître ! »']),'n');back()}));return}
     back();
    }
    // ---------- adversaire ----------
@@ -11433,7 +11436,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
    function chooseMode(m){mode=m;okS();closeMenu();hint()}
    function powerAct(){if(phase!=='select'||jauge[0]<100)return;const pw=POW[curP.pw];okS();closeMenu();
     if(pw.tgt){phase='power';powArm='solo';renderP();setHint(`<span class="p">${pw.nm}</span> : ${curP.pw==='mistral'?'touche le terrain dans la direction où souffle le vent.':curP.pw==='sardine'?'touche le terrain là où échouer la sardine : les boules rebondiront dessus.':'touche le terrain à l’endroit choisi.'}`)}else{usePower(0,curP,null);if(phase==='select'){openMenu();hint()}}}
-   function duoAct(){if(phase!=='select'||jauge[0]<200)return;const d=duoInfo(curP);okS();closeMenu();
+   function duoAct(){if(phase!=='select'||jauge[0]<200)return;const d=duoInfo(curP);if(!d)return;okS();closeMenu();
     if(d.tgt){phase='power';powArm='duo';renderP();setHint(`<span class="p">${d.nm}</span> : touche le terrain à l’endroit choisi.`)}else useDuo(curP,null)}
    const kdG=e=>{if(!$('#qcmd')){document.removeEventListener('keydown',kdG);return}if(phase!=='select')return;
     if(!menuOpen){if(e.key==='Enter'||e.key===' '||e.key==='Escape'){e.preventDefault();openMenu()}return}
@@ -11522,7 +11525,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     g.fillStyle=hi;g.fillRect(xx-2,yy-2,2,1)}
    function gullStep(dt,now){const G=GULL;G.t+=dt;const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
     if(G.st===0){const k=Math.min(1,G.t/.8),e=ease(k);G.x=G.from.x+(G.c.x-G.from.x)*e;G.y=G.from.y+(G.c.y-6-G.from.y)*e;if(k>=1){G.st=1;G.t=0;G.p={x:G.x,y:G.y};dust(G.c.x,G.c.y);gullCry();ono('KIAAA !',G.x,G.y-14,'#fff',1);for(let i=0;i<6;i++)P(G.x,G.y,{vx:(Math.random()-.5)*30,vy:5+Math.random()*10,t:1.6,c:'#f4f4f0',feather:1,s:2})}}
-    else if(G.st===1){const k=Math.min(1,G.t/1.1),e=ease(k);G.x=G.p.x+(G.drop.x-G.p.x)*e;G.y=G.p.y+(G.drop.y-6-G.p.y)*e-Math.sin(k*Math.PI)*24;G.c.x=G.x;G.c.y=G.y+6;if(k>=1){G.st=2;G.t=0;G.c.x=G.drop.x;G.c.y=G.drop.y;thud();dust(G.drop.x,G.drop.y);Z('blue',G.drop.x,G.drop.y,46,16);psfx('hit',.6);ono('TOC !',G.drop.x,G.drop.y-10,'#ffb070',0);G.p={x:G.x,y:G.y}}}
+    else if(G.st===1){const k=Math.min(1,G.t/1.1),e=ease(k);G.x=G.p.x+(G.drop.x-G.p.x)*e;G.y=G.p.y+(G.drop.y-6-G.p.y)*e-Math.sin(k*Math.PI)*24;if(G.drunk&&k<1){G.x+=Math.sin(G.t*13)*9*(1-k);G.y+=Math.cos(G.t*9)*5*(1-k)}G.c.x=G.x;G.c.y=G.y+6;if(k>=1){G.st=2;G.t=0;G.c.x=G.drop.x;G.c.y=G.drop.y;if(G.nc)balls.push({x:G.drop.x,y:G.drop.y,vx:0,vy:0,r:RC,m:.35,team:-2,alive:true,air:0});thud();dust(G.drop.x,G.drop.y);Z('blue',G.drop.x,G.drop.y,46,16);psfx('hit',.6);ono('TOC !',G.drop.x,G.drop.y-10,'#ffb070',0);G.p={x:G.x,y:G.y}}}
     else{const k=Math.min(1,G.t/.9);G.x=G.p.x+k*(W+30-G.p.x);G.y=G.p.y-k*60;if(k>=1){GULL=null;const f=G.after;f&&f();return}}
     const fl=((now/90)|0)%2,dir=G.st===2||G.drop.x>G.x?1:-1;
     g.fillStyle='rgba(0,0,0,.18)';g.beginPath();g.ellipse(Math.round(G.x),Math.min(T.y+T.h,Math.round(G.y)+26),10,3,0,0,7);g.fill();
@@ -11530,9 +11533,9 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
      const wing=(sx)=>{g.fillStyle='#2a2433';if(up){g.fillRect(X+sx*3,Y-9,sx*11,4);g.fillStyle='#c8ced6';g.fillRect(X+sx*4,Y-8,sx*9,2);g.fillStyle='#8a929c';g.fillRect(X+sx*12,Y-9,sx*2,3)}else{g.fillRect(X+sx*3,Y-3,sx*10,4);g.fillStyle='#c8ced6';g.fillRect(X+sx*4,Y-2,sx*8,2);g.fillStyle='#8a929c';g.fillRect(X+sx*11,Y-1,sx*2,2)}};
      wing(1);wing(-1);
      if(GULLI.complete)g.drawImage(GULLI,(((now/120)|0)%6)*16,0,16,16,X-8,Y-12,16,16);
-     if(G.st===1){g.fillStyle='#2a2433';g.fillRect(X-1,Y+3,1,2);g.fillRect(X+1,Y+3,1,2)}}}
+     if(G.st===1){g.fillStyle='#2a2433';g.fillRect(X-1,Y+3,1,2);g.fillRect(X+1,Y+3,1,2);if(G.nc){g.fillStyle='#2a1400';g.beginPath();g.arc(X,Y+7,RC+1,0,7);g.fill();g.fillStyle='#ff8c1a';g.beginPath();g.arc(X,Y+7,RC,0,7);g.fill()}}}}
    const POSM=new Map();let lastThr=null,pNow=0;
-   function slotOf(p,thr){if(p===thr)return[C.x-6,C.y+8];const us=S.us.includes(p),L=(us?S.us:S.them).filter(q=>q!==thr),i=L.indexOf(p);return us?[14,60+i*20]:[14,138+i*18]}
+   function slotOf(p,thr){if(p.sard)return[-30,150];if(p===thr)return[C.x-6,C.y+8];const us=S.us.includes(p),L=(us?S.us:S.them).filter(q=>q!==thr),i=L.indexOf(p);return us?[14,60+i*20]:[14,138+i*18]}
    function movePeople(now,thr){const dt=pNow?Math.min(.05,(now-pNow)/1000):0;pNow=now;[...S.us,...S.them].forEach(p=>{const tg=slotOf(p,thr);let P=POSM.get(p);if(!P){P={x:tg[0],y:tg[1],mv:0,dx:0,dy:0};POSM.set(p,P)}
      const dx=tg[0]-P.x,dy=tg[1]-P.y,d=Math.hypot(dx,dy),st=48*dt;if(d>.6){const k=Math.min(1,st/d);P.x+=dx*k;P.y+=dy*k;P.mv=1;P.dx=dx;P.dy=dy}else{P.x=tg[0];P.y=tg[1];P.mv=0}});
     if(thr!==lastThr){const same=lastThr&&thr&&(S.us.includes(lastThr)===S.us.includes(thr));if(same&&POSM.get(lastThr)){const P=POSM.get(lastThr),us=S.us.includes(thr);say2(P.x,P.y-30,us?pickL(['Vas-y minot !','À toi, gamin !','À toi de jouer !','Montre-leur !']):pickL(['Vas-y, mon grand.','À toi, collègue.','Fais-leur voir.']),us)}lastThr=thr}}
@@ -11707,7 +11710,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
      if(sv>0){sideView(now,tg?sv:1,v,sm3);g.globalAlpha=tg?Math.min(1,sv*5):sv;g.drawImage(c3,0,0);g.globalAlpha=1}}
     raf=requestAnimationFrame(frame);
    }
-   window.__pq2={pow:(id,tx,ty)=>{const p=S.us.find(q=>q.id===id);if(!p)return 'nop';jauge[0]=200;usePower(0,p,tx!=null?{x:tx,y:ty}:null);return 'ok'},ai:n=>{jauge[1]=n},st:()=>({phase,itch:FX.itch.slice(),mag:FX.mag.length,sard:FX.sard.length,mud:FX.mud.length,oil:FX.oil.length,balls:balls.length,rocks:rocks.length,bumps:bumps.length,tk:TK,score:S.score.slice()})};
+   window.__pq2={duo:id=>{const p=S.us.find(q=>q.id===id);if(!p)return 'nop';const d=duoInfo(p);if(!d)return 'none';jauge[0]=200;curP=p;useDuo(p,null);return d.k},pow:(id,tx,ty)=>{const p=S.us.find(q=>q.id===id);if(!p)return 'nop';jauge[0]=200;usePower(0,p,tx!=null?{x:tx,y:ty}:null);return 'ok'},ai:n=>{jauge[1]=n},st:()=>({phase,itch:FX.itch.slice(),mag:FX.mag.length,sard:FX.sard.length,mud:FX.mud.length,oil:FX.oil.length,balls:balls.length,rocks:rocks.length,bumps:bumps.length,tk:TK,score:S.score.slice(),j2:balls.filter(b=>b.team===-2).length,them:S.them.map(p=>p.left+(p.sard?'s':'')),hold:(holder()||{}).team})};
    gauges();newMene();raf=requestAnimationFrame(frame);
   }
   // ---------- 5. résultat ----------
