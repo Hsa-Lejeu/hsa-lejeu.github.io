@@ -20,6 +20,15 @@ Un message qui ne demande ni décision ni action est de niveau 3, même s'il est
 
 Tous les messages passent par une file unique (l'aiguilleur). Aucun canal n'affiche directement : `popWin`, `ctip`, `ulSide`, `camSay`/`say`, les ouvertures de `#m` et les alertes déposent leur message dans la file avec son niveau et sa priorité. L'aiguilleur applique les règles 3 à 6.
 
+Mis en place en v520 (objet `window.AG`, fin du code) :
+
+- `popWin`, `ctip`, `ulSide` et `camSay` sont enveloppés : ils déposent leur message dans `AG.q` au lieu d'afficher.
+- La fenêtre `#m` est surveillée : une ouverture décidée par le jeu (pas par un geste du joueur) est mise en attente si une autre fenêtre est à l'écran ou si le délai de la règle 4 n'est pas écoulé. Son contenu est mis de côté avec ses boutons et la partie continue.
+- Ne sont jamais retardés : les dangers, les bilans, les chapitres, ce que le joueur ouvre lui-même (geste de moins de 0,4 s) et une fenêtre qui se redessine (fermée puis rouverte en moins de 1,5 s). La réunion de saison suit le bilan du mois sans délai, car elle s'ouvre quand le joueur ferme ce bilan.
+- L'horloge de l'aiguilleur (`AG.clock`) ne compte que le temps hors pause et hors fenêtre bloquante.
+- Les « Nouveau ! » et les conseils ne sont jamais abandonnés. Seuls les retours d'action de la bulle le sont après 30 s.
+- `AG.log` garde la trace des ouvertures de `#m` (montrée, différée, geste du joueur).
+
 ## 3. Une seule chose à la fois
 
 - Une seule fenêtre bloquante à l'écran.

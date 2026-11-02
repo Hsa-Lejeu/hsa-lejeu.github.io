@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v519')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v520')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5560,7 +5560,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v519')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v520')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -12291,6 +12291,95 @@ setInterval(()=>{try{if(YR!==1||document.getElementById('m').hidden)return;const
 @keyframes qrdy{from{transform:scale(2.6);opacity:0}to{transform:scale(1) skew(-8deg);opacity:1}}
 @keyframes qgo{0%{transform:scale(7) rotate(-14deg);opacity:0}55%{transform:scale(.85) skew(-8deg);opacity:1}100%{transform:scale(1.05) skew(-8deg)}}
 `;document.head.appendChild(st)}
+
+// ===== v520 : l'aiguilleur des messages (RYTHME.md, règles 2 à 7)
+// Tous les canaux déposent leurs messages dans une seule file. L'aiguilleur montre :
+// une seule fenêtre bloquante à la fois, rien par-dessus, un seul message d'information à la fois,
+// avec les délais et le temps de lecture de RYTHME.md.
+{const AG=window.AG={q:[],seq:0,clock:0,lastB:-1e9,lastL3:-1e9,lastTip:-1e9,bubUntil:0,calmDay:-1,curB:0,prevB:false,wasMeet:false,uAt:-1e9,rel:0,log:[]};
+ const $i=id=>document.getElementById(id);
+ const DANG=/surdose|overdose|accident d.exposition|piqûre accidentelle/i,BIL=/bilan|chapitre|fin de l.année|réunion|fin du mois|le point/i;
+ ['pointerdown','click','keydown','touchstart'].forEach(ev=>document.addEventListener(ev,e=>{if(e.isTrusted)AG.uAt=performance.now()},true));
+ const userNow=()=>{try{const e=window.event;if(e&&e.isTrusted&&/click|pointer|touch|key|mouse/.test(e.type))return true}catch(_){}return performance.now()-AG.uAt<400};
+ const dayAbs=()=>{try{return GT/DAYL}catch(_){return 0}};
+ const gapB=()=>{try{return YR>=2?20:40}catch(_){return 40}};
+ const mEl=$i('m'),HD=Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden');
+ const mOpen=()=>mEl&&!HD.get.call(mEl);
+ const others=()=>{try{return (typeof MEET!='undefined'&&!!MEET)||!!$i('fmo')||!!$i('envo')||!!$i('debov')||!!$i('tvov')||!!$i('epov')||!!$i('peta')||document.body.classList.contains('trn')}catch(_){return false}};
+ const blocker=()=>mOpen()||others();
+ const rm=x=>{const k=AG.q.indexOf(x);if(k>=0)AG.q.splice(k,1)};
+ AG.push=x=>{x.at=AG.clock;x.seq=++AG.seq;AG.q.push(x);if(AG.q.length>80)AG.q.splice(AG.q.findIndex(y=>y.lvl===3&&!y.noexp),1)};
+ const repause=()=>setTimeout(()=>{try{if(!B.march&&!(TR_&&TR_.t>0)&&$('tut').hidden)paused=blocker()}catch(_){}},0);
+ // ---- niveau 1 : la fenêtre plein écran #m
+ const clsM=()=>{try{const mb=$i('mb')||mEl,h=((mb.querySelector('h2,h3')||{}).textContent||'');if(DANG.test(h))return 1;if(BIL.test(h))return 3;
+   const bs=[...mb.querySelectorAll('button')].filter(b=>!/^\s*(Fermer|Continuer|▶|OK)/.test(b.textContent));return bs.length>=2?2:4}catch(_){return 3}};
+ const firstWaiting=p=>AG.q.some(x=>x.lvl===1&&x.pri<p);
+ const canB=p=>!others()&&!firstWaiting(p)&&AG.clock-AG.lastB>=gapB()&&(p!==4||dayAbs()>=AG.calmDay);
+ const shownB=p=>{AG.curB=p;if(p!==1)AG.lastB=AG.clock};
+ if(mEl&&HD){let pend=null;Object.defineProperty(mEl,'hidden',{configurable:true,get(){return HD.get.call(this)},set(v){
+   if(v){if(!HD.get.call(this))AG.mClosed=performance.now();HD.set.call(this,true);return}
+   if(!HD.get.call(this))return;
+   const ttl=()=>{try{return(($i('mb').querySelector('h2,h3')||$i('mb')).textContent||'').slice(0,50)}catch(_){return''}};const L_=k=>{AG.log.push([+AG.clock.toFixed(1),k,ttl()]);if(AG.log.length>200)AG.log.shift()};
+   if(AG.rel||userNow()){L_(AG.rel?'rel':'user');HD.set.call(this,false);return}
+   try{if(typeof MEET!='undefined'&&MEET){L_('meet');HD.set.call(this,false);return}}catch(_){}
+   // la même fenêtre qui se redessine (fermée puis rouverte aussitôt) n'est pas une nouvelle fenêtre
+   if(performance.now()-(AG.mClosed||-1e9)<1500){L_('suite');HD.set.call(this,false);return}
+   const p=clsM();
+   if(p===1||p===3||canB(p)){L_('show'+p);HD.set.call(this,false);shownB(p);return}
+   L_('defer'+p);
+   // différée : le contenu est mis de côté (avec ses boutons) et la partie continue
+   if(pend)return;pend=1;queueMicrotask(()=>{pend=null;try{if(!HD.get.call(mEl))return;const mb=$i('mb'),fr=document.createDocumentFragment();while(mb.firstChild)fr.appendChild(mb.firstChild);const cls=mEl.className;
+    AG.push({lvl:1,pri:p,kind:'m',run(){const mb2=$i('mb');mb2.replaceChildren(fr);mEl.className=cls;AG.rel=1;try{mEl.hidden=false}finally{AG.rel=0}try{paused=true}catch(_){}}});repause()}catch(_){}})}})}
+ // ---- niveau 1 : les scènes illustrées (popWin)
+ const clsO=o=>{const t=(o&&o.t)||'';if(DANG.test(t))return 1;if(BIL.test(t))return 3;return o&&o.btns&&o.btns.length>=2?2:4};
+ {const _pw=window.popWin;if(typeof _pw==='function'){window.popWin=function(o){try{if(AG.rel||userNow())return _pw.apply(this,arguments);const p=clsO(o);if(p===1&&!mOpen()&&!others())return _pw.apply(this,arguments);
+    AG.push({lvl:1,pri:p,kind:'pw',run(){AG.rel=1;try{_pw.call(window,o)}finally{AG.rel=0}}});return}catch(_){return _pw.apply(this,arguments)}};try{popWin=window.popWin}catch(_){}}}
+ // ---- niveau 3 : la bulle de Camille
+ {const _cs=window.camSay;if(typeof _cs==='function'){window.camSay=function(t,cls){try{const s=String(t||'').trim();if(!s||AG.rel||(typeof CAM!='undefined'&&s===CAM.full))return _cs.apply(this,arguments);
+    for(let i=AG.q.length-1;i>=0;i--)if(AG.q[i].kind==='say'&&AG.q[i].t===s)AG.q.splice(i,1);
+    AG.push({lvl:3,pri:DANG.test(s)?1:/ouvre ses portes|Chapitre/.test(s)?3:5,kind:'say',t:s,noexp:/ouvre ses portes|🔓|Chapitre/.test(s),run(){AG.rel=1;try{_cs.call(window,s,cls)}finally{AG.rel=0}const ms=1000+40*s.length;AG.bubUntil=performance.now()+ms;try{CAM.until=AG.bubUntil}catch(_){}return true}});return}catch(_){return _cs.apply(this,arguments)}};try{camSay=window.camSay}catch(_){}}}
+ // ---- niveau 3 : « Nouveau ! »
+ {const _ul=window.ulSide;if(typeof _ul==='function'){window.ulSide=function(e){try{if(AG.rel)return _ul.apply(this,arguments);let e2=e;
+    // règle 7 : l'onglet Quartier n'a plus de conseil, il est annoncé avec la maraude
+    if(e&&e.k==='m'){e2=Object.assign({},e,{d:(e.d?e.d+' ':'')+'Elle se lance depuis le nouvel onglet 🌳 Quartier, qui regroupe tout ce qui se passe hors les murs.',tab:e.tab!=null?e.tab:3})}
+    AG.push({lvl:3,pri:5,kind:'ul',noexp:1,run(){AG.rel=1;try{_ul.call(window,e2)}finally{AG.rel=0}return !!$i('ulp')}});return}catch(_){return _ul.apply(this,arguments)}};try{ulSide=window.ulSide}catch(_){}}}
+ // ---- niveau 3 : conseils de Camille (règle 7)
+ const DEL=new Set(['acc','unl','wheel','spd','call','room','date','yr','stock','das','quart']);
+ const DONE={syr:()=>typeof SYP!='undefined'&&SYP>0,card:()=>!!B.albSeen,tired:()=>!!B.restDone,eu:()=>!!B.euSeen};
+ {const _ct=window.ctip;if(typeof _ct==='function'){window.ctip=function(k,t,e){try{if(AG.rel)return _ct.apply(this,arguments);if(DEL.has(k))return;if(DONE[k]&&DONE[k]())return;if((B.tips||{})[k])return;if(AG.q.some(x=>x.kind==='tip'&&x.k===k))return;
+    AG.push({lvl:3,pri:5,kind:'tip',k,noexp:1,run(){if(DONE[k]&&DONE[k]())return false;AG.rel=1;try{_ct.call(window,k,t,e)}finally{AG.rel=0}const b=$i('ctip');return !!(b&&b.classList.contains('on'))}});return}catch(_){return _ct.apply(this,arguments)}};try{ctip=window.ctip}catch(_){}}}
+ // l'action déjà faite rend le conseil inutile
+ {const _al=window.album;if(typeof _al==='function'){window.album=function(){try{B.albSeen=1}catch(_){}return _al.apply(this,arguments)};try{album=window.album}catch(_){}}}
+ document.addEventListener('click',e=>{try{const u=$i('eu');if(u&&u.parentNode&&u.parentNode.contains(e.target))B.euSeen=1}catch(_){}},true);
+ setInterval(()=>{try{if(!B.restDone&&STF.some(z=>z.pause))B.restDone=1}catch(_){}},1000);
+ // ---- niveau 2 : naloxone et DASRI deviennent des alertes persistantes
+ setInterval(()=>{try{const box=$i('alst');if(!box)return;const L=[];
+   if(started&&!ended){try{if(built[1]&&S.n<2)L.push({t:`🩺 Naloxone : plus que ${S.n} en stock<small>Sans naloxone, la salle de consommation ferme · toucher : commander (onglet Soins)</small>`,f:()=>{try{tab(1)}catch(_){}}})}catch(_){}
+    try{const d=DAS.find(d=>d.l>=6&&d.l<10);if(d)L.push({t:`🗑️ Boîte DASRI bientôt pleine<small>Si elle déborde, la salle ferme · toucher : la faire vider (30 €)</small>`,f:()=>{try{collect()}catch(_){}}})}catch(_){}}
+   const sig=L.map(o=>o.t).join('|'),cur=[...box.querySelectorAll('.al.my2')];if(box._my2===sig&&cur.length===L.length)return;box._my2=sig;cur.forEach(e=>e.remove());
+   L.forEach(o=>{const d=document.createElement('div');d.className='al my2';d.innerHTML=o.t;d.onclick=()=>{try{o.f()}catch(_){}};box.appendChild(d)})}catch(_){}},700);
+ // ---- rien par-dessus une fenêtre bloquante
+ {const st=document.createElement('style');st.textContent='body.aigB #cbub,body.aigB #ctip,body.aigB #ulp,body.aigB #alst{visibility:hidden!important}';document.head.appendChild(st)}
+ // ---- l'aiguilleur
+ let lastT=performance.now();
+ AG.tick=()=>{const now=performance.now(),dt=Math.min(.5,(now-lastT)/1000);lastT=now;
+  const B_=blocker();document.body.classList.toggle('aigB',B_);
+  let pz=false;try{pz=paused}catch(_){}
+  if(!B_&&!pz&&!document.hidden)AG.clock+=dt;
+  try{if(B_&&typeof MEET!='undefined'&&MEET)AG.wasMeet=true}catch(_){}
+  if(AG.prevB&&!B_){if(AG.curB===3||AG.wasMeet)AG.calmDay=dayAbs()+5;AG.curB=0;AG.wasMeet=false}AG.prevB=B_;
+  // les retours d'action périmés (plus de 30 s dans la file) sont abandonnés
+  for(let i=AG.q.length-1;i>=0;i--){const x=AG.q[i];if(x.kind==='say'&&x.pri>1&&!x.noexp&&AG.clock-x.at>30)AG.q.splice(i,1)}
+  if(B_)return;
+  const ord=(a,b)=>a.pri-b.pri||a.seq-b.seq;
+  for(const x of AG.q.filter(x=>x.lvl===1).sort(ord)){if(x.pri===1||x.pri===3||canB(x.pri)){rm(x);x.run();shownB(x.pri);return}}
+  const busy=(()=>{const c=$i('ctip');return !!(c&&c.classList.contains('on'))||!!$i('ulp')||now<AG.bubUntil})();
+  for(const x of AG.q.filter(x=>x.lvl===3).sort(ord)){
+   if(x.pri===1){rm(x);x.run();AG.lastL3=AG.clock;return}
+   if(busy||AG.clock-AG.lastL3<6)return;
+   if(x.kind==='tip'&&AG.clock-AG.lastTip<(x.k==='eu'?120:60))continue;
+   rm(x);const ok=x.run();if(ok!==false){AG.lastL3=AG.clock;if(x.kind==='tip')AG.lastTip=AG.clock}return}};
+ setInterval(()=>{try{AG.tick()}catch(_){}},150)}
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
