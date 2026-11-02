@@ -12,8 +12,10 @@
 //   python3 -m http.server 8765  puis  url = http://localhost:8765/index.html)
 // Ajouter V=1 devant la commande pour voir chaque action du joueur automatique.
 //
-// Sortie : le fichier JSON (une ligne par message : secondes, date du jeu, canal, texte)
-// et un résumé comparé aux objectifs de RYTHME.md.
+// Sortie : le fichier JSON (une ligne par message : secondes, date du jeu, canal, texte ;
+// pour les fenêtres bloquantes, « par » vaut « joueur » si elles suivent un geste du joueur,
+// sinon « jeu ») et un résumé comparé aux objectifs de RYTHME.md.
+// Une alerte qui réapparaît moins de 60 s après avoir été cachée (par une fenêtre) n'est pas recomptée.
 
 const { chromium } = require('playwright');
 const DUR = +(process.argv[2]||240)*1000, READ = +(process.argv[3]||2500), OUT = process.argv[4]||'frise.json', URL = process.argv[5]||'https://hsa-lejeu.github.io/';
@@ -22,7 +24,7 @@ const DUR = +(process.argv[2]||240)*1000, READ = +(process.argv[3]||2500), OUT =
  const ctx = await b.newContext({viewport:{width:375,height:812},deviceScaleFactor:2,isMobile:true,hasTouch:true});
  const p = await ctx.newPage();
  await p.addInitScript(()=>{
-  window.__LOG=[];const T0=performance.now();let prev={};
+  window.__LOG=[];const T0=performance.now();let prev={};let lastU=-1e9;const alSeen={};document.addEventListener('pointerdown',e=>{if(e.isTrusted)lastU=performance.now()},true);
   const dt=()=>{try{return (typeof YR!='undefined'?'A'+YR+' ':'')+(document.body.innerText.match(/(janv|févr|mars|avr|mai|juin|juil|août|sept|oct|nov|déc)\.?\s*J\d+/)||[''])[0]}catch(_){return ''}};
   const cl=t=>(t||'').replace(/\s+/g,' ').trim().slice(0,140);
   const vis=e=>e&&e.offsetParent!==null&&getComputedStyle(e).visibility!='hidden';
@@ -40,8 +42,8 @@ const DUR = +(process.argv[2]||240)*1000, READ = +(process.argv[3]||2500), OUT =
    const ts=$('mtst'); if(ts) cur.toast=cl(ts.textContent);
    const als=[...document.querySelectorAll('.al')].filter(vis).filter(e=>e.textContent.trim().length>2).map(e=>cl(e.textContent).replace(/\(\d+ s\)/,'').slice(0,90));
    const s=+((performance.now()-T0)/1000).toFixed(1);
-   for(const k of Object.keys(cur)){ if(cur[k]!==prev[k]) __LOG.push({s,d:dt(),ch:k,t:cur[k]}) }
-   const pa=prev.alertes||[]; als.filter(a=>!pa.includes(a)).forEach(a=>__LOG.push({s,d:dt(),ch:'alerte',t:a}));
+   for(const k of Object.keys(cur)){ if(cur[k]!==prev[k]){const o={s,d:dt(),ch:k,t:cur[k]};if(['modal','event','reunion'].includes(k))o.par=performance.now()-lastU<700?'joueur':'jeu';__LOG.push(o)} }
+   const pa=prev.alertes||[]; als.filter(a=>!pa.includes(a)).forEach(a=>{if(alSeen[a]!=null&&s-alSeen[a]<60){alSeen[a]=s;return}alSeen[a]=s;__LOG.push({s,d:dt(),ch:'alerte',t:a})}); als.forEach(a=>{alSeen[a]=s});
    cur.alertes=als; prev=cur;
   }catch(e){window.__ERR=e.message}},150);
  });
@@ -78,9 +80,12 @@ const DUR = +(process.argv[2]||240)*1000, READ = +(process.argv[3]||2500), OUT =
  const avant=op==null?L:L.filter(e=>e.s<op),apres=op==null?[]:L.filter(e=>e.s>=op);
  const span=apres.length?(apres.at(-1).s-op)/60:0;
  console.log(`${L.length} messages enregistrés · ouverture à ${op==null?'?':Math.round(op)+' s'}`);
- console.log(`Avant l'ouverture : ${avant.filter(e=>blq.includes(e.ch)).length} fenêtres bloquantes (objectif ≤ 2)`);
+ {const av=avant.filter(e=>blq.includes(e.ch));console.log(`Avant l'ouverture : ${av.length} fenêtres bloquantes, dont ${av.filter(e=>e.par==='joueur').length} après un geste du joueur (objectif ≤ 2 au total)`)}
  if(span)console.log(`Après l'ouverture : ${(apres.length/span).toFixed(1)} messages par minute (objectif ≤ 5)`);
- const bq=L.filter(e=>blq.includes(e.ch));const proches=bq.filter((e,i)=>i&&e.s-bq[i-1].s<40).length;
- console.log(`Fenêtres bloquantes à moins de 40 s l'une de l'autre : ${proches} (temps réel, pauses comprises)`);
+ const bq=L.filter(e=>blq.includes(e.ch)),jeu=bq.filter(e=>e.par==='jeu');
+ console.log(`Fenêtres bloquantes : ${bq.length} (${bq.length-jeu.length} ouvertes par un geste du joueur, ${jeu.length} par le jeu)`);
+ const proches=jeu.filter((e,i)=>i&&e.s-jeu[i-1].s<40);
+ console.log(`Fenêtres ouvertes par le jeu à moins de 40 s de la précédente : ${proches.length}${proches.length?' (temps réel, pauses comprises ; à comparer avec la règle 4)':''}`);
+ proches.forEach(e=>console.log(`   ${Math.round(e.s)} s · ${e.t.slice(0,70)}`));
  await b.close();
 })();
