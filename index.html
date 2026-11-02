@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v517')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v518')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5560,7 +5560,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v517')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v518')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -10910,7 +10910,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
  const W=320,H=180,T={x:34,y:40,w:278,h:110},C={x:52,y:95};
  const MU=95,RB=4,RC=2,REST=.82,PULL=62,LMAX=300,TIRV=230,TIRROLL=55,AG=.55;
  const POW={
-  geante:{nm:'La miche géante',ds:'Sa prochaine boule est énorme et bouscule tout.',tgt:false},
+  geante:{nm:'Le coup de levure',ds:'Une pincée de levure du fournil : sa prochaine boule gonfle, devient énorme et bouscule tout.',tgt:false},
   aimant:{nm:'Le cochonnet aimanté',ds:'Pour ce lancer seulement, le cochonnet attire notre boule comme un aimant.',tgt:false},
   pastis:{nm:'La Pastagattaque',ds:'Un pastis de trop dans le verre du prochain lanceur d’en face : il vise vraiment n’importe comment.',tgt:false},
   sardine:{nm:'La sardine du port',ds:'Une sardine géante s’échoue sur le terrain : les boules qui la touchent rebondissent dessus.',tgt:true},
@@ -10922,6 +10922,8 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
   'aimant+gabian':{nm:'Le gabian dressé',ds:'Le goéland dépose le cochonnet tout contre notre meilleure boule.',tgt:false},
   'aimant+mistral':{nm:'Mistral magnétique',ds:'Une rafale qui ne souffle que sur les boules d’en face, loin du cochonnet.',tgt:false},
   'geante+sardine':{nm:'La bouillabaisse',ds:'Boule géante lancée parfaitement, et la sardine balaie les boules d’en face loin du cochonnet.',tgt:false},
+  'geante+gabian':{nm:'Le gabian glouton',ds:'Le goéland chipe la boule levée et la lâche en piqué sur la meilleure boule d’en face, qui est éjectée.',tgt:false},
+  'geante+mistral':{nm:'La tempête de boules géantes',ds:'Le mistral souffle la levure partout : 3 boules géantes à nous tombent au hasard sur le terrain.',tgt:false},
   'pastis+mistral':{nm:'La tournée générale',ds:'Le mistral fait voler le pastis jusqu’à l’équipe d’en face : leurs 3 prochains lancers partent n’importe où.',tgt:false},
   'pastis+sardine':{nm:'La sardinade arrosée',ds:'Le joueur d’en face qui a le plus de boules en main part à la sardinade : il ne joue plus de la manche.',tgt:false},
   'pastis+gabian':{nm:'La cuite du gabian',ds:'Le goéland a trop bu : il vole de travers et lâche 2 nouveaux cochonnets près de nos boules. Chaque boule compte au cochonnet le plus proche.',tgt:false}};
@@ -11343,7 +11345,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
      g.globalAlpha=1;requestAnimationFrame(fr)};
     requestAnimationFrame(fr)}
    function freeSpot(){for(let i=0;i<40;i++){const p={x:T.x+100+Math.random()*(T.w-116),y:T.y+12+Math.random()*(T.h-24)};if(balls.every(b=>b.team<0||dist(b,p)>b.r+6))return p}return{x:230,y:95}}
-   function gullGo2(drop,after){GULL={st:1,t:0,x:W+12,y:4,p:{x:W+12,y:4},c:{x:W+12,y:10},drop,after,nc:1,drunk:1};phase='anim';gullCry()}
+   function gullGo2(drop,after,o){GULL=Object.assign({st:1,t:0,x:W+12,y:4,p:{x:W+12,y:4},c:{x:W+12,y:10},drop,after,nc:1,drunk:1},o?{nc:0,drunk:0}:{},o||{});phase='anim';gullCry()}
    function gullGo(drop,after){const c=coch();c.vx=c.vy=0;GULL={st:0,t:0,x:W+12,y:4,from:{x:W+12,y:4},c,drop,after};phase='anim';gullCry()}
    function back(){phase='select';menuOpen=true;sub=null;mIdx=0;renderP();hint()}
    function usePower(team,pl,tgt){const prev=phase;phase='anim';powCine([pl],pl.pw,POW[pl.pw].nm,team,()=>{if(quit)return;phase=prev;usePower0(team,pl,tgt);if(team===0&&phase==='select'){menuOpen=false;renderCmd();hint();setTimeout(()=>{if(phase==='select'&&!aim&&!menuOpen){menuOpen=true;renderCmd();hint()}},1300)}})}
@@ -11354,7 +11356,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     flash(team===0?'#ffb0dc':'#ffc890');
     if(k==='mistral'&&tgt){const dx=tgt.x-(T.x+T.w/2),dy=tgt.y-(T.y+T.h/2),l=Math.hypot(dx,dy)||1;windD={x:dx/l,y:dy/l}}
     powFx(k,pl,tgt,team);
-    if(k==='geante'){giantNext=8;voice('« Celle-là, je l’ai pétrie moi-même. »');banner('Miche géante !')}
+    if(k==='geante'){giantNext=8;voice('« Un peu de levure du fournil, et hop, ça gonfle ! »');banner('Coup de levure !')}
     else if(k==='aimant'){FX.mag.push({x:tgt.x,y:tgt.y,coch:1,team});voice(team===0?'« Regarde bien le cochonnet… »':'« Hé hé, le cochonnet, il m’aime. »');banner('Cochonnet aimanté !')}
     else if(k==='pastis'){FX.itch[o]=1;voice(team===0?'« Un petit jaune pour la route, Tonin ? C’est ma tournée. »':'« Allez, un pastis, ça fait pas de mal. »');banner('Pastagattaque !')}
     else if(k==='sardine'){FX.sard.push({x:tgt.x,y:tgt.y});voice(pickL(['« Une sardine ? Elle a bouché le port, elle bouchera le terrain. »','« Fraîche du matin, la sardine ! »']));banner('Sardine géante !')}
@@ -11377,6 +11379,14 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     if(d.k==='aimant+gabian'){const m=best();let drop=freeSpot();if(m){const dx=C.x-m.x,dy=C.y-m.y,l=Math.hypot(dx,dy)||1;drop={x:m.x-dx/l*(m.r+3),y:m.y-dy/l*(m.r+3)}}gullGo(drop,()=>{say('Mme Lefèvre','« Brave bête. Personne n’a rien vu. »','r');back()});return}
     if(d.k==='aimant+mistral'){live(1).forEach(b=>{if(b.stuck)return;const dx=b.x-c.x,dy=b.y-c.y,l=Math.hypot(dx,dy)||1;b.vx+=dx/l*150;b.vy+=dy/l*150});windT=performance.now();windD={x:1,y:0};phase='roll';rollT=0;afterRoll=back;return}
     if(d.k==='geante+sardine'){giantNext=10;perfectNext=true;cannon=true;live(1).forEach(b=>{if(b.stuck)return;const dx=b.x-c.x,dy=b.y-c.y,l=Math.hypot(dx,dy)||1;b.vx+=dx/l*130;b.vy+=dy/l*130});FX.sard.push({x:c.x+14,y:c.y});windT=performance.now();windD={x:1,y:0};phase='roll';rollT=0;afterRoll=back;return}
+    if(d.k==='geante+gabian'){const tb=live(1).sort((a,b)=>sdist(a,c)-sdist(b,c))[0];
+     if(!tb){giantNext=10;banner('Rien à bombarder : boule levée !');say('',pickL(['« Le gabian a tout mangé… sauf la levure ! »']),'n');back();return}
+     gullGo2({x:tb.x,y:tb.y},null,{loaf:1,ondrop:()=>{const dx=tb.x-c.x,dy=tb.y-c.y,l=Math.hypot(dx,dy)||1;tb.vx+=dx/l*300+(Math.random()-.5)*40;tb.vy+=dy/l*300+(Math.random()-.5)*40;shake(3,.5);try{dsfx('ko',.8)}catch(_){}Z('nuke',tb.x,tb.y,60,8);ono('BOUM !',tb.x,tb.y-14,'#ff6a3a',1);for(let i=0;i<24;i++)P(tb.x,tb.y,{vx:(Math.random()-.5)*70,vy:-20-Math.random()*40,t:1,c:'#e8b06a',g:40,s:2});
+      say('',pickL(['« Bombardement de gabian ! »','« Il a lâché la boule et gardé la mie ! »','« Ce goéland, c’est un vrai glouton ! »']),'n');phase='roll';rollT=0;afterRoll=back}});return}
+    if(d.k==='geante+mistral'){windD={x:-1,y:0};windT=performance.now();ono('FFFFOUUU !',W*.7,T.y+18,'#cfe8ff',1);let n=0;
+     const drop=()=>{const r=9+Math.random()*2,p2=freeSpot();balls.push({x:p2.x,y:p2.y,vx:0,vy:0,r,m:r/2.6,team:0,alive:true,air:0,bounced:false,big:1});thud();dust(p2.x,p2.y);Z('circ',p2.x,p2.y,40,10);ono('POUF !',p2.x,p2.y-12,'#fffaf0',0);shake(2,.3);
+      if(++n<3)setTimeout(drop,450);else setTimeout(()=>{say('Nadia',pickL(['« Trois fournées d’un coup, c’est cadeau ! »','« Ça a levé plus que prévu… »']),'r');back()},700)};
+     setTimeout(drop,400);return}
     if(d.k==='pastis+mistral'){FX.itch[1]=3;windD={x:-1,y:0};windT=performance.now();for(let i=0;i<22;i++)P(C.x+20+Math.random()*60,C.y-10-Math.random()*30,{vx:-40-Math.random()*60,vy:(Math.random()-.5)*20,t:1.2,c:'#ffd23f',s:2});ono('GLOU GLOU GLOU !',W*.7,T.y+20,'#ffe36a',1);
      setTimeout(()=>{say('Karim','« Allez, c’est ma tournée ! Trois pastis pour la table d’en face ! »','r');back()},900);return}
     if(d.k==='pastis+sardine'){const av=S.them.filter(o=>o.left>0).sort((a,b)=>b.left-a.left)[0];
@@ -11452,7 +11462,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
      (rel&&chain<1?` <span class="y">${lastGrp==='r'?'Riverain → usager':'Usager → riverain'} : bonus de précision.</span>`:'')+
      (FX.itch[0]?' <span class="p">Pastagattaque : la visée tangue !</span>':'')+
      (joker?' <span class="y">Joker de la dernière boule : précision renforcée et ralenti.</span>':'')+
-     (giantNext?` <span class="p">${cannon?'Boulet de canon prêt : tire !':'Miche géante prête.'}</span>`:'')+(h?` ${h.team===0?'On a le point.':'Ils ont le point.'}`:''))}
+     (giantNext?` <span class="p">${cannon?'Boulet de canon prêt : tire !':'Boule levée prête : elle est énorme !'}</span>`:'')+(h?` ${h.team===0?'On a le point.':'Ils ont le point.'}`:''))}
    let bubT=0;function say(who,txt,grp){const b=$('#qbub');if(!b)return;const col={r:'#2f7a2a',u:'#6b3fb0',t:'#a0581a'}[grp]||'#4a4060';b.innerHTML=(who?`<b style="color:${col}">${who}</b>`:'')+txt;b.classList.remove('off');clearTimeout(bubT);bubT=setTimeout(()=>b.classList.add('off'),2400)}
    let banT=0;function banner(t){const b=$('#qban');if(!b)return;b.textContent=t;b.classList.remove('off');clearTimeout(banT);banT=setTimeout(()=>b.classList.add('off'),1300)}
    const dust=(x,y)=>{for(let i=0;i<5;i++)parts.push({x,y,vx:(Math.random()-.5)*40,vy:(Math.random()-.5)*40,t:.5,c:'#e8d3a8'})};
@@ -11525,7 +11535,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     g.fillStyle=hi;g.fillRect(xx-2,yy-2,2,1)}
    function gullStep(dt,now){const G=GULL;G.t+=dt;const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
     if(G.st===0){const k=Math.min(1,G.t/.8),e=ease(k);G.x=G.from.x+(G.c.x-G.from.x)*e;G.y=G.from.y+(G.c.y-6-G.from.y)*e;if(k>=1){G.st=1;G.t=0;G.p={x:G.x,y:G.y};dust(G.c.x,G.c.y);gullCry();ono('KIAAA !',G.x,G.y-14,'#fff',1);for(let i=0;i<6;i++)P(G.x,G.y,{vx:(Math.random()-.5)*30,vy:5+Math.random()*10,t:1.6,c:'#f4f4f0',feather:1,s:2})}}
-    else if(G.st===1){const k=Math.min(1,G.t/1.1),e=ease(k);G.x=G.p.x+(G.drop.x-G.p.x)*e;G.y=G.p.y+(G.drop.y-6-G.p.y)*e-Math.sin(k*Math.PI)*24;if(G.drunk&&k<1){G.x+=Math.sin(G.t*13)*9*(1-k);G.y+=Math.cos(G.t*9)*5*(1-k)}G.c.x=G.x;G.c.y=G.y+6;if(k>=1){G.st=2;G.t=0;G.c.x=G.drop.x;G.c.y=G.drop.y;if(G.nc)balls.push({x:G.drop.x,y:G.drop.y,vx:0,vy:0,r:RC,m:.35,team:-2,alive:true,air:0});thud();dust(G.drop.x,G.drop.y);Z('blue',G.drop.x,G.drop.y,46,16);psfx('hit',.6);ono('TOC !',G.drop.x,G.drop.y-10,'#ffb070',0);G.p={x:G.x,y:G.y}}}
+    else if(G.st===1){const k=Math.min(1,G.t/1.1),e=ease(k);G.x=G.p.x+(G.drop.x-G.p.x)*e;G.y=G.p.y+(G.drop.y-6-G.p.y)*e-Math.sin(k*Math.PI)*24;if(G.drunk&&k<1){G.x+=Math.sin(G.t*13)*9*(1-k);G.y+=Math.cos(G.t*9)*5*(1-k)}G.c.x=G.x;G.c.y=G.y+6;if(k>=1){G.st=2;G.t=0;G.c.x=G.drop.x;G.c.y=G.drop.y;if(G.nc)balls.push({x:G.drop.x,y:G.drop.y,vx:0,vy:0,r:RC,m:.35,team:-2,alive:true,air:0});if(G.ondrop){const f=G.ondrop;G.ondrop=null;f()}thud();dust(G.drop.x,G.drop.y);Z('blue',G.drop.x,G.drop.y,46,16);psfx('hit',.6);ono('TOC !',G.drop.x,G.drop.y-10,'#ffb070',0);G.p={x:G.x,y:G.y}}}
     else{const k=Math.min(1,G.t/.9);G.x=G.p.x+k*(W+30-G.p.x);G.y=G.p.y-k*60;if(k>=1){GULL=null;const f=G.after;f&&f();return}}
     const fl=((now/90)|0)%2,dir=G.st===2||G.drop.x>G.x?1:-1;
     g.fillStyle='rgba(0,0,0,.18)';g.beginPath();g.ellipse(Math.round(G.x),Math.min(T.y+T.h,Math.round(G.y)+26),10,3,0,0,7);g.fill();
@@ -11533,7 +11543,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
      const wing=(sx)=>{g.fillStyle='#2a2433';if(up){g.fillRect(X+sx*3,Y-9,sx*11,4);g.fillStyle='#c8ced6';g.fillRect(X+sx*4,Y-8,sx*9,2);g.fillStyle='#8a929c';g.fillRect(X+sx*12,Y-9,sx*2,3)}else{g.fillRect(X+sx*3,Y-3,sx*10,4);g.fillStyle='#c8ced6';g.fillRect(X+sx*4,Y-2,sx*8,2);g.fillStyle='#8a929c';g.fillRect(X+sx*11,Y-1,sx*2,2)}};
      wing(1);wing(-1);
      if(GULLI.complete)g.drawImage(GULLI,(((now/120)|0)%6)*16,0,16,16,X-8,Y-12,16,16);
-     if(G.st===1){g.fillStyle='#2a2433';g.fillRect(X-1,Y+3,1,2);g.fillRect(X+1,Y+3,1,2);if(G.nc){g.fillStyle='#2a1400';g.beginPath();g.arc(X,Y+7,RC+1,0,7);g.fill();g.fillStyle='#ff8c1a';g.beginPath();g.arc(X,Y+7,RC,0,7);g.fill()}}}}
+     if(G.st===1){g.fillStyle='#2a2433';g.fillRect(X-1,Y+3,1,2);g.fillRect(X+1,Y+3,1,2);if(G.loaf){g.fillStyle='#5a3418';g.beginPath();g.arc(X,Y+9,8,0,7);g.fill();g.fillStyle='#c98a44';g.beginPath();g.arc(X,Y+9,7,0,7);g.fill();g.fillStyle='#e8b06a';g.fillRect(X-4,Y+5,8,2)}if(G.nc){g.fillStyle='#2a1400';g.beginPath();g.arc(X,Y+7,RC+1,0,7);g.fill();g.fillStyle='#ff8c1a';g.beginPath();g.arc(X,Y+7,RC,0,7);g.fill()}}}}
    const POSM=new Map();let lastThr=null,pNow=0;
    function slotOf(p,thr){if(p.sard)return[-30,150];if(p===thr)return[C.x-6,C.y+8];const us=S.us.includes(p),L=(us?S.us:S.them).filter(q=>q!==thr),i=L.indexOf(p);return us?[14,60+i*20]:[14,138+i*18]}
    function movePeople(now,thr){const dt=pNow?Math.min(.05,(now-pNow)/1000):0;pNow=now;[...S.us,...S.them].forEach(p=>{const tg=slotOf(p,thr);let P=POSM.get(p);if(!P){P={x:tg[0],y:tg[1],mv:0,dx:0,dy:0};POSM.set(p,P)}
@@ -11710,7 +11720,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
      if(sv>0){sideView(now,tg?sv:1,v,sm3);g.globalAlpha=tg?Math.min(1,sv*5):sv;g.drawImage(c3,0,0);g.globalAlpha=1}}
     raf=requestAnimationFrame(frame);
    }
-   window.__pq2={duo:id=>{const p=S.us.find(q=>q.id===id);if(!p)return 'nop';const d=duoInfo(p);if(!d)return 'none';jauge[0]=200;curP=p;useDuo(p,null);return d.k},pow:(id,tx,ty)=>{const p=S.us.find(q=>q.id===id);if(!p)return 'nop';jauge[0]=200;usePower(0,p,tx!=null?{x:tx,y:ty}:null);return 'ok'},ai:n=>{jauge[1]=n},st:()=>({phase,itch:FX.itch.slice(),mag:FX.mag.length,sard:FX.sard.length,mud:FX.mud.length,oil:FX.oil.length,balls:balls.length,rocks:rocks.length,bumps:bumps.length,tk:TK,score:S.score.slice(),j2:balls.filter(b=>b.team===-2).length,them:S.them.map(p=>p.left+(p.sard?'s':'')),hold:(holder()||{}).team})};
+   window.__pq2={ob:()=>{const c=coch();balls.push({x:c.x+12,y:c.y+3,vx:0,vy:0,r:RB,m:1,team:1,alive:true,air:0});return balls.length},duo:id=>{const p=S.us.find(q=>q.id===id);if(!p)return 'nop';const d=duoInfo(p);if(!d)return 'none';jauge[0]=200;curP=p;useDuo(p,null);return d.k},pow:(id,tx,ty)=>{const p=S.us.find(q=>q.id===id);if(!p)return 'nop';jauge[0]=200;usePower(0,p,tx!=null?{x:tx,y:ty}:null);return 'ok'},ai:n=>{jauge[1]=n},st:()=>({phase,itch:FX.itch.slice(),mag:FX.mag.length,sard:FX.sard.length,mud:FX.mud.length,oil:FX.oil.length,balls:balls.length,rocks:rocks.length,bumps:bumps.length,tk:TK,score:S.score.slice(),j2:balls.filter(b=>b.team===-2).length,them:S.them.map(p=>p.left+(p.sard?'s':'')),hold:(holder()||{}).team})};
    gauges();newMene();raf=requestAnimationFrame(frame);
   }
   // ---------- 5. résultat ----------
