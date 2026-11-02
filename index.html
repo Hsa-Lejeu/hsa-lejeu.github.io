@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v524')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v525')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5560,7 +5560,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v524')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v525')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -10329,7 +10329,7 @@ body:has(#mrt) #fmo,body:has(#mrt) #ulp,body:has(#mrt) #ctoast,body:has(#mrt) #t
   const ov=document.createElement('div');ov.id='mrt';document.body.appendChild(ov);requestAnimationFrame(()=>ov.classList.add('on'));
   try{sfx('sad')}catch(_){}
   const N=`<b>${D.n}</b>`;
-  ov.innerHTML=`<div class="news"><canvas class="ph" width="16" height="20"></canvas><h2>🕯️ Une triste nouvelle</h2>Le Collectif Les Morts de la Rue nous l’apprend : ${N}, qui venait à la halte depuis des mois, ${(window.GEN&&GEN(N)==='f')?'a été retrouvée morte':(window.GEN&&GEN(N)==='m')?'a été retrouvé mort':'a été retrouvé·e mort·e'} dans la rue.<br><br>La halte ferme une demi-journée en son hommage. L’équipe et les usager·es se retrouvent au square, autour d’une grande photo de ${D.n}.<span class="src">Le Collectif Les Morts de la Rue recense chaque année les personnes mortes sans chez-soi en France.</span><div class="row"><button>Se rassembler au square</button></div></div>`;
+  ov.innerHTML=`<div class="news"><canvas class="ph" width="16" height="20"></canvas><h2>🕯️ Une triste nouvelle</h2>Le Collectif Les Morts de la Rue nous l’apprend : ${N}, qui venait à la halte depuis des mois, ${(window.GEN&&GEN(D.n)==='f')?'a été retrouvée morte':(window.GEN&&GEN(D.n)==='m')?'a été retrouvé mort':'a été retrouvé·e mort·e'} dans la rue.<br><br>La halte ferme une demi-journée en son hommage. L’équipe et les usager·es se retrouvent au square, autour d’une grande photo de ${D.n}.<span class="src">Le Collectif Les Morts de la Rue recense chaque année les personnes mortes sans chez-soi en France.</span><div class="row"><button>Se rassembler au square</button></div></div>`;
   {const c=ov.querySelector('.ph').getContext('2d');c.imageSmoothingEnabled=false;const d=()=>{if(IMAok())c.drawImage(IMA,24*16,S.dci*26,16,20,0,0,16,20);else setTimeout(d,200)};d()}
   ov.querySelector('button').onclick=()=>start();
   const LINES=[null,
@@ -10749,7 +10749,7 @@ W('camOn',(o,a)=>{if(window._flyOn)return;return o(...a)});
  #peta .sf .big{height:min(24vh,170px);width:calc(min(24vh,170px)*16/26)}
  #peta .sf .row6{gap:5px}#peta .sf .grd{max-width:420px;width:100%;justify-self:center}
 }
-#peta .cmd{position:absolute;left:21%;top:10%;width:min(48%,300px);z-index:3;display:flex;flex-direction:column;gap:3px;filter:drop-shadow(4px 4px 0 rgba(0,0,0,.65));animation:pcmd .18s ease-out}
+#peta .cmd{position:absolute;left:21%;top:10%;width:min(48%,300px);z-index:4;display:flex;flex-direction:column;gap:3px;filter:drop-shadow(4px 4px 0 rgba(0,0,0,.65));animation:pcmd .18s ease-out}
 @keyframes pcmd{from{transform:translateX(-14px);opacity:0}}#peta .cmd[hidden],#peta .ctag[hidden],#peta .aim3 .ctag,#peta .aim3 .cmd{display:none!important}
 #peta .cmd .hd{display:flex;align-items:center;gap:6px;background:#fff;color:#111;font:400 clamp(13px,2vw,17px) Lilita,sans-serif;font-style:italic;padding:2px 12px 2px 6px;transform:skew(-12deg);width:max-content;margin-bottom:2px}
 #peta .cmd .hd canvas{width:22px;height:22px;image-rendering:pixelated;transform:skew(12deg)}
@@ -11009,7 +11009,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
   Avant le vote du conseil de quartier, le comité de voisinage et la halte organisent un tournoi de pétanque. Une seule règle : <b>chaque triplette mélange riverains et usager·es de la halte</b>.<br><br>
   En face, le club de la Boule d’en face, qui ne perd jamais. Tout le quartier sera là : une belle partie peut faire changer bien des avis avant le vote.
   <div class="terw"><span class="lb">EN 2 MANCHES GAGNANTES · TERRAIN TIRÉ AU SORT À CHAQUE MANCHE</span><div class="ters"><button data-t="major">⛪ La Major</button><button data-t="carli">🎶 Le Carli</button><button data-t="panier">📸 Le Panier</button><button data-t="canebiere">⛰️ La Canebière</button><button data-t="calanques">🌊 Les Calanques</button></div><small id="qterd"></small></div>
-  <div class="sline"><span id="qslt">🔈 Son : touche « Tester le son » pour vérifier les bruitages.</span><button class="sec" id="qsnt">🔊 Tester le son</button><small>v506</small></div>
+  <div class="sline"><span id="qslt">🔈 Son : touche « Tester le son » pour vérifier les bruitages.</span><button class="sec" id="qsnt">🔊 Tester le son</button></div>
   <div class="coin">▶ INSÈRE UNE PIÈCE · APPUIE SUR START</div><div class="btns"><button class="sec" id="qpsk">Laisser l’équipe jouer sans moi</button><button id="qpgo" class="start">START · Composer l’équipe</button></div></div>`;
   $('#qpgo').onclick=selScreen;
   const refT=()=>{ov.querySelectorAll('.ters button').forEach(b=>b.classList.toggle('on',!!window.__terF&&b.dataset.t===terK));const d=$('#qterd');if(d)d.textContent=TDS[terK]};ov.querySelectorAll('.ters button').forEach(b=>b.onclick=()=>{terK=b.dataset.t;refT();blip()});refT();window.__terSet=k=>{terK=k;window.__terF=k;refT()};
@@ -11019,7 +11019,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
    ov.classList.add('sfm');petaMus('petac');
    setTimeout(()=>{try{if($('#qsq')&&!$('#qsqx')){const b=document.createElement('button');b.id='qsqx';b.className='qsqx';b.textContent='✕ Sans moi';b.title='Laisser l’équipe jouer sans moi';b.onclick=()=>$('#qpsk')?$('#qpsk').click():null;ov.appendChild(b)}}catch(_){}},80);
    setTimeout(()=>{try{psLoad();const st=petaSndState();const d=document.createElement('div');d.className='snd '+st[0];d.textContent=st[1];ov.appendChild(d);setTimeout(()=>d.remove(),st[0]==='ok'?2500:6000)}catch(_){}},60);
-   const QUO={geante:'Celle-là, je l’ai pétrie moi-même. Personne ne la bouge.',aimant:'Le syndic a toujours un plan B… et un cochonnet aimanté.',pastis:'Un petit jaune pour l’adversaire, et il vise le cochonnet du voisin.',sardine:'Ma sardine, elle a bouché le port. Le terrain, c’est rien.',gabian:'Mon gabian connaît le port mieux que moi.',mistral:'Quand je souffle, les boules s’envolent.'};
+   const QUO={geante:'Une pincée de levure du fournil, et ma boule gonfle. Personne ne la bouge.',aimant:'Le syndic a toujours un plan B… et un cochonnet aimanté.',pastis:'Un petit jaune pour l’adversaire, et il vise le cochonnet du voisin.',sardine:'Ma sardine, elle a bouché le port. Le terrain, c’est rien.',gabian:'Mon gabian connaît le port mieux que moi.',mistral:'Quand je souffle, les boules s’envolent.'};
    const SEAT=[[50,92],[68,92],[86,92],[50,146],[68,146],[86,146]],SLOT=[[222,98],[222,122],[222,146]];
    ov.innerHTML=`<div class="sq"><div class="sqw"><canvas id="qsq" width="${W}" height="${H}"></canvas><div class="tag tl" id="qttl"><b>Qui joue ?</b><small>au moins 1 riverain + 1 usager</small></div><div class="tag tr" id="qcnt"><b>0</b> / 3</div><div class="go3" id="qpok" role="button" tabindex="0" hidden>C’est parti !</div><div class="foot" id="qfoot">Touche quelqu’un sur le banc.</div></div></div>`;
    const sq=$('.sqw'),cv2=$('#qsq'),g2=cv2.getContext('2d');g2.imageSmoothingEnabled=false;const se=seas();
@@ -12374,7 +12374,7 @@ function bulApply(s){const t=bulNorm(String(s||''));for(const r of BULR){const m
  // ---- niveau 2 : naloxone et DASRI deviennent des alertes persistantes
  setInterval(()=>{try{const box=$i('alst');if(!box)return;const L=[];
    if(started&&!ended){try{if(built[1]&&S.n<2)L.push({t:`🩺 Naloxone : plus que ${S.n} en stock<small>Sans naloxone, la salle de consommation ferme · toucher : commander (onglet Soins)</small>`,f:()=>{try{tab(1)}catch(_){}}})}catch(_){}
-    try{const d=DAS.find(d=>d.l>=6&&d.l<10);if(d)L.push({t:`🗑️ Boîte DASRI bientôt pleine<small>Si elle déborde, la salle ferme · toucher : la faire vider (30 €)</small>`,f:()=>{try{collect()}catch(_){}}})}catch(_){}}
+    try{const d=DAS.find(d=>d.l>=6&&d.l<10);if(d&&!DAS.some(x=>x.l>=10))L.push({t:`🗑️ Boîte DASRI bientôt pleine<small>Si elle déborde, la salle ferme · toucher : la faire vider (30 €)</small>`,f:()=>{try{collect()}catch(_){}}})}catch(_){}}
    const sig=L.map(o=>o.t).join('|'),cur=[...box.querySelectorAll('.al.my2')];if(box._my2===sig&&cur.length===L.length)return;box._my2=sig;cur.forEach(e=>e.remove());
    L.forEach(o=>{const d=document.createElement('div');d.className='al my2';d.innerHTML=o.t;d.onclick=()=>{try{o.f()}catch(_){}};box.appendChild(d)})}catch(_){}},700);
  // ---- rien par-dessus une fenêtre bloquante
@@ -12455,6 +12455,28 @@ html body #peta button.sec{background:#fff!important;color:#0b2a5b!important}
 #peta .sub{color:#2FAEE0}
 #peta #qhint b,#peta #qhint .n{color:#1d86b3!important}
 `;document.head.appendChild(st)}
+
+// ===== v525 : relecture d'ensemble — plafond d'images par seconde mesuré sur le temps de calcul, contrats sous le bandeau sans chevaucher le quiz, un seul ❗ par salle pour les DASRI
+(function(){
+ // 1. plafond à 30 images/s : décidé sur le temps réellement passé dans une image (mise à jour + dessin), et levé quand il redescend
+ try{if(typeof loop==='function'&&window.loop===loop){let busy=8,since=0;const _lp=window.loop;
+  window.loop=function(t){const t0=performance.now();const r=_lp.apply(this,arguments);const d=performance.now()-t0;if(d<200)busy=busy*.92+d*.08;
+   const now=performance.now();if(!window.FPSCAPB&&busy>12){window.FPSCAPB=true;since=now}else if(window.FPSCAPB&&busy<7&&now-since>15000)window.FPSCAPB=false;window.FPSBUSY=busy;return r};
+  // remplace les deux versions précédentes de BGTH (v507 : dessin ralenti derrière une fenêtre ; v508 : plafond mesuré sur l'intervalle entre images, qui ne se levait jamais sur un écran à 60 Hz)
+  let lastDraw=0,lastD=0;window.BGTH=()=>{try{const now=performance.now();window.FPSCAP=!!window.FPSCAPB;if(typeof MEET!='undefined'&&MEET)return false;
+   const sp=document.getElementById('splash'),m=document.getElementById('m');
+   const hid=!!sp||(paused&&((m&&!m.hidden)||document.getElementById('fmo')||document.getElementById('petov')||document.getElementById('peta')||document.getElementById('epov')));
+   if(hid){if(now-lastD>=(sp?250:125)){lastD=now;return false}return true}
+   if((window.FPSCAPB||window.ECO)&&now-lastDraw<31)return true;lastDraw=now;return false}catch(_){return false}}}}catch(_){}
+ // 2. en paysage, la pile des contrats (#rdfx) ne doit pas passer sous le bouton Quiz : elle glisse alors en haut du plan (par transform, que l'ancien placement ne touche pas)
+ setInterval(()=>{try{const e=document.getElementById('rdfx'),q=document.getElementById('qbub');if(!e)return;if(!(window.LSCOL&&LSCOL())){e.style.transform='';e.dataset.moved='';return}
+  const h=document.getElementById('hud').getBoundingClientRect();const tr=e.style.transform;e.style.transform='';const r=e.getBoundingClientRect();const qr=q?q.getBoundingClientRect():null;
+  const clash=qr&&qr.height>0&&r.bottom>qr.top-4&&r.left<qr.right;
+  if(clash)e.dataset.moved='1';if(e.dataset.moved==='1'){const dx=Math.round(h.right+10-r.left),dy=Math.round(h.top+52-r.top);e.style.transform=`translate(${dx}px,${dy}px)`}else e.style.transform=tr}catch(_){}},600);
+ // 3. un seul ❗ pour les DASRI d'une salle : celui de la boîte la plus pleine
+ try{const _da=window.dasri;if(typeof _da==='function'){window.dasri=function(X,Y,l){let mx=0;try{mx=Math.max(0,...DAS.map(d=>d.l||0))}catch(_){}
+   if((l||0)>=8&&((l||0)<mx||(window._dasBang&&performance.now()-window._dasBang<20))){const _b=window.bang;window.bang=()=>{};try{return _da.apply(this,arguments)}finally{window.bang=_b}}window._dasBang=performance.now();return _da.apply(this,arguments)};try{dasri=window.dasri}catch(_){}}}catch(_){}
+})();
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
