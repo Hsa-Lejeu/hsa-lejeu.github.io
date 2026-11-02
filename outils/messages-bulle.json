@@ -1,0 +1,3637 @@
+{
+ "version_jeu": "v523",
+ "source": "Claude Doc « HSA – Tri des messages de la bulle de Camille » (rev 1041)",
+ "regles": "RYTHME.md §8. tri : Montrer | Regrouper | Taire | À discuter | null (non trié). nouveau_texte : remplace le texte affiché (null = inchangé). Les « … » sont des valeurs calculées par le code et « [a / b] » des variantes selon une condition : garder la même logique.",
+ "messages": [
+  {
+   "id": "M001",
+   "tri": "Montrer",
+   "texte_actuel": "Recrute quelqu'un à l'accueil, installe une salle de consommation et recrute quelqu'un dedans : la halte ouvrira au public quand les deux seront prêtes.",
+   "nouveau_texte": "Pour commencer: recrute un.e accueillant.e, ouvre une salle de conso et recrute un.e infirmier.e.",
+   "code": {
+    "appel": "say",
+    "fonction": "tutEnd",
+    "condition": "INTRO",
+    "ligne_v523": 1090,
+    "extrait_source": "Recrute quelqu'un à l'accueil, installe une salle de consommation et recrute que"
+   },
+   "categorie": "guide",
+   "vu_en_test": 9
+  },
+  {
+   "id": "M002",
+   "tri": "Taire",
+   "texte_actuel": "🗺️ Fais glisser le plan pour explorer le quartier autour de la halte (pince ou double-touche pour voir tout le quartier).",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:upd",
+    "condition": "started&&!B.mapTip&&GT>20",
+    "ligne_v523": 12470,
+    "extrait_source": "🗺️ Fais glisser le plan pour explorer le quartier autour de la halte (pince ou d"
+   },
+   "categorie": "guide",
+   "vu_en_test": 6
+  },
+  {
+   "id": "M003",
+   "tri": "Taire",
+   "texte_actuel": "Choisis l’emplacement de « … » (salle …, …2 cases) : touche un espace libre sur le plan.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "selT",
+    "condition": "",
+    "ligne_v523": 687,
+    "extrait_source": "Choisis l’emplacement de « … » (salle …, …2 cases) : touche un espace libre sur "
+   },
+   "categorie": "guide",
+   "vu_en_test": 3
+  },
+  {
+   "id": "M004",
+   "tri": null,
+   "texte_actuel": "Déplacement annulé : la salle reste où elle était.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "cancelSel",
+    "condition": "MV",
+    "ligne_v523": 676,
+    "extrait_source": "Déplacement annulé : la salle reste où elle était."
+   },
+   "categorie": "guide",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M005",
+   "tri": "Taire",
+   "texte_actuel": "↔️ Touche un espace libre pour réinstaller « … » (salle …, …2 cases). Touche en dehors du bâtiment pour annuler.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "roomAct",
+    "condition": "",
+    "ligne_v523": 683,
+    "extrait_source": "↔️ Touche un espace libre pour réinstaller « … » (salle …, …2 cases). Touche en "
+   },
+   "categorie": "guide",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M006",
+   "tri": "Montrer",
+   "texte_actuel": "🟡 Camille : « Un conteneur DASRI est rempli à 80 %. Touche-le pour le faire vider (30 €), sinon la salle de consommation fermera. [Un contrat de collecte (onglet 🩺 Soins) évite d’y penser. » / Plus tard, la pharmacie partenaire pourra nous proposer un contrat de collecte. »]",
+   "nouveau_texte": "🟡 Camille : « Un DASRI est rempli à 80 %. Touche-le pour le vider (30 €), sinon la salle de consommation ferme. [Un contrat de collecte (onglet 🩺 Soins) évite d’y penser. » / Plus tard, la pharmacie partenaire pourra nous proposer un contrat de collecte. »]",
+   "code": {
+    "appel": "say",
+    "fonction": "W:fillD",
+    "condition": "DAS.some((d,i)=>d.l>=8&&was[i]<8)&&!DCT",
+    "ligne_v523": 5492,
+    "extrait_source": "🟡 Camille : « Un conteneur DASRI est rempli à 80 %. Touche-le pour le faire vide"
+   },
+   "categorie": "guide",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M007",
+   "tri": null,
+   "texte_actuel": "⏳ Camille : « Quelqu’un attend un·e pro qui n’est pas là : construis la salle ou recrute vite ! »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:next",
+    "condition": "!B.hgTip",
+    "ligne_v523": 2019,
+    "extrait_source": "⏳ Camille : « Quelqu’un attend un·e pro qui n’est pas là : construis la salle ou"
+   },
+   "categorie": "camille",
+   "vu_en_test": 7
+  },
+  {
+   "id": "M008",
+   "tri": "Montrer",
+   "texte_actuel": "💶 Camille : « La ville nous aide toute la première année (+… € ce mois-ci). Ensuite, il faudra d’autres financements ! »",
+   "nouveau_texte": "💶 Camille : « La ville nous aide toute la première année (+… € ce mois-ci).»",
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "",
+    "ligne_v523": 3744,
+    "extrait_source": "💶 Camille : « La ville nous aide toute la première année (+… € ce mois-ci). Ensu"
+   },
+   "categorie": "camille",
+   "vu_en_test": 6
+  },
+  {
+   "id": "M009",
+   "tri": null,
+   "texte_actuel": "🏘️ Camille : « Tranquillité sous 40 % ! … (🌳 Quartier) la [feraient / ferait] remonter. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "low&&!paused&&$('m').hidden&&GT-QAL>150",
+    "ligne_v523": 5490,
+    "extrait_source": "🏘️ Camille : « Tranquillité sous 40 % ! … (🌳 Quartier) la [feraient | ferait] re"
+   },
+   "categorie": "camille",
+   "vu_en_test": 1
+  },
+  {
+   "id": "M010",
+   "tri": "À discuter",
+   "texte_actuel": "📍 Camille : « D’après l’association ASUD, environ 2 000 personnes qui consomment vivent dans la rue, rien qu’au centre-ville de Marseille. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "YR==1&&A>=1&&!B.mrsF.b",
+    "ligne_v523": 11829,
+    "extrait_source": "📍 Camille : « D’après l’association ASUD, environ 2 000 personnes qui consomment"
+   },
+   "categorie": "camille",
+   "vu_en_test": 1
+  },
+  {
+   "id": "M011",
+   "tri": "À discuter",
+   "texte_actuel": "📍 Camille : « À Paris et à Strasbourg, les deux haltes ouvertes en 2016 ont été évaluées par l’INSERM : moins de passages aux urgences, moins d’hépatites C, et environ 11 millions d’euros de soins évités en dix ans. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "YR==1&&A>=2&&!B.mrsF.c",
+    "ligne_v523": 11830,
+    "extrait_source": "📍 Camille : « À Paris et à Strasbourg, les deux haltes ouvertes en 2016 ont été "
+   },
+   "categorie": "camille",
+   "vu_en_test": 1
+  },
+  {
+   "id": "M012",
+   "tri": "Montrer",
+   "texte_actuel": "[🆘 Camille : « Plus que … dose[s / ] de naloxone ! Sans naloxone, la salle de consommation fermera. Rachète-en vite (onglet 🩺 Soins). » | 📦 Camille : « Il ne reste presque plus de …. Pense à en racheter dans l’onglet 🩺 Soins. »]",
+   "nouveau_texte": "[🆘 Camille : « Plus que … dose[s / ] de naloxone ! A zéro, la salle de consommation ferme. Rachète-en vite (onglet 🩺 Soins). » / 📦 Camille : « Il ne reste presque plus de …. Rachete-en dans l’onglet 🩺 Soins. »]",
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "!STKL[k]&&(S[k]||0)>0&&!paused&&$('m').hidden",
+    "ligne_v523": 5515,
+    "extrait_source": "[🆘 Camille : « Plus que … dose[s | ] de naloxone ! Sans naloxone, la salle de co"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M013",
+   "tri": "Taire",
+   "texte_actuel": "[🎃 Camille : « Les usager·es ont décoré la halte pour Halloween : citrouilles, toiles d’araignée et petits fantômes ! » / 🎄 Camille : « Sapin, couronnes et chaussettes : la halte est décorée pour les fêtes, avec les usager·es. »]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "decoCheck",
+    "condition": "mo==D.mo&&day>=D.day&&!B.decoY[id]",
+    "ligne_v523": 8315,
+    "extrait_source": "[🎃 Camille : « Les usager·es ont décoré la halte pour Halloween : citrouilles, t"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M014",
+   "tri": "Montrer",
+   "texte_actuel": "[🎳 Camille : « Tu as vu les voisins applaudir nos usager·es ? Ça, aucune affiche ne l’aurait fait. » / 🎳 Camille : « On a perdu la partie, mais pas le quartier. Les voisins en parlent encore. »]",
+   "nouveau_texte": "[Camille : « Bravo pour la partie! Les adversaires de la HSA ont.. les boules! » / 🎳 Camille : « Peuchère, tu as perdu... mais c'est un beau souvenir! »]",
+   "code": {
+    "appel": "say",
+    "fonction": "end",
+    "condition": "",
+    "ligne_v523": 11777,
+    "extrait_source": "[🎳 Camille : « Tu as vu les voisins applaudir nos usager·es ? Ça, aucune affiche"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M015",
+   "tri": "Montrer",
+   "texte_actuel": "[🤫 Camille : « Psssst ! Relis ça avant d’y aller, ça peut te servir ! Crotti sera devant la porte dans quelques jours. » / 🤫 Camille : « Crotti sera devant la porte dans quelques jours. Relis l’album : nos cartes sont nos arguments. »]",
+   "nouveau_texte": "[🤫 Camille : « Psssst ! Relis ça avant d’y aller, ça peut te servir contre Crotti.» / 🤫 Camille : « Crotti sera bientôt devant nos locaux. Relis tes cartes... ça peut servir. »]",
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "",
+    "ligne_v523": 7504,
+    "extrait_source": "[🤫 Camille : « Psssst ! Relis ça avant d’y aller, ça peut te servir ! Crotti ser"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M016",
+   "tri": "Taire",
+   "texte_actuel": "↘️ Camille : « On a déjà fait … il y a peu : l’effet est moins fort (… %). Varions les actions ! »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:act",
+    "condition": "",
+    "ligne_v523": 10169,
+    "extrait_source": "↘️ Camille : « On a déjà fait … il y a peu : l’effet est moins fort (… %). Vario"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M017",
+   "tri": null,
+   "texte_actuel": "♿ Camille : « Agnès est repartie : son fauteuil ne passe pas la marche. Rendons la halte accessible (🏗️ Locaux › Couloir). »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "wcBlock",
+    "condition": "",
+    "ligne_v523": 9649,
+    "extrait_source": "♿ Camille : « Agnès est repartie : son fauteuil ne passe pas la marche. Rendons "
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M018",
+   "tri": "Taire",
+   "texte_actuel": "✊ Refus. Camille : « On n’exige de personne qu’elle arrête. » L’équipe applaudit ; le budget reste serré.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 4279,
+    "extrait_source": "✊ Refus. Camille : « On n’exige de personne qu’elle arrête. » L’équipe applaudit"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M019",
+   "tri": null,
+   "texte_actuel": "✋ Camille : « Crotti a collé des affiches contre la halte. Touche-les pour les arracher, sinon le quartier se crispe. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:draw",
+    "condition": "!B.crHint&&started&&!paused",
+    "ligne_v523": 10116,
+    "extrait_source": "✋ Camille : « Crotti a collé des affiches contre la halte. Touche-les pour les a"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M020",
+   "tri": null,
+   "texte_actuel": "🌼 Camille : « Des jardinières aux fenêtres, et la pétition qui s’essouffle… La mairie nous verse 200 € de soutien ! »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "v>=55&&!B.vt.b",
+    "ligne_v523": 8491,
+    "extrait_source": "🌼 Camille : « Des jardinières aux fenêtres, et la pétition qui s’essouffle… La m"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M021",
+   "tri": "Montrer",
+   "texte_actuel": "🍷 … repart. Camille : « L’alcool tue 41 000 personnes par an. Refuser Gérard, c’est refuser la RDR. »",
+   "nouveau_texte": "🍷 … repart. Camille : « L’alcool tue 41 000 personnes par an. La RDR alcool a du retard en France. »",
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 4274,
+    "extrait_source": "🍷 … repart. Camille : « L’alcool tue 41 000 personnes par an. Refuser Gérard, c’"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M022",
+   "tri": "Taire",
+   "texte_actuel": "🎉 Camille : « Malik a fait danser tout le monde. Une voisine m’a dit : « Je les imaginais autrement. » »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "Math.random()<.7",
+    "ligne_v523": 8546,
+    "extrait_source": "🎉 Camille : « Malik a fait danser tout le monde. Une voisine m’a dit : « Je les "
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M023",
+   "tri": null,
+   "texte_actuel": "🏘️ Camille : « Les voisins se plaignent ! Maraudes, seringues ramassées et DASRI vidés font remonter la barre 🏘️. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "started&&!ended&&chapOf()==1&&!window.HARD&&false&&!(B.qShow)",
+    "ligne_v523": 7374,
+    "extrait_source": "🏘️ Camille : « Les voisins se plaignent ! Maraudes, seringues ramassées et DASRI"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M024",
+   "tri": "Taire",
+   "texte_actuel": "🏘️ Camille : « Une deuxième porte s’ouvre, de l’autre côté de la ville. On n’est plus une expérience : on est un réseau. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "go",
+    "condition": "",
+    "ligne_v523": 9086,
+    "extrait_source": "🏘️ Camille : « Une deuxième porte s’ouvre, de l’autre côté de la ville. On n’est"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M025",
+   "tri": null,
+   "texte_actuel": "🏛️ Camille : « La mairie a baissé notre subvention de … % ce mois-ci (−… €). Les riverains sont trop mécontents. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "c>0&&pct>0&&Math.round(c*pct)>=10",
+    "ligne_v523": 8482,
+    "extrait_source": "🏛️ Camille : « La mairie a baissé notre subvention de … % ce mois-ci (−… €). Les"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M026",
+   "tri": "Montrer",
+   "texte_actuel": "🏛️ Camille : « On a dépassé l’enveloppe de la ville pour ce mois-ci : chaque passage en plus n’est plus payé qu’à moitié. »",
+   "nouveau_texte": "🏛️ Camille : « On a dépassé nos prévisions mensuelles : chaque passage en plus n’est plus payé qu’à moitié. »",
+   "code": {
+    "appel": "say",
+    "fonction": "W:leave",
+    "condition": "n==121",
+    "ligne_v523": 8700,
+    "extrait_source": "🏛️ Camille : « On a dépassé l’enveloppe de la ville pour ce mois-ci : chaque pas"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M027",
+   "tri": "Montrer",
+   "texte_actuel": "🏛️ Camille : « Plus de 200 passages ce mois-ci : la ville ne paie plus qu’un quart du tarif. »",
+   "nouveau_texte": "🏛️ Camille : « La fréquentation a explosé nos prévisions: la ville ne paie plus qu’un quart du prévisionnel. »",
+   "code": {
+    "appel": "say",
+    "fonction": "W:leave",
+    "condition": "n==201",
+    "ligne_v523": 8700,
+    "extrait_source": "🏛️ Camille : « Plus de 200 passages ce mois-ci : la ville ne paie plus qu’un qua"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M028",
+   "tri": "Taire",
+   "texte_actuel": "🏠 Camille : « Trois personnes dorment chez elles ce soir. Un chez-soi d’abord : ça marche. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "go",
+    "condition": "",
+    "ligne_v523": 9088,
+    "extrait_source": "🏠 Camille : « Trois personnes dorment chez elles ce soir. Un chez-soi d’abord : "
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M029",
+   "tri": null,
+   "texte_actuel": "💉 Camille : « Avec le ou la médecin, l’équipe mobile peut enfin vacciner : +2 vaccinations au dossier. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "B.emoV&&DOC()",
+    "ligne_v523": 9539,
+    "extrait_source": "💉 Camille : « Avec le ou la médecin, l’équipe mobile peut enfin vacciner : +2 va"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M030",
+   "tri": null,
+   "texte_actuel": "💊 Camille : « La boulangère a un kit de naloxone sous le comptoir. Le quartier change. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "go",
+    "condition": "",
+    "ligne_v523": 9090,
+    "extrait_source": "💊 Camille : « La boulangère a un kit de naloxone sous le comptoir. Le quartier c"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M031",
+   "tri": null,
+   "texte_actuel": "💊 Camille : « L’ARS a convaincu le pharmacien : le partenariat continue. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "Math.random()<.5",
+    "ligne_v523": 8597,
+    "extrait_source": "💊 Camille : « L’ARS a convaincu le pharmacien : le partenariat continue. »"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M032",
+   "tri": null,
+   "texte_actuel": "💊 Camille : « Malgré l’ARS, le pharmacien arrête. On a perdu la pharmacie. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "Math.random()<.5",
+    "ligne_v523": 8597,
+    "extrait_source": "💊 Camille : « Malgré l’ARS, le pharmacien arrête. On a perdu la pharmacie. »"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M033",
+   "tri": null,
+   "texte_actuel": "💚 Camille : « Les voisins créent un comité de suivi avec nous : la tranquillité ne descendra plus sous 45 %. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "v>=65&&!B.vt.c",
+    "ligne_v523": 8492,
+    "extrait_source": "💚 Camille : « Les voisins créent un comité de suivi avec nous : la tranquillité "
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M034",
+   "tri": null,
+   "texte_actuel": "💬 Camille : « Ce n’est pas vraiment ce qu’on demandait… On continue à se battre, et on continue d’accueillir. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 8208,
+    "extrait_source": "💬 Camille : « Ce n’est pas vraiment ce qu’on demandait… On continue à se battre,"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M035",
+   "tri": null,
+   "texte_actuel": "💬 Camille : « Ce n’est pas vraiment ce qu’on demandait… On rouvre quand même demain : les gens attendent dehors. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 4516,
+    "extrait_source": "💬 Camille : « Ce n’est pas vraiment ce qu’on demandait… On rouvre quand même dem"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M036",
+   "tri": null,
+   "texte_actuel": "💬 Camille : « Tu te souviens de … ? On peut encore lui proposer un suivi : touche son portrait en gris, en haut de l’écran. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "!S.decR&&AMI()-S.decAm>=1",
+    "ligne_v523": 5505,
+    "extrait_source": "💬 Camille : « Tu te souviens de … ? On peut encore lui proposer un suivi : touch"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M037",
+   "tri": "Montrer",
+   "texte_actuel": "💬 Camille : « Ça fait longtemps qu’on n’a pas de nouvelles de …… Ce serait bien de prendre de ses nouvelles. »",
+   "nouveau_texte": "💬 Camille : « Ça fait longtemps qu’on n’a pas de nouvelles de ……. »",
+   "code": {
+    "appel": "say",
+    "fonction": "lcTick",
+    "condition": "S.lk<35&&GT-(S.remT||-999)>100",
+    "ligne_v523": 2105,
+    "extrait_source": "💬 Camille : « Ça fait longtemps qu’on n’a pas de nouvelles de …… Ce serait bien "
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M038",
+   "tri": null,
+   "texte_actuel": "💬 Camille : « Ça se bouscule devant la porte ! Un·e médiateur·rice organiserait la file (onglet Équipe). »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:upd",
+    "condition": "started&&!ended&&!B.medTip&&!QMED()&&WL[0].length-(window.QNS?QNS():0)>=8",
+    "ligne_v523": 6178,
+    "extrait_source": "💬 Camille : « Ça se bouscule devant la porte ! Un·e médiateur·rice organiserait "
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M039",
+   "tri": null,
+   "texte_actuel": "💶 Camille : « C’est voté ! Augmentation de 20 % pour toute l’équipe dès ce mois-ci. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 8705,
+    "extrait_source": "💶 Camille : « C’est voté ! Augmentation de 20 % pour toute l’équipe dès ce mois-"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M040",
+   "tri": "Taire",
+   "texte_actuel": "💶 Camille : « Nos services rapportent : le labo analyse pour d’autres, la cuisine fait traiteur solidaire ! »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "",
+    "ligne_v523": 5800,
+    "extrait_source": "💶 Camille : « Nos services rapportent : le labo analyse pour d’autres, la cuisin"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M041",
+   "tri": null,
+   "texte_actuel": "📍 Camille : « Tu sais qu’une première halte devait ouvrir à Marseille ? Fin 2023, tout était prêt, les travaux allaient commencer… et l’État a bloqué le projet. Cette fois, on n’a pas le droit à l’erreur. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "YR==1&&A>=0&&day>=16&&!B.mrsF.a",
+    "ligne_v523": 11828,
+    "extrait_source": "📍 Camille : « Tu sais qu’une première halte devait ouvrir à Marseille ? Fin 2023"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M042",
+   "tri": null,
+   "texte_actuel": "📑 Camille : « Les caisses se vident. La formation appels à projets (Équipe › 🎓) aiderait à trouver des fonds. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "low&&!B.aapTip&&mo>=1",
+    "ligne_v523": 3565,
+    "extrait_source": "📑 Camille : « Les caisses se vident. La formation appels à projets (Équipe › 🎓) "
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M043",
+   "tri": "Montrer",
+   "texte_actuel": "📣 Camille : « Crotti a fait tout l’immeuble. Une maraude ou une réunion de rue dans les 10 jours, vite ! »",
+   "nouveau_texte": "📣 Camille : « Crotti démarche tout l’immeuble. Une maraude ou une réunion de rue dans les 10 jours, vite ! »",
+   "code": {
+    "appel": "say",
+    "fonction": "crAfter",
+    "condition": "",
+    "ligne_v523": 8929,
+    "extrait_source": "📣 Camille : « Crotti a fait tout l’immeuble. Une maraude ou une réunion de rue d"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M044",
+   "tri": null,
+   "texte_actuel": "📣 Camille : « La notoriété s’essouffle : affichage, maraudes, fêtes… faisons parler de la halte ! »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "n0!=null&&NOT<n0-4&&!B.nTip",
+    "ligne_v523": 1777,
+    "extrait_source": "📣 Camille : « La notoriété s’essouffle : affichage, maraudes, fêtes… faisons par"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M045",
+   "tri": null,
+   "texte_actuel": "📦 Camille : « Plus de … en stock : quelqu’un vient de repartir sans. Rachète-en dans l’onglet 🩺 Soins (…). »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:outc",
+    "condition": "k&&STKN[k]&&started&&!ended&&!(GT-(STKT[k]||-1e9)<120)",
+    "ligne_v523": 5512,
+    "extrait_source": "📦 Camille : « Plus de … en stock : quelqu’un vient de repartir sans. Rachète-en "
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M046",
+   "tri": "Taire",
+   "texte_actuel": "📰 Camille : « Trois draps de protestation, et La Gazette du Mistral relaie la pétition… Il faut regagner la confiance des voisins, vite. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "v<25&&!B.vt.d",
+    "ligne_v523": 8493,
+    "extrait_source": "📰 Camille : « Trois draps de protestation, et La Gazette du Mistral relaie la pé"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M047",
+   "tri": null,
+   "texte_actuel": "🕊️ Camille : « … …. Encore un envol : bravo à toute l’équipe ! » (🏘️ +5 · 📣 +5 · 💶 +100 €)",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:envol",
+    "condition": "",
+    "ligne_v523": 8299,
+    "extrait_source": "🕊️ Camille : « … …. Encore un envol : bravo à toute l’équipe ! » (🏘️ +5 · 📣 +5 ·"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M048",
+   "tri": null,
+   "texte_actuel": "🕯️ Camille : « Merci à toutes et tous d’être venu·es pour …. On rouvre cet après-midi. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "end",
+    "condition": "",
+    "ligne_v523": 10353,
+    "extrait_source": "🕯️ Camille : « Merci à toutes et tous d’être venu·es pour …. On rouvre cet après"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M049",
+   "tri": null,
+   "texte_actuel": "🖼️ Camille : « Le débat a tourné au pugilat. On a perdu du terrain. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "Math.random()<.5",
+    "ligne_v523": 8574,
+    "extrait_source": "🖼️ Camille : « Le débat a tourné au pugilat. On a perdu du terrain. »"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M050",
+   "tri": null,
+   "texte_actuel": "🖼️ Camille : « Salle comble. Des voisins ont pris la parole pour nous défendre. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "Math.random()<.5",
+    "ligne_v523": 8574,
+    "extrait_source": "🖼️ Camille : « Salle comble. Des voisins ont pris la parole pour nous défendre. "
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M051",
+   "tri": null,
+   "texte_actuel": "😞 Camille : « Je comprends. L’équipe aussi, mais elle est déçue. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 8706,
+    "extrait_source": "😞 Camille : « Je comprends. L’équipe aussi, mais elle est déçue. »"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M052",
+   "tri": "Montrer",
+   "texte_actuel": "😟 Camille : « Personne n’est allé voir les voisins après le passage de Crotti. Ses arguments ont fait leur chemin. »",
+   "nouveau_texte": "😟 Camille : « Personne pour contredire les arguments de Crotti... des indécis.e se font convaincre... »",
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "B.crR&&GT>=B.crR.until",
+    "ligne_v523": 8940,
+    "extrait_source": "😟 Camille : « Personne n’est allé voir les voisins après le passage de Crotti. S"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M053",
+   "tri": null,
+   "texte_actuel": "😬 Camille : « Ça s’est mal fini : un usager ivre, une dispute… Les voisins hostiles ont eu leur photo. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "Math.random()<.7",
+    "ligne_v523": 8546,
+    "extrait_source": "😬 Camille : « Ça s’est mal fini : un usager ivre, une dispute… Les voisins hosti"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M054",
+   "tri": "Taire",
+   "texte_actuel": "🚑 Camille : « L’équipe mobile est partie : là où personne ne va, on y va. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "go",
+    "condition": "",
+    "ligne_v523": 9089,
+    "extrait_source": "🚑 Camille : « L’équipe mobile est partie : là où personne ne va, on y va. »"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M055",
+   "tri": "Montrer",
+   "texte_actuel": "🚪 … est exclu·e. Les riverains sont rassurés, l’ambiance est lourde. Camille : « … va continuer ailleurs, sans personne. »",
+   "nouveau_texte": "🚪 … est exclu·e. Les riverains sont rassurés, l’équipe divisée. Camille : « … va continuer ailleurs, sans personne. »",
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 4276,
+    "extrait_source": "🚪 … est exclu·e. Les riverains sont rassurés, l’ambiance est lourde. Camille : «"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M056",
+   "tri": "Montrer",
+   "texte_actuel": "🤝 Camille : « Bien joué. Les voisins ont vu qu’on ne se cache pas : les draps de Crotti redescendent. »",
+   "nouveau_texte": "🤝 Camille : « Bien joué! Les voisins ont vu qu’on ne se laissait pas démonter! Prends ça, Crotti! »",
+   "code": {
+    "appel": "say",
+    "fonction": "W:act",
+    "condition": "B.crR&&eu<e0&&(k=='m'||k=='r')",
+    "ligne_v523": 8933,
+    "extrait_source": "🤝 Camille : « Bien joué. Les voisins ont vu qu’on ne se cache pas : les draps de"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M057",
+   "tri": null,
+   "texte_actuel": "🤝 Camille : « Un nouveau partenariat demande du temps pour se mettre en place. On pourra en signer un autre dans … jours. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "nope",
+    "condition": "",
+    "ligne_v523": 9620,
+    "extrait_source": "🤝 Camille : « Un nouveau partenariat demande du temps pour se mettre en place. O"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M058",
+   "tri": null,
+   "texte_actuel": "🧪 Camille : « Pendant le festival, beaucoup de monde va passer au labo faire analyser ses produits. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "",
+    "ligne_v523": 3656,
+    "extrait_source": "🧪 Camille : « Pendant le festival, beaucoup de monde va passer au labo faire ana"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M059",
+   "tri": null,
+   "texte_actuel": "🧭 Camille : « Dernière année : les attentes sont au plus haut. Chaque besoin sans réponse pèsera lourd. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "YR>=3&&!B.exS3",
+    "ligne_v523": 5869,
+    "extrait_source": "🧭 Camille : « Dernière année : les attentes sont au plus haut. Chaque besoin san"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M060",
+   "tri": null,
+   "texte_actuel": "🧭 Camille : « Les gens attendent plus de nous maintenant : un besoin sans réponse déçoit davantage. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "YR>=2&&!B.exS2",
+    "ligne_v523": 5868,
+    "extrait_source": "🧭 Camille : « Les gens attendent plus de nous maintenant : un besoin sans répons"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M061",
+   "tri": null,
+   "texte_actuel": "🧭 Camille : « Personne n’a fini son parcours cette semaine (… en attente). Pourquoi : …. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "",
+    "ligne_v523": 9593,
+    "extrait_source": "🧭 Camille : « Personne n’a fini son parcours cette semaine (… en attente). Pourq"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M062",
+   "tri": null,
+   "texte_actuel": "🧹 Camille : « Le chantier démarre : … personnes commencent lundi. Premier salaire, première fierté. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "go",
+    "condition": "",
+    "ligne_v523": 9087,
+    "extrait_source": "🧹 Camille : « Le chantier démarre : … personnes commencent lundi. Premier salair"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M063",
+   "tri": "Montrer",
+   "texte_actuel": "🧹 Camille : « Le dernier drap est décroché ! Et Michel, un voisin, ramassera les seringues du square chaque semaine. »",
+   "nouveau_texte": "🧹 Camille : « Les riverains sont maintenant des allié.es! L'un d'eux, Michel, ramasse les seringues du square chaque semaine. »",
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "v>=45&&!B.vt.a",
+    "ligne_v523": 8490,
+    "extrait_source": "🧹 Camille : « Le dernier drap est décroché ! Et Michel, un voisin, ramassera les"
+   },
+   "categorie": "camille",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M064",
+   "tri": null,
+   "texte_actuel": "Budget insuffisant pour agrandir.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "cellTap",
+    "condition": "d>0&&eu<d",
+    "ligne_v523": 674,
+    "extrait_source": "Budget insuffisant pour agrandir."
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M065",
+   "tri": null,
+   "texte_actuel": "Budget insuffisant pour agrandir.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "ghBuild",
+    "condition": "d>0&&eu<d",
+    "ligne_v523": 1585,
+    "extrait_source": "Budget insuffisant pour agrandir."
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M066",
+   "tri": null,
+   "texte_actuel": "Budget insuffisant.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "cellTap",
+    "condition": "eu<c_",
+    "ligne_v523": 675,
+    "extrait_source": "Budget insuffisant."
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M067",
+   "tri": null,
+   "texte_actuel": "Budget insuffisant.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "ghBuild",
+    "condition": "eu<c_",
+    "ligne_v523": 1586,
+    "extrait_source": "Budget insuffisant."
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M068",
+   "tri": null,
+   "texte_actuel": "Pas assez de budget pour la collecte DASRI (30 €).",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "collect",
+    "condition": "eu<30",
+    "ligne_v523": 638,
+    "extrait_source": "Pas assez de budget pour la collecte DASRI (30 €)."
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M069",
+   "tri": "Montrer",
+   "texte_actuel": "[🎚️ Mode difficile : la ville et l’ARS paient 20 % de moins, l’équipe attend 30 s au plus quand elle appelle, et chaque refus pèse davantage. / 🎚️ Mode normal rétabli.]",
+   "nouveau_texte": "[🎚️ Mode difficile : moins d'argent, moins de temps pour réagir... / 🎚️ Mode normal rétabli.]",
+   "code": {
+    "appel": "say",
+    "fonction": "setHard",
+    "condition": "",
+    "ligne_v523": 7354,
+    "extrait_source": "[🎚️ Mode difficile : la ville et l’ARS paient 20 % de moins, l’équipe attend 30 "
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M070",
+   "tri": "Montrer",
+   "texte_actuel": "[🏢 Le local voisin est loué (450 € de travaux, puis 40 €/mois de loyer) : 4 cases de plus pour aménager des salles ! / 🏗️ L’annexe est construite à côté du parking : 4 cases de plus pour aménager des salles !]",
+   "nouveau_texte": "[🏢 Le local voisin est loué (450 € de travaux, puis 40 €/mois de loyer).  / 🏗️ L’annexe est construite à côté du parking .]",
+   "code": {
+    "appel": "say",
+    "fonction": "buyExt",
+    "condition": "",
+    "ligne_v523": 686,
+    "extrait_source": "[🏢 Le local voisin est loué (450 € de travaux, puis 40 €/mois de loyer) : 4 case"
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M071",
+   "tri": "Montrer",
+   "texte_actuel": "[🗣️ Un·e superviseur·e extérieur·e viendra chaque mois analyser les pratiques avec l’équipe (80 €/mois). / 🗣️ La supervision d’équipe est arrêtée.]",
+   "nouveau_texte": "[🗣️ Un·e psychologue viendra chaque mois analyser les pratiques avec l’équipe (80 €/mois). / 🗣️ La supervision d’équipe est arrêtée.]",
+   "code": {
+    "appel": "say",
+    "fonction": "xpBuy",
+    "condition": "k=='s'",
+    "ligne_v523": 714,
+    "extrait_source": "[🗣️ Un·e superviseur·e extérieur·e viendra chaque mois analyser les pratiques av"
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M072",
+   "tri": null,
+   "texte_actuel": "↩️ Contrat DASRI annulé : 120 € remboursés.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "onclick",
+    "condition": "un",
+    "ligne_v523": 6357,
+    "extrait_source": "↩️ Contrat DASRI annulé : 120 € remboursés."
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M073",
+   "tri": null,
+   "texte_actuel": "↩️ Embauche de … annulée : … € remboursés.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "fireDo",
+    "condition": "un",
+    "ligne_v523": 6342,
+    "extrait_source": "↩️ Embauche de … annulée : … € remboursés."
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M074",
+   "tri": "Montrer",
+   "texte_actuel": "🆘 Le CAARUD voisin a appris que la caisse était vide : il nous dépanne avec 5 doses de naloxone. La salle de consommation peut rouvrir !",
+   "nouveau_texte": "🆘 Le CAARUD voisin nous dépanne avec 5 doses de naloxone. La salle de consommation peut rouvrir !",
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "",
+    "ligne_v523": 5880,
+    "extrait_source": "🆘 Le CAARUD voisin a appris que la caisse était vide : il nous dépanne avec 5 do"
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M075",
+   "tri": "Montrer",
+   "texte_actuel": "🎓 Camille se forme à la rédaction d’appels à projets : une jauge apparaît au-dessus de sa tête, et des financements arriveront.",
+   "nouveau_texte": "🎓 Camille se forme à la rédaction d’appels à projets : des financements arriveront.",
+   "code": {
+    "appel": "say",
+    "fonction": "train",
+    "condition": "z",
+    "ligne_v523": 295,
+    "extrait_source": "🎓 Camille se forme à la rédaction d’appels à projets : une jauge apparaît au-des"
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M076",
+   "tri": null,
+   "texte_actuel": "🎪 …[ et … / ] [tiennent / tient] le stand du festival (+… €). [Analyse sur place : un comprimé très dosé, l’alerte circule. / Le stand ne désemplit pas.]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "festGo",
+    "condition": "",
+    "ligne_v523": 3653,
+    "extrait_source": "🎪 …[ et … | ] [tiennent | tient] le stand du festival (+… €). [Analyse sur place"
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M077",
+   "tri": null,
+   "texte_actuel": "🏗️ … (…)[ : −… €. / [ : +… € récupérés. | .]]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "cellTap",
+    "condition": "MV",
+    "ligne_v523": null,
+    "extrait_source": "🏗️ … (…)[ : −… €. | [ : +… € récupérés. | .]]"
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M078",
+   "tri": null,
+   "texte_actuel": "🏗️ … (…)[ : −… €. / [ : +… € récupérés. | .]]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "ghBuild",
+    "condition": "MV",
+    "ligne_v523": null,
+    "extrait_source": "🏗️ … (…)[ : −… €. | [ : +… € récupérés. | .]]"
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M079",
+   "tri": "Montrer",
+   "texte_actuel": "🏛️ Dossier envoyé à la mairie : elle peut financer la moitié des travaux d’accessibilité. Réponse dans un mois environ.",
+   "nouveau_texte": "🏛️ Demande de subvention envoyé à la mairie : elle pourrait financer la moitié des travaux d’accessibilité. Réponse dans un mois environ.",
+   "code": {
+    "appel": "say",
+    "fonction": "onclick",
+    "condition": "",
+    "ligne_v523": 9658,
+    "extrait_source": "🏛️ Dossier envoyé à la mairie : elle peut financer la moitié des travaux d’acces"
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M080",
+   "tri": null,
+   "texte_actuel": "🏛️ La mairie accepte : elle finance la moitié de la mise en accessibilité. Il reste … € à la charge de la halte (🏗️ Locaux › Couloir).",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "B.pmrAid&&!B.pmrAidOk&&AMI()>=B.pmrAid&&started&&!paused",
+    "ligne_v523": 9660,
+    "extrait_source": "🏛️ La mairie accepte : elle finance la moitié de la mise en accessibilité. Il re"
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M081",
+   "tri": null,
+   "texte_actuel": "🏛️ La mairie verse 200 € de soutien après le vote du conseil de quartier. Un riverain, Marcel, vient donner un coup de main le samedi.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:nextYear",
+    "condition": "",
+    "ligne_v523": 7408,
+    "extrait_source": "🏛️ La mairie verse 200 € de soutien après le vote du conseil de quartier. Un riv"
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M082",
+   "tri": null,
+   "texte_actuel": "💶 Tout reste ouvert. Il faudra tenir : surveille le budget, les salaires pourraient être payés en retard.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 4281,
+    "extrait_source": "💶 Tout reste ouvert. Il faudra tenir : surveille le budget, les salaires pourrai"
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M083",
+   "tri": null,
+   "texte_actuel": "💸 Salaires payés en retard : la rumeur court dans le quartier, la méfiance augmente (−8 de tranquillité).[ / Pense à la formation « appels à projets » (Équipe › 🎓 Formations) pour trouver des financements.]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "",
+    "ligne_v523": 2025,
+    "extrait_source": "💸 Salaires payés en retard : la rumeur court dans le quartier, la méfiance augme"
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M084",
+   "tri": null,
+   "texte_actuel": "📅 Collecte DASRI signée (20 €/mois), les 10 et 20 du mois. Premier passage [le 10 / [le 20 | le 10 du mois prochain]][ : d’ici là, surveille les conteneurs presque pleins. / .]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "dasContract",
+    "condition": "",
+    "ligne_v523": 639,
+    "extrait_source": "📅 Collecte DASRI signée (20 €/mois), les 10 et 20 du mois. Premier passage [le 1"
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M085",
+   "tri": "Montrer",
+   "texte_actuel": "📣 La notoriété de la halte paie : l’appel aux dons rapporte 200 €. Ça ne compensera pas tout.",
+   "nouveau_texte": "📣 La notoriété de la halte paie : l’appel aux dons rapporte 200 €.",
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 4281,
+    "extrait_source": "📣 La notoriété de la halte paie : l’appel aux dons rapporte 200 €. Ça ne compens"
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M086",
+   "tri": null,
+   "texte_actuel": "🔒 La salle … est fermée pour deux mois. Son équipe est en chômage partiel (moitié des salaires économisée).",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "closeRoom2",
+    "condition": "",
+    "ligne_v523": 4227,
+    "extrait_source": "🔒 La salle … est fermée pour deux mois. Son équipe est en chômage partiel (moiti"
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M087",
+   "tri": null,
+   "texte_actuel": "🚓 Amende de 135 € : le camion était garé sur une place de livraison.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "tourGo",
+    "condition": "B.vanFine&&AMI()<B.vanFine.until",
+    "ligne_v523": 8467,
+    "extrait_source": "🚓 Amende de 135 € : le camion était garé sur une place de livraison."
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M088",
+   "tri": "Taire",
+   "texte_actuel": "🛎️ L’accueil a déménagé juste à côté de l’entrée, à la place de l’ancien bureau. Sa place dans la halte est libre[ (+… € récupérés) / ].",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "ensureAcc",
+    "condition": "was&&msg",
+    "ligne_v523": 10532,
+    "extrait_source": "🛎️ L’accueil a déménagé juste à côté de l’entrée, à la place de l’ancien bureau."
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M089",
+   "tri": null,
+   "texte_actuel": "🛏️ Partenariat avec le SIAO : le 115 nous orientera des personnes sans solution pour la nuit, et chaque nuitée au dortoir sera financée (15 €).",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "siaoSign",
+    "condition": "",
+    "ligne_v523": 5803,
+    "extrait_source": "🛏️ Partenariat avec le SIAO : le 115 nous orientera des personnes sans solution "
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M090",
+   "tri": null,
+   "texte_actuel": "🧨 … : …… € récupérés. Tu peux la reconstruire ailleurs quand tu veux.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "roomAct",
+    "condition": "k=='del'",
+    "ligne_v523": 682,
+    "extrait_source": "🧨 … : …… € récupérés. Tu peux la reconstruire ailleurs quand tu veux."
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M091",
+   "tri": "Taire",
+   "texte_actuel": "🧪 Partie de test : [janvier de l’année 3 / début de l’année …/3], avec une halte déjà installée (… pros, … salles, … €). Bon test !",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "",
+    "ligne_v523": 9061,
+    "extrait_source": "🧪 Partie de test : [janvier de l’année 3 | début de l’année …/3], avec une halte"
+   },
+   "categorie": "argent",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M092",
+   "tri": null,
+   "texte_actuel": "🏗️ … ! Recrute maintenant quelqu’un dans l’onglet Équipe.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "place",
+    "condition": "",
+    "ligne_v523": 675,
+    "extrait_source": "🏗️ … ! Recrute maintenant quelqu’un dans l’onglet Équipe."
+   },
+   "categorie": "equipe",
+   "vu_en_test": 7
+  },
+  {
+   "id": "M093",
+   "tri": null,
+   "texte_actuel": "🏗️ … (…) ! Recrute maintenant quelqu’un dans l’onglet Équipe.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "cellTap",
+    "condition": "",
+    "ligne_v523": 675,
+    "extrait_source": "🏗️ … (…) ! Recrute maintenant quelqu’un dans l’onglet Équipe."
+   },
+   "categorie": "equipe",
+   "vu_en_test": 7
+  },
+  {
+   "id": "M094",
+   "tri": null,
+   "texte_actuel": "🏗️ … (…) ! Recrute maintenant quelqu’un dans l’onglet Équipe.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "ghBuild",
+    "condition": "",
+    "ligne_v523": 1586,
+    "extrait_source": "🏗️ … (…) ! Recrute maintenant quelqu’un dans l’onglet Équipe."
+   },
+   "categorie": "equipe",
+   "vu_en_test": 7
+  },
+  {
+   "id": "M095",
+   "tri": null,
+   "texte_actuel": "🤒 … est en arrêt maladie pour environ … jour[s / ]. [La salle … reste fermée en attendant : rien n’est cassé, … revient bientôt. / Les collègues prennent le relais.]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "",
+    "ligne_v523": 9699,
+    "extrait_source": "🤒 … est en arrêt maladie pour environ … jour[s | ]. [La salle … reste fermée en "
+   },
+   "categorie": "equipe",
+   "vu_en_test": 4
+  },
+  {
+   "id": "M096",
+   "tri": null,
+   "texte_actuel": "☕ … est fatigué·e et part souffler [en salle de repos / un moment (sans salle de repos, la pause récupère moins)].[ Seul·e dans sa salle, la salle ferme le temps de la pause : un·e deuxième pro éviterait ça. / ]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:upd",
+    "condition": "!B.pzTip",
+    "ligne_v523": 10201,
+    "extrait_source": "☕ … est fatigué·e et part souffler [en salle de repos | un moment (sans salle de"
+   },
+   "categorie": "equipe",
+   "vu_en_test": 3
+  },
+  {
+   "id": "M097",
+   "tri": null,
+   "texte_actuel": "Sans personne à l'accueil, quelqu'un est reparti sans aide. Recrute un·e médiateur·rice !",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "fail",
+    "condition": "",
+    "ligne_v523": 1142,
+    "extrait_source": "Sans personne à l'accueil, quelqu'un est reparti sans aide. Recrute un·e médiate"
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M098",
+   "tri": null,
+   "texte_actuel": "[🏛️ Sortie au musée : … personnes partent avec l’équipe pour …. / … : … personnes se retrouvent en cercle dans la salle de repos (…).]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "startWS",
+    "condition": "",
+    "ligne_v523": 342,
+    "extrait_source": "[🏛️ Sortie au musée : … personnes partent avec l’équipe pour …. | … : … personne"
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M099",
+   "tri": null,
+   "texte_actuel": "[😮‍💨 … est à bout d’énergie. Un repas d’équipe, une machine à café ou un coin repos l’aideraient… sinon c’est l’arrêt maladie. / 😮‍💨 … sont à bout d’énergie. Un repas d’équipe, une machine à café ou un coin repos les aideraient… sinon c’est l’arrêt maladie.]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "camSay",
+    "fonction": "(global)",
+    "condition": "tw.length&&GT-(B.twG??-1e9)>10*DAYL",
+    "ligne_v523": 9289,
+    "extrait_source": "[😮‍💨 … est à bout d’énergie. Un repas d’équipe, une machine à café ou un coin re"
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M100",
+   "tri": "Taire",
+   "texte_actuel": "… recruté·e ! [L'accueil est ouvert : on y entre sans jugement. / … peut recevoir plus de monde.]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "hire",
+    "condition": "built[i]&&eu>=cost()&&cnt(i)<3+RSZ[i]&&!(i==1&&S.n<1)",
+    "ligne_v523": 1127,
+    "extrait_source": "… recruté·e ! [L'accueil est ouvert : on y entre sans jugement. | … peut recevoi"
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M101",
+   "tri": "Taire",
+   "texte_actuel": "☕ … est déposé·e en salle de repos : pause, le temps de souffler.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "drop",
+    "condition": "r==2&&built[2]&&!z.pause",
+    "ligne_v523": 10418,
+    "extrait_source": "☕ … est déposé·e en salle de repos : pause, le temps de souffler."
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M102",
+   "tri": null,
+   "texte_actuel": "🌟 … devient référent·e ! Congrès et formations à animer : de l’argent et de la notoriété pour la halte.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "gainXP",
+    "condition": "l==3",
+    "ligne_v523": 710,
+    "extrait_source": "🌟 … devient référent·e ! Congrès et formations à animer : de l’argent et de la n"
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M103",
+   "tri": "Montrer",
+   "texte_actuel": "🌴 Journée de repos : la halte est fermée aujourd’hui, l’équipe souffle. Sur la porte : « On revient demain, reposé·es. »",
+   "nouveau_texte": "🌴 Journée de repos : la halte est fermée aujourd’hui, l’équipe souffle.",
+   "code": {
+    "appel": "say",
+    "fonction": "W:act",
+    "condition": "",
+    "ligne_v523": 9759,
+    "extrait_source": "🌴 Journée de repos : la halte est fermée aujourd’hui, l’équipe souffle. Sur la p"
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M104",
+   "tri": null,
+   "texte_actuel": "🎓 Une formation est déjà en cours ce mois-ci : la prochaine pourra commencer le mois prochain.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:train",
+    "condition": "!F[k]&&B.trnM===AMI()",
+    "ligne_v523": 9354,
+    "extrait_source": "🎓 Une formation est déjà en cours ce mois-ci : la prochaine pourra commencer le "
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M105",
+   "tri": null,
+   "texte_actuel": "🎓 … part en formation (…) : ….",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "train",
+    "condition": "z",
+    "ligne_v523": 295,
+    "extrait_source": "🎓 … part en formation (…) : …."
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M106",
+   "tri": "Taire",
+   "texte_actuel": "🎓 … revient de formation, avec de nouvelles compétences !",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "upd",
+    "condition": "s.trn",
+    "ligne_v523": 1167,
+    "extrait_source": "🎓 … revient de formation, avec de nouvelles compétences !"
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M107",
+   "tri": "Montrer",
+   "texte_actuel": "👣 Maraude en binôme avec le ou la travailleur·se pair·e : une personne de plus rejoint la halte, quelqu’un qu’on n’avait jamais vu.",
+   "nouveau_texte": "👣 Maraude avec le ou la travailleur·se pair·e : grâce à ses connaissances, une personne de plus rejoint la halte!",
+   "code": {
+    "appel": "say",
+    "fonction": "W:act",
+    "condition": "k=='m'&&cd[k]>(c0||0)&&ulOn('mab')&&PAIRS===1&&B.unl&&!B.unl.all",
+    "ligne_v523": 2394,
+    "extrait_source": "👣 Maraude en binôme avec le ou la travailleur·se pair·e : une personne de plus r"
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M108",
+   "tri": "Taire",
+   "texte_actuel": "💪 … revient d’arrêt, reposé·e.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "upd",
+    "condition": "s.hos",
+    "ligne_v523": 1167,
+    "extrait_source": "💪 … revient d’arrêt, reposé·e."
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M109",
+   "tri": null,
+   "texte_actuel": "💶 Pas assez d’argent pour le lit médicalisé pour l’instant : Agnès se reposera dans son fauteuil.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "eu<300",
+    "ligne_v523": 9672,
+    "extrait_source": "💶 Pas assez d’argent pour le lit médicalisé pour l’instant : Agnès se reposera d"
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M110",
+   "tri": null,
+   "texte_actuel": "📋 Des évaluatrices accréditées (référentiel HAS) viendront [faire une première visite préliminaire / évaluer la halte] en … : salles, formations, déchets… Prépare-toi !",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "",
+    "ligne_v523": 1726,
+    "extrait_source": "📋 Des évaluatrices accréditées (référentiel HAS) viendront [faire une première v"
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M111",
+   "tri": "Taire",
+   "texte_actuel": "🔓 La halte rouvre : l’équipe est de retour, reposée.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:upd",
+    "condition": "B.rest&&GT>=B.rest.until",
+    "ligne_v523": 9765,
+    "extrait_source": "🔓 La halte rouvre : l’équipe est de retour, reposée."
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M112",
+   "tri": null,
+   "texte_actuel": "😫 … est épuisé·e et part en arrêt : recrute pour répartir la charge, et pense aux pauses !",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "ev",
+    "fonction": "upd",
+    "condition": "s.e<=0",
+    "ligne_v523": 1170,
+    "extrait_source": "😫 … est épuisé·e et part en arrêt : recrute pour répartir la charge, et pense au"
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M113",
+   "tri": null,
+   "texte_actuel": "😴 Fin du festival : … [se reposent / se repose] ce matin après les nuits au stand.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "S&&S.y==YR&&!S.done&&!(mo==FMO&&day<=FDAY1)",
+    "ligne_v523": 3657,
+    "extrait_source": "😴 Fin du festival : … [se reposent | se repose] ce matin après les nuits au stan"
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M114",
+   "tri": null,
+   "texte_actuel": "🧭 La mission locale est passée : deux jeunes ont pris rendez-vous pour une formation.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "Math.random()<.35",
+    "ligne_v523": 2330,
+    "extrait_source": "🧭 La mission locale est passée : deux jeunes ont pris rendez-vous pour une forma"
+   },
+   "categorie": "equipe",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M115",
+   "tri": "Taire",
+   "texte_actuel": "🏘️ Astuce : touche les bâtiments du quartier (pharmacie, épicerie, hôpital…) pour agir directement là-bas.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "",
+    "ligne_v523": 10161,
+    "extrait_source": "🏘️ Astuce : touche les bâtiments du quartier (pharmacie, épicerie, hôpital…) pou"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 3
+  },
+  {
+   "id": "M116",
+   "tri": null,
+   "texte_actuel": "[ / 🚶 Maraude : l’équipe va à la rencontre des personnes qui ne viennent pas d’elles-mêmes. Deux personnes rejoignent la halte.]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "act",
+    "condition": "k=='m'",
+    "ligne_v523": 298,
+    "extrait_source": "[ | 🚶 Maraude : l’équipe va à la rencontre des personnes qui ne viennent pas d’e"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M117",
+   "tri": null,
+   "texte_actuel": "[🐕 Le vétérinaire solidaire soigne le chien et lui trouve une famille dans le quartier. / 🐕 Un refuge vient chercher le chien. Il trouvera sûrement une famille.]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 1932,
+    "extrait_source": "[🐕 Le vétérinaire solidaire soigne le chien et lui trouve une famille dans le qu"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M118",
+   "tri": null,
+   "texte_actuel": "… La maison de quartier organise … : … y participent avec les habitant·es. Des liens se créent !",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "partTick",
+    "condition": "us.length",
+    "ligne_v523": 742,
+    "extrait_source": "… La maison de quartier organise … : … y participent avec les habitant·es. Des l"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M119",
+   "tri": "Montrer",
+   "texte_actuel": "…[ (Les riverains connaissent déjà la méthode : ça porte moins que la première fois.) / ]",
+   "nouveau_texte": "…[ (Les riverains connaissent déjà la méthode : ça marche moins que la première fois.) / ]",
+   "code": {
+    "appel": "ev",
+    "fonction": "petPick",
+    "condition": "",
+    "ligne_v523": 9041,
+    "extrait_source": "…[ (Les riverains connaissent déjà la méthode : ça porte moins que la première f"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M120",
+   "tri": "Montrer",
+   "texte_actuel": "…[ Les riverains connaissent déjà la méthode : ça porte un peu moins. / ]",
+   "nouveau_texte": "…[ Les riverains connaissent déjà la méthode : ça convainc un peu moins. / ]",
+   "code": {
+    "appel": "say",
+    "fonction": "petPick",
+    "condition": "",
+    "ligne_v523": 9041,
+    "extrait_source": "…[ Les riverains connaissent déjà la méthode : ça porte un peu moins. | ]"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M121",
+   "tri": null,
+   "texte_actuel": "⚠️ Affiches, messages, maraude express : toutes les personnes sont prévenues. Plusieurs ont jeté le produit ou réduit les doses.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 2401,
+    "extrait_source": "⚠️ Affiches, messages, maraude express : toutes les personnes sont prévenues. Pl"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M122",
+   "tri": "Taire",
+   "texte_actuel": "✋ Affiche de Crotti arrachée. Son équipe en recollera d’autres dans une dizaine de jours : garde l’œil ouvert.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "!B.crTornT",
+    "ligne_v523": 10023,
+    "extrait_source": "✋ Affiche de Crotti arrachée. Son équipe en recollera d’autres dans une dizaine "
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M123",
+   "tri": null,
+   "texte_actuel": "✍️ L’équipe écrit à … : des nouvelles du quartier, des dessins, et le numéro de la halte pour la sortie.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 1863,
+    "extrait_source": "✍️ L’équipe écrit à … : des nouvelles du quartier, des dessins, et le numéro de "
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M124",
+   "tri": null,
+   "texte_actuel": "🌙 Maraude de nuit : d’autres personnes, plus isolées, plus exposées au froid et aux violences.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:act",
+    "condition": "B.mnuit==1",
+    "ligne_v523": 3456,
+    "extrait_source": "🌙 Maraude de nuit : d’autres personnes, plus isolées, plus exposées au froid et "
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M125",
+   "tri": "Montrer",
+   "texte_actuel": "🎉 Fête de quartier ! Usagers, riverains et équipe se rencontrent : la halte est ouverte sur son quartier.",
+   "nouveau_texte": "🎉 Fête de quartier ! Usagers, riverains et équipe se rencontrent pour apaiser les tensions!",
+   "code": {
+    "appel": "say",
+    "fonction": "act",
+    "condition": "k=='f'",
+    "ligne_v523": 300,
+    "extrait_source": "🎉 Fête de quartier ! Usagers, riverains et équipe se rencontrent : la halte est "
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M126",
+   "tri": null,
+   "texte_actuel": "🎊 Fête de quartier co-organisée avec le collectif : les riverain·es ont apporté les tables, la musique et les gâteaux !",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:act",
+    "condition": "k=='f'&&cd[k]>(c0||0)&&ulOn('fco')&&B.unl&&!B.unl.all",
+    "ligne_v523": 2335,
+    "extrait_source": "🎊 Fête de quartier co-organisée avec le collectif : les riverain·es ont apporté "
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M127",
+   "tri": "Montrer",
+   "texte_actuel": "💉 Automate d’échange de seringues installé près de la pharmacie : un kit propre 24 h/24. Moins de seringues dans la rue !",
+   "nouveau_texte": "💉 Automate d’échange de seringues installé. Moins de seringues dans la rue !",
+   "code": {
+    "appel": "say",
+    "fonction": "buyAuto",
+    "condition": "",
+    "ligne_v523": 1563,
+    "extrait_source": "💉 Automate d’échange de seringues installé près de la pharmacie : un kit propre "
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M128",
+   "tri": null,
+   "texte_actuel": "📢 Sans réponse, la pétition prend de l’ampleur.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "ev",
+    "fonction": "upd",
+    "condition": "pet<=0",
+    "ligne_v523": 1173,
+    "extrait_source": "📢 Sans réponse, la pétition prend de l’ampleur."
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M129",
+   "tri": "Montrer",
+   "texte_actuel": "📣 Campagne d’affichage dans le quartier : de plus en plus de monde connaît la halte.",
+   "nouveau_texte": "📣 Campagne d’affichage dans le quartier : on devient connus dans le quartier.",
+   "code": {
+    "appel": "say",
+    "fonction": "act",
+    "condition": "k=='a'",
+    "ligne_v523": 297,
+    "extrait_source": "📣 Campagne d’affichage dans le quartier : de plus en plus de monde connaît la ha"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M130",
+   "tri": "Montrer",
+   "texte_actuel": "📣 On commence à parler de nous dans le quartier ! Encore un peu, et des bénévoles viendront proposer leur aide.",
+   "nouveau_texte": "📣 La HSA est populaire dans le quartier! Encore un peu, et des bénévoles viendront proposer leur aide.",
+   "code": {
+    "appel": "camSay",
+    "fonction": "(global)",
+    "condition": "typeof camSay=='function'",
+    "ligne_v523": 6710,
+    "extrait_source": "📣 On commence à parler de nous dans le quartier ! Encore un peu, et des bénévole"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M131",
+   "tri": "Montrer",
+   "texte_actuel": "📸 Un commerçant du quartier, Cédric Crotti, photographie la file d’attente. Il ne dit rien. Il prend des notes.",
+   "nouveau_texte": "📸 Hey, y a un mec qui, photographie la file d’attente. Il ne dit rien. Il prend des notes. Il a l'air louche...",
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "Math.abs(wx-X)<8&&wy>Y-16&&wy<Y+3",
+    "ligne_v523": 8945,
+    "extrait_source": "📸 Un commerçant du quartier, Cédric Crotti, photographie la file d’attente. Il n"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M132",
+   "tri": null,
+   "texte_actuel": "🔒 Le jardin a été fermé à la demande des riverains.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "buyG",
+    "condition": "B.gBan",
+    "ligne_v523": 8465,
+    "extrait_source": "🔒 Le jardin a été fermé à la demande des riverains."
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M133",
+   "tri": "Montrer",
+   "texte_actuel": "🚐 Le camion de maraude est garé sur le parking ! Dans l’onglet Quartier, organise des tournées : choisis la destination et l’équipage.",
+   "nouveau_texte": "🚐 Le camion de maraude est garé sur le parking ! Dans l’onglet Quartier, prépare des maraudes.",
+   "code": {
+    "appel": "say",
+    "fonction": "buyVan",
+    "condition": "",
+    "ligne_v523": 833,
+    "extrait_source": "🚐 Le camion de maraude est garé sur le parking ! Dans l’onglet Quartier, organis"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M134",
+   "tri": null,
+   "texte_actuel": "🤝 La réunion désamorce la pétition !",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "ev",
+    "fonction": "act",
+    "condition": "pet>0",
+    "ligne_v523": 299,
+    "extrait_source": "🤝 La réunion désamorce la pétition !"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M135",
+   "tri": "Taire",
+   "texte_actuel": "🤝 Réunion avec les riverains : on écoute, on explique, on répond aux inquiétudes. La confiance progresse.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "act",
+    "condition": "k=='r'",
+    "ligne_v523": 299,
+    "extrait_source": "🤝 Réunion avec les riverains : on écoute, on explique, on répond aux inquiétudes"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M136",
+   "tri": null,
+   "texte_actuel": "🤝 Un nouveau partenariat peut être signé ! (onglet 🌳 Quartier › Partenaires)",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "L==0&&B.parAt!=null&&!B.parTold&&!paused&&$('m').hidden&&[...document.querySelectorAll('bu",
+    "ligne_v523": 9626,
+    "extrait_source": "🤝 Un nouveau partenariat peut être signé ! (onglet 🌳 Quartier › Partenaires)"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M137",
+   "tri": "Montrer",
+   "texte_actuel": "🤝 … reste : pas de vente dans la halte ni devant, et on en reparle chaque semaine. … accepte, soulagé·e. Les riverains, eux, grondent.",
+   "nouveau_texte": "🤝 … reste : pas de vente dans la halte ni devant, et on en reparle chaque semaine. … accepte, soulagé·e. Les riverains sont plutôt en colère.",
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 4276,
+    "extrait_source": "🤝 … reste : pas de vente dans la halte ni devant, et on en reparle chaque semain"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M138",
+   "tri": "Taire",
+   "texte_actuel": "🧤 Seringue ramassée et déposée dans un dasri.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "clean",
+    "condition": "o.l!=null",
+    "ligne_v523": 695,
+    "extrait_source": "🧤 Seringue ramassée et déposée dans un dasri."
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M139",
+   "tri": "Taire",
+   "texte_actuel": "🧱 Il ne reste que … case[s / ] libre[s / ] : choisis bien la taille des prochaines salles[, et pense au local voisin (onglet Locaux) / , et pense à l’annexe].",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:ui",
+    "condition": "started&&fr<=3&&used>0&&!B.cellTip&&(!B.lv||!B.ax)",
+    "ligne_v523": 1620,
+    "extrait_source": "🧱 Il ne reste que … case[s | ] libre[s | ] : choisis bien la taille des prochain"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M140",
+   "tri": null,
+   "texte_actuel": "🧹 Chantier d’insertion : avec TAPAJ, [… / des jeunes du quartier] débarrassent le terrain vague, payé·es à la journée.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "lotStart",
+    "condition": "",
+    "ligne_v523": 1533,
+    "extrait_source": "🧹 Chantier d’insertion : avec TAPAJ, [… | des jeunes du quartier] débarrassent l"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M141",
+   "tri": null,
+   "texte_actuel": "🧹 TAPAJ : … [travaillent / travaille] une demi-journée aux espaces verts, payé·e[s / ] le soir même.[ Les seringues de la rue sont ramassées. / ]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "partTick",
+    "condition": "us.length",
+    "ligne_v523": 743,
+    "extrait_source": "🧹 TAPAJ : … [travaillent | travaille] une demi-journée aux espaces verts, payé·e"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M142",
+   "tri": null,
+   "texte_actuel": "🪧 Les bénévoles collent des affiches « Soigner, pas punir » par-dessus celles de Crotti.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "onclick",
+    "condition": "",
+    "ligne_v523": 8963,
+    "extrait_source": "🪧 Les bénévoles collent des affiches « Soigner, pas punir » par-dessus celles de"
+   },
+   "categorie": "quartier",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M143",
+   "tri": "Taire",
+   "texte_actuel": "🔓 Nouvelle salle disponible : … … ! Tu peux la construire dans l’onglet 🏗️ Locaux.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "AMI()<12",
+    "ligne_v523": 8115,
+    "extrait_source": "🔓 Nouvelle salle disponible : … … ! Tu peux la construire dans l’onglet 🏗️ Locau"
+   },
+   "categorie": "salles",
+   "vu_en_test": 10
+  },
+  {
+   "id": "M144",
+   "tri": "Taire",
+   "texte_actuel": "🚪 Encore un effort avant d’ouvrir : il faut …. Les premières personnes viendront quand l’accueil ET la salle de consommation seront prêts.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:hire",
+    "condition": "",
+    "ligne_v523": 2778,
+    "extrait_source": "🚪 Encore un effort avant d’ouvrir : il faut …. Les premières personnes viendront"
+   },
+   "categorie": "salles",
+   "vu_en_test": 7
+  },
+  {
+   "id": "M145",
+   "tri": "Taire",
+   "texte_actuel": "🆘 Naloxone en stock : la salle de consommation peut ouvrir. Surveille le stock.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "buyNal",
+    "condition": "",
+    "ligne_v523": 290,
+    "extrait_source": "🆘 Naloxone en stock : la salle de consommation peut ouvrir. Surveille le stock."
+   },
+   "categorie": "salles",
+   "vu_en_test": 5
+  },
+  {
+   "id": "M146",
+   "tri": "Taire",
+   "texte_actuel": "Pas assez de place ici : une salle … demande … cases libres côte à côte.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "cellTap",
+    "condition": "best<0",
+    "ligne_v523": 674,
+    "extrait_source": "Pas assez de place ici : une salle … demande … cases libres côte à côte."
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M147",
+   "tri": "Taire",
+   "texte_actuel": "Pas assez de place ici : une salle … demande … cases libres côte à côte.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "ghBuild",
+    "condition": "!ghFits(GH.zi,GH.c,n)",
+    "ligne_v523": 1584,
+    "extrait_source": "Pas assez de place ici : une salle … demande … cases libres côte à côte."
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M148",
+   "tri": null,
+   "texte_actuel": "[🆘 Surdose en salle de conso ! L’équipe est formée, elle intervient. Touche la personne pour aller plus vite. / 🆘 Surdose en salle de conso ! Touche vite la personne pour que l’équipe intervienne !]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "camSay",
+    "fonction": "odStart",
+    "condition": "ODN<=2&&typeof camSay=='function'",
+    "ligne_v523": 6719,
+    "extrait_source": "[🆘 Surdose en salle de conso ! L’équipe est formée, elle intervient. Touche la p"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M149",
+   "tri": null,
+   "texte_actuel": "[💊 Le pharmacien passe vider les conteneurs DASRI. / 💊 Le pharmacien arrive avec un carton de matériel pour la salle de soins.]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "phStart",
+    "condition": "!B.phSay",
+    "ligne_v523": 5761,
+    "extrait_source": "[💊 Le pharmacien passe vider les conteneurs DASRI. | 💊 Le pharmacien arrive avec"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M150",
+   "tri": "Taire",
+   "texte_actuel": "[🔓 Les travaux sont terminés : la salle … rouvre ses portes. / 🔓 La salle … rouvre ses portes après deux mois de fermeture.]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "B.rclose&&am>=B.rclose.until",
+    "ligne_v523": 4224,
+    "extrait_source": "[🔓 Les travaux sont terminés : la salle … rouvre ses portes. | 🔓 La salle … rouv"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M151",
+   "tri": "Montrer",
+   "texte_actuel": "[🚨 Les secours arrivent, trop tard. L’équipe est bouleversée. / 🚨 Surdose en salle de consommation : l’équipe a appelé les secours. Ils arrivent pour emmener la personne aux urgences de la Timone.]",
+   "nouveau_texte": "[🚨 Les secours arrivent, trop tard. L’équipe est bouleversée. / 🚨 Surdose en salle de consommation : l’équipe a appelé les secours. Le patient est transféré aux urgences de la Timone.]",
+   "code": {
+    "appel": "say",
+    "fonction": "ambStart",
+    "condition": "",
+    "ligne_v523": 2802,
+    "extrait_source": "[🚨 Les secours arrivent, trop tard. L’équipe est bouleversée. | 🚨 Surdose en sal"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M152",
+   "tri": null,
+   "texte_actuel": "[🩺 Un·e médecin rejoint l’équipe : il·elle circule entre la salle de consommation, les soins et le bureau psy. / [🤝 Un·e médiateur·rice rejoint l’équipe : il·elle réconforte les personnes qui attendent. | 🗣️ Un·e interprète rejoint l’équipe : on peut enfin comprendre toutes les langues !]]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "hireX",
+    "condition": "",
+    "ligne_v523": 1126,
+    "extrait_source": "[🩺 Un·e médecin rejoint l’équipe : il·elle circule entre la salle de consommatio"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M153",
+   "tri": "Taire",
+   "texte_actuel": "❄️ Climatiseur installé : … (discret, dans les combles). Un peu de fraîcheur pendant la canicule.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "cool",
+    "condition": "",
+    "ligne_v523": 646,
+    "extrait_source": "❄️ Climatiseur installé : … (discret, dans les combles). Un peu de fraîcheur pen"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M154",
+   "tri": "Taire",
+   "texte_actuel": "❄️ Climatiseurs installés dans … salle[s / ] (discrets, dans les combles) : un peu de fraîcheur pendant la canicule.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "coolAll",
+    "condition": "",
+    "ligne_v523": 7308,
+    "extrait_source": "❄️ Climatiseurs installés dans … salle[s | ] (discrets, dans les combles) : un p"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M155",
+   "tri": null,
+   "texte_actuel": "🆘 Surdose en salle de conso !",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "camSay",
+    "fonction": "odStart",
+    "condition": "typeof camSay=='function'",
+    "ligne_v523": 6719,
+    "extrait_source": "🆘 Surdose en salle de conso !"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M156",
+   "tri": "Taire",
+   "texte_actuel": "🎓 … rejoint la salle de soins pour deux mois.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 1946,
+    "extrait_source": "🎓 … rejoint la salle de soins pour deux mois."
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M157",
+   "tri": null,
+   "texte_actuel": "💩 … a fait ses besoins dans la salle …… Touche la crotte pour la ramasser !",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "dogTick",
+    "condition": "DOG.poops.length<1&&Math.random()<.07&&DOG.tp<=0",
+    "ligne_v523": 5142,
+    "extrait_source": "💩 … a fait ses besoins dans la salle …… Touche la crotte pour la ramasser !"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M158",
+   "tri": "Taire",
+   "texte_actuel": "📄 Fin du contrat DASRI : pense à faire vider les conteneurs avant qu’ils débordent.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "onclick",
+    "condition": "un",
+    "ligne_v523": 6357,
+    "extrait_source": "📄 Fin du contrat DASRI : pense à faire vider les conteneurs avant qu’ils déborde"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M159",
+   "tri": "Montrer",
+   "texte_actuel": "📋 Les évaluatrices sont arrivées ! Elles vont visiter chaque salle et prendre des notes. Montre-leur le meilleur de la halte…",
+   "nouveau_texte": "📋 Les évaluateur.rices sont arrivé.es ! Visitant chaque salle et prenant des notes. Quel stress...",
+   "code": {
+    "appel": "say",
+    "fonction": "hasArrive",
+    "condition": "",
+    "ligne_v523": 2513,
+    "extrait_source": "📋 Les évaluatrices sont arrivées ! Elles vont visiter chaque salle et prendre de"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M160",
+   "tri": null,
+   "texte_actuel": "📦 Contrat signé avec la pharmacie : le pharmacien livrera lui-même le matériel dès qu’un stock baisse.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "phAutoBuy",
+    "condition": "",
+    "ligne_v523": 5743,
+    "extrait_source": "📦 Contrat signé avec la pharmacie : le pharmacien livrera lui-même le matériel d"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M161",
+   "tri": null,
+   "texte_actuel": "🔒 Cette salle ne peut être reconstruite que dans l’annexe, à côté du parking.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "cellTap",
+    "condition": "(B.roomBan||{})[sel]&&!built[sel]&&Z_.k!='ax'",
+    "ligne_v523": 673,
+    "extrait_source": "🔒 Cette salle ne peut être reconstruite que dans l’annexe, à côté du parking."
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M162",
+   "tri": "Taire",
+   "texte_actuel": "🔥 Chauffage installé : … (discret, dans les murs). Plus personne n’aura froid ici cet hiver.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "heat",
+    "condition": "",
+    "ligne_v523": 645,
+    "extrait_source": "🔥 Chauffage installé : … (discret, dans les murs). Plus personne n’aura froid ic"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M163",
+   "tri": "Taire",
+   "texte_actuel": "🔥 Chauffage installé dans … salle[s / ] (discret, dans les murs) : plus personne n’aura froid cet hiver.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "heatAll",
+    "condition": "",
+    "ligne_v523": 7307,
+    "extrait_source": "🔥 Chauffage installé dans … salle[s | ] (discret, dans les murs) : plus personne"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M164",
+   "tri": "Taire",
+   "texte_actuel": "🔧 Le bailleur a enfin réparé : la salle … rouvre.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "B.flood&&am>=B.flood.until",
+    "ligne_v523": 1957,
+    "extrait_source": "🔧 Le bailleur a enfin réparé : la salle … rouvre."
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M165",
+   "tri": "Taire",
+   "texte_actuel": "🔧 Le plombier répare la fuite dans la journée : la salle … rouvre dès demain.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 1925,
+    "extrait_source": "🔧 Le plombier répare la fuite dans la journée : la salle … rouvre dès demain."
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M166",
+   "tri": "Taire",
+   "texte_actuel": "🗓️ La halte souffle sa bougie : c’est le début de l’année …. L’équipe, les salles et les personnes accompagnées sont toujours là.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "nextYear",
+    "condition": "",
+    "ligne_v523": 1113,
+    "extrait_source": "🗓️ La halte souffle sa bougie : c’est le début de l’année …. L’équipe, les salle"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M167",
+   "tri": "Taire",
+   "texte_actuel": "🟡 Collecte des DASRI par un prestataire agréé : les déchets piquants sont évacués en sécurité.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "collect",
+    "condition": "",
+    "ligne_v523": 638,
+    "extrait_source": "🟡 Collecte des DASRI par un prestataire agréé : les déchets piquants sont évacué"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M168",
+   "tri": "Taire",
+   "texte_actuel": "🥖 Courses faites : pain, légumes et fruits pour cuisiner ensemble.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "buyFood",
+    "condition": "",
+    "ligne_v523": 4027,
+    "extrait_source": "🥖 Courses faites : pain, légumes et fruits pour cuisiner ensemble."
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M169",
+   "tri": "Taire",
+   "texte_actuel": "🥖 Livraison de la boulangerie et de l’épicerie solidaire : pain, légumes et fruits pour cuisiner ensemble ce mois-ci.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "partTick",
+    "condition": "P.b&&built[6]&&B.bkM!==mo+'/'+YR",
+    "ligne_v523": 739,
+    "extrait_source": "🥖 Livraison de la boulangerie et de l’épicerie solidaire : pain, légumes et frui"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M170",
+   "tri": "Taire",
+   "texte_actuel": "🪣 En attendant le bailleur, la salle … reste fermée un mois. L’équipe de la salle est redéployée ailleurs.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 1926,
+    "extrait_source": "🪣 En attendant le bailleur, la salle … reste fermée un mois. L’équipe de la sall"
+   },
+   "categorie": "salles",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M171",
+   "tri": "Taire",
+   "texte_actuel": "🗓️ La halte ouvre ses portes ! Peu de monde la connaît encore : soigne l’accueil des premières personnes.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "upd",
+    "condition": "!started&&st[0]>0&&st[1]>0",
+    "ligne_v523": 1172,
+    "extrait_source": "🗓️ La halte ouvre ses portes ! Peu de monde la connaît encore : soigne l’accueil"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 8
+  },
+  {
+   "id": "M172",
+   "tri": null,
+   "texte_actuel": "🤝 … accepte, un peu [méfiante / méfiant]. Son portrait apparaît en haut de l’écran : touche-le pour prendre de ses nouvelles.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 2111,
+    "extrait_source": "🤝 … accepte, un peu [méfiante | méfiant]. Son portrait apparaît en haut de l’écr"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 5
+  },
+  {
+   "id": "M173",
+   "tri": null,
+   "texte_actuel": "Placement annulé.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "cancelSel",
+    "condition": "MV",
+    "ligne_v523": 676,
+    "extrait_source": "Placement annulé."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M174",
+   "tri": null,
+   "texte_actuel": "[🎯 Défi réussi : / 🎯 Défi raté : ]…[ — … / ]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "dfEnd",
+    "condition": "",
+    "ligne_v523": 1764,
+    "extrait_source": "[🎯 Défi réussi : | 🎯 Défi raté : ]…[ — … | ]"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M175",
+   "tri": null,
+   "texte_actuel": "[💛 / 💬] … : …",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "lcAsk",
+    "condition": "",
+    "ligne_v523": null,
+    "extrait_source": "[💛 | 💬] … : …"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M176",
+   "tri": null,
+   "texte_actuel": "[📚 L’équipe s’installe une petite bibliothèque : ouvrages sur les addictions, la RdR, le travail social. Chacun·e y pioche chaque mois. / [📖 De nouveaux livres et revues arrivent dans la bibliothèque : l’équipe se tient à jour. | 🎓 Toute l’équipe suit la … : +… XP pour chacun·e.]]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "xpBuy",
+    "condition": "",
+    "ligne_v523": 714,
+    "extrait_source": "[📚 L’équipe s’installe une petite bibliothèque : ouvrages sur les addictions, la"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M177",
+   "tri": null,
+   "texte_actuel": "… … : la halte est plus accueillante[ et peut accueillir plus de monde / ] !",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "buy",
+    "condition": "",
+    "ligne_v523": 443,
+    "extrait_source": "… … : la halte est plus accueillante[ et peut accueillir plus de monde | ] !"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M178",
+   "tri": null,
+   "texte_actuel": "… … apporte à … : ….",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "lcAct",
+    "condition": "LCB[a]",
+    "ligne_v523": null,
+    "extrait_source": "… … apporte à … : …."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M179",
+   "tri": null,
+   "texte_actuel": "↩️ On reprend l’année … depuis le début. Nouvelle chance, Camille y croit !",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "",
+    "ligne_v523": 8892,
+    "extrait_source": "↩️ On reprend l’année … depuis le début. Nouvelle chance, Camille y croit !"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M180",
+   "tri": "Montrer",
+   "texte_actuel": "♿ Travaux terminés : rampe à l’entrée, portes élargies, toilettes adaptées. La halte est enfin accessible à toutes et tous.",
+   "nouveau_texte": "♿ Travaux terminés : rampe à l’entrée, portes élargies, toilettes adaptées. Ça devrait être la norme partout...",
+   "code": {
+    "appel": "say",
+    "fonction": "pmrBuy",
+    "condition": "",
+    "ligne_v523": 9656,
+    "extrait_source": "♿ Travaux terminés : rampe à l’entrée, portes élargies, toilettes adaptées. La h"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M181",
+   "tri": null,
+   "texte_actuel": "⚠️ Personne n’a été prévenu : deux overdoses dans la semaine, dont une hospitalisée. L’équipe s’en veut.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 2401,
+    "extrait_source": "⚠️ Personne n’a été prévenu : deux overdoses dans la semaine, dont une hospitali"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M182",
+   "tri": null,
+   "texte_actuel": "✅ …… : les usager·es l’avaient demandé au conseil. Satisfaction +10.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "cvsTick",
+    "condition": "d.ok()",
+    "ligne_v523": 4317,
+    "extrait_source": "✅ …… : les usager·es l’avaient demandé au conseil. Satisfaction +10."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M183",
+   "tri": null,
+   "texte_actuel": "✊ La halte est fermée. Sur la porte : « En grève pour pouvoir continuer à vous accueillir. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 4419,
+    "extrait_source": "✊ La halte est fermée. Sur la porte : « En grève pour pouvoir continuer à vous a"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M184",
+   "tri": null,
+   "texte_actuel": "✊ …",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "marchStart",
+    "condition": "",
+    "ligne_v523": null,
+    "extrait_source": "✊ …"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M185",
+   "tri": null,
+   "texte_actuel": "✊ …",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "tick",
+    "condition": "k!==Mh.ci",
+    "ligne_v523": null,
+    "extrait_source": "✊ …"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M186",
+   "tri": null,
+   "texte_actuel": "✔ Choix : « … »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "m1===m0&&e1===e0&&!document.getElementById('fmo')&&lab.length<90",
+    "ligne_v523": null,
+    "extrait_source": "✔ Choix : « … »"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M187",
+   "tri": "Taire",
+   "texte_actuel": "❤️ C’est noté : le stand du 1er décembre sera installé devant la halte le jour J.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "rdvGo",
+    "condition": "k=='sida'&&!window._rdvNow&&mo<8",
+    "ligne_v523": 1823,
+    "extrait_source": "❤️ C’est noté : le stand du 1er décembre sera installé devant la halte le jour J"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M188",
+   "tri": null,
+   "texte_actuel": "🌫️ … ne répond plus, personne ne l’a revu·e. [Elle est perdue / Il est perdu] de vue.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "lcTick",
+    "condition": "S.lk<=0",
+    "ligne_v523": 2106,
+    "extrait_source": "🌫️ … ne répond plus, personne ne l’a revu·e. [Elle est perdue | Il est perdu] de"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M189",
+   "tri": "Taire",
+   "texte_actuel": "🌳 Le jardin est ouvert ! Équipe-le : potager, fontaine, bancs…",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "buyG",
+    "condition": "",
+    "ligne_v523": 689,
+    "extrait_source": "🌳 Le jardin est ouvert ! Équipe-le : potager, fontaine, bancs…"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M190",
+   "tri": null,
+   "texte_actuel": "🌸 Le planning familial est passé pendant le créneau femmes : contraception, tests, et beaucoup d’écoute.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "Math.random()<.3",
+    "ligne_v523": 2458,
+    "extrait_source": "🌸 Le planning familial est passé pendant le créneau femmes : contraception, test"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M191",
+   "tri": null,
+   "texte_actuel": "🍷 … reste. L’infirmière lui parle d’eau entre les verres et des dangers d’un sevrage brutal. « Personne m’avait jamais dit ça. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 4274,
+    "extrait_source": "🍷 … reste. L’infirmière lui parle d’eau entre les verres et des dangers d’un sev"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M192",
+   "tri": null,
+   "texte_actuel": "🍽️ Repas d’équipe : on respire, on rit ensemble!",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "act",
+    "condition": "k=='t'",
+    "ligne_v523": 297,
+    "extrait_source": "🍽️ Repas d’équipe : on respire, on rit ensemble!"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M193",
+   "tri": null,
+   "texte_actuel": "🎓 … termine son stage : « J’ai appris plus ici qu’en deux ans de cours. Je reviendrai ! »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "",
+    "ligne_v523": 1956,
+    "extrait_source": "🎓 … termine son stage : « J’ai appris plus ici qu’en deux ans de cours. Je revie"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M194",
+   "tri": null,
+   "texte_actuel": "🎤 … est de retour à la halte après son intervention extérieure.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "upd",
+    "condition": "s.mis",
+    "ligne_v523": 1167,
+    "extrait_source": "🎤 … est de retour à la halte après son intervention extérieure."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M195",
+   "tri": null,
+   "texte_actuel": "🎤 … … ([… jour[s / ] | quelques heures]).",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "off",
+    "condition": "",
+    "ligne_v523": 8806,
+    "extrait_source": "🎤 … … ([… jour[s | ] | quelques heures])."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M196",
+   "tri": null,
+   "texte_actuel": "🎥 …",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "sxTVr",
+    "condition": "",
+    "ligne_v523": null,
+    "extrait_source": "🎥 …"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M197",
+   "tri": null,
+   "texte_actuel": "🎨 La fresque est finie ! Les passant·es s’arrêtent, prennent des photos, discutent avec celles et ceux qui l’ont peinte.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 1942,
+    "extrait_source": "🎨 La fresque est finie ! Les passant·es s’arrêtent, prennent des photos, discute"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M198",
+   "tri": null,
+   "texte_actuel": "🎯 Objectif atteint : …… !",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "has(o[2])",
+    "ligne_v523": 10062,
+    "extrait_source": "🎯 Objectif atteint : …… !"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M199",
+   "tri": null,
+   "texte_actuel": "🎯 Étape réussie : …… ![ Prochaine : ……. / ]",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "nw.length",
+    "ligne_v523": 10012,
+    "extrait_source": "🎯 Étape réussie : …… ![ Prochaine : ……. | ]"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M200",
+   "tri": "Montrer",
+   "texte_actuel": "🏠 Agnès a un toit… mais elle ne peut ni sortir ni rentrer seule. « Je suis enfermée en hauteur. »",
+   "nouveau_texte": "🏠 Agnès a un toit… mais elle ne peut ni sortir ni rentrer seule. « C'est une prison confortable, quoi.\"",
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 9670,
+    "extrait_source": "🏠 Agnès a un toit… mais elle ne peut ni sortir ni rentrer seule. « Je suis enfer"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M201",
+   "tri": "Montrer",
+   "texte_actuel": "🏢 Un studio se libère à la pension de famille : … y emménage. Une fenêtre de plus s’allume.",
+   "nouveau_texte": "🏢 Un studio se libère à la pension de famille : … y emménage.",
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "h&&penAdd(h)",
+    "ligne_v523": 2636,
+    "extrait_source": "🏢 Un studio se libère à la pension de famille : … y emménage. Une fenêtre de plu"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M202",
+   "tri": "Montrer",
+   "texte_actuel": "🏢 … emménage à la pension de famille : une fenêtre de plus s’allume dans l’immeuble rouge.",
+   "nouveau_texte": "🏢 … emménage à la pension de famille.",
+   "code": {
+    "appel": "say",
+    "fonction": "W:envol",
+    "condition": "",
+    "ligne_v523": 2633,
+    "extrait_source": "🏢 … emménage à la pension de famille : une fenêtre de plus s’allume dans l’immeu"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M203",
+   "tri": null,
+   "texte_actuel": "🏥 … est de retour de la Timone.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "upd",
+    "condition": "s.hos",
+    "ligne_v523": 1167,
+    "extrait_source": "🏥 … est de retour de la Timone."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M204",
+   "tri": null,
+   "texte_actuel": "🐕 Le vétérinaire solidaire soigne gratuitement le chien de … : vaccins, vermifuge, antipuces.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "partTick",
+    "condition": "us.length",
+    "ligne_v523": 741,
+    "extrait_source": "🐕 Le vétérinaire solidaire soigne gratuitement le chien de … : vaccins, vermifug"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M205",
+   "tri": "Montrer",
+   "texte_actuel": "💇 Yassine est passé : coupes et barbes pour tout le monde. On se regarde dans le miroir, on sourit.",
+   "nouveau_texte": "💇 Yassine est passé : coupes et barbes pour tout le monde. Sartek la nouvelle coupe de cheveux!",
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "Math.random()<.5",
+    "ligne_v523": 2266,
+    "extrait_source": "💇 Yassine est passé : coupes et barbes pour tout le monde. On se regarde dans le"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M206",
+   "tri": "Taire",
+   "texte_actuel": "💉 L’automate a délivré … kits ce mois-ci, surtout la nuit et le week-end.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "Math.random()<.4",
+    "ligne_v523": 1561,
+    "extrait_source": "💉 L’automate a délivré … kits ce mois-ci, surtout la nuit et le week-end."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M207",
+   "tri": null,
+   "texte_actuel": "💊 … vient annoncer la nouvelle : guéri·e de l’hépatite C ! Toute l’équipe applaudit.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "h",
+    "ligne_v523": 2397,
+    "extrait_source": "💊 … vient annoncer la nouvelle : guéri·e de l’hépatite C ! Toute l’équipe applau"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M208",
+   "tri": null,
+   "texte_actuel": "💧 Points d’eau installés dans le couloir et devant l’entrée : on peut boire et se rafraîchir en attendant.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "water",
+    "condition": "",
+    "ligne_v523": 647,
+    "extrait_source": "💧 Points d’eau installés dans le couloir et devant l’entrée : on peut boire et s"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M209",
+   "tri": null,
+   "texte_actuel": "💶 Pas assez d’argent pour ça.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "lcAsk",
+    "condition": "E.eu&&eu<E.eu",
+    "ligne_v523": 8829,
+    "extrait_source": "💶 Pas assez d’argent pour ça."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M210",
+   "tri": "Taire",
+   "texte_actuel": "💶 Tout reste ouvert. Il faudra tenir.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "budGo",
+    "condition": "i>=0",
+    "ligne_v523": 4283,
+    "extrait_source": "💶 Tout reste ouvert. Il faudra tenir."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M211",
+   "tri": null,
+   "texte_actuel": "💾 Partie reprise : …, jour …[, année … / ]. Bon retour à la halte !",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "continueGame",
+    "condition": "",
+    "ligne_v523": 12484,
+    "extrait_source": "💾 Partie reprise : …, jour …[, année … | ]. Bon retour à la halte !"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M212",
+   "tri": null,
+   "texte_actuel": "📄 Agnès part avec l’adresse et un formulaire de vingt pages.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 9674,
+    "extrait_source": "📄 Agnès part avec l’adresse et un formulaire de vingt pages."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M213",
+   "tri": null,
+   "texte_actuel": "📄 Fin de contrat : … quitte l’équipe. Les collègues sont un peu secoué·es.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "fireDo",
+    "condition": "un",
+    "ligne_v523": 6328,
+    "extrait_source": "📄 Fin de contrat : … quitte l’équipe. Les collègues sont un peu secoué·es."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M214",
+   "tri": null,
+   "texte_actuel": "📄 … remplit le dossier avec Agnès, pièce par pièce. Réponse attendue dans plusieurs mois.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 9674,
+    "extrait_source": "📄 … remplit le dossier avec Agnès, pièce par pièce. Réponse attendue dans plusie"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M215",
+   "tri": null,
+   "texte_actuel": "📖 Une nouvelle page s’écrit dans l’histoire de … : « … ». Touche son portrait pour la lire.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "lcPage",
+    "condition": "i>0",
+    "ligne_v523": 2099,
+    "extrait_source": "📖 Une nouvelle page s’écrit dans l’histoire de … : « … ». Touche son portrait po"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M216",
+   "tri": null,
+   "texte_actuel": "📜 Charte acceptée. À l’accueil, les visages se ferment : « Donc si j’arrête pas, j’ai plus droit à l’assistante sociale ? » Certaines personnes ne reviendront pas.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 4279,
+    "extrait_source": "📜 Charte acceptée. À l’accueil, les visages se ferment : « Donc si j’arrête pas,"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M217",
+   "tri": null,
+   "texte_actuel": "📝 … est de retour : le dossier est déposé.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "upd",
+    "condition": "s.dos",
+    "ligne_v523": 1167,
+    "extrait_source": "📝 … est de retour : le dossier est déposé."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M218",
+   "tri": null,
+   "texte_actuel": "📞 Il faut un·e assistant·e social·e disponible pour appeler le 115.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "call115",
+    "condition": "!z",
+    "ligne_v523": 8977,
+    "extrait_source": "📞 Il faut un·e assistant·e social·e disponible pour appeler le 115."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M219",
+   "tri": null,
+   "texte_actuel": "📞 On a déjà appelé aujourd’hui : le 115 rappellera demain.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "call115",
+    "condition": "(B.c115||0)>GT",
+    "ligne_v523": 8977,
+    "extrait_source": "📞 On a déjà appelé aujourd’hui : le 115 rappellera demain."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M220",
+   "tri": null,
+   "texte_actuel": "📞 On relance Toit & Moi et le bailleur : il faudra attendre, mais Agnès aura un logement adapté.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 9670,
+    "extrait_source": "📞 On relance Toit & Moi et le bailleur : il faudra attendre, mais Agnès aura un "
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M221",
+   "tri": null,
+   "texte_actuel": "📞 … appelle le 115 : 45 minutes d’attente, puis « plus de place ce soir ». On réessaiera demain.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "call115",
+    "condition": "ok",
+    "ligne_v523": 8981,
+    "extrait_source": "📞 … appelle le 115 : 45 minutes d’attente, puis « plus de place ce soir ». On ré"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M222",
+   "tri": null,
+   "texte_actuel": "📞 … appelle le 115 : une place s’ouvre pour …. Cette nuit, [elle / il] sera au chaud.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "call115",
+    "condition": "ok",
+    "ligne_v523": 8980,
+    "extrait_source": "📞 … appelle le 115 : une place s’ouvre pour …. Cette nuit, [elle | il] sera au c"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M223",
+   "tri": null,
+   "texte_actuel": "📣 … : informé·es de l’ouverture de la halte (+… de notoriété).",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "inf",
+    "condition": "",
+    "ligne_v523": 296,
+    "extrait_source": "📣 … : informé·es de l’ouverture de la halte (+… de notoriété)."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M224",
+   "tri": null,
+   "texte_actuel": "📭 Agnès a abandonné son dossier MDPH : trop de pièces à fournir, et personne pour l’aider à s’y retrouver.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "(global)",
+    "condition": "ok",
+    "ligne_v523": 9667,
+    "extrait_source": "📭 Agnès a abandonné son dossier MDPH : trop de pièces à fournir, et personne pou"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M225",
+   "tri": null,
+   "texte_actuel": "🔓 La halte rouvre après l’hommage à ….",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:upd",
+    "condition": "B.homm&&GT>=B.homm.until",
+    "ligne_v523": 10357,
+    "extrait_source": "🔓 La halte rouvre après l’hommage à …."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M226",
+   "tri": null,
+   "texte_actuel": "🔥 Nouveau record : … personnes accueillies d’affilée sans que personne ne reparte déçu·e !",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:leave",
+    "condition": "",
+    "ligne_v523": 1999,
+    "extrait_source": "🔥 Nouveau record : … personnes accueillies d’affilée sans que personne ne repart"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M227",
+   "tri": null,
+   "texte_actuel": "🗑️ Poubelle vidée : la halte reste propre.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "clean",
+    "condition": "o.l!=null",
+    "ligne_v523": 695,
+    "extrait_source": "🗑️ Poubelle vidée : la halte reste propre."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M228",
+   "tri": null,
+   "texte_actuel": "😞 Agnès passe la nuit assise. « On s’habitue. Enfin, on fait semblant. »",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 9672,
+    "extrait_source": "😞 Agnès passe la nuit assise. « On s’habitue. Enfin, on fait semblant. »"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M229",
+   "tri": null,
+   "texte_actuel": "🙅 …",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": null,
+    "extrait_source": "🙅 …"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M230",
+   "tri": null,
+   "texte_actuel": "🚐 Le camion part vers … avec ….",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "tourGo",
+    "condition": "",
+    "ligne_v523": 796,
+    "extrait_source": "🚐 Le camion part vers … avec …."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M231",
+   "tri": null,
+   "texte_actuel": "🚐 Une seule tournée par mois : on a promis aux commerçants de libérer leurs places.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "tourGo",
+    "condition": "B.vanM===AMI()",
+    "ligne_v523": 8467,
+    "extrait_source": "🚐 Une seule tournée par mois : on a promis aux commerçants de libérer leurs plac"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M232",
+   "tri": null,
+   "texte_actuel": "🚑 [… personnes malades arrivent / La personne malade arrive] à la halte avec l’équipe du camion.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:tourEnd",
+    "condition": "T&&T.sick",
+    "ligne_v523": 5383,
+    "extrait_source": "🚑 [… personnes malades arrivent | La personne malade arrive] à la halte avec l’é"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M233",
+   "tri": null,
+   "texte_actuel": "🚓 … a été interpellé·e et condamné·e à quelques mois de prison. Iel ne viendra plus pour un moment…",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:polStart",
+    "condition": "",
+    "ligne_v523": 1875,
+    "extrait_source": "🚓 … a été interpellé·e et condamné·e à quelques mois de prison. Iel ne viendra p"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M234",
+   "tri": null,
+   "texte_actuel": "🚧 Le·la médiateur·rice installe des cordons devant l’entrée : la file d’attente serpente calmement, chacun·e voit son tour arriver.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:hireX",
+    "condition": "",
+    "ligne_v523": 1988,
+    "extrait_source": "🚧 Le·la médiateur·rice installe des cordons devant l’entrée : la file d’attente "
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M235",
+   "tri": null,
+   "texte_actuel": "🛎️ L’accueil reste à côté de l’entrée : c’est là que la file arrive. Il ne se déplace pas et garde sa taille.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:roomMenu",
+    "condition": "a[0]===0",
+    "ligne_v523": 10542,
+    "extrait_source": "🛎️ L’accueil reste à côté de l’entrée : c’est là que la file arrive. Il ne se dé"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M236",
+   "tri": null,
+   "texte_actuel": "🛏️ Le lit médicalisé est installé, et on a écarté les autres lits. Agnès dort enfin allongée.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 9672,
+    "extrait_source": "🛏️ Le lit médicalisé est installé, et on a écarté les autres lits. Agnès dort en"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M237",
+   "tri": null,
+   "texte_actuel": "🤝 Le GEM est lancé : les usager·es s’y retrouvent et décident ensemble. La psychologue soutient, sans animer.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "gemGo",
+    "condition": "",
+    "ligne_v523": 3842,
+    "extrait_source": "🤝 Le GEM est lancé : les usager·es s’y retrouvent et décident ensemble. La psych"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M238",
+   "tri": null,
+   "texte_actuel": "🤝 [… / Camille] accompagne … [au premier rendez-vous à la maternité / à la PMI] : un suivi adapté se met en place, sans jugement.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": 1869,
+    "extrait_source": "🤝 [… | Camille] accompagne … [au premier rendez-vous à la maternité | à la PMI] "
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M239",
+   "tri": null,
+   "texte_actuel": "🤝 …",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "f",
+    "condition": "",
+    "ligne_v523": null,
+    "extrait_source": "🤝 …"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M240",
+   "tri": null,
+   "texte_actuel": "🧹 Crotte ramassée. … te regarde d’un air désolé.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "dogPick",
+    "condition": "",
+    "ligne_v523": 5150,
+    "extrait_source": "🧹 Crotte ramassée. … te regarde d’un air désolé."
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M241",
+   "tri": null,
+   "texte_actuel": "🧹 Le chantier TAPAJ est terminé : le terrain est propre ! Les habitant·es veulent en faire quelque chose.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:upd",
+    "condition": "B.lotT<=0",
+    "ligne_v523": 1558,
+    "extrait_source": "🧹 Le chantier TAPAJ est terminé : le terrain est propre ! Les habitant·es veulen"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  },
+  {
+   "id": "M242",
+   "tri": null,
+   "texte_actuel": "🩺 Permanence du CSAPA : une personne commence un traitement de substitution aujourd’hui même.",
+   "nouveau_texte": null,
+   "code": {
+    "appel": "say",
+    "fonction": "W:monthEnd",
+    "condition": "Math.random()<.3",
+    "ligne_v523": 2396,
+    "extrait_source": "🩺 Permanence du CSAPA : une personne commence un traitement de substitution aujo"
+   },
+   "categorie": "personnes",
+   "vu_en_test": 0
+  }
+ ]
+}
