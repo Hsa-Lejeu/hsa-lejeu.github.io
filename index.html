@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v515')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v516')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5560,7 +5560,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v515')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v516')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -10911,23 +10911,23 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
  const MU=95,RB=4,RC=2,REST=.82,PULL=62,LMAX=300,TIRV=230,TIRROLL=55,AG=.55;
  const POW={
   geante:{nm:'La miche géante',ds:'Sa prochaine boule est énorme et bouscule tout.',tgt:false},
-  aimant:{nm:'L’aimant secret',ds:'Enterre un aimant : toute boule qui roule à sa portée (le cercle rose) est déviée vers lui — les nôtres comme les leurs. Près du cochonnet, il ramène nos boules ; loin, il piège celles d’en face.',tgt:true},
-  pastis:{nm:'La tournée de pastis',ds:'Une flaque de pastis : les boules glissent comme sur de l’huile.',tgt:true},
-  poil:{nm:'Le poil à gratter',ds:'Le prochain lanceur d’en face se gratte et vise n’importe comment.',tgt:false},
+  aimant:{nm:'Le cochonnet aimanté',ds:'Pour ce lancer seulement, le cochonnet attire notre boule comme un aimant.',tgt:false},
+  pastis:{nm:'La Pastagattaque',ds:'Un pastis de trop dans le verre du prochain lanceur d’en face : il vise vraiment n’importe comment.',tgt:false},
+  sardine:{nm:'La sardine du port',ds:'Une sardine géante s’échoue sur le terrain : les boules qui la touchent rebondissent dessus.',tgt:true},
+  arrosoir:{nm:'Le coup d’arrosoir',ds:'Arrose le gravier : dans la zone mouillée, les boules s’arrêtent net.',tgt:true},
   gabian:{nm:'L’appel du gabian',ds:'Un goéland chipe le cochonnet et le relâche n’importe où.',tgt:false},
   mistral:{nm:'Le coup de mistral',ds:'Une rafale pousse toutes les boules dans la direction choisie.',tgt:true},
-  trou:{nm:'Le coup de pelle',ds:'Un trou où la première boule qui passe reste coincée.',tgt:true},
-  banane:{nm:'La peau de banane',ds:'La prochaine boule d’en face glisse beaucoup trop loin.',tgt:false}};
+  trou:{nm:'Le coup de pelle',ds:'Un trou où la première boule qui passe reste coincée.',tgt:true}};
  const COMBOS={
   'aimant+gabian':{nm:'Le gabian dressé',ds:'Le goéland dépose le cochonnet tout contre notre meilleure boule.',tgt:false},
   'aimant+mistral':{nm:'Mistral magnétique',ds:'Une rafale qui ne souffle que sur les boules d’en face, loin du cochonnet.',tgt:false},
-  'geante+poil':{nm:'Le boulet de canon',ds:'Prochaine boule géante, lancée parfaitement et deux fois plus fort.',tgt:false},
+  'geante+sardine':{nm:'La bouillabaisse',ds:'Boule géante lancée parfaitement, et la sardine balaie les boules d’en face loin du cochonnet.',tgt:false},
   'pastis+mistral':{nm:'La marée de pastis',ds:'Une immense flaque autour du cochonnet : les boules qui arrivent filent au-delà.',tgt:false}};
  const RIV=[{id:'nad',nm:'Nadia',ci:80,grp:'r',role:'La boulangère',P:.86,T:.34,pw:'geante'},
   {id:'lef',nm:'Mme Lefèvre',ci:84,grp:'r',role:'Présidente de la copro',P:.62,T:.58,pw:'aimant'},
   {id:'kar',nm:'Karim',ci:79,grp:'r',role:'Le buraliste',P:.52,T:.74,pw:'pastis'}];
- const AIT=[{nm:'Tonin',ci:78,P:.66,T:.55,pw:'trou'},{nm:'Lulu',ci:81,P:.72,T:.45,pw:'banane'},{nm:'Marius',ci:85,P:.55,T:.7,pw:'aimant'}];
- const UPW=['poil','gabian','mistral'];
+ const AIT=[{nm:'Tonin',ci:78,P:.66,T:.55,pw:'trou'},{nm:'Lulu',ci:81,P:.72,T:.45,pw:'arrosoir'},{nm:'Marius',ci:85,P:.55,T:.7,pw:'aimant'}];
+ const UPW=['sardine','gabian','mistral'];
  const hsh=s=>{let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))%9973;return h};
  const okH=h=>h&&h.v>0&&h.st!='envol'&&h.st!='gone'&&h.st!='hosp'&&!h.dead&&h.vol==null&&(h.ci||0)<NIMA&&THROK.has(h.ci||0);
  function usagers(){
@@ -10969,6 +10969,8 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
   else if(k==='geante'){r('#5a3418',1,6,14,7);r('#c98a44',2,6,12,6);r('#e8b06a',3,5,10,2);r('#f6d29a',4,7,2,1);r('#8a5428',5,8,1,3);r('#8a5428',8,8,1,3);r('#8a5428',11,8,1,3);r('#fffaf0',2,4,1,1);r('#fffaf0',13,3,1,1)}
   else if(k==='aimant'){r('#2a2433',2,2,5,12);r('#2a2433',9,2,5,12);r('#2a2433',2,10,12,4);r('#d83030',3,3,3,8);r('#d83030',10,3,3,8);r('#d83030',3,11,10,2);r('#e8e8f0',3,2,3,2);r('#e8e8f0',10,2,3,2);r('#ff9fd0',0,0);r('#ff9fd0',15,1);r('#ff9fd0',7,0)}
   else if(k==='pastis'){r('#2a2433',3,3,8,12);r('#fff6c0',4,4,6,10);r('#f6d860',4,7,6,7);r('#ffffff',5,5,1,7);r('#2a2433',11,6,4,8);r('#3a7a4a',12,7,2,6);r('#d8e8ff',12,4,2,2);r('#ffe36a',1,13,2,1);r('#ffe36a',13,15,2,1)}
+  else if(k==='sardine'){r('#2a2433',1,6,13,5);r('#9fb8c8',2,7,11,3);r('#dbe8f0',3,8,6,1);r('#5f7fa0',6,7,1,3);r('#2a2433',12,4,3,2);r('#2a2433',12,10,3,2);r('#9fb8c8',13,6,2,1);r('#9fb8c8',13,9,2,1);r('#1a1420',4,8);r('#fff',4,7);r('#6fc4ff',1,3);r('#6fc4ff',9,2)}
+  else if(k==='arrosoir'){r('#2a2433',3,6,9,8);r('#3f8a4a',4,7,7,6);r('#6fc46a',5,8,2,2);r('#2a2433',11,4,3,3);r('#3f8a4a',12,5,1,1);r('#2a2433',1,7,2,4);r('#2a2433',5,3,5,3);r('#3f8a4a',6,4,3,1);r('#6fc4ff',13,1);r('#6fc4ff',14,3);r('#6fc4ff',15,0)}
   else if(k==='poil'){r('#3a8a3a',7,6,2,10);r('#5ab84a',3,4,4,3);r('#5ab84a',9,2,4,3);r('#ff6fb5',2,1);r('#ff6fb5',5,0);r('#ff6fb5',12,0);r('#ff6fb5',14,4);r('#ff6fb5',1,8);r('#ff6fb5',13,8);r('#ff9fd0',4,10,2,1);r('#ff9fd0',10,11,2,1)}
   else if(k==='mistral'){r('#cfe8ff',1,4,9,1);r('#cfe8ff',10,3,2,1);r('#cfe8ff',12,4,1,2);r('#cfe8ff',11,6,1,1);r('#ffffff',3,8,11,1);r('#ffffff',14,7,1,1);r('#cfe8ff',2,12,7,1);r('#cfe8ff',9,11,2,1);r('#7fc45a',12,11,2,2);r('#d9822b',5,14,2,1)}
   else if(k==='trou'){r('#8a5a2a',7,1,2,9);r('#2a2433',4,9,8,6);r('#c0c8d0',5,10,6,4);r('#e8eef4',5,10,2,1);r('#6b4a28',1,15,14,1)}
@@ -10981,6 +10983,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
   gn.gain.setValueAtTime(0,t);gn.gain.linearRampToValueAtTime(vol*VK(),t+Math.min(.08,d/4));gn.gain.linearRampToValueAtTime(0,t+d);s.connect(f).connect(gn).connect(OUT(a));s.start(t,Math.random());s.stop(t+d+.05)}catch(_){}}
  const whoosh=()=>noise(.35,300,2400,1.2,.12),swoosh=()=>noise(.5,2500,300,1,.12);
  function cheer(big){noise(big?2.2:1.1,900,1300,.6,big?.16:.09);noise(big?2:1,2200,1800,.8,big?.08:.04);if(big)setTimeout(()=>{for(let i=0;i<6;i++)setTimeout(()=>noise(.06,2600,2600,2,.08),i*110+Math.random()*60)},200)}
+ function boo(){try{const a=AC();for(let i=0;i<6;i++){const o=a.createOscillator(),gn=a.createGain(),t=a.currentTime+i*.12;o.type='square';o.frequency.setValueAtTime(300-i*16,t);o.frequency.linearRampToValueAtTime(260-i*16,t+.1);gn.gain.setValueAtTime(0,t);gn.gain.linearRampToValueAtTime(.035*VK(),t+.03);gn.gain.linearRampToValueAtTime(0,t+.11);o.connect(gn).connect(OUT(a));o.start(t);o.stop(t+.12)}}catch(_){}noise(1.3,500,350,.6,.08)}
  function ooh(){try{const a=AC();[220,277].forEach(f=>{const o=a.createOscillator(),gn=a.createGain(),t=a.currentTime;o.type='triangle';o.frequency.setValueAtTime(f*1.1,t);o.frequency.linearRampToValueAtTime(f*.85,t+.9);gn.gain.setValueAtTime(0,t);gn.gain.linearRampToValueAtTime(.05*VK(),t+.15);gn.gain.linearRampToValueAtTime(0,t+.95);o.connect(gn).connect(OUT(a));o.start(t);o.stop(t+1)})}catch(_){}noise(.9,700,500,.7,.05)}
  const blip=()=>tone(780,.04,'square',.035),okS=()=>{tone(660,.06,'square',.05);setTimeout(()=>tone(1046,.09,'square',.05),60)},heart=()=>{tone(55,.12,'sine',.22);setTimeout(()=>tone(48,.14,'sine',.18),170)};
  const impact=()=>{tone(70,.4,'sine',.25);noise(.4,1200,200,.7,.14)};
@@ -10996,19 +10999,23 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
   const US=usagers(),ALL=[...RIV,...US];
   let pick=[];
   // ---------- 1. annonce ----------
-  ov.innerHTML=`<div class="card0"><h2>🎳 Le tournoi de pétanque du quartier</h2>
-  Avant le vote du conseil de quartier, le comité de voisinage et la halte organisent un tournoi au square. Une seule règle : <b>chaque triplette mélange riverains et usager·es de la halte</b>.<br><br>
+  let terK=pickL(['major','carli','panier']);
+  const TDS={major:'Sur le parvis de la Major : beaucoup de passage, et la cathédrale derrière.',carli:'Au Carli, cours Julien : de l’herbe, de la musique, et quelques cailloux sur le terrain.',panier:'Au Panier : les touristes, la Bonne Mère, et un terrain pas tout à fait plat.'};
+  ov.innerHTML=`<div class="card0 arcd"><div class="ttlw"><div class="ttl"><span>STREET</span><br><span>PÉTANQUEUR</span></div><div class="sub">★ LE TOURNOI DU QUARTIER ★</div></div>
+  Avant le vote du conseil de quartier, le comité de voisinage et la halte organisent un tournoi de pétanque. Une seule règle : <b>chaque triplette mélange riverains et usager·es de la halte</b>.<br><br>
   En face, le club de la Boule d’en face, qui ne perd jamais. Tout le quartier sera là : une belle partie peut faire changer bien des avis avant le vote.
-  <div class="sline"><span id="qslt">🔈 Son : touche « Tester le son » pour vérifier les bruitages.</span><button class="sec" id="qsnt">🔊 Tester le son</button><small>v505</small></div>
-  <div class="btns"><button class="sec" id="qpsk">Laisser l’équipe jouer sans moi</button><button id="qpgo">Composer l’équipe</button></div></div>`;
+  <div class="terw"><span class="lb">STAGE SELECT · TERRAIN</span><div class="ters"><button data-t="major">⛪ La Major</button><button data-t="carli">🎶 Le Carli</button><button data-t="panier">📸 Le Panier</button></div><small id="qterd"></small></div>
+  <div class="sline"><span id="qslt">🔈 Son : touche « Tester le son » pour vérifier les bruitages.</span><button class="sec" id="qsnt">🔊 Tester le son</button><small>v506</small></div>
+  <div class="coin">▶ INSÈRE UNE PIÈCE · APPUIE SUR START</div><div class="btns"><button class="sec" id="qpsk">Laisser l’équipe jouer sans moi</button><button id="qpgo" class="start">START · Composer l’équipe</button></div></div>`;
   $('#qpgo').onclick=selScreen;
+  const refT=()=>{ov.querySelectorAll('.ters button').forEach(b=>b.classList.toggle('on',b.dataset.t===terK));const d=$('#qterd');if(d)d.textContent=TDS[terK]};ov.querySelectorAll('.ters button').forEach(b=>b.onclick=()=>{terK=b.dataset.t;refT();blip()});refT();window.__terSet=k=>{terK=k;refT()};
   $('#qsnt').onclick=()=>{try{if(typeof AU!=='undefined'&&AU.s<=0){AU.s=.7;try{auVol()}catch(_){}try{localStorage.setItem('hsa-vol',JSON.stringify({m:AU.m,s:AU.s}))}catch(_){}}}catch(_){}const a=AC();psLoad();okS();setTimeout(()=>{psfx('magic',.9);try{dsfx('shing',.8)}catch(_){}},150);setTimeout(()=>{const st=petaSndState();const e=$('#qslt');if(e)e.textContent=st[1]+(st[0]==='ok'?' — tu devrais avoir entendu un « ding » et un coup de magie.':'')},500)};$('#qpsk').onclick=()=>{const w=Math.random()<.55,s0=w?5+(Math.random()*4|0):2+(Math.random()*4|0),s1=w?Math.max(0,s0-1-(Math.random()*4|0)):s0+1+(Math.random()*3|0);result(s0,s1,true)};
   // ---------- 2. choix des joueurs façon arcade ----------
   function selScreen(){
    ov.classList.add('sfm');petaMus('petac');
    setTimeout(()=>{try{if($('#qsq')&&!$('#qsqx')){const b=document.createElement('button');b.id='qsqx';b.className='qsqx';b.textContent='✕ Sans moi';b.title='Laisser l’équipe jouer sans moi';b.onclick=()=>$('#qpsk')?$('#qpsk').click():null;ov.appendChild(b)}}catch(_){}},80);
    setTimeout(()=>{try{psLoad();const st=petaSndState();const d=document.createElement('div');d.className='snd '+st[0];d.textContent=st[1];ov.appendChild(d);setTimeout(()=>d.remove(),st[0]==='ok'?2500:6000)}catch(_){}},60);
-   const QUO={geante:'Celle-là, je l’ai pétrie moi-même. Personne ne la bouge.',aimant:'Le syndic a toujours un plan B… sous le gravier.',pastis:'Un pastis renversé, et la piste devient une patinoire.',poil:'Vingt ans de boulodrome. Je tire comme un dieu.',gabian:'Mon gabian connaît le port mieux que moi.',mistral:'Quand je souffle, les boules s’envolent.'};
+   const QUO={geante:'Celle-là, je l’ai pétrie moi-même. Personne ne la bouge.',aimant:'Le syndic a toujours un plan B… et un cochonnet aimanté.',pastis:'Un petit jaune pour l’adversaire, et il vise le cochonnet du voisin.',sardine:'Ma sardine, elle a bouché le port. Le terrain, c’est rien.',gabian:'Mon gabian connaît le port mieux que moi.',mistral:'Quand je souffle, les boules s’envolent.'};
    const SEAT=[[50,92],[68,92],[86,92],[50,146],[68,146],[86,146]],SLOT=[[222,98],[222,122],[222,146]];
    ov.innerHTML=`<div class="sq"><div class="sqw"><canvas id="qsq" width="${W}" height="${H}"></canvas><div class="tag tl" id="qttl"><b>Qui joue ?</b><small>au moins 1 riverain + 1 usager</small></div><div class="tag tr" id="qcnt"><b>0</b> / 3</div><div class="go3" id="qpok" role="button" tabindex="0" hidden>C’est parti !</div><div class="foot" id="qfoot">Touche quelqu’un sur le banc.</div></div></div>`;
    const sq=$('.sqw'),cv2=$('#qsq'),g2=cv2.getContext('2d');g2.imageSmoothingEnabled=false;const se=seas();
@@ -11050,16 +11057,16 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
    function ref(){const r=pick.filter(p=>p.grp==='r').length,u=pick.length-r,ok=pick.length===3&&r&&u;$('#qcnt').innerHTML=`<b>${pick.length}</b> / 3`;$('#qpok').hidden=!ok;
     $('#qfoot').textContent=ok?'Équipe prête !':pick.length===3?'Il faut au moins un riverain et un usager : retire quelqu’un.':pick.length?`Encore ${3-pick.length} joueur${3-pick.length>1?'s':''}.`:'Touche quelqu’un sur le banc.';retarget()}
    window.__pickSel=id=>{const p=ALL.find(q=>q.id===id);if(!p)return;const i=pick.indexOf(p);if(i>=0)pick.splice(i,1);else if(pick.length<3)pick.push(p);ref()};
-   function go(){if($('#qpok').hidden)return;okS();ov.classList.remove('sfm');vsScreen()}
+   function go(){if($('#qpok').hidden)return;okS();ov.classList.remove('sfm');try{if(PM.el)fadeTo(PM.el,musVol()*.1,500)}catch(_){}setTimeout(vsScreen,520)}
    $('#qpok').onclick=go;$('#qpok').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}};
    ref();
   }
   // ---------- 3. écran VS ----------
   function vsScreen(){
-   ov.innerHTML=`<div class="vs"><div class="side"><h3 style="color:#9fc3ff">Notre quartier</h3><div class="row" id="qvA"></div></div><div class="x">VS</div><div class="side"><h3 style="color:#ffb070">La Boule d’en face</h3><div class="row" id="qvB"></div></div></div>`;
+   ov.innerHTML=`<div class="vs"><div class="side"><h3 style="color:#9fc3ff">Notre quartier</h3><div class="row" id="qvA"></div></div><div class="x pre sfg" id="qvx">VS</div><div class="side"><h3 style="color:#ffb070">La Boule d’en face</h3><div class="row" id="qvB"></div></div></div><div class="vter">📍 ${({major:'Parvis de la Major',carli:'Le Carli · cours Julien',panier:'Le Panier'})[terK]}</div>`;
    const put=(box,p,base,i)=>{const d=document.createElement('div');d.style.animationDelay=(i*.15)+'s';const c=document.createElement('canvas');c.width=16;c.height=26;d.appendChild(c);d.insertAdjacentHTML('beforeend',`<span>${short(p.nm)}</span>`);$(box).appendChild(d);anim(c,p.ci,base)};
    pick.forEach((p,i)=>put('#qvA',p,36,i));AIT.forEach((p,i)=>put('#qvB',p,30,i));
-   swoosh();setTimeout(impact,450);setTimeout(()=>fanfare(),700);setTimeout(game,2500);
+   swoosh();setTimeout(()=>{const X=$('#qvx');if(X){X.classList.remove('pre');X.classList.add('slam')}impact();try{dsfx('ko',1)}catch(_){}try{dsfx('boom',1)}catch(_){}tone(48,.5,'sine',.3);noise(.5,80,1200,.6,.22);ov.classList.add('qshk');setTimeout(()=>ov.classList.remove('qshk'),500);const f=document.createElement('div');f.className='vfl';ov.appendChild(f);setTimeout(()=>f.remove(),400)},620);setTimeout(()=>fanfare(),1000);setTimeout(game,2900);
   }
   // ---------- 4. le match ----------
   let raf=0;
@@ -11072,21 +11079,86 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
    const se=seas();
    // décor pré-dessiné
    // (les marques de touche sont remises à zéro à chaque lancer)
+   // ---- le terrain du jour : la Major, le Carli (cours Julien) ou le Panier
+   const TK=terK;const TNM={major:'La Major',carli:'Le Carli',panier:'Le Panier'}[TK];
+   const rocks=[],bumps=[];{let rs=TK==='carli'?17:29;const rr=()=>(rs=(rs*16807)%2147483647)/2147483647;
+    if(TK==='carli')for(let i=0;i<5;i++)rocks.push({x:T.x+60+rr()*(T.w-80),y:T.y+10+rr()*(T.h-20),r:2.2+rr()*1.2});
+    if(TK==='panier')for(let i=0;i<5;i++)bumps.push({x:T.x+56+rr()*(T.w-76),y:T.y+13+rr()*(T.h-26),r:9+rr()*5,h:i%2?1:-1})}
+   const ObS=(g_,n,X,YB,sc)=>{const r=OM[n];if(!r||!OAT.complete)return;sc=sc||1;g_.drawImage(OAT,r[0],r[1],r[2],r[3],Math.round(X),Math.round(YB-r[3]*sc),Math.round(r[2]*sc),Math.round(r[3]*sc))};
+   const DEC=TK==='major'?[['lamp',298,38,.55],['lamp',298,178,.55],['bench',140,34]]:TK==='carli'?[['tree'+se,-10,40],['tree'+se,286,42],['bush'+se,40,30],['bush'+se,250,30],['bench',140,34],['fl1',20,170],['fl2',300,172],['fl3',200,176],['fl1',120,176]]:[['bench',140,34],['bush'+se,44,34],['bush'+se,252,34],['fl2',300,172],['fl1',20,170],['fl3',200,176]];
+   function paintGround(b,y0,y1){
+    if(TK==='major'){b.fillStyle='#d9d2c2';b.fillRect(0,y0,W,y1-y0);let q=5;const rr=()=>(q=(q*16807)%2147483647)/2147483647;for(let y=Math.floor(y0/14)*14;y<y1;y+=14)for(let x=((y/14)|0)%2?-10:0;x<W;x+=20){b.fillStyle=['#dcd5c5','#d2cbba','#e0d9c9','#cfc8b7'][(rr()*4)|0];b.fillRect(x,y,20,14);b.fillStyle='#b9b2a2';b.fillRect(x,y,20,1);b.fillRect(x,y,1,14)}}
+    else if(TK==='panier'){b.fillStyle='#c9b9a2';b.fillRect(0,y0,W,y1-y0);let q=9;const rr=()=>(q=(q*16807)%2147483647)/2147483647;for(let y=Math.floor(y0/6)*6;y<y1;y+=6)for(let x=((y/6)|0)%2?-4:0;x<W;x+=8){b.fillStyle=['#c4b49c','#d2c2aa','#bcac94','#cab9a0'][(rr()*4)|0];b.fillRect(x+1,y+1,6,4);b.fillStyle='#a8977f';b.fillRect(x+1,y+5,6,1)}}
+    else{if(TIL.complete)for(let y=y0;y<y1;y+=16)for(let x=0;x<W;x+=16)b.drawImage(TIL,[0,1,2,3][se]*16,0,16,16,x,y,16,16);else{b.fillStyle='#5a9a4a';b.fillRect(0,y0,W,y1-y0)}}}
+   function skyline(g3,top,now){const R=(x,y,w,h,c)=>{g3.fillStyle=c;g3.fillRect(Math.round(x),Math.round(top+y),Math.ceil(w),Math.ceil(h))};
+    let gr=g3.createLinearGradient(0,0,0,top);gr.addColorStop(0,TK==='carli'?'#7aa6d8':'#6fb6ef');gr.addColorStop(1,'#d8f0ff');g3.fillStyle=gr;g3.fillRect(0,0,W,top+1);
+    if(TK==='major'){R(0,-7,W,8,'#4f8fc4');R(0,-4,W,1,'#9fd0f0');for(let i=0;i<10;i++)R(i*34+((now/400)%34),-5+(i%2),6,1,'#bfe4ff');
+     // la Major : façade rayée, deux tours à coupole, grand dôme
+     const S=(x,y,w,h)=>{for(let k=0;k<h;k+=4)R(x,y+k,w,4,((k/4)|0)%2?'#e9e4d8':'#6a8a7c')};
+     S(52,-24,36,24);S(232,-24,36,24);S(86,-44,148,44);R(86,-46,148,2,'#f2eee4');
+     for(let x=92;x<230;x+=14){R(x,-24,8,16,'#2f3f3a');R(x+1,-26,6,3,'#2f3f3a')}
+     S(94,-64,22,64);S(204,-64,22,64);g3.fillStyle='#3f6a5a';g3.beginPath();g3.ellipse(105,top-66,12,8,0,Math.PI,0);g3.fill();g3.beginPath();g3.ellipse(215,top-66,12,8,0,Math.PI,0);g3.fill();R(104,-78,2,6,'#2a2433');R(214,-78,2,6,'#2a2433');R(103,-76,4,1,'#2a2433');R(213,-76,4,1,'#2a2433');
+     S(128,-54,64,10);g3.fillStyle='#4b7a6a';g3.beginPath();g3.ellipse(160,top-56,34,20,0,Math.PI,0);g3.fill();g3.fillStyle='#5e8f7e';for(let k=-3;k<=3;k++)R(160+k*9,-74+Math.abs(k)*3,2,18-Math.abs(k)*3,'#5e8f7e');R(154,-82,12,8,'#e9e4d8');R(159,-88,2,6,'#2a2433');R(157,-86,6,1,'#2a2433');
+     R(0,-1,W,2,'#b9b2a2')}
+    else if(TK==='carli'){let q=3;const rr=()=>(q=(q*16807)%2147483647)/2147483647;let x=-6;const cols=['#c9b59a','#b89a7a','#d8c3a5','#9a8ea0','#c7a98c'];
+     while(x<W){const w=34+rr()*28,h=28+rr()*42,c=cols[(rr()*5)|0];R(x,-h,w,h,c);R(x,-h,w,2,'#5a4a40');for(let yy=-h+6;yy<-6;yy+=9)for(let xx=x+4;xx<x+w-5;xx+=8)R(xx,yy,4,5,rr()>.3?'#3a3450':'#ffe9a0');
+      // tags et fresques en bas des façades
+      const n=2+(rr()*3|0);for(let k=0;k<n;k++){const tx=x+3+rr()*(w-14),ty=-6-rr()*12,tc=['#ff5fa0','#4fd4ff','#ffd23f','#7fe07a','#ff7a1a','#c080ff'][(rr()*6)|0];R(tx,ty,4+rr()*8,3+rr()*4,tc);R(tx+2,ty-2,3,2,tc)}
+      if(rr()<.3){g3.fillStyle='#ffd23f';g3.beginPath();g3.arc(x+w/2,top-h*.55,6,0,7);g3.fill();R(x+w/2-2,-h*.55-2,4,2,'#2a2433');R(x+w/2-3,-h*.55+2,6,1,'#e8262d')}
+      x+=w+2}
+     R(0,-1,W,2,'#6a6a70')}
+    else{ // le Panier : colline, maisons de village, la Bonne Mère
+     g3.fillStyle='#8aa06a';g3.beginPath();g3.moveTo(0,top+1);for(let i=0;i<=16;i++){const xx=i*W/16;g3.lineTo(xx,top-10-Math.sin(i/16*Math.PI)*34-Math.sin(i*1.7)*3)}g3.lineTo(W,top+1);g3.fill();
+     let q=7;const rr=()=>(q=(q*16807)%2147483647)/2147483647;for(let i=0;i<14;i++){const x=10+i*22+rr()*6,hy=-10-Math.sin((x/W)*Math.PI)*30,w=12+rr()*8,h=8+rr()*8;R(x,hy-h+4,w,h,['#e8d6b0','#f0c8a8','#e6dcc4','#d9b98f'][(rr()*4)|0]);R(x-1,hy-h+2,w+2,3,'#b55a3c');R(x+3,hy-h+8,3,3,'#5a7fb0');if(w>16)R(x+9,hy-h+8,3,3,'#5a7fb0')}
+     // la basilique sur sa colline
+     const bx=152,by=-40;R(bx-16,by-8,46,10,'#c9c3b0');R(bx-10,by-22,36,16,'#e8e2d2');for(let k=0;k<16;k+=4)R(bx-10,by-22+k,36,1,'#6a8a7c');g3.fillStyle='#4b7a6a';g3.beginPath();g3.ellipse(bx+8,top+by-22,13,6,0,Math.PI,0);g3.fill();
+     R(bx-8,by-52,12,30,'#e8e2d2');for(let k=0;k<30;k+=4)R(bx-8,by-52+k,12,1,'#6a8a7c');R(bx-10,by-54,16,3,'#c9c3b0');R(bx-5,by-47,2,5,'#2f3f3a');R(bx+1,by-47,2,5,'#2f3f3a');
+     R(bx-3,by-60,2,6,'#c9c3b0');R(bx-5,by-67,6,7,'#f2c230');R(bx-3,by-70,2,3,'#f2c230');R(bx-2,by-71,1,1,'#fff6c0');if(((now/700)|0)%2)R(bx+3,by-69,1,1,'#fff');
+     R(0,-1,W,2,'#a8977f')}}
    const bg=document.createElement('canvas');bg.width=W;bg.height=H;const bgG=document.createElement('canvas');bgG.width=W;bgG.height=H;{const b=bg.getContext('2d');b.imageSmoothingEnabled=false;
-    if(TIL.complete)for(let y=0;y<H;y+=16)for(let x=0;x<W;x+=16)b.drawImage(TIL,[0,1,2,3][se]*16,0,16,16,x,y,16,16);else{b.fillStyle='#5a9a4a';b.fillRect(0,0,W,H)}
+    paintGround(b,0,H);
+    if(TK==='panier'){ // façades du village en haut, linge, guirlande
+     let q=13;const rr=()=>(q=(q*16807)%2147483647)/2147483647;let x=-4;while(x<W){const w=36+rr()*22,c=['#e8d6b0','#f0c8a8','#e6dcc4','#d9b98f','#e2c9b2'][(rr()*5)|0];b.fillStyle=c;b.fillRect(x,0,w,27);b.fillStyle='#b55a3c';b.fillRect(x,0,w,3);b.fillStyle='#2a2433';b.fillRect(x+w-1,0,1,27);
+      for(let xx=x+5;xx<x+w-8;xx+=13){b.fillStyle='#3a3450';b.fillRect(xx,8,5,7);b.fillStyle=rr()>.5?'#5a7fb0':'#5f9a5a';b.fillRect(xx-2,7,2,9);b.fillRect(xx+5,7,2,9)}
+      if(rr()>.5){b.fillStyle='#5a3a2a';b.fillRect(x+w/2-3,18,6,9)}x+=w}
+     b.fillStyle='#2a2433';b.fillRect(0,26,W,1);
+     b.strokeStyle='#3a3450';b.lineWidth=1;b.beginPath();b.moveTo(40,12);b.quadraticCurveTo(100,18,160,12);b.stroke();[[58,'#ff9fd0'],[82,'#9fd0ff'],[106,'#fff'],[130,'#ffd23f']].forEach(([lx,lc])=>{b.fillStyle=lc;b.fillRect(lx,13,7,8)});
+     try{const bu=(window.ENDI||{}).bunting,la=(window.ENDI||{}).lanterne;if(bu&&bu.naturalWidth){const w=bu.naturalWidth*.4,h=bu.naturalHeight*.4;for(let X=180;X<W;X+=w-2)b.drawImage(bu,X,14,w,h)}if(la&&la.naturalWidth){const w=la.naturalWidth*.3,h=la.naturalHeight*.3;[8,24,300].forEach(X=>b.drawImage(la,X,16,w,h))}}catch(_){}}
+    if(TK==='carli'){ // ghetto-blaster et bouteilles près des spectateurs
+     b.fillStyle='#2a2433';b.fillRect(160,28,16,9);b.fillStyle='#555';b.fillRect(161,29,14,7);b.fillStyle='#2a2433';b.beginPath();b.arc(164,33,2.2,0,7);b.arc(172,33,2.2,0,7);b.fill();b.fillStyle='#ffd23f';b.fillRect(167,30,2,1);b.fillStyle='#2a2433';b.fillRect(163,26,10,1);
+     [[120,38],[246,38],[186,39]].forEach(([bx,by])=>{b.fillStyle='#2a2433';b.fillRect(bx,by-7,3,7);b.fillStyle='#3f8a4a';b.fillRect(bx+1,by-5,1,4);b.fillStyle='#8fd18a';b.fillRect(bx+1,by-6,1,1)})}
     let s=11;const rnd=()=>(s=(s*16807)%2147483647)/2147483647;
     b.fillStyle='#8a6038';b.fillRect(T.x-4,T.y-4,T.w+8,T.h+8);b.fillStyle='#5e3f24';for(let x=T.x-4;x<T.x+T.w+4;x+=14)b.fillRect(x,T.y-4,1,T.h+8);
     b.fillStyle='#a87a4a';b.fillRect(T.x-4,T.y-4,T.w+8,1);
     b.fillStyle='#cfae78';b.fillRect(T.x,T.y,T.w,T.h);const cols=['#bf9c66','#dcbd8a','#b48f5b','#e4c99a','#a98654'];
     for(let i=0;i<3200;i++){b.fillStyle=cols[rnd()*5|0];b.fillRect(T.x+rnd()*T.w|0,T.y+rnd()*T.h|0,1,1)}
     b.fillStyle='rgba(60,40,20,.12)';[[110,70,22],[200,120,28],[260,80,18]].forEach(([x,y,r])=>{b.beginPath();b.ellipse(x,y,r,r*.6,0,0,7);b.fill()});
+    bumps.forEach(bp=>{const lite=bp.h>0;b.fillStyle=lite?'rgba(255,245,220,.35)':'rgba(60,40,20,.22)';b.beginPath();b.ellipse(bp.x,bp.y,bp.r,bp.r*.7,0,0,7);b.fill();b.fillStyle=lite?'rgba(60,40,20,.16)':'rgba(255,245,220,.22)';b.beginPath();b.ellipse(bp.x+(lite?2:-2),bp.y+(lite?2:-1),bp.r*.8,bp.r*.5,0,0,7);b.fill()});
+    rocks.forEach(rk=>{b.fillStyle='rgba(40,25,10,.3)';b.beginPath();b.ellipse(rk.x+1,rk.y+1,rk.r+.5,rk.r*.6,0,0,7);b.fill();b.fillStyle='#2a2433';b.beginPath();b.arc(rk.x,rk.y,rk.r+1,0,7);b.fill();b.fillStyle='#9a9a9a';b.beginPath();b.arc(rk.x,rk.y,rk.r,0,7);b.fill();b.fillStyle='#d0d0d0';b.fillRect(Math.round(rk.x-1),Math.round(rk.y-1),1,1)});
     bgG.getContext('2d').drawImage(bg,0,0);
-    Ob(b,'tree'+se,-10,40);Ob(b,'tree'+se,286,42);Ob(b,'bush'+se,40,30);Ob(b,'bush'+se,250,30);Ob(b,'bench',140,34);
-    [['fl1',20,170],['fl2',300,172],['fl3',200,176],['fl1',120,176]].forEach(([n,x,y])=>Ob(b,n,x,y))}
+    DEC.forEach(([n,x,y,sc])=>ObS(b,n,x,y,sc))}
+   // ---- passants (la Major), touristes (le Panier), foule qui réagit
+   const walkers=[];let walkT=0,noteK=0,crowdM=null;const WCI=[76,77,78,79,80,81,82,83,84,85,86,87,89,90,91];
+   function walkStep(now){if(TK!=='major')return;if(now>walkT&&walkers.length<6){walkT=now+900+Math.random()*2200;const dir=Math.random()<.5?1:-1;walkers.push({x:dir>0?-10:W+10,y:14+Math.random()*14,dir,ci:pickL(WCI),sp:16+Math.random()*14,o:Math.random()*6})}
+    const dt=.016;for(let i=walkers.length-1;i>=0;i--){const c=walkers[i];c.x+=c.dir*c.sp*dt;if(c.x<-14||c.x>W+14)walkers.splice(i,1)}}
+   function crowdMood(k){crowdM={k,until:performance.now()+1700}}
+   function crowdPose(c,now){let x=c.x,y=c.y,col=24+(((now/150+c.o)|0)%6);if(c.sit)col=48+(((now/900+c.o)|0)%2);
+    if(crowdM&&now<crowdM.until){if(crowdM.k==='cheer'){y-=Math.abs(Math.sin(now/120+c.o))*4;col=24+(((now/90+c.o)|0)%6)}else{x+=Math.round(Math.sin(now/70+c.o)*1.2);col=c.sit?col:36+(((now/150+c.o)|0)%6)}}
+    return{x,y,col}}
+   function camDraw(g_,c,x,y,now){if(now>(c.nextF||0)){c.nextF=now+2500+Math.random()*4500;c.flashT=now;ono('CLIC !',Math.max(22,Math.min(W-22,x)),Math.max(24,y-30),'#fff',0,'clic',500)}g_.fillStyle='#2a2433';g_.fillRect(Math.round(x+2),Math.round(y-16),5,4);g_.fillStyle='#9fd0ff';g_.fillRect(Math.round(x+4),Math.round(y-15),2,2);
+    if(now-(c.flashT||0)<110){g_.fillStyle='rgba(255,255,255,.85)';g_.beginPath();g_.arc(x+5,y-15,6+(now-c.flashT)/20,0,7);g_.fill()}}
+   function drawSard(g_,x,y,now,sc,sd){const w=12*sc,hh=4.2*sc,fl=Math.sin(now/140)*1.2*sc,hit=sd&&now-(sd.hit||0)<220;g_.save();g_.translate(x,y);
+    g_.fillStyle='rgba(0,0,0,.25)';g_.beginPath();g_.ellipse(1,2,w,hh*.6,0,0,7);g_.fill();
+    g_.fillStyle='#2a2433';g_.beginPath();g_.ellipse(0,0,w+1.2,hh+1.2,0,0,7);g_.fill();g_.beginPath();g_.moveTo(w-2,0);g_.lineTo(w+6,-4-fl);g_.lineTo(w+6,4+fl);g_.closePath();g_.fill();
+    g_.fillStyle=hit?'#dbe8f0':'#9fb8c8';g_.beginPath();g_.ellipse(0,0,w,hh,0,0,7);g_.fill();g_.fillStyle='#dbe8f0';g_.beginPath();g_.ellipse(-1,1.2,w*.7,hh*.4,0,0,7);g_.fill();g_.fillStyle='#5f7fa0';g_.fillRect(-2,-hh+1,2,hh*2-2);g_.fillRect(3,-hh+1,2,hh*2-2);
+    g_.fillStyle='#9fb8c8';g_.beginPath();g_.moveTo(w-2,0);g_.lineTo(w+5,-3-fl);g_.lineTo(w+5,3+fl);g_.closePath();g_.fill();g_.fillStyle='#fff';g_.fillRect(-w+3,-1.5,2,2);g_.fillStyle='#1a1420';g_.fillRect(-w+4,-1,1,1);g_.restore()}
+   function drawMud(g_,o,now){g_.fillStyle='rgba(50,40,70,.42)';g_.beginPath();g_.ellipse(o.x,o.y,o.r,o.r*.8,0,0,7);g_.fill();g_.fillStyle='rgba(140,200,255,.45)';const k=(now/500+o.x)%6.28;g_.fillRect(Math.round(o.x+Math.cos(k)*o.r*.5),Math.round(o.y+Math.sin(k)*o.r*.35),3,1);g_.fillRect(Math.round(o.x-Math.cos(k)*o.r*.4),Math.round(o.y-Math.sin(k)*o.r*.3),2,1)}
+   const pickL2=(p,a)=>{if(p._n==null)p._n=Math.random()*a.length|0;return a[p._n]};
    // spectateurs : l'équipe de la halte et des usager·es, derrière le terrain
    const crowd=[];{let pr=[],us=[];try{pr=STF.filter(z=>!z.stg&&z.ci!=null).slice(0,4).map(z=>z.ci)}catch(_){}try{us=Object.values(hist).filter(okH).filter(h=>h.ci!=null&&!pick.some(p=>p.nm===h.n)).slice(0,4).map(h=>h.ci)}catch(_){}
     const L=[...pr,...us];[77,82,83,91,86,87,89,90].forEach(ci=>{if(L.length<8&&!pick.some(p=>p.ci===ci))L.push(ci)});
-    L.slice(0,8).forEach((ci,i)=>crowd.push({ci,x:(i<4?78+i*20:200+(i-4)*20)+(i%2?3:0),y:37,o:i*1.7}))}
+    L.slice(0,8).forEach((ci,i)=>crowd.push({ci,x:(i<4?78+i*20:200+(i-4)*20)+(i%2?3:0),y:37,o:i*1.7,sit:terK==='carli'&&i%2===0}));
+    if(terK==='panier')[[22,38],[300,36],[158,174]].forEach(([x,y],i)=>crowd.push({ci:[83,89,87][i],x,y,o:i*2.3,cam:1}))}
    const S={score:[0,0],us:pick.map(p=>({...p,left:2})),them:AIT.map(p=>({...p,left:2,grp:'x'}))};
    let balls=[],phase='wait',curP=null,mode='P',lastGrp=null,aiIdx=0,starter=0,lastTeam=0,meneN=1,chain=0;
    let svOut=0,bz=null,cslow=0;let FX,jauge=[0,0],pending=null,afterRoll=null,rollT=0,showScore=null,aim=null,powArm=null,giantNext=0,perfectNext=false,cannon=false;
@@ -11102,11 +11174,15 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
    $('#qmenu').onclick=pmenu;
    function setMn(){$('#qmn').innerHTML=meneN<=3?`<b>Manche ${meneN} / 3</b>total des points`:`<b>La belle !</b>égalité`}
    function newMene(){
-    balls=[];FX={mag:[],holes:[],oil:[],itch:[0,0],slip:[false,false]};giantNext=0;perfectNext=false;cannon=false;
+    balls=[];FX={mag:[],holes:[],oil:[],itch:[0,0],slip:[false,false],sard:[],mud:[]};giantNext=0;perfectNext=false;cannon=false;
     S.us.forEach(p=>p.left=2);S.them.forEach(p=>p.left=2);setMn();
     balls.push({x:175+Math.random()*100,y:T.y+22+Math.random()*(T.h-44),vx:0,vy:0,r:RC,m:.35,team:-1,alive:true,air:0});
-    banner(meneN<=3?`Manche ${meneN}`:'La belle !');phase='wait';renderP();setTimeout(()=>startTurn(starter),900);
+    phase='wait';renderP();readyGo(meneN<=3?`MANCHE ${meneN}`:'LA BELLE !',()=>startTurn(starter));
    }
+   function readyGo(lbl,cb){const w=$('.wrap');if(!w){cb&&cb();return}const old=w.querySelector('.rdy');if(old)old.remove();const d=document.createElement('div');d.className='rdy';d.innerHTML=`<small>${lbl}</small><b class="sfg">PRÊTS ?</b>`;w.appendChild(d);
+    tone(440,.12,'square',.06);setTimeout(()=>tone(440,.12,'square',.06),180);
+    setTimeout(()=>{if(!d.isConnected)return;const b=d.querySelector('b');b.textContent='PÉTANQUEZ !';b.classList.remove('sfg');void b.offsetWidth;b.classList.add('sfg','go');d.querySelector('small').style.opacity='0';impact();try{dsfx('ko',.9)}catch(_){}tone(660,.18,'square',.07);shake(2,.3);flash('#fff6c0')},1000);
+    setTimeout(()=>{d.classList.add('out');setTimeout(()=>d.remove(),300);cb&&cb()},1900)}
    function scoring(){const c=coch();if(!c)return null;const h=holder();if(!h)return null;const oth=live(1-h.team).map(b=>sdist(b,c)),lim=oth.length?Math.min(...oth):1e9;return{team:h.team,balls:live(h.team).filter(b=>sdist(b,c)<lim).sort((a,b)=>sdist(a,c)-sdist(b,c))}}
    function aura(G,x,y,r,team,now,i){const col=team===0?[255,210,63]:[255,140,50],pu=(Math.sin(now/200+i)+1)/2,R0=r+6+pu*3;G.save();const gr=G.createRadialGradient(x,y,r*.6,x,y,R0+6);gr.addColorStop(0,`rgba(${col},.75)`);gr.addColorStop(.5,`rgba(${col},.35)`);gr.addColorStop(1,`rgba(${col},0)`);G.fillStyle=gr;G.beginPath();G.ellipse(x,y,R0+6,(R0+6)*.8,0,0,7);G.fill();
     G.strokeStyle=`rgba(${col},.95)`;G.lineWidth=1;const a0=now/500;for(let k=0;k<6;k++){const a=a0+k*1.047;G.beginPath();G.moveTo(x+Math.cos(a)*(r+2),y+Math.sin(a)*(r+2)*.8);G.lineTo(x+Math.cos(a)*(R0+4),y+Math.sin(a)*(R0+4)*.8);G.stroke()}
@@ -11143,17 +11219,17 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     else{const k=team===0&&cannon?1.5:1;b.vx=dx*TIRV*k;b.vy=dy*TIRV*k;b.air=L;b.airMax=L;b.landV=Math.sqrt(2*MU*TIRROLL)*k*k}
     return b}
    function throwBall(team,pl,m,dir,L){
-    const skill=m==='P'?pl.P:pl.T;let mult=1;
-    if(FX.itch[team]){mult*=3.2;FX.itch[team]--}
+    const skill=m==='P'?pl.P:pl.T;let mult=1,drunk=false;const h0=holder();
+    if(FX.itch[team]){mult*=7;drunk=true;FX.itch[team]--}
     if(team===0&&lastGrp&&pl.grp!==lastGrp)mult*=.55;
     if(team===0&&perfectNext){mult=0;perfectNext=false}
     if(team===0&&joker){mult*=.4;slow=true;joker=false}
-    const a=Math.atan2(dir.y,dir.x)+gauss()*(1.3-skill)*.055*mult;L*=1+gauss()*(1.3-skill)*.07*mult;
+    let a=Math.atan2(dir.y,dir.x)+gauss()*(1.3-skill)*.055*mult;L*=1+gauss()*(1.3-skill)*.07*mult;if(drunk){a+=gauss()*.4;L*=.5+Math.random()*1.1}
     const slip=FX.slip[team];FX.slip[team]=false;if(slip&&m==='P')L*=1.9;
     const giant=team===0?giantNext:0;if(team===0)giantNext=0;
     const b=makeBall(team,Math.cos(a),Math.sin(a),m,L,giant);if(slip&&m==='T')b.landV*=1.8;
     pl.left--;const tb=m==='T'?alongBall(b):null;
-    balls.forEach(o=>{o.hitBy=null;o.hitT=0});pending={team,player:pl,m,ball:b,tb,tbPos:tb?{x:tb.x,y:tb.y}:null,hits:0};
+    balls.forEach(o=>{o.hitBy=null;o.hitT=0});pending={team,player:pl,m,ball:b,tb,tbPos:tb?{x:tb.x,y:tb.y}:null,hits:0,had:!!(h0&&h0.team===team)};
     const tk=THROK.has(pl.ci);phase='throw';thrw={t:0,rel:tk?.46:.36,dur:tk?.7:.75,done:false,pl,launch:()=>{balls.push(b);phase='roll';rollT=0;afterRoll=afterShot;noise(.6,200,1800,.8,.14)}};
     if(team===0){chain=lastGrp&&pl.grp!==lastGrp?chain+1:1;lastGrp=pl.grp;if(chain===3)pending.combo=1;else if(chain>3)pending.combo2=1;cannon=false}
     else curAI=pl;
@@ -11165,8 +11241,10 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
      if(!b.alive||b.stuck)continue;let sp=Math.hypot(b.vx,b.vy);if(sp<=0)continue;
      if(b.air>0){b.air-=sp*dt;if(b.air<=0){b.air=0;if(b.landV!=null){b.vx=b.vx/sp*b.landV;b.vy=b.vy/sp*b.landV}if(real){sb('rpg/chop',.6,b.airMax>20?.9:.5);dust(b.x,b.y);if(b.airMax>20){ono('PLOF',b.x,b.y-10,'#f1e3c4',0,'plof',150);if(b.r>RB){shake(2.5,.3);burst(b.x,b.y,'#fffaf0',18,70);Z('expl',b.x,b.y-2,72,14);try{dsfx('boom',.9)}catch(_){}}}}}}
      else{
-      if(sp>25)for(const m of FX.mag){const dx=m.x-b.x,dy=m.y-b.y,d=Math.hypot(dx,dy);if(d<58*(m.k||1)&&d>1){if(real&&d<22&&!b.magS){b.magS=1;ono('ZZZT !',b.x,b.y-10,'#ff9fd0',0);ring(m.x,m.y,'#ff6fb5',18)}const a=3800*(m.k||1)/(d+8);b.vx+=dx/d*a*dt;b.vy+=dy/d*a*dt}}
-      sp=Math.hypot(b.vx,b.vy);let fr=b.team<0?1.2:1;for(const o of FX.oil){if(Math.hypot(b.x-o.x,(b.y-o.y)/.8)<o.r){fr*=.12;if(real&&!b.oilS&&sp>20){b.oilS=1;ono('FSSSHH !',b.x,b.y-10,'#ffe36a',0)}if(real&&Math.random()<.3)P(b.x,b.y,{vx:(Math.random()-.5)*20,vy:-10,t:.3,c:'#fff6c0'});break}}
+      if(sp>25)for(const m of FX.mag){if(m.coch){const cc=coch();if(cc){m.x=cc.x;m.y=cc.y}if(m.team!==b.team)continue}const dx=m.x-b.x,dy=m.y-b.y,d=Math.hypot(dx,dy);if(d<58*(m.k||1)&&d>1){if(real&&d<22&&!b.magS){b.magS=1;ono('ZZZT !',b.x,b.y-10,'#ff9fd0',0);ring(m.x,m.y,'#ff6fb5',18)}const a=3800*(m.k||1)/(d+8);b.vx+=dx/d*a*dt;b.vy+=dy/d*a*dt}}
+      sp=Math.hypot(b.vx,b.vy);let fr=b.team<0?1.2:1;for(const o of FX.mud){if(Math.hypot(b.x-o.x,(b.y-o.y)/.8)<o.r){fr*=5.5;if(real&&!b.mudS&&sp>20){b.mudS=1;ono('FLOTCH…',b.x,b.y-10,'#9fd0ff',0)}if(real&&Math.random()<.3)P(b.x,b.y,{vx:(Math.random()-.5)*16,vy:-8,t:.3,c:'#9fd0ff'});break}}
+      for(const bp of bumps){const dx=b.x-bp.x,dy=b.y-bp.y,d=Math.hypot(dx,dy);if(d<bp.r&&d>.5&&b.air<=0){const f=(1-d/bp.r)*430*bp.h;b.vx+=dx/d*f*dt;b.vy+=dy/d*f*dt}}
+      for(const o of FX.oil){if(Math.hypot(b.x-o.x,(b.y-o.y)/.8)<o.r){fr*=.12;if(real&&!b.oilS&&sp>20){b.oilS=1;ono('FSSSHH !',b.x,b.y-10,'#ffe36a',0)}if(real&&Math.random()<.3)P(b.x,b.y,{vx:(Math.random()-.5)*20,vy:-10,t:.3,c:'#fff6c0'});break}}
       const ns=Math.max(0,sp-MU*dt*fr);let vx=b.vx,vy=b.vy;
       if(real){const j=(Math.random()-.5)*.005,cs=Math.cos(j),sn=Math.sin(j);vx=b.vx*cs-b.vy*sn;vy=b.vx*sn+b.vy*cs}
       b.vx=sp?vx/sp*ns:0;b.vy=sp?vy/sp*ns:0}
@@ -11175,6 +11253,8 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
      if(b.x>T.x+T.w-b.r){b.x=T.x+T.w-b.r;b.vx=-Math.abs(b.vx)*REST;hit=true}
      if(b.y<T.y+b.r){b.y=T.y+b.r;b.vy=Math.abs(b.vy)*REST;hit=true}
      if(b.y>T.y+T.h-b.r){b.y=T.y+T.h-b.r;b.vy=-Math.abs(b.vy)*REST;hit=true}
+     for(const rk of rocks){const dx=b.x-rk.x,dy=b.y-rk.y,d=Math.hypot(dx,dy),Rr=b.r+rk.r;if(d<Rr&&d>0){const nx=dx/d,ny=dy/d;b.x+=nx*(Rr-d);b.y+=ny*(Rr-d);const vn=b.vx*nx+b.vy*ny;if(vn<0){b.vx-=(1+REST*.8)*vn*nx;b.vy-=(1+REST*.8)*vn*ny;if(real&&sp>25){sb('rpg/metalClick',1.1,.5);ono('TIC !',rk.x,rk.y-8,'#e8e8e8',0,'rk',250)}}}}
+     for(const sd of FX.sard){const hx=11,cx=Math.max(sd.x-hx,Math.min(sd.x+hx,b.x)),dx=b.x-cx,dy=b.y-sd.y,d=Math.hypot(dx,dy),Rr=b.r+4.5;if(d<Rr&&d>0){const nx=dx/d,ny=dy/d;b.x+=nx*(Rr-d);b.y+=ny*(Rr-d);const vn=b.vx*nx+b.vy*ny;if(vn<0){b.vx-=(1+REST)*vn*nx;b.vy-=(1+REST)*vn*ny;if(real&&sp>30){sb('rpg/chop',1.3,.6);ono('SPLATCH !',sd.x,sd.y-10,'#9fd0e8',0,'sard',300);sd.hit=performance.now()}}}}
      if(hit){b.bounced=true;if(real){b.nb=(b.nb||0)+1;if(b.nb>=2&&pending&&pending.ball===b&&sp>40&&!bz){bz={b,t:0,T:1.5};petaMusSlow(true);ono('BANDE ×'+b.nb+' !',Math.max(T.x+30,Math.min(T.x+T.w-30,b.x)),Math.max(T.y+16,b.y-16),'#ffd23f',1,'nb',400);try{dsfx('grow',.5,1.3)}catch(_){}}else if(b.nb>=3&&bz&&bz.b===b){bz.t=Math.max(0,bz.t-.5);ono('BANDE ×'+b.nb+' !',Math.max(T.x+30,Math.min(T.x+T.w-30,b.x)),Math.max(T.y+16,b.y-16),'#ffd23f',1,'nb',400)}}if(real&&sp>30){sb('rpg/chop',1,Math.min(.9,.4+sp/400));if(sp>60)ono(pickL(['BONK !','TONK !']),Math.max(T.x+14,Math.min(T.x+T.w-14,b.x)),Math.max(T.y+8,Math.min(T.y+T.h-8,b.y)),'#ffd8a0',0,'bonk',300)}}
      if(!b.air)for(const h of FX.holes){if(!h.full&&Math.hypot(b.x-h.x,b.y-h.y)<h.r&&sp<260){const n=h.n||0,an=n*2.1;b.x=h.x+(n?Math.cos(an)*3:0);b.y=h.y+(n?Math.sin(an)*3:0);b.vx=b.vy=0;b.stuck=true;if(real){h.n=n+1;if(h.n>=(h.cap||1))h.full=true;thud();ono('SCHLOUP !',h.x,h.y-10,'#d9b37a',1);burst(h.x,h.y,'#8a5a2a',10,50);say('',pickL(['« Plouf, dans le trou ! »','« Coincée ! »']),'n')}break}}
     }
@@ -11192,7 +11272,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
    function addJ(t,n){jauge[t]=Math.min(200,jauge[t]+n);gauges();try{const e=$('#qg'+t);if(e&&n>0){e.classList.remove('bump');void e.offsetWidth;e.classList.add('bump');const f=document.createElement('span');f.className='jf';f.textContent='+'+n;e.parentElement.appendChild(f);setTimeout(()=>f.remove(),900)}}catch(_){}}
    function gauges(){[0,1].forEach(t=>{const e=$('#qg'+t);if(!e)return;e.firstChild.style.width=jauge[t]/2+'%';e.classList.toggle('full',jauge[t]>=100);e.classList.toggle('duoR',jauge[t]>100)});renderP()}
    function afterShot(){if(quit)return;
-    const s=pending,h=holder();phase='wait';if(slow||hb)jokerOff();slow=false;rollSet(0);addJ(s.team,9);let said=false;
+    const s=pending;FX.mag=FX.mag.filter(m=>!(m.coch&&m.team===s.team));const h=holder();phase='wait';if(slow||hb)jokerOff();slow=false;rollSet(0);addJ(s.team,9);let said=false;
     const mates=S.us.filter(p=>p.nm!==s.player.nm),mate=mates.find(p=>p.grp!==s.player.grp)||mates[0],grp=s.team===0?s.player.grp:'t';
     if(s.m==='T'&&s.tb){const mv=dist(s.tb,s.tbPos),stay=dist(s.ball,s.tbPos);
      if(mv>14&&stay<7){banner('CARREAU !');fanfare();confetti();cheer(true);Z('expl',s.tbPos.x,s.tbPos.y-2,60,14);psfx('hit',.8);ono('PAF !',s.tbPos.x,s.tbPos.y-14,'#ffd23f',1);burst(s.tbPos.x,s.tbPos.y,'#ffd23f',20,110);ring(s.tbPos.x,s.tbPos.y,'#fff',34);shake(3,.35);flash('#fff6c0');addJ(s.team,30);if(s.team===0)stats.car++;say(s.team===0?mate.nm:'Tonin',s.team===0?'« CARREAU ! Je l’avais dit qu’on était forts ! »':'« Carreau ! Ça, c’est du travail. »',s.team===0?mate.grp:'t');said=true}
@@ -11202,6 +11282,9 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
      else if(!said&&h.d<5){say(s.team===0?mate.nm:'Marius',s.team===0?(mate.grp!==s.player.grp?pickL([`« Magnifique, ${short(s.player.nm)} ! On fait une belle équipe. »`,'« Collée ! Je te paie le café. »']):'« Elle est collée ! »'):'« Allez, à vous de jouer, les artistes. »',s.team===0?mate.grp:'t');said=true}}
     if(s.team===0&&h&&h.b!==s.ball&&s.ball.alive&&sdist(s.ball,coch())<9){if(!said)ooh()}
     else if(!said&&!s.ball.stuck&&s.team===0&&(!h||h.team===1)&&Math.random()<.5)say(s.player.nm,pickL(['« Oh fan de chichourle… »','« C’est le gravier, je te jure ! »','« Peuchère… »']),grp);
+    if(s.team===0){const nowH=!!(h&&h.team===0),dl=said?900:200;
+     if(s.had&&!nowH){setTimeout(()=>{banner('LA HONTE !');boo();crowdMood('mock');ono('HA HA HA !',T.x+T.w*.3,T.y-6,'#ff8a8a',1);ono('HOU !',T.x+T.w*.72,T.y-4,'#ff8a8a',1);say(pickL(['Le public','Un spectateur','Une spectatrice']),pickL(['« Oh la honte ! Tu avais le point ! »','« Rends les boules, peuchère ! »','« Tu joues avec les pieds ou quoi ?! »','« Même ma grand-mère fait mieux ! »','« Fanny ! Fanny ! »']),'n');shake(1,.3)},dl)}
+     else if(!s.had&&nowH){setTimeout(()=>{crowdMood('cheer');cheer(true);ono('BRAVO !',T.x+T.w*.38,T.y-6,'#ffd23f',1);say(pickL(['Le public','Un spectateur','Une spectatrice']),pickL(['« Bien ouej gamin ! »','« Oh la belle ! Bravo ! »','« Ça, c’est du jeu ! »','« Et le point change de camp ! »','« Allez le quartier ! »']),'n')},dl)}}
     if(s.combo){stats.cmb++;setTimeout(()=>{banner('ENSEMBLE !');fanfare();confetti();cheer(true);flash('#d8ffd0');['#ff6fb5','#ffd23f','#8fd18a','#9fc3ff'].forEach((c,i)=>setTimeout(()=>ring(C.x,C.y,c,40+i*12),i*90));addJ(0,50);say(s.player.nm,'« Trois relais d’affilée ! Le quartier, c’est nous ! »',s.player.grp)},said?900:0)}else if(s.combo2)addJ(0,15);
     const nt=nextTeam();setTimeout(()=>{if(nt<0)scoreMene();else startTurn(nt)},s.combo?1700:750);
    }
@@ -11263,16 +11346,17 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
    function usePower(team,pl,tgt){const prev=phase;phase='anim';powCine([pl],pl.pw,POW[pl.pw].nm,team,()=>{if(quit)return;phase=prev;usePower0(team,pl,tgt);if(team===0&&phase==='select'){menuOpen=false;renderCmd();hint();setTimeout(()=>{if(phase==='select'&&!aim&&!menuOpen){menuOpen=true;renderCmd();hint()}},1300)}})}
    function usePower0(team,pl,tgt){
     const k=pl.pw,o=1-team,grp=team===0?pl.grp:'t',voice=t=>say(pl.nm,t,grp);
+    if(k==='aimant'){const cc=coch();tgt={x:cc.x,y:cc.y}}if(k==='pastis')tgt={x:C.x+12,y:C.y-4};
     jauge[team]=Math.max(0,jauge[team]-100);gauges();
     flash(team===0?'#ffb0dc':'#ffc890');
     if(k==='mistral'&&tgt){const dx=tgt.x-(T.x+T.w/2),dy=tgt.y-(T.y+T.h/2),l=Math.hypot(dx,dy)||1;windD={x:dx/l,y:dy/l}}
     powFx(k,pl,tgt,team);
     if(k==='geante'){giantNext=8;voice('« Celle-là, je l’ai pétrie moi-même. »');banner('Miche géante !')}
-    else if(k==='aimant'){FX.mag.push({x:tgt.x,y:tgt.y});voice(team===0?'« Personne ne verra rien… »':'« Hé hé, j’ai un petit secret sous le gravier. »');banner('Aimant enterré')}
-    else if(k==='pastis'){FX.oil.push({x:tgt.x,y:tgt.y,r:15,s:Math.random()*9});voice('« Oups ! Mon pastis… Bon, ça glisse maintenant. »');banner('Pastis renversé !')}
+    else if(k==='aimant'){FX.mag.push({x:tgt.x,y:tgt.y,coch:1,team});voice(team===0?'« Regarde bien le cochonnet… »':'« Hé hé, le cochonnet, il m’aime. »');banner('Cochonnet aimanté !')}
+    else if(k==='pastis'){FX.itch[o]=1;voice(team===0?'« Un petit jaune pour la route, Tonin ? C’est ma tournée. »':'« Allez, un pastis, ça fait pas de mal. »');banner('Pastagattaque !')}
+    else if(k==='sardine'){FX.sard.push({x:tgt.x,y:tgt.y});voice(pickL(['« Une sardine ? Elle a bouché le port, elle bouchera le terrain. »','« Fraîche du matin, la sardine ! »']));banner('Sardine géante !')}
+    else if(k==='arrosoir'){FX.mud.push({x:tgt.x,y:tgt.y,r:16});voice('« Un petit coup d’arrosoir, ça rafraîchit le gravier. »');banner('Gravier mouillé !')}
     else if(k==='trou'){FX.holes.push({x:tgt.x,y:tgt.y,r:6});for(let i=0;i<8;i++)dust(tgt.x,tgt.y);voice('« Attention, ça creuse ! »');banner('Coup de pelle !')}
-    else if(k==='poil'){FX.itch[o]=1;voice('« Un petit cadeau pour toi, Tonin… »');banner('Poil à gratter !')}
-    else if(k==='banane'){FX.slip[o]=true;voice('« Oups, j’ai fait tomber ma banane… »');banner('Peau de banane !')}
     else if(k==='gabian'){voice(team===0?'« Allez mon beau, va chercher ! »':'« Regardez, un gabian ! »');banner('Le gabian !');gullGo(freeSpot(),()=>{say('',pickL(['« Il l’a posé où, là ?! »','« Mais il est fou, ce gabian ! »','« KIAAA ! »']),'n');if(team===0)back();else phase='ai'});return}
     else if(k==='mistral'){const dx=tgt.x-(T.x+T.w/2),dy=tgt.y-(T.y+T.h/2),l=Math.hypot(dx,dy)||1;balls.forEach(b=>{if(b.alive&&!b.stuck){b.vx+=dx/l*95;b.vy+=dy/l*95}});windT=performance.now();windD={x:dx/l,y:dy/l};voice('« Té, le mistral se lève ! »');banner('Coup de mistral !');phase='roll';rollT=0;afterRoll=back;return}
     renderP();
@@ -11284,16 +11368,16 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
    function useDuo0(p,tgt){
     const d=duoInfo(p),q=d.q,c=coch();jauge[0]=0;gauges();stats.duo++;flash('#fff');shake(2,.4);
     setTimeout(()=>{Z('nuke',T.x+T.w/2,T.y+T.h/2-8,160,10);[0,80,160,240].forEach((dl,i)=>bolt(T.x+40+i*66,T.y+T.h-6,dl,96));shake(3,.6);psfx('vapor',.9);try{dsfx('ko',.9)}catch(_){}},650);setTimeout(()=>{banner(d.nm+' !');fanfare();confetti();cheer(true)},700);
-    [p.pw,q.pw].forEach(k=>{if(k!=='mistral'&&k!=='gabian'&&tgt)powFx(k,p,tgt,0)});if(d.k==='geante+poil')powFx('geante',p,null,0);if(d.k==='pastis+mistral'){const cc=coch();powFx('pastis',p,{x:cc.x,y:cc.y},0)}
+    [p.pw,q.pw].forEach(k=>{if(k!=='mistral'&&k!=='gabian'&&tgt)powFx(k,p,tgt,0)});if(!tgt)[p.pw,q.pw].forEach(k=>{if(k==='aimant')powFx(k,p,{x:c.x,y:c.y},0);if(k==='pastis')powFx(k,p,{x:C.x+12,y:C.y-4},0)});if(d.k==='geante+sardine')powFx('geante',p,null,0);if(d.k==='pastis+mistral'){const cc=coch();powFx('pastis',p,{x:cc.x,y:cc.y},0)}
     say(short(p.nm)+' & '+short(q.nm),pickL(['« À deux, on est imbattables ! »','« Riverains, usagers : même combat ! »','« Un, deux, trois… maintenant ! »']),'u');
     const best=()=>live(0).sort((a,b)=>sdist(a,c)-sdist(b,c))[0];
     if(d.k==='aimant+gabian'){const m=best();let drop=freeSpot();if(m){const dx=C.x-m.x,dy=C.y-m.y,l=Math.hypot(dx,dy)||1;drop={x:m.x-dx/l*(m.r+3),y:m.y-dy/l*(m.r+3)}}gullGo(drop,()=>{say('Mme Lefèvre','« Brave bête. Personne n’a rien vu. »','r');back()});return}
     if(d.k==='aimant+mistral'){live(1).forEach(b=>{if(b.stuck)return;const dx=b.x-c.x,dy=b.y-c.y,l=Math.hypot(dx,dy)||1;b.vx+=dx/l*150;b.vy+=dy/l*150});windT=performance.now();windD={x:1,y:0};phase='roll';rollT=0;afterRoll=back;return}
-    if(d.k==='geante+poil'){giantNext=10;perfectNext=true;cannon=true}
+    if(d.k==='geante+sardine'){giantNext=10;perfectNext=true;cannon=true;live(1).forEach(b=>{if(b.stuck)return;const dx=b.x-c.x,dy=b.y-c.y,l=Math.hypot(dx,dy)||1;b.vx+=dx/l*130;b.vy+=dy/l*130});FX.sard.push({x:c.x+14,y:c.y});windT=performance.now();windD={x:1,y:0};phase='roll';rollT=0;afterRoll=back;return}
     else if(d.k==='pastis+mistral'){FX.oil.push({x:c.x,y:c.y,r:30,s:3})}
     else{let roll=false,gul=false;
      [p,q].forEach((pl,i)=>{const k=pl.pw,t=tgt?{x:tgt.x+(i?10:0),y:tgt.y}:null;
-      if(k==='geante')giantNext=11;else if(k==='aimant')FX.mag.push({x:t.x,y:t.y,k:1.7});else if(k==='poil')FX.itch[1]=2;else if(k==='pastis')FX.oil.push({x:t.x,y:t.y,r:22,s:5});else if(k==='gabian')gul=true;
+      if(k==='geante')giantNext=11;else if(k==='aimant'){const cc=coch();FX.mag.push({x:cc.x,y:cc.y,coch:1,team:0,k:1.7})}else if(k==='pastis')FX.itch[1]=2;else if(k==='sardine'&&t)FX.sard.push({x:t.x,y:t.y});else if(k==='gabian')gul=true;
       else if(k==='mistral'){const dx=t.x-(T.x+T.w/2),dy=t.y-(T.y+T.h/2),l=Math.hypot(dx,dy)||1;windD={x:dx/l,y:dy/l};roll=true}});
      const blow=()=>{balls.forEach(b=>{if(b.alive&&!b.stuck){b.vx+=windD.x*150;b.vy+=windD.y*150}});windT=performance.now();phase='roll';rollT=0;afterRoll=back};
      if(gul){const m=best();gullGo(m?{x:m.x+12,y:m.y+(Math.random()-.5)*10}:freeSpot(),()=>{if(roll)blow();else back()});return}
@@ -11305,12 +11389,12 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     const c=coch(),av=S.them.filter(p=>p.left>0);if(!av.length)return;const p=(curAI&&curAI.left>0)?curAI:av[0];curAI=p;let delay=0;
     if(jauge[1]>=100&&Math.random()<.75){let tgt=null;
      if(p.pw==='trou'){const dx=C.x-c.x,dy=C.y-c.y,l=Math.hypot(dx,dy);tgt={x:c.x+dx/l*13,y:c.y+dy/l*13+(Math.random()-.5)*8}}
-     if(p.pw==='aimant'){const m=live(1).sort((a,b)=>sdist(a,c)-sdist(b,c))[0];tgt=m&&sdist(m,c)<20?{x:m.x,y:m.y}:{x:c.x-6,y:c.y+(Math.random()-.5)*10}}
+     if(p.pw==='arrosoir'){const dx=c.x-C.x,dy=c.y-C.y,l=Math.hypot(dx,dy)||1;tgt={x:c.x-dx/l*15,y:c.y-dy/l*15+(Math.random()-.5)*6}}
      usePower(1,p,tgt);delay=1300+CINE*1000}
     setTimeout(()=>{const h=holder();let m='P',tg;
      if(h&&h.team===0&&h.d<12&&(p.T>.6||Math.random()<.45)){m='T';tg={x:h.b.x,y:h.b.y}}else{const dx=C.x-c.x,dy=C.y-c.y,l=Math.hypot(dx,dy);tg={x:c.x+dx/l*4,y:c.y+dy/l*4}}
      const sx=C.x+8,sy=C.y,dx=tg.x-sx,dy=tg.y-sy,l=Math.hypot(dx,dy);
-     if(FX.itch[1])say(p.nm,'« Ça gratte ! Ça gratte ! »','t');else say(p.nm,m==='T'?pickL(['« Je vais te la chercher, celle-là. »','« Pousse-toi, je tire. »']):pickL(['« Doucement… doucement… »','« Regardez et apprenez. »','« Une petite caresse. »']),'t');
+     if(FX.itch[1])say(p.nm,pickL(['« Hips… c’est lequel, le cochonnet ? »','« Il y en a deux, des cochonnets ?! »','« Hé, ça tangue, le terrain… »']),'t');else say(p.nm,m==='T'?pickL(['« Je vais te la chercher, celle-là. »','« Pousse-toi, je tire. »']):pickL(['« Doucement… doucement… »','« Regardez et apprenez. »','« Une petite caresse. »']),'t');
      setTimeout(()=>throwBall(1,p,m,{x:dx/l,y:dy/l},m==='P'?l-2:l),450)},delay);
    }
    // ---------- interface ----------
@@ -11348,7 +11432,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
    function closeMenu(){menuOpen=false;sub=null;renderCmd()}
    function chooseMode(m){mode=m;okS();closeMenu();hint()}
    function powerAct(){if(phase!=='select'||jauge[0]<100)return;const pw=POW[curP.pw];okS();closeMenu();
-    if(pw.tgt){phase='power';powArm='solo';renderP();setHint(`<span class="p">${pw.nm}</span> : ${curP.pw==='mistral'?'touche le terrain dans la direction où souffle le vent.':curP.pw==='aimant'?'touche la piste là où enterrer l’aimant. Les boules qui rouleront dans son cercle rose seront attirées vers lui (les nôtres aussi !).':'touche le terrain à l’endroit choisi.'}`)}else{usePower(0,curP,null);if(phase==='select'){openMenu();hint()}}}
+    if(pw.tgt){phase='power';powArm='solo';renderP();setHint(`<span class="p">${pw.nm}</span> : ${curP.pw==='mistral'?'touche le terrain dans la direction où souffle le vent.':curP.pw==='sardine'?'touche le terrain là où échouer la sardine : les boules rebondiront dessus.':'touche le terrain à l’endroit choisi.'}`)}else{usePower(0,curP,null);if(phase==='select'){openMenu();hint()}}}
    function duoAct(){if(phase!=='select'||jauge[0]<200)return;const d=duoInfo(curP);okS();closeMenu();
     if(d.tgt){phase='power';powArm='duo';renderP();setHint(`<span class="p">${d.nm}</span> : touche le terrain à l’endroit choisi.`)}else useDuo(curP,null)}
    const kdG=e=>{if(!$('#qcmd')){document.removeEventListener('keydown',kdG);return}if(phase!=='select')return;
@@ -11363,7 +11447,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     setHint(`<b>${curP.nm}</b> ${mode==='P'?'pointe':'tire'}. ${menuOpen?'Choisis dans le menu, ou':'Pose le doigt sur le terrain,'} tire vers l’arrière pour viser, lâche pour lancer. Tire loin : la visée est plus fine.`+
      (rel&&chain>=1?` <span class="y">Relais ×${chain+1} : bonus de précision${chain+1===3?', et combo « Ensemble ! » si tu lances !':'.'}</span>`:'')+
      (rel&&chain<1?` <span class="y">${lastGrp==='r'?'Riverain → usager':'Usager → riverain'} : bonus de précision.</span>`:'')+
-     (FX.itch[0]?' <span class="p">Ça gratte : la visée tremble !</span>':'')+
+     (FX.itch[0]?' <span class="p">Pastagattaque : la visée tangue !</span>':'')+
      (joker?' <span class="y">Joker de la dernière boule : précision renforcée et ralenti.</span>':'')+
      (giantNext?` <span class="p">${cannon?'Boulet de canon prêt : tire !':'Miche géante prête.'}</span>`:'')+(h?` ${h.team===0?'On a le point.':'Ils ont le point.'}`:''))}
    let bubT=0;function say(who,txt,grp){const b=$('#qbub');if(!b)return;const col={r:'#2f7a2a',u:'#6b3fb0',t:'#a0581a'}[grp]||'#4a4060';b.innerHTML=(who?`<b style="color:${col}">${who}</b>`:'')+txt;b.classList.remove('off');clearTimeout(bubT);bubT=setTimeout(()=>b.classList.add('off'),2400)}
@@ -11389,6 +11473,8 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     if(k==='geante')Z('circ',th.x,th.y-4,64,14);
     else if(k==='aimant'){Z('blue',tgt.x,tgt.y,76,14);bolt(tgt.x,tgt.y+2,160,64);bolt(tgt.x-12,tgt.y+4,330,46);bolt(tgt.x+12,tgt.y+4,330,46)}
     else if(k==='pastis')Z('circ',tgt.x,tgt.y,48,16);
+    else if(k==='sardine')Z('blue',tgt.x,tgt.y,70,14);
+    else if(k==='arrosoir')Z('blue',tgt.x,tgt.y-6,56,14);
     else if(k==='trou'){Z('expl',tgt.x,tgt.y-4,70,14);try{dsfx('boom2',.9)}catch(_){}}
     else if(k==='poil'){[0,120,260,400].forEach((d,i)=>Z('fire',C.x+(i%2?10:-4),C.y-6+(i>1?6:0),30,14,{d}))}
     else if(k==='banane')Z('circ',C.x+14,C.y+2,40,18);
@@ -11397,7 +11483,9 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     fxD=0;
     if(k==='geante'){for(let i=0;i<26;i++)P(th.x+(Math.random()-.5)*14,th.y,{vx:(Math.random()-.5)*50,vy:-20-Math.random()*30,t:1,c:'#fffaf0',g:30,s:2});ono('POUF !',th.x+18,th.y-8,'#fffaf0',1)}
     else if(k==='aimant'){ring(tgt.x,tgt.y,'#ff6fb5',36);ring(tgt.x,tgt.y,'#ff6fb5',20);for(let i=0;i<12;i++)P(tgt.x,tgt.y,{vx:(Math.random()-.5)*60,vy:-30-Math.random()*40,t:.6,c:'#8a5a2a',g:160});ono('ZZZT !',tgt.x,tgt.y-12,'#ff9fd0',1)}
-    else if(k==='pastis'){for(let i=0;i<22;i++){const a=Math.random()*6.28,v=30+Math.random()*60;P(tgt.x,tgt.y,{vx:Math.cos(a)*v,vy:Math.sin(a)*v*.7-30,t:.7,c:i%3?'#f6d860':'#fff6c0',g:140,s:2})}ono('SPLASH !',tgt.x,tgt.y-14,'#ffe36a',1);tone(300,.25,'triangle',.06)}
+    else if(k==='pastis'){for(let i=0;i<22;i++){const a=Math.random()*6.28,v=30+Math.random()*60;P(tgt.x,tgt.y,{vx:Math.cos(a)*v,vy:Math.sin(a)*v*.7-30,t:.7,c:i%3?'#f6d860':'#fff6c0',g:140,s:2})}ono('GLOU GLOU !',tgt.x,tgt.y-14,'#ffe36a',1);tone(300,.25,'triangle',.06)}
+    else if(k==='sardine'){for(let i=0;i<18;i++){const a=Math.random()*6.28,v=20+Math.random()*50;P(tgt.x,tgt.y,{vx:Math.cos(a)*v,vy:Math.sin(a)*v*.6-20,t:.6,c:i%2?'#9fd0e8':'#fff',g:120,s:2})}ono('SPLATCH !',tgt.x,tgt.y-14,'#9fd0e8',1);shake(1,.2)}
+    else if(k==='arrosoir'){for(let i=0;i<26;i++)P(tgt.x+(Math.random()-.5)*20,tgt.y-24,{vx:(Math.random()-.5)*16,vy:30+Math.random()*30,t:.6,c:'#7fc8ff',g:120,s:1});ono('PSCHHH !',tgt.x,tgt.y-14,'#9fd0ff',1)}
     else if(k==='trou'){for(let i=0;i<20;i++)P(tgt.x,tgt.y,{vx:(Math.random()-.5)*90,vy:-40-Math.random()*70,t:.8,c:i%2?'#6b4a28':'#a07a4a',g:200,s:2});shake(1.5,.25);ono('CHTOK !',tgt.x,tgt.y-12,'#d9b37a',1)}
     else if(k==='poil'){const t1=S.them.find(p=>p.left>0);for(let i=0;i<16;i++)P(C.x+(Math.random()-.5)*20,C.y-14+(Math.random()-.5)*16,{vx:(Math.random()-.5)*30,vy:-10-Math.random()*20,t:1.1,c:'#ff6fb5',s:1});ono('GRAT GRAT !',C.x+16,C.y-26,'#ff8fc8',1)}
     else if(k==='banane'){ono('ZIP !',C.x+16,C.y-12,'#ffe36a',1)}
@@ -11412,7 +11500,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     if(phase!=='select')return;if(menuOpen){menuOpen=false;sub=null;renderCmd();hint()}aim={sx:p.x,sy:p.y,x:p.x,y:p.y,cx:e.clientX,cy:e.clientY,ex:e.clientX,ey:e.clientY,R:cv.getBoundingClientRect()};try{cv.setPointerCapture(e.pointerId)}catch(_){}});
    cv.addEventListener('pointermove',e=>{if(aim){const r=aim.R;aim.x=(e.clientX-r.left)/r.width*W;aim.y=(e.clientY-r.top)/r.height*H;aim.ex=e.clientX;aim.ey=e.clientY}});
    const PULLS=()=>Math.max(110,Math.min(190,Math.min(window.innerWidth,window.innerHeight)*.42));
-   function aimVec(now){if(!aim)return null;const px=aim.cx-aim.ex,py=aim.cy-aim.ey,len=Math.hypot(px,py);if(len<8||px<3)return null;let a=Math.atan2(py,px)*AG;if(FX.itch[0])a+=Math.sin(now/70)*.16;const k=Math.min(1,len/Math.min(PULLS(),Math.max(50,aim.cx-14)));return{x:Math.cos(a),y:Math.sin(a),k,L:k*LMAX}}
+   function aimVec(now){if(!aim)return null;const px=aim.cx-aim.ex,py=aim.cy-aim.ey,len=Math.hypot(px,py);if(len<8||px<3)return null;let a=Math.atan2(py,px)*AG;if(FX.itch[0])a+=Math.sin(now/90)*.3;const k=Math.min(1,len/Math.min(PULLS(),Math.max(50,aim.cx-14)));return{x:Math.cos(a),y:Math.sin(a),k,L:k*LMAX}}
    cv.addEventListener('pointerup',()=>{if(!aim)return;const v=aimVec(performance.now());aim=null;if(v&&phase==='select')throwBall(0,curP,mode,{x:v.x,y:v.y},v.L)});
    cv.addEventListener('pointercancel',()=>aim=null);
    // ---------- rendu ----------
@@ -11455,7 +11543,9 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     const thrower=usT?curP:(curAI||S.them.find(p=>p.left>0)||S.them[0]);
     const fr=k=>((now/150+k)|0)%6;
     movePeople(now,thrower);
-    crowd.forEach(c=>spr(g,c.ci,24+fr(c.o),c.x,c.y));
+    walkStep(now);walkers.forEach(c=>spr(g,c.ci,(c.dir>0?12:6)+(((now/110+c.o)|0)%6),c.x,c.y));
+    crowd.forEach(c=>{const cp=crowdPose(c,now);spr(g,c.ci,cp.col,cp.x,cp.y);if(c.cam)camDraw(g,c,cp.x,cp.y,now)});
+    if(TK==='carli'&&((now/650)|0)!==noteK){noteK=(now/650)|0;P(168+(Math.random()-.5)*6,27,{vx:(Math.random()-.5)*8,vy:-11,t:1.5,c:pickL(['#fff','#ffd23f','#ff9fd0']),note:1})}
     [...S.us,...S.them].forEach(p=>{const P=POSM.get(p);if(p===thrower&&!P.mv)return;g.fillStyle='rgba(0,0,0,.25)';g.beginPath();g.ellipse(P.x,P.y,5,1.6,0,0,7);g.fill();spr(g,p.ci,walkCol(P,now),P.x,P.y)});
     if(thrower&&!POSM.get(thrower).mv){const itchy=(usT&&FX.itch[0])||(!usT&&FX.itch[1]),sh=itchy?Math.round(Math.sin(now/40)):0;
      const hasT=THROK.has(thrower.ci)&&THRI.complete;
@@ -11465,7 +11555,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
      g.fillStyle='rgba(0,0,0,.28)';g.beginPath();g.ellipse(C.x-6,C.y+8,6,2,0,0,7);g.fill();
      if(hasT){const k=thrw?Math.min(13,Math.floor(thrw.t/.05)):(ball?4:-1),X0=Math.round(C.x-6+sh-8),Y0=Math.round(C.y+8-26);if(k>=0){g.drawImage(THRI,k*16,thrower.ci*26,16,26,X0,Y0,16,26);if(ball&&k<=8){const H=k<3?[10,18]:k<6?[13,16]:[11,8],tm=usT?0:1;g.fillStyle=tm?'#4a2f12':'#5d6b7c';g.beginPath();g.arc(X0+H[0],Y0+H[1],2.5,0,7);g.fill();g.fillStyle=tm?'#9a6a34':'#dfe6ef';g.beginPath();g.arc(X0+H[0],Y0+H[1],1.7,0,7);g.fill()}}else spr(g,thrower.ci,36+fr(0),C.x-6+sh,C.y+8)}
      else{const wf=thrw?12+Math.min(5,Math.floor(thrw.t/.12)):(ball?36:36+fr(0));spr(g,thrower.ci,wf,fx,fy);if(ball){const tm=usT?0:1;g.fillStyle=tm?'#4a2f12':'#5d6b7c';g.beginPath();g.arc(fx+5,fy-10,2.6,0,7);g.fill();g.fillStyle=tm?'#9a6a34':'#dfe6ef';g.beginPath();g.arc(fx+5,fy-10,1.8,0,7);g.fill()}}
-     if(itchy&&(now/200|0)%2){g.fillStyle='#ff6fb5';g.fillRect(C.x+2,C.y-20,1,3);g.fillRect(C.x-14,C.y-14,1,3)}}
+     if(itchy){const gx=C.x+6,gy=C.y-8;g.fillStyle='#2a2433';g.fillRect(gx-2,gy-6,5,7);g.fillStyle='#ffd23f';g.fillRect(gx-1,gy-4,3,4);g.fillStyle='#fff6c0';g.fillRect(gx-1,gy-5,3,1);if((now/300|0)%2){g.fillStyle='#fff';g.fillRect(gx+4,gy-10,1,1);g.fillRect(gx+6,gy-13,1,1)}}}
    }
    // ---------- vue 3D de visée : caméra derrière le lanceur ----------
    const c3=document.createElement('canvas');c3.width=W;c3.height=H;const x3=c3.getContext('2d');x3.imageSmoothingEnabled=false;let a3=0,last3=null;
@@ -11518,20 +11608,20 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     const g3=x3;g3.setTransform(1,0,0,1,0,0);g3.clearRect(0,0,W,H);
     const k=1-s+DK*s,t=s*(GY-DK*C.y);
     // ciel et collines qui apparaissent quand la caméra descend
-    const top=t;if(top>0){let gr=g3.createLinearGradient(0,0,0,top);gr.addColorStop(0,'#6fb6ef');gr.addColorStop(1,'#d8f0ff');g3.fillStyle=gr;g3.fillRect(0,0,W,top+1);
-     g3.fillStyle='#4d8a44';g3.beginPath();g3.moveTo(0,top+1);for(let i=0;i<=16;i++)g3.lineTo(i*W/16,top-6-Math.sin(i*1.3)*4-Math.sin(i*.5)*5);g3.lineTo(W,top+1);g3.fill();
-     g3.fillStyle='#e8dcc0';g3.fillRect(146,top-30,4,22);g3.fillRect(143,top-34,10,5);g3.fillStyle='#f2c230';g3.fillRect(147,top-38,2,4)}
+    const top=t;if(top>0)skyline(g3,top,now);
     // le sol, écrasé selon la hauteur de la caméra
-    {const se2=seas();if(TIL.complete)for(let y=Math.floor(top/16)*16;y<H;y+=16)for(let x=0;x<W;x+=16)g3.drawImage(TIL,[0,1,2,3][se2]*16,0,16,16,x,y,16,16);else{g3.fillStyle='#5a9a4a';g3.fillRect(0,top,W,H)}}
+    paintGround(g3,Math.floor(top/16)*16,H);
     g3.setTransform(1,0,0,k,0,t);g3.drawImage(bgG,0,0);
     FX.oil.forEach(o=>{g3.fillStyle='rgba(250,220,90,.62)';g3.beginPath();g3.ellipse(o.x,o.y,o.r,o.r*.8,0,0,7);g3.fill()});
-    FX.holes.forEach(h=>{g3.fillStyle='#2a1a0c';g3.beginPath();g3.ellipse(h.x,h.y,h.r,h.r*.75,0,0,7);g3.fill()});
+    FX.holes.forEach(h=>{g3.fillStyle='#2a1a0c';g3.beginPath();g3.ellipse(h.x,h.y,h.r,h.r*.75,0,0,7);g3.fill()});FX.mud.forEach(o=>drawMud(g3,o,now));
     g3.strokeStyle='#d8322a';g3.lineWidth=1.5;g3.beginPath();g3.arc(C.x,C.y,8,0,7);g3.stroke();
     g3.setTransform(1,0,0,1,0,0);
     // objets debout et personnages (de la profondeur au premier plan)
     const L=[];const se=seas();
-    [['tree'+se,-10,40],['tree'+se,286,42],['bush'+se,40,30],['bush'+se,250,30],['bench',140,34]].forEach(([n,x,y])=>L.push({y,d:()=>{const p=PS(x,y,0,s);Ob(g3,n,p[0],p[1])}}));
-    crowd.forEach(c=>L.push({y:c.y,d:()=>{const p=PS(c.x,c.y,0,s);spr(g3,c.ci,24+(((now/150+c.o)|0)%6),p[0],p[1])}}));
+    DEC.forEach(([n,x,y,sc])=>L.push({y,d:()=>{const p=PS(x,y,0,s);ObS(g3,n,p[0],p[1],sc||1)}}));
+    walkers.forEach(c=>L.push({y:c.y,d:()=>{const p=PS(c.x,c.y,0,s);spr(g3,c.ci,(c.dir>0?12:6)+(((now/110+c.o)|0)%6),p[0],p[1])}}));
+    crowd.forEach(c=>L.push({y:c.y,d:()=>{const cp=crowdPose(c,now),p=PS(cp.x,cp.y,0,s);spr(g3,c.ci,cp.col,p[0],p[1]);if(c.cam)camDraw(g3,c,p[0],p[1],now)}}));
+    FX.sard.forEach(sd=>L.push({y:sd.y,d:()=>{const p=PS(sd.x,sd.y,0,s);drawSard(g3,p[0],p[1],now,1,sd)}}));
     const usT=phase==='select'||phase==='power'||(pending&&pending.team===0&&(phase==='roll'||phase==='wait'||phase==='throw'))||(phase==='anim'&&lastTeam===0);
     const thr=usT?curP:(curAI||S.them.find(p=>p.left>0)||S.them[0]);
     [...S.us,...S.them].forEach(p=>{const P=POSM.get(p);if(!P||(p===thr&&!P.mv))return;L.push({y:P.y,d:()=>{const q=PS(P.x,P.y,0,s);spr(g3,p.ci,walkCol(P,now),q[0],q[1])}})});
@@ -11560,7 +11650,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
      g3.save();g3.fillStyle='#1a1420';g3.fillRect(MX-3,MY-3,MW+6,MH+6);g3.beginPath();g3.rect(MX,MY,MW,MH);g3.clip();
      g3.translate(MX+MW/2,MY+MH/2);g3.scale(Z,Z);g3.translate(-cx,-cy);g3.drawImage(bgG,0,0);
      g3.lineWidth=1/Z;for(let x=T.x;x<=T.x+T.w;x+=20){g3.strokeStyle='rgba(120,90,50,.25)';g3.beginPath();g3.moveTo(x,T.y);g3.lineTo(x,T.y+T.h);g3.stroke()}for(let y=T.y;y<=T.y+T.h;y+=20){g3.strokeStyle='rgba(120,90,50,.25)';g3.beginPath();g3.moveTo(T.x,y);g3.lineTo(T.x+T.w,y);g3.stroke()}
-     FX.oil.forEach(o=>{g3.fillStyle='rgba(250,220,90,.6)';g3.beginPath();g3.ellipse(o.x,o.y,o.r,o.r*.8,0,0,7);g3.fill()});FX.holes.forEach(h=>{g3.fillStyle='#2a1a0c';g3.beginPath();g3.ellipse(h.x,h.y,h.r,h.r*.75,0,0,7);g3.fill()});
+     FX.oil.forEach(o=>{g3.fillStyle='rgba(250,220,90,.6)';g3.beginPath();g3.ellipse(o.x,o.y,o.r,o.r*.8,0,0,7);g3.fill()});FX.holes.forEach(h=>{g3.fillStyle='#2a1a0c';g3.beginPath();g3.ellipse(h.x,h.y,h.r,h.r*.75,0,0,7);g3.fill()});FX.mud.forEach(o=>drawMud(g3,o,now));FX.sard.forEach(sd=>drawSard(g3,sd.x,sd.y,now,1,sd));
      balls.filter(b=>b.alive).forEach(b=>{g3.fillStyle='#1a1420';g3.beginPath();g3.arc(b.x,b.y,b.r+1,0,7);g3.fill();g3.fillStyle=b.team<0?'#ff8c1a':b.team?'#9a6a34':'#dfe6ef';g3.beginPath();g3.arc(b.x,b.y,b.r,0,7);g3.fill()});
      sm.pts.forEach((p,i)=>{if(i%2)return;g3.fillStyle=p.air?'rgba(255,255,255,.5)':'rgba(255,255,255,.9)';g3.fillRect(p.x-.5,p.y-.5,1,1)});
      const pu=(Math.sin(now/120)+1)/2;g3.strokeStyle='#ffd23f';g3.lineWidth=1.2/Z;g3.beginPath();g3.arc(land.x,land.y,5+pu,0,7);g3.stroke();g3.strokeStyle='#fff';g3.beginPath();g3.moveTo(land.x-8,land.y);g3.lineTo(land.x+8,land.y);g3.moveTo(land.x,land.y-8);g3.lineTo(land.x,land.y+8);g3.stroke();
@@ -11579,6 +11669,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     g.strokeStyle='#d8322a';g.lineWidth=1.5;g.beginPath();g.arc(C.x,C.y,8,0,7);g.stroke();
     FX.oil.forEach(o=>{g.fillStyle='rgba(250,220,90,.62)';g.strokeStyle='rgba(170,120,20,.7)';g.lineWidth=1;g.beginPath();for(let a=0;a<6.3;a+=.5){const rr=o.r*(.85+.15*Math.sin(a*3+o.s));g.lineTo(o.x+Math.cos(a)*rr,o.y+Math.sin(a)*rr*.8)}g.closePath();g.fill();g.stroke();g.fillStyle='rgba(255,255,255,.6)';const k=(now/300+o.s)%6.3;g.fillRect(Math.round(o.x+Math.cos(k)*o.r*.5),Math.round(o.y+Math.sin(k)*o.r*.35),2,1)});
     FX.holes.forEach(h=>{g.fillStyle='#6b4a28';g.beginPath();g.ellipse(h.x,h.y,h.r+1.5,h.r*.8+1.5,0,0,7);g.fill();g.fillStyle='#2a1a0c';g.beginPath();g.ellipse(h.x,h.y,h.r,h.r*.75,0,0,7);g.fill()});
+    FX.mud.forEach(o=>drawMud(g,o,now));FX.sard.forEach(sd=>drawSard(g,sd.x,sd.y,now,1,sd));
     FX.mag.forEach(m=>{try{window.PETMAG&&PETMAG(g,m,now)}catch(_){}const p=(now/600)%1,R_=58*(m.k||1)*.92;g.save();g.setLineDash([3,3]);g.lineDashOffset=-(now/60)%6;g.strokeStyle='rgba(255,90,170,.85)';g.lineWidth=1.3;g.beginPath();g.ellipse(m.x,m.y,R_,R_*.78,0,0,7);g.stroke();g.setLineDash([]);g.fillStyle='rgba(255,111,181,.13)';g.fill();for(let i=0;i<4;i++){const a=i*1.571+now/900,q=1-p;const x1=m.x+Math.cos(a)*R_*(.5+.45*q),y1=m.y+Math.sin(a)*R_*.78*(.5+.45*q);g.fillStyle=`rgba(255,160,210,${.3+.5*q})`;g.beginPath();g.moveTo(x1,y1);g.lineTo(x1+Math.cos(a+2.6)*4,y1+Math.sin(a+2.6)*3);g.lineTo(x1+Math.cos(a-2.6)*4,y1+Math.sin(a-2.6)*3);g.closePath();g.fill()}g.restore();g.strokeStyle=`rgba(255,111,181,${.5*(1-p)})`;g.lineWidth=1;g.beginPath();g.arc(m.x,m.y,4+p*20,0,7);g.stroke();g.fillStyle='#c33';g.fillRect(m.x-3,m.y-2,2,4);g.fillRect(m.x+1,m.y-2,2,4);g.fillStyle='#888';g.fillRect(m.x-3,m.y+2,6,1)});
     if(slow!==window._pSlow){window._pSlow=slow;try{petaMusSlow(slow)}catch(_){}}
     if(thrw){thrw.t+=dt*(slow||joker?.6:1);if(!thrw.done&&thrw.t>=thrw.rel){thrw.done=true;thrw.launch()}if(thrw.t>=thrw.dur)thrw=null}
@@ -11603,10 +11694,11 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     parts=parts.filter(p=>(p.t-=dt)>0);parts.forEach(p=>{
      if(p.ring){const k=1-p.t/p.T;g.strokeStyle=p.c;g.globalAlpha=p.t/p.T;g.lineWidth=1.5;g.beginPath();g.ellipse(p.x,p.y,p.r+(p.R-p.r)*k,(p.r+(p.R-p.r)*k)*.7,0,0,7);g.stroke();g.globalAlpha=1;return}
      if(p.g)p.vy+=p.g*dt;if(p.feather)p.vx=Math.sin(now/200+p.y)*18;p.x+=p.vx*dt;p.y+=p.vy*dt;g.fillStyle=p.c;const s=p.s||1;
+     if(p.note){g.font='400 7px sans-serif';g.globalAlpha=Math.min(1,p.t);g.fillText(pickL2(p,['♪','♫']),Math.round(p.x),Math.round(p.y));g.globalAlpha=1;return}
      if(p.big)g.fillRect(Math.round(p.x),Math.round(p.y),2,1+((p.t*8|0)%2));else g.fillRect(Math.round(p.x),Math.round(p.y),s,s)});
     {let tr='';if(shakeT>0){shakeT-=dt;const a=shakeA*(shakeT>0?1:0);if(a)tr+=` translate(${(Math.random()-.5)*a*4}px,${(Math.random()-.5)*a*4}px)`;if(shakeT<=0)shakeA=0}if(cv._tr!==tr){cv._tr=tr;cv.style.transform=tr}}
     if(FX.slip[0]||FX.slip[1]){const x=C.x+12,y=C.y+1;try{g.drawImage(FOODI,51,0,14,12,x,y,14,12)}catch(_){g.fillStyle='#f2d03a';g.fillRect(x,y+4,7,2)}}
-    {const usT=phase==='select'||phase==='power';if(((usT&&FX.itch[0])||(phase==='ai'&&FX.itch[1]))&&((now/900)|0)!==itchK){itchK=(now/900)|0;ono(pickL(['GRAT GRAT','GRATTE !','ÇA GRATTE']),C.x+10,C.y-30,'#ff8fc8',0)}}
+    {const usT=phase==='select'||phase==='power';if(((usT&&FX.itch[0])||(phase==='ai'&&FX.itch[1]))&&((now/900)|0)!==itchK){itchK=(now/900)|0;ono(pickL(['HIPS !','BURP…','GLOU GLOU','HIPS !']),C.x+10,C.y-30,'#ffe36a',0)}}
     drawFx(g,now);
     if(bz&&bz.b){const b=bz.b,zw=96,zh=54,dw=136,dh=76,dx=b.x<W/2?W-dw-5:5,dy=5,sx=Math.max(0,Math.min(W-zw,b.x-zw/2)),sy=Math.max(0,Math.min(H-zh,b.y-zh/2));const k=Math.min(1,bz.t/.18);g.save();g.globalAlpha=k;g.fillStyle='#1a1420';g.fillRect(dx-3,dy-3,dw+6,dh+6);g.drawImage(cv,sx,sy,zw,zh,dx,dy,dw,dh);g.strokeStyle='#ffd23f';g.lineWidth=2;g.strokeRect(dx-1,dy-1,dw+2,dh+2);g.fillStyle='#ffd23f';g.fillRect(dx-3,dy+dh+3,dw+6,9);g.fillStyle='#1a1420';g.font="400 7px Lilita,sans-serif";g.fillText('RALENTI · REBONDS',dx+4,dy+dh+10);g.restore()}
     {const w_=$('.wrap');if(w_)w_.classList.toggle('aim3',!!(aim&&phase==='select'))}
@@ -11615,6 +11707,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
      if(sv>0){sideView(now,tg?sv:1,v,sm3);g.globalAlpha=tg?Math.min(1,sv*5):sv;g.drawImage(c3,0,0);g.globalAlpha=1}}
     raf=requestAnimationFrame(frame);
    }
+   window.__pq2={pow:(id,tx,ty)=>{const p=S.us.find(q=>q.id===id);if(!p)return 'nop';jauge[0]=200;usePower(0,p,tx!=null?{x:tx,y:ty}:null);return 'ok'},ai:n=>{jauge[1]=n},st:()=>({phase,itch:FX.itch.slice(),mag:FX.mag.length,sard:FX.sard.length,mud:FX.mud.length,oil:FX.oil.length,balls:balls.length,rocks:rocks.length,bumps:bumps.length,tk:TK,score:S.score.slice()})};
    gauges();newMene();raf=requestAnimationFrame(frame);
   }
   // ---------- 5. résultat ----------
@@ -12109,6 +12202,47 @@ setInterval(()=>{try{if(YR!==1||document.getElementById('m').hidden)return;const
    for(let i=0;i<4;i++){const t=(T*1.2+i*.31)%1,s=2+Math.sin(t*Math.PI)*2.5,X_=X+[-6,5,-3,7][i],Y_=Y-[4,9,13,2][i];x.globalAlpha=Math.sin(t*Math.PI);nn(x,st,X_-s/2,Y_-s/2,s,s)}x.restore()}catch(_){try{x.restore()}catch(__){}}};try{rainbow=window.rainbow}catch(_){}}
  window.SNOWF=function(t,WWv,WHv,OXv,OYv){const f=I.flocon;if(!ok(f))return false;for(let k=0;k<28;k++){const X=(k*37+Math.sin(t+k)*5+t)%WWv-OXv,Y=(t*(7+k%4*3)+k*23)%WHv-OYv,s=4+(k%3)*1;x.save();x.translate(X,Y);x.rotate(t*.5+k);nn(x,f,-s/2,-s/2,s,s);x.restore()}return true};
 })();
+
+// ===== v515 : pétanque — titre, choix du terrain, écran VS qui claque
+{const st=document.createElement('style');st.textContent=`
+#peta .ttlw{text-align:center;margin:-2px 0 10px}#peta .ttl{display:inline-block;font:400 clamp(30px,8.5vw,56px)/.9 Lilita,sans-serif;color:#ffd23f;-webkit-text-stroke:1.5px #2a2433;text-shadow:3px 3px 0 #e8262d,6px 6px 0 #2a2433;transform:skew(-7deg);letter-spacing:.02em;padding:4px 10px}
+#peta .sub{font:400 13px Lilita,sans-serif;color:#e8262d;letter-spacing:.22em;margin-top:6px}
+#peta .terw{margin:10px 0 2px;display:flex;flex-direction:column;gap:5px;align-items:flex-start}#peta .terw .lb{font:400 11px Lilita,sans-serif;letter-spacing:.2em;color:#6a5c4c}
+#peta .ters{display:flex;gap:6px;flex-wrap:wrap}#peta .ters button{font:400 14px Lilita,sans-serif;padding:5px 10px;background:#fff;color:#2a2433;border:2px solid #2a2433;border-radius:9px;box-shadow:2px 2px 0 #2a2433;cursor:pointer}
+#peta .ters button.on{background:#ffd23f;transform:translate(1px,1px);box-shadow:1px 1px 0 #2a2433}#peta .terw small{font-size:12.5px;color:#4a3f33;min-height:1.2em}
+#peta .vs .x.pre{opacity:0;animation:none}
+@keyframes pvslam{0%{transform:scale(9) rotate(-28deg);opacity:0}55%{transform:scale(.8) rotate(5deg);opacity:1}75%{transform:scale(1.18) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
+#peta .vs .x.slam{animation:pvslam .42s cubic-bezier(.2,1.3,.4,1) both;text-shadow:0 4px 0 #b05a00,0 8px 0 #000,0 0 30px #ffb000}
+@keyframes qshk{0%,100%{transform:none}15%{transform:translate(-7px,5px)}35%{transform:translate(7px,-6px)}55%{transform:translate(-5px,3px)}75%{transform:translate(3px,-2px)}}
+#peta.qshk .vs{animation:qshk .45s linear}
+#peta .vfl{position:fixed;inset:0;background:#fff;pointer-events:none;animation:pfl .4s ease-out forwards;z-index:9}
+#peta .vs{margin-top:auto}#peta .vter{margin-bottom:auto;padding:14px 0 6px;text-align:center;font:400 15px Lilita,sans-serif;color:#ffd23f;letter-spacing:.08em;text-shadow:2px 2px 0 #000}
+`;document.head.appendChild(st)}
+
+// ===== v516 : typo façon jeu de combat (titre, VS, Prêts ? Pétanquez !), écran titre d'arcade
+{const st=document.createElement('style');st.textContent=`
+#peta .sfg,#peta .ttl span{font-family:Lilita,sans-serif;font-style:italic;font-weight:400;background:linear-gradient(#fff9c0 0%,#ffd23f 30%,#ff8a1a 56%,#e8262d 80%,#8a1020 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:3px #14124a;paint-order:stroke fill;filter:drop-shadow(3px 4px 0 #14124a) drop-shadow(0 0 3px rgba(0,0,0,.6))}
+#peta .ttl{display:inline-block;line-height:.86;transform:skew(-11deg) scaleY(1.12);padding:6px 14px 10px;text-shadow:none;color:transparent;-webkit-text-stroke:0;filter:none;letter-spacing:0}
+#peta .ttl span{display:inline-block;font-size:clamp(36px,9.6vw,70px);-webkit-text-stroke-width:4px;letter-spacing:-.01em}
+#peta .ttl span:last-child{font-size:clamp(30px,8vw,58px)}
+#peta .card0.arcd{background:radial-gradient(ellipse at 50% 0%,#3a1a6a,#140a2a 60%,#0b0618);color:#f2efe4;border:3px solid #ffd23f;box-shadow:0 0 0 3px #14124a,0 0 24px rgba(255,120,40,.45),0 8px 0 #14124a;position:relative;overflow:hidden}
+#peta .card0.arcd::after{content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.14) 0 2px,transparent 2px 4px)}
+#peta .card0.arcd .sub{color:#ffd23f;text-shadow:2px 2px 0 #8a1020}
+#peta .card0.arcd .terw .lb{color:#9fd0ff}#peta .card0.arcd .terw small{color:#e6dcc8}
+#peta .card0.arcd .ters button{background:#1a1040;color:#ffd23f;border-color:#ffd23f;box-shadow:2px 2px 0 #8a1020}#peta .card0.arcd .ters button.on{background:#ffd23f;color:#14124a}
+#peta .card0.arcd .sline{color:#cfc6dc}#peta .card0.arcd .sline small{color:#8a80a0}
+#peta .coin{text-align:center;font:400 14px Lilita,sans-serif;letter-spacing:.18em;color:#9fd0ff;margin:12px 0 6px;animation:qblink 1.1s steps(2,start) infinite}
+@keyframes qblink{50%{opacity:0}}
+#peta .card0.arcd button.start{background:linear-gradient(#ffd23f,#ff8a1a);color:#14124a;border-color:#14124a;font-size:18px;box-shadow:0 4px 0 #14124a;text-transform:uppercase;letter-spacing:.04em}
+#peta .card0.arcd button.sec{background:#2a1a4a;color:#e6dcc8;border-color:#6a4a8a}
+#peta .vs .x.sfg{color:transparent;font-style:italic;font-size:clamp(64px,14vw,120px);-webkit-text-stroke-width:5px;text-shadow:none;filter:drop-shadow(5px 6px 0 #14124a) drop-shadow(0 0 18px rgba(255,160,40,.8))}
+#peta .rdy{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;pointer-events:none;z-index:6;transition:opacity .3s}
+#peta .rdy.out{opacity:0}#peta .rdy small{font:400 clamp(13px,2.6vw,20px) Lilita,sans-serif;letter-spacing:.3em;color:#fff;text-shadow:2px 2px 0 #14124a;transition:opacity .2s}
+#peta .rdy b{font-size:clamp(34px,9vw,76px);-webkit-text-stroke-width:4px;animation:qrdy .45s cubic-bezier(.2,1.4,.4,1) both;transform-origin:center}
+#peta .rdy b.go{animation:qgo .4s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes qrdy{from{transform:scale(2.6);opacity:0}to{transform:scale(1) skew(-8deg);opacity:1}}
+@keyframes qgo{0%{transform:scale(7) rotate(-14deg);opacity:0}55%{transform:scale(.85) skew(-8deg);opacity:1}100%{transform:scale(1.05) skew(-8deg)}}
+`;document.head.appendChild(st)}
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
