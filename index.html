@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v521')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v522')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5560,7 +5560,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v521')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v522')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -12387,6 +12387,76 @@ setInterval(()=>{try{if(YR!==1||document.getElementById('m').hidden)return;const
    if(x.kind==='tip'&&AG.clock-AG.lastTip<(x.k==='eu'?120:60))continue;
    rm(x);const ok=x.run();if(ok!==false){AG.lastL3=AG.clock;if(x.kind==='tip')AG.lastTip=AG.clock}return}};
  setInterval(()=>{try{AG.tick()}catch(_){}},150)}
+
+// ===== v522 : la pétanque aux couleurs de l'OM — fond blanc, bleu ciel #2FAEE0 pour les bandeaux et les boutons, bleu marine pour les contours et les textes, orange pour l'équipe d'en face
+{const st=document.createElement('style');st.id='petaOM';st.textContent=`
+html body #peta{background:#fff!important;color:#0b2a5b}
+#peta .card0{background:#fff!important;color:#0b2a5b!important;border-color:#0b2a5b!important}
+#peta .card0 b,#peta .card0 h2,#peta .card0 h3{color:#0b2a5b}
+html body #peta button{background:#2FAEE0!important;color:#fff!important;border:3px solid #0b2a5b!important;box-shadow:3px 3px 0 #0b2a5b!important}
+html body #peta button.sec{background:#fff!important;color:#0b2a5b!important}
+#peta .sline{background:#eaf6fc!important;border-color:#2FAEE0!important;color:#0b2a5b!important}
+#peta .tag,#peta .foot{background:#0b2a5b!important;color:#fff!important}
+#peta .go3{background:linear-gradient(90deg,#5cc6ee,#2FAEE0)!important;color:#fff!important}
+#peta .vter{color:#0b2a5b!important;text-shadow:none!important}
+#peta .hud .sc{background:#2FAEE0!important;color:#fff!important;border-color:#0b2a5b!important;box-shadow:4px 4px 0 #0b2a5b!important}
+#peta .hud .sc.th{background:#ff7a1a!important}
+#peta .hud .us{border-left-color:#0b2a5b!important}
+#peta .hud .sc b,#peta .hud .sc .l,#peta .hud .sc .l *{color:#fff!important}
+#peta .gauge{background:#fff!important;border-color:#0b2a5b!important}
+#peta .gauge i{background:#0b2a5b!important}
+#peta #qg1 i{background:#a8420a!important}
+#peta .gauge.duoR i{background:linear-gradient(90deg,#0b2a5b 50%,#2FAEE0 50%)!important}
+#peta .hud .mn{background:#fff!important;color:#0b2a5b!important;border-color:#0b2a5b!important;box-shadow:3px 3px 0 #2FAEE0!important}
+#peta .hud .mn b{color:#2FAEE0!important}
+#peta .qmenu{background:#2FAEE0!important;color:#fff!important;border-color:#0b2a5b!important;box-shadow:3px 3px 0 #0b2a5b!important}
+#peta .cmd .hd{background:#fff!important;color:#0b2a5b!important;border-color:#0b2a5b!important;box-shadow:3px 3px 0 #2FAEE0!important}
+#peta .cmd .hd *{color:#0b2a5b!important}
+#peta .cmd .it{background:#fff!important;color:#0b2a5b!important;border-color:#0b2a5b!important;box-shadow:3px 3px 0 #0b2a5b!important}
+#peta .cmd .it *{color:inherit!important}
+#peta .cmd .it.f{background:#2FAEE0!important;color:#fff!important}
+#peta .cmd .it.dis{background:#eef6fa!important;color:#7f97ad!important}
+#peta .ctag{background:#2FAEE0!important;color:#fff!important;box-shadow:3px 3px 0 #0b2a5b!important}
+#peta .pan{background:#fff!important;border-color:#0b2a5b!important;box-shadow:5px 5px 0 #2FAEE0!important;color:#0b2a5b!important}
+#peta .pls .pl{background:#eaf6fc!important;color:#0b2a5b!important;border-color:#0b2a5b!important}
+#peta .pls .pl *{color:inherit!important}
+#peta .pls .pl .d i{background:#0b2a5b!important;border-color:#0b2a5b!important}
+#peta .pls .pl .d i.u{background:transparent!important}
+#peta .pls .pl.cur{background:#2FAEE0!important;color:#fff!important}
+#peta .pls .pl.cur .d i{background:#fff!important;border-color:#fff!important}
+#peta .pls .pl.cur .d i.u{background:transparent!important}
+#peta .hint,#peta #qhint{color:#0b2a5b!important}
+#peta .hint .y,#peta #qhint .y{color:#1d86b3!important}
+#peta .ban{color:#fff!important;-webkit-text-stroke-color:#0b2a5b!important;text-shadow:5px 5px 0 #2FAEE0,7px 7px 0 #0b2a5b!important}
+#peta .pm{background:#fff!important;border-color:#0b2a5b!important;box-shadow:8px 8px 0 #2FAEE0!important;color:#0b2a5b}
+#peta .pm h3{color:#2FAEE0!important}
+#peta .selh h2{color:#2FAEE0!important;text-shadow:0 3px 0 #0b2a5b!important}
+#peta .cin .who,#peta .cin .st3{color:#2FAEE0!important}
+#peta .cin .act{background:#2FAEE0!important;color:#fff!important;box-shadow:3px 3px 0 #0b2a5b!important}
+#peta .vs .x{color:#2FAEE0!important;text-shadow:0 4px 0 #0b2a5b,0 8px 0 #06183a!important}
+#peta .vs h3{text-shadow:0 2px 0 #0b2a5b}
+#peta .vs .vter{color:#0b2a5b!important}
+#peta .ttl{color:#2FAEE0!important;-webkit-text-stroke-color:#0b2a5b!important;text-shadow:3px 3px 0 #2FAEE0,6px 6px 0 #0b2a5b!important}
+#peta .sfg,#peta .ttl span{background:linear-gradient(#ffffff 0%,#d4f0fb 28%,#2FAEE0 58%,#1a6fa8 80%,#0b2a5b 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;-webkit-text-stroke-color:#0b2a5b!important}
+#peta .card0.arcd{background:#fff!important;color:#0b2a5b!important;border:3px solid #0b2a5b!important;box-shadow:0 0 0 3px #2FAEE0,0 8px 0 #0b2a5b!important}
+#peta .card0.arcd::after{background:repeating-linear-gradient(0deg,rgba(47,174,224,.06) 0 2px,transparent 2px 4px)!important}
+#peta .card0.arcd .sub{color:#2FAEE0!important;text-shadow:2px 2px 0 #0b2a5b!important}
+#peta .card0.arcd .terw .lb{color:#1d86b3!important}
+#peta .card0.arcd .terw small{color:#0b2a5b!important}
+#peta .card0.arcd .ters button{background:#fff!important;color:#0b2a5b!important;border-color:#0b2a5b!important;box-shadow:2px 2px 0 #2FAEE0!important}
+#peta .card0.arcd .ters button.on{background:#2FAEE0!important;color:#fff!important}
+#peta .card0.arcd button.start{background:linear-gradient(#5cc6ee,#2FAEE0)!important;color:#fff!important;border-color:#0b2a5b!important;box-shadow:0 4px 0 #0b2a5b!important}
+#peta .card0.arcd .coin{color:#0b2a5b!important}
+#peta .card0.arcd small,#peta .card0.arcd .sline{color:#0b2a5b!important}
+#peta .rdy small{text-shadow:2px 2px 0 #0b2a5b!important}
+#peta .rdy small .tn{color:#2FAEE0!important}
+#peta .wrap>canvas,#peta .sqw canvas{border-color:#0b2a5b!important;box-shadow:6px 6px 0 #2FAEE0!important}
+#peta .sub{color:#2FAEE0}
+#peta .vs,#peta .vs *{color:#0b2a5b}
+#peta .vs h3{color:#2FAEE0!important}
+#peta .vs .side:last-child h3{color:#ff7a1a!important}
+#peta #qhint b,#peta #qhint .n{color:#1d86b3!important}
+`;document.head.appendChild(st)}
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
