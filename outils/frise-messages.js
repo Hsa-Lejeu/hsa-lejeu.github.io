@@ -42,6 +42,7 @@ const DUR = +(process.argv[2]||240)*1000, READ = +(process.argv[3]||2500), OUT =
    const ts=$('mtst'); if(ts) cur.toast=cl(ts.textContent);
    const als=[...document.querySelectorAll('.al')].filter(vis).filter(e=>e.textContent.trim().length>2).map(e=>cl(e.textContent).replace(/\(\d+ s\)/,'').slice(0,90));
    const s=+((performance.now()-T0)/1000).toFixed(1);
+   try{if(typeof started!='undefined'&&started&&!window.__OPN){window.__OPN=1;__LOG.push({s,d:dt(),ch:'ouverture',t:'(la halte ouvre ses portes)'})}}catch(_){}
    for(const k of Object.keys(cur)){ if(cur[k]!==prev[k]){const o={s,d:dt(),ch:k,t:cur[k]};if(['modal','event','reunion'].includes(k))o.par=performance.now()-lastU<700?'joueur':'jeu';__LOG.push(o)} }
    const pa=prev.alertes||[]; als.filter(a=>!pa.includes(a)).forEach(a=>{if(alSeen[a]!=null&&s-alSeen[a]<60){alSeen[a]=s;return}alSeen[a]=s;__LOG.push({s,d:dt(),ch:'alerte',t:a})}); als.forEach(a=>{alSeen[a]=s});
    cur.alertes=als; prev=cur;
@@ -75,8 +76,9 @@ const DUR = +(process.argv[2]||240)*1000, READ = +(process.argv[3]||2500), OUT =
  const log=ALL;
  require('fs').writeFileSync(OUT,JSON.stringify(log));
  await p.screenshot({path:'end.png'});
- const op=(log.find(e=>/ouvre ses portes/.test(e.t))||{}).s;
- const blq=['modal','event','reunion'];const L=log.filter(e=>e.ch!=='guide'&&e.ch!=='RELOAD');
+ // l'ouverture est lue dans le jeu (variable started) : le message de la bulle peut être tu
+ const op=(log.find(e=>e.ch==='ouverture')||log.find(e=>/ouvre ses portes/.test(e.t))||{}).s;
+ const blq=['modal','event','reunion'];const L=log.filter(e=>e.ch!=='guide'&&e.ch!=='RELOAD'&&e.ch!=='ouverture');
  const avant=op==null?L:L.filter(e=>e.s<op),apres=op==null?[]:L.filter(e=>e.s>=op);
  const span=apres.length?(apres.at(-1).s-op)/60:0;
  console.log(`${L.length} messages enregistrés · ouverture à ${op==null?'?':Math.round(op)+' s'}`);
