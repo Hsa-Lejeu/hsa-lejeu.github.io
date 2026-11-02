@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v520')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v521')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5560,7 +5560,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v520')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v521')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -11959,9 +11959,9 @@ body:has(#app.open) #alst,body:has(#fmo) #alst,body:has(#rw) #alst{display:none}
   return{w,nm,lab:null,urg:0}};
  // ---- alertes persistantes (sans pause)
  const box=document.createElement('div');box.id='alst';document.body.appendChild(box);const EVA=[];
- const evWatch=()=>{const e=document.getElementById('ev');if(!e)return;let last='';new MutationObserver(()=>{try{const t=e.textContent||'';if(t===last)return;last=t;if(e.className!=='bad')return;if(/SAMU|surdose|overdose|hôpital|urgences|s’est piqué|accident/i.test(t)&&!/DASRI|naloxone|conteneur/i.test(t)&&!EVA.some(o=>o.t===t)){EVA.push({t,until:performance.now()+30000});if(EVA.length>2)EVA.shift();draw()}}catch(_){}}).observe(e,{childList:true,characterData:true,subtree:true})};setTimeout(evWatch,1500);
+ const evWatch=()=>{const e=document.getElementById('ev');if(!e)return;let last='';new MutationObserver(()=>{try{const t=e.textContent||'';if(t===last)return;last=t;if(e.className!=='bad')return;if(/SAMU|surdose|overdose|hôpital|urgences|s’est piqué|accident/i.test(t)&&!/DASRI|naloxone|conteneur/i.test(t)&&!EVA.some(o=>o.t===t)){EVA.push({t,until:performance.now()+30000});if(EVA.length>2)EVA.shift();draw()}}catch(_){}}).observe(e,{childList:true,characterData:true,subtree:true})};/* v521 : les événements passés restent dans la bulle seulement (RYTHME règle 1) */
  let sig='';const draw=()=>{try{if(!started||ended){box.innerHTML='';sig='';return}const now=performance.now();for(let k=EVA.length-1;k>=0;k--)if(EVA[k].until<now)EVA.splice(k,1);const L=[];for(let i=0;i<9;i++){if(!built[i])continue;const c=closeFix(i);if(c&&c.urg)L.push({i,c})}
-   const s=L.map(o=>o.i+o.c.w).join('|')+'#'+EVA.map(o=>o.t).join('|');if(s===sig)return;sig=s;box.innerHTML='';
+   const s=L.map(o=>o.i+o.c.w).join('|')+'#'+EVA.map(o=>o.t).join('|');if(s===sig)return;sig=s;box.querySelectorAll('.al:not(.my):not(.my2)').forEach(e=>e.remove());
    L.forEach(({i,c})=>{const d=document.createElement('div');d.className='al';d.innerHTML=`⛔ ${c.nm} ${FEMR(i)?'fermée':'fermé'} : ${c.w}<small>${c.lab?'Toucher : '+c.lab:''}</small>`;d.onclick=()=>{try{c.f&&c.f()}catch(_){}};box.appendChild(d)});
    EVA.forEach(o=>{const d=document.createElement('div');d.className='al ev';d.innerHTML=`${o.t}<small>Toucher pour fermer</small>`;d.onclick=()=>{const k=EVA.indexOf(o);if(k>=0)EVA.splice(k,1);sig='';draw()};box.appendChild(d)})}catch(_){}};setInterval(draw,700);
  // ---- la roue d'une salle fermée montre la raison et le bouton pour la rouvrir ; « Vider le DASRI » dans les actions
@@ -12292,12 +12292,12 @@ setInterval(()=>{try{if(YR!==1||document.getElementById('m').hidden)return;const
 @keyframes qgo{0%{transform:scale(7) rotate(-14deg);opacity:0}55%{transform:scale(.85) skew(-8deg);opacity:1}100%{transform:scale(1.05) skew(-8deg)}}
 `;document.head.appendChild(st)}
 
-// ===== v520 : l'aiguilleur des messages (RYTHME.md, règles 2 à 7)
+// ===== v520-521 : l'aiguilleur des messages (RYTHME.md, règles 2 à 7)
 // Tous les canaux déposent leurs messages dans une seule file. L'aiguilleur montre :
 // une seule fenêtre bloquante à la fois, rien par-dessus, un seul message d'information à la fois,
 // avec les délais et le temps de lecture de RYTHME.md.
 {const AG=window.AG={q:[],seq:0,clock:0,lastB:-1e9,lastL3:-1e9,lastTip:-1e9,bubUntil:0,calmDay:-1,curB:0,prevB:false,wasMeet:false,uAt:-1e9,rel:0,log:[]};
- const $i=id=>document.getElementById(id);
+ const $i=id=>document.getElementById(id),lg=(a,b)=>{AG.log.push([+AG.clock.toFixed(1),a,b]);if(AG.log.length>200)AG.log.shift()};
  const DANG=/surdose|overdose|accident d.exposition|piqûre accidentelle/i,BIL=/bilan|chapitre|fin de l.année|réunion|fin du mois|le point/i;
  ['pointerdown','click','keydown','touchstart'].forEach(ev=>document.addEventListener(ev,e=>{if(e.isTrusted)AG.uAt=performance.now()},true));
  const userNow=()=>{try{const e=window.event;if(e&&e.isTrusted&&/click|pointer|touch|key|mouse/.test(e.type))return true}catch(_){}return performance.now()-AG.uAt<400};
@@ -12335,9 +12335,12 @@ setInterval(()=>{try{if(YR!==1||document.getElementById('m').hidden)return;const
  {const _pw=window.popWin;if(typeof _pw==='function'){window.popWin=function(o){try{if(AG.rel||userNow())return _pw.apply(this,arguments);const p=clsO(o);if(p===1&&!mOpen()&&!others())return _pw.apply(this,arguments);
     AG.push({lvl:1,pri:p,kind:'pw',run(){AG.rel=1;try{_pw.call(window,o)}finally{AG.rel=0}}});return}catch(_){return _pw.apply(this,arguments)}};try{popWin=window.popWin}catch(_){}}}
  // ---- niveau 3 : la bulle de Camille
+ const fam=s=>{if(/Encore un effort|ouvre ses portes|emplacement de|aménagée|Recrute maintenant|recruté·e|Naloxone en stock|Recrute quelqu/i.test(s))return 'guide';if(/DASRI|conteneur/i.test(s))return 'dasri';const m=s.match(/^\S*\s*([A-ZÀ-Ý][\wÀ-ÿ’'-]+) (?:est fatigué|est en arrêt|part souffler|est à bout|revient)/);if(m)return 'stf:'+m[1];if(/tranquillité/i.test(s))return 'q';return null};
  {const _cs=window.camSay;if(typeof _cs==='function'){window.camSay=function(t,cls){try{const s=String(t||'').trim();if(!s||AG.rel||(typeof CAM!='undefined'&&s===CAM.full))return _cs.apply(this,arguments);
-    for(let i=AG.q.length-1;i>=0;i--)if(AG.q[i].kind==='say'&&AG.q[i].t===s)AG.q.splice(i,1);
-    AG.push({lvl:3,pri:DANG.test(s)?1:/ouvre ses portes|Chapitre/.test(s)?3:5,kind:'say',t:s,noexp:/ouvre ses portes|🔓|Chapitre/.test(s),run(){AG.rel=1;try{_cs.call(window,s,cls)}finally{AG.rel=0}const ms=1000+40*s.length;AG.bubUntil=performance.now()+ms;try{CAM.until=AG.bubUntil}catch(_){}return true}});return}catch(_){return _cs.apply(this,arguments)}};try{camSay=window.camSay}catch(_){}}}
+    const fm=fam(s);for(let i=AG.q.length-1;i>=0;i--){const x=AG.q[i];if(x.kind==='say'&&(x.t===s||(fm&&x.fam===fm)))AG.q.splice(i,1)}
+    const it={fam:fm,lvl:3,pri:DANG.test(s)?1:/ouvre ses portes|Chapitre/.test(s)?3:5,kind:'say',t:s,noexp:/ouvre ses portes|🔓|Chapitre/.test(s),run(){AG.rel=1;try{_cs.call(window,s,cls)}finally{AG.rel=0}const ms=1000+40*s.length;AG.bubUntil=performance.now()+ms;try{CAM.until=AG.bubUntil}catch(_){}return true}};
+    if(userNow()&&!blocker()){it.run();AG.lastL3=AG.clock;lg('say-user',s.slice(0,40));return}
+    AG.push(it);return}catch(_){return _cs.apply(this,arguments)}};try{camSay=window.camSay}catch(_){}}}
  // ---- niveau 3 : « Nouveau ! »
  {const _ul=window.ulSide;if(typeof _ul==='function'){window.ulSide=function(e){try{if(AG.rel)return _ul.apply(this,arguments);let e2=e;
     // règle 7 : l'onglet Quartier n'a plus de conseil, il est annoncé avec la maraude
@@ -12346,8 +12349,12 @@ setInterval(()=>{try{if(YR!==1||document.getElementById('m').hidden)return;const
  // ---- niveau 3 : conseils de Camille (règle 7)
  const DEL=new Set(['acc','unl','wheel','spd','call','room','date','yr','stock','das','quart']);
  const DONE={syr:()=>typeof SYP!='undefined'&&SYP>0,card:()=>!!B.albSeen,tired:()=>!!B.restDone,eu:()=>!!B.euSeen};
- {const _ct=window.ctip;if(typeof _ct==='function'){window.ctip=function(k,t,e){try{if(AG.rel)return _ct.apply(this,arguments);if(DEL.has(k))return;if(DONE[k]&&DONE[k]())return;if((B.tips||{})[k])return;if(AG.q.some(x=>x.kind==='tip'&&x.k===k))return;
-    AG.push({lvl:3,pri:5,kind:'tip',k,noexp:1,run(){if(DONE[k]&&DONE[k]())return false;AG.rel=1;try{_ct.call(window,k,t,e)}finally{AG.rel=0}const b=$i('ctip');return !!(b&&b.classList.contains('on'))}});return}catch(_){return _ct.apply(this,arguments)}};try{ctip=window.ctip}catch(_){}}}
+ {const _ct=window.ctip;if(typeof _ct==='function'){window.ctip=function(k,t,e){try{if(AG.rel)return _ct.apply(this,arguments);
+    // un conseil supprimé ou devenu inutile est marqué comme vu : sinon la boucle des conseils reste bloquée dessus
+    if(DEL.has(k)||(DONE[k]&&DONE[k]())){B.tips=B.tips||{};B.tips[k]=1;return}if((B.tips||{})[k])return;if(AG.q.some(x=>x.kind==='tip'&&x.k===k))return;
+    AG.push({lvl:3,pri:4,kind:'tip',k,noexp:1,run(){lg('tip',k);if(DONE[k]&&DONE[k]()){B.tips=B.tips||{};B.tips[k]=1;return false}AG.rel=1;try{_ct.call(window,k,t,e)}finally{AG.rel=0}const b=$i('ctip');return !!(b&&b.classList.contains('on'))}});return}catch(_){return _ct.apply(this,arguments)}};try{ctip=window.ctip}catch(_){}}}
+ // « hi » est gardé (RYTHME règle 7) : il revient, une fois la halte ouverte
+ window.tipHello=()=>{try{if(B.tipHi)return;B.tipHi=1;B.q0=q;ctip('hi','La halte est ouverte ! Pour le reste, je t’expliquerai au fur et à mesure, quand ça se présentera. Cette année, un seul objectif : que les gens entrent, soient bien reçu·es, et reviennent. (Le tutoriel complet est dans ☰.)')}catch(_){}};
  // l'action déjà faite rend le conseil inutile
  {const _al=window.album;if(typeof _al==='function'){window.album=function(){try{B.albSeen=1}catch(_){}return _al.apply(this,arguments)};try{album=window.album}catch(_){}}}
  document.addEventListener('click',e=>{try{const u=$i('eu');if(u&&u.parentNode&&u.parentNode.contains(e.target))B.euSeen=1}catch(_){}},true);
