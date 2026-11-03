@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v530')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v531')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5560,7 +5560,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v530')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v531')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -12671,6 +12671,49 @@ window.drumRoll=function(d){try{if(typeof AU=='undefined'||!AU.ctx||AU.s<=0)retu
  // la Marseillaise s'efface pendant le roulement
  try{if(typeof MRSP!='undefined'&&MRSP&&MRSP.out)MRSP.out.gain.setTargetAtTime(MRSP.out.gain.value*.2,c.currentTime,.4)}catch(_){}
  return()=>{try{out.gain.setTargetAtTime(0,c.currentTime,.03)}catch(_){}}}catch(_){return()=>{}}};
+
+// ===== v531 : paysage — le panneau de gauche redessiné (une seule carte, lignes séparées, date sur une ligne, jauges alignées et lisibles)
+(function(){const st=document.createElement('style');st.id='v531';st.textContent=`@media (orientation:landscape) and (max-height:600px){
+ html body #app #hud{width:134px!important}
+ html body #app #hplank{background:#fffaf0!important;border:3px solid #2a2433!important;border-image:none!important;border-radius:12px!important;box-shadow:0 3px 0 rgba(0,0,0,.28)!important;padding:4px 7px 6px!important;gap:0!important;box-sizing:border-box!important}
+ html body #app #hplank>div,html body #app #hud>#spw{background:transparent!important;border:0!important;border-image:none!important;box-shadow:none!important;border-radius:0!important;margin:0!important;padding:4px 0!important;min-height:0!important}
+ html body #app #hplank>div:not(:last-child){border-bottom:1px dashed #d6c6a2!important}
+ html body #app #hplank .euw,html body #app #hplank .euw+div{display:flex!important;align-items:center!important;gap:5px!important;flex-wrap:nowrap!important}
+ html body #app #hplank .euw img.pxi{width:21px!important;height:auto!important;flex:none}
+ html body #app #hplank .euw+div img.pxi{width:auto!important;height:16px!important;flex:none;margin:0 3px 0 2px}
+ html body #app #hplank #eu{font:400 18px/1 Lilita,'Atkinson Hyperlegible',sans-serif!important;color:#2a2433}
+ html body #app #hplank #ac{font:400 17px/1 Lilita,'Atkinson Hyperlegible',sans-serif!important;color:#2a2433;margin-left:1px}
+ html body #app #hplank #euf,html body #app #hplank #acip{display:block!important;margin-left:auto!important;font-size:10px!important;line-height:1.1!important;text-align:right;white-space:nowrap}
+ html body #app #hplank #acip{color:#7a6c5a!important}
+ html body #app #hplank .euw+div{position:relative!important;overflow:visible!important}
+ html body #app #hplank{overflow:visible!important}
+ html body #app #hplank #cbh:not(:empty){position:absolute!important;left:calc(100% + 10px)!important;top:50%!important;transform:translateY(-50%)!important;margin:0!important;display:flex!important;align-items:center!important;gap:1px!important;background:#e8780e!important;color:#fff!important;border:2px solid #2a2433!important;border-radius:10px!important;padding:0 6px 0 3px!important;font:400 14px/18px Lilita,'Atkinson Hyperlegible',sans-serif!important;text-shadow:0 1px 0 #9a3f00!important;box-shadow:0 2px 0 rgba(0,0,0,.3)!important;white-space:nowrap;z-index:2}
+ html body #app #hplank #cbh.hot{background:#e0405a!important}
+ html body #app #hplank #cbh img.pxi{width:14px!important;height:14px!important;margin:0!important}
+ html body #app #hplank .date{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:3px!important}
+ html body #app #hplank .date #pl{font:700 11px/1.2 'Atkinson Hyperlegible',sans-serif!important;white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis;color:#2a2433;display:flex!important;align-items:center;gap:3px}
+ html body #app #hplank .date #pl img.pxi:first-child{display:none!important}
+ html body #app #hplank .date #pl img.pxi{width:13px!important;height:13px!important}
+ html body #app #hplank .date .bar{display:block!important;height:5px!important;width:auto!important;border:0!important;border-radius:3px!important;background:#e8dcc0!important;margin:0!important;box-shadow:none!important;padding:0!important;overflow:hidden}
+ html body #app #hplank .date .bar #pf{height:100%!important;margin:0!important;border-radius:3px!important;position:static!important}
+ html body #app #hud>#spw,html body #app #hplank #spw{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;gap:4px!important;max-width:none!important;width:auto!important}
+ html body #app #spw .r{flex:0 0 100%!important;width:100%!important}
+ html body #app #chapc{margin:0!important;font-size:11px!important;border-width:2px!important}
+ html body #app #obc{align-self:flex-start!important;font-size:11px!important;padding:1px 7px!important;border-width:2px!important;margin:0 0 1px!important}
+ html body #app #obc::after{content:' à faire';font-weight:400}
+ html body #app #chapc:not(.yrh):not([style*="none"])+#obc::after{content:none}
+ html body #app #spw .r{display:flex!important;align-items:center!important;gap:4px!important;height:15px}
+ html body #app #spw .r .ic{width:20px!important;flex:none!important;display:flex!important;justify-content:center!important;align-items:center!important}
+ html body #app #spw .r .ic img.pxi{height:15px!important;width:auto!important;max-width:20px}
+ html body #app #spw .r .bar{flex:1!important;height:14px!important;background:#ece1c8!important;border:2px solid #2a2433!important;border-image:none!important;border-radius:4px!important;box-sizing:border-box!important;position:relative!important;overflow:hidden!important;box-shadow:inset 0 2px 0 rgba(0,0,0,.08)!important;margin:0!important}
+ html body #app #spw .r .bar>i{position:absolute!important;left:0!important;top:0!important;bottom:0!important;height:auto!important;border-radius:0!important;margin:0!important}
+ html body #app #spw .r .blab{position:absolute!important;inset:0 4px!important;transform:none!important;top:0!important;bottom:0!important;height:auto!important;display:flex!important;align-items:center!important;justify-content:flex-end!important}
+ html body #app #spw .r .blab span{font:700 9.5px/1 'Atkinson Hyperlegible',sans-serif!important;color:#2a2433!important;text-shadow:0 0 2px #fffaf0,0 0 2px #fffaf0,0 0 1px #fffaf0!important}
+}`;document.head.appendChild(st);
+ const MC={'Janvier':'Janv.','Février':'Févr.','Juillet':'Juil.','Septembre':'Sept.','Octobre':'Oct.','Novembre':'Nov.','Décembre':'Déc.'},MRX=/Janvier|Février|Juillet|Septembre|Octobre|Novembre|Décembre/;
+ const ab=()=>{try{if(!(innerWidth>innerHeight&&innerHeight<=600))return;const pl=document.getElementById('pl');if(!pl)return;const w=document.createTreeWalker(pl,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){if(MRX.test(n.nodeValue))n.nodeValue=n.nodeValue.replace(MRX,m=>MC[m])}}catch(_){}};
+ setInterval(()=>{ab();try{const e=document.getElementById('eu');if(e)e.style.color=/^\s*[-−]/.test(e.textContent)?'#c8322a':''}catch(_){}},300);try{const pl=document.getElementById('pl');if(pl)new MutationObserver(ab).observe(pl,{childList:true,subtree:true,characterData:true})}catch(_){}
+ setInterval(()=>{try{if(!(innerWidth>innerHeight&&innerHeight<=600))return;const pk=document.getElementById('hplank'),sp=document.getElementById('spw');if(pk&&sp&&sp.parentNode!==pk)pk.appendChild(sp)}catch(_){}},500)})();
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
