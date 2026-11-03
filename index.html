@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v532')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v533')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5560,7 +5560,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v532')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v533')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -12778,7 +12778,7 @@ body.aigB .edg,body.aigB #hxpop,body:has(#app.open) .edg,body:has(#rw) .edg,body
   if(qOn&&qVis){qr.classList.add('hxr');const b=mkB('hxq',qr,qr.firstChild);b.onclick=e=>{e.stopPropagation();pop(b,`<b>🏘️ Quartier à bout : ${Math.max(0,Math.round(q))} %</b>${YR==2?'À 0 %, le conseil de quartier vote la fermeture.':'À 0 %, la confiance s’effondre et la halte ferme.'}`,'🌳 Actions du quartier',()=>tab(3))}}else rmB('hxq');
   tabB(3,qOn&&!qVis);
   // naloxone presque épuisée, départ d'un·e collègue
-  let nl=false;try{nl=!!(built[1]&&S.n<2)}catch(_){}tabB(1,nl);tabB(0,!!DEP);
+  let nl=false;try{nl=!!(built[1]&&S.n<2)}catch(_){}tabB(1,nl);tabB(0,!!DEP||STF.length==0);
  }catch(_){}},500);
  // ---- appels et salles fermées : icône au bord de l'écran quand l'événement est hors de la vue
  const E={};
@@ -12845,6 +12845,35 @@ html body body:has(#ctip.on) #qbub,body:has(#ctip.on) #qbub{display:none!importa
   document.querySelectorAll('#mb .atab').forEach(b=>{const t=(b.textContent||'').trim()||b.dataset.lb||'';if(!b.dataset.lb&&t)b.dataset.lb=t;const ic=AIC[b.dataset.lb]||'📁';if(b.dataset.ic!==ic){b.dataset.ic=ic;b.title=b.dataset.lb}});
   if(narrow){const t0=document.getElementById('t0');if(t0){const w=document.createTreeWalker(t0,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){if(/Salle de consommation ·/.test(n.nodeValue))n.nodeValue=n.nodeValue.replace(/Salle de consommation ·/g,'Conso ·')}}}
  }catch(_){}},400);
+})();
+
+// ===== v533 : bouton OK de Camille discret ; onglets : rouge seulement pour une action attendue, contour pour une nouveauté ;
+// bulles des passants : jamais au-dessus des salles ; « +15 € » seulement près de sa source ; album : titres des cartes lisibles
+(function(){const st=document.createElement('style');st.textContent=`
+html body #ctip button,html body #ctip .tx button{min-width:0!important;min-height:0!important;height:auto!important;padding:3px 14px!important;font-size:12px!important;line-height:1.2!important;position:relative;border-width:4px 3px 6px!important}
+html body #ctip button::after{content:"";position:absolute;inset:-10px -8px}
+#tabs .dot{display:none!important}
+#tabs .hxn{display:none!important}
+#tabs button.tnew{box-shadow:0 0 0 3px #ffd23f,0 0 12px 3px rgba(255,210,63,.8)!important;border-radius:10px}
+#mb .abk .aslot .ast,#mb .aslot .ast{white-space:normal!important;text-overflow:clip!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;font:700 9.5px/1.12 'Atkinson Hyperlegible',sans-serif!important;max-height:none!important;height:auto!important;padding:2px 3px 3px!important}
+#mb .aslot.on{aspect-ratio:auto!important}
+#mb .aslot.on,#mb .aslot.anew{overflow:visible!important}
+#mb .agr>*{min-width:0!important}
+#mb .aslot.on .ast{word-break:normal;overflow-wrap:anywhere;font-family:'Atkinson Hyperlegible',sans-serif!important;-webkit-text-stroke:0!important;text-shadow:none!important;color:#2a2433!important;font-weight:700!important;letter-spacing:-.02em;-webkit-line-clamp:4!important;max-height:4.6em!important;padding:2px 2px 3px!important;font-size:8.5px!important;line-height:1.08!important}
+html body #mb .abk .aslot.on .ast{-webkit-line-clamp:4!important;max-height:4.6em!important}
+#mb .aslot.on .cil{width:calc(100% - 6px)!important;margin:0 3px!important}
+#mb .aslot.on canvas{border-radius:4px 4px 0 0}
+html body #mb button.aslot.on{padding:0!important}
+#mb .aslot.anew::after{top:-15px!important;left:auto!important;right:-8px!important;transform:rotate(8deg)!important;font-size:9px!important;padding:2px 4px!important;z-index:3}
+@media (orientation:landscape) and (max-height:600px){#mb .atab{font-size:0!important;padding:0!important;min-width:34px}#mb .atab::before{content:attr(data-ic);font-size:16px;line-height:1}}
+`;document.head.appendChild(st);
+ // onglets : contour pour les nouveautés (plus de point rouge)
+ setInterval(()=>{try{const N=(typeof B!='undefined'&&B.nw)||{};document.querySelectorAll('#tabs button').forEach(b=>{const m=/tab\((\d+)\)/.exec(b.getAttribute('onclick')||'');if(!m)return;const n=+m[1];const nw=!!b.querySelector('.hxn')||!!(N[n]&&N[n].length)||(n===4&&!!(N[2]&&N[2].length));b.classList.toggle('tnew',nw&&!b.querySelector('.hxt'))})}catch(_){}},400);
+ // passants : pas de bulle au-dessus de la halte (on peut toujours toucher la personne pour lire)
+ {const _tk=window.talk;if(typeof _tk==='function'){window.talk=function(n,t,p,full){try{if(!p&&full!=='full'&&!(typeof MEET!='undefined'&&MEET)){const v=V.find(w=>w.name==n&&!w.gone);if(v&&v.x!=null&&v.x>=-2&&v.x<178&&v.y>=-2&&v.y<185){v.lt={t,at:GT};try{LG.unshift(`<b>${n}</b> : « ${t} »`);LG.length=3}catch(_){}return}}}catch(_){}return _tk.apply(this,arguments)};try{talk=window.talk}catch(_){}}}
+ // argent : le chiffre monte depuis la personne ou la salle ; plus de doublon par-dessus l'argent
+ {let lastF=-1e9;const _f=window.flt;if(typeof _f==='function'){window.flt=function(o,txt){try{if(/€/.test(String(txt)))lastF=performance.now()}catch(_){}return _f.apply(this,arguments)};try{flt=window.flt}catch(_){}}
+  new MutationObserver(ms=>{const now=performance.now();ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.classList&&n.classList.contains('eufl')&&/^\+/.test(n.textContent||'')&&now-lastF<600)n.remove()}))}).observe(document.getElementById('hud')||document.body,{childList:true,subtree:true})}
 })();
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
