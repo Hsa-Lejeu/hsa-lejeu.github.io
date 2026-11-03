@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v535')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v536')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5560,7 +5560,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v535')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v536')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -11006,12 +11006,12 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
   let terK='major';window.__terF=null;
   const TDS={major:'Sur le parvis de la Major : beaucoup de passage, et la cathédrale derrière.',carli:'Au Carli, cours Julien : de l’herbe, de la musique, et quelques cailloux sur le terrain.',panier:'Au Panier : les touristes, la Bonne Mère, et un terrain pas tout à fait plat.',canebiere:'Sur la Canebière : ça monte ! Il faut pointer plus fort pour que la boule grimpe jusqu’au cochonnet.',calanques:'Dans les Calanques : la mer, les randonneurs, et de gros rochers en plein terrain.'};
   ov.innerHTML=`<div class="card0 arcd"><div class="ttlw"><div class="ttl"><span>STREET</span><br><span>PÉTANQUEUR</span></div><div class="sub">★ LE TOURNOI DU QUARTIER ★</div></div>
-  Avant le vote du conseil de quartier, le comité de voisinage et la halte organisent un tournoi de pétanque. Une seule règle : <b>chaque triplette mélange riverains et usager·es de la halte</b>.<br><br>
-  En face, le club de la Boule d’en face, qui ne perd jamais. Tout le quartier sera là : une belle partie peut faire changer bien des avis avant le vote.
+  <div class="ctx">Avant le vote du conseil de quartier, le comité de voisinage et la halte organisent un tournoi de pétanque. Une seule règle : <b>chaque triplette mélange riverains et usager·es de la halte</b>.<br><br>
+  En face, le club de la Boule d’en face, qui ne perd jamais. Tout le quartier sera là : une belle partie peut faire changer bien des avis avant le vote.</div>
   <div class="terw"><span class="lb">EN 2 MANCHES GAGNANTES · CHOISIS TON TERRAIN (SINON : TIRÉ AU SORT À CHAQUE MANCHE)</span><div class="ters"><button data-t="major">⛪ La Major</button><button data-t="carli">🎶 Le Carli</button><button data-t="panier">📸 Le Panier</button><button data-t="canebiere">⛰️ La Canebière</button><button data-t="calanques">🌊 Les Calanques</button></div><small id="qterd"></small></div>
   <div class="sline"><span id="qslt"></span><button class="sec" id="qsnt" title="Tester le son" aria-label="Tester le son">🔊</button></div>
   <div class="coin">▶ INSÈRE UNE PIÈCE · APPUIE SUR START</div><div class="btns"><button class="sec" id="qpsk">Laisser l’équipe jouer sans moi</button><button id="qpgo" class="start">START · Composer l’équipe</button></div></div>`;
-  $('#qpgo').onclick=selScreen;
+  $('#qpgo').onclick=selScreen;if(force){$('.card0').classList.add('fun');ov.classList.add('pfun')}
   const refT=()=>{ov.querySelectorAll('.ters button').forEach(b=>b.classList.toggle('on',!!window.__terF&&b.dataset.t===terK));const d=$('#qterd');if(d)d.textContent=TDS[terK]};ov.querySelectorAll('.ters button').forEach(b=>b.onclick=()=>{terK=b.dataset.t;refT();blip()});refT();window.__terSet=k=>{terK=k;window.__terF=k;refT()};
   $('#qsnt').onclick=()=>{try{if(typeof AU!=='undefined'&&AU.s<=0){AU.s=.7;try{auVol()}catch(_){}try{localStorage.setItem('hsa-vol',JSON.stringify({m:AU.m,s:AU.s}))}catch(_){}}}catch(_){}const a=AC();psLoad();okS();setTimeout(()=>{psfx('magic',.9);try{dsfx('shing',.8)}catch(_){}},150);setTimeout(()=>{const st=petaSndState();const e=$('#qslt');if(e)e.textContent=st[1]+(st[0]==='ok'?' — tu devrais avoir entendu un « ding » et un coup de magie.':'')},500)};$('#qpsk').onclick=()=>{const w=Math.random()<.55,o=Math.random()<.5?0:1;window.__pqPts=null;result(w?2:o,w?o:2,true)};
   // ---------- 2. choix des joueurs façon arcade ----------
@@ -11079,7 +11079,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
    <div class="mn" id="qmn"></div><button class="qmenu" id="qmenu" aria-label="Menu">≡</button><div class="sc th"><div class="l">En face<b id="qs1">0</b></div><div class="gauge" id="qg1"><i></i></div></div></div>
    <div class="wrap"><canvas id="qpcv" width="${W}" height="${H}"></canvas><div class="bub off" id="qbub"></div><div class="ban off" id="qban"></div><div class="cmd" id="qcmd" role="menu" hidden></div><div class="ctag" id="qctag" hidden></div></div>
    <div class="pan"><div class="pls" id="qpls"></div><div class="hint" id="qhint"></div></div></div>`;
-   const cv=$('#qpcv'),g=cv.getContext('2d');g.imageSmoothingEnabled=false;petaMus('peta');
+   const cv=$('#qpcv'),g=cv.getContext('2d');window.__pg=g;window.__pcv=cv;window.__pv=innerHeight>innerWidth;window.__psv=0;g.imageSmoothingEnabled=false;petaMus('peta');
    const se=seas();
    // décor pré-dessiné
    // (les marques de touche sont remises à zéro à chaque lancer)
@@ -11143,7 +11143,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
      cliff([[W,1],[W,-80],[W-22,-90],[W-40,-74],[W-60,-82],[W-80,-60],[W-96,-48],[W-112,-26],[W-124,-8],[W-130,1]],'#e2ddd0','#c4bdac');
      [[12,-90],[30,-80],[58,-86],[W-20,-88],[W-50,-80],[W-74,-62]].forEach(([x,y],i)=>{g3.fillStyle=i%2?'#2f5a32':'#3a6a3a';g3.beginPath();g3.ellipse(x,top+y,7,3.5,0,0,7);g3.fill();R(x-1,y,2,4,'#5a3a2a')});
      R(0,-1,W,2,'#b8b0a0')}}
-   const bg=document.createElement('canvas');bg.width=W;bg.height=H;const bgG=document.createElement('canvas');bgG.width=W;bgG.height=H;function paintBG(){const b=bg.getContext('2d');b.imageSmoothingEnabled=false;b.clearRect(0,0,W,H);
+   const bg=document.createElement('canvas');bg.width=W;bg.height=H;const bgG=document.createElement('canvas');bgG.width=W;bgG.height=H;function paintBG(){const b=bg.getContext('2d');window.__pbg=b;b.imageSmoothingEnabled=false;b.clearRect(0,0,W,H);
     paintGround(b,0,H);
     if(TK==='panier'){ // façades du village en haut, linge, guirlande
      let q=13;const rr=()=>(q=(q*16807)%2147483647)/2147483647;let x=-4;while(x<W){const w=36+rr()*22,c=['#e8d6b0','#f0c8a8','#e6dcc4','#d9b98f','#e2c9b2'][(rr()*5)|0];b.fillStyle=c;b.fillRect(x,0,w,27);b.fillStyle='#b55a3c';b.fillRect(x,0,w,3);b.fillStyle='#2a2433';b.fillRect(x+w-1,0,1,27);
@@ -11755,7 +11755,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     {const w_=$('.wrap');if(w_)w_.classList.toggle('aim3',!!(aim&&phase==='select'))}
     {const tirTurn=(phase==='select'&&mode==='T'),inAir=pending&&pending.m==='T'&&(phase==='throw'||(phase==='roll'&&pending.ball&&pending.ball.air>0));const tg=(tirTurn||inAir)?1:0;
      if(tg){sv+=(1-sv)*Math.min(1,dt*4);svOut=0}else if(sv>0){svOut+=dt;sv=Math.max(0,1-svOut/.22);if(sv<.005)sv=0}
-     if(sv>0){sideView(now,tg?sv:1,v,sm3);g.globalAlpha=tg?Math.min(1,sv*5):sv;g.drawImage(c3,0,0);g.globalAlpha=1}}
+     window.__psv=(tg||sv>0)?1:0;if(sv>0){sideView(now,tg?sv:1,v,sm3);g.globalAlpha=tg?Math.min(1,sv*5):sv;g.drawImage(c3,0,0);g.globalAlpha=1}}
     raf=requestAnimationFrame(frame);
    }
    window.__pq2={ob:()=>{const c=coch();balls.push({x:c.x+12,y:c.y+3,vx:0,vy:0,r:RB,m:1,team:1,alive:true,air:0});return balls.length},duo:id=>{const p=S.us.find(q=>q.id===id);if(!p)return 'nop';const d=duoInfo(p);if(!d)return 'none';jauge[0]=200;curP=p;useDuo(p,null);return d.k},pow:(id,tx,ty)=>{const p=S.us.find(q=>q.id===id);if(!p)return 'nop';jauge[0]=200;usePower(0,p,tx!=null?{x:tx,y:ty}:null);return 'ok'},ai:n=>{jauge[1]=n},st:()=>({phase,itch:FX.itch.slice(),mag:FX.mag.length,sard:FX.sard.length,mud:FX.mud.length,oil:FX.oil.length,balls:balls.length,rocks:rocks.length,bumps:bumps.length,tk:TK,score:S.score.slice(),j2:balls.filter(b=>b.team===-2).length,them:S.them.map(p=>p.left+(p.sard?'s':'')),hold:(holder()||{}).team})};
@@ -12919,6 +12919,75 @@ html body #peta{background:#0f0a16 repeating-linear-gradient(115deg,transparent 
  // en portrait : le menu d'action quitte le terrain pour le panneau du bas
  setInterval(()=>{try{const ov=document.getElementById('peta');if(!ov)return;const m=ov.querySelector('#qcmd'),pan=ov.querySelector('.pan');if(!m||!pan)return;const port=innerHeight>innerWidth;
   if(port&&m.parentNode!==pan){const h=pan.querySelector('#qhint');pan.insertBefore(m,h||null)}else if(!port&&m.parentNode===pan){const w=ov.querySelector('.wrap');if(w)w.appendChild(m)}}catch(_){}},250);
+})();
+
+// ===== v536 : Street Pétanqueur — depuis la halte (fin de l'an 2) : une annonce, puis directement le choix des joueurs avec le titre qui saute à l'écran ;
+// depuis le menu principal : l'écran titre sans le contexte (partie pour le fun)
+(function(){const st=document.createElement('style');st.textContent=`
+#peta .card0.fun .ctx,#peta .card0.fun #qpsk,#peta .card0.fun .coin{display:none!important}
+#peta .card0.fun .ttlw{margin-bottom:6px}
+#peta .card0.fun .sline{border:0!important;background:none!important;padding:0!important}
+#peta.pfun .qsqx{display:none!important}
+#peta.jmp .card0{visibility:hidden!important}
+#peta .jtl{position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,#3a1a6a,#0b0618 70%)}
+#peta .jtl .ttl{animation:jtl 1.5s cubic-bezier(.2,1.6,.4,1) both}
+#peta .jtl .ttl span:first-child{animation:jtj .5s .35s ease-out both}
+#peta .jtl .ttl span:last-child{animation:jtj .5s .5s ease-out both}
+@keyframes jtl{0%{transform:skew(-11deg) scale(0) rotate(-14deg)}35%{transform:skew(-11deg) scale(1.35) rotate(3deg)}55%{transform:skew(-11deg) scale(.92) rotate(-1deg)}75%{transform:skew(-11deg) scale(1.08)}100%{transform:skew(-11deg) scaleY(1.12) scale(1)}}
+@keyframes jtj{0%{transform:translateY(0)}40%{transform:translateY(-22px)}70%{transform:translateY(4px)}100%{transform:translateY(0)}}
+#peta .jtl.out{animation:jto .35s ease-in forwards}@keyframes jto{to{opacity:0;transform:scale(1.6)}}`;document.head.appendChild(st);
+ const _ps=window.petaShow;if(typeof _ps!=='function')return;
+ const intro=()=>{const ov=document.getElementById('peta');if(!ov)return;ov.classList.add('jmp');const d=document.createElement('div');d.className='jtl';d.innerHTML='<div class="ttlw"><div class="ttl"><span>STREET</span><br><span>PÉTANQUEUR</span></div><div class="sub">★ LE TOURNOI DU QUARTIER ★</div></div>';ov.appendChild(d);
+  try{dsfx('boom',.9)}catch(_){}setTimeout(()=>{try{dsfx('shing',.8)}catch(_){}},420);
+  setTimeout(()=>{d.classList.add('out');setTimeout(()=>{d.remove();ov.classList.remove('jmp');const b=document.getElementById('qpgo');if(b)b.click()},330)},1700)};
+ window.petaShow=function(force,go){
+  if(force||go==='go')return _ps.call(this,force);
+  if(document.getElementById('peta'))return;try{if(B.peta)return;B.peta={st:'ask'}}catch(_){}
+  try{popWin({t:'Le tournoi de pétanque',n:'🏆 Street Pétanqueur',d:'Avant le vote du conseil de quartier, le comité de voisinage et la halte organisent un tournoi de pétanque. Une seule règle : chaque triplette mélange riverains et usager·es de la halte. En face, le club de la Boule d’en face, qui ne perd jamais. Tout le quartier sera là : une belle partie peut faire changer bien des avis avant le vote.',
+   draw:(H,T)=>{H.street();[76,77,79,83,85].forEach((ci,i)=>H.spr(ci,24,30+i*28,86));H.spr(18,T%1.2<.6?24:25,172,88)},
+   btns:[{t:'🎯 Jouer le tournoi<br><small>composer l’équipe et lancer les boules</small>',go:1,f:()=>{try{B.peta=null}catch(_){}_ps.call(window,false);setTimeout(intro,30)}},
+         {t:'Laisser l’équipe jouer sans moi<br><small>le résultat est tiré au sort</small>',f:()=>{try{B.peta=null}catch(_){}_ps.call(window,false);setTimeout(()=>{const b=document.getElementById('qpsk');if(b)b.click()},60)}}]})}catch(e){try{B.peta=null}catch(_){}_ps.call(this,false)}};
+ try{petaShow=window.petaShow}catch(_){}
+})();
+
+// ===== v536 : Street Pétanqueur en portrait — le terrain à la verticale (vu de derrière le lanceur : cercle en bas, cochonnet en haut)
+// le terrain est tourné d'un quart de tour, les personnages et le décor restent debout ; pour Tirer, la vue de côté repasse à l'horizontale
+(function(){const st=document.createElement('style');st.textContent=`
+#peta .game.pv{gap:4px}
+#peta .vhold{position:relative;flex:none;align-self:center}
+#peta .vhold>.wrap{position:absolute!important;margin:0!important;transform-origin:50% 50%}
+#peta .vhold>.vlay{position:absolute;inset:0;pointer-events:none;z-index:6}
+#peta .vhold>.vlay>*{pointer-events:none}
+#peta .vhold.rot>.wrap>.ono,#peta .vhold.rot>.wrap>.ctag,#peta .vhold.rot>.wrap .tband{rotate:90deg}
+#peta .vhold.rot>.wrap>canvas{border-radius:6px}
+#peta .vlay .tband{position:absolute!important;top:10%!important}
+#peta .vlay .cut{position:absolute!important;top:30%!important;height:30%!important}
+`;document.head.appendChild(st);
+ const P=CanvasRenderingContext2D.prototype,_di=P.drawImage,_ft=P.fillText;
+ const mine=c=>window.__pv&&(c===window.__pg||c===window.__pbg);
+ P.drawImage=function(im){try{if(mine(this)&&arguments.length>=5&&!(im instanceof HTMLCanvasElement)){const a=arguments,n=a.length;const dx=n>=9?a[5]:a[1],dy=n>=9?a[6]:a[2],dw=n>=9?a[7]:a[3],dh=n>=9?a[8]:a[4];
+   if(!(dw===16&&dh===16)&&dw<200&&dh<120){this.save();this.translate(dx+dw/2,dy+dh);this.rotate(Math.PI/2);if(n>=9)_di.call(this,im,a[1],a[2],a[3],a[4],-dw/2,-dh,dw,dh);else _di.call(this,im,-dw/2,-dh,dw,dh);this.restore();return}}}catch(_){}return _di.apply(this,arguments)};
+ P.fillText=function(t,x,y){try{if(mine(this)&&this===window.__pg){this.save();this.translate(x,y);this.rotate(Math.PI/2);const r=_ft.call(this,t,0,0,arguments[3]);this.restore();return r}}catch(_){}return _ft.apply(this,arguments)};
+ // mise en page : un support à la taille visible, le terrain tourné dedans
+ let pend=null;
+ const lay=()=>{try{const ov=document.getElementById('peta');if(!ov)return;const game=ov.querySelector('.game'),wrap=ov.querySelector('.wrap');if(!game||!wrap)return;
+  if(!window.__pv||!(innerHeight>innerWidth)){game.classList.remove('pv');return}
+  game.classList.add('pv');let hold=ov.querySelector('.vhold');if(!hold){hold=document.createElement('div');hold.className='vhold';wrap.parentNode.insertBefore(hold,wrap);hold.appendChild(wrap);const vl=document.createElement('div');vl.className='vlay';hold.appendChild(vl)}
+  const vl=hold.querySelector('.vlay');['#qban','#qbub'].forEach(id=>{const e=wrap.querySelector(id);if(e)vl.appendChild(e)});ov.querySelectorAll('.wrap>.tband,.wrap>.cut,.game>.tband,.game>.cut').forEach(e=>vl.appendChild(e));
+  const hud=ov.querySelector('.game .hud'),pan=ov.querySelector('.game .pan');const Aw=Math.min(innerWidth-14,560),Ah=innerHeight-(hud?hud.offsetHeight:56)-(pan?pan.offsetHeight:150)-26;const k=320/180;
+  const side=!!window.__psv;
+  if(side){const w=Aw,h=Math.round(Aw/k);hold.classList.remove('rot');hold.style.width=w+'px';hold.style.height=h+'px';Object.assign(wrap.style,{width:w+'px',height:h+'px',left:'0px',top:'0px',transform:'none'})}
+  else{const Rw=Math.max(150,Math.min(Aw,Ah/k)),Rh=Math.round(Rw*k),ww=Rh,wh=Math.round(Rw);hold.classList.add('rot');hold.style.width=Math.round(Rw)+'px';hold.style.height=Rh+'px';Object.assign(wrap.style,{width:ww+'px',height:wh+'px',left:Math.round((Rw-ww)/2)+'px',top:Math.round((Rh-wh)/2)+'px',transform:'rotate(-90deg)'})}
+ }catch(_){}};
+ setInterval(lay,120);addEventListener('resize',lay);
+ setInterval(()=>{try{const ov=document.getElementById('peta');if(ov&&!ov._pvmo){ov._pvmo=1;new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.classList&&(n.classList.contains('tband')||n.classList.contains('cut')||n.classList.contains('game')))))lay()}).observe(ov,{childList:true,subtree:true})}}catch(_){}},300);
+ // le doigt : on traduit les coordonnées de l'écran vers le terrain tourné
+ const fakeR=new WeakMap();
+ const hook=cv=>{if(cv._pvh)return;cv._pvh=1;const _gb=cv.getBoundingClientRect.bind(cv);
+  cv.getBoundingClientRect=function(){const r=_gb();const hold=cv.closest('.vhold');if(window.__pv&&hold&&hold.classList.contains('rot')){return{left:0,top:0,width:r.height,height:r.width,right:r.height,bottom:r.width,x:0,y:0}}return r};
+  ['pointerdown','pointermove','pointerup','pointercancel'].forEach(t=>cv.addEventListener(t,e=>{if(e.__pv)return;const hold=cv.closest('.vhold');if(!(window.__pv&&hold&&hold.classList.contains('rot')))return;e.stopImmediatePropagation();e.preventDefault();
+   const r=_gb();const vx=r.bottom-e.clientY,vy=e.clientX-r.left;const ne=new PointerEvent(t,{clientX:vx,clientY:vy,pointerId:e.pointerId,pointerType:e.pointerType,isPrimary:e.isPrimary,bubbles:true,cancelable:true,button:e.button,buttons:e.buttons});ne.__pv=1;cv.dispatchEvent(ne)},true))};
+ setInterval(()=>{try{const cv=window.__pcv;if(cv&&cv.isConnected)hook(cv)}catch(_){}},200);
 })();
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
