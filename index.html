@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v531')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v532')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5560,7 +5560,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v531')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v532')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -12714,6 +12714,138 @@ window.drumRoll=function(d){try{if(typeof AU=='undefined'||!AU.ctx||AU.s<=0)retu
  const ab=()=>{try{if(!(innerWidth>innerHeight&&innerHeight<=600))return;const pl=document.getElementById('pl');if(!pl)return;const w=document.createTreeWalker(pl,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){if(MRX.test(n.nodeValue))n.nodeValue=n.nodeValue.replace(MRX,m=>MC[m])}}catch(_){}};
  setInterval(()=>{ab();try{const e=document.getElementById('eu');if(e)e.style.color=/^\s*[-−]/.test(e.textContent)?'#c8322a':''}catch(_){}},300);try{const pl=document.getElementById('pl');if(pl)new MutationObserver(ab).observe(pl,{childList:true,subtree:true,characterData:true})}catch(_){}
  setInterval(()=>{try{if(!(innerWidth>innerHeight&&innerHeight<=600))return;const pk=document.getElementById('hplank'),sp=document.getElementById('spw');if(pk&&sp&&sp.parentNode!==pk)pk.appendChild(sp)}catch(_){}},500)})();
+
+// ===== v532 : portrait — retour de relecture (date et objectif à 360 px, rien sous le portrait de Camille, création du personnage, album…)
+(function(){const st=document.createElement('style');st.id='v532';st.textContent=`
+#cgen .ft{position:sticky;bottom:-8px;background:#fffaf0;padding:6px 0 4px;z-index:2;box-shadow:0 -6px 8px -6px rgba(42,36,51,.25)}
+@media (orientation:portrait){#cgen .pv{flex-direction:row!important;flex-wrap:wrap;justify-content:center;align-items:center}#cgen .pv canvas{width:72px!important;height:117px!important}#cgen .pv .rot{flex-direction:column}}
+#splx .bx{box-sizing:border-box;max-height:calc(100dvh - 16px)!important;overflow-y:auto!important}
+@media (orientation:landscape) and (max-height:600px){
+ html body #ctip{left:calc(env(safe-area-inset-left,0px) + 96px)!important;right:auto!important;margin:0!important;width:auto!important;max-width:min(400px,calc(100vw - 250px))!important;bottom:calc(env(safe-area-inset-bottom,0px) + 8px)!important;padding:6px 10px 6px!important;font-size:12px!important;line-height:1.3!important;border-radius:12px!important}
+ html body #ctip .pt{display:none!important}
+ html body #app #hud #hplank #spw .r,html body #app #hud>#spw .r{flex:0 0 100%!important;width:100%!important;max-width:none!important}
+ html body #app #hud #hplank #spw{flex-wrap:wrap!important;white-space:normal!important}
+ html body #cbub{max-width:min(420px,calc(100vw - 260px))!important;white-space:normal!important}
+ html body #ctip p{margin:1px 0 4px!important}
+ html body #ctip .tx>b{font-size:12px}
+ html body #ctip button{min-height:34px!important;min-width:0!important;padding:3px 14px!important;font-size:12px!important}
+ html body #ctip::before{content:"";position:absolute;left:-11px;bottom:16px;border:8px solid transparent;border-right-color:#2a2433;border-left:0}
+}
+`;document.head.appendChild(st)
+ // le bouton des conseils de Camille : « OK » au lieu de « Compris »
+ setInterval(()=>{try{const b=document.querySelector('#ctip button');if(b&&/^\s*Compris\s*$/.test(b.textContent))b.textContent='OK'}catch(_){}},200);
+})();
+
+// ===== v532 : plus de bandeaux d'alerte (RYTHME règle 1, niveau 2 = une pastille qui mène à l'action)
+// ❗ sur l'argent (caisse basse) et sur la jauge du quartier (quartier à bout), pastilles sur les onglets Soins (naloxone) et Équipe (départ),
+// appels et salles fermées : une icône au bord de l'écran avec une flèche quand l'événement est hors de la vue
+(function(){const $=id=>document.getElementById(id);
+ const st=document.createElement('style');st.textContent=`#alst{display:none!important}
+@keyframes hxp{50%{transform:scale(1.15)}}
+html body #app #hplank button#hxm.hxb,html body #app #hplank button#hxq.hxb,html body #app #hud button#hxm.hxb,html body #app #hud button#hxq.hxb,button.hxb{display:inline-flex!important;align-items:center;justify-content:center;width:19px!important;height:19px!important;min-width:0!important;min-height:0!important;padding:0!important;margin:0 0 0 3px!important;border-radius:50%!important;background:#e0405a!important;color:#fff!important;border:2px solid #2a2433!important;border-image:none!important;box-shadow:none!important;font:900 12px/1 'Atkinson Hyperlegible',sans-serif!important;flex:none!important;animation:hxp 1.2s ease-in-out infinite;cursor:pointer;position:relative;z-index:3}
+button.hxb::before{content:"";position:absolute;inset:-12px}
+html body #app #hplank .r>button#hxq.hxb,html body #app #hud .r>button#hxq.hxb{position:absolute!important;left:-6px;top:-6px;margin:0!important;width:16px!important;height:16px!important;font-size:11px!important}
+#spw .r.hxr{position:relative!important}
+#tabs button .hxt{position:absolute;left:2px;top:-4px;width:18px;height:18px;border-radius:50%;background:#e0405a;color:#fff;border:2px solid #2a2433;font:900 12px/15px 'Atkinson Hyperlegible',sans-serif;text-align:center;pointer-events:none;animation:hxp 1.2s ease-in-out infinite;z-index:3}
+#tabs button{position:relative}
+#hxpop{position:fixed;z-index:95;width:min(270px,calc(100vw - 20px));box-sizing:border-box;background:#fffaf0;border:3px solid #2a2433;border-radius:12px;box-shadow:0 4px 0 rgba(0,0,0,.25);padding:8px 10px;font:13px/1.35 'Atkinson Hyperlegible',sans-serif;color:#2a2433}
+#hxpop b{display:block;margin-bottom:2px;font-size:14px}
+#hxpop button{margin-top:7px;width:100%;min-height:40px}
+.edg{position:fixed;z-index:44;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%!important;background:#fff3c4!important;border:3px solid #2a2433!important;border-image:none!important;box-shadow:0 3px 0 rgba(0,0,0,.3)!important;display:flex;align-items:center;justify-content:center;padding:0!important;min-width:0!important;min-height:0!important;cursor:pointer;font:22px/1 sans-serif}
+.edg.room{background:#ffd6d0!important}
+.edg i{position:absolute;left:50%;top:50%;width:0;height:0;margin-top:-7px;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:11px solid #2a2433;transform-origin:0 50%;pointer-events:none}
+.edg small{position:absolute;bottom:-11px;left:50%;transform:translateX(-50%);background:#2a2433;color:#fff;font:700 10px/1 'Atkinson Hyperlegible',sans-serif;padding:2px 5px;border-radius:6px;white-space:nowrap;pointer-events:none}
+.edg img{width:24px;height:24px;image-rendering:pixelated;pointer-events:none}
+.edg.pulse{animation:hxp 1s ease-in-out infinite}
+body.aigB .edg,body.aigB #hxpop,body:has(#app.open) .edg,body:has(#rw) .edg,body:has(#fmo) .edg,body.gdon .edg{visibility:hidden!important}`;document.head.appendChild(st);
+ const on=()=>{try{return started&&!ended}catch(_){return false}};
+ // ---- petite bulle d'explication
+ const pop=(anchor,html,lab,f)=>{let p=$('hxpop');if(p){const same=p._a===anchor;p.remove();if(same)return}p=document.createElement('div');p.id='hxpop';p._a=anchor;p.innerHTML=html+(lab?`<button class="go">${lab}</button>`:'');document.body.appendChild(p);
+  const r=anchor.getBoundingClientRect(),W=innerWidth,H=innerHeight,pw=p.offsetWidth,ph=p.offsetHeight;let L=Math.min(W-pw-8,Math.max(8,r.left-10)),T=r.bottom+8;if(T+ph>H-8)T=Math.max(8,r.top-ph-8);if(W>H&&innerHeight<=600){const hp=$('hplank');if(hp){const q=hp.getBoundingClientRect();L=Math.min(W-pw-8,q.right+8);T=Math.min(H-ph-8,Math.max(8,r.top-10))}}p.style.left=L+'px';p.style.top=T+'px';
+  const b=p.querySelector('button');if(b)b.onclick=e=>{e.stopPropagation();p.remove();try{f&&f()}catch(_){}}};
+ document.addEventListener('pointerdown',e=>{const p=$('hxpop');if(p&&!p.contains(e.target)&&!(e.target.closest&&e.target.closest('.hxb')))p.remove()},true);
+ const salM=()=>{try{const n=STF.filter(z=>!z.stg).length,d=typeof NDOC=='function'?NDOC():0;return (n-d)*SAL+d*(typeof SALD!='undefined'?SALD:0)}catch(_){return 0}};
+ const mkB=(id,host,before)=>{let b=$(id);if(!b){b=document.createElement('button');b.id=id;b.className='hxb';b.type='button';b.textContent='!';b.title='Alerte : toucher pour voir';}if(b.parentNode!==host){if(before&&before.parentNode===host)host.insertBefore(b,before);else host.appendChild(b)}return b};
+ const rmB=id=>{const b=$(id);if(b)b.remove()};
+ const tabB=(n,onq)=>{const t=document.querySelector(`#tabs button[onclick="tab(${n})"]`);if(!t)return;let s=t.querySelector('.hxt');if(onq&&!s){s=document.createElement('span');s.className='hxt';s.textContent='!';t.appendChild(s)}else if(!onq&&s)s.remove()};
+ let DEP=0;const _ad=window.alDep;window.alDep=function(t,f){DEP=1;try{sfx('alert')}catch(_){}};
+ {const _t=window.tab;if(typeof _t==='function'){window.tab=function(n){if(n===0)DEP=0;return _t.apply(this,arguments)};try{tab=window.tab}catch(_){}}}
+ setInterval(()=>{try{if(!on()){['hxm','hxq'].forEach(rmB);[0,1,3].forEach(n=>tabB(n,false));return}
+  // caisse basse
+  const sm=salM();if(sm>0&&eu<2*sm){const w=document.querySelector('#hud .euw');const ef=$('euf');if(w){const b=mkB('hxm',w,ef);b.onclick=e=>{e.stopPropagation();pop(b,`<b>💸 Caisse basse : ${Math.round(eu)} €</b>${eu<sm?'Pas de quoi payer les salaires du mois.':'Moins de 2 mois de salaires.'}<br><small>Salaires : ${sm} € / mois</small>`,'💶 Voir les comptes',()=>finModal())}}}else rmB('hxm');
+  // quartier à bout
+  let qOn=false;try{qOn=q<12}catch(_){}const qr=$('qf')&&$('qf').closest('.r'),qVis=qr&&getComputedStyle(qr).display!='none'&&qr.getBoundingClientRect().width>0;
+  if(qOn&&qVis){qr.classList.add('hxr');const b=mkB('hxq',qr,qr.firstChild);b.onclick=e=>{e.stopPropagation();pop(b,`<b>🏘️ Quartier à bout : ${Math.max(0,Math.round(q))} %</b>${YR==2?'À 0 %, le conseil de quartier vote la fermeture.':'À 0 %, la confiance s’effondre et la halte ferme.'}`,'🌳 Actions du quartier',()=>tab(3))}}else rmB('hxq');
+  tabB(3,qOn&&!qVis);
+  // naloxone presque épuisée, départ d'un·e collègue
+  let nl=false;try{nl=!!(built[1]&&S.n<2)}catch(_){}tabB(1,nl);tabB(0,!!DEP);
+ }catch(_){}},500);
+ // ---- appels et salles fermées : icône au bord de l'écran quand l'événement est hors de la vue
+ const E={};
+ const safe=()=>{const W=innerWidth,H=innerHeight,land=W>H;let l=34,t=34,r=W-34,b=H-34;const hp=$('hplank'),hud=$('hud'),tb=$('tabs');
+  if(land){if(hp){const q=hp.getBoundingClientRect();if(q.width)l=q.right+34}t=78;if(tb){const q=tb.getBoundingClientRect();if(q.width)r=q.left-34}}
+  else{if(hud){const q=hud.getBoundingClientRect();t=q.bottom+34}if(tb){const q=tb.getBoundingClientRect();if(q.height)b=q.top-34}}
+  return{l,t,r,b}};
+ const targets=()=>{const L=[];try{STF.forEach(z=>{if(z.call&&!(z.off>0)&&z.px!=null)L.push({k:'c'+z.n,kind:'call',mx:z.px+OX,my:z.py+OY-12,lab:Math.max(1,Math.round(z.call.t))+' s',go:()=>{if(z.call)openCall(z)}})})}catch(_){}
+  try{for(let i=0;i<9;i++){if(!built[i])continue;const c=closeFix(i);if(!c||!c.urg)continue;const mx=OX+R[i][2]+16,my=OY+R[i][3]+10;L.push({k:'r'+i,kind:'room',mx,my,lab:c.w.length>14?'fermée':c.w,go:()=>{flyMap(mx,my+12,1.8,()=>{try{const p=mapPt(mx,my);roomWheel(i,p[0],p[1])}catch(_){}})}})}}catch(_){}return L};
+ const ico=k=>{const I=window.HSAICO||{};const im=k==='call'?null:I.alerte;return im&&im.complete&&im.naturalWidth?`<img src="${im.src}" alt="">`:(k==='call'?'☎️':'⛔')};
+ const tick=()=>{try{const L=on()?targets():[];const seen={};const s=safe(),cx=(s.l+s.r)/2,cy=(s.t+s.b)/2;
+  L.forEach(o=>{let p;try{p=mapPt(o.mx,o.my)}catch(_){return}const[X,Y]=p;const inside=X>=s.l-24&&X<=s.r+24&&Y>=s.t-24&&Y<=s.b+24;if(inside)return;seen[o.k]=1;
+   let e=E[o.k];if(!e){e=document.createElement('button');e.type='button';e.className='edg pulse '+o.kind;e.innerHTML=ico(o.kind)+'<i></i><small></small>';document.body.appendChild(e);E[o.k]=e}
+   e.onclick=ev=>{ev.stopPropagation();try{o.go()}catch(_){}};e.title=o.kind==='call'?'Un appel : toucher pour répondre':'Salle fermée : toucher pour y aller';
+   const dx=X-cx,dy=Y-cy;const kx=dx?((dx>0?s.r:s.l)-cx)/dx:1e9,ky=dy?((dy>0?s.b:s.t)-cy)/dy:1e9;const k=Math.min(Math.abs(kx),Math.abs(ky));const ex=cx+dx*k,ey=cy+dy*k;
+   e.style.left=Math.round(ex)+'px';e.style.top=Math.round(ey)+'px';const a=Math.atan2(dy,dx);e.querySelector('i').style.transform=`rotate(${a}rad) translateX(26px)`;const sm=e.querySelector('small');if(sm.textContent!==o.lab)sm.textContent=o.lab});
+  for(const k in E)if(!seen[k]){E[k].remove();delete E[k]}}catch(_){}};
+ setInterval(tick,120);
+})();
+
+// ===== v532 : « Nouveau ! » devient un petit signe sur l'onglet concerné (plus de bandeau) ; les paroles sur le plan redeviennent des bulles de BD
+(function(){const st=document.createElement('style');st.textContent=`#ulp{display:none!important}
+#tabs button .hxn{position:absolute;right:-5px;top:-7px;min-width:20px;height:20px;box-sizing:border-box;border-radius:10px;background:#ffd23f;color:#2a2433;border:2px solid #2a2433;font:900 12px/16px 'Atkinson Hyperlegible',sans-serif;text-align:center;pointer-events:none;z-index:4;animation:hxn 1.6s ease-in-out infinite;box-shadow:0 2px 0 rgba(0,0,0,.25)}
+@keyframes hxn{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(14deg) scale(1.15)}}
+#tabs button:has(.hxn) .dot{display:none!important}
+#stage .bub{background:#fffaf0!important;border:2px solid #2a2433!important;border-image:none!important;border-radius:12px!important;padding:3px 9px!important;box-shadow:0 2px 0 rgba(0,0,0,.22)!important;color:#2a2433}
+#stage .bub::after{content:""!important;position:absolute!important;left:50%!important;bottom:-9px!important;margin-left:-7px!important;width:0!important;height:0!important;border-style:solid!important;border-width:9px 7px 0 7px!important;border-color:#2a2433 transparent transparent transparent!important}
+#stage .bub::before{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-5px;width:0;height:0;border-style:solid;border-width:6px 5px 0 5px;border-color:#fffaf0 transparent transparent transparent;z-index:1}`;document.head.appendChild(st);
+ const NEWT=new Set();
+ window.ulSide=function(e){try{let t=e?e.tab:null;if(e&&e.k==='m'&&t==null)t=3;if(t===2)t=4;if(t!=null)NEWT.add(t)}catch(_){}};try{ulSide=window.ulSide}catch(_){}
+ {const _t=window.tab;if(typeof _t==='function'){window.tab=function(n){try{NEWT.delete(n);if(n===2)NEWT.delete(4)}catch(_){}return _t.apply(this,arguments)};try{tab=window.tab}catch(_){}}}
+ setInterval(()=>{try{document.querySelectorAll('#tabs button').forEach(b=>{const m=/tab\((\d+)\)/.exec(b.getAttribute('onclick')||'');if(!m)return;const n=+m[1];let s=b.querySelector('.hxn');const want=NEWT.has(n)&&(()=>{try{return started&&!ended}catch(_){return false}})();if(want&&!s){s=document.createElement('span');s.className='hxn';s.textContent='✦';s.title='Nouveau';b.appendChild(s)}else if(!want&&s)s.remove()})}catch(_){}},400);
+})();
+
+// ===== v532 : portrait — date et objectif lisibles à 360 px, rien sous le portrait de Camille, album, libellés, ✕
+(function(){const st=document.createElement('style');st.textContent=`
+#fmo .ft{animation-delay:.5s!important}
+html body .rsx,html body #side .x,html body button[title="Fermer"]{min-width:44px;min-height:44px}
+html body #app #hplank #acip{color:#5a4c3c!important;opacity:1!important}
+html body body:has(#ctip.on) #qbub,body:has(#ctip.on) #qbub{display:none!important}
+@media (orientation:portrait){
+ html body #app #tabsbody{padding-bottom:96px!important}
+ body:has(#lci button) #objp{max-width:calc(100vw - 132px)!important}
+ #objp{display:flex!important;align-items:baseline;gap:3px;white-space:nowrap;overflow:hidden}
+ #objp b{overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto}
+ #objp small{flex:none}
+}
+@media (orientation:portrait) and (max-width:420px){
+ html body #app #hplank{flex:1 1 auto!important;min-width:0!important}
+ html body #app #hplank .euw,html body #app #hplank .euw+div{display:grid!important;grid-template-columns:auto auto;grid-template-rows:auto auto;column-gap:4px!important;row-gap:0!important;align-items:center;align-content:center;padding:0 5px!important}
+ html body #app #hplank .euw img.pxi,html body #app #hplank .euw+div img.pxi{grid-column:1;grid-row:1/3}
+ html body #app #hplank #eu,html body #app #hplank #ac{grid-column:2;grid-row:1;line-height:1!important;font-size:14px!important}
+ html body #app #hplank #euf,html body #app #hplank #acip{grid-column:2;grid-row:2;font-size:9.5px!important;line-height:1.05!important;margin:0!important;white-space:nowrap}
+ html body #app #hplank #cbh{grid-column:3;grid-row:1/3}
+ html body #app #hplank #hxm{grid-column:3;grid-row:1/3}
+ html body #app #hplank .date{flex:1 1 auto!important;min-width:0!important;justify-content:center}
+ html body #app #hplank .date #pl{white-space:nowrap!important;overflow:visible!important;font-size:12px!important}
+ #mb .atab{font-size:0!important;padding:0!important}
+ #mb .atab::before{content:attr(data-ic);font-size:15px;line-height:1}
+ #mb .aslot .ast{white-space:normal!important;font-size:8.5px!important;line-height:1.05!important;display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;height:auto!important;max-height:2.2em}
+}`;document.head.appendChild(st);
+ const AIC={'RdR':'💉','Soins':'🩺','Droits':'📄','Quartier':'🏘️','Équipe':'👥','Lien':'🤝','Expression':'🎨','Partenaires':'🧩'};
+ setInterval(()=>{try{const narrow=innerWidth<=420&&innerWidth<innerHeight;
+  document.querySelectorAll('#mb .atab').forEach(b=>{const t=(b.textContent||'').trim()||b.dataset.lb||'';if(!b.dataset.lb&&t)b.dataset.lb=t;const ic=AIC[b.dataset.lb]||'📁';if(b.dataset.ic!==ic){b.dataset.ic=ic;b.title=b.dataset.lb}});
+  if(narrow){const t0=document.getElementById('t0');if(t0){const w=document.createTreeWalker(t0,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){if(/Salle de consommation ·/.test(n.nodeValue))n.nodeValue=n.nodeValue.replace(/Salle de consommation ·/g,'Conso ·')}}}
+ }catch(_){}},400);
+})();
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});

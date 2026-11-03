@@ -11,8 +11,8 @@ Chaque message appartient à un seul niveau.
 | Niveau | Pour quoi | Forme | Canaux actuels concernés |
 | --- | --- | --- | --- |
 | 1. Bloquant | Danger (surdose, accident), décision à prendre, bilan, chapitre | Fenêtre qui met le jeu en pause | Fenêtre plein écran (`#m`), scène illustrée (`popWin`), réunion de saison (`MEET`) |
-| 2. Alerte persistante | Une action est attendue du joueur (salle fermée, appel, caisse basse, quartier à bout) | Pastille sur le plan, reste tant que le problème existe, mène à l'action | `.al` |
-| 3. Information | Tout le reste : retour d'action, astuce, nouveauté, ambiance | Non bloquant, disparaît seul | Bulle de Camille (`camSay`/`say`), conseils (`ctip`), « Nouveau ! » (`ulSide`), toast de bilan, bannière |
+| 2. Alerte persistante | Une action est attendue du joueur (salle fermée, appel, caisse basse, quartier à bout) | Pastille sur le plan ou sur le bandeau, reste tant que le problème existe, mène à l'action | Depuis la v532, plus aucun bandeau (`#alst` masqué) : ❗ à côté de l'argent (caisse basse) et sur la jauge du quartier (quartier à bout), « ! » sur les onglets Soins (naloxone) et Équipe (départ), icône au bord de l'écran avec une flèche pour un appel ou une salle fermée hors de la vue (`.edg`) |
+| 3. Information | Tout le reste : retour d'action, astuce, nouveauté, ambiance | Non bloquant, disparaît seul | Bulle de Camille (`camSay`/`say`), conseils (`ctip`), toast de bilan, bannière. Depuis la v532, « Nouveau ! » (`ulSide`) n'est plus qu'un signe ✦ sur l'onglet concerné |
 
 Un message qui ne demande ni décision ni action est de niveau 3, même s'il est important pour la pédagogie.
 
