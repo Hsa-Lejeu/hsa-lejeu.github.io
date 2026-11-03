@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v538')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v539')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -1589,13 +1589,13 @@ function ghBar(){if(!GH||sel<0)return ghEnd();let b=$('ghb');if(!b){b=document.c
 const n=SZ+2,ok=ghFits(GH.zi,GH.c,n),free=ghFree(GH.zi,GH.c,n),cost=ghCost(),poor=cost>0&&eu<cost,nm=R[sel][0][0]+R[sel][0].slice(1).toLowerCase();
 const Bt=(t,f,cls,dis)=>`<button class="${cls||''}" ${dis?'disabled':''} onclick="${f}">${t}</button>`;
 const ar=(t,f,c)=>`<button class="ga ${c}" onclick="${f}" aria-label="déplacer">${t}</button>`;
-const h_=`<div class="gsz">${['P','M','G'].map((t,k)=>Bt(t,'ghSize('+k+')',k==SZ?'on':'',(!MV&&eu<rc_(sel,k))||(sel==2&&WS&&!WS.done))).join('')}</div>${Bt('✔'+(cost>0?' '+cost+' €':''),'ghBuild()','go gok',!ok||poor)}${Bt('✖','cancelSel()','gx')}${!ok?`<div class="gw">Pas assez de place ici</div>`:poor?`<div class="gw">Il manque ${cost-eu} €</div>`:''}
+const h_=`<div class="gsz">${['P','M','G'].map((t,k)=>Bt('<i class="gszq q'+k+'"></i>','ghSize('+k+')',k==SZ?'on':'',(!MV&&eu<rc_(sel,k))||(sel==2&&WS&&!WS.done))).join('')}</div>${Bt('✔'+(cost>0?' '+cost+' €':''),'ghBuild()','go gok',!ok||poor)}${Bt('✖','cancelSel()','gx')}${!ok?`<div class="gw">Pas assez de place ici</div>`:poor?`<div class="gw">Il manque ${cost-eu} €</div>`:''}
 <div class="garr">${ar('◀','ghMove(-1,0)','al')}${ar('▶','ghMove(1,0)','ar')}${ar('▲','ghMove(0,-1)','au')}${ar('▼','ghMove(0,1)','ad')}</div>`;if(b._h!==h_){b._h=h_;b.innerHTML=h_}b.classList.add('fl');ghPos();if(!b._lp){b._lp=1;const lp=()=>{if(!b.isConnected)return;try{ghPos()}catch(_){}requestAnimationFrame(lp)};requestAnimationFrame(lp)}}
 // v413 : la barre de placement flotte à côté de la salle fantôme (dessous, sinon dessus, sinon sur le côté)
 function ghBot(){const t=$('tabs');if(t){const q=t.getBoundingClientRect();if(q.height>0&&q.top>innerHeight*.5)return q.top}return innerHeight}
 function ghLeft(){try{if(window.LSCOL&&LSCOL())return $('hud').getBoundingClientRect().right}catch(_){}return 0}
 function ghPos(){const b=$('ghb');if(!GH||!b)return;const Z_=ZONES()[GH.zi],r=cv.getBoundingClientRect(),kx=r.width/WW,ky=r.height/WH,gL=r.left+(OX+Z_.x0+GH.c*CW)*kx,gR=gL+(SZ+2)*CW*kx,gT=r.top+(OY+Z_.y)*ky,gB=gT+46*ky,bw=b.offsetWidth,bh=b.offsetHeight;window.GHR={l:gL,t:gT,r:gR,b:gB};const top0=(Z.hh||40)+6,bot0=ghBot()-6,l0=ghLeft()+6,r0=innerWidth-6;
- let x=(gL+gR)/2-bw/2,y,d;if(gB+40+bh<=bot0){y=gB+40;d='dn'}else if(gT-40-bh>=top0){y=gT-40-bh;d='up'}else{y=(gT+gB)/2-bh/2;if(gR+12+bw<=r0){x=gR+12;d='rt'}else{x=gL-12-bw;d='lf'}}
+ let x=(gL+gR)/2-bw/2,y,d;if(gB+58+bh<=bot0){y=gB+58;d='dn'}else if(gT-58-bh>=top0){y=gT-58-bh;d='up'}else{y=(gT+gB)/2-bh/2;if(gR+12+bw<=r0){x=gR+12;d='rt'}else{x=gL-12-bw;d='lf'}}
  x=Math.max(l0,Math.min(r0-bw,x));y=Math.max(top0,Math.min(bot0-bh,y));b.style.left=Math.round(x)+'px';b.style.top=Math.round(y)+'px';
  const ax=Math.max(14,Math.min(bw-14,(gL+gR)/2-x)),ay=Math.max(14,Math.min(bh-14,(gT+gB)/2-y));b.style.setProperty('--ax',ax+'px');b.style.setProperty('--ay',ay+'px');if(b.dataset.d!==d)b.dataset.d=d;
  const A=b.querySelector('.garr');if(A){const P=(c,X,Y)=>{const e=A.querySelector('.'+c);if(e){e.style.left=Math.round(X-x-15)+'px';e.style.top=Math.round(Y-y-15)+'px'}};const my=(gT+gB)/2,mx=(gL+gR)/2;P('al',gL-20,my);P('ar',gR+20,my);P('au',mx,gT-20);P('ad',mx,gB+20)}}
@@ -5560,7 +5560,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v538')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v539')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -12990,6 +12990,28 @@ html body #peta{background:#0f0a16 repeating-linear-gradient(115deg,transparent 
   ['pointerdown','pointermove','pointerup','pointercancel'].forEach(t=>cv.addEventListener(t,e=>{if(e.__pv)return;const hold=cv.closest('.vhold');if(!(window.__pv&&hold&&hold.classList.contains('rot')))return;e.stopImmediatePropagation();e.preventDefault();
    const r=_gb();const vx=r.bottom-e.clientY,vy=e.clientX-r.left;const ne=new PointerEvent(t,{clientX:vx,clientY:vy,pointerId:e.pointerId,pointerType:e.pointerType,isPrimary:e.isPrimary,bubbles:true,cancelable:true,button:e.button,buttons:e.buttons});ne.__pv=1;cv.dispatchEvent(ne)},true))};
  setInterval(()=>{try{const cv=window.__pcv;if(cv&&cv.isConnected)hook(cv)}catch(_){}},200);
+})();
+
+// ===== v539 : construction — dans la liste on choisit la salle ; la taille se choisit en la plaçant (trois carrés), le nombre de pros et le prix s'affichent sur la salle
+(function(){const st=document.createElement('style');st.textContent=`
+#rbx .rbc .szs{display:none!important}
+#ghb .gsz button{display:inline-flex!important;align-items:center;justify-content:center;padding:0!important}
+html body #ghb .gsz button .gszq{display:block!important;visibility:visible!important;background:#c9b49a;border:2px solid #2a2433;border-radius:2px;box-sizing:border-box}
+html body #ghb .gsz .gszq.q0{width:10px;height:10px}html body #ghb .gsz .gszq.q1{width:15px;height:15px}html body #ghb .gsz .gszq.q2{width:21px;height:21px}
+html body #ghb .gsz button.on .gszq{background:#ffd23f}
+#ghb .gsz button[disabled] .gszq{opacity:.35}
+#ghlab{position:fixed;z-index:61;pointer-events:none;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:1px;background:rgba(255,250,240,.94);border:2px solid #2a2433;border-radius:9px;padding:2px 7px;font:700 11.5px/1.2 'Atkinson Hyperlegible',sans-serif;color:#2a2433;white-space:nowrap;box-shadow:0 2px 0 rgba(0,0,0,.25)}
+#ghlab .c{color:#2e7d32}#ghlab .c.no{color:#c8322a}
+#rbx .rbc .hd span::after{content:''}
+`;document.head.appendChild(st);
+ window.rbPick=(i,k)=>{try{setSZ(k!=null?k:0);selT(i)}catch(_){}};try{rbPick=window.rbPick}catch(_){}
+ // texte sous chaque salle de la liste : capacité et prix selon la taille
+ setInterval(()=>{try{document.querySelectorAll('#rbx .rbc:not(.lock)').forEach(c=>{if(c.querySelector('.szi'))return;const m=/rbPick\((\d+)\)/.exec(c.getAttribute('onclick')||'');if(!m)return;const i=+m[1];const d=document.createElement('div');d.className='szi';d.style.cssText='font-size:11.5px;color:#5a4c3c;margin-top:3px';d.textContent=`Petite, moyenne ou grande : de ${rc_(i,0)} à ${rc_(i,2)} €, de 3 à 5 pros. La taille se choisit en la plaçant.`;c.appendChild(d)})}catch(_){}},500);
+ // étiquette sur la salle en cours de placement
+ const loop=()=>{try{const b=document.getElementById('ghb');let l=document.getElementById('ghlab');const R_=window.GHR;
+  if(!b||!R_||typeof GH==='undefined'||!GH||sel<0){if(l)l.remove()}else{if(!l){l=document.createElement('div');l.id='ghlab';document.body.appendChild(l)}
+   const n=3+SZ,c=ghCost(),poor=c>0&&eu<c,h=`<span>👥 jusqu’à ${n} pros</span><span class="c${poor?' no':''}">${c>0?c+' €':'gratuit'}</span>`;if(l._h!==h){l._h=h;l.innerHTML=h}
+   l.style.left=Math.round((R_.l+R_.r)/2)+'px';l.style.top=Math.round((R_.t+R_.b)/2)+'px'}}catch(_){}requestAnimationFrame(loop)};requestAnimationFrame(loop);
 })();
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
