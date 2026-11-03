@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v541')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v542')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -1056,7 +1056,7 @@ BINS.forEach(b=>{corbeille(b.x,b.y+1,b.l);rect(b.x-3,b.y+2,6,1,'#0007');rect(b.x
 SYR.forEach(o=>{const pl=.5+.5*Math.sin(Date.now()/200);x.globalAlpha=.2+.3*pl;x.fillStyle='#ffe27a';x.beginPath();x.ellipse(o.x,o.y,6+pl,4+pl*.6,0,0,7);x.fill();x.globalAlpha=1;syr(o.x,o.y);});x.font=LBL;
 if(ENDING)endScene();const se=seas(),t=Date.now()/1000;if(se==2){{const sx=WW-OX-14,sy=-OY+4;const _su=(window.HSAICO||{}).soleil;if(_su&&_su.complete&&_su.naturalWidth){const sm=x.imageSmoothingEnabled;x.imageSmoothingEnabled=false;x.drawImage(_su,sx-4,sy-4,16,16);x.imageSmoothingEnabled=sm}else{rect(sx,sy,8,8,'#ffd54a');rect(sx-2,sy+3,2,2,'#ffd54a');rect(sx+8,sy+3,2,2,'#ffd54a');rect(sx+3,sy-2,2,2,'#ffd54a');rect(sx+3,sy+8,2,2,'#ffd54a')}}}
 else if(!(se==0&&window.SNOWF&&SNOWF(t,WW,WH,OX,OY))){const c=['#fff','#f7b6d0',0,'#e08a2b'][se];for(let k=0;k<50;k++)rect((k*37+Math.sin(t+k)*5+t*(se==3?4:1))%WW-OX,(t*(7+k%4*3)+k*23)%WH-OY,se==0?1:2,1,c)}}
-const IN_=['Bonjour ! Je suis <b>Camille</b>, chef·fe de service. Le président vient d’autoriser l’ouverture d’une <b>Halte Soins Addictions</b> dans ce quartier : c’est à nous de la faire vivre.','La ville nous prête ce local vide et 1 600 € pour démarrer. Le quartier est tendu : on a <b>trois ans</b> pour convaincre. Allons-y !'];let ii=0;
+const IN_=['Bonjour ! Je suis <b>Camille</b>, chef·fe de service. La ville nous prête ce local et 1 600 € pour ouvrir une <b>Halte Soins Addictions</b>. Le quartier est tendu : on a <b>trois ans</b> pour convaincre. Allons-y !'];let ii=0;
 
 const HB=k=>document.querySelector('#hud button[onclick="'+k+'()"]'),TB=i=>document.querySelectorAll('#tabs button')[i];
 const TUT=[
@@ -5560,7 +5560,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v541')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v542')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -8076,7 +8076,7 @@ window.debFinish=n=>{if(!DS||DS.ph=='end')return;DS.won=n;clearTimeout(DS.speakE
 #mb .chg .tip{margin-top:8px;font-size:12px;color:#5a5060;text-align:left}`;document.head.appendChild(st)})();
 const CHG={
  1:{c:'#2e9e4f',y:'An 1',ic:'🏠',slides:[
-  {cam:'Bienvenue ! On ouvre la halte. Cette année, un seul objectif : que les gens entrent, soient bien reçus, et reviennent. On construit, on recrute, on apprend. Le reste attendra.'},
+  {cam:'Premier mois bouclé ! Cette année, un seul objectif : que les gens entrent, soient bien reçus, et reviennent. On construit, on recrute, on apprend. Le reste attendra.'},
   {h:'Trois ans, trois chapitres',cam:'On a trois ans pour convaincre. Chaque année a son enjeu.',rows:[['🏠','<b>An 1 · S’installer</b> : accueillir, recruter, apprendre. On n’est noté·es sur rien.'],['🏘️','<b>An 2 · Le quartier</b> : convaincre les riverains. En mars, le conseil de quartier décide si la halte est la bienvenue.'],['🏛️','<b>An 3 · Les institutions</b> : remplir le dossier d’agrément, réussir l’évaluation HAS… et affronter Cédric Crotti devant les caméras. En mars, le ministère tranche.']]},
   {h:'Ce qui compte cette année',cam:'Ces trois barres comptent pour l’instant.',rows:[['🤝','<b>Accompagnement social</b> : les droits ouverts, les démarches, les suivis.'],['😊','<b>Satisfaction</b> des personnes accueillies : on répond à leurs besoins, sans les faire trop attendre.'],['👥','<b>Équipe</b> : une équipe épuisée accueille mal. Recrute, fais des pauses.'],['🔒','La <b>tranquillité du quartier</b> et la <b>santé publique</b> viendront plus tard.']]},
 ]},
@@ -9815,7 +9815,7 @@ W('talk',(o,a)=>{try{const n=a[0],p=a[2];const v=p||V.find(x=>x.name==n&&!x.gone
 
 // v459 : au début d'une partie, la fiche « Chapitre 1 · S'installer » s'affiche d'abord, puis le guide de Camille (et non l'inverse)
 W('tutEnd',(o,a)=>{let first=false;try{first=!!INTRO&&!started&&!(st[0]>0)&&!STF.some(z=>z.r==0)&&!B.gdDone}catch(_){}if(first){B.gdDone=1;B.chSeen1=1;B.ch1=1}const r=o(...a);
- if(first){const go=()=>{try{B.gdDone=0;gdStart()}catch(_){}};setTimeout(()=>{try{chgShow(1,1)}catch(_){go()}},500);let n=0;const t=setInterval(()=>{n++;try{if(n>900){clearInterval(t);go();return}if(n>4&&$('m').hidden){clearInterval(t);setTimeout(go,300)}}catch(_){clearInterval(t)}},300)}return r});
+ if(first){const go=()=>{try{B.gdDone=0;gdStart()}catch(_){}};B.ch1Late=1;setTimeout(go,400)}return r});
 
 // v460 : paysage — les portraits (Jess, Samba…) et la jauge du quartier rejoignent la colonne de droite, sous les onglets
 {const st=document.createElement('style');st.textContent=`@media (orientation:landscape){#app #tabs{top:calc(var(--hh,44px) + 8px)!important;transform:none!important}}`;document.head.appendChild(st);
@@ -13237,6 +13237,10 @@ window.P3BG=window.P3BG||{};window.P3BG.major={back:'data:image/webp;base64,UklG
 `;document.head.appendChild(st);
  setInterval(()=>{try{const ov=document.getElementById('peta');if(!ov)return;const pg=window.__PG;const on=!!(pg&&pg.cv&&pg.cv.isConnected&&pg.phase!=='select'&&pg.phase!=='power');ov.classList.toggle('qturn',on)}catch(_){}},200);
 })();
+
+// ===== v542 : la fiche « Trois ans, trois chapitres » arrive au début du deuxième mois (et non avant l'ouverture)
+setInterval(()=>{try{if(!B.ch1Late||!started||ended||YR!==1||mo<1||day<8||paused)return;if(!$('m').hidden||document.getElementById('fmo')||document.getElementById('envo')||document.getElementById('debov')||document.getElementById('peta')||(typeof MEET!='undefined'&&MEET))return;B.ch1Late=0;chgShow(1,1)}catch(_){}},1000);
+{const st=document.createElement('style');st.textContent='#rsp .rsl{padding-bottom:12px}#rsp .rsd{margin-top:14px!important;box-shadow:0 -8px 10px -6px rgba(42,36,51,.25)}';document.head.appendChild(st)}
 
 W('envol',(o,a)=>{if(!B.env1&&!(CN.env>0)){B.env1=1;paused=true;envolAnim(a[0],()=>o(...a));return}return o(...a)});
 W('overdose',(o,a)=>{if(F.i&&Math.random()<.35){const e=$('ev');e.className='good';e.textContent='💉 Grâce à l’AERLI, une personne a adapté son geste et sa dose : pas de surdose aujourd’hui.';q+=1;return}return o(...a)});
