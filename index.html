@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v552')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v553')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v552')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v553')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -13566,6 +13566,23 @@ html body #odc.on{left:var(--odx)!important;top:var(--ody)!important;transform:n
     let lab=REC.nice;if(!lab&&REC.team===0){try{const c=pg.coch&&pg.coch();const last=REC.f.length?REC.f[REC.f.length-1][1]:[];if(c&&last.some(([x,y,r,tm])=>tm===0&&Math.hypot(x-c.x,y-c.y)<r+c.r+1.5))lab='Biberon !'}catch(_){}}
     if(lab&&REC.f.length>8)setTimeout(()=>play(pg,lab),500)}
    REC.ph=ph}}catch(_){}requestAnimationFrame(loop)};requestAnimationFrame(loop);
+})();
+</script>
+<script>
+// ===== v553 : Street Pétanqueur — écran de chargement le temps que le terrain 3D, les décors et les joueurs soient prêts (plus d'aller-retour 2D → 3D)
+(function(){const st=document.createElement('style');st.textContent=`#pload{position:absolute;inset:0;z-index:80;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(ellipse at 50% 45%,#3a1a6a,#0b0618 72%);color:#ffd23f;font:400 22px Lilita,'Atkinson Hyperlegible',sans-serif;letter-spacing:.05em;text-shadow:0 3px 0 #b05a00;transition:opacity .45s;pointer-events:auto}
+#pload.out{opacity:0;pointer-events:none}
+#pload i{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0 12%,#c8ced8 30%,#6c7684 75%,#3a414c);box-shadow:0 6px 0 rgba(0,0,0,.35);animation:plrol 1s linear infinite}
+#pload small{font:400 13px 'Atkinson Hyperlegible',sans-serif;color:#d8cfee;text-shadow:none;letter-spacing:0}
+@keyframes plrol{0%{transform:translateX(-40px) rotate(0)}50%{transform:translateX(40px) rotate(360deg)}100%{transform:translateX(-40px) rotate(720deg)}}`;document.head.appendChild(st);
+ let t3=0,pov=null,tl=0;
+ setInterval(()=>{try{const ov=document.getElementById('peta');if(!ov){t3=0;pov=null;return}if(ov!==pov){pov=ov;t3=0;tl=0}
+  const g=ov.querySelector('.game');const live=!!(g&&g.offsetParent);let L=ov.querySelector('#pload');
+  if(!live||!window.__P3D){if(L&&!L.classList.contains('out')){L.classList.add('out');setTimeout(()=>{try{L.remove()}catch(_){}},500)}return}
+  if(!tl)tl=performance.now();const ready=ov.classList.contains('p3d')||performance.now()-tl>4000;if(ready&&!t3)t3=performance.now();
+  const hold=!ready||performance.now()-t3<1100;
+  if(hold){if(!L&&!t3||(!L&&performance.now()-t3<300)){L=document.createElement('div');L.id='pload';L.innerHTML='<i></i>Préparation du terrain…<small>les boules sont astiquées</small>';ov.appendChild(L)}}
+  else if(L&&!L.classList.contains('out')){L.classList.add('out');setTimeout(()=>{try{L.remove()}catch(_){}},500)}}catch(_){}},40);
 })();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
