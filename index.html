@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v550')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v551')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v550')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v551')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -13009,7 +13009,7 @@ html body #ghb .gsz button.on .gszq{background:#ffd23f}
 `;document.head.appendChild(st);
  window.rbPick=(i,k)=>{try{setSZ(k!=null?k:0);selT(i)}catch(_){}};try{rbPick=window.rbPick}catch(_){}
  // texte sous chaque salle de la liste : capacité et prix selon la taille
- setInterval(()=>{try{document.querySelectorAll('#rbx .rbc:not(.lock)').forEach(c=>{if(c.querySelector('.szi'))return;const m=/rbPick\((\d+)\)/.exec(c.getAttribute('onclick')||'');if(!m)return;const i=+m[1];const d=document.createElement('div');d.className='szi';d.style.cssText='font-size:11.5px;color:#5a4c3c;margin-top:3px';d.textContent=`Petite, moyenne ou grande : de ${rc_(i,0)} à ${rc_(i,2)} €, de 3 à 5 pros. La taille se choisit en la plaçant.`;c.appendChild(d)})}catch(_){}},500);
+ setInterval(()=>{try{document.querySelectorAll('#rbx .rbc:not(.lock)').forEach(c=>{if(c.querySelector('.szi'))return;const m=/rbPick\((\d+)\)/.exec(c.getAttribute('onclick')||'');if(!m)return;const i=+m[1];const d=document.createElement('div');d.className='szi';d.style.cssText='font-size:11.5px;color:#5a4c3c;margin-top:3px';d.textContent='La taille se choisit en la plaçant.';c.appendChild(d)})}catch(_){}},500);
  // étiquette sur la salle en cours de placement
  const loop=()=>{try{const b=document.getElementById('ghb');let l=document.getElementById('ghlab');const R_=window.GHR;
   if(!b||!R_||typeof GH==='undefined'||!GH||sel<0){if(l)l.remove()}else{if(!l){l=document.createElement('div');l.id='ghlab';document.body.appendChild(l)}
@@ -13475,6 +13475,37 @@ body:has(#m:not([hidden])) #dfi,body.fly #dfi,body:has(#mtg) #dfi,body:has(#debo
  document.addEventListener('click',e=>{try{if(e.target.closest&&e.target.closest('#gdb .sk'))B.gdSkip=1}catch(_){}},true);
  const st=document.createElement('style');st.textContent='body:has(#nalg) #gdb,body:has(#nalg) #gdr{display:none!important}';document.head.appendChild(st);
  const _nm=window.nalModal;if(typeof _nm=='function'){window.nalModal=function(){try{if(!B.tutFull&&!B.gdSkip&&!(S.n>0)&&YR==1&&window.nalGuide){B.tutFull=1}}catch(_){}return _nm.apply(this,arguments)};try{nalModal=window.nalModal}catch(_){}}
+})();
+</script>
+<script>
+// ===== v551 : icônes jamais déformées ; réseau : cases carrées ; texte des choix moins gras (la parenthèse en écriture normale) ;
+// portraits ronds (Jess, Jawad…) ; quand une fenêtre ou un panneau défile, une flèche le signale
+(function(){const st=document.createElement('style');st.textContent=`
+img.pxg{object-fit:contain}
+#mb .rso,.rso{padding:0!important;display:inline-flex!important;align-items:center;justify-content:center;aspect-ratio:1/1}
+.rso i{display:flex;align-items:center;justify-content:center;font-style:normal}
+.rso img.pxg{height:20px!important;width:auto!important;max-width:none!important}
+.nb,#fmo button small,#m button small,#mb button small,#fmo button .nb,#side button small{font-family:'Atkinson Hyperlegible',sans-serif!important;font-weight:400!important;letter-spacing:0!important}
+.nb{font-size:.86em}
+button[data-solew]::after{font-family:'Atkinson Hyperlegible',sans-serif!important;font-weight:400!important}
+html body #lci button.lcb{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:50%!important;padding:0!important;overflow:visible!important;aspect-ratio:1/1}
+html body #lci button.lcb svg{display:block}
+.scrh{position:fixed;z-index:9999;width:32px;height:32px;border-radius:50%;background:#2a2433;color:#fff;display:flex;align-items:center;justify-content:center;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;box-shadow:0 2px 6px rgba(0,0,0,.35);cursor:pointer;animation:scrb 1.2s ease-in-out infinite;opacity:.88;pointer-events:auto}
+@keyframes scrb{50%{transform:translateY(4px)}}`;document.head.appendChild(st);
+ // la parenthèse des boutons de choix passe en écriture normale
+ const fix=b=>{try{if(b.dataset.nbx)return;b.dataset.nbx=1;const H=b.innerHTML;const k=H.search(/<br|<small|<div|<span class="(?:pr|ptg|bd)/);const head=k<0?H:H.slice(0,k),tail=k<0?'':H.slice(k);
+   const m=/^([^]*?\S)\s*\(([^]{6,})\)\s*$/.exec(head);if(!m||/<button|<input/.test(head))return;b.innerHTML=m[1]+' <span class="nb">('+m[2]+')</span>'+tail}catch(_){}};
+ setInterval(()=>{try{document.querySelectorAll('#fmo button:not([data-nbx]),#mb button:not([data-nbx])').forEach(fix)}catch(_){}},300);
+ // portraits ronds : le dessin s'adapte à la taille du bouton
+ setInterval(()=>{try{document.querySelectorAll('#lci .lcb svg:not([viewBox])').forEach(s=>{const w=s.getAttribute('width')||46,hh=s.getAttribute('height')||46;s.setAttribute('viewBox','0 0 '+w+' '+hh)})}catch(_){}},500);
+ // indicateur de défilement
+ const H=new Map();
+ const cands=()=>{const L=[];['tabsbody','mb'].forEach(id=>{const e=document.getElementById(id);if(e)L.push(e)});document.querySelectorAll('#fmo *,#splx .bx,#xpov *,#rsp,#lcbook *').forEach(e=>{if(e.clientHeight>80&&e.scrollHeight>e.clientHeight+12){const o=getComputedStyle(e).overflowY;if(o=='auto'||o=='scroll')L.push(e)}});return L};
+ setInterval(()=>{try{const L=cands(),seen=new Set();
+  L.forEach(e=>{const r=e.getBoundingClientRect();const more=e.scrollHeight-e.scrollTop-e.clientHeight>14;const vis=r.width>60&&r.height>80&&e.offsetParent&&getComputedStyle(e).visibility!='hidden';if(!more||!vis)return;seen.add(e);
+   let c=H.get(e);if(!c){c=document.createElement('div');c.className='scrh';c.textContent='⌄';c.title='Faire défiler';c.onclick=()=>{try{e.scrollBy({top:e.clientHeight*.7,behavior:'smooth'})}catch(_){e.scrollTop+=e.clientHeight*.7}};document.body.appendChild(c);H.set(e,c)}
+   c.style.left=Math.round(r.right-44)+'px';c.style.top=Math.round(Math.min(innerHeight-40,r.bottom)-42)+'px'});
+  H.forEach((c,e)=>{if(!seen.has(e)||!e.isConnected){c.remove();H.delete(e)}})}catch(_){}},250);
 })();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
