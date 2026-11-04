@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v545')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v546')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v545')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v546')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7449,10 +7449,7 @@ window.realModal=function(){if(!$('m').hidden)return;paused=true;
  <li><b>Le financement de l’ARS.</b> Dans le jeu, l’ARS paie par personne soignée. En réalité, les structures d’addictologie (CSAPA, CAARUD, haltes) reçoivent une <b>dotation globale annuelle</b> fixée par l’ARS et financée par l’Assurance maladie, indépendante du nombre de personnes vues.</li>
  <li><b>Le financement de la ville.</b> Le paiement « par personne accueillie » est une invention du jeu. Les collectivités peuvent subventionner une halte, mais pas à l’acte.</li>
  <li><b>« 3 ans pour convaincre ».</b> Les haltes soins addictions existent en France dans le cadre d’une expérimentation nationale encadrée par la loi, prolongée à plusieurs reprises. La décision ne se joue pas ville par ville sur trois ans.</li>
- <li><b>Le temps.</b> Une journée de jeu dure quelques secondes ; les accompagnements, formations, travaux et procédures prennent en réalité des semaines ou des mois.</li>
- <li><b>Les prix.</b> Salaires, travaux, matériel : les montants sont réduits d’environ cent fois pour rester lisibles, et leurs proportions ne sont qu’indicatives.</li>
- <li><b>Le conseil de quartier, le collectif de riverains, le dossier d’agrément</b> sont des dispositifs de jeu inspirés de situations réelles (réunions publiques, pétitions, comités de suivi), mais aucun vote de quartier ne décide du sort d’une halte.</li>
- <li><b>Ce qui est fidèle :</b> les missions (accueil sans condition, matériel stérile, soins, accès aux droits, orientation), la naloxone, les TROD, les DASRI, les partenariats, et les faits présentés dans les cartes à collectionner.</li></ul>
+ <li><b>Le conseil de quartier, le collectif de riverains, le dossier d’agrément</b> sont des dispositifs de jeu inspirés de situations réelles (réunions publiques, pétitions, comités de suivi), mais aucun vote de quartier ne décide du sort d’une halte.</li></ul>
  <button class="go" onclick="closeH()">Fermer</button>`;$('m').className='modal';$('m').hidden=false};
 try{window.hasReportT=(lv,nx,nl)=>hasReport(lv,nx,nl,hasStats(),HASC[nx]);window.hasStatsT=()=>hasStats()}catch(_){}
 
@@ -13381,6 +13378,40 @@ W('endMeet',(o,a)=>{B.mt=(B.mt||0)+1;return o(...a)});})();
 .ecpan{padding:8px 14px!important;bottom:2vh!important}.ecpan p{font-size:13px!important;margin:2px 0!important}}
 body.endg #lci,body:has(#epov) #lci,body:has(#debov) #lci,body:has(#tvov) #lci{visibility:hidden!important;pointer-events:none!important}`;document.head.appendChild(st);
  setInterval(()=>{try{document.body.classList.toggle('endg',!!(typeof ended!='undefined'&&ended))}catch(_){}},500)})();
+</script>
+<script>
+// ===== v546 : réunion en portrait (fenêtre de Camille remontée) ; bilan du mois en paysage sur deux colonnes, sans défilement ;
+// défis : une icône avec le temps restant, touchée elle rappelle les objectifs ; texte des boutons sans ombre verte
+(function(){const st=document.createElement('style');st.textContent=`
+@media (orientation:portrait){#mtg .mb{bottom:min(72px,8vh)!important}}
+#m button,#fmo button,.box button,#side button,#splx button,#mtg button,#cgen button,#xpov button,#cmbx button{text-shadow:none!important}
+@media (orientation:landscape) and (max-height:600px){
+#m.modal #mb.bil2{display:grid!important;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);column-gap:12px;row-gap:4px;align-content:start;max-width:min(96vw,860px)!important}
+#m #mb.bil2>*{grid-column:2;margin-top:0!important;margin-bottom:0!important}
+#m #mb.bil2>h2{grid-column:1/-1}
+#m #mb.bil2>.mbud{grid-column:1;grid-row:2/span 12;align-self:start;margin:0!important}
+#m #mb.bil2 .mbud .mtip{font-size:12px;line-height:1.3;padding:4px 8px}
+#m #mb.bil2 .mbud .mres,#m #mb.bil2 .mbud .mbal{padding-top:3px;padding-bottom:3px}
+#m #mb.bil2 .mq{display:flex;align-items:center;gap:10px;justify-content:flex-start;margin-top:4px}
+#m #mb.bil2 .mq .ax{flex:0 1 190px!important;max-width:190px!important}
+#m #mb.bil2>p{font-size:13px;line-height:1.3}
+#m #mb.bil2>button.go:last-child{min-width:0;width:100%!important;margin-top:6px!important}}
+#dfb{display:none!important}
+#dfi{position:fixed;z-index:46;display:flex;align-items:center;gap:4px;padding:3px 9px 3px 6px;min-height:34px;box-sizing:border-box;background:#fffaf0;border:2px solid #2a2433;border-radius:18px;box-shadow:0 3px 0 rgba(0,0,0,.25);font:700 13px 'Atkinson Hyperlegible',sans-serif;color:#2a2433;cursor:pointer;right:8px;top:calc(var(--hh,44px) + 46px)}
+#dfi.ok{border-color:#3f9a4a}#dfi.late{color:#b33}
+#dfi img.pxg{height:20px}
+@media (orientation:landscape) and (max-height:600px){#dfi{right:auto;left:172px;top:8px}}
+body:has(#m:not([hidden])) #dfi,body.fly #dfi,body:has(#mtg) #dfi,body:has(#debov) #dfi,body:has(#peta) #dfi{display:none}`;document.head.appendChild(st);
+ // bilan du mois : deux colonnes en paysage
+ const mb=document.getElementById('mb');if(mb)new MutationObserver(()=>{try{const h=mb.querySelector(':scope>h2');mb.classList.toggle('bil2',!!(h&&mb.querySelector(':scope>.mbud')&&/Bilan/i.test(h.textContent)))}catch(_){}}).observe(mb,{childList:true});
+ // défis : petite icône
+ setInterval(()=>{try{let b=document.getElementById('dfi');const K=typeof B!='undefined'&&B.dfK,D=K&&typeof DF!='undefined'?DF[K]:null;
+  if(!D||typeof started=='undefined'||!started||ended){if(b)b.remove();return}
+  if(!b){b=document.createElement('button');b.id='dfi';b.title='Défi en cours';b.onclick=()=>{try{dfHelp()}catch(_){}};document.body.appendChild(b)}
+  const P=D.prog?D.prog():[],done=P.length&&P.every(([l,v,m])=>v>=m),left=Math.max(0,B.dfEnd-((YR-1)*12+mo));
+  const t=D.hold?'à tenir':left<=0?'dernier mois':left+' mois';const h='🎯 '+t+(P.length?' · '+P.filter(([l,v,m])=>v>=m).length+'/'+P.length:'');
+  if(b._h!==h){b._h=h;b.textContent=h}b.classList.toggle('ok',!!done);b.classList.toggle('late',left<=0&&!done&&!D.hold)}catch(_){}},800);
+})();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
