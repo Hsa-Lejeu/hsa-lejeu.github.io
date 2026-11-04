@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v547')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v548')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -618,7 +618,7 @@ function drawSplDog(g,X,Y,left,t){const b=Math.floor(t*8)%2,s=left?-1:1,r=(a,c,w
 function splPlay(){const a=$('splm');if(!a||SPLM||AU.m<=0)return;a.volume=Math.min(1,AU.m*1.3);const pr=a.play();if(pr&&pr.then)pr.then(()=>{$('splsnd').textContent='🔊';$('splhint').hidden=true}).catch(()=>{$('splsnd').textContent='🔇';$('splhint').hidden=false})}
 function splToggle(e){e.stopPropagation();const a=$('splm');if(a.paused){SPLM=0;splPlay()}else{SPLM=1;a.pause();$('splsnd').textContent='🔇'}}
 function settings(){if(!$('m').hidden)return;paused=true;const m=Math.round(AU.m*100),sv=Math.round(AU.s*100);
-$('mb').innerHTML=`<h2>⚙️ Paramètres</h2><div class="set"><label>🎵 Musique : <span id="vm">${m}</span> %</label><input type="range" min="0" max="100" value="${m}" oninput="AU.m=this.value/100;$('vm').textContent=this.value;auVol()"><label>🔔 Effets sonores : <span id="vs">${sv}</span> %</label><input type="range" min="0" max="100" value="${sv}" oninput="AU.s=this.value/100;$('vs').textContent=this.value;auVol()" onchange="sfx('coin')"><label style="display:flex;gap:8px;align-items:center;margin-top:10px;font-size:13px"><input type="checkbox" ${window.camTopOn&&camTopOn()?'checked':''} onchange="camTop(this.checked)" style="width:auto"> 📱 Téléphone en portrait : conseils de Camille en haut de l’écran</label></div><button class="go" style="background:#e9e2d0;color:#3a3347" onclick="if(this.dataset.ok){toMenu()}else{this.dataset.ok=1;this.innerHTML='🏠 Sûr ? La partie est sauvegardée : touche encore'}">🏠 Revenir au menu principal</button><button class="go" onclick="closeH()">Fermer</button>`;$('m').className='modal';$('m').hidden=false;auInit()}
+$('mb').innerHTML=`<h2>⚙️ Paramètres</h2><div class="set"><label>🎵 Musique : <span id="vm">${m}</span> %</label><input type="range" min="0" max="100" value="${m}" oninput="AU.m=this.value/100;$('vm').textContent=this.value;auVol()"><label>🔔 Effets sonores : <span id="vs">${sv}</span> %</label><input type="range" min="0" max="100" value="${sv}" oninput="AU.s=this.value/100;$('vs').textContent=this.value;auVol()" onchange="sfx('coin')"></div><button class="go" style="background:#e9e2d0;color:#3a3347" onclick="if(this.dataset.ok){toMenu()}else{this.dataset.ok=1;this.innerHTML='🏠 Sûr ? La partie est sauvegardée : touche encore'}">🏠 Revenir au menu principal</button><button class="go" onclick="closeH()">Fermer</button>`;$('m').className='modal';$('m').hidden=false;auInit()}
 function subSel(btn){const sec=btn.closest('section'),k=btn.dataset.k;sec.querySelectorAll('.subt button').forEach(b=>b.classList.toggle('on',b===btn));sec.querySelectorAll('.sub').forEach(d=>d.hidden=d.dataset.k!==k);$('tabsbody').scrollTop=0}
 function tab(n){const app=$('app'),same=n>=0&&app.dataset.t==String(n)&&app.classList.contains('open'),bt=document.querySelectorAll('#tabs button');if(n<0||same){app.classList.remove('open');app.dataset.t='';bt.forEach(b=>b.classList.remove('on'));return}document.querySelectorAll('.tab').forEach((e,i)=>e.hidden=i!=n);bt.forEach((b,i)=>b.classList.toggle('on',i==n));app.classList.add('open');app.dataset.t=n;$('ptitle').textContent=['👥 Équipe','🩺 Soins','🛋️ Salles','🌳 Quartier','🏗️ Locaux'][n];$('tabsbody').scrollTop=0}
 function dots(){const on=(i,c)=>$("d"+i).hidden=!c;on(0,STF.length==0||STF.some(s=>s.e<30||(s.off>0&&!s.mis)||s.call)||(Y2()&&!STF.some(z=>z.role=='int')));on(1,(hasR("inf")&&(S.s<2||(F.t&&S.t<1)))||(built[1]&&(S.n<2||DAS.some(d=>d.l>=7))));on(3,pet>0||q<30);on(2,(isGF()&&built.some((b,i)=>b&&!HEAT[i]))||(isCN()&&(!WATER||built.some((b,i)=>b&&!COOL[i]))));on(4,sel>=0||(!RLOCK(6)&&!built[6])||(!RLOCK(7)&&!built[7])||(!RLOCK(8)&&!built[8]));locs()}
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v547')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v548')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7238,7 +7238,7 @@ function camEmo(t,cls){let k='';if(cls=='bad')k='worry';else if(cls=='good')k='h
  else if(emo=='happy'){P(6,15,LIP);P(11,15,LIP);[7,8,9,10].forEach(X=>P(X,16,LIP));if(ph==2){P(8,15,'#e8796a');P(9,15,'#e8796a')}}
  else if(emo=='sad'){P(7,16,LIP);P(10,16,LIP);P(8,15,LIP);P(9,15,LIP)}
  else if(emo=='worry'){P(8,15,LIP);P(9,16,LIP);P(10,15,LIP);if(ph==2)P(9,15,LIP2)}
- else{if(ph==0){P(8,15,LIP);P(9,15,LIP)}else if(ph==1){P(8,15,LIP);P(9,15,LIP);P(8,16,'#b5503c');P(9,16,'#b5503c')}else{P(8,15,LIP2);P(9,15,LIP2);P(8,16,LIP2);P(9,16,LIP2)}}};window.camDraw=camDraw}
+ else{if(ph==0){P(8,15,LIP);P(9,15,LIP)}else if(ph==1){P(8,15,LIP);P(9,15,LIP);P(8,16,'#b5503c');P(9,16,'#b5503c')}else{P(8,15,LIP2);P(9,15,LIP2);P(8,16,LIP2);P(9,16,LIP2)}}};window.camDraw=camDraw;window.camDrawProc=camDraw}
 
 // ===== v334 : la fontaine à eau est celle du pack Modern Office
 try{EAUI.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAeCAYAAADKO/UvAAADLElEQVR4nKWTXWhTZxjHf2nTpJqzYI2pgRI6XIkViS22FT8Y6CYZTIR1iFOKvdChd8K6izKYQrVUFD9gdx1TQZEx8WNQvJgX21W9aTutpawNGqy12NUcLfloc3JOc7yIec2bN/XGBw6853mf9/f+n/9zDpFIp71z53d8TDh37GhxDA6OKBv7D3YBYJkGlmmwZGXF3r1716TaisHBEe7fv6YAmlo2AtjOKre9ZGVtwAbscGsTe/Z0SvWOcgqaWjYyOjJuX+rvAUBPG/g8bvS0wU/fdxFubXKMDY8KRY4PAW4NPFHa3PVFUAFVFBdkjQUJsG9vA/v2NkiQf/6e5sxvFxkbHrULOWdxQW7JIp2IS4fGn+lsCNeI9//G3ijqJCWZxbTwYEO4hvFnunKgGGiapgqxLJNkMkFvVx8Bv6YAAAJ+jd6uPpLJBJZVAolEOnE4KgFo3LaFc915UOlzrruPA8eO5NvP2UQinbInlZVuu7raTfOmMLu/3MrV8/18uvlrnr+cJPfyKQBtXx0S9S6Xx7YswyFBADzeNWLdfriDz4I+oIGn0zoPH703NVC3jtmZGBUVThRIrd/HnSuX8ft9tB/uUDwZ+us6Q+/qZmdi5HKWCqkPhohODHC0+zh3r9wo287t/h5WNfvEGQUCEGpcT+8PJ/n50imlndv9PWxqbpPqFcjqgAaEAPj17C8iPzeb/whLARKkyuXCzL7/3euDIeqDRZVhVfHjR0NUr/DISlb51vDH9d/FuhDzelzk5vU4mUwCyE/odfx/GTKvxwk1rldurPX7lPXcK50XUzFWrPSUN3bulS5uLxfFKhcX0sWeuPF84hUj/vFE97KQC6fPSiABcbndIplKJUjG55aFpFKJ8pCsYUigmzcHmJ2JEahbJ3Kl7wrEzBospJLSZumBcgAJsriQxumsYmo6iqZ5pYmURqnpAmJZJpnMIpB3PzoxSSqVUACa5pX8qFtbU37EtX7fB5VA/jMA+DbSZksQTfPy7/CQcuO8HheqNM0r1QM4t2//hgcP/gTyo2tv72BqOqooK0R0YlK0/GIqloe0fr4VTfOW7X+5KPwaBchbxepN4t6QVDoAAAAASUVORK5CYII='}catch(_){}
@@ -12207,7 +12207,7 @@ setInterval(()=>{try{if(YR!==1||document.getElementById('m').hidden)return;const
  const ok=i=>i&&i.complete&&i.naturalWidth;const SC=.7;
  const SPOTS=[[112,64],[150,66],[252,66],[300,64],[408,66],[34,176],[66,228],[86,150],[20,240]];
  const G=[];const mk=()=>{const s=SPOTS[(Math.random()*SPOTS.length)|0];return{x:s[0],y:s[1],st:'idle',t:2+Math.random()*6,f:'00',dir:Math.random()<.5?1:-1,ph:Math.random()*10}};
- for(let i=0;i<3;i++)G.push(mk());
+ /* v548 : plus de goélands sur le plan pour l’instant */
  let last=performance.now();
  const step=()=>{const now=performance.now(),dt=Math.min(.1,(now-last)/1000);last=now;if(typeof paused!=='undefined'&&paused)return;
   G.forEach(g=>{g.t-=dt;g.ph+=dt;
@@ -12661,7 +12661,7 @@ body:has(#m:not([hidden])) #qbub,body:has(#fmo) #qbub{display:none!important}
 html body #side .subt{flex-wrap:wrap!important;overflow-x:visible!important;row-gap:4px!important}
 #splx .bx{box-sizing:border-box;max-height:calc(100dvh - 16px)!important;overflow-y:auto!important}
 }`;document.head.appendChild(st);
- const _cd=window.camDraw;if(typeof _cd==='function'){window.camDraw=function(){try{if(window.CHEF_APPLIED_&&typeof IMC!='undefined'&&IMC.complete&&IMC.naturalWidth){const c=document.getElementById('ccv');if(!c)return;if(c.width!==18){c.width=18;c.height=20}
+ const _cd=window.camDraw;if(typeof _cd==='function'){window.camDraw=function(){try{if(window.CHEF_APPLIED_&&typeof IMC!='undefined'&&IMC.complete&&IMC.naturalWidth){const c=document.getElementById('ccv');if(!c)return;if(c.width!==18){c.width=18;c.height=20}if(window.camDrawProc)return window.camDrawProc();
    const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.fillStyle='#e6d9b8';g.fillRect(0,0,18,20);g.fillStyle='rgba(255,255,255,.35)';g.fillRect(0,0,18,3);g.fillStyle='rgba(0,0,0,.13)';g.fillRect(0,15,18,5);
    let tk=0;try{tk=CAM.talk&&((performance.now()/160|0)%2)}catch(_){}g.drawImage(IMC,18*48+(tk?0:16),1,16,20,1,1,16,20);return}}catch(_){}return _cd.apply(this,arguments)};try{camDraw=window.camDraw}catch(_){}}
 })();
@@ -13450,6 +13450,20 @@ body:has(#m:not([hidden])) #dfi,body.fly #dfi,body:has(#mtg) #dfi,body:has(#debo
 :is(${S}){border-width:2px!important;border-radius:6px!important;box-shadow:inset 0 2px 0 var(--pl),inset 0 -3px 0 var(--pd),0 2px 0 rgba(42,36,51,.28)!important}
 :is(${S}).go,#side button.on,.box button.on{box-shadow:inset 0 2px 0 var(--pgl),inset 0 -3px 0 var(--pgd),0 2px 0 rgba(42,36,51,.28)!important}
 :is(${S}):disabled{box-shadow:none!important}`;document.head.appendChild(st)})();
+</script>
+<script>
+// ===== v548 : plus d'option « Camille en haut » (elle mettait Camille en haut à droite et les appels en bas, par-dessus le portrait) ;
+// dans la bulle, plus de « Camille : « … » » : le portrait suffit à savoir qui parle
+(function(){try{document.body.classList.remove('camtop');localStorage.removeItem('hsa_camtop')}catch(_){}
+ window.camTopOn=()=>false;window.camTop=()=>{try{document.body.classList.remove('camtop')}catch(_){}};
+ const nm=()=>{try{return (typeof CHEF!='undefined'&&CHEF&&CHEF.name)||'Camille'}catch(_){return 'Camille'}};
+ const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+ const strip=t=>{try{t=String(t);const N='(?:Cam'+'ille|'+esc(nm())+')';
+   t=t.replace(new RegExp('^((?:\\S+\\s)?)'+N+'\\s*:\\s*«\\s*([^]*?)\\s*»\\s*$','u'),'$1$2');
+   t=t.replace(new RegExp('^((?:\\S+\\s)?)'+N+'\\s*:\\s*','u'),'$1');return t}catch(_){return t}};
+ const _cs=window.camSay;if(typeof _cs=='function'){window.camSay=function(t,c){return _cs.call(this,t?strip(t):t,c)};try{camSay=window.camSay}catch(_){}}
+ window.camStrip=strip;
+})();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
