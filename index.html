@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v551')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v552')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v551')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v552')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -13129,7 +13129,7 @@ window.P3BG=window.P3BG||{};window.P3BG.major={back:'data:image/webp;base64,UklG
    const tir=(ph==='select'&&pg.mode==='T')||(pd&&pd.m==='T'&&(ph==='throw'||(ball&&ball.air>0)));
    if(ph==='power'){gP.set(port?6.5:5,port?9:7,cz+3.5);gT.set(0,0,cz-.6);return}
    if(tir){const tz=Z3((pg.coch()||{x:T.x+T.w*.6}).x),mid=tz/2;gP.set(port?4.6:5.2,port?3.6:2.6,port?4.2:2.2);gT.set(-.5,.4,mid-(port?1.2:.6));return}
-   if(ball&&(ph==='roll'||ph==='throw')&&(Math.abs(ball.vx)+Math.abs(ball.vy)>1||ball.air>0)){const bx=X3(ball.y),bz=Z3(ball.x);gP.set(bx*.5+.6,port?2.8:2.2,bz+(port?4.2:3.6));gT.set(bx,0,bz-2.2);return}
+   if(ball&&(ph==='roll'||ph==='throw')&&(Math.abs(ball.vx)+Math.abs(ball.vy)>1||ball.air>0)){const bx=X3(ball.y),bz=Z3(ball.x);gP.set(bx*.2+.6,port?3.6:3,bz*.4+(port?4.8:4.2));gT.set(bx*.45,0,bz*.6-2.6);return}
    if(ph==='anim'||ph==='score'||(ph==='wait'&&pg.balls.length>1)){const j=pg.coch();const jz=j?Z3(j.x):cz;gP.set(.4,port?5.4:4,jz+(port?4.8:4.2));gT.set(0,0,jz-.3);return}
    gP.set(.75,port?3.6:2.5,port?6.4:4.8);gT.set(.1,0,-6.2)}
   // ---------- saisie : on traduit l'écran vers le plan du jeu ----------
@@ -13189,7 +13189,7 @@ window.P3BG=window.P3BG||{};window.P3BG.major={back:'data:image/webp;base64,UklG
    {let ip=0,ir=0;(pg.parts||[]).forEach(p=>{if(p.ring){const k=1-p.t/p.T,rr=(p.r+(p.R-p.r)*k)*K;const o=ringO(ir++);o.scale.setScalar(rr);o.material.color.set(p.c);o.material.opacity=p.t/p.T;o.position.set(X3(p.y),.02,Z3(p.x));return}if(ip>=160)return;const o=partO(ip++,p.c);if(p.big){o.position.set(X3(p.y)*.6,3.2-(p.y/H)*3,Z3(p.x)*.6-3);o.rotation.set(now/200+ip,now/300,0);o.scale.set(1.6,.4,1)}else{o.position.set(X3(p.y),.06+Math.max(0,p.t)*.3,Z3(p.x));o.scale.set(1,1,1)}});
     for(let i=ip;i<PP.length;i++)PP[i].visible=false;for(let i=ir;i<RG.length;i++)RG[i].visible=false}
    // caméra
-   shot(now);if(window.__P3CAM){const q=window.__P3CAM;gP.set(...q[0]);gT.set(...q[1])}const kk=first?1:1-Math.pow(.035,dt);first=false;cP.lerp(gP,kk);cT.lerp(gT,kk);cam.position.copy(cP);cam.lookAt(cT);
+   shot(now);if(window.__P3CAM){const q=window.__P3CAM;gP.set(...q[0]);gT.set(...q[1])}const kk=first?1:1-Math.pow(.22,dt);first=false;cP.lerp(gP,kk);cT.lerp(gT,kk);cam.position.copy(cP);cam.lookAt(cT);
    // personnages trop près de l'objectif : on les cache (sinon ils bouchent l'écran)
    PS.forEach(o=>{if(o.s.visible&&o.s.position.distanceTo(cam.position)<3.1)o.s.visible=o.sh.visible=false});
    rend.render(scene,cam);overlays()}
@@ -13506,6 +13506,66 @@ html body #lci button.lcb svg{display:block}
    let c=H.get(e);if(!c){c=document.createElement('div');c.className='scrh';c.textContent='⌄';c.title='Faire défiler';c.onclick=()=>{try{e.scrollBy({top:e.clientHeight*.7,behavior:'smooth'})}catch(_){e.scrollTop+=e.clientHeight*.7}};document.body.appendChild(c);H.set(e,c)}
    c.style.left=Math.round(r.right-44)+'px';c.style.top=Math.round(Math.min(innerHeight-40,r.bottom)-42)+'px'});
   H.forEach((c,e)=>{if(!seen.has(e)||!e.isConnected){c.remove();H.delete(e)}})}catch(_){}},250);
+})();
+</script>
+<script>
+// ===== v552 : libellés des onglets lisibles ; objectif toujours sous le bandeau ; surdose = pastille au bord de l'écran ;
+// « À savoir » devient une icône à côté des sous-onglets ; formations et salles repliées (un toucher déplie, un second valide) ;
+// pétanque : caméra plus douce et ralenti automatique des beaux coups
+(function(){const st=document.createElement('style');st.textContent=`
+#tabs button{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:visible}
+#tabs button .ic{flex:0 1 auto!important;min-height:0!important;line-height:1!important;display:flex;align-items:center;justify-content:center}
+#tabs button .ic img{height:24px!important;width:auto!important;max-height:none!important}
+#tabs button small{display:block!important;flex:0 0 auto!important;height:auto!important;max-height:none!important;overflow:visible!important;font-size:9.5px!important;line-height:1.05!important;margin-top:1px!important;white-space:nowrap}
+html body #odc.on{left:var(--odx)!important;top:var(--ody)!important;transform:none!important;width:52px;height:52px;border-radius:50%!important;padding:0!important;display:flex!important;align-items:center;justify-content:center;font-size:24px!important;animation:odp2 .8s ease-in-out infinite!important;overflow:visible}
+#odc::after{content:'';position:absolute;left:50%;top:50%;width:0;height:0;border:7px solid transparent;border-left:11px solid #c0392b;transform:translate(-50%,-50%) rotate(var(--oda,0deg)) translateX(36px)}
+@keyframes odp2{50%{box-shadow:0 0 0 7px rgba(224,64,64,.35),0 2px 0 #0005}}
+.subt .hqb.ic1{font-size:0!important;width:34px!important;min-width:34px!important;height:34px!important;min-height:34px!important;padding:0!important;margin:0!important;display:inline-flex!important;align-items:center;justify-content:center;flex:none!important;position:static!important}
+.subt .hqb.ic1 img{height:20px!important;width:auto!important;margin:0!important}
+#trn button:not(.xopen) small,#trn button:not(.xopen) .nb,#trn button:not(.xopen)::after,#rbx .rbc:not(.xopen) small,#rbx .rbc:not(.xopen) .szi{display:none!important}
+#trn button:not(.xopen)>br:nth-of-type(2){display:none}
+#trn button.xopen,#rbx .rbc.xopen{outline:3px solid #ffc21f;outline-offset:-3px}
+.xhint{display:block;margin-top:4px;font:700 11.5px 'Atkinson Hyperlegible',sans-serif!important;color:#2f6fb5!important}
+#rbx .rbc:not(.xopen) .hd::after,#trn button:not(.xopen):not(:disabled) .pnm::after{content:' ›';color:#2f6fb5}
+#prpl{position:absolute;left:10px;bottom:10px;z-index:60;background:#14102a;border:3px solid #ffd23f;border-radius:10px;box-shadow:0 4px 0 rgba(0,0,0,.4);padding:4px;cursor:pointer;animation:prin .3s ease-out}
+#prpl canvas{display:block;image-rendering:auto}
+#prpl b{position:absolute;left:8px;top:6px;font:400 13px Lilita,sans-serif;color:#ffd23f;text-shadow:1px 1px 0 #000;letter-spacing:.04em}
+@keyframes prin{from{transform:scale(.6);opacity:0}}`;document.head.appendChild(st);
+ // objectif sous le bandeau, même quand celui-ci change de hauteur
+ setInterval(()=>{try{const o=document.getElementById('objp'),hd=document.getElementById('hud');if(!o||!hd)return;if(innerWidth>innerHeight){o.style.removeProperty('top');return}const b=Math.round(hd.getBoundingClientRect().bottom+8);const v=b+'px';if(o.style.getPropertyValue('top')!==v)o.style.setProperty('top',v,'important')}catch(_){}},400);
+ // surdose : pastille au bord de l'écran, flèche vers la salle
+ setInterval(()=>{try{const el=document.getElementById('odc');if(!el||!el.classList.contains('on'))return;if(el.textContent!=='🆘')el.textContent='🆘';el.title='Surdose en salle de conso : y aller';
+  const r=cv.getBoundingClientRect(),k=r.width/WW,cx=r.left+(OX+R[1][2]+RW[1]/2)*k,cy=r.top+(OY+R[1][3]+23)*r.height/WH;
+  const hb=(document.getElementById('hud')||{getBoundingClientRect:()=>({bottom:60})}).getBoundingClientRect().bottom;const m=34,x=Math.max(m,Math.min(innerWidth-m,cx)),y=Math.max(hb+40,Math.min(innerHeight-110,cy));
+  el.style.setProperty('--odx',(x-26)+'px');el.style.setProperty('--ody',(y-26)+'px');el.style.setProperty('--oda',(Math.atan2(cy-y,cx-x)*180/Math.PI).toFixed(0)+'deg')}catch(_){}},150);
+ // « À savoir » : une icône à côté des sous-onglets
+ setInterval(()=>{try{document.querySelectorAll('#side .tab').forEach(t=>{const sb=t.querySelector('.subt');t.querySelectorAll('.hqb:not(.ic1)').forEach(b=>{if(!/savoir/i.test(b.textContent))return;b.classList.add('ic1');b.title='À savoir';b._sub=b.closest('.sub');if(sb&&b.parentNode!==sb)sb.appendChild(b)});t.querySelectorAll('.subt .hqb.ic1').forEach(b=>{const on=!b._sub||!!b._sub.offsetParent||getComputedStyle(b._sub).display!='none';b.style.setProperty('display',on?'inline-flex':'none','important')})})}catch(_){}},400);
+ // formations et salles : repliées ; un toucher déplie, un second valide
+ const XS='#trn button,#rbx .rbc';
+ document.addEventListener('click',e=>{try{const b=e.target.closest&&e.target.closest(XS);if(!b||b.disabled)return;if(b.classList.contains('xopen'))return;
+   e.preventDefault();e.stopImmediatePropagation();document.querySelectorAll('#trn .xopen,#rbx .xopen').forEach(x=>{x.classList.remove('xopen');x.querySelectorAll('.xhint').forEach(h=>h.remove())});
+   b.classList.add('xopen');if(!b.classList.contains('lock')&&!b.querySelector('.xhint')){const s=document.createElement('span');s.className='xhint';s.textContent=b.closest('#rbx')?'↳ touche encore pour placer la salle':'↳ touche encore pour lancer la formation';b.appendChild(s)}}catch(_){}},true);
+ // pétanque : enregistrement des coups et ralenti des beaux coups
+ const REC={f:[],team:null,nice:'',ph:''};let playing=false;
+ const NICE=/CARREAU|À la bande|COMBO|ENSEMBLE|Sardine géante/i;
+ new MutationObserver(()=>{try{const b=document.querySelector('#peta #qban');if(b&&!b.classList.contains('off')&&NICE.test(b.textContent)&&REC.team===0)REC.nice=b.textContent.trim()}catch(_){}}).observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class']});
+ const snap=pg=>pg.balls.filter(b=>b.alive!==false).map(b=>[b.x,b.y,b.r,b.team,b.air||0]);
+ const play=(pg,label)=>{try{if(playing||!REC.f.length)return;const ov=document.getElementById('peta');if(!ov)return;const T=pg.T,sc=Math.min(240/T.w,90/T.h),Wc=Math.round(T.w*sc)+16,Hc=Math.round(T.h*sc)+30;
+   const d=document.createElement('div');d.id='prpl';d.innerHTML='<canvas></canvas><b>⟲ REPLAY · '+label.replace(/[<>]/g,'')+'</b>';const c=d.querySelector('canvas');c.width=Wc*2;c.height=Hc*2;c.style.width=Wc+'px';c.style.height=Hc+'px';ov.appendChild(d);playing=true;
+   const g=c.getContext('2d');g.scale(2,2);const F=REC.f.slice(),t0=performance.now(),dur=F[F.length-1][0]-F[0][0],spd=.55;
+   const end=()=>{playing=false;d.remove()};d.onclick=end;
+   const fr=()=>{if(!d.isConnected)return end();const el=(performance.now()-t0)*spd;let i=F.findIndex(q=>q[0]-F[0][0]>=el);if(i<0)i=F.length-1;const S_=F[i][1];
+    g.fillStyle='#14102a';g.fillRect(0,0,Wc,Hc);g.fillStyle='#d8bd8a';g.fillRect(8,22,T.w*sc,T.h*sc);g.strokeStyle='#8a6a3a';g.lineWidth=2;g.strokeRect(8,22,T.w*sc,T.h*sc);
+    S_.forEach(([x,y,r,tm,air])=>{const X=8+(x-T.x)*sc,Y=22+(y-T.y)*sc,R_=Math.max(2,r*sc)*(1+Math.min(1.2,air/20));g.fillStyle='rgba(0,0,0,.25)';g.beginPath();g.arc(X+1,Y+1+air*sc*.15,R_,0,7);g.fill();
+     g.fillStyle=tm<0?'#f5d14a':tm===0?'#cfd8e6':'#c98a4a';g.beginPath();g.arc(X,Y-air*sc*.3,R_,0,7);g.fill();g.lineWidth=1.5;g.strokeStyle=tm<0?'#8a6a00':tm===0?'#3a78d8':'#e07a20';g.stroke()});
+    if(el<dur+600)requestAnimationFrame(fr);else setTimeout(end,900)};fr()}catch(e){playing=false}};
+ const loop=()=>{try{const pg=window.__PG,ov=document.getElementById('peta');if(pg&&ov){const ph=pg.phase;
+   if(ph==='throw'&&REC.ph!=='throw'){REC.f=[];REC.nice='';REC.team=pg.pending?pg.pending.team:null}
+   if(ph==='throw'||ph==='roll'||ph==='anim'){if(REC.f.length<900)REC.f.push([performance.now(),snap(pg)])}
+   if((REC.ph==='roll'||REC.ph==='anim')&&ph!=='roll'&&ph!=='anim'&&ph!=='throw'){
+    let lab=REC.nice;if(!lab&&REC.team===0){try{const c=pg.coch&&pg.coch();const last=REC.f.length?REC.f[REC.f.length-1][1]:[];if(c&&last.some(([x,y,r,tm])=>tm===0&&Math.hypot(x-c.x,y-c.y)<r+c.r+1.5))lab='Biberon !'}catch(_){}}
+    if(lab&&REC.f.length>8)setTimeout(()=>play(pg,lab),500)}
+   REC.ph=ph}}catch(_){}requestAnimationFrame(loop)};requestAnimationFrame(loop);
 })();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
