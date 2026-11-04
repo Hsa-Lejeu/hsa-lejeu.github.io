@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v546')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v547')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v546')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v547')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -13412,6 +13412,44 @@ body:has(#m:not([hidden])) #dfi,body.fly #dfi,body:has(#mtg) #dfi,body:has(#debo
   const t=D.hold?'à tenir':left<=0?'dernier mois':left+' mois';const h='🎯 '+t+(P.length?' · '+P.filter(([l,v,m])=>v>=m).length+'/'+P.length:'');
   if(b._h!==h){b._h=h;b.textContent=h}b.classList.toggle('ok',!!done);b.classList.toggle('late',left<=0&&!done&&!D.hold)}catch(_){}},800);
 })();
+</script>
+<script>
+// ===== v547 : avec le tutoriel suivi jusqu'au bout, pas de fenêtre « naloxone » : Camille l'explique et guide vers l'achat (onglet Soins › Naloxone).
+// Si le tutoriel a été passé, la fenêtre reste comme avant.
+(function(){const st=document.createElement('style');st.textContent=`#nalg{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 92px);transform:translateX(-50%);width:min(520px,calc(100vw - 24px));z-index:70;display:flex;gap:10px;align-items:flex-start;background:#fffaf0;border:3px solid #2a2433;border-radius:14px;box-shadow:0 5px 0 rgba(0,0,0,.3);padding:9px 11px;font:14px/1.4 'Atkinson Hyperlegible',sans-serif;color:#2a2433;animation:cmin .35s cubic-bezier(.2,1.4,.4,1);box-sizing:border-box}
+#nalg canvas{width:52px;height:58px;image-rendering:pixelated;border:3px solid #6a5c4c;border-radius:8px;flex:none;background:#f3e7c9}
+#nalg .nm{font:400 16px Lilita,sans-serif}#nalg p{margin:2px 0 6px}#nalg .cbt{display:flex;justify-content:flex-end}#nalg .cbt button{min-height:34px;padding:4px 14px;text-shadow:none}
+#nalg .cbt:empty{display:none}
+#nalg.top{bottom:auto;top:calc(env(safe-area-inset-top,0px) + 96px)}
+@media (orientation:landscape) and (max-height:600px){#nalg{bottom:8px;left:calc(50% - 40px)}#nalg.top{top:auto;bottom:8px;left:38%}}
+.nalhl{outline:4px solid #ffc21f!important;outline-offset:-4px;animation:nalp .9s ease-in-out infinite!important;position:relative;z-index:3}
+@keyframes nalp{50%{outline-color:#ff7a00;filter:brightness(1.12)}}`;document.head.appendChild(st);
+ // le tutoriel est-il allé jusqu'au bout ?
+ const _tn=window.tutNext;if(typeof _tn=='function'){window.tutNext=function(){try{if(typeof TI!='undefined'&&typeof TUT!='undefined'&&TI>=TUT.length-1)B.tutFull=1}catch(_){}return _tn.apply(this,arguments)};try{tutNext=window.tutNext}catch(_){}}
+ const nm=()=>{try{return (typeof CHEF!='undefined'&&CHEF&&CHEF.name)||'Camille'}catch(_){return 'Camille'}};
+ let G=null;const hl=e=>{document.querySelectorAll('.nalhl').forEach(x=>{if(x!==e)x.classList.remove('nalhl')});if(e)e.classList.add('nalhl')};
+ const box=(txt,btn,cb)=>{let b=document.getElementById('nalg');if(!b){b=document.createElement('div');b.id='nalg';b.innerHTML='<canvas width="18" height="20"></canvas><div><span class="nm"></span><p></p><div class="cbt"></div></div>';document.body.appendChild(b);
+   try{const g=b.querySelector('canvas').getContext('2d');g.imageSmoothingEnabled=false;const dr=()=>{g.fillStyle='#f3e7c9';g.fillRect(0,0,18,20);g.drawImage(IMC,18*48+16,1,16,20,1,1,16,20)};if(IMC.complete&&IMC.naturalWidth)dr();else IMC.addEventListener('load',dr,{once:true})}catch(_){}}
+  b.querySelector('.nm').textContent=nm();b.querySelector('p').innerHTML=txt;const c=b.querySelector('.cbt');c.innerHTML='';if(btn){const k=document.createElement('button');k.className='go';k.textContent=btn;k.onclick=cb;c.appendChild(k)}};
+ const end=()=>{hl(null);const b=document.getElementById('nalg');if(b)b.remove();if(G&&G.iv)clearInterval(G.iv);G=null};
+ const tabBtn=()=>document.querySelector('#tabs button[onclick="tab(1)"]');
+ const guide=()=>{end();G={st:0};paused=true;
+  box('Notre salle de consommation est prête ! Avant d’ouvrir, il nous faut de la <b>naloxone</b> : c’est l’<b>antidote des surdoses d’opioïdes</b>. En spray ou en injection, elle relance la respiration en quelques minutes. <b>Sans naloxone en stock, la salle reste fermée.</b>','On en commande ▶',()=>{G.st=1;paused=false;step()});
+  G.iv=setInterval(step,300)};
+ const step=()=>{try{if(!G)return;if(S.n>0){G.st=3;hl(null);{const b=document.getElementById('nalg');if(b)b.classList.remove('top')}box('Parfait, on a de la naloxone ! À chaque surdose, l’équipe utilise un kit : surveille le stock dans l’onglet Soins.','Compris',end);clearInterval(G.iv);G.iv=setTimeout(end,9000);return}
+   if(G.st<1)return;const bn=document.getElementById('bn'),open=bn&&bn.offsetParent;
+   if(!open){if(G.st!==1||!document.querySelector('.nalhl')){G.st=1;hl(tabBtn());{const b=document.getElementById('nalg');if(b)b.classList.remove('top')}box('Ouvre l’onglet <b>Soins</b> (le stéthoscope), c’est là qu’on commande le matériel.',null)}}
+   else if(G.st!==2){G.st=2;hl(bn);try{bn.scrollIntoView({block:'center',behavior:'smooth'})}catch(_){}box(bn.disabled?'Il faut un peu d’argent pour 5 kits de naloxone : dès que la caisse le permet, touche <b>« Naloxone ×5 »</b>.':'Ici, le matériel. Touche <b>« Naloxone ×5 »</b> pour commander 5 kits.',null);const b=document.getElementById('nalg');if(b)b.classList.add('top')}}catch(_){}};
+ const _nm=window.nalModal;if(typeof _nm=='function'){window.nalModal=function(){try{if(B.tutFull&&!(S.n>0))return guide()}catch(_){}return _nm.apply(this,arguments)};try{nalModal=window.nalModal}catch(_){}}
+ window.nalGuide=guide;
+})();
+</script>
+<script>
+// ===== v547 : boutons moins massifs — bordure plus fine, coins légèrement arrondis, ombre portée douce au lieu du bloc noir
+(function(){const st=document.createElement('style');const S='#app button:not(#tabs button),#m button,#mtg button,#splx button,#fmo button,#xpov button,#nalg button,#cmbx button';st.textContent=`
+:is(${S}){border-width:2px!important;border-radius:6px!important;box-shadow:inset 0 2px 0 var(--pl),inset 0 -3px 0 var(--pd),0 2px 0 rgba(42,36,51,.28)!important}
+:is(${S}).go,#side button.on,.box button.on{box-shadow:inset 0 2px 0 var(--pgl),inset 0 -3px 0 var(--pgd),0 2px 0 rgba(42,36,51,.28)!important}
+:is(${S}):disabled{box-shadow:none!important}`;document.head.appendChild(st)})();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
