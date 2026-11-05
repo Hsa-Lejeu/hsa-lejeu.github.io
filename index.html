@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v560')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v561')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -4989,7 +4989,7 @@ function epCity(k){try{$('m').hidden=true}catch(_){}tab(-1);paused=true;hdInstal
  function walk(){CAMW.on=1;CAMW.tp=performance.now();fadeY=(304+EY)*2;epCap(cap,{n:(window.CHEF&&CHEF.name)||'Camille',role:'sort rejoindre tout le monde',cam:1});bub('Allez, viens ! Tout le monde nous attend dehors.',CAMW.x*2,(CAMW.y+EY)*2,30,2800);
   goTo({cx:CAMW.x*2,cy:(CAMW.y+EY)*2-22,s0:zoomP*.9,th:34,u:1},1500,null);if(k==2){try{if(!FETE.length)feteStart()}catch(_){}}else window.HDEXTRA=()=>{camDraw()}}
  let i=0;const visit=()=>{if(stopped)return;if(i>=stops.length){if(k==2)walk();else finale();return}const s=stops[i++];
-  goTo({cx:s.x,cy:s.y-26,s0:zoomP,th:36,u:1},2200,()=>{epCap(cap,s);const msg=s.cam?'Merci. On l’a fait, toustes ensemble.':EPP[(i-1)%EPP.length];epLater(()=>bub(msg,s.x,s.y,30,2600),300);epLater(visit,3300)})};
+  goTo({cx:s.x,cy:s.y-26,s0:zoomP,th:36,u:1},2200,()=>{epCap(cap,s);const msg=s.cam?(k==2?'Merci. On l’a fait, toustes ensemble.':'Merci à toustes. On continue, et on finira par les convaincre.'):EPP[(i-1)%EPP.length];epLater(()=>bub(msg,s.x,s.y,30,2600),300);epLater(visit,3300)})};
  epLater(visit,4600);
  // les gens de la halte remercient aussi
  const crowd=()=>{if(stopped)return;try{const L=V.filter(q=>!q.gone&&q.x!=null&&q.x<176);if(L.length){const q=L[Math.random()*L.length|0];bub(EPM[Math.random()*EPM.length|0],(q.x+OX)*2,(q.y+OY)*2,30,2200)}}catch(_){}epLater(crowd,1700+Math.random()*900)};epLater(crowd,6500);
@@ -5008,7 +5008,7 @@ function epCity(k){try{$('m').hidden=true}catch(_){}tab(-1);paused=true;hdInstal
    epLater(()=>finale2(),14600);return}
   finale2()}
  function finale2(){goTo({cx:cv.width/2+30,cy:cv.height*.42,s0:Math.min(W/cv.width,H/cv.height)*1.35,th:40,u:1},3200,()=>{});
-  epLater(()=>{night=1;fin0=performance.now();cap.textContent=k==2?'🎉 Les HSA sont inscrites dans la loi : toute la ville fait la fête !':'👏 L’expérimentation continue : bravo à toute l’équipe !';try{rvConfetti(80)}catch(_){}
+  epLater(()=>{if(k!=2){cap.textContent='👏 L’expérimentation continue : bravo à toute l’équipe !';try{epClap(3)}catch(_){}try{rvConfetti(30)}catch(_){}epLater(end,7500);return}night=1;fin0=performance.now();cap.textContent=k==2?'🎉 Les HSA sont inscrites dans la loi : toute la ville fait la fête !':'👏 L’expérimentation continue : bravo à toute l’équipe !';try{rvConfetti(80)}catch(_){}
    mid=()=>{const T=(performance.now()-fin0)/1000;if(T>nfw){nfw=T+(T<2?.8:.3)+Math.random()*.3;const n=T>5?2:1;for(let j=0;j<n;j++)FW.push({cx:W*.1+Math.random()*W*.8,cy:H*.07+Math.random()*H*.3,t:T,hue:Math.random()*360,R:W*.1+Math.random()*W*.13});try{window.epFw&&epFw()}catch(_){}}
     hd.g.save();hd.g.globalCompositeOperation='lighter';for(let q=FW.length-1;q>=0;q--){const f=FW[q],u=T-f.t;if(u>1.9){FW.splice(q,1);continue}const al=Math.max(0,1-u/1.9);
      if(u<.3){hd.g.fillStyle=`hsla(${f.hue},100%,85%,.9)`;hd.g.fillRect(f.cx,f.cy+(.3-u)*H*1.6,3,12)}else{const R_=Math.min(f.R,(u-.3)*f.R*1.3);for(let a=0;a<36;a++){const an=a/36*Math.PI*2,px=f.cx+Math.cos(an)*R_,py=f.cy+Math.sin(an)*R_+u*u*40;hd.g.fillStyle=`hsla(${f.hue+a*4},100%,70%,${al})`;hd.g.fillRect(px,py,8,8);if(a%3==0){hd.g.fillStyle=`hsla(${f.hue+40},100%,80%,${al*.8})`;hd.g.fillRect(f.cx+Math.cos(an)*R_*.6,f.cy+Math.sin(an)*R_*.6+u*u*30,3,3)}}
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v560')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v561')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -6479,7 +6479,7 @@ window.endTips=function(){try{const I=window.ENDINFO||{},sc=window.LASTSC||[],T=
 // dans le panneau final (après le générique) : si la halte n'est pas pérennisée, une petite fenêtre de conseils puis « Ressaye ! »
 new MutationObserver(()=>{try{const pn=document.querySelector('#epov .ecpan.on');if(!pn||pn._tips||ENDING=='good')return;pn._tips=1;const L=endTips();if(!L.length)return;
  const ps=pn.querySelectorAll('p');const second=ps[1];const box=document.createElement('div');box.className='ectip';
- box.innerHTML=`<h4>💡 Pour mieux convaincre le gouvernement la prochaine fois…</h4><ul>${L.map(t=>'<li>'+t+'</li>').join('')}</ul>`;
+ box.innerHTML=(ENDING=='mid'?`<p class="ecretry">🔁 Réessaie pour faire inscrire les HSA dans le droit commun !<br><span>${window.endMiss?endMiss():''}</span></p>`:'')+`<h4>💡 Pour mieux convaincre le gouvernement la prochaine fois…</h4><ul>${L.map(t=>'<li>'+t+'</li>').join('')}</ul>`;
  if(second)second.replaceWith(box);else pn.insertBefore(box,pn.querySelector('.ecb'));
  const rb=pn.querySelector('.ecb button.go');if(rb){rb.textContent='↺ Ressaye !';rb.classList.add('retry')}}catch(_){}}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
 
@@ -13666,6 +13666,15 @@ if(window.P3BG&&window.P3BG.calanques)window.P3BG.calanques.veg='data:image/webp
   setTimeout(()=>{try{set.classList.remove('tvshake');void set.offsetWidth;set.classList.add('tvshake')}catch(_){}try{if(AU.ctx&&AU.s>0&&AU.fx){const t=AU.ctx.currentTime+.01;tone(hz(36),t,.22,'triangle',.32,AU.fx,hz(28));tone(hz(60),t,.06,'square',.06,AU.fx,0)}}catch(_){}},480);
   setTimeout(()=>{try{rvConfetti(28)}catch(_){}},700)};
 })();
+</script>
+<script>
+// v561 : fin « prolongation » — ce qui manquait pour la bonne fin
+window.endMiss=function(){try{const I=window.ENDINFO||{},T=window.ENDTH||{mean:85,min:55,has:2},sc=window.LASTSC||[],mean=Math.round(I.mean||0),mn=Math.round(I.mn||0);
+ if(mean<T.mean){const d=T.mean-mean;return `Il te manquait <b>${d} point${d>1?'s':''}</b> de note finale (${mean}/100 sur ${T.mean}).`}
+ if(mn<T.min){const w=sc.slice().sort((a,b)=>a[1]-b[1])[0];return w?`Il te manquait <b>${T.min-w[1]} point${T.min-w[1]>1?'s':''}</b> en ${w[0].toLowerCase()} (${w[1]} sur ${T.min} minimum).`:''}
+ if((I.has||0)<T.has)return 'Il te manquait <b>★★ à l’évaluation de la HAS</b>.';
+ if((I.lateY||0)>6||(I.lateS||0)>=3)return 'Il te manquait des <b>salaires payés à l’heure</b> la 3e année.';return ''}catch(_){return ''}};
+{const st=document.createElement('style');st.textContent=`.ectip .ecretry{margin:0 0 8px;font:400 18px/1.25 Lilita,'Atkinson Hyperlegible',sans-serif;color:#1f5fbf;text-align:center}.ectip .ecretry span{display:block;font:400 14px/1.35 'Atkinson Hyperlegible',sans-serif;color:#2a2433;margin-top:3px}`;document.head.appendChild(st)}
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
