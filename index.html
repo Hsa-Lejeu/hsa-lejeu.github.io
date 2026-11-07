@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v575')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v576')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v575')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v576')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -6366,7 +6366,7 @@ function dcAsk(){const das=$('das');let d=das.querySelector('.rfc');if(d){d.remo
  const msg=t=>{let m=$('orbm');if(!m){m=document.createElement('div');m.id='orbm';sp.appendChild(m)}m.textContent=t;clearTimeout(msg.t);msg.t=setTimeout(()=>m.remove(),4500)};
  const TO=(pr,ms)=>Promise.race([pr,new Promise((_,j)=>setTimeout(()=>j(0),ms))]);
  const lock=async w=>{try{await TO(so.lock(w),1500);return true}catch(_){}try{if(!document.fullscreenElement&&document.documentElement.requestFullscreen){await TO(document.documentElement.requestFullscreen({navigationUI:'hide'}),1500);await TO(so.lock(w),1500);return true}}catch(_){}return false};
- b.onclick=async e=>{e.stopPropagation();const w=cur()=='portrait'?'landscape':'portrait';try{sfx('page')}catch(_){}if(await lock(w)){setTimeout(lab,300)}else msg('Ton téléphone ne permet pas de changer l’orientation depuis le jeu : tourne-le simplement (rotation automatique activée).')};
+ b.onclick=async e=>{e.stopPropagation();const w=cur()=='portrait'?'landscape':'portrait';try{localStorage.setItem('hsa-or-choice',w)}catch(_){}try{sfx('page')}catch(_){}if(await lock(w)){setTimeout(lab,300)}else msg('Ton téléphone ne permet pas de changer l’orientation depuis le jeu : tourne-le simplement (rotation automatique activée).')};
  // l'orientation choisie est reprise au premier toucher suivant
  try{localStorage.removeItem('hsaOr')}catch(_){}})();
 
@@ -14471,6 +14471,15 @@ const _gr=window.ground;window.ground=ground=function(se){if(GCV[se]&&GCV[se]._v
 try{for(const k in GCV)delete GCV[k]}catch(_){}
 })();
 
+</script>
+<script>
+// v576 : portrait par défaut — au premier toucher, l'appli installée (ou plein écran) se verrouille en portrait,
+// sauf si le joueur a choisi le paysage avec le bouton de l'accueil
+(function(){let done=false;const go=()=>{if(done)return;done=true;try{const ch=localStorage.getItem('hsa-or-choice');if(ch==='landscape')return;const so=screen.orientation;if(!so||typeof so.lock!='function')return;
+ const app=matchMedia('(display-mode: fullscreen), (display-mode: standalone), (display-mode: minimal-ui)').matches||String(document.referrer).startsWith('android-app://');
+ const lock=()=>so.lock(ch||'portrait').catch(()=>{});
+ if(app||document.fullscreenElement)lock()}catch(_){}};
+ go();document.addEventListener('pointerdown',()=>{done=false;go()},{once:true,capture:true})})();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
