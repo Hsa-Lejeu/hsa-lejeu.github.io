@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v582')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v583')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -3768,7 +3768,7 @@ hasReport=function(lv,nx,nl,S_,C){const up=nl>lv;if(up){B.has=nl;eu+=HASB[nl];NO
  $('m').className='modal';$('m').hidden=false;paused=true;ui();HSEQ={i:0,n:C.length,L,G,up,tm:null};hasStep()};
 let HSEQ=null;
 function hasStep(){const S=HSEQ;if(!S)return;const mb=$('mb');if(!mb.querySelector('.hasr'))return;if(S.i>=S.n){hasStampGo();return}
- const r=$('hr'+S.i),sp=mb.querySelector('.hspot');if(r&&sp){try{r.scrollIntoView({block:'nearest',behavior:'smooth'})}catch(_){}r.classList.add('cur');sp.style.top=r.offsetTop+'px';sp.style.height=r.offsetHeight+'px';sp.classList.add('on')}hasDrum();
+ const r=$('hr'+S.i),sp=mb.querySelector('.hspot');if(r&&sp){try{r.scrollIntoView({block:'nearest',behavior:'smooth'})}catch(_){}r.classList.add('cur');sp.style.top=r.offsetTop+'px';sp.style.height=r.offsetHeight+'px';sp.style.left=r.offsetLeft+'px';sp.style.width=r.offsetWidth+'px';sp.style.right='auto';sp.classList.add('on')}hasDrum();
  S.tm=setTimeout(()=>{if(r){r.classList.remove('cur');r.classList.add('show')}hasHit(S.L[S.i]);S.i++;S.tm=setTimeout(hasStep,650)},1050)}
 function hasStampGo(){const S=HSEQ;if(!S)return;const mb=$('mb'),sp=mb.querySelector('.hspot');if(sp)sp.classList.remove('on');hasDrum();S.tm=setTimeout(()=>{const st=mb.querySelector('.hstamp');if(st){st.classList.add('on');try{st.scrollIntoView({block:'nearest',behavior:'smooth'})}catch(_){}}try{AU.ctx&&noise(AU.ctx.currentTime+.01,.25,.6,120,0,'lowpass')}catch(_){}try{sfx(S.G=='A'||S.G=='B'?'fanfare':'sad')}catch(_){}
  S.tm=setTimeout(()=>{mb.querySelector('.hfin')&&mb.querySelector('.hfin').classList.add('on');const b=mb.querySelector('.hcont');if(b){b.classList.add('on');try{b.scrollIntoView({block:'nearest',behavior:'smooth'})}catch(_){}}const k=mb.querySelector('.hskip');if(k)k.style.visibility='hidden';HSEQ=null},900)},1100)}
@@ -4702,9 +4702,9 @@ W('annual',(o,a)=>{const rs=window.rvStage;window.rvStage=()=>{};let r;try{r=o(.
   yrLater(()=>{show(Q('.vn'));try{Q('.vn').scrollIntoView({behavior:'smooth',block:'nearest'})}catch(_){}},900);yrLater(()=>show(Q('p.rvh')),1500);
   yrLater(()=>{const b=Q('.yrgo');show(b);b.classList.add('rvpulse');const sk=Q('.yrsk');if(sk)sk.remove();try{b.scrollIntoView({behavior:'smooth',block:'nearest'})}catch(_){}},2000)};
  yrLater(()=>{Q('.yrh h2').classList.add('rvstamp');try{sfx('page')}catch(_){}},50);
- yrLater(()=>{show(Q('.yrph'));const fl=document.createElement('div');fl.className='yrflash';document.body.appendChild(fl);setTimeout(()=>fl.remove(),500);try{sfx('coin')}catch(_){}},800);
- yrLater(()=>{show(Q('.yrn'));mb.querySelectorAll('.yrn b').forEach(b=>yrCount(b,+b.dataset.v,1300,b.dataset.s||''))},2200);
- yrLater(()=>{const bx=Q('.yrs');show(bx);fin=rvAnim(bx,sc,()=>yrLater(verdict,350));try{bx.scrollIntoView({behavior:'smooth',block:'nearest'})}catch(_){}},4000);
+ yrLater(()=>{show(Q('.yrph'));const fl=document.createElement('div');fl.className='yrflash';document.body.appendChild(fl);setTimeout(()=>fl.remove(),500);try{sfx('coin')}catch(_){}},120);
+ yrLater(()=>{show(Q('.yrn'));mb.querySelectorAll('.yrn b').forEach(b=>yrCount(b,+b.dataset.v,1300,b.dataset.s||''))},250);
+ yrLater(()=>{const bx=Q('.yrs');show(bx);fin=rvAnim(bx,sc,()=>yrLater(verdict,350));try{bx.scrollIntoView({behavior:'smooth',block:'nearest'})}catch(_){}},450);
  Q('.yrsk').onclick=()=>{YRT.forEach(clearTimeout);YRT=[];['.yrph','.yrn'].forEach(s=>show(Q(s)));mb.querySelectorAll('.yrn b').forEach(b=>b.textContent=b.dataset.v+(b.dataset.s||''));const bx=Q('.yrs');show(bx);if(fin)fin();else{bx.innerHTML=rvSvg(sc);const P=bx.querySelector('.rvp'),cx=130,cy=120,R_=78;P.setAttribute('points',sc.map((v,i)=>(cx+R_*v[1]/100*Math.cos((-90+i*72)*Math.PI/180)).toFixed(1)+','+(cy+R_*v[1]/100*Math.sin((-90+i*72)*Math.PI/180)).toFixed(1)).join(' '));sc.forEach((v,i)=>{const n=bx.querySelector(`.rvl[data-i="${i}"] .rvn`);n.textContent=v[1];n.setAttribute('fill',RVC(v[1]))})}
   done=false;const h=Q('.yrv');show(h,'rvstamp');show(h.nextElementSibling);show(Q('.vn'));show(Q('p.rvh'));const b=Q('.yrgo');show(b);b.classList.add('rvpulse');done=true;Q('.yrsk').remove()}}catch(e){console.error(e)}return r});
 W('nextYear',(o,a)=>{YRT.forEach(clearTimeout);YRT=[];$('m').className='modal';return o(...a)});
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v582')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v583')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7846,7 +7846,7 @@ function debDraw(){const S=DS,g=S.g,hd=S.hd,cam=S.cam;const now=performance.now(
 // ---- les phrases du discours, qui avancent vers le joueur
 function debStmtsDraw(T){const S=DS;if(S.freeze)T=S.freeze;S.stmts.forEach(o=>{const u=(T-o.t0)/o.dur;if(u<0)return;if(u>=1){if(!o.done){o.done=1;o.el.remove()}return}
   const[cx,cy]=S.croScr?[S.croScr[0]/HDC.W*innerWidth,(S.croScr[1]-S.croScr[4]*.9)/HDC.H*innerHeight]:[innerWidth/2,innerHeight*.3];
-  const land=innerWidth>innerHeight;const ex=innerWidth*(o.side?.6:.4),ey=land?innerHeight*(o.side?.58:.46):innerHeight*.3;const e=u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2;   const sc=(land?.3+.85*e:.3+1.05*e),hh=(o.el.offsetHeight||40)*sc/2,ww=(o.el.offsetWidth||200)*sc/2;let x=cx+(ex-cx)*e+Math.sin(u*9+o.i)*6,y=cy+(ey-cy)*e-Math.sin(u*Math.PI)*innerHeight*(land?.04:.08);const top0=land?innerHeight*.36:56;y=Math.max(top0+hh,Math.min(innerHeight*(land?.66:.62)-hh,y));x=Math.max(ww+4,Math.min(innerWidth-ww-4,x));const rot=(o.side?-1:1)*(5-10*u);
+  const land=innerWidth>innerHeight;const top0=land?innerHeight*.36:56,bot0=innerHeight*(land?.66:.62),mid=(top0+bot0)/2,lo=o.side?mid+2:top0,hi=o.side?bot0:mid-2;const ex=innerWidth*(o.side?.6:.4),ey=(lo+hi)/2;const e=u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2;const oh=o.el.offsetHeight||40,ow=o.el.offsetWidth||200;const ra=land?2:5,sn=Math.sin(ra*Math.PI/180);let sc=(land?.3+.85*e:.3+1.05*e);sc=Math.min(sc,(hi-lo)/(oh+ow*sn),(innerWidth-8)/ow);const hh=(oh+ow*sn)*sc/2,ww=ow*sc/2;let x=cx+(ex-cx)*e+Math.sin(u*9+o.i)*6,y=cy+(ey-cy)*e-Math.sin(u*Math.PI)*innerHeight*(land?.04:.08);y=Math.max(lo+hh,Math.min(hi-hh,y));x=Math.max(ww+4,Math.min(innerWidth-ww-4,x));const rot=(o.side?-1:1)*ra*(1-2*u);
   o.el.style.transform=`translate(${x}px,${y}px) translate(-50%,-50%) rotate(${rot}deg) scale(${sc})`;o.el.style.opacity=u<.08?u/.08:u>.88?(1-u)/.12:1;o.el.style.zIndex=String(20+Math.round(u*60));o.el.style.pointerEvents=(u>.12&&u<.95)?'auto':'none'})}
 function debSpeak(){if(!DS)return;const S=DS,D=DEB[S.r];S.ph='speak';S.stmts.forEach(o=>o.el.remove());S.stmts=[];const gap=S.r==0?2.4:S.r==1?1.9:1.4,dur=S.r==0?4.1:S.r==1?3.2:2.6;
  const T=S.T;D.seg.forEach((txt,i)=>{const el=document.createElement('div');el.className='stmt'+(S.armed?' armed':'');el.style.setProperty('--fs',(S.r>=2?21:23)+'px');el.textContent=txt;el.dataset.i=i;el.style.opacity=0;el.style.pointerEvents='none';S.ov.appendChild(el);const o={el,i,t0:T+.4+i*gap,dur,side:i%2};S.stmts.push(o);setTimeout(()=>{if(DS&&S.ph=='speak'){debSwish();dsfx('launch',.35,1.6);debVoice('cro',txt)}},(.4+i*gap)*1000);
@@ -7860,7 +7860,7 @@ function debHand(){if(!DS)return;const S=DS,D=DEB[S.r],h=S.ov.querySelector('.ha
  const own=CARDS.map(c=>c[0]).filter(id=>COL[id]&&id!=D.card&&id!=D.card2&&!DEB.some(x=>x.card==id||x.card2==id));const alts=D.alt.filter(id=>id!=D.card&&id!=D.card2).slice();
  while(alts.length<4&&own.length){const id=own.splice(Math.floor(Math.random()*own.length),1)[0];if(!alts.includes(id))alts.push(id)}
  const base=D.card2?[D.card,D.card2]:[D.card],hand=base.concat(alts.slice(0,5-base.length)).sort(()=>Math.random()-.5),n=hand.length;
- hand.forEach((id,j)=>{const i=cIdx(id),c=CARDS[i];if(!c)return;const k=CCAT[c[1]]||['','#888'];const e=document.createElement('div');e.className='pc deal'+(S.used[S.r+id]?' used':'');e.dataset.id=id;const m=j-(n-1)/2;e.style.setProperty('--rot',(m*9)+'deg');e.style.setProperty('--ty',(Math.abs(m)*9)+'px');e.style.setProperty('--d',(j*.07)+'s');
+ hand.forEach((id,j)=>{const i=cIdx(id),c=CARDS[i];if(!c)return;const k=CCAT[c[1]]||['','#888'];const e=document.createElement('div');e.className='pc deal'+(S.used[S.r+id]?' used':'');e.dataset.id=id;const m=j-(n-1)/2;const fk=innerWidth<innerHeight?4:7;e.style.setProperty('--rot',(m*fk)+'deg');e.style.setProperty('--ty',(Math.abs(m)*fk)+'px');e.style.setProperty('--d',(j*.07)+'s');
   e.innerHTML=`<div class="pt" style="background:${k[1]}">${k[0].split(' ')[0]}</div><canvas width="120" height="70"></canvas><b>${c[3]}</b>`;const cv=e.querySelector('canvas'),gg=cv.getContext('2d');gg.imageSmoothingEnabled=false;const dr=()=>{try{gg.drawImage(CIMG,(cAT(i)%11)*120,Math.floor(cAT(i)/11)*70,120,70,0,0,120,70)}catch(_){}};if(CIMG.complete&&CIMG.naturalWidth)dr();else CIMG.addEventListener('load',dr,{once:true});
   e.onpointerdown=ev=>{S.sw={id,x:ev.clientX,y:ev.clientY,t:performance.now()};try{e.setPointerCapture(ev.pointerId)}catch(_){}};
   e.onpointerup=ev=>{const w=S.sw;S.sw=null;if(!w||w.id!=id)return;const dy=ev.clientY-w.y,dx=ev.clientX-w.x;if(dy<-48&&Math.abs(dx)<Math.abs(dy)*1.2&&performance.now()-w.t<600){S.swT=performance.now();debFling(id,e)}};
@@ -7903,7 +7903,7 @@ function debTry(o){if(!DS)return;const S=DS;let D=debD();if(S.ph!='speak'||!S.ar
   // 3. explosion de rayons et RÉFUTÉ
   setTimeout(()=>{if(!DS)return;debHLines(1.8);debObjection();},950);
   setTimeout(()=>{if(DS)debCut('cam',D.rep,4200,1)},3500);
-  setTimeout(()=>{if(!DS)return;if(half){S.hit2=1;S.used[S.r+D.card]=1;S.ov.querySelector('.rnd').textContent='Manche finale · Il reste une phrase fausse';debPh('cri','ET ÇA ? Vous n’avez RIEN contre ÇA !',S.cro.X,S.cro.Y,26*S.sc,2400);S.anger=Math.max(S.anger,2.5);S.shake=.8;dsfx('miss2',.6,.8);setTimeout(()=>{if(!DS)return;debHand();debHint('Il reste une phrase fausse dans son discours. Une deuxième carte !');setTimeout(debSpeak,500)},2200);return}S.r++;if(S.r>=3)debEnd();else debInterlude()},7800)}
+  setTimeout(()=>{if(!DS)return;if(half){S.hit2=1;S.used[S.r+D.card]=1;S.ov.querySelector('.rnd').textContent='Finale · 1 phrase fausse';debPh('cri','ET ÇA ? Vous n’avez RIEN contre ÇA !',S.cro.X,S.cro.Y,26*S.sc,2400);S.anger=Math.max(S.anger,2.5);S.shake=.8;dsfx('miss2',.6,.8);setTimeout(()=>{if(!DS)return;debHand();debHint('Il reste une phrase fausse dans son discours. Une deuxième carte !');setTimeout(debSpeak,500)},2200);return}S.r++;if(S.r>=3)debEnd();else debInterlude()},7800)}
  else{S.hp--;S.ov.querySelector('.hp').textContent='❤️'.repeat(S.hp)+'🖤'.repeat(3-S.hp);const rightCard=S.armed==D.card||(DEB[S.r].card2&&!S.hit2&&S.armed==DEB[S.r].card2);const c=S.ov.querySelector('.pc.armed');if(!rightCard){S.used[S.r+S.armed]=1;if(c){c.classList.remove('armed');c.classList.add('used')}S.armed=null;S.stmts.forEach(x=>x.el.classList.remove('armed'))}S.ov.classList.add('shk');setTimeout(()=>S.ov.classList.remove('shk'),500);dsfx('miss',.9);dsfx('miss2',.7);debBuzz();if(S.hp==1){[0,900,1800].forEach(d=>setTimeout(()=>{if(DS)debHeart()},400+d))}
   const rf=document.createElement('div');rf.className='redfl';S.ov.appendChild(rf);setTimeout(()=>rf.remove(),900);debOno('RATÉ…',innerWidth/2,innerHeight*.42,{s:46,c:'#ff6f66',r:6});
   debPh('cri',o.i!=D.ok?'HA ! Même vous, vous ne contestez pas ça !':'Une carte ? C’EST TOUT ?',S.cro.X,S.cro.Y,26*S.sc,2000);
@@ -14556,6 +14556,94 @@ window.__BUL2=[{"id": "M004", "re": "Déplacement[\\s\\u00a0\\u202f]+annulé[\\s
    if(r.a==='t'){toJournal(t,cls);lg('v582-taire',r.id);return}
    const k=(YR-1)*12+mo;B.bulG=B.bulG||{};if(B.bulG[r.id]===k){toJournal(t,cls);lg('v582-groupe',r.id);return}B.bulG[r.id]=k}}}catch(_){}return _cs.apply(this,arguments)};
  try{camSay=window.camSay}catch(_){}})();
+</script>
+<script>
+// ===== v583 : interface en paysage et en portrait
+// Une seule mise en page paysage pour les zones de l'écran : variables communes (--zl, --zr, --zt) et marges de sécurité,
+// fenêtres à la hauteur de l'écran, plus les 8 points relevés en jouant la v580.
+(function(){const st=document.createElement('style');st.textContent=`
+:root{--sl:env(safe-area-inset-left,0px);--sr:env(safe-area-inset-right,0px);--st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px)}
+/* ---------- paysage : trois zones fixes (compteurs à gauche, plan au centre, onglets à droite) ---------- */
+@media (orientation:landscape) and (max-height:600px){
+ :root{--zl:calc(var(--sl) + 142px);--zr:calc(var(--sr) + 66px);--zt:calc(var(--st) + 48px)}
+ #hud{left:calc(var(--sl) + 4px)!important}
+ #tabs{right:calc(var(--sr) + 16px)!important;top:calc(var(--st) + 52px)!important}
+ #cam{max-width:calc(100vw - var(--zr) - var(--sl) - 16px)!important}
+ /* fenêtres : jamais plus hautes que l'écran, le texte défile, l'action reste visible */
+ #m.modal{padding:calc(var(--st) + 6px) calc(var(--sr) + 8px) calc(var(--sb) + 6px) calc(var(--sl) + 8px)!important}
+ #m #mb{max-height:calc(100dvh - var(--st) - var(--sb) - 12px)!important;overflow-y:auto!important;box-sizing:border-box!important}
+ /* 1. grille HAS : critères sur deux colonnes en pleine largeur, verdict et boutons dessous */
+ .box:has(.hasr){width:min(860px,96vw)!important;max-width:min(860px,96vw)!important}
+ .box:has(.hasr) .hbody{display:block!important}
+ .box:has(.hasr) .hrows{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:5px 8px}
+ .box:has(.hasr) .hr{grid-template-columns:minmax(0,1fr) auto 100px!important;gap:6px!important;padding:3px 7px!important}
+ .box:has(.hasr) .hl{font-size:12.5px!important;line-height:1.25}
+ .box:has(.hasr) .hside{display:flex!important;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-top:6px;width:auto!important}
+ .box:has(.hasr) .hstamp{width:78px!important;height:78px!important;margin:0 4px!important;border-width:4px!important;flex:none}
+ .box:has(.hasr) .hstamp b{font-size:34px!important}
+ .box:has(.hasr) .hstamp span{font-size:7.5px!important;padding:0 6px!important}
+ .box:has(.hasr) .hfin{flex:1 1 300px;font-size:13px!important;line-height:1.35!important;text-align:left!important;margin:0!important}
+ .box:has(.hasr) .hsub{margin:0 0 4px!important}
+ /* 2. bilan final : le bouton sous le radar (plus sur le tableau), texte à 13 px */
+ #m.endl #mb{font-size:13px!important}
+ #m.endl #mb>p{font-size:13px!important;line-height:1.4!important}
+ #m.endl #mb>p.src583{font-size:11.5px!important}
+ #m.endl #mb>.epgo{position:static!important;float:left;clear:left;width:min(36vw,290px)!important;min-width:0!important;margin:4px 14px 8px 0!important;box-shadow:0 4px 0 #2a2433!important}
+ #m.endl #mb details.crit583{font-size:13px}
+}
+/* ---------- tous formats ---------- */
+/* 1. HAS : « Continuer » utilisable tout de suite, et toujours visible en bas de la fenêtre */
+.hasr>.hbt{position:sticky;bottom:-8px;z-index:4;background:#1f1a2e;margin:6px 0 0!important;padding:6px 44px 6px 0;justify-content:flex-end}
+.hcont,.hcont.on{opacity:1!important;pointer-events:auto!important}
+/* 2. détail par critère replié */
+details.crit583{display:flow-root;margin:4px 0;border:2px solid #e3d6bb;border-radius:9px;padding:3px 8px;background:#fffaf0}
+details.crit583>summary{cursor:pointer;font-weight:700;font-size:13px;list-style:revert}
+details.crit583>p{margin:4px 0!important;font-size:13px!important;line-height:1.4!important}
+/* 3. bilan du mois : la fenêtre prend la hauteur de son contenu, texte bien lisible */
+#m #mb.bil2{height:auto!important;min-height:0!important}
+#m #mb.bil2>p.ba{color:#2a2433!important}
+#m #mb.bil2 .mbud small{opacity:1!important;color:#5a4c3c!important}
+#m #mb.bil2>p small,#m #mb.bil2>p .mut{opacity:1!important;color:#4a3f33!important}
+#m #mb.bil2>button.go:last-child{position:sticky;bottom:0;z-index:3;box-shadow:0 -12px 12px -4px rgba(246,241,228,.95),0 4px 0 #2a2433}
+/* 4. bilan de fin d'année : ce qui n'est pas encore révélé ne prend pas de place, le radar est en haut tout de suite */
+#m #mb .rvh{display:none!important}
+/* 5. débat en portrait : un éventail qui tient dans l'écran */
+@media (orientation:portrait){
+ html body #debov .hand .pc{width:min(72px,calc((100vw - 40px)/5))!important;height:auto!important;aspect-ratio:84/118;margin:0 -4px!important}
+ html body #debov .hand .pc b{font-size:11.5px!important}
+}
+@media (orientation:landscape) and (max-height:600px){
+ html body #debov .hand{bottom:24px!important}
+ html body #debov .hand .pc{width:76px!important;height:107px!important}
+}
+/* 8. guide de la naloxone : le même anneau qu'aux autres étapes */
+#nalr{position:fixed;z-index:96;pointer-events:none;border:3px solid #ffd23f;border-radius:10px;box-shadow:0 0 0 3px rgba(42,36,51,.75),0 0 18px 4px rgba(255,210,63,.8);animation:gdp 1.1s ease-in-out infinite;display:none}
+#nalr::after{content:'👆';position:absolute;right:-10px;bottom:-30px;font-size:26px;filter:drop-shadow(0 2px 0 rgba(0,0,0,.35));animation:gdf .9s ease-in-out infinite}
+`;document.head.appendChild(st)})();
+
+// 1. HAS : les boutons sortent du verdict pour rester collés en bas de la fenêtre
+(function(){const _hr=window.hasReport;if(typeof _hr!='function')return;window.hasReport=function(){const r=_hr.apply(this,arguments);try{const h=document.querySelector('#mb .hasr'),bt=h&&h.querySelector('.hside .hbt');if(bt)h.appendChild(bt)}catch(_){}return r};try{hasReport=window.hasReport}catch(_){}})();
+
+// 8. anneau du guide de la naloxone : suit l'élément mis en avant (onglet Soins, puis bouton « Naloxone ×5 »)
+(function(){let r=null;const loop=()=>{requestAnimationFrame(loop);try{const e=document.getElementById('nalg')&&document.querySelector('.nalhl');
+  if(!e||(!$('m').hidden&&!$('m').contains(e))){if(r)r.style.display='none';return}
+  if(!r){r=document.createElement('div');r.id='nalr';document.body.appendChild(r)}
+  const b=e.getBoundingClientRect();if(!b.width){r.style.display='none';return}
+  r.style.display='block';r.style.left=(b.left-6)+'px';r.style.top=(b.top-6)+'px';r.style.width=(b.width+6)+'px';r.style.height=(b.height+6)+'px'}catch(_){}};requestAnimationFrame(loop)})();
+
+// 2. bilan final : en paysage, le bouton de l'épilogue va sous le radar ; le détail par critère est replié
+(function(){setInterval(()=>{try{const m=$('m');if(m.hidden||!m.classList.contains('endl'))return;const mb=$('mb');
+  if(!mb.querySelector('details.crit583')){const p=[...mb.querySelectorAll(':scope>p')].find(p=>/^\s*\S*\s*Santé publique\s*:/.test(p.textContent)&&/Tranquillité\s*:/.test(p.textContent));
+   if(p&&!p.classList.contains('rvh')){const d=document.createElement('details');d.className='crit583';d.innerHTML='<summary>Le détail, critère par critère</summary>';p.replaceWith(d);p.style.fontSize='';d.appendChild(p)}}
+  const src=[...mb.querySelectorAll(':scope>p')].find(p=>/^\s*Sources\s*:/.test(p.textContent));if(src)src.classList.add('src583');
+  const land=matchMedia('(orientation:landscape) and (max-height:600px)').matches,g=mb.querySelector(':scope>.epgo'),box=mb.querySelector(':scope>.rvbox');
+  if(land&&g&&box){const after=box.nextElementSibling&&box.nextElementSibling.classList.contains('rvskip')?box.nextElementSibling:box;if(after.nextElementSibling!==g)after.after(g)}
+ }catch(_){}},250)})();
+
+// 3. bilan du mois négatif : le conseil « Pour équilibrer » juste sous les chiffres
+(function(){setInterval(()=>{try{const m=$('m');if(m.hidden)return;const mb=$('mb');if(!mb.classList.contains('bil2'))return;
+  const p=[...mb.querySelectorAll(':scope>p')].find(p=>/Pour équilibrer/.test(p.textContent)),bd=mb.querySelector(':scope>.mbud');
+  if(p&&bd&&bd.nextElementSibling!==p)bd.after(p)}catch(_){}},200)})();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
