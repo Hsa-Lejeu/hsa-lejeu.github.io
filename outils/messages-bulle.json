@@ -50,7 +50,7 @@
   },
   {
    "id": "M004",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "Déplacement annulé : la salle reste où elle était.",
    "nouveau_texte": null,
    "code": {
@@ -95,7 +95,7 @@
   },
   {
    "id": "M007",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "⏳ Camille : « Quelqu’un attend un·e pro qui n’est pas là : construis la salle ou recrute vite ! »",
    "nouveau_texte": null,
    "code": {
@@ -125,7 +125,7 @@
   },
   {
    "id": "M009",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🏘️ Camille : « Tranquillité sous 40 % ! … (🌳 Quartier) la [feraient / ferait] remonter. »",
    "nouveau_texte": null,
    "code": {
@@ -245,7 +245,7 @@
   },
   {
    "id": "M017",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "♿ Camille : « Agnès est repartie : son fauteuil ne passe pas la marche. Rendons la halte accessible (🏗️ Locaux › Couloir). »",
    "nouveau_texte": null,
    "code": {
@@ -275,7 +275,7 @@
   },
   {
    "id": "M019",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "✋ Camille : « Crotti a collé des affiches contre la halte. Touche-les pour les arracher, sinon le quartier se crispe. »",
    "nouveau_texte": null,
    "code": {
@@ -290,7 +290,7 @@
   },
   {
    "id": "M020",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🌼 Camille : « Des jardinières aux fenêtres, et la pétition qui s’essouffle… La mairie nous verse 200 € de soutien ! »",
    "nouveau_texte": null,
    "code": {
@@ -335,7 +335,7 @@
   },
   {
    "id": "M023",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🏘️ Camille : « Les voisins se plaignent ! Maraudes, seringues ramassées et DASRI vidés font remonter la barre 🏘️. »",
    "nouveau_texte": null,
    "code": {
@@ -365,7 +365,7 @@
   },
   {
    "id": "M025",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🏛️ Camille : « La mairie a baissé notre subvention de … % ce mois-ci (−… €). Les riverains sont trop mécontents. »",
    "nouveau_texte": null,
    "code": {
@@ -425,7 +425,7 @@
   },
   {
    "id": "M029",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "💉 Camille : « Avec le ou la médecin, l’équipe mobile peut enfin vacciner : +2 vaccinations au dossier. »",
    "nouveau_texte": null,
    "code": {
@@ -440,7 +440,7 @@
   },
   {
    "id": "M030",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "💊 Camille : « La boulangère a un kit de naloxone sous le comptoir. Le quartier change. »",
    "nouveau_texte": null,
    "code": {
@@ -455,7 +455,7 @@
   },
   {
    "id": "M031",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "💊 Camille : « L’ARS a convaincu le pharmacien : le partenariat continue. »",
    "nouveau_texte": null,
    "code": {
@@ -470,7 +470,7 @@
   },
   {
    "id": "M032",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "💊 Camille : « Malgré l’ARS, le pharmacien arrête. On a perdu la pharmacie. »",
    "nouveau_texte": null,
    "code": {
@@ -485,7 +485,7 @@
   },
   {
    "id": "M033",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "💚 Camille : « Les voisins créent un comité de suivi avec nous : la tranquillité ne descendra plus sous 45 %. »",
    "nouveau_texte": null,
    "code": {
@@ -500,7 +500,7 @@
   },
   {
    "id": "M034",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "💬 Camille : « Ce n’est pas vraiment ce qu’on demandait… On continue à se battre, et on continue d’accueillir. »",
    "nouveau_texte": null,
    "code": {
@@ -515,7 +515,7 @@
   },
   {
    "id": "M035",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "💬 Camille : « Ce n’est pas vraiment ce qu’on demandait… On rouvre quand même demain : les gens attendent dehors. »",
    "nouveau_texte": null,
    "code": {
@@ -530,7 +530,7 @@
   },
   {
    "id": "M036",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "💬 Camille : « Tu te souviens de … ? On peut encore lui proposer un suivi : touche son portrait en gris, en haut de l’écran. »",
    "nouveau_texte": null,
    "code": {
@@ -560,7 +560,7 @@
   },
   {
    "id": "M038",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "💬 Camille : « Ça se bouscule devant la porte ! Un·e médiateur·rice organiserait la file (onglet Équipe). »",
    "nouveau_texte": null,
    "code": {
@@ -575,7 +575,7 @@
   },
   {
    "id": "M039",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "💶 Camille : « C’est voté ! Augmentation de 20 % pour toute l’équipe dès ce mois-ci. »",
    "nouveau_texte": null,
    "code": {
@@ -605,7 +605,7 @@
   },
   {
    "id": "M041",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "📍 Camille : « Tu sais qu’une première halte devait ouvrir à Marseille ? Fin 2023, tout était prêt, les travaux allaient commencer… et l’État a bloqué le projet. Cette fois, on n’a pas le droit à l’erreur. »",
    "nouveau_texte": null,
    "code": {
@@ -620,7 +620,7 @@
   },
   {
    "id": "M042",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "📑 Camille : « Les caisses se vident. La formation appels à projets (Équipe › 🎓) aiderait à trouver des fonds. »",
    "nouveau_texte": null,
    "code": {
@@ -650,7 +650,7 @@
   },
   {
    "id": "M044",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "📣 Camille : « La notoriété s’essouffle : affichage, maraudes, fêtes… faisons parler de la halte ! »",
    "nouveau_texte": null,
    "code": {
@@ -665,7 +665,7 @@
   },
   {
    "id": "M045",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "📦 Camille : « Plus de … en stock : quelqu’un vient de repartir sans. Rachète-en dans l’onglet 🩺 Soins (…). »",
    "nouveau_texte": null,
    "code": {
@@ -695,7 +695,7 @@
   },
   {
    "id": "M047",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🕊️ Camille : « … …. Encore un envol : bravo à toute l’équipe ! » (🏘️ +5 · 📣 +5 · 💶 +100 €)",
    "nouveau_texte": null,
    "code": {
@@ -710,7 +710,7 @@
   },
   {
    "id": "M048",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🕯️ Camille : « Merci à toutes et tous d’être venu·es pour …. On rouvre cet après-midi. »",
    "nouveau_texte": null,
    "code": {
@@ -725,7 +725,7 @@
   },
   {
    "id": "M049",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🖼️ Camille : « Le débat a tourné au pugilat. On a perdu du terrain. »",
    "nouveau_texte": null,
    "code": {
@@ -740,7 +740,7 @@
   },
   {
    "id": "M050",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🖼️ Camille : « Salle comble. Des voisins ont pris la parole pour nous défendre. »",
    "nouveau_texte": null,
    "code": {
@@ -755,7 +755,7 @@
   },
   {
    "id": "M051",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "😞 Camille : « Je comprends. L’équipe aussi, mais elle est déçue. »",
    "nouveau_texte": null,
    "code": {
@@ -785,7 +785,7 @@
   },
   {
    "id": "M053",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "😬 Camille : « Ça s’est mal fini : un usager ivre, une dispute… Les voisins hostiles ont eu leur photo. »",
    "nouveau_texte": null,
    "code": {
@@ -845,7 +845,7 @@
   },
   {
    "id": "M057",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🤝 Camille : « Un nouveau partenariat demande du temps pour se mettre en place. On pourra en signer un autre dans … jours. »",
    "nouveau_texte": null,
    "code": {
@@ -860,7 +860,7 @@
   },
   {
    "id": "M058",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🧪 Camille : « Pendant le festival, beaucoup de monde va passer au labo faire analyser ses produits. »",
    "nouveau_texte": null,
    "code": {
@@ -875,7 +875,7 @@
   },
   {
    "id": "M059",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🧭 Camille : « Dernière année : les attentes sont au plus haut. Chaque besoin sans réponse pèsera lourd. »",
    "nouveau_texte": null,
    "code": {
@@ -890,7 +890,7 @@
   },
   {
    "id": "M060",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🧭 Camille : « Les gens attendent plus de nous maintenant : un besoin sans réponse déçoit davantage. »",
    "nouveau_texte": null,
    "code": {
@@ -905,7 +905,7 @@
   },
   {
    "id": "M061",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "🧭 Camille : « Personne n’a fini son parcours cette semaine (… en attente). Pourquoi : …. »",
    "nouveau_texte": null,
    "code": {
@@ -920,7 +920,7 @@
   },
   {
    "id": "M062",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🧹 Camille : « Le chantier démarre : … personnes commencent lundi. Premier salaire, première fierté. »",
    "nouveau_texte": null,
    "code": {
@@ -950,7 +950,7 @@
   },
   {
    "id": "M064",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "Budget insuffisant pour agrandir.",
    "nouveau_texte": null,
    "code": {
@@ -965,7 +965,7 @@
   },
   {
    "id": "M065",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "Budget insuffisant pour agrandir.",
    "nouveau_texte": null,
    "code": {
@@ -980,7 +980,7 @@
   },
   {
    "id": "M066",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "Budget insuffisant.",
    "nouveau_texte": null,
    "code": {
@@ -995,7 +995,7 @@
   },
   {
    "id": "M067",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "Budget insuffisant.",
    "nouveau_texte": null,
    "code": {
@@ -1010,7 +1010,7 @@
   },
   {
    "id": "M068",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "Pas assez de budget pour la collecte DASRI (30 €).",
    "nouveau_texte": null,
    "code": {
@@ -1070,7 +1070,7 @@
   },
   {
    "id": "M072",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "↩️ Contrat DASRI annulé : 120 € remboursés.",
    "nouveau_texte": null,
    "code": {
@@ -1085,7 +1085,7 @@
   },
   {
    "id": "M073",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "↩️ Embauche de … annulée : … € remboursés.",
    "nouveau_texte": null,
    "code": {
@@ -1130,7 +1130,7 @@
   },
   {
    "id": "M076",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🎪 …[ et … / ] [tiennent / tient] le stand du festival (+… €). [Analyse sur place : un comprimé très dosé, l’alerte circule. / Le stand ne désemplit pas.]",
    "nouveau_texte": null,
    "code": {
@@ -1145,7 +1145,7 @@
   },
   {
    "id": "M077",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🏗️ … (…)[ : −… €. / [ : +… € récupérés. | .]]",
    "nouveau_texte": null,
    "code": {
@@ -1160,7 +1160,7 @@
   },
   {
    "id": "M078",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🏗️ … (…)[ : −… €. / [ : +… € récupérés. | .]]",
    "nouveau_texte": null,
    "code": {
@@ -1190,7 +1190,7 @@
   },
   {
    "id": "M080",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🏛️ La mairie accepte : elle finance la moitié de la mise en accessibilité. Il reste … € à la charge de la halte (🏗️ Locaux › Couloir).",
    "nouveau_texte": null,
    "code": {
@@ -1205,7 +1205,7 @@
   },
   {
    "id": "M081",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🏛️ La mairie verse 200 € de soutien après le vote du conseil de quartier. Un riverain, Marcel, vient donner un coup de main le samedi.",
    "nouveau_texte": null,
    "code": {
@@ -1220,7 +1220,7 @@
   },
   {
    "id": "M082",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "💶 Tout reste ouvert. Il faudra tenir : surveille le budget, les salaires pourraient être payés en retard.",
    "nouveau_texte": null,
    "code": {
@@ -1235,7 +1235,7 @@
   },
   {
    "id": "M083",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "💸 Salaires payés en retard : la rumeur court dans le quartier, la méfiance augmente (−8 de tranquillité).[ / Pense à la formation « appels à projets » (Équipe › 🎓 Formations) pour trouver des financements.]",
    "nouveau_texte": null,
    "code": {
@@ -1250,7 +1250,7 @@
   },
   {
    "id": "M084",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "📅 Collecte DASRI signée (20 €/mois), les 10 et 20 du mois. Premier passage [le 10 / [le 20 | le 10 du mois prochain]][ : d’ici là, surveille les conteneurs presque pleins. / .]",
    "nouveau_texte": null,
    "code": {
@@ -1280,7 +1280,7 @@
   },
   {
    "id": "M086",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🔒 La salle … est fermée pour deux mois. Son équipe est en chômage partiel (moitié des salaires économisée).",
    "nouveau_texte": null,
    "code": {
@@ -1295,7 +1295,7 @@
   },
   {
    "id": "M087",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🚓 Amende de 135 € : le camion était garé sur une place de livraison.",
    "nouveau_texte": null,
    "code": {
@@ -1325,7 +1325,7 @@
   },
   {
    "id": "M089",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🛏️ Partenariat avec le SIAO : le 115 nous orientera des personnes sans solution pour la nuit, et chaque nuitée au dortoir sera financée (15 €).",
    "nouveau_texte": null,
    "code": {
@@ -1340,7 +1340,7 @@
   },
   {
    "id": "M090",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🧨 … : …… € récupérés. Tu peux la reconstruire ailleurs quand tu veux.",
    "nouveau_texte": null,
    "code": {
@@ -1370,7 +1370,7 @@
   },
   {
    "id": "M092",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🏗️ … ! Recrute maintenant quelqu’un dans l’onglet Équipe.",
    "nouveau_texte": null,
    "code": {
@@ -1385,7 +1385,7 @@
   },
   {
    "id": "M093",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🏗️ … (…) ! Recrute maintenant quelqu’un dans l’onglet Équipe.",
    "nouveau_texte": null,
    "code": {
@@ -1400,7 +1400,7 @@
   },
   {
    "id": "M094",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🏗️ … (…) ! Recrute maintenant quelqu’un dans l’onglet Équipe.",
    "nouveau_texte": null,
    "code": {
@@ -1415,7 +1415,7 @@
   },
   {
    "id": "M095",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "🤒 … est en arrêt maladie pour environ … jour[s / ]. [La salle … reste fermée en attendant : rien n’est cassé, … revient bientôt. / Les collègues prennent le relais.]",
    "nouveau_texte": null,
    "code": {
@@ -1430,7 +1430,7 @@
   },
   {
    "id": "M096",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "☕ … est fatigué·e et part souffler [en salle de repos / un moment (sans salle de repos, la pause récupère moins)].[ Seul·e dans sa salle, la salle ferme le temps de la pause : un·e deuxième pro éviterait ça. / ]",
    "nouveau_texte": null,
    "code": {
@@ -1445,7 +1445,7 @@
   },
   {
    "id": "M097",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "Sans personne à l'accueil, quelqu'un est reparti sans aide. Recrute un·e médiateur·rice !",
    "nouveau_texte": null,
    "code": {
@@ -1460,7 +1460,7 @@
   },
   {
    "id": "M098",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "[🏛️ Sortie au musée : … personnes partent avec l’équipe pour …. / … : … personnes se retrouvent en cercle dans la salle de repos (…).]",
    "nouveau_texte": null,
    "code": {
@@ -1475,7 +1475,7 @@
   },
   {
    "id": "M099",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "[😮‍💨 … est à bout d’énergie. Un repas d’équipe, une machine à café ou un coin repos l’aideraient… sinon c’est l’arrêt maladie. / 😮‍💨 … sont à bout d’énergie. Un repas d’équipe, une machine à café ou un coin repos les aideraient… sinon c’est l’arrêt maladie.]",
    "nouveau_texte": null,
    "code": {
@@ -1520,7 +1520,7 @@
   },
   {
    "id": "M102",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🌟 … devient référent·e ! Congrès et formations à animer : de l’argent et de la notoriété pour la halte.",
    "nouveau_texte": null,
    "code": {
@@ -1550,7 +1550,7 @@
   },
   {
    "id": "M104",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🎓 Une formation est déjà en cours ce mois-ci : la prochaine pourra commencer le mois prochain.",
    "nouveau_texte": null,
    "code": {
@@ -1565,7 +1565,7 @@
   },
   {
    "id": "M105",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🎓 … part en formation (…) : ….",
    "nouveau_texte": null,
    "code": {
@@ -1625,7 +1625,7 @@
   },
   {
    "id": "M109",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "💶 Pas assez d’argent pour le lit médicalisé pour l’instant : Agnès se reposera dans son fauteuil.",
    "nouveau_texte": null,
    "code": {
@@ -1640,7 +1640,7 @@
   },
   {
    "id": "M110",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "📋 Des évaluatrices accréditées (référentiel HAS) viendront [faire une première visite préliminaire / évaluer la halte] en … : salles, formations, déchets… Prépare-toi !",
    "nouveau_texte": null,
    "code": {
@@ -1670,7 +1670,7 @@
   },
   {
    "id": "M112",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "😫 … est épuisé·e et part en arrêt : recrute pour répartir la charge, et pense aux pauses !",
    "nouveau_texte": null,
    "code": {
@@ -1685,7 +1685,7 @@
   },
   {
    "id": "M113",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "😴 Fin du festival : … [se reposent / se repose] ce matin après les nuits au stand.",
    "nouveau_texte": null,
    "code": {
@@ -1700,7 +1700,7 @@
   },
   {
    "id": "M114",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "🧭 La mission locale est passée : deux jeunes ont pris rendez-vous pour une formation.",
    "nouveau_texte": null,
    "code": {
@@ -1730,7 +1730,7 @@
   },
   {
    "id": "M116",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "[ / 🚶 Maraude : l’équipe va à la rencontre des personnes qui ne viennent pas d’elles-mêmes. Deux personnes rejoignent la halte.]",
    "nouveau_texte": null,
    "code": {
@@ -1745,7 +1745,7 @@
   },
   {
    "id": "M117",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "[🐕 Le vétérinaire solidaire soigne le chien et lui trouve une famille dans le quartier. / 🐕 Un refuge vient chercher le chien. Il trouvera sûrement une famille.]",
    "nouveau_texte": null,
    "code": {
@@ -1760,7 +1760,7 @@
   },
   {
    "id": "M118",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "… La maison de quartier organise … : … y participent avec les habitant·es. Des liens se créent !",
    "nouveau_texte": null,
    "code": {
@@ -1805,7 +1805,7 @@
   },
   {
    "id": "M121",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "⚠️ Affiches, messages, maraude express : toutes les personnes sont prévenues. Plusieurs ont jeté le produit ou réduit les doses.",
    "nouveau_texte": null,
    "code": {
@@ -1835,7 +1835,7 @@
   },
   {
    "id": "M123",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "✍️ L’équipe écrit à … : des nouvelles du quartier, des dessins, et le numéro de la halte pour la sortie.",
    "nouveau_texte": null,
    "code": {
@@ -1850,7 +1850,7 @@
   },
   {
    "id": "M124",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🌙 Maraude de nuit : d’autres personnes, plus isolées, plus exposées au froid et aux violences.",
    "nouveau_texte": null,
    "code": {
@@ -1880,7 +1880,7 @@
   },
   {
    "id": "M126",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🎊 Fête de quartier co-organisée avec le collectif : les riverain·es ont apporté les tables, la musique et les gâteaux !",
    "nouveau_texte": null,
    "code": {
@@ -1910,7 +1910,7 @@
   },
   {
    "id": "M128",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "📢 Sans réponse, la pétition prend de l’ampleur.",
    "nouveau_texte": null,
    "code": {
@@ -1970,7 +1970,7 @@
   },
   {
    "id": "M132",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🔒 Le jardin a été fermé à la demande des riverains.",
    "nouveau_texte": null,
    "code": {
@@ -2000,7 +2000,7 @@
   },
   {
    "id": "M134",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🤝 La réunion désamorce la pétition !",
    "nouveau_texte": null,
    "code": {
@@ -2030,7 +2030,7 @@
   },
   {
    "id": "M136",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🤝 Un nouveau partenariat peut être signé ! (onglet 🌳 Quartier › Partenaires)",
    "nouveau_texte": null,
    "code": {
@@ -2090,7 +2090,7 @@
   },
   {
    "id": "M140",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🧹 Chantier d’insertion : avec TAPAJ, [… / des jeunes du quartier] débarrassent le terrain vague, payé·es à la journée.",
    "nouveau_texte": null,
    "code": {
@@ -2105,7 +2105,7 @@
   },
   {
    "id": "M141",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "🧹 TAPAJ : … [travaillent / travaille] une demi-journée aux espaces verts, payé·e[s / ] le soir même.[ Les seringues de la rue sont ramassées. / ]",
    "nouveau_texte": null,
    "code": {
@@ -2120,7 +2120,7 @@
   },
   {
    "id": "M142",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🪧 Les bénévoles collent des affiches « Soigner, pas punir » par-dessus celles de Crotti.",
    "nouveau_texte": null,
    "code": {
@@ -2210,7 +2210,7 @@
   },
   {
    "id": "M148",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "[🆘 Surdose en salle de conso ! L’équipe est formée, elle intervient. Touche la personne pour aller plus vite. / 🆘 Surdose en salle de conso ! Touche vite la personne pour que l’équipe intervienne !]",
    "nouveau_texte": null,
    "code": {
@@ -2225,7 +2225,7 @@
   },
   {
    "id": "M149",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "[💊 Le pharmacien passe vider les conteneurs DASRI. / 💊 Le pharmacien arrive avec un carton de matériel pour la salle de soins.]",
    "nouveau_texte": null,
    "code": {
@@ -2270,7 +2270,7 @@
   },
   {
    "id": "M152",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "[🩺 Un·e médecin rejoint l’équipe : il·elle circule entre la salle de consommation, les soins et le bureau psy. / [🤝 Un·e médiateur·rice rejoint l’équipe : il·elle réconforte les personnes qui attendent. | 🗣️ Un·e interprète rejoint l’équipe : on peut enfin comprendre toutes les langues !]]",
    "nouveau_texte": null,
    "code": {
@@ -2315,7 +2315,7 @@
   },
   {
    "id": "M155",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🆘 Surdose en salle de conso !",
    "nouveau_texte": null,
    "code": {
@@ -2345,7 +2345,7 @@
   },
   {
    "id": "M157",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "💩 … a fait ses besoins dans la salle …… Touche la crotte pour la ramasser !",
    "nouveau_texte": null,
    "code": {
@@ -2390,7 +2390,7 @@
   },
   {
    "id": "M160",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "📦 Contrat signé avec la pharmacie : le pharmacien livrera lui-même le matériel dès qu’un stock baisse.",
    "nouveau_texte": null,
    "code": {
@@ -2405,7 +2405,7 @@
   },
   {
    "id": "M161",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🔒 Cette salle ne peut être reconstruite que dans l’annexe, à côté du parking.",
    "nouveau_texte": null,
    "code": {
@@ -2570,7 +2570,7 @@
   },
   {
    "id": "M172",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🤝 … accepte, un peu [méfiante / méfiant]. Son portrait apparaît en haut de l’écran : touche-le pour prendre de ses nouvelles.",
    "nouveau_texte": null,
    "code": {
@@ -2585,7 +2585,7 @@
   },
   {
    "id": "M173",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "Placement annulé.",
    "nouveau_texte": null,
    "code": {
@@ -2600,7 +2600,7 @@
   },
   {
    "id": "M174",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "[🎯 Défi réussi : / 🎯 Défi raté : ]…[ — … / ]",
    "nouveau_texte": null,
    "code": {
@@ -2615,7 +2615,7 @@
   },
   {
    "id": "M175",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "[💛 / 💬] … : …",
    "nouveau_texte": null,
    "code": {
@@ -2630,7 +2630,7 @@
   },
   {
    "id": "M176",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "[📚 L’équipe s’installe une petite bibliothèque : ouvrages sur les addictions, la RdR, le travail social. Chacun·e y pioche chaque mois. / [📖 De nouveaux livres et revues arrivent dans la bibliothèque : l’équipe se tient à jour. | 🎓 Toute l’équipe suit la … : +… XP pour chacun·e.]]",
    "nouveau_texte": null,
    "code": {
@@ -2645,7 +2645,7 @@
   },
   {
    "id": "M177",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "… … : la halte est plus accueillante[ et peut accueillir plus de monde / ] !",
    "nouveau_texte": null,
    "code": {
@@ -2660,7 +2660,7 @@
   },
   {
    "id": "M178",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "… … apporte à … : ….",
    "nouveau_texte": null,
    "code": {
@@ -2675,7 +2675,7 @@
   },
   {
    "id": "M179",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "↩️ On reprend l’année … depuis le début. Nouvelle chance, Camille y croit !",
    "nouveau_texte": null,
    "code": {
@@ -2705,7 +2705,7 @@
   },
   {
    "id": "M181",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "⚠️ Personne n’a été prévenu : deux overdoses dans la semaine, dont une hospitalisée. L’équipe s’en veut.",
    "nouveau_texte": null,
    "code": {
@@ -2720,7 +2720,7 @@
   },
   {
    "id": "M182",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "✅ …… : les usager·es l’avaient demandé au conseil. Satisfaction +10.",
    "nouveau_texte": null,
    "code": {
@@ -2735,7 +2735,7 @@
   },
   {
    "id": "M183",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "✊ La halte est fermée. Sur la porte : « En grève pour pouvoir continuer à vous accueillir. »",
    "nouveau_texte": null,
    "code": {
@@ -2750,7 +2750,7 @@
   },
   {
    "id": "M184",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "✊ …",
    "nouveau_texte": null,
    "code": {
@@ -2765,7 +2765,7 @@
   },
   {
    "id": "M185",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "✊ …",
    "nouveau_texte": null,
    "code": {
@@ -2780,7 +2780,7 @@
   },
   {
    "id": "M186",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "✔ Choix : « … »",
    "nouveau_texte": null,
    "code": {
@@ -2810,7 +2810,7 @@
   },
   {
    "id": "M188",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🌫️ … ne répond plus, personne ne l’a revu·e. [Elle est perdue / Il est perdu] de vue.",
    "nouveau_texte": null,
    "code": {
@@ -2840,7 +2840,7 @@
   },
   {
    "id": "M190",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "🌸 Le planning familial est passé pendant le créneau femmes : contraception, tests, et beaucoup d’écoute.",
    "nouveau_texte": null,
    "code": {
@@ -2855,7 +2855,7 @@
   },
   {
    "id": "M191",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🍷 … reste. L’infirmière lui parle d’eau entre les verres et des dangers d’un sevrage brutal. « Personne m’avait jamais dit ça. »",
    "nouveau_texte": null,
    "code": {
@@ -2870,7 +2870,7 @@
   },
   {
    "id": "M192",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🍽️ Repas d’équipe : on respire, on rit ensemble!",
    "nouveau_texte": null,
    "code": {
@@ -2885,7 +2885,7 @@
   },
   {
    "id": "M193",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "🎓 … termine son stage : « J’ai appris plus ici qu’en deux ans de cours. Je reviendrai ! »",
    "nouveau_texte": null,
    "code": {
@@ -2900,7 +2900,7 @@
   },
   {
    "id": "M194",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🎤 … est de retour à la halte après son intervention extérieure.",
    "nouveau_texte": null,
    "code": {
@@ -2915,7 +2915,7 @@
   },
   {
    "id": "M195",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🎤 … … ([… jour[s / ] | quelques heures]).",
    "nouveau_texte": null,
    "code": {
@@ -2930,7 +2930,7 @@
   },
   {
    "id": "M196",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🎥 …",
    "nouveau_texte": null,
    "code": {
@@ -2945,7 +2945,7 @@
   },
   {
    "id": "M197",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🎨 La fresque est finie ! Les passant·es s’arrêtent, prennent des photos, discutent avec celles et ceux qui l’ont peinte.",
    "nouveau_texte": null,
    "code": {
@@ -2960,7 +2960,7 @@
   },
   {
    "id": "M198",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🎯 Objectif atteint : …… !",
    "nouveau_texte": null,
    "code": {
@@ -2975,7 +2975,7 @@
   },
   {
    "id": "M199",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🎯 Étape réussie : …… ![ Prochaine : ……. / ]",
    "nouveau_texte": null,
    "code": {
@@ -3035,7 +3035,7 @@
   },
   {
    "id": "M203",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🏥 … est de retour de la Timone.",
    "nouveau_texte": null,
    "code": {
@@ -3050,7 +3050,7 @@
   },
   {
    "id": "M204",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "🐕 Le vétérinaire solidaire soigne gratuitement le chien de … : vaccins, vermifuge, antipuces.",
    "nouveau_texte": null,
    "code": {
@@ -3095,7 +3095,7 @@
   },
   {
    "id": "M207",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "💊 … vient annoncer la nouvelle : guéri·e de l’hépatite C ! Toute l’équipe applaudit.",
    "nouveau_texte": null,
    "code": {
@@ -3110,7 +3110,7 @@
   },
   {
    "id": "M208",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "💧 Points d’eau installés dans le couloir et devant l’entrée : on peut boire et se rafraîchir en attendant.",
    "nouveau_texte": null,
    "code": {
@@ -3125,7 +3125,7 @@
   },
   {
    "id": "M209",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "💶 Pas assez d’argent pour ça.",
    "nouveau_texte": null,
    "code": {
@@ -3155,7 +3155,7 @@
   },
   {
    "id": "M211",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "💾 Partie reprise : …, jour …[, année … / ]. Bon retour à la halte !",
    "nouveau_texte": null,
    "code": {
@@ -3170,7 +3170,7 @@
   },
   {
    "id": "M212",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "📄 Agnès part avec l’adresse et un formulaire de vingt pages.",
    "nouveau_texte": null,
    "code": {
@@ -3185,7 +3185,7 @@
   },
   {
    "id": "M213",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "📄 Fin de contrat : … quitte l’équipe. Les collègues sont un peu secoué·es.",
    "nouveau_texte": null,
    "code": {
@@ -3200,7 +3200,7 @@
   },
   {
    "id": "M214",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "📄 … remplit le dossier avec Agnès, pièce par pièce. Réponse attendue dans plusieurs mois.",
    "nouveau_texte": null,
    "code": {
@@ -3215,7 +3215,7 @@
   },
   {
    "id": "M215",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "📖 Une nouvelle page s’écrit dans l’histoire de … : « … ». Touche son portrait pour la lire.",
    "nouveau_texte": null,
    "code": {
@@ -3230,7 +3230,7 @@
   },
   {
    "id": "M216",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "📜 Charte acceptée. À l’accueil, les visages se ferment : « Donc si j’arrête pas, j’ai plus droit à l’assistante sociale ? » Certaines personnes ne reviendront pas.",
    "nouveau_texte": null,
    "code": {
@@ -3245,7 +3245,7 @@
   },
   {
    "id": "M217",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "📝 … est de retour : le dossier est déposé.",
    "nouveau_texte": null,
    "code": {
@@ -3260,7 +3260,7 @@
   },
   {
    "id": "M218",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "📞 Il faut un·e assistant·e social·e disponible pour appeler le 115.",
    "nouveau_texte": null,
    "code": {
@@ -3275,7 +3275,7 @@
   },
   {
    "id": "M219",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "📞 On a déjà appelé aujourd’hui : le 115 rappellera demain.",
    "nouveau_texte": null,
    "code": {
@@ -3290,7 +3290,7 @@
   },
   {
    "id": "M220",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "📞 On relance Toit & Moi et le bailleur : il faudra attendre, mais Agnès aura un logement adapté.",
    "nouveau_texte": null,
    "code": {
@@ -3305,7 +3305,7 @@
   },
   {
    "id": "M221",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "📞 … appelle le 115 : 45 minutes d’attente, puis « plus de place ce soir ». On réessaiera demain.",
    "nouveau_texte": null,
    "code": {
@@ -3320,7 +3320,7 @@
   },
   {
    "id": "M222",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "📞 … appelle le 115 : une place s’ouvre pour …. Cette nuit, [elle / il] sera au chaud.",
    "nouveau_texte": null,
    "code": {
@@ -3335,7 +3335,7 @@
   },
   {
    "id": "M223",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "📣 … : informé·es de l’ouverture de la halte (+… de notoriété).",
    "nouveau_texte": null,
    "code": {
@@ -3350,7 +3350,7 @@
   },
   {
    "id": "M224",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "📭 Agnès a abandonné son dossier MDPH : trop de pièces à fournir, et personne pour l’aider à s’y retrouver.",
    "nouveau_texte": null,
    "code": {
@@ -3365,7 +3365,7 @@
   },
   {
    "id": "M225",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🔓 La halte rouvre après l’hommage à ….",
    "nouveau_texte": null,
    "code": {
@@ -3380,7 +3380,7 @@
   },
   {
    "id": "M226",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "🔥 Nouveau record : … personnes accueillies d’affilée sans que personne ne reparte déçu·e !",
    "nouveau_texte": null,
    "code": {
@@ -3395,7 +3395,7 @@
   },
   {
    "id": "M227",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🗑️ Poubelle vidée : la halte reste propre.",
    "nouveau_texte": null,
    "code": {
@@ -3410,7 +3410,7 @@
   },
   {
    "id": "M228",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "😞 Agnès passe la nuit assise. « On s’habitue. Enfin, on fait semblant. »",
    "nouveau_texte": null,
    "code": {
@@ -3425,7 +3425,7 @@
   },
   {
    "id": "M229",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🙅 …",
    "nouveau_texte": null,
    "code": {
@@ -3440,7 +3440,7 @@
   },
   {
    "id": "M230",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🚐 Le camion part vers … avec ….",
    "nouveau_texte": null,
    "code": {
@@ -3455,7 +3455,7 @@
   },
   {
    "id": "M231",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🚐 Une seule tournée par mois : on a promis aux commerçants de libérer leurs places.",
    "nouveau_texte": null,
    "code": {
@@ -3470,7 +3470,7 @@
   },
   {
    "id": "M232",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🚑 [… personnes malades arrivent / La personne malade arrive] à la halte avec l’équipe du camion.",
    "nouveau_texte": null,
    "code": {
@@ -3485,7 +3485,7 @@
   },
   {
    "id": "M233",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🚓 … a été interpellé·e et condamné·e à quelques mois de prison. Iel ne viendra plus pour un moment…",
    "nouveau_texte": null,
    "code": {
@@ -3500,7 +3500,7 @@
   },
   {
    "id": "M234",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🚧 Le·la médiateur·rice installe des cordons devant l’entrée : la file d’attente serpente calmement, chacun·e voit son tour arriver.",
    "nouveau_texte": null,
    "code": {
@@ -3515,7 +3515,7 @@
   },
   {
    "id": "M235",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🛎️ L’accueil reste à côté de l’entrée : c’est là que la file arrive. Il ne se déplace pas et garde sa taille.",
    "nouveau_texte": null,
    "code": {
@@ -3530,7 +3530,7 @@
   },
   {
    "id": "M236",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🛏️ Le lit médicalisé est installé, et on a écarté les autres lits. Agnès dort enfin allongée.",
    "nouveau_texte": null,
    "code": {
@@ -3545,7 +3545,7 @@
   },
   {
    "id": "M237",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🤝 Le GEM est lancé : les usager·es s’y retrouvent et décident ensemble. La psychologue soutient, sans animer.",
    "nouveau_texte": null,
    "code": {
@@ -3560,7 +3560,7 @@
   },
   {
    "id": "M238",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🤝 [… / Camille] accompagne … [au premier rendez-vous à la maternité / à la PMI] : un suivi adapté se met en place, sans jugement.",
    "nouveau_texte": null,
    "code": {
@@ -3575,7 +3575,7 @@
   },
   {
    "id": "M239",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🤝 …",
    "nouveau_texte": null,
    "code": {
@@ -3590,7 +3590,7 @@
   },
   {
    "id": "M240",
-   "tri": null,
+   "tri": "Taire",
    "texte_actuel": "🧹 Crotte ramassée. … te regarde d’un air désolé.",
    "nouveau_texte": null,
    "code": {
@@ -3605,7 +3605,7 @@
   },
   {
    "id": "M241",
-   "tri": null,
+   "tri": "Montrer",
    "texte_actuel": "🧹 Le chantier TAPAJ est terminé : le terrain est propre ! Les habitant·es veulent en faire quelque chose.",
    "nouveau_texte": null,
    "code": {
@@ -3620,7 +3620,7 @@
   },
   {
    "id": "M242",
-   "tri": null,
+   "tri": "Regrouper",
    "texte_actuel": "🩺 Permanence du CSAPA : une personne commence un traitement de substitution aujourd’hui même.",
    "nouveau_texte": null,
    "code": {
@@ -3633,5 +3633,6 @@
    "categorie": "personnes",
    "vu_en_test": 0
   }
- ]
+ ],
+ "v582": "Tri appliqué en v582 (enveloppe window.__BUL2 : Taire → journal, Regrouper → une fois par mois de jeu). Non traités : M078 (= M077), M116 (déjà en v581), M178 et M195 (trop généraux, restent affichés)."
 }
