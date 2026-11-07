@@ -486,7 +486,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v572')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v573')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5556,7 +5556,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v572')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v573')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -14360,6 +14360,98 @@ window.__P3HOOK.push(now=>{const S=window.__P3S;if(S&&S!==S3){P.forEach(p=>{try{
 })();
 // toucher l'écran pendant l'animation rend la caméra au joueur
 document.addEventListener('pointerdown',e=>{try{if(e.target&&e.target.closest&&e.target.closest('#peta canvas.c3d')&&window.__PG&&window.__PG.phase==='select'){window.__P3CAM=null}}catch(_){}},true);
+
+</script>
+<script>
+// ===== v573 : changement de saison refait (sans émoji, éléments marseillais : mistral, coquelicots et genêts,
+// lavande et cigales, feuilles de platane) ; pelouse moins répétitive et terrain vague plus réaliste
+(function(){
+// ---------- petits sprites pixel art (dessinés une fois) ----------
+const SP={};
+function spr(n,rows,pal){const h=rows.length,w=rows[0].length,c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');rows.forEach((r,y)=>{for(let x=0;x<w;x++){const k=r[x];if(k!=='.'&&pal[k]){g.fillStyle=pal[k];g.fillRect(x,y,1,1)}}});SP[n]=c}
+const O='#2a2433';
+spr('poppy',['.rr.','rRRr','rRkR','.rr.'],{r:'#c8141e',R:'#ff3b30',k:'#1a1014'});
+spr('poppy2',['.r.','rRr','.r.'],{r:'#d81e28',R:'#ff5a46'});
+spr('genet',['.y.y','yYyY','.Yy.','..g.'],{y:'#f0b400',Y:'#ffd84a',g:'#5a8a2a'});
+spr('leafS',['..g','.gG','gG.','g..'],{g:'#4f8a2f',G:'#7fbf4a'});
+spr('bfly1',['b...b','bBwBb','.bwb.','b...b'],{b:'#3a7ad8',B:'#7fb8ff',w:O});
+spr('bfly2',['.....','.bwb.','bBwBb','.....'],{b:'#3a7ad8',B:'#7fb8ff',w:O});
+spr('lav',['.p.','pPp','.p.','pPp','.p.','.g.','.g.'],{p:'#7a4fc0',P:'#b08aff',g:'#6a8a4a'});
+spr('cig',['.ww.','wbbw','.bb.','.bb.'],{w:'#cfe8ff',b:'#5a4a2a'});
+spr('spark',['.y.','yWy','.y.'],{y:'#ffd23f',W:'#fffbe0'});
+spr('plat1',['..o..','.oOo.','oOoOo','.oOo.','..b..'],{o:'#d9822b',O:'#f2a541',b:'#7a4a1a'});
+spr('plat2',['..y..','.yYy.','yYyYy','.yYy.','..b..'],{y:'#c9a227',Y:'#ecc94a',b:'#7a4a1a'});
+spr('plat3',['..r..','.rRr.','rRrRr','.rRr.','..b..'],{r:'#a0522d',R:'#c0703a',b:'#5a3214'});
+spr('flake',['.w.','wWw','.w.'],{w:'#dfefff',W:'#ffffff'});
+// ---------- l'animation ----------
+const ICN=['vent','pousse','soleil','feuille'],NAMES=['HIVER','PRINTEMPS','ÉTÉ','AUTOMNE'],SUB=['le mistral souffle','les coquelicots sont là','les cigales chantent','les platanes jaunissent'];
+let lastSe=-1;
+window.trans=trans=function(dt){const o=$('sea'),sb=$('sb');if(!(TR_.t>0)){o.style.display='none';lastSe=-1;return}
+ TR_.t-=dt||0;const p=Math.max(0,TR_.t)/3.2,e=1-p,a=Math.sin(p*Math.PI),se=TR_.se;o.style.display='block';
+ const c=$('seac'),W=Math.ceil(innerWidth/3),H=Math.ceil(innerHeight/3);if(c.width!=W||c.height!=H){c.width=W;c.height=H}const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,W,H);
+ g.globalAlpha=a*.55;g.fillStyle=['#9fb8cc','#cfe3a0','#ffd98a','#d8a060'][se];g.fillRect(0,0,W,H);g.globalAlpha=Math.min(1,a*1.8);
+ const D=(n,X,Y)=>{const s=SP[n];if(s)g.drawImage(s,Math.round(X),Math.round(Y))};
+ if(se==0){ // mistral : longues rafales + quelques flocons
+  g.fillStyle='rgba(255,255,255,.75)';for(let k=0;k<46;k++){const y=(k*37.7)%H,len=14+(k%5)*8,x=((k*91.3+e*W*2.6*(1+(k%3)*.3))%(W+len*2))-len;g.fillRect(Math.round(x),Math.round(y+Math.sin(e*6+k)*2),len,1)}
+  for(let k=0;k<26;k++){const x=((k*71.9+e*W*1.4)%W),y=((k*43.1+e*H*.8)%H);D('flake',x,y)}}
+ else if(se==1){ // coquelicots, genêts, feuilles qui volent, papillons
+  for(let k=0;k<90;k++){const sp=.5+(k%7)*.1,x=((k*97.37+Math.sin(e*5+k)*8+e*W*.3)%W+W)%W,y=((k*53.13+e*H*1.3*sp)%(H+10))-6;D(['poppy','poppy2','genet','leafS','poppy','genet'][k%6],x,y)}
+  for(let k=0;k<6;k++){const x=(k*67+e*W*.6)%W,y=H*.2+k*H*.12+Math.sin(e*9+k)*6;D(((performance.now()/120+k)|0)%2?'bfly1':'bfly2',x,y)}}
+ else if(se==2){ // rayons, brins de lavande, cigales
+  g.save();g.translate(W/2,H*.3);g.rotate(e*.6);g.fillStyle='rgba(255,236,150,.35)';for(let k=0;k<12;k++){g.rotate(Math.PI/6);g.fillRect(18,-3,Math.max(W,H),6)}g.restore();
+  for(let k=0;k<40;k++){const x=(k*61.7)%W,y=H-((k*29.3+e*H*.9*(.6+(k%4)*.15))%(H+10));D('lav',x,y)}
+  for(let k=0;k<30;k++){const tw=(Math.sin(e*20+k*3)+1)/2;if(tw>.35)D('spark',(k*83.1)%W,(k*47.7)%H)}
+  for(let k=0;k<5;k++){const x=(k*90+e*W*.5)%W,y=H*.15+(k*37)%(H*.6);D('cig',x,y)}}
+ else{ // feuilles de platane qui tombent en tournoyant
+  for(let k=0;k<110;k++){const sp=.5+(k%7)*.1,x=((k*97.37+Math.sin(e*6+k)*10+e*W*.35)%W+W)%W,y=((k*53.13+e*H*1.4*sp)%(H+10))-6;D(['plat1','plat2','plat3'][k%3],x,y)}}
+ g.globalAlpha=1;
+ if(lastSe!==se){lastSe=se;const im=(window.HSAICO2||{})[ICN[se]]||(window.HSAICO||{})[ICN[se]];sb.innerHTML=`<span class="sbw">${im&&im.src?`<img src="${im.src}" alt="">`:''}<b>${NAMES[se]}</b><small>${SUB[se]}</small></span>`}
+ sb.style.opacity=Math.min(1,a*1.6);const pp=Math.min(1,e*3.2);sb.style.transform=`scale(${pp<1?.3+.95*Math.sin(pp*Math.PI*.62)/Math.sin(Math.PI*.62):1})`};
+{const st=document.createElement('style');st.textContent=`#sb .sbw{display:flex;flex-direction:column;align-items:center;gap:.05em}#sb .sbw img{height:.9em;width:auto;image-rendering:pixelated;filter:drop-shadow(0 .05em 0 #2a2433)}
+#sb .sbw small{font:400 .3em/1 Lilita,sans-serif;-webkit-text-stroke:.12em #2a2433;letter-spacing:.06em;margin-top:.15em}`;document.head.appendChild(st)}
+
+// ---------- pelouse et terrain vague ----------
+function vn(seed){const P=new Float32Array(256);let s=seed;for(let i=0;i<256;i++){s=(s*16807)%2147483647;P[i]=s/2147483647}
+ const h=(x,y)=>P[(x*7+y*131)&255],f=t=>t*t*(3-2*t);return(x,y)=>{const xi=Math.floor(x),yi=Math.floor(y),xf=f(x-xi),yf=f(y-yi);const a=h(xi,yi),b=h(xi+1,yi),c=h(xi,yi+1),d=h(xi+1,yi+1);return a+(b-a)*xf+(c-a)*yf+(a-b-c+d)*xf*yf}}
+function improve(c,se){const g=c.getContext('2d'),W_=c.width,H_=c.height;let D;try{D=g.getImageData(0,0,W_,H_)}catch(_){return}const d=D.data,n1=vn(11+se),n2=vn(97+se);
+ const PAL=[null,[[118,186,84],[96,164,66],[140,200,96]],[[150,176,86],[128,156,70],[200,184,120]],[[134,166,78],[112,146,64],[176,160,92]]][se];
+ let sd=3+se;const rnd=()=>(sd=(sd*16807)%2147483647)/2147483647;
+ for(let y=0;y<H_;y++)for(let x=0;x<W_;x++){const i=(y*W_+x)*4,r=d[i],gg=d[i+1],b=d[i+2];if(se==0||!PAL||!(gg>r+12&&gg>b+12))continue;
+  const v=n1(x/70,y/70),w=n2(x/16,y/16),dz=n2(x/110+5,y/110+3);let c=PAL[0];
+  const m=Math.min(1,Math.max(0,(v-.35)*1.6));let R=PAL[0][0]+(PAL[1][0]-PAL[0][0])*m,G=PAL[0][1]+(PAL[1][1]-PAL[0][1])*m,B_=PAL[0][2]+(PAL[1][2]-PAL[0][2])*m;
+  const dt=Math.max(0,dz-.62)*3;if(dt>0){const t=Math.min(1,dt);R+=(PAL[2][0]-R)*t;G+=(PAL[2][1]-G)*t;B_+=(PAL[2][2]-B_)*t}
+  const k=.94+(w-.5)*.14;R*=k;G*=k;B_*=k;
+  // brins : petits traits verticaux plus sombres ou plus clairs, répartis au hasard (pas de motif qui se répète)
+  const q=rnd();if(q<.07){R*=.8;G*=.84;B_*=.8}else if(q<.11){R*=1.12;G*=1.1;B_*=1.05}
+  d[i]=R;d[i+1]=G;d[i+2]=B_}
+ for(let y=H_-2;y>=1;y--)for(let x=0;x<W_;x++){const i=(y*W_+x)*4,j=((y-1)*W_+x)*4;if(d[i+3]&&rnd()<.5&&d[i]<d[j]*.9&&d[j+1]>d[j]+12)d[j]=d[j]*.93,d[j+1]=d[j+1]*.95,d[j+2]=d[j+2]*.93}
+ g.putImageData(D,0,0);
+ // quelques détails sur l'herbe : pâquerettes, trèfle, cailloux
+ let s=7+se;const rn=()=>(s=(s*16807)%2147483647)/2147483647;
+ for(let k=0;k<420;k++){const x=rn()*W_|0,y=rn()*H_|0;const q=g.getImageData(x,y,1,1).data;if(!(q[1]>q[0]+8&&q[1]>q[2]+8))continue;const t=rn();
+  if(t<.4){g.fillStyle=se==2?'#e8d080':'#fffaf0';g.fillRect(x,y,2,2);g.fillStyle='#ffd23f';g.fillRect(x,y,1,1)}
+  else if(t<.75){g.fillStyle='rgba(30,70,20,.35)';g.fillRect(x,y,3,2);g.fillRect(x+1,y-1,1,4)}
+  else{g.fillStyle='#b8b0a0';g.fillRect(x,y,2,2);g.fillStyle='#8a8070';g.fillRect(x+1,y+1,1,1)}}
+ // terrain vague : terre poussiéreuse, ornières, fissures, herbes sèches
+ const X0=476,X1=676,Y0=580+EY*2,Y1=H_;const n3=vn(5),n4=vn(29);const L=g.getImageData(X0,Y0,X1-X0,Y1-Y0),ld=L.data,LW=X1-X0;
+ const base=se==0?[176,158,132]:[188,154,108];
+ for(let y=0;y<Y1-Y0;y++)for(let x=0;x<LW;x++){const i=(y*LW+x)*4,v=n3(x/30,y/30),w=n4(x/7,y/7),z=n4(x/2.2+40,y/2.2);let k=.84+v*.26+(w-.5)*.1+(z>.82?-.12:z<.12?.08:0);
+  let R=base[0]*k,G=base[1]*k,B_=base[2]*k;const gr=n3(x/18+9,y/18+4);if(gr>.66){const t=Math.min(1,(gr-.66)*4);R+=(206-R)*t*.6;G+=(186-G)*t*.6;B_+=(110-B_)*t*.6}
+  ld[i]=R;ld[i+1]=G;ld[i+2]=B_;ld[i+3]=255}
+ g.putImageData(L,X0,Y0);
+ // ornières de pneus
+ g.strokeStyle='rgba(90,64,40,.28)';g.lineWidth=3;[[0],[9]].forEach(([o])=>{g.beginPath();g.moveTo(X0+20+o,Y1);g.bezierCurveTo(X0+40+o,Y0+180,X0+120+o,Y0+120,X0+150+o,Y0+10);g.stroke()});
+ // fissures
+ g.strokeStyle='rgba(80,56,34,.4)';g.lineWidth=1;for(let k=0;k<14;k++){let x=X0+10+rn()*(LW-20),y=Y0+10+rn()*(Y1-Y0-20);g.beginPath();g.moveTo(x,y);for(let j=0;j<4;j++){x+=(rn()-.5)*14;y+=(rn()-.5)*14;g.lineTo(x,y)}g.stroke()}
+ // touffes d'herbe sèche et quelques mauvaises herbes vertes, cailloux
+ for(let k=0;k<70;k++){const x=X0+4+rn()*(LW-8)|0,y=Y0+4+rn()*(Y1-Y0-8)|0,t=rn();
+  if(t<.55){g.fillStyle=se==0?'#a89a78':'#c8a85a';for(let j=0;j<5;j++)g.fillRect(x+j-2,y-(j%2?3:1)-(j==2?2:0),1,(j%2?3:1)+(j==2?2:0)+1);g.fillStyle='#8a7038';g.fillRect(x-2,y+1,5,1)}
+  else if(t<.75){g.fillStyle=se==3?'#8a8a3a':'#5a8a3a';g.fillRect(x,y-2,1,3);g.fillRect(x-1,y-1,1,2);g.fillRect(x+1,y-1,1,2)}
+  else{g.fillStyle='#cfc4b0';g.fillRect(x,y,3,2);g.fillStyle='#8a7e6a';g.fillRect(x,y+2,3,1)}}
+ if(se==0){g.fillStyle='rgba(255,255,255,.18)';g.fillRect(X0,Y0,LW,Y1-Y0)}}
+const _gr=window.ground;window.ground=ground=function(se){if(GCV[se]&&GCV[se]._v2)return GCV[se];const c=_gr(se);if(!c)return c;try{improve(c,se)}catch(e){console.error(e)}c._v2=1;return c};
+try{for(const k in GCV)delete GCV[k]}catch(_){}
+})();
 
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
