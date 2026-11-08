@@ -527,7 +527,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v592')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v593')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5589,7 +5589,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v592')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v593')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -11201,7 +11201,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     {let cx,cy,tr=0;do{cx=175+Math.random()*(TK==='canebiere'?70:100);cy=T.y+22+Math.random()*(T.h-44)}while(tr++<30&&rocks.some(rk=>Math.hypot(cx-rk.x,cy-rk.y)<rk.r+9));balls.push({x:cx,y:cy,vx:0,vy:0,r:RC,m:.35,team:-1,alive:true,air:0})}
     phase='wait';renderP();readyGo((S.score[0]===1&&S.score[1]===1?'MANCHE DÉCISIVE':`MANCHE ${meneN}`)+`<br><span class="tn">${TNM.toUpperCase()}</span>`,()=>{startTurn(starter);if(TK==='canebiere')setTimeout(()=>say('',pickL(['« Ça monte, sur la Canebière ! Pointe plus fort, sinon elle redescend. »','« Attention, c’est en pente : il faut donner plus de force. »']),'n'),300);if(TK==='velodrome')setTimeout(()=>say('',pickL(['« Tout le Vélodrome nous regarde ! »','« Écoute le virage chanter : interdit de rater ! »']),'n'),300);if(TK==='calanques')setTimeout(()=>say('',pickL(['« Gare aux rochers des calanques ! »','« Avec ces cailloux, faut viser entre les rochers. »']),'n'),300)});
    }
-   function readyGo(lbl,cb){if(!readyGo.__t&&/MANCHE/.test(lbl)&&window.__meneTr&&meneN>1){readyGo.__t=1;return window.__meneTr(S.score,()=>{readyGo.__t=0;readyGo(lbl,cb)})}const w=$('.wrap');if(!w){cb&&cb();return}const old=w.querySelector('.rdy');if(old)old.remove();const d=document.createElement('div');d.className='rdy';d.innerHTML=`<small>${lbl}</small><b class="sfg">PRÊTS ?</b>`;w.appendChild(d);
+   function readyGo(lbl,cb){if(readyGo.__s)readyGo.__s=0;else if(/MANCHE/.test(lbl)&&window.__meneTr&&meneN>1){return window.__meneTr(S.score,()=>{readyGo.__s=1;readyGo(lbl,cb)})}const w=$('.wrap');if(!w){cb&&cb();return}const old=w.querySelector('.rdy');if(old)old.remove();const d=document.createElement('div');d.className='rdy';d.innerHTML=`<small>${lbl}</small><b class="sfg">PRÊTS ?</b>`;w.appendChild(d);
     tone(440,.12,'square',.06);setTimeout(()=>tone(440,.12,'square',.06),180);
     setTimeout(()=>{if(!d.isConnected)return;const b=d.querySelector('b');b.textContent='PÉTANQUEZ !';b.classList.remove('sfg');void b.offsetWidth;b.classList.add('sfg','go');d.querySelector('small').style.opacity='0';impact();try{dsfx('ko',.9)}catch(_){}tone(660,.18,'square',.07);shake(2,.3);flash('#fff6c0')},1000);
     setTimeout(()=>{d.classList.add('out');setTimeout(()=>d.remove(),300);cb&&cb()},1900)}
@@ -13019,10 +13019,10 @@ window.P3BG=window.P3BG||{};window.P3BG.major={back:'a/de81f47bf75f.webp',side:'
    window.__p3e=window.__p3e;const pitTex=()=>{if(window.__pitT)return window.__pitT;const c=document.createElement('canvas');c.width=c.height=32;const q=c.getContext('2d');q.fillStyle='#4a3a30';q.fillRect(0,0,32,32);q.fillStyle='#b8aa98';q.fillRect(1,1,30,30);q.fillStyle='#8f6a48';q.fillRect(4,4,24,24);for(let i=0;i<60;i++){q.fillStyle=Math.random()<.5?'#7a5a3c':'#a07a54';q.fillRect(4+Math.random()*23|0,4+Math.random()*23|0,1,1)}q.fillStyle='#6a4e36';q.fillRect(4,4,24,1);q.fillRect(4,4,1,24);return window.__pitT=NEAR(new THREE.CanvasTexture(c))};
    const VR=HDf.vegR||[[0,0,162,180,4.6],[164,52,110,128,3.4],[276,123,73,57,1.15],[351,137,59,43,.8]],VW_=HDf.vegW||410,VH_=HDf.vegH||180,vegT=HDf.veg?(window['__vegT'+terK]=window['__vegT'+terK]||imgTex(HDf.veg,1)):null;
    const vegSpr=k=>{const r=VR[k],t=vegT.clone();t.needsUpdate=true;t.repeat.set(r[2]/VW_,r[3]/VH_);t.offset.set(r[0]/VW_,1-(r[1]+r[3])/VH_);return sprite(t,r[4]*r[2]/r[3],r[4])};let vti=0,vbi=0;
-   (pg.DEC||[]).forEach(([n,x,y,sc])=>{const s=(vegT&&/^tree/.test(n))?vegSpr(vti++%2):(vegT&&/^bush/.test(n))?vegSpr(2+(vbi++%2)):objSpr(n,sc);if(!s)return;{const px=X3(y)*1.15+(y<T.y?-.4:.4),pz=Z3(x);s.position.set(px,window.__p3h?window.__p3h(px,pz):0,pz);if(HDf.pit&&vegT&&/^tree/.test(n)){const pm=new THREE.Mesh(new THREE.PlaneGeometry(1.7,1.7),new THREE.MeshLambertMaterial({map:pitTex()}));pm.rotation.x=-Math.PI/2;pm.position.set(px,.004,pz);terG.add(pm)}}terG.add(s)});
+   (pg.DEC||[]).forEach(([n,x,y,sc])=>{const s=(vegT&&/^tree/.test(n))?vegSpr(vti++%2):(vegT&&/^bush/.test(n))?vegSpr(2+(vbi++%2)):objSpr(n,sc);if(!s)return;{let px=X3(y)*1.15+(y<T.y?-.4:.4);const pz=Z3(x);if(/^(tree|bush)/.test(n)){const xa=Math.min(X3(T.y),X3(T.y+T.h)),xb=Math.max(X3(T.y),X3(T.y+T.h)),za=Math.min(Z3(T.x),Z3(T.x+T.w)),zb=Math.max(Z3(T.x),Z3(T.x+T.w)),hw=Math.abs(s.scale.x)*.42+.25;if(pz>za-hw&&pz<zb+hw&&px>xa-hw&&px<xb+hw)px=px<(xa+xb)/2?xa-hw:xb+hw}s.position.set(px,window.__p3h?window.__p3h(px,pz):0,pz);if(HDf.pit&&vegT&&/^tree/.test(n)){const pm=new THREE.Mesh(new THREE.PlaneGeometry(1.7,1.7),new THREE.MeshLambertMaterial({map:pitTex()}));pm.rotation.x=-Math.PI/2;pm.position.set(px,.004,pz);terG.add(pm)}}terG.add(s)});
    if(vegT&&window.__p3e&&window.__p3h){const E=window.__p3e;let sd=7;const rnd=()=>{sd=Math.sin(sd*91.3+4.7)*43758.5453;sd-=Math.floor(sd);return sd};
     for(let i=0;i<22;i++){const th=rnd()*Math.PI*2,k=.45+rnd()*.42,px=E.cx+Math.cos(th)*E.ex*E.eR(th)*k,pz=E.cz+Math.sin(th)*E.ez*E.eR(th)*k;
-     if(Math.abs(px-E.cx)<E.hx+E.FM&&Math.abs(pz-E.cz)<E.hz+E.FM)continue;const kind=i%4===0?(i%8?0:1):2+(i%3===0?1:0),sp=vegSpr(kind);const f=.8+rnd()*.4;sp.scale.multiplyScalar(f);sp.position.set(px,window.__p3h(px,pz)-.05,pz);terG.add(sp)}}
+     if(Math.abs(px-E.cx)<E.hx+E.FM+1.6&&Math.abs(pz-E.cz)<E.hz+E.FM+1.6)continue;const kind=i%4===0?(i%8?0:1):2+(i%3===0?1:0),sp=vegSpr(kind);const f=.8+rnd()*.4;sp.scale.multiplyScalar(f);sp.position.set(px,window.__p3h(px,pz)-.05,pz);terG.add(sp)}}
   }
   // ---------- personnages ----------
   const PS=new Map();
@@ -13107,7 +13107,7 @@ window.P3BG=window.P3BG||{};window.P3BG.major={back:'a/de81f47bf75f.webp',side:'
    // celle qui tient le point
    {const ph=pg.phase,hd=(ph==='select'||ph==='ai'||ph==='power'||ph==='wait')?pg.holder():null;lead.visible=arrow.visible=!!hd&&!window.__RPLON;if(hd){const b=hd.b,r=b.r*KB,x=X3(b.y),z=Z3(b.x),pu=1+Math.sin(now/160)*.12;lead.material.color.set(hd.team===0?0xffd23f:0xff9a3a);lead.scale.setScalar(r*pu);lead.position.set(x,.013,z);arrow.position.set(x,r*2+.28+Math.abs(Math.sin(now/220))*.08,z);arrow.material.color.set(hd.team===0?0xffd23f:0xff9a3a)}}
    // visée : trajectoire, point de chute, point d'arrêt
-   {dots.forEach(d=>d.visible=false);[landO,landR,stopO,stopR].forEach(m=>m.visible=false);const sm=pg.aim&&pg.phase==='select'&&pg.simC&&pg.simC.sm;
+   {if(!dots.__ot){dots.__ot=1;[...dots,landO,landR,stopO,stopR].forEach(m=>{m.renderOrder=20;if(m.material){m.material.depthTest=false;m.material.transparent=true}})}dots.forEach(d=>d.visible=false);[landO,landR,stopO,stopR].forEach(m=>m.visible=false);const sm=pg.aim&&pg.phase==='select'&&pg.simC&&pg.simC.sm;
     if(sm){const P=sm.pts;let i0=P.findIndex(p=>p.air),i1=-1;for(let i=P.length-1;i>=0;i--)if(P[i].air){i1=i;break}const tir=pg.mode==='T',hm=tir?1.9:.55;
      const ptsA=i0>=0?P.slice(i0,i1+2):[];const step=Math.max(1,Math.ceil(ptsA.length/dots.length));let k=0;
      for(let i=0;i<ptsA.length&&k<dots.length;i+=step){const p=ptsA[i],t=ptsA.length>1?i/(ptsA.length-1):0;const d=dots[k++];d.position.set(X3(p.y),.12+4*hm*t*(1-t),Z3(p.x));d.visible=true;d.scale.setScalar(1-t*.35)}
@@ -13472,9 +13472,9 @@ html body #odc.on{left:var(--odx)!important;top:var(--ody)!important;transform:n
  let t3=0,pov=null,tl=0;
  setInterval(()=>{try{const ov=document.getElementById('peta');if(!ov){t3=0;pov=null;return}if(ov!==pov){pov=ov;t3=0;tl=0}
   const g=ov.querySelector('.game');const live=!!(g&&g.offsetParent);let L=ov.querySelector('#pload');
-  if(!live||!window.__P3D){if(L&&!L.classList.contains('out')){L.classList.add('out');setTimeout(()=>{try{L.remove()}catch(_){}},500)}return}
+  if(!live||!window.__P3D){ov.classList.add('gok');if(L&&!L.classList.contains('out')){L.classList.add('out');setTimeout(()=>{try{L.remove()}catch(_){}},500)}return}
   if(!tl)tl=performance.now();const ready=ov.classList.contains('p3d')||performance.now()-tl>4000;if(ready&&!t3)t3=performance.now();
-  const hold=!ready||performance.now()-t3<1100;
+  const hold=!ready||performance.now()-t3<1100;ov.classList.toggle('gok',!hold);
   if(hold){if(!L&&!t3||(!L&&performance.now()-t3<300)){L=document.createElement('div');L.id='pload';L.innerHTML='<i></i>Préparation du terrain…<small>les boules sont astiquées</small>';ov.appendChild(L)}}
   else if(L&&!L.classList.contains('out')){L.classList.add('out');setTimeout(()=>{try{L.remove()}catch(_){}},500)}}catch(_){}},40);
 })();
@@ -15026,7 +15026,16 @@ try{openM=window.openM}catch(_){}
 @keyframes mtrAo{to{transform:translateX(-115%) skewX(-14deg)}}@keyframes mtrBo{to{transform:translateX(115%) skewX(-14deg)}}@keyframes mtrTo{to{opacity:0}}
 /* dernière boule : le bandeau passe devant le terrain 3D */
 #peta .jk{z-index:31!important}
+/* tant que le terrain 3D n'est pas prêt, on ne montre pas le jeu (seulement « Préparation du terrain ») */
+#peta .game{visibility:hidden}#peta.gok .game{visibility:visible}
+/* la visée part de n'importe où sur le terrain : les étiquettes posées dessus ne prennent plus le doigt */
+#peta .wrap .ctag,#peta .wrap .tband,#peta .wrap .ono,#peta .wrap .qsay,#peta .mtr,#peta .jk{pointer-events:none!important}
 `;document.head.appendChild(st)})();
+
+// un appui sur le terrain qui ne tombe pas sur le canevas (bord, étiquette) démarre quand même la visée
+document.addEventListener('pointerdown',e=>{try{if(e.__p3||e.__fw)return;const w=e.target&&e.target.closest&&e.target.closest('#peta .wrap');if(!w)return;const cv=w.querySelector('canvas#qpcv');if(!cv||e.target===cv)return;
+ if(e.target.closest('button,a,input,select,[onclick],#pmm,#prpl3,.cut,.fsel,.mtr'))return;if(!window.__PG||window.__PG.phase!=='select')return;
+ e.stopPropagation();e.preventDefault();const ne=new PointerEvent('pointerdown',{clientX:e.clientX,clientY:e.clientY,pointerId:e.pointerId,pointerType:e.pointerType,isPrimary:e.isPrimary,bubbles:true,cancelable:true,button:e.button,buttons:e.buttons});ne.__fw=1;cv.dispatchEvent(ne)}catch(_){}},true);
 
 // le terrain, choisi après l'équipe, sur la carte de Marseille (3 lieux au départ, 6 quand on en a débloqué)
 window.__terPick=function(ov,cb){try{
