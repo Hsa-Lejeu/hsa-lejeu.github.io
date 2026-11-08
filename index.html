@@ -527,7 +527,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v596')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v597')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5589,7 +5589,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v596')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v597')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -10988,7 +10988,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
   let terK='major';window.__terF=null;
   const TDS={major:'Sur le parvis de la Major : beaucoup de passage, et la cathédrale derrière.',carli:'Au Carli, cours Julien : de l’herbe, de la musique, et quelques cailloux sur le terrain.',panier:'Au Panier : les touristes, la Bonne Mère, et un terrain pas tout à fait plat.',canebiere:'Sur la Canebière : ça monte ! Il faut pointer plus fort pour que la boule grimpe jusqu’au cochonnet.',calanques:'Dans les Calanques : la mer, les randonneurs, et de gros rochers en plein terrain.',velodrome:'Au stade Vélodrome : une pelouse de match, et tout le virage qui chante.'};
   ov.innerHTML=`<div class="card0 arcd"><div class="ttlw"><div class="ttl"><span>STREET</span><br><span>PÉTANQUEUR</span></div><div class="sub">★ LE TOURNOI DU QUARTIER ★</div></div>
-  <div class="ctx">Avant le vote du conseil de quartier, le comité de voisinage et la halte organisent un tournoi de pétanque. Une seule règle : <b>chaque triplette mélange riverains et usager·es de la halte</b>.<br><br>
+  <div class="ctx">Avant le vote du conseil de quartier, le comité de voisinage et la halte organisent un tournoi de pétanque. Il est ouvert à tout le quartier : <b>riverains comme usager·es de la halte</b>, chacun compose sa triplette.<br><br>
   En face, le club de la Boule d’en face, qui ne perd jamais. Tout le quartier sera là : une belle partie peut faire changer bien des avis avant le vote.</div>
   <div class="terw"><span class="lb">EN 2 MANCHES GAGNANTES · CHOISIS TON TERRAIN (SINON : TIRÉ AU SORT À CHAQUE MANCHE)</span><div class="ters"><button data-t="major">La Major</button><button data-t="carli">Le Carli</button><button data-t="panier">Le Panier</button><button data-t="canebiere">La Canebière</button><button data-t="calanques">Les Calanques</button><button data-t="velodrome">Le Vélodrome</button></div><small id="qterd"></small></div>
   <div class="sline" hidden style="display:none!important"><span id="qslt"></span><button class="sec" id="qsnt" title="Tester le son" aria-label="Tester le son">🔊</button></div>
@@ -11003,7 +11003,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
    setTimeout(()=>{try{psLoad();const st=petaSndState();const d=document.createElement('div');d.className='snd '+st[0];d.textContent=st[1];ov.appendChild(d);setTimeout(()=>d.remove(),st[0]==='ok'?2500:6000)}catch(_){}},60);
    const QUO={geante:'Une pincée de levure du fournil, et ma boule gonfle. Personne ne la bouge.',aimant:'Le syndic a toujours un plan B… et un cochonnet aimanté.',pastis:'Un petit jaune pour l’adversaire, et il vise le cochonnet du voisin.',sardine:'Ma sardine, elle a bouché le port. Le terrain, c’est rien.',gabian:'Mon gabian connaît le port mieux que moi.',mistral:'Quand je souffle, les boules s’envolent.'};
    const SEAT=[[50,92],[68,92],[86,92],[50,146],[68,146],[86,146]],SLOT=[[222,98],[222,122],[222,146]];
-   ov.innerHTML=`<div class="sq"><div class="sqw"><canvas id="qsq" width="${W}" height="${H}"></canvas><div class="tag tl" id="qttl"><b>Qui joue ?</b><small>au moins 1 riverain + 1 usager</small></div><div class="tag tr" id="qcnt"><b>0</b> / 3</div><div class="go3" id="qpok" role="button" tabindex="0" hidden>C’est parti !</div><div class="foot" id="qfoot">Touche quelqu’un sur le banc.</div></div></div>`;
+   ov.innerHTML=`<div class="sq"><div class="sqw"><canvas id="qsq" width="${W}" height="${H}"></canvas><div class="tag tl" id="qttl"><b>Qui joue ?</b><small>3 joueurs, au choix</small></div><div class="tag tr" id="qcnt"><b>0</b> / 3</div><div class="go3" id="qpok" role="button" tabindex="0" hidden>C’est parti !</div><div class="foot" id="qfoot">Touche quelqu’un sur le banc.</div></div></div>`;
    const sq=$('.sqw'),cv2=$('#qsq'),g2=cv2.getContext('2d');g2.imageSmoothingEnabled=false;const se=seas();
    // le décor du square, dessiné une fois
    const bg2=document.createElement('canvas');bg2.width=W;bg2.height=H;{const b=bg2.getContext('2d');b.imageSmoothingEnabled=false;
@@ -11040,8 +11040,8 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
    function closeCut(){open=false;const d=ov.querySelector('.cin');if(d){d.classList.add('out');setTimeout(()=>d.remove(),260)}retarget();blip()}
    const toC2=e=>{const r=cv2.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*H}};
    cv2.addEventListener('pointerdown',e=>{if(open)return;const q=toC2(e);let best=null,bd=e.pointerType==='touch'?34:22;PP.forEach(o=>{const d=Math.hypot(q.x-o.x,q.y-(o.y-12));if(d<bd){bd=d;best=o}});if(best){cutin(best.p)}else if(foc){foc=null;retarget()}});
-   function ref(){const r=pick.filter(p=>p.grp==='r').length,u=pick.length-r,ok=pick.length===3&&r&&u;$('#qcnt').innerHTML=`<b>${pick.length}</b> / 3`;$('#qpok').hidden=!ok;
-    $('#qfoot').textContent=ok?'Équipe prête !':pick.length===3?'Il faut au moins un riverain et un usager : retire quelqu’un.':pick.length?`Encore ${3-pick.length} joueur${3-pick.length>1?'s':''}.`:'Touche quelqu’un sur le banc.';retarget()}
+   function ref(){const ok=pick.length===3;$('#qcnt').innerHTML=`<b>${pick.length}</b> / 3`;$('#qpok').hidden=!ok;
+    $('#qfoot').textContent=ok?'Équipe prête !':pick.length?`Encore ${3-pick.length} joueur${3-pick.length>1?'s':''}.`:'Touche quelqu’un sur le banc.';retarget()}
    window.__pickSel=id=>{const p=ALL.find(q=>q.id===id);if(!p)return;const i=pick.indexOf(p);if(i>=0)pick.splice(i,1);else if(pick.length<3)pick.push(p);ref()};
    function go(){if($('#qpok').hidden)return;okS();ov.classList.remove('sfm');try{if(PM.el)fadeTo(PM.el,musVol()*.1,500)}catch(_){}setTimeout(vsScreen,520)}
    $('#qpok').onclick=go;$('#qpok').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}};
@@ -11311,7 +11311,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
      if(s.had&&!nowH){setTimeout(()=>{banner('LA HONTE !');boo();crowdMood('mock');ono('HA HA HA !',T.x+T.w*.3,T.y-6,'#ff8a8a',1);ono('HOU !',T.x+T.w*.72,T.y-4,'#ff8a8a',1);say(pickL(['Le public','Un spectateur','Une spectatrice']),pickL(['« Oh la honte ! Tu avais le point ! »','« Rends les boules, peuchère ! »','« Tu joues avec les pieds ou quoi ?! »','« Même ma grand-mère fait mieux ! »','« Fanny ! Fanny ! »']),'n');shake(1,.3)},dl)}
      else if(!s.had&&nowH){setTimeout(()=>{crowdMood('cheer');cheer(true);ono('BRAVO !',T.x+T.w*.38,T.y-6,'#ffd23f',1);say(pickL(['Le public','Un spectateur','Une spectatrice']),pickL(['« Bien ouej gamin ! »','« Oh la belle ! Bravo ! »','« Ça, c’est du jeu ! »','« Et le point change de camp ! »','« Allez le quartier ! »']),'n')},dl)}}
     if(s.combo){stats.cmb++;setTimeout(()=>{banner('ENSEMBLE !');fanfare();confetti();cheer(true);flash('#d8ffd0');['#ff6fb5','#ffd23f','#8fd18a','#9fc3ff'].forEach((c,i)=>setTimeout(()=>ring(C.x,C.y,c,40+i*12),i*90));addJ(0,50);say(s.player.nm,'« Trois relais d’affilée ! Le quartier, c’est nous ! »',s.player.grp)},said?900:0)}else if(s.combo2)addJ(0,15);
-    const nt=nextTeam();setTimeout(()=>{if(nt<0)scoreMene();else startTurn(nt)},(s.combo?1700:750)+(window.__rplD?(()=>{try{return __rplD(s)||0}catch(_){return 0}})():0));
+    const nt=nextTeam();const rd=window.__rplD?(()=>{try{return __rplD(s)||0}catch(_){return 0}})():0;const goOn=()=>{if(quit)return;if(window.__RPLON){setTimeout(goOn,120);return}if(nt<0)scoreMene();else startTurn(nt)};setTimeout(goOn,(s.combo?1700:750)+(rd?700:0));
    }
    function scoreMene(){if(quit)return;
     phase='score';const c=coch(),l0=live(0).map(b=>sdist(b,c)).sort((a,b)=>a-b),l1=live(1).map(b=>sdist(b,c)).sort((a,b)=>a-b);let win=-1,pts=0;
@@ -13958,8 +13958,7 @@ window.__selNew=function(X){const {ov,ALL,pick,POW,anim,headC,icon,okS,blip,whoo
   t.onclick=()=>{prev(p,true);tiles()};t.ondblclick=()=>{take()};G.appendChild(t)})}
  function slots(){d.querySelectorAll('.fs-slot').forEach((s,i)=>{s.querySelectorAll('canvas').forEach(c=>c.remove());const p=pick[i];if(p){try{s.appendChild((window.__headStill||headC)(p.ci,26,160))}catch(_){}}})}
  function ref(){const i=pick.indexOf(foc),full=pick.length>=3;const tk=q('.fs-take');tk.textContent=i>=0?'Retirer':full?'Équipe complète':'Prendre';tk.className='fs-btn fs-take'+(i>=0?' rm':'');tk.disabled=!okP(foc)||(i<0&&full);
-  const r=pick.filter(p=>p.grp==='r').length,u=pick.filter(p=>p.grp==='u').length,ok=pick.length===3&&r&&u;q('.fs-go').disabled=!ok;
-  if(pick.length===3&&!ok)info('Il faut au moins un·e riverain·e et un·e usager·e de la halte dans l’équipe.');slots()}
+  const ok=pick.length===3;q('.fs-go').disabled=!ok;slots()}
  function take(){if(!okP(foc)){tone(160,.12,'square',.05);return}const i=pick.indexOf(foc);if(i>=0){pick.splice(i,1);tone(330,.08,'square',.05)}else if(pick.length<3){pick.push(foc);try{okS()}catch(_){}try{dsfx('ko',.35,1.3)}catch(_){}}else{tone(160,.12,'square',.05);return}tiles();ref()}
  q('.fs-take').onclick=take;
  q('.fs-x').onclick=()=>{try{skip&&skip()}catch(_){}};
@@ -14013,8 +14012,8 @@ window.__P3HOOK.push((now,dt)=>{const S=window.__P3S;if(!S)return;if(S!==P3)setu
  // traînées : nouvelle manche = sol propre
  const bl=g_(()=>pg.balls,[]);if(bl!==lastBalls&&!RPL.on){if(bl.length<=1){TR.g.clearRect(0,0,TR.cw,TR.ch);TR.dirty=1;TR.prev=new Map()}lastBalls=bl}
  if(!RPL.on)bl.forEach(b=>{if(!b.alive)return;const pv=TR.prev.get(b);const air=b.air>0;
-  if(pv&&!air&&!pv.air&&(Math.abs(b.x-pv.x)+Math.abs(b.y-pv.y))>.3){const a=toC(pv.x,pv.y),z=toC(b.x,b.y);TR.g.strokeStyle=b.team<0?'rgba(185,152,108,.03)':'rgba(178,144,100,.05)';TR.g.lineWidth=Math.max(2,b.r*2*.36*4);TR.g.lineCap='round';TR.g.beginPath();TR.g.moveTo(a.X,a.Y);TR.g.lineTo(z.X,z.Y);TR.g.stroke();TR.dirty=1}
-  if(pv&&pv.air&&!air&&b.airMax>20){const z=toC(b.x,b.y),r=b.r*4*1.5;TR.g.fillStyle='rgba(175,140,96,.09)';TR.g.beginPath();TR.g.ellipse(z.X,z.Y,r*.85,r,0,0,7);TR.g.fill();TR.g.strokeStyle='rgba(255,246,226,.16)';TR.g.lineWidth=1.5;TR.g.stroke();TR.dirty=1}
+  if(pv&&!air&&!pv.air&&(Math.abs(b.x-pv.x)+Math.abs(b.y-pv.y))>.3){const a=toC(pv.x,pv.y),z=toC(b.x,b.y);TR.g.strokeStyle=b.team<0?'rgba(150,118,80,.12)':'rgba(140,108,72,.2)';TR.g.lineWidth=Math.max(2.5,b.r*2*.42*4);TR.g.lineCap='round';TR.g.beginPath();TR.g.moveTo(a.X,a.Y);TR.g.lineTo(z.X,z.Y);TR.g.stroke();TR.dirty=1}
+  if(pv&&pv.air&&!air&&b.airMax>20){const z=toC(b.x,b.y),r=b.r*4*1.5;TR.g.fillStyle='rgba(140,108,72,.22)';TR.g.beginPath();TR.g.ellipse(z.X,z.Y,r*.85,r,0,0,7);TR.g.fill();TR.g.strokeStyle='rgba(255,246,226,.16)';TR.g.lineWidth=1.5;TR.g.stroke();TR.dirty=1}
   TR.prev.set(b,{x:b.x,y:b.y,air})});
  TR.fade+=dt;if(TR.fade>.6){TR.fade=0;TR.g.globalCompositeOperation='destination-out';TR.g.fillStyle='rgba(0,0,0,.025)';TR.g.fillRect(0,0,TR.cw,TR.ch);TR.g.globalCompositeOperation='source-over';TR.dirty=1}
  if(TR.dirty){TR.tex.needsUpdate=true;TR.dirty=0}
@@ -14078,18 +14077,26 @@ function play(F,lab,pb){const pg=window.__PG,ov=document.getElementById('peta');
  let wall=0;for(let t=0;t<tE;t+=16)wall+=16/spd(t);const k=wall>6500?wall/6500:1;wall/=k;
  const GH=new Map(),gh=o=>{let g=GH.get(o);if(!g){g={};GH.set(o,g)}return g};
  const desc=Object.getOwnPropertyDescriptor(pg,'balls');let cur=[];Object.defineProperty(pg,'balls',{get:()=>cur,configurable:true});
- const d=document.createElement('div');d.id='prpl3';d.innerHTML=`<div class="rb"><i></i>REPLAY</div><div class="rbig">REPLAY</div><div class="tv">PÉTANQUE TV</div><div class="lb">${lab.replace(/[<>]/g,'')}</div><div class="sk">Touche pour passer</div>`;ov.appendChild(d);RPL.on=true;window.__PSLOW=.3;window.__RPLON=1;try{tone(880,.08,'square',.05);setTimeout(()=>tone(660,.12,'square',.05),90)}catch(_){}
- let tt=0,last=performance.now(),stop=false;const end=()=>{if(stop)return;stop=true;RPL.on=false;RPL.__pp=null;window.__PSLOW=1;window.__RPLON=0;window.__P3CAM=null;try{if(desc)Object.defineProperty(pg,'balls',desc);else delete pg.balls}catch(_){}d.remove();try{if(window.petaMusSlow)petaMusSlow(false)}catch(_){}};
- d.onclick=end;try{if(window.petaMusSlow)petaMusSlow(true)}catch(_){}
+ const d=document.createElement('div');d.id='prpl3';d.innerHTML=`<div class="rb"><i></i>REPLAY</div><div class="rbig">REPLAY</div><div class="tv">PÉTANQUE TV</div><div class="lb">${lab.replace(/[<>]/g,'')}</div><div class="sk">Touche l’écran pour passer ▸▸</div>`;ov.appendChild(d);RPL.on=true;window.__PSLOW=.3;window.__RPLON=1;try{tone(880,.08,'square',.05);setTimeout(()=>tone(660,.12,'square',.05),90)}catch(_){}
+ let tt=0,last=performance.now(),stop=false;const end=()=>{if(stop)return;stop=true;RPL.on=false;RPL.__pp=null;RPL.__f=null;RPL.__dir=null;RPL.__sw=0;window.__PSLOW=1;window.__RPLON=0;window.__P3CAM=null;try{if(desc)Object.defineProperty(pg,'balls',desc);else delete pg.balls}catch(_){}d.remove();try{if(window.petaMusSlow)petaMusSlow(false)}catch(_){}};
+ d.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();end()});d.onclick=end;try{if(window.petaMusSlow)petaMusSlow(true)}catch(_){}
  const S=window.__P3S;
  const fr=()=>{if(stop)return;const now=performance.now(),dt=Math.min(50,now-last);last=now;tt+=dt*spd(tt)*k;if(tt>=tE+500){end();return}
   let i=F.findIndex(q=>q.t-t0>=tt);if(i<0)i=F.length-1;const Fr=F[i],F0=F[Math.max(0,i-1)],u=i>0&&Fr.t>F0.t?Math.max(0,Math.min(1,(tt-(F0.t-t0))/(Fr.t-F0.t))):1,L_=(a,b)=>a+((b||0)-(a||0))*u;cur=Fr.b.filter(q=>q.alive).map(q=>{const g=gh(q.o),p0=F0.b.find(z=>z.o===q.o)||q;Object.assign(g,{x:L_(p0.x,q.x),y:L_(p0.y,q.y),air:Math.max(0,L_(p0.air,q.air)),airMax:q.airMax,r:q.r,team:q.team,alive:true,rot:L_(p0.rot,q.rot),dir:q.dir,vx:q.vx,vy:q.vy});return g});
-  try{const {X3,Z3,K}=S;const gp=GH.get(pb),P=(gp&&cur.includes(gp))?gp:(Fr.b.find(q=>q.o===pb)||Fr.b[Fr.b.length-1]);const I=(F[imp].b.find(q=>q.o===pb)||P);const c=cur.find(q=>q.team<0)||Fr.b.find(q=>q.team<0)||P;
+  try{const {X3,Z3,K}=S;const dtw=Math.max(.001,dt*spd(tt)*k/1000);
    const h=q=>q.air>0&&q.airMax?Math.sin(Math.PI*(1-q.air/q.airMax))*(q.airMax>20?24:4)*K:0;
-   if(tt<tI-260){const x=X3(P.y),z=Z3(P.x),y=h(P);let cy=y+.75,cz=z+1.5,ty=y*.6;try{const R_=pg.rocks||[];const cxF=P.x-1.5/K,cyF=P.y+.35/K;for(const rk of R_){if(!rk.big)continue;const ax=cxF,ay=cyF,bx=P.x,by=P.y,dx=bx-ax,dy=by-ay,l2=dx*dx+dy*dy||1;let u=((rk.x-ax)*dx+(rk.y-ay)*dy)/l2;u=Math.max(0,Math.min(1,u));const px=ax+dx*u,py=ay+dy*u;const dd=Math.hypot(rk.x-px,rk.y-py);if(dd<rk.r+4.5||Math.hypot(rk.x-ax,rk.y-ay)<rk.r+5){cy=Math.max(cy,y+2.1);cz=z+1.1;ty=y*.6-.1}}}catch(_){}window.__P3CAM=[[x+.35,cy,cz],[x,ty,z-1.2]];
-    try{if(window.__rplLines)window.__rplLines(S,x,y+P.r*K,z,RPL.__pp?Math.hypot(x-RPL.__pp[0],z-RPL.__pp[1]):0);RPL.__pp=[x,z]}catch(_){}}
-   else if(tt<tI+900){RPL.__pp=null;const x=X3(I.y),z=Z3(I.x);window.__P3CAM=[[x+1.15,.32,z+.55],[x,.04,z-.15]]}
-   else{const x=X3(c.y),z=Z3(c.x);window.__P3CAM=[[x+.4,2.6,z+1.4],[x,0,z]]}}catch(_){}
+   cur.forEach(g=>{const w=[X3(g.y),Z3(g.x)];if(g.__w){const dx=w[0]-g.__w[0],dz=w[1]-g.__w[1],v=Math.hypot(dx,dz)/dtw;g.__v=g.__v==null?v:g.__v*.7+v*.3;if(v>.02){const l=Math.hypot(dx,dz)||1;g.__d=[dx/l,dz/l]}}else g.__v=0;g.__w=w});
+   const gp=GH.get(pb);let f=RPL.__f;if(!f||!cur.includes(f))f=(gp&&cur.includes(gp))?gp:cur[cur.length-1];
+   // si la boule suivie ralentit et qu'une autre file plus vite, on passe à celle-là
+   const fast=cur.reduce((a,g)=>(!a||(g.__v||0)>(a.__v||0))?g:a,null);if(fast&&fast!==f&&(fast.__v||0)>.6&&((f.__v||0)<(fast.__v||0)*.55)&&(!RPL.__sw||tt-RPL.__sw>350)){f=fast;RPL.__sw=tt}RPL.__f=f;
+   const moving=cur.some(g=>(g.__v||0)>.12)||(f&&f.air>0);
+   if(f&&moving){const x=X3(f.y),z=Z3(f.x),y=h(f);const d0=f.__d||[0,-1];const D=RPL.__dir||(RPL.__dir=[d0[0],d0[1]]);D[0]+=(d0[0]-D[0])*.12;D[1]+=(d0[1]-D[1])*.12;const dl=Math.hypot(D[0],D[1])||1,ux=D[0]/dl,uz=D[1]/dl;
+    let back=1.5,cy=y+.75,ty=y*.6;const camX=x-ux*back+uz*.35,camZ=z-uz*back-ux*.35;
+    // un gros rocher entre la caméra et la boule : on passe au-dessus
+    try{for(const rk of (pg.rocks||[])){if(!rk.big)continue;const rx=X3(rk.y),rz=Z3(rk.x),rr=rk.r*K+.25;const ax=camX,az=camZ,bx=x,bz=z,ex=bx-ax,ez=bz-az,l2=ex*ex+ez*ez||1;let u=((rx-ax)*ex+(rz-az)*ez)/l2;u=Math.max(0,Math.min(1,u));if(Math.hypot(rx-(ax+ex*u),rz-(az+ez*u))<rr){cy=Math.max(cy,y+2.1);ty=y*.6-.1}}}catch(_){}
+    window.__P3CAM=[[camX,cy,camZ],[x+ux*1.2,ty,z+uz*1.2]];
+    try{if(window.__rplLines&&(f.__v||0)>.3)window.__rplLines(S,x,y+f.r*K,z,Math.min(.2,(f.__v||0)*.03))}catch(_){}}
+   else{const c=cur.find(q=>q.team<0)||f;if(c){const x=X3(c.y),z=Z3(c.x);window.__P3CAM=[[x+.4,2.6,z+1.4],[x,0,z]]}}}catch(_){}
   requestAnimationFrame(fr)};
  setTimeout(()=>{if(!stop)requestAnimationFrame(fr)},600);
  setTimeout(end,600+wall+700);
@@ -15168,8 +15175,8 @@ window.__pow3=function(o){try{if(ACT)ACT.end(true);const S=window.__P3S,pg=S&&S.
  setTimeout(()=>sfx('light',.8),600);
  if(duo){setTimeout(()=>{L.burst(cx+.31,1.25,cz,26,{col:[0xffffff,0xffd23f,0xff6fb5],tx:'star',el0:-.5,el1:1.5,sp0:1,sp1:2.6,g:2,l0:.3,l1:.6,s0:.14});L.emit({o:L.sprite('glow',0xffffff,true),x:cx+.31,y:1.25,z:cz,s0:.2,s1:1.1,life:.3,a0:1,a1:0});sfx('shing',.7,1.2)},760)}
  // comète du personnage vers la cible, au moment du recul
- const comet=()=>{const T_=.8;L.emit({o:L.sprite('glow',0xffffff,true),x:hand[0],y:hand[1],z:hand[2],vx:(tx-hand[0])/T_,vy:(.9-hand[1])/T_,vz:(tz-hand[2])/T_,g:2.2,life:T_,s0:.36,s1:.28,a0:1,a1:.9});
-  for(let i=0;i<14;i++){const f=i/14;L.emit({o:L.sprite('glow',col,true),x:hand[0],y:hand[1],z:hand[2],vx:(tx-hand[0])/T_,vy:(.9-hand[1])/T_,vz:(tz-hand[2])/T_,g:2.2,life:T_*(1-f*.45),s0:.26*(1-f),s1:.04,a0:.85,a1:0,delay:f*.16})}sfx('launch',.7)};
+ const comet=()=>{};const orbs=()=>{for(let o=0;o<3;o++){const a0=o*2.094;for(let i=0;i<10;i++){const f=i/10;L.emit({o:L.sprite('glow',i?col:0xffffff,true),cx,cz,ang:a0-f*.55,rad:.62,rv:0,orbit:5.2,x:cx,y:.35+o*.28,z:cz,vy:.12,life:1.55-f*.2,s0:(i?.2:.3)*(1-f*.7),s1:.06,a0:i?.85*(1-f):1,a1:0,delay:.45+f*.05})}}};orbs();
+
  // l'effet propre au pouvoir
  const E=(duo?DUO[k]:EFF[k])||EFF.default;const ctx={S,pg,L,THREE,team,players:o.players,col,cx,cz,hand,tx,tz,coch3,mid,B,add,kill,word:(t,c,x,z,y,d,b)=>word(S,t,c==null?col:c,x,z,y,d,b),puff:(x,z,n,c,y)=>puff(S,x,z,n,c,y)};
  const ef=E(ctx)||{};const applyAt=ef.applyAt==null?2.2:ef.applyAt;const zoneKeys=ef.keys||[[2.2,[tx+1.4,1.2,tz+1.7],[tx,.1,tz]],[3.5,[tx+1.1,.9,tz+1.4],[tx,.1,tz]],[4.6,[tx+1.4,1.1,tz+1.7],[tx,.05,tz]]];
