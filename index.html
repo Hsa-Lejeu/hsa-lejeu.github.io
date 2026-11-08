@@ -527,7 +527,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v610')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v612')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5589,7 +5589,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v610')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v612')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -12821,7 +12821,7 @@ html body #peta{background:#0f0a16 repeating-linear-gradient(115deg,transparent 
 `;document.head.appendChild(st);
  // en portrait : le menu d'action quitte le terrain pour le panneau du bas
  setInterval(()=>{try{const ov=document.getElementById('peta');if(!ov)return;const m=ov.querySelector('#qcmd'),pan=ov.querySelector('.pan');if(!m||!pan)return;const port=innerHeight>innerWidth;
-  if((port||window.__P3D)&&m.parentNode!==pan){const h=pan.querySelector('#qhint');pan.insertBefore(m,h||null)}else if(!port&&!window.__P3D&&m.parentNode===pan){const w=ov.querySelector('.wrap');if(w)w.appendChild(m)}}catch(_){}},250);
+  const w=ov.querySelector('.wrap');if(w&&m.parentNode!==w)w.appendChild(m);}catch(_){}},250);
 })();
 
 // ===== v536 : Street Pétanqueur — depuis la halte (fin de l'an 2) : une annonce, puis directement le choix des joueurs avec le titre qui saute à l'écran ;
@@ -15686,10 +15686,10 @@ const st=document.createElement('style');st.textContent=`
 #pcoch[hidden]{display:none!important}
 #peta .fsel .fs-t.sit canvas{filter:brightness(.85) saturate(.85)}#peta .fsel .fs-t.sit:hover canvas{filter:none}`;document.head.appendChild(st);
 let ON=false,btn=null;const OKP={select:1,ai:1,wait:1};
-const off=()=>{if(!ON)return;ON=false;window.__P3CAM=null;if(btn){btn.classList.remove('on');btn.querySelector('b').textContent='Cochonnet'}};
+const off=()=>{if(!ON)return;ON=false;window.__P3CAM=null;if(btn){btn.classList.remove('on');btn.querySelector('b').textContent='Zoom'}};
 const on=()=>{ON=true;btn.classList.add('on');btn.querySelector('b').textContent='Revenir';try{dsfx&&dsfx('shing',.3,1.4)}catch(_){}};
-function mk(ov){btn=document.createElement('button');btn.id='pcoch';btn.type='button';btn.setAttribute('aria-label','Voir le cochonnet de près');
- btn.innerHTML='<svg viewBox="0 0 20 20" shape-rendering="crispEdges"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13" y="13" width="3" height="3" fill="currentColor" transform="rotate(45 14.5 14.5)"/><rect x="13.5" y="14.5" width="5" height="2.6" fill="currentColor" transform="rotate(45 16 15.8)"/><circle cx="9" cy="9" r="2.4" fill="#ff6a3a"/></svg><b>Cochonnet</b>';
+function mk(ov){btn=document.createElement('button');btn.id='pcoch';btn.type='button';btn.setAttribute('aria-label','Zoom sur le cochonnet');
+ btn.innerHTML='<svg viewBox="0 0 20 20" shape-rendering="crispEdges"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13" y="13" width="3" height="3" fill="currentColor" transform="rotate(45 14.5 14.5)"/><rect x="13.5" y="14.5" width="5" height="2.6" fill="currentColor" transform="rotate(45 16 15.8)"/><circle cx="9" cy="9" r="2.4" fill="#ff6a3a"/></svg><b>Zoom</b>';
  btn.onclick=e=>{e.stopPropagation();ON?off():on()}}
 // toucher le terrain pour viser ramène la vue normale
 document.addEventListener('pointerdown',e=>{try{if(ON&&e.target&&e.target.closest&&e.target.closest('#peta canvas.c3d'))off()}catch(_){}},true);
@@ -15822,6 +15822,53 @@ const st=document.createElement('style');st.textContent=`
 #pmm.big canvas{width:230px!important;height:96px!important;transform:translate(-67px,67px) rotate(-90deg)}
 #peta .ctag{left:calc(8px + 50px + 18px)!important}
 `;document.head.appendChild(st);
+})();
+</script>
+<script>
+// ===== v611 : menu façon Persona
+(function(){const st=document.createElement('style');st.textContent=`
+#peta .wrap #qcmd.cmd{position:absolute!important;left:auto!important;right:12px!important;top:auto!important;bottom:14px!important;width:auto!important;max-width:62%!important;z-index:30!important;display:flex;flex-direction:column;align-items:flex-end;gap:7px!important;filter:drop-shadow(3px 4px 0 rgba(0,0,0,.55))!important;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;pointer-events:auto;transform:none!important}
+#peta .wrap #qcmd.cmd .hd{align-self:flex-end;background:#14124a!important;color:#ffd23f!important;border:0!important;box-shadow:none!important;font:400 13px Lilita,sans-serif!important;padding:1px 12px 1px 5px!important;transform:skewX(-14deg) rotate(-4deg)!important;margin:0 8px -2px 0!important;width:auto!important}
+#peta .wrap #qcmd.cmd .hd *{color:#ffd23f!important}
+#peta .wrap #qcmd.cmd .hd canvas{width:18px!important;height:18px!important}
+#peta .wrap #qcmd.cmd .it{position:relative;background:#111!important;color:#fff!important;border:0!important;box-shadow:none!important;padding:2px 14px 2px 6px!important;gap:6px!important;transform:skewX(-14deg) rotate(-4deg)!important;font:400 clamp(17px,2.6vw,22px)/1 Lilita,sans-serif!important;text-transform:uppercase;letter-spacing:.02em;width:auto!important;min-height:0!important;transition:transform .12s,background .12s}
+#peta .wrap #qcmd.cmd .it:nth-of-type(2){margin-right:16px}#peta .wrap #qcmd.cmd .it:nth-of-type(3){margin-right:6px}#peta .wrap #qcmd.cmd .it:nth-of-type(4){margin-right:22px}#peta .wrap #qcmd.cmd .it:nth-of-type(5){margin-right:10px}
+#peta .wrap #qcmd.cmd .it .tx>span:first-child{font-style:italic}
+#peta .wrap #qcmd.cmd .it small,#peta .wrap #qcmd.cmd .it .pds{display:none!important}
+#peta .wrap #qcmd.cmd .it.f{background:#ffd23f!important;color:#111!important;transform:skewX(-14deg) rotate(-4deg) scale(1.14) translateX(-6px)!important;z-index:2}
+#peta .wrap #qcmd.cmd .it.f::before{content:"";position:absolute;inset:-7px -12px -7px -10px;z-index:-1;background:#2faee0;clip-path:polygon(0 30%,8% 0,30% 22%,52% 2%,70% 24%,92% 0,100% 40%,94% 72%,100% 100%,70% 82%,48% 100%,28% 78%,6% 100%,10% 66%)}
+#peta .wrap #qcmd.cmd .pcap{order:99;align-self:flex-end;margin:3px 10px 0 0;transform:skewX(-14deg) rotate(-4deg);background:#fff;color:#14124a;font:400 11px 'Atkinson Hyperlegible',sans-serif;padding:1px 8px;white-space:nowrap;box-shadow:2px 2px 0 #14124a;max-width:100%;overflow:hidden;text-overflow:ellipsis}#peta .wrap #qcmd.cmd .pcap .mbar{display:inline-block}#peta .wrap #qcmd.cmd .pcap:empty{display:none}
+#peta .wrap #qcmd.cmd .it.f small .mbar{display:inline-block}
+#peta .wrap #qcmd.cmd .it.dis{background:#3a3446!important;color:#8a8296!important}
+#peta .wrap #qcmd.cmd .it.dis.f{background:#8a8296!important;color:#222!important}
+#peta .wrap #qcmd.cmd .it.gold{background:linear-gradient(90deg,#c2367f,#d99a10)!important}
+#peta .wrap #qcmd.cmd .it canvas{width:20px!important;height:20px!important;transform:skewX(14deg) rotate(4deg)!important}
+#peta .wrap #qcmd.cmd .it.f canvas{filter:drop-shadow(0 0 2px #fff)}
+`;document.head.appendChild(st);
+// la légende de l'action choisie, sous le menu
+const cap=m=>{const f=m.querySelector('.it.f small');let c=m.querySelector('.pcap');if(!c){c=document.createElement('div');c.className='pcap'}if(c.parentNode!==m||m.lastElementChild!==c)m.appendChild(c);const h=f?f.innerHTML:'';if(c.innerHTML!==h)c.innerHTML=h};
+new MutationObserver(()=>{const m=document.getElementById('qcmd');if(m&&!m.hidden)cap(m)}).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['class','hidden']});
+})();
+</script>
+<script>
+// ===== v612 : un joueur choisi se voit de loin
+(function(){const st=document.createElement('style');st.textContent=`
+@keyframes pkIn{0%{transform:translateX(-50%) scale(0) rotate(-30deg)}70%{transform:translateX(-50%) scale(1.25) rotate(6deg)}100%{transform:translateX(-50%) scale(1) rotate(-4deg)}}
+@keyframes pkBeam{0%{opacity:0}100%{opacity:1}}
+#peta .fsel .fs-t.pk .fs-sp::after{background:rgba(120,70,0,.5)}
+#peta .fsel .fs-t.pk .fs-sp{box-shadow:inset 0 -14px 18px -6px rgba(255,210,63,.55)}
+#peta .fsel .fs-t.pk .fs-sp>canvas{filter:drop-shadow(0 0 4px #ffd23f) drop-shadow(0 0 1px #fff)!important}
+#peta .fsel .fs-t.pk::before{content:"";position:absolute;left:8%;right:8%;top:6px;bottom:22px;background:linear-gradient(to top,rgba(255,210,63,.55),rgba(255,210,63,.12) 70%,transparent);clip-path:polygon(30% 0,70% 0,100% 100%,0 100%);animation:pkBeam .35s ease-out both;pointer-events:none}
+#peta .fsel .fs-t em{top:-6px!important;left:50%!important;right:auto!important;width:30px;height:30px;border-radius:50%;display:flex!important;align-items:center;justify-content:center;font:400 15px Lilita,sans-serif!important;font-style:normal!important;background:#ffd23f!important;color:#14124a!important;border:3px solid #14124a;box-shadow:0 3px 0 #14124a,0 0 10px rgba(255,210,63,.8);transform:translateX(-50%) rotate(-4deg)!important;animation:pkIn .4s cubic-bezier(.3,1.4,.5,1) both;padding:0!important;z-index:3}
+@media (orientation:portrait){#peta .fsel .fs-t{padding-top:22px!important}}
+#peta .fsel .fs-t.pk>span{background:#ffd23f!important;color:#14124a!important;border-color:#14124a!important;box-shadow:2px 2px 0 #14124a}
+#peta .fsel .fs-t.pk.on>span{background:#fff!important}
+#peta .fs-slot.full{background:#ffd23f;border-color:#fff;box-shadow:0 0 8px rgba(255,210,63,.8)}
+#peta .fs-slot.full b{color:#14124a}
+#peta .wrap #qcmd.cmd .it{padding-top:7px!important;padding-bottom:7px!important}
+`;document.head.appendChild(st);
+// les cases J1 J2 J3 du haut s'allument quand elles sont remplies
+new MutationObserver(()=>{document.querySelectorAll('#peta .fs-slot').forEach(s=>s.classList.toggle('full',!!s.querySelector('canvas')))}).observe(document.body,{subtree:true,childList:true});
 })();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
