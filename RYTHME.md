@@ -28,6 +28,7 @@ Mis en place en v520 (objet `window.AG`, fin du code) :
 - L'horloge de l'aiguilleur (`AG.clock`) ne compte que le temps hors pause et hors fenêtre bloquante.
 - Les « Nouveau ! » et les conseils ne sont jamais abandonnés. Seuls les retours d'action de la bulle le sont après 30 s.
 - `AG.log` garde la trace des ouvertures de `#m` (montrée, différée, geste du joueur).
+- **Toute nouvelle fenêtre passe par `openM(html, opts)`** (v589), qui la dépose dans la file de l'aiguilleur (`AG.push`) avec sa priorité (`opts.pri` : 1 danger, 2 décision, 3 bilan, 4 récit). Ne plus écrire `$('m').hidden=false` : la redéfinition de `hidden` sur `#m` ne reste que comme filet de sécurité pour les fenêtres anciennes.
 
 ## 3. Une seule chose à la fois
 

@@ -523,7 +523,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v588')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v589')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5585,7 +5585,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v588')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v589')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -12317,6 +12317,11 @@ function bulApply(s){const t=bulNorm(String(s||''));for(const r of BULR){const m
  const firstWaiting=p=>AG.q.some(x=>x.lvl===1&&x.pri<p);
  const canB=p=>!others()&&!firstWaiting(p)&&AG.clock-AG.lastB>=gapB()&&(p!==4||dayAbs()>=AG.calmDay);
  const shownB=p=>{AG.curB=p;if(p!==1)AG.lastB=AG.clock};
+ // FILET DE SÉCURITÉ (v520, commenté en v589) : les anciennes fenêtres ouvrent #m directement ($('m').hidden=false).
+ // Cette redéfinition de « hidden » les intercepte pour appliquer quand même les règles de RYTHME.md (délais, priorités,
+ // une seule fenêtre à la fois). Toute NOUVELLE fenêtre doit passer par openM(html,opts), qui dépose la fenêtre
+ // dans la file de l'aiguilleur (AG.push) au lieu de toucher à #m.hidden. Ne pas supprimer ce filet tant que
+ // des fenêtres anciennes l'utilisent.
  if(mEl&&HD){let pend=null;Object.defineProperty(mEl,'hidden',{configurable:true,get(){return HD.get.call(this)},set(v){
    if(v){if(!HD.get.call(this))AG.mClosed=performance.now();HD.set.call(this,true);return}
    if(!HD.get.call(this))return;
@@ -14910,6 +14915,18 @@ html body #m #mb .abk .atab.on{opacity:1;box-shadow:2px 2px 0 rgba(0,0,0,.3),ins
 <script>
 // la feuille paysage passe en dernier parmi les styles chargés, pour garder sa priorité
 (function(){const p=document.getElementById('paysage');if(p)document.head.appendChild(p)})();
+</script>
+<script>
+// v589 : openM(html, opts) — LA façon d'ouvrir une nouvelle fenêtre (règle de RYTHME.md).
+//   html : contenu de la fenêtre (#mb)
+//   opts.pri : 1 danger, 2 décision, 3 bilan/chapitre/réunion, 4 récit (défaut) — voir RYTHME.md règle 6
+//   opts.cls : classe de #m (défaut 'modal') ; opts.onOpen() : appelée une fois la fenêtre affichée
+//   opts.user : true si le joueur vient de la demander lui-même (ouverture immédiate)
+// La fenêtre est déposée dans la file de l'aiguilleur (AG.push) : elle attend son tour (délais, une seule fenêtre à la fois).
+window.openM=function(html,opts){opts=opts||{};const pri=opts.pri||4;
+ const show=()=>{const m=$('m');$('mb').innerHTML=html;m.className=opts.cls||'modal';AG.rel=1;try{m.hidden=false}finally{AG.rel=0}try{paused=true}catch(_){}try{drawPts()}catch(_){}if(opts.onOpen)try{opts.onOpen()}catch(e){oops(e,'openM')}};
+ try{if(!window.AG||opts.user){show();return}AG.push({lvl:1,pri,kind:'openM',run:show})}catch(e){oops(e,'openM');show()}};
+try{openM=window.openM}catch(_){}
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
