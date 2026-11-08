@@ -1,4 +1,8 @@
 <!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#2e9e4f"><link rel="apple-touch-icon" href="apple-touch-icon-v2.png"><script>
+// v590 : esc(s) échappe & < > " ' pour tout texte du joueur (son prénom) qui finit dans du HTML (innerHTML, attributs)
+window.esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))};
+</script>
+<script>
 // v588 : repositionnement de l'interface à la demande (au lieu de minuteries à 200-500 ms)
 // __hsaLayout(f) : f est appelée au prochain affichage après un redimensionnement, une rotation, un toucher,
 // l'ouverture ou la fermeture d'une fenêtre (#m, éléments ajoutés au corps de la page), un changement d'onglet,
@@ -523,7 +527,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v589')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v590')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -3003,11 +3007,11 @@ function chefApply(){if(!CHEF||!CGOK()||!IMA.complete||!IMA.naturalWidth||!IMC.c
 window.chefApply=chefApply;
 // ---- noms et accords dans tous les textes
 const chefTitle=()=>!CHEF?'chef·fe de service':CHEF.pro=='il'?'chef de service':CHEF.pro=='elle'?'cheffe de service':'chef·fe de service';
-function chefTx(s){if(!CHEF||!s||typeof s!='string')return s;const n=CHEF.name||'Camille';if(n!=='Camille'&&s.indexOf('amille')<0&&s.indexOf('AMILLE')<0&&s.indexOf('chef·fe')<0)return s;
+function chefTx(s){if(!CHEF||!s||typeof s!='string')return s;const n0=CHEF.name||'Camille',n=/<[a-zA-Z\/!]|&[#a-zA-Z0-9]+;/.test(s)?esc(n0):n0;if(n!=='Camille'&&s.indexOf('amille')<0&&s.indexOf('AMILLE')<0&&s.indexOf('chef·fe')<0)return s;
  let r=s;if(n!=='Camille'){r=r.replace(/Camille/g,n).replace(/CAMILLE/g,n.toUpperCase())}if(CHEF.pro!='iel')r=r.replace(/chef·fe de service/g,chefTitle()).replace(/Chef·fe de service/g,chefTitle().replace(/^c/,'C'));return r}
 (function(){const fx=CanvasRenderingContext2D.prototype.fillText,sx=CanvasRenderingContext2D.prototype.strokeText,mt=CanvasRenderingContext2D.prototype.measureText;
  CanvasRenderingContext2D.prototype.fillText=function(t,...a){return fx.call(this,chefTx(t),...a)};CanvasRenderingContext2D.prototype.strokeText=function(t,...a){return sx.call(this,chefTx(t),...a)};CanvasRenderingContext2D.prototype.measureText=function(t){return mt.call(this,chefTx(t))};
- const walk=n=>{if(!CHEF)return;if(n.nodeType==3){const v=chefTx(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v;return}if(n.nodeType==1&&!/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(n.tagName)&&!['cgen','msg','ev'].includes(n.id))n.childNodes.forEach(walk)};
+ const walk=n=>{if(!CHEF)return;if(n.nodeType==3){const pp=n.parentNode;if(pp&&/^(SCRIPT|STYLE|TEXTAREA|NOSCRIPT)$/.test(pp.nodeName))return;const v=chefTx(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v;return}if(n.nodeType==1&&!/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(n.tagName)&&!['cgen','msg','ev'].includes(n.id))n.childNodes.forEach(walk)};
  new MutationObserver(ms=>{if(!CHEF)return;ms.forEach(m=>{const p_=m.target.nodeType==3?m.target.parentNode:m.target;if(p_&&p_.closest&&p_.closest('#msg,#ev'))return;if(m.type=='characterData')walk(m.target);else m.addedNodes.forEach(walk)})}).observe(document.body,{childList:true,subtree:true,characterData:true});window.chefWalk=()=>walk(document.body)})();
 // portrait des bulles : pas de clignement dessiné à la main sur un visage personnalisé
 W('camDraw',(o,a)=>{const r=o(...a);try{if(CHEF_APPLIED){const c=$('ccv'),g=c.getContext('2d');g.fillStyle='#e6d9b8';g.fillRect(0,0,18,20);g.fillStyle='rgba(255,255,255,.35)';g.fillRect(0,0,18,3);g.fillStyle='rgba(0,0,0,.13)';g.fillRect(0,15,18,5);const tk=CAM.talk&&Math.floor(performance.now()/160)%2;g.drawImage(IMC,18*48+(tk?0:16),1,16,20,1,1,16,20)}}catch(_){}return r});
@@ -3085,7 +3089,7 @@ function chefCreate(done){cgcss();const c=Object.assign(chefDefault(),CHEF||{});
  o.querySelectorAll('.rot button').forEach(b=>b.onclick=()=>{dir=(dir+ +b.dataset.r+4)%4});
  o.querySelector('.rnd').onclick=()=>{const R=n=>Math.random()*n|0;c.body=SKN[R(SKN.length)];c.eyes=R(CGC.eyes.length);c.hs=R(HAIRG.length);c.hc=R(7);c.os=R(OUTG.length);c.oc=R(5);if(Math.random()<.5){const G=ACG[R(ACG.length)];c.acc=G.v[R(G.v.length)]}else c.acc=-1;upd()};
  const ORD=[0,2,3,1];let raf=0;const loop=()=>{if(!document.body.contains(cv))return;if(!strip&&CGOK())upd();g.clearRect(0,0,16,26);if(strip){const d=ORD[dir],f=24+d*6+((performance.now()/160|0)%6);g.drawImage(strip,f*16,0,16,26,0,0,16,26)}raf=requestAnimationFrame(loop)};upd();loop();
- o.querySelector('.ok').onclick=()=>{c.name=(inp.value||'').trim().replace(/[<>]/g,'')||'Camille';CHEF=c;try{localStorage.setItem('hsa-chef',JSON.stringify(c))}catch(_){}o.remove();chefApply();try{chefWalk()}catch(_){}done()}}
+ o.querySelector('.ok').onclick=()=>{c.name=(inp.value||'').replace(/[<>\u0000-\u001f\u007f]/g,'').trim().slice(0,24)||'Camille';CHEF=c;try{localStorage.setItem('hsa-chef',JSON.stringify(c))}catch(_){}o.remove();chefApply();try{chefWalk()}catch(_){}done()}}
 window.chefCreate=chefCreate;
 // au chargement d'une partie existante : on remet le personnage
 if(CHEF)chefApply();
@@ -5299,7 +5303,7 @@ function vanMenu(){if(!vanSale())return;paused=true;tab(-1);const ok=eu>=600;$('
 window.vanMenu=vanMenu;
 (function(){const oc=cv.onclick;cv.onclick=e=>{try{if(!Z.moved&&!ended&&!paused&&$('m').hidden&&vanSale()){const r=cv.getBoundingClientRect(),mx=(e.clientX-r.left)/r.width*WW,my=(e.clientY-r.top)/r.height*WH-EY;if(mx>=350&&mx<=402&&my>=138&&my<=172){vanMenu();return}}}catch(_){}return oc(e)}})();
 // Camille présente le camion : la caméra va dessus, puis elle en parle
-function camBox(txt,btn,cb){const o=$('cmbx');if(o)o.remove();const b=document.createElement('div');b.id='cmbx';b.innerHTML=`<canvas width="18" height="20"></canvas><div><b>${(window.CHEF&&CHEF.name)||'Camille'}</b><p></p><div class="cbt"><button class="go"></button></div></div>`;b.querySelector('p').innerHTML=txt;b.querySelector('button').textContent=btn||'D’accord';document.body.appendChild(b);try{lcPortrait(b.querySelector('canvas'),18,'#f3e7c9')}catch(_){}
+function camBox(txt,btn,cb){const o=$('cmbx');if(o)o.remove();const b=document.createElement('div');b.id='cmbx';b.innerHTML=`<canvas width="18" height="20"></canvas><div><b>${esc((window.CHEF&&CHEF.name)||'Camille')}</b><p></p><div class="cbt"><button class="go"></button></div></div>`;b.querySelector('p').innerHTML=txt;b.querySelector('button').textContent=btn||'D’accord';document.body.appendChild(b);try{lcPortrait(b.querySelector('canvas'),18,'#f3e7c9')}catch(_){}
  b.querySelector('button').onclick=()=>{b.remove();cb&&cb()}}
 function vanReveal(){try{B.vanShown=1;const go=()=>{paused=true;camBox('Regarde, il y a un <b>camion à vendre</b> sur le parking ! Ce serait super pour faire des <b>maraudes</b> plus loin, à la gare ou dans les campements, et des <b>TROD délocalisés</b> : dépister directement là où vivent les gens. <br><small>Touche le camion pour l’acheter.</small>','D’accord !',()=>{paused=false})};
  if(typeof flyMap=='function')flyMap(392,218,2.2,()=>{try{sparkle(392,212,0)}catch(_){}go()});else go()}catch(_){}}
@@ -5585,7 +5589,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v589')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v590')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -7735,7 +7739,7 @@ function debPh(cls,txt,X,Y,h,dur){const S=DS;if(!S)return;let[x,y]=debXY(X,Y,h||
  if(cls=='cam'){S.camTalk=1;clearTimeout(S._ct);S._ct=setTimeout(()=>{if(DS)DS.camTalk=0},dur||2600)}setTimeout(()=>b.classList.add('out'),dur||2600);setTimeout(()=>b.remove(),(dur||2600)+300);return b}
 // incrustation manga : Camille (ou Crotti) regarde le joueur et parle
 function debCut(who,txt,dur,top){const S=DS;if(!S)return;S.ov.querySelectorAll('.cut').forEach(c=>c.remove());const d=document.createElement('div');d.className='cut '+(who=='cro'?'cro':'cam');d.style.top=(who=='cro'||top)?(who=='cro'?'52px':(innerHeight>innerWidth?'56px':Math.round(Math.min(innerHeight*.16,140)+innerHeight*.09)+'px')):'';d.style.bottom=(who=='cro'||top)?'':'170px';
- d.innerHTML=`<canvas width="16" height="20"></canvas><div class="cb"><small>${who=='cro'?'CÉDRIC CROTTI':((CHEF&&CHEF.name)||'Camille').toUpperCase()}</small>${txt}</div>`;S.ov.appendChild(d);
+ d.innerHTML=`<canvas width="16" height="20"></canvas><div class="cb"><small>${who=='cro'?'CÉDRIC CROTTI':esc(((CHEF&&CHEF.name)||'Camille').toUpperCase())}</small>${txt}</div>`;S.ov.appendChild(d);
  const c=d.querySelector('canvas').getContext('2d');c.imageSmoothingEnabled=false;const draw=()=>{if(!d.isConnected)return;c.clearRect(0,0,16,20);const T=performance.now();
   if(who=='cro'){c.drawImage(IMA,24*16,VAL.ci*26,16,20,0,0,16,20);c.fillStyle='#d9302c';if((T/120|0)%2)c.fillRect(6,15,4,1)}else{c.drawImage(IMC,18*48+16,1,16,20,0,0,16,20);if((T/140|0)%3==1){c.fillStyle='#8a3a2a';c.fillRect(8,15,2,1)}}requestAnimationFrame(draw)};draw();
  S.camTalk=who=='cam'?1:0;debSwish();debVoice(who,txt);
