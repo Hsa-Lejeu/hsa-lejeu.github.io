@@ -527,7 +527,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v605')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v606')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5589,7 +5589,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v605')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v606')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -13955,12 +13955,12 @@ window.__selNew=function(X){const {ov,ALL,pick,POW,anim,headC,icon,okS,blip,whoo
   <div class="fs-st"><span>🎯 PRÉCISION</span>${bars(s.pr)}<span>💪 FORCE</span>${bars(s.fo)}<span>📏 PORTÉE</span>${bars(s.po)}<span>⚡ RECHARGE</span>${bars(s.re)}</div>
   <div class="fs-pw"><div><span class="lb">COUP SPÉCIAL</span><b>${pw.nm}</b><small>${pw.ds}</small></div></div>`;
   try{q('.fs-pw').insertBefore(icon(p.pw),q('.fs-pw').firstChild)}catch(_){}
-  const old=q('.fs-big canvas'),c=document.createElement('canvas');c.width=16;c.height=26;old.replaceWith(c);const tk_=pick.indexOf(p)>=0;c.classList.toggle('tk',tk_);try{if(tk_)anim(c,p.ci,66,0);else anim(c,p.ci,24,1)}catch(_){}
+  const old=q('.fs-big canvas'),c=document.createElement('canvas');c.width=16;c.height=26;old.replaceWith(c);const tk_=pick.indexOf(p)>=0;c.classList.toggle('tk',tk_);try{if(tk_)anim(c,p.ci,0,0);else anim(c,p.ci,24,1)}catch(_){}
   if(pop){const pv=q('.fs-pv');pv.classList.remove('fspp');void pv.offsetWidth;pv.classList.add('fspp');try{whoosh()}catch(_){}try{dsfx('shing',.45,1.25)}catch(_){}}
   info(lk&&!real(lk)?(window.__PTEST?`🔓 Débloqué pour les tests. Normalement : ${lk.t}.`:`🔒 ${lk.t}.`):'');ref()}
  function info(t){q('.fs-info').textContent=t}
  function tiles(){const G=q('.fs-grid');G.innerHTML='';ALL.forEach(p=>{const t=document.createElement('div');const i=pick.indexOf(p);t.className='fs-t '+p.grp+(p===foc?' on':'')+(i>=0?' pk':'');
-  const sp=document.createElement('div');sp.className='fs-sp';const h=document.createElement('canvas');h.width=16;h.height=26;sp.appendChild(h);t.appendChild(sp);const ix_=ALL.indexOf(p);t.classList.toggle('sit',i<0&&p!==foc);try{anim(h,p.ci,i>=0?66:p===foc?24:(ix_%2?54:48),p===foc?0:1)}catch(_){}t.insertAdjacentHTML('beforeend',`<span>${p.nm.replace('Cédric ','').replace('Mme ','M<sup>me</sup> ')}</span>${i>=0?`<em>J${i+1}</em>`:''}`);
+  const sp=document.createElement('div');sp.className='fs-sp';const h=document.createElement('canvas');h.width=16;h.height=26;sp.appendChild(h);t.appendChild(sp);const ix_=ALL.indexOf(p);t.classList.toggle('sit',i<0&&p!==foc);try{if(i<0&&p!==foc)window.__seatDraw(h,p.ci);else anim(h,p.ci,24,p===foc?0:1)}catch(_){}t.insertAdjacentHTML('beforeend',`<span>${p.nm.replace('Cédric ','').replace('Mme ','M<sup>me</sup> ')}</span>${i>=0?`<em>J${i+1}</em>`:''}`);
   const lk=lockOf(p);if(lk&&!isOK(lk))t.insertAdjacentHTML('beforeend','<div class="lk">🔒</div>');else if(lk&&!real(lk))t.insertAdjacentHTML('beforeend','<i class="tst">TEST</i>');
   t.onclick=()=>{prev(p,true);tiles()};t.ondblclick=()=>{take()};G.appendChild(t)})}
  function slots(){d.querySelectorAll('.fs-slot').forEach((s,i)=>{s.querySelectorAll('canvas').forEach(c=>c.remove());const p=pick[i];if(p){try{s.appendChild((window.__headStill||headC)(p.ci,26,160))}catch(_){}}})}
@@ -15685,6 +15685,75 @@ window.__P3HOOK.push(()=>{try{const ov=document.getElementById('peta'),mm=docume
  btn.style.top=(mm.offsetTop+mm.offsetHeight+6)+'px';btn.style.right='auto';btn.style.left=(mm.offsetLeft+mm.offsetWidth-btn.offsetWidth)+'px';
  if(ON){const c=P.coch&&P.coch();if(!c){off();return}const x=S.X3(c.y),z=S.Z3(c.x);window.__P3CAM=[[x+.35,1.75,z+1.75],[x,0,z-.25]]}}catch(_){}});
 window.__cochView=v=>{if(!btn)return;(v?on:off)()};
+})();
+</script>
+<script>
+// ===== v606 : banc (assis de face), présentoir des boules, plan caché avant le chargement
+(function(){
+// assis de face, fabriqué à partir de la pose debout : le haut du corps descend, les cuisses s'élargissent, les pieds s'écartent
+window.__seatDraw=function(c,ci){const g=c.getContext('2d');g.imageSmoothingEnabled=false;let tries=0;const go=()=>{if(!c.isConnected){if(tries++<40)setTimeout(go,50);return}if(!IMAok()){setTimeout(go,120);return}
+ const X=24*16,Y=ci*26;g.clearRect(0,0,16,26);g.drawImage(IMA,X,Y+22,16,1,-1,24,16,1);g.drawImage(IMA,X,Y+22,16,1,1,24,16,1);g.drawImage(IMA,X,Y+22,16,1,0,24,16,1);
+ g.drawImage(IMA,X,Y+25,8,1,-1,25,8,1);g.drawImage(IMA,X+8,Y+25,8,1,9,25,8,1);g.drawImage(IMA,X,Y,16,21,0,3,16,21)};setTimeout(go,0)};
+// ---------- le présentoir des boules ----------
+window.__ballPick=function(ov,cb){try{const A=window.__pBallAPI;if(!A){cb();return}
+ const d=document.createElement('div');d.className='fsel fmal fpres';let sel=A.cur();
+ d.innerHTML='<div class="fs-top"><b class="fs-ttl">CHOISIS TES BOULES</b></div><div class="pr-w"><div class="pr-cab"><div class="pr-sign">Boulodrome du quartier</div></div><div class="pr-side"><div class="pr-soc"><div class="pr-spot"></div><div class="pr-bb"></div><div class="pr-ped"></div></div><div class="mal-inf"></div></div></div>';
+ ov.appendChild(d);const cab=d.querySelector('.pr-cab'),inf=d.querySelector('.mal-inf'),bb=d.querySelector('.pr-bb');
+ const bars=n=>'<i>'+[1,2,3,4,5].map(k=>'<u class="'+(k<=n?'on':'')+'"></u>').join('')+'</i>';
+ const pL=n=>n>=4?'lourde':n<=2?'légère':'équilibrée',fL=n=>n>=4?'forte':n<=2?'faible':'normale';
+ const show=id=>{const b=A.BALLS.find(x=>x.id===id)||A.BALLS[0],ok=A.isOK(b),s_=window.__ballStats(b.id);
+  bb.innerHTML='';const big=A.chip(b.id,112);bb.appendChild(big);bb.classList.toggle('lock',!ok);bb.classList.remove('in');void bb.offsetWidth;bb.classList.add('in');
+  inf.innerHTML='<div class="mi-hd"><div><b>'+b.nm+'</b><small>'+(ok?(A.real(b)?'Sur ton étagère':'Débloquée pour les tests'):'Pas encore débloquée')+'</small></div></div><div class="mi-st"><span>Poids</span>'+bars(s_.p)+'<em>'+pL(s_.p)+(s_.p>=4?' : le vent la dévie peu, elle rebondit peu':s_.p<=2?' : le vent la pousse, elle rebondit plus':' : un peu de tout')+'</em><span>Friction</span>'+bars(s_.f)+'<em>'+fL(s_.f)+(s_.f>=4?' : elle s’arrête vite sur le sable':s_.f<=2?' : elle roule longtemps':'')+'</em></div>'+(ok?'':'<div class="mi-lk">Pour l’avoir : '+b.t.charAt(0).toLowerCase()+b.t.slice(1)+'.</div>')+'<button class="mal-go"'+(ok?'':' disabled')+'>Ces boules ! ▶</button>';
+  inf.querySelector('.mal-go').onclick=()=>{if(!ok)return;A.set(b.id);try{dsfx('ko',.6)}catch(_){}if(d.dataset.done)return;d.dataset.done=1;setTimeout(()=>{d.remove();cb()},250)}};
+ const all=[];const N=6;for(let r=0;r*N<A.BALLS.length;r++){const row=document.createElement('div');row.className='pr-row';row.style.animationDelay=(.15+r*.12)+'s';cab.appendChild(row);
+  A.BALLS.slice(r*N,r*N+N).forEach(b=>{const ok=A.isOK(b);const e=document.createElement('button');e.type='button';e.className='pr-b'+(ok?'':' lock')+(b.id===sel?' on':'');e.setAttribute('aria-label',b.nm);
+   const w=document.createElement('span');w.className='pr-ball';w.appendChild(A.chip(b.id,64));e.appendChild(w);e.insertAdjacentHTML('beforeend','<span class="pr-tag">'+b.nm.replace(/’/g,'’⁠')+'</span>');
+   e.onclick=()=>{all.forEach(x=>x.classList.toggle('on',x===e));show(b.id);if(ok){sel=b.id;A.set(b.id)}try{dsfx('light',.35,1.2)}catch(_){}};row.appendChild(e);all.push(e)})}
+ show(sel);window.__ballPickSel=id=>{const i=A.BALLS.findIndex(b=>b.id===id);if(i>=0)all[i].click()};
+}catch(e){console.error(e);cb()}};
+const st=document.createElement('style');st.textContent=`
+/* le plan du terrain n'apparaît qu'une fois la partie chargée */
+#peta:not(.gok) #pmm,#peta:not(.gok) #pcoch{visibility:hidden!important}
+/* le banc */
+#peta .fsel .fs-sp::before{content:"";position:absolute;left:0;right:0;bottom:calc(6px + var(--sc)*1px);height:calc(var(--sc)*3px);background:linear-gradient(#c58a4c,#94602e 55%,#6a3f1a);border-top:2px solid #e2a866;box-shadow:0 2px 0 rgba(0,0,0,.35);z-index:0}
+#peta .fsel .fs-sp{background:linear-gradient(to top,#5a3d22 0 3px,#c9a46a 3px 12px,transparent 12px),linear-gradient(#3a2412,#3a2412) 14% calc(100% - 9px)/calc(var(--sc)*1.5px) calc(var(--sc)*1px + 4px) no-repeat,linear-gradient(#3a2412,#3a2412) 86% calc(100% - 9px)/calc(var(--sc)*1.5px) calc(var(--sc)*1px + 4px) no-repeat}
+#peta .fsel .fs-t.on .fs-sp{background:linear-gradient(to top,#5a3d22 0 3px,#e3c486 3px 12px,transparent 12px),linear-gradient(#3a2412,#3a2412) 14% calc(100% - 9px)/calc(var(--sc)*1.5px) calc(var(--sc)*1px + 4px) no-repeat,linear-gradient(#3a2412,#3a2412) 86% calc(100% - 9px)/calc(var(--sc)*1.5px) calc(var(--sc)*1px + 4px) no-repeat,radial-gradient(ellipse 60% 90% at 50% 100%,rgba(255,210,63,.45),transparent 70%)}
+#peta .fsel .fs-t.pk:not(.on) canvas{filter:drop-shadow(0 0 3px #ffd23f)}
+@keyframes prHop{0%,100%{transform:translateY(0)}40%{transform:translateY(-7%)}55%{transform:translateY(-8%)}}
+#peta .fs-big canvas.tk{animation:prHop .6s ease-in-out infinite}
+/* le présentoir */
+#peta .fpres .pr-w{flex:1;min-height:0;display:flex;gap:12px;padding:0 6px 6px}
+#peta .fpres .pr-cab{flex:1.5;min-width:0;position:relative;display:flex;flex-direction:column;justify-content:space-evenly;gap:0;padding:24px 12px 4px;border:4px solid #2a1608;border-radius:6px;box-shadow:0 6px 0 #14124a,inset 0 0 30px rgba(0,0,0,.55);background:repeating-linear-gradient(90deg,#4b2f1a 0 38px,#432a17 38px 40px,#55361f 40px 78px,#3c2414 78px 80px)}
+#peta .fpres .pr-sign{position:absolute;top:4px;left:50%;transform:translateX(-50%) rotate(-1.5deg);font:400 11px Lilita,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#2a0a00;background:#ffd23f;padding:1px 10px;border:2px solid #2a1608;white-space:nowrap}
+#peta .fpres .pr-row{position:relative;display:flex;justify-content:space-around;align-items:flex-end;padding:6px 4px 10px;margin-bottom:16px;animation:prIn .4s ease-out both}
+@keyframes prIn{from{opacity:0;transform:translateY(-10px)}}
+#peta .fpres .pr-row::after{content:"";position:absolute;left:-8px;right:-8px;bottom:0;height:10px;background:linear-gradient(#d9a066,#a8703a 40%,#6b3f1c);border-radius:2px;box-shadow:0 5px 0 rgba(0,0,0,.4);z-index:0}
+#peta .fpres button.pr-b{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0!important;min-width:0;width:16%;cursor:pointer;transform:none}
+#peta .fpres .pr-ball{position:relative;display:block;width:clamp(34px,6.4vw,50px);aspect-ratio:1;transition:transform .2s}
+#peta .fpres .pr-ball::after{content:"";position:absolute;left:12%;right:12%;bottom:-3px;height:5px;border-radius:50%;background:rgba(0,0,0,.45);z-index:-1}
+#peta .fpres .pr-ball canvas{width:100%!important;height:100%!important;display:block;border:0!important;box-shadow:none!important;background:none!important;filter:drop-shadow(0 2px 1px rgba(0,0,0,.4))}
+#peta .fpres .pr-tag{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) rotate(-2deg);z-index:2;font:700 8.5px/1.05 'Atkinson Hyperlegible',sans-serif;color:#2a2433;background:#fffaf0;border:1px solid #6a5c4c;padding:1px 3px;width:max-content;max-width:66px;text-align:center;box-shadow:1px 1px 0 rgba(0,0,0,.35);pointer-events:none}
+#peta .fpres .pr-b:nth-child(even) .pr-tag{transform:translateX(-50%) rotate(2deg)}
+#peta .fpres .pr-b:hover .pr-ball{transform:translateY(-3px)}
+#peta .fpres .pr-b.on .pr-ball{transform:translateY(-9px) scale(1.08)}
+#peta .fpres .pr-b.on .pr-ball canvas{filter:drop-shadow(0 0 5px #ffd23f) drop-shadow(0 0 2px #fff)}
+#peta .fpres .pr-b.on .pr-tag{background:#ffd23f;border-color:#2a0a00}
+#peta .fpres .pr-b.lock .pr-ball canvas{filter:brightness(.25) saturate(0)}
+#peta .fpres .pr-b.lock .pr-ball::before{content:"?";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 18px Lilita,sans-serif;color:#c9b8a0;z-index:2}
+#peta .fpres .pr-side{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+#peta .fpres .pr-soc{position:relative;height:clamp(96px,30vh,150px);flex:none;display:flex;align-items:flex-end;justify-content:center}
+#peta .fpres .pr-spot{position:absolute;inset:0;background:radial-gradient(ellipse 45% 70% at 50% 100%,rgba(255,226,140,.5),transparent 70%),linear-gradient(to bottom,rgba(255,240,190,.18),transparent 60%);clip-path:polygon(38% 0,62% 0,90% 100%,10% 100%)}
+#peta .fpres .pr-ped{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:clamp(70px,22vh,110px);height:22px;background:linear-gradient(#b0202e,#6a0a14);border-radius:50%/40% 40% 12px 12px;box-shadow:0 3px 0 #2a0206,inset 0 4px 0 rgba(255,255,255,.18)}
+#peta .fpres .pr-bb{position:relative;z-index:1;margin-bottom:12px;width:clamp(60px,19vh,96px);aspect-ratio:1}
+#peta .fpres .pr-bb canvas{width:100%!important;height:100%!important;display:block;border:0!important;box-shadow:none!important;background:none!important;filter:drop-shadow(0 6px 3px rgba(0,0,0,.45))}
+#peta .fpres .pr-bb.in{animation:prPop .45s cubic-bezier(.3,1.6,.5,1),prBob 2.6s ease-in-out .45s infinite}
+@keyframes prPop{from{transform:translateY(-30px) scale(.6);opacity:0}}
+@keyframes prBob{50%{transform:translateY(-4px)}}
+#peta .fpres .pr-bb.lock canvas{filter:brightness(.25) saturate(0)}
+#peta .fpres .mal-inf{flex:1;min-height:0}
+#peta .fpres .mi-hd b{font-size:clamp(17px,2.6vw,22px)}
+@media (orientation:portrait){#peta .fpres .pr-w{flex-direction:column}#peta .fpres .pr-cab{flex:none;min-height:300px}#peta .fpres .pr-ball{width:clamp(36px,11vw,48px)}#peta .fpres .pr-soc{height:120px}#peta .fpres .pr-side{flex:1;justify-content:flex-start}#peta .fpres .mal-inf{flex:none}#peta .fpres .pr-soc{height:150px}#peta .fpres .pr-tag{max-width:54px;font-size:8px}}
+`;document.head.appendChild(st);
 })();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
