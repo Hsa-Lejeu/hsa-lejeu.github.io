@@ -1,4 +1,24 @@
 <!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#2e9e4f"><link rel="apple-touch-icon" href="apple-touch-icon-v2.png"><script>
+// v588 : repositionnement de l'interface à la demande (au lieu de minuteries à 200-500 ms)
+// __hsaLayout(f) : f est appelée au prochain affichage après un redimensionnement, une rotation, un toucher,
+// l'ouverture ou la fermeture d'une fenêtre (#m, éléments ajoutés au corps de la page), un changement d'onglet,
+// un défilement ou un appel à ui() ; et au moins une fois par seconde par sécurité.
+(function(){const F=[];let pend=false,last=0,started_=false;
+ const ST=window.__LAYST={n:0,ms:0};const run=()=>{pend=false;const t=last=performance.now();for(const f of F){try{f()}catch(e){try{oops(e,'__hsaLayout')}catch(_){}}}ST.n++;ST.ms+=performance.now()-t};
+ const soon=()=>{if(pend)return;pend=true;const w=Math.max(0,90-(performance.now()-last));if(w>0)setTimeout(()=>requestAnimationFrame(run),w);else requestAnimationFrame(run)};
+ const slow=()=>{if(performance.now()-last>400)soon()};
+ const init=()=>{if(started_)return;started_=true;
+  addEventListener('resize',soon);addEventListener('orientationchange',()=>{soon();setTimeout(soon,350)});
+  addEventListener('scroll',soon,true);document.addEventListener('pointerup',()=>setTimeout(soon,40),true);
+  const obs=()=>{try{new MutationObserver(soon).observe(document.body,{childList:true});
+   const m=document.getElementById('m');if(m)new MutationObserver(soon).observe(m,{attributes:true,attributeFilter:['hidden','class']});
+   const a=document.getElementById('app');if(a)new MutationObserver(soon).observe(a,{attributes:true,attributeFilter:['class']});
+   const _u=window.ui;if(typeof _u=='function'&&!_u.__lay){const w=function(){const r=_u.apply(this,arguments);slow();return r};w.__lay=1;window.ui=w;try{ui=w}catch(_){}}}catch(_){}};
+  if(document.readyState=='complete')obs();else addEventListener('load',obs);
+  setInterval(run,1000)};
+ window.__hsaLayout=function(f){F.push(f);init();soon();return F.length};window.__hsaLayoutNow=soon})();
+</script>
+<script>
 // v587 : les erreurs ne sont plus avalées en silence. oops(e,ou) les écrit dans la console ([HSA]) et les compte dans window.__ERRS.
 window.__ERRS={n:0,parLieu:{},dernieres:[]};
 window.oops=function(e,ou){try{console.error('[HSA]',ou,e);const E=window.__ERRS;E.n++;E.parLieu[ou]=(E.parLieu[ou]||0)+1;E.dernieres.push(ou+' : '+((e&&e.message)||e));if(E.dernieres.length>30)E.dernieres.shift()}catch(_){}};
@@ -503,7 +523,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v587')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v588')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5565,7 +5585,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v587')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v588')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -6029,7 +6049,7 @@ function bUpd(){const n=CARDS.filter(c=>COL[c[0]]).length;bd.querySelector('.cbl
 function bPos(){const sd=$('side'),sideOpen=sd&&getComputedStyle(sd).display!='none';const on=typeof started!='undefined'&&started&&!(typeof ENDING!='undefined'&&ENDING)&&!document.getElementById('splash')&&!sideOpen;bd.style.display=on?'flex':'none';if(!on)return;
  const c=$('ccv');let r=c&&c.getBoundingClientRect();if(r&&r.width>0&&r.top>0&&r.bottom<=innerHeight+2&&getComputedStyle(c).visibility!='hidden'){bd.style.bottom=Math.round(innerHeight-r.top+6)+'px';bd.style.right=Math.max(6,Math.round(innerWidth-r.right+(r.width-64)/2))+'px'}else{bd.style.bottom='12px';bd.style.right='12px'}}
 window.bPos=bPos;
-setTimeout(()=>{bDraw();bUpd();bPos()},800);setInterval(()=>{try{bPos();bUpd()}catch(_){}},500);addEventListener('resize',()=>{try{bPos()}catch(_){}});
+setTimeout(()=>{bDraw();bUpd();bPos()},800);__hsaLayout(()=>{try{bPos();bUpd()}catch(_){}},500);addEventListener('resize',()=>{try{bPos()}catch(_){}});
 // ouvrir l'album à la page de la première nouvelle carte
 function newPage(){if(!CNEW.length)return -1;const per=innerWidth>innerHeight?8:9;let p=0;for(const cat of Object.keys(CCAT)){const L=CARDS.filter(c=>c[1]==cat);for(let k=0;k<L.length;k++)if(CNEW.includes(L[k][0]))return p+Math.floor(k/per);p+=Math.ceil(L.length/per)}return -1}
 bd.onclick=()=>{try{sfx('page')}catch(_){}album();const t=newPage();if(t>0)setTimeout(()=>{try{albGo(t)}catch(_){}},30)};
@@ -9405,7 +9425,7 @@ body.lsc #vig{animation:vigf .3s ease-out!important;width:min(220px,30vw)!import
 `;document.head.appendChild(st)}
 {const vis=e=>{if(!e||!e.isConnected||e.hidden)return null;const c=getComputedStyle(e);if(c.display=='none'||c.visibility=='hidden'||+c.opacity<.1)return null;const r=e.getBoundingClientRect();return r.width>2&&r.height>2?r:null};
  const ov=(a,b)=>a&&b&&a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
- setInterval(()=>{try{
+ __hsaLayout(()=>{try{
   const land=innerWidth>innerHeight,lscol=!!(window.LSCOL&&LSCOL());
   // 1. la bulle de Camille « camion » s'efface derrière les vraies fenêtres, et ne recouvre plus les onglets
   const cm=document.getElementById('cmbx');
@@ -9778,7 +9798,7 @@ W('tutEnd',(o,a)=>{let first=false;try{first=!!INTRO&&!started&&!(st[0]>0)&&!STF
  const land=()=>matchMedia('(orientation:landscape)').matches&&innerWidth>innerHeight;
  const Z_=el=>{try{return parseFloat(getComputedStyle(el).zoom)||1}catch(_){return 1}};
  const SP=(el,k,v)=>{if(el.style.getPropertyValue(k)!==v)el.style.setProperty(k,v,'important')};
- setInterval(()=>{try{const tb=$('tabs'),li=$('lci'),vg=$('vgauge');if(!tb)return;
+ __hsaLayout(()=>{try{const tb=$('tabs'),li=$('lci'),vg=$('vgauge');if(!tb)return;
   if(!land()){[li,vg].forEach(e=>{if(e&&e.dataset.col){e.dataset.col='';['left','right','top','transform','transform-origin'].forEach(k=>e.style.removeProperty(k))}});return}
   const r=tb.getBoundingClientRect();if(r.height<60||r.right<innerWidth*.5)return;let y=r.bottom+8;const right=Math.max(0,innerWidth-r.right);
   if(li){const z=Z_(li);li.dataset.col='1';SP(li,'left','auto');SP(li,'right',((innerWidth-r.left+10)/z)+'px');SP(li,'top',(r.top/z)+'px');SP(li,'flex-direction','column')}
@@ -13355,7 +13375,7 @@ html body #lci button.lcb svg{display:block}
  // indicateur de défilement
  const H=new Map();
  const cands=()=>{const L=[];['tabsbody','mb'].forEach(id=>{const e=document.getElementById(id);if(e)L.push(e)});document.querySelectorAll('#fmo *,#splx .bx,#xpov *,#rsp,#lcbook *').forEach(e=>{if(e.clientHeight>80&&e.scrollHeight>e.clientHeight+12){const o=getComputedStyle(e).overflowY;if(o=='auto'||o=='scroll')L.push(e)}});return L};
- setInterval(()=>{try{const L=cands(),seen=new Set();
+ __hsaLayout(()=>{try{const L=cands(),seen=new Set();
   L.forEach(e=>{const r=e.getBoundingClientRect();const more=e.scrollHeight-e.scrollTop-e.clientHeight>14;const vis=r.width>60&&r.height>80&&e.offsetParent&&getComputedStyle(e).visibility!='hidden';if(!more||!vis)return;seen.add(e);
    let c=H.get(e);if(!c){c=document.createElement('div');c.className='scrh';c.textContent='⌄';c.title='Faire défiler';c.onclick=()=>{try{e.scrollBy({top:e.clientHeight*.7,behavior:'smooth'})}catch(_){e.scrollTop+=e.clientHeight*.7}};document.body.appendChild(c);H.set(e,c)}
    c.style.left=Math.round(r.right-44)+'px';c.style.top=Math.round(Math.min(innerHeight-40,r.bottom)-42)+'px'});
