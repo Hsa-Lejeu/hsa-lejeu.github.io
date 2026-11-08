@@ -11,6 +11,7 @@
 //   - « petit »  : moins de 28 px de haut ou de large
 // Pour les fenêtres (#m) : « vide » si plus de 35 % de la fenêtre est sans contenu (sauf pendant l'animation du radar,
 // quand « Passer » est affiché), « déborde » si elle dépasse l'écran.
+// « erreur » : une erreur attrapée par oops() (v587) pendant l'écran.
 // Le résumé final compte les problèmes par écran et par format ; 0 « caché » et 0 « dehors » est l'objectif.
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const URL_=process.argv[2]||'http://localhost:8765/index.html';const OUT=process.argv[3]||'ecrans';const FILT=process.argv[4]||'';
@@ -55,7 +56,7 @@ const PROBE=()=>{const W=innerWidth,H=innerHeight,out=[];
   let empty=0,tot=0;const st=12;for(let y=r.top+st/2;y<Math.min(r.bottom,H);y+=st)for(let x=r.left+st/2;x<Math.min(r.right,W);x+=st){tot++;const f=document.elementFromPoint(x,y);if(!f||f===mb||f===m||(f.contains(mb)))empty++}
   const vf=tot?empty/tot:0;if(vf>.35&&!mb.querySelector('.rvskip,.yrsk'))out.push({k:'vide',e:'#mb',v:Math.round(vf*100)+' %'})}
  return out};
-(async()=>{const b=await chromium.launch();const rep={};let tot={caché:0,dehors:0,petit:0,vide:0,déborde:0};
+(async()=>{const b=await chromium.launch();const rep={};let tot={caché:0,dehors:0,petit:0,vide:0,déborde:0,erreur:0};
  for(const [n,q,code,wait,clk] of ST){if(FILT&&!n.includes(FILT))continue;
   for(const [vn,w,h] of VP){const pg=await b.newPage({viewport:{width:w,height:h},isMobile:true,hasTouch:true});const errs=[];pg.on('pageerror',e=>errs.push(e.message.slice(0,140)));
    try{await pg.goto(URL_+q);await pg.waitForTimeout(q?6000:wait);
@@ -64,7 +65,7 @@ const PROBE=()=>{const W=innerWidth,H=innerHeight,out=[];
     if(n=='debat'){for(let i=0;i<70;i++){const d=await pg.evaluate("(()=>{if(document.querySelector('#debov .hand>*'))return 1;const b=[...document.querySelectorAll('#debov button,#debov [onclick]')].filter(b=>{const r=b.getBoundingClientRect();if(!r.width)return false;const f=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);return f&&(f===b||b.contains(f))});const g=b.find(x=>/Suivant|Continuer|C’est parti|Commencer|Débattre|Y aller|Allons|Go|▶/.test(x.textContent))||b.find(x=>x.classList.contains('go'))||b[0];if(g)g.click();else{const o=document.getElementById('debov');if(o){const r=o.getBoundingClientRect();o.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,clientX:r.width/2,clientY:r.height/2}));o.click()}}return 0})()");if(d)break;await pg.waitForTimeout(700)}}
     await pg.waitForTimeout(wait);
     for(const t of (clk||[])){await pg.evaluate(t=>{const b=[...document.querySelectorAll('button')].find(b=>{const r=b.getBoundingClientRect();if(!r.width||!b.textContent.includes(t))return false;const f=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);return f&&(f===b||b.contains(f))});b&&b.click()},t);await pg.waitForTimeout(wait)}
-    const P=await pg.evaluate(PROBE);await pg.screenshot({path:path.join(OUT,n+'_'+vn+'.png')});
+    const P=await pg.evaluate(PROBE);const ER=await pg.evaluate(()=>window.__ERRS?window.__ERRS.dernieres.slice():[]);if(ER.length){P.push({k:'erreur',e:ER.slice(-3).join(' | ')})}await pg.screenshot({path:path.join(OUT,n+'_'+vn+'.png')});
     rep[n+' · '+vn]={pb:P,errs};const c={};P.forEach(p=>{c[p.k]=(c[p.k]||0)+1;tot[p.k]=(tot[p.k]||0)+1});
     console.log((n+' · '+vn).padEnd(34),Object.entries(c).map(([k,v])=>k+' '+v).join(', ')||'ok',errs.length?' ⚠ '+errs[0]:'');
     P.filter(p=>p.k!='petit').slice(0,6).forEach(p=>console.log('     ',p.k,p.e,p.par?'← '+p.par:'',p.v||'',p.r?JSON.stringify(p.r):''))}
