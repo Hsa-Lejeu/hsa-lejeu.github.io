@@ -527,7 +527,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v595')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v596')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5589,7 +5589,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v595')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v596')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -11460,7 +11460,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
     if(S.us.filter(p=>p.left>0&&p!==curP).length)L.push({lab:'Changer de joueur',small:'à qui le tour ?',ic:headC((S.us.find(p=>p!==curP&&p.left>0)||curP).ci,24,260),act:()=>{sub='pl';mIdx=0;blip();renderCmd()}});
     return L}
    function renderCmd(){
-    const m=$('#qcmd'),t=$('#qctag');if(!m)return;const sel=phase==='select'&&curP;
+    const m=$('#qcmd'),t=$('#qctag');if(!m)return;const sel=phase==='select'&&curP;try{if(m&&!m.hidden){const k=(sub||'main')+'|'+(curP&&curP.id);if(m.dataset.sub!==k){m.dataset.sub=k;m.classList.remove('swp');void m.offsetWidth;m.classList.add('swp')}}}catch(_){}
     m.hidden=!(sel&&menuOpen);t.hidden=!(sel&&!menuOpen);
     if(!t.hidden)t.innerHTML=`◆ ${mode==='P'?'Pointer':'Tirer'}<small>menu</small>`;
     if(m.hidden)return;
@@ -14009,7 +14009,7 @@ function skin(id){if(SKM[id])return SKM[id];const {THREE,toonG}=P3;const t=new T
 window.__P3HOOK=window.__P3HOOK||[];
 window.__P3HOOK.push((now,dt)=>{const S=window.__P3S;if(!S)return;if(S!==P3)setup(S);const pg=S.pg,{THREE,scene,X3,Z3,K}=S;
  // boules de notre équipe habillées
- if(S.BS){const mat=skin(curBall());S.BS.forEach((o,b)=>{if(b.team===0&&o.m.material!==mat)o.m.material=mat})}
+ if(S.BS){const mat=skin(curBall());window.__ourBallMat=mat;S.BS.forEach((o,b)=>{if(b.team===0&&o.m.material!==mat)o.m.material=mat})}
  // traînées : nouvelle manche = sol propre
  const bl=g_(()=>pg.balls,[]);if(bl!==lastBalls&&!RPL.on){if(bl.length<=1){TR.g.clearRect(0,0,TR.cw,TR.ch);TR.dirty=1;TR.prev=new Map()}lastBalls=bl}
  if(!RPL.on)bl.forEach(b=>{if(!b.alive)return;const pv=TR.prev.get(b);const air=b.air>0;
@@ -14087,7 +14087,7 @@ function play(F,lab,pb){const pg=window.__PG,ov=document.getElementById('peta');
   try{const {X3,Z3,K}=S;const gp=GH.get(pb),P=(gp&&cur.includes(gp))?gp:(Fr.b.find(q=>q.o===pb)||Fr.b[Fr.b.length-1]);const I=(F[imp].b.find(q=>q.o===pb)||P);const c=cur.find(q=>q.team<0)||Fr.b.find(q=>q.team<0)||P;
    const h=q=>q.air>0&&q.airMax?Math.sin(Math.PI*(1-q.air/q.airMax))*(q.airMax>20?24:4)*K:0;
    if(tt<tI-260){const x=X3(P.y),z=Z3(P.x),y=h(P);let cy=y+.75,cz=z+1.5,ty=y*.6;try{const R_=pg.rocks||[];const cxF=P.x-1.5/K,cyF=P.y+.35/K;for(const rk of R_){if(!rk.big)continue;const ax=cxF,ay=cyF,bx=P.x,by=P.y,dx=bx-ax,dy=by-ay,l2=dx*dx+dy*dy||1;let u=((rk.x-ax)*dx+(rk.y-ay)*dy)/l2;u=Math.max(0,Math.min(1,u));const px=ax+dx*u,py=ay+dy*u;const dd=Math.hypot(rk.x-px,rk.y-py);if(dd<rk.r+4.5||Math.hypot(rk.x-ax,rk.y-ay)<rk.r+5){cy=Math.max(cy,y+2.1);cz=z+1.1;ty=y*.6-.1}}}catch(_){}window.__P3CAM=[[x+.35,cy,cz],[x,ty,z-1.2]];
-    try{if(window.__rplSpeed)window.__rplSpeed(S,x,y+P.r*K,z,RPL.__pp||[x,z]);RPL.__pp=[x,z]}catch(_){}}
+    try{if(window.__rplLines)window.__rplLines(S,x,y+P.r*K,z,RPL.__pp?Math.hypot(x-RPL.__pp[0],z-RPL.__pp[1]):0);RPL.__pp=[x,z]}catch(_){}}
    else if(tt<tI+900){RPL.__pp=null;const x=X3(I.y),z=Z3(I.x);window.__P3CAM=[[x+1.15,.32,z+.55],[x,.04,z-.15]]}
    else{const x=X3(c.y),z=Z3(c.x);window.__P3CAM=[[x+.4,2.6,z+1.4],[x,0,z]]}}catch(_){}
   requestAnimationFrame(fr)};
@@ -15191,7 +15191,7 @@ const EFF={};
 EFF.default=()=>({});
 EFF.geante=c=>{const {S,L,hand,cx,cz,add}=c;let ball=null,step=0;const SZ=[.09,.13,.18,.24];const T=[2.45,2.95,3.45];
  return{keys:[[2.2,[cx+1.3,1.0,cz-1.9],[hand[0],.7,hand[2]]],[4.7,[cx+1.0,.95,cz-1.5],[hand[0],.72,hand[2]]]],dur:()=>4.9,
-  frame(t){if(!ball&&t>=2.2){ball=add(ballObj(S));ball.position.set(hand[0],hand[1],hand[2])}if(!ball)return;
+  frame(t){if(!ball&&t>=2.2){ball=add(ballObj(S));ball.position.set(hand[0],hand[1],hand[2])}if(!ball)return;if(window.__ourBallMat&&ball.material!==window.__ourBallMat)ball.material=window.__ourBallMat;
    while(step<3&&t>=T[step]){step++;c.word('POUF',0xffffff,hand[0],hand[2],hand[1]+.5,0,false);L.burst(hand[0],hand[1],hand[2],16,{col:0xfff8ee,tx:'smoke',add:false,sp0:.4,sp1:1.3,el0:-.2,el1:1.2,l0:.5,l1:.9,s0:.16,s1:.5,drag:2});L.emit({o:L.sprite('glow',0xffd23f,true),x:hand[0],y:hand[1],z:hand[2],s0:.3,s1:1.1,life:.35,a0:.9,a1:0});sfx('grow',.6,1+step*.12)}
    let s;if(step===0)s=SZ[0];else{const k=Math.min(1,(t-T[step-1])/.25),a=SZ[step-1],b=SZ[step];s=a+(b-a)*(k<1?eo(k)*(1+.25*Math.sin(k*Math.PI)):1)}
    if(t>4.55){s*=Math.max(0,1-(t-4.55)/.3)}ball.scale.setScalar(Math.max(.001,s));ball.position.set(hand[0],hand[1]-.1+s,hand[2]);
@@ -15344,6 +15344,41 @@ const st=document.createElement('style');st.textContent=`
 // on habille la carte dès qu'elle apparaît
 new MutationObserver(()=>{try{document.querySelectorAll('#peta .fm-in:not(.dressed)').forEach(m=>{m.classList.add('dressed');m.insertAdjacentHTML('beforeend','<i class="pin a"></i><i class="pin b"></i><i class="pin c"></i><i class="pin d"></i><i class="tape"></i><b class="fm-pk"></b>');
  m.addEventListener('click',e=>{const b=e.target.closest('.fm-s');if(!b||b.classList.contains('lock'))return;setTimeout(()=>{m.querySelectorAll('.fm-s').forEach(x=>{const on=x.classList.contains('on');if(on){const pk=m.querySelector('.fm-pk');pk.style.left=(parseFloat(x.style.left)+parseFloat(x.style.width)/2)+'%';pk.style.top=(parseFloat(x.style.top)+parseFloat(x.style.height)*.45)+'%';pk.classList.add('on')}})},0)})})}catch(_){}}).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+<script>
+// ===== v596 : speed lines façon manga pendant le replay, transitions entre les menus
+(function(){
+const st=document.createElement('style');st.textContent=`
+#peta canvas.spdl{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:34;mix-blend-mode:screen;opacity:0;transition:opacity .18s}
+#peta canvas.spdl.on{opacity:1}
+/* les écrans de menu arrivent par un balayage en biais */
+#peta .fsel,#peta .vs,#peta .card0{animation:menuIn .42s cubic-bezier(.2,.9,.3,1) both}
+@keyframes menuIn{0%{clip-path:polygon(-20% 0,-5% 0,-35% 100%,-50% 100%);transform:translateX(18px)}100%{clip-path:polygon(-20% 0,130% 0,115% 100%,-50% 100%);transform:none}}
+#peta .fsel::after{content:"";position:absolute;top:-10%;bottom:-10%;width:9%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);transform:skewX(-14deg);animation:menuBar .48s cubic-bezier(.2,.9,.3,1) both;pointer-events:none;z-index:50}
+@keyframes menuBar{0%{left:-12%}100%{left:112%;opacity:0}}
+/* le menu d'action : les lignes se posent en cascade quand on change de sous-menu */
+#peta .cmd.swp .it{animation:itIn .22s cubic-bezier(.2,.9,.3,1) both}
+#peta .cmd.swp .it:nth-child(2){animation-delay:.03s}#peta .cmd.swp .it:nth-child(3){animation-delay:.06s}#peta .cmd.swp .it:nth-child(4){animation-delay:.09s}#peta .cmd.swp .it:nth-child(5){animation-delay:.12s}#peta .cmd.swp .it:nth-child(6){animation-delay:.15s}#peta .cmd.swp .it:nth-child(7){animation-delay:.18s}
+@keyframes itIn{from{opacity:0;transform:skew(-12deg) translateX(-14px)}to{opacity:1;transform:skew(-12deg)}}
+`;document.head.appendChild(st);
+// ---------- speed lines ----------
+let CV=null,G=null,on=0,lastT=0,lines=null,seed=1,hideT=0;
+const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+function cv(){const ov=document.getElementById('peta'),w=ov&&ov.querySelector('.wrap');if(!w)return null;if(CV&&CV.isConnected&&CV.parentElement===w)return CV;CV=document.createElement('canvas');CV.className='spdl';w.appendChild(CV);G=CV.getContext('2d');return CV}
+window.__rplLines=function(S,x,y,z,speed){const c=cv();if(!c)return;const now=performance.now();hideT=now+140;
+ const r=c.parentElement.getBoundingClientRect();const W=Math.round(r.width),H=Math.round(r.height);if(c.width!==W||c.height!==H){c.width=W;c.height=H}
+ if(now-lastT<34)return;lastT=now;
+ const v=new S.THREE.Vector3(x,y,z).project(S.cam);const cx=(v.x+1)/2*W,cy=(1-v.y)/2*H;
+ const inten=Math.min(1,.35+speed*9);
+ G.clearRect(0,0,W,H);const N=Math.round(70+inten*70),R=Math.hypot(W,H);const hole=Math.min(W,H)*(.26-inten*.06);
+ G.lineCap='round';
+ for(let i=0;i<N;i++){const a=rnd()*6.283,len=R*(.25+rnd()*.75),w=.6+rnd()*(1.2+inten*1.2),al=.25+rnd()*.55*inten;
+  const h2=hole*(.8+rnd()*.7);const x0=cx+Math.cos(a)*h2,y0=cy+Math.sin(a)*h2,x1=cx+Math.cos(a)*(h2+len),y1=cy+Math.sin(a)*(h2+len);
+  const gr=G.createLinearGradient(x0,y0,x1,y1);gr.addColorStop(0,'rgba(255,255,255,0)');gr.addColorStop(.25,`rgba(255,255,255,${al})`);gr.addColorStop(1,`rgba(255,255,255,${al*.9})`);
+  G.strokeStyle=gr;G.lineWidth=w;G.beginPath();G.moveTo(x0,y0);G.lineTo(x1,y1);G.stroke()}
+ if(!on){on=1;c.classList.add('on')}};
+setInterval(()=>{if(on&&performance.now()>hideT){on=0;if(CV){CV.classList.remove('on');setTimeout(()=>{try{if(!on&&G)G.clearRect(0,0,CV.width,CV.height)}catch(_){}},200)}}},60);
 })();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
