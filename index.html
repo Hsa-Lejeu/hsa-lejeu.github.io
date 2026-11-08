@@ -527,7 +527,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v604')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v605')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5589,7 +5589,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v604')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v605')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -11070,6 +11070,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
    const TORD=['major','carli','panier','canebiere','calanques','velodrome'],TNMS={major:'La Major',carli:'Le Carli',panier:'Le Panier',canebiere:'La Canebière',calanques:'Les Calanques',velodrome:'Le Vélodrome'},SLOPE=30,WALKT={major:1,canebiere:1,calanques:1};let TK=window.__terF||(L_=>L_[Math.random()*L_.length|0])(TORD.filter(k=>!window.__pTerOK||__pTerOK(k))),TNM=TNMS[TK];
    const rocks=[],bumps=[];function genTer(){rocks.length=0;bumps.length=0;let rs=TK==='carli'?17:29;const rr=()=>(rs=(rs*16807)%2147483647)/2147483647;
     if(TK==='carli')for(let i=0;i<5;i++)rocks.push({x:T.x+60+rr()*(T.w-80),y:T.y+10+rr()*(T.h-20),r:2.2+rr()*1.2});
+    if(TK==='carli'){const HB_=[1.3,1.3,-1.1,1.3];for(let i=0;i<4;i++)bumps.push({x:T.x+74+i*(T.w-104)/4+rr()*26,y:T.y+20+rr()*(T.h-40),r:14+rr()*6,h:HB_[i]})}
     if(TK==='panier')for(let i=0;i<5;i++)bumps.push({x:T.x+56+rr()*(T.w-76),y:T.y+13+rr()*(T.h-26),r:9+rr()*5,h:i%2?1:-1});
     if(TK==='calanques'){const ys=[.3,.72,.42];for(let i=0;i<3;i++)rocks.push({x:T.x+92+i*64+rr()*20,y:T.y+12+ys[i]*(T.h-24),r:7+rr()*3,big:1})}}genTer();
    const ObS=(g_,n,X,YB,sc)=>{const r=OM[n];if(!r||!OAT.complete)return;sc=sc||1;g_.drawImage(OAT,r[0],r[1],r[2],r[3],Math.round(X),Math.round(YB-r[3]*sc),Math.round(r[2]*sc),Math.round(r[3]*sc))};
@@ -12971,9 +12972,9 @@ window.P3BG=window.P3BG||{};window.P3BG.major={back:'a/de81f47bf75f.webp',side:'
    const HDf=(window.P3BG||{})[terK]||{};window.__p3h=null;if(HDf.floor){const m=2,cx0=T.y-m,cy0=W-(T.x+T.w)-m,cw=T.h+2*m,ch=T.w+2*m,c3=document.createElement('canvas');c3.width=cw;c3.height=ch;const q3=c3.getContext('2d');q3.imageSmoothingEnabled=false;q3.drawImage(c,cx0,cy0,cw,ch,0,0,cw,ch);gt.image=c3;gt.needsUpdate=true;gp.geometry.dispose();gp.geometry=new THREE.PlaneGeometry(cw*K,ch*K);gp.position.set(X3(cx0+cw/2),0,Z3(W-(cy0+ch/2)))}
    if(window.P3SAND){const sdt=imgTex(window.__sandFor?__sandFor(terK):P3SAND);sdt.wrapS=sdt.wrapT=THREE.RepeatWrapping;try{sdt.anisotropy=rend.capabilities.getMaxAnisotropy()}catch(_){}const sw=T.h*K,sl=T.w*K,SS=2.6;sdt.repeat.set(sw/SS,sl/SS);
     const sm=new THREE.MeshLambertMaterial({map:sdt});sm.onBeforeCompile=sh=>{sh.fragmentShader=sh.fragmentShader.replace('void main() {','float hN(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}float vN(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(hN(i),hN(i+vec2(1,0)),f.x),mix(hN(i+vec2(0,1)),hN(i+vec2(1,1)),f.x),f.y);}\nvoid main() {').replace('#include <map_fragment>','#ifdef USE_MAP\n vec2 uB=mat2(0.8,-0.6,0.6,0.8)*vUv*0.9+vec2(0.37,0.61);float m1=smoothstep(0.4,0.6,vN(vUv*0.7));vec4 texelColor=mix(texture2D(map,vUv),texture2D(map,uB),m1);texelColor=mapTexelToLinear(texelColor);float tn=vN(vUv*0.35+3.1);diffuseColor.rgb*=mix(vec3(1.0),vec3(0.93,0.92,0.9),tn)*0.93;diffuseColor*=texelColor;\n#endif')};
-    const sp=new THREE.Mesh(new THREE.PlaneGeometry(sw,sl),sm);sp.rotation.x=-Math.PI/2;sp.position.set(X3(T.y+T.h/2),.003,Z3(T.x+T.w/2));terG.add(sp)}
+    const spG=window.__bumpGeo&&pg.bumps&&pg.bumps.length?__bumpGeo(THREE,sw,sl,X3(T.y+T.h/2),Z3(T.x+T.w/2),K,C,pg.bumps):null;if(spG)sm.vertexColors=true;const sp=new THREE.Mesh(spG||new THREE.PlaneGeometry(sw,sl),sm);sp.rotation.x=-Math.PI/2;sp.position.set(X3(T.y+T.h/2),.003,Z3(T.x+T.w/2));terG.add(sp);if(pg.bumps&&pg.bumps.some(q=>q.h<0))gp.position.y=-.05}
    let col='#c9c0ac';try{const d=src.getContext('2d').getImageData(3,H-4,1,1).data;col=`rgb(${d[0]},${d[1]},${d[2]})`}catch(_){}
-   const big=new THREE.Mesh(new THREE.PlaneGeometry(80,90),new THREE.MeshLambertMaterial({color:new THREE.Color(col)}));big.rotation.x=-Math.PI/2;big.position.set(0,-.01,-20);terG.add(big);if(HDf.floor&&HDf.flat){const S=HDf.floorS||4,ft=imgTex(HDf.floor);ft.wrapS=ft.wrapT=THREE.RepeatWrapping;ft.repeat.set(80/S,90/S);try{ft.anisotropy=rend.capabilities.getMaxAnisotropy()}catch(_){}
+   const big=new THREE.Mesh(new THREE.PlaneGeometry(80,90),new THREE.MeshLambertMaterial({color:new THREE.Color(col)}));big.rotation.x=-Math.PI/2;big.position.set(0,(pg.bumps&&pg.bumps.some(q=>q.h<0))?-.06:-.01,-20);terG.add(big);if(HDf.floor&&HDf.flat){const S=HDf.floorS||4,ft=imgTex(HDf.floor);ft.wrapS=ft.wrapT=THREE.RepeatWrapping;ft.repeat.set(80/S,90/S);try{ft.anisotropy=rend.capabilities.getMaxAnisotropy()}catch(_){}
     const fm=new THREE.MeshLambertMaterial({map:ft});fm.onBeforeCompile=sh=>{sh.fragmentShader=sh.fragmentShader.replace('void main() {','float hN(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}float vN(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(hN(i),hN(i+vec2(1,0)),f.x),mix(hN(i+vec2(0,1)),hN(i+vec2(1,1)),f.x),f.y);}\nvoid main() {').replace('#include <map_fragment>','#ifdef USE_MAP\n vec4 texelColor=texture2D(map,vUv);texelColor=mapTexelToLinear(texelColor);float tn=vN(vUv*0.13+3.1),t2=vN(vUv*0.55+7.3);diffuseColor.rgb*=mix(vec3(1.02,1.0,0.97),vec3(0.86,0.87,0.9),tn)*(0.9+0.1*t2);diffuseColor*=texelColor;\n#endif')};big.material=fm;if(HDf.R){big.geometry.dispose();big.geometry=new THREE.CircleGeometry(HDf.R+.3,72);ft.repeat.set((2*HDf.R+.6)/S,(2*HDf.R+.6)/S);big.position.set(0,-.01,Z3(T.x+T.w)/2+(HDf.dz||0))}}
    else if(HDf.floor){const S=HDf.floorS||5,ft=imgTex(HDf.floor);ft.wrapS=ft.wrapT=THREE.RepeatWrapping;try{ft.anisotropy=rend.capabilities.getMaxAnisotropy()}catch(_){}
     const fm=new THREE.MeshLambertMaterial({map:ft});fm.onBeforeCompile=sh=>{sh.fragmentShader=sh.fragmentShader.replace('void main() {','float hN(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}float vN(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(hN(i),hN(i+vec2(1,0)),f.x),mix(hN(i+vec2(0,1)),hN(i+vec2(1,1)),f.x),f.y);}\nvoid main() {').replace('#include <map_fragment>','#ifdef USE_MAP\n vec2 uB=mat2(0.8,-0.6,0.6,0.8)*vUv*0.83+vec2(0.37,0.61);vec2 uC=mat2(-0.5,0.866,-0.866,-0.5)*vUv*1.17+vec2(0.71,0.13);float m1=smoothstep(0.42,0.58,vN(vUv*0.45)),m2=smoothstep(0.45,0.6,vN(vUv*0.37+9.3));vec4 texelColor=mix(mix(texture2D(map,vUv),texture2D(map,uB),m1),texture2D(map,uC),m2*0.85);texelColor=mapTexelToLinear(texelColor);float lu=dot(texelColor.rgb,vec3(0.299,0.587,0.114));texelColor.rgb=mix(vec3(lu),texelColor.rgb,0.62)*0.88;float tn=vN(vUv*0.16+3.1);diffuseColor.rgb*=mix(vec3(1.0,0.985,0.96),vec3(0.86,0.86,0.88),tn);diffuseColor*=texelColor;\n#endif')};
@@ -13107,8 +13108,8 @@ window.P3BG=window.P3BG||{};window.P3BG.major={back:'a/de81f47bf75f.webp',side:'
    pg.balls.forEach(b=>{if(!b.alive)return;const o=ballO(b);const r=b.r*KB*(b.team<0?.9:1),hh=airH(b)*K*HB+(b.__dy||0);const x=X3(b.y),z=Z3(b.x);
     o.m.scale.setScalar(r);o.m.position.set(x,r+hh,z);o.m.visible=true;{const hl=o.m.userData.hl;hl.visible=true;hl.scale.setScalar(r);hl.position.set(x,r+hh,z);hl.quaternion.copy(cam.quaternion);hl.translateX(-r*.35);hl.translateY(r*.38);hl.translateZ(r*1.02)}
     const dx=(b.y-o.py)*K,dz=-(b.x-o.px)*K,d=Math.hypot(dx,dz);if(d>1e-4&&d<2){tmpA.set(dz,0,-dx).normalize();o.m.rotateOnWorldAxis(tmpA,-d/r)}o.px=b.x;o.py=b.y;
-    const sk=Math.max(.3,1-hh*.5);o.sh.scale.set(r*3.4*sk,r*3.4*sk,1);o.sh.position.set(x,.008,z);o.sh.material.opacity=1;o.sh.visible=true;
-    if(o.rg){o.rg.visible=!(b.air>0);o.rg.scale.setScalar(r);o.rg.position.set(x,.011,z)}});
+    const sk=Math.max(.3,1-hh*.5);o.sh.scale.set(r*3.4*sk,r*3.4*sk,1);o.sh.position.set(x,.008+(b.air>0?0:(b.__dy||0)),z);o.sh.material.opacity=1;o.sh.visible=true;
+    if(o.rg){o.rg.visible=!(b.air>0);o.rg.scale.setScalar(r);o.rg.position.set(x,.011+(b.__dy||0),z)}});
    BS.forEach((o,b)=>{if(!o.seen){o.m.visible=o.sh.visible=false;o.m.userData.hl.visible=false;if(o.rg)o.rg.visible=false}});
    // celle qui tient le point
    {const ph=pg.phase,hd=(ph==='select'||ph==='ai'||ph==='power'||ph==='wait')?pg.holder():null;lead.visible=arrow.visible=!!hd&&!window.__RPLON;if(hd){const b=hd.b,r=b.r*KB,x=X3(b.y),z=Z3(b.x),pu=1+Math.sin(now/160)*.12;lead.material.color.set(hd.team===0?0xffd23f:0xff9a3a);lead.scale.setScalar(r*pu);lead.position.set(x,.013,z);arrow.position.set(x,r*2+.28+Math.abs(Math.sin(now/220))*.08,z);arrow.material.color.set(hd.team===0?0xffd23f:0xff9a3a)}}
@@ -13959,7 +13960,7 @@ window.__selNew=function(X){const {ov,ALL,pick,POW,anim,headC,icon,okS,blip,whoo
   info(lk&&!real(lk)?(window.__PTEST?`🔓 Débloqué pour les tests. Normalement : ${lk.t}.`:`🔒 ${lk.t}.`):'');ref()}
  function info(t){q('.fs-info').textContent=t}
  function tiles(){const G=q('.fs-grid');G.innerHTML='';ALL.forEach(p=>{const t=document.createElement('div');const i=pick.indexOf(p);t.className='fs-t '+p.grp+(p===foc?' on':'')+(i>=0?' pk':'');
-  const sp=document.createElement('div');sp.className='fs-sp';const h=document.createElement('canvas');h.width=16;h.height=26;sp.appendChild(h);t.appendChild(sp);try{anim(h,p.ci,i>=0?66:24,p===foc?0:1)}catch(_){}t.insertAdjacentHTML('beforeend',`<span>${p.nm.replace('Cédric ','').replace('Mme ','M<sup>me</sup> ')}</span>${i>=0?`<em>J${i+1}</em>`:''}`);
+  const sp=document.createElement('div');sp.className='fs-sp';const h=document.createElement('canvas');h.width=16;h.height=26;sp.appendChild(h);t.appendChild(sp);const ix_=ALL.indexOf(p);t.classList.toggle('sit',i<0&&p!==foc);try{anim(h,p.ci,i>=0?66:p===foc?24:(ix_%2?54:48),p===foc?0:1)}catch(_){}t.insertAdjacentHTML('beforeend',`<span>${p.nm.replace('Cédric ','').replace('Mme ','M<sup>me</sup> ')}</span>${i>=0?`<em>J${i+1}</em>`:''}`);
   const lk=lockOf(p);if(lk&&!isOK(lk))t.insertAdjacentHTML('beforeend','<div class="lk">🔒</div>');else if(lk&&!real(lk))t.insertAdjacentHTML('beforeend','<i class="tst">TEST</i>');
   t.onclick=()=>{prev(p,true);tiles()};t.ondblclick=()=>{take()};G.appendChild(t)})}
  function slots(){d.querySelectorAll('.fs-slot').forEach((s,i)=>{s.querySelectorAll('canvas').forEach(c=>c.remove());const p=pick[i];if(p){try{s.appendChild((window.__headStill||headC)(p.ci,26,160))}catch(_){}}})}
@@ -15182,7 +15183,7 @@ window.__pow3=function(o){try{if(ACT)ACT.end(true);const S=window.__P3S,pg=S&&S.
  const add=m=>{objs.push(m);return m};
  // prélude commun
  sfx('grow',.7,.9);L.vign(1700,col);
- L.emit({o:L.flat('rune',col),x:cx,y:.02,z:cz,s0:.15,s1:1.2,spin:2.4,life:1.5,a0:1,a1:.1,ease:'out',delay:.45});L.emit({o:L.flat('ring',col),x:cx,y:.03,z:cz,s0:1.8,s1:.15,life:.9,a0:.9,a1:.2,delay:.55});
+ L.emit({o:L.flat('glow',col),x:cx,y:.02,z:cz,s0:.3,s1:1.5,life:1.6,a0:.85,a1:0,ease:'out',delay:.45});L.pillar(cx,cz,col,2.4,1.5,.5);for(let i=0;i<3;i++)L.emit({o:L.flat('ring',col),x:cx,y:.05,z:cz,vy:1.05,s0:.55,s1:.8,life:1.2,a0:.9,a1:0,delay:.5+i*.28});L.emit({o:L.flat('ring',col),x:cx,y:.03,z:cz,s0:1.8,s1:.15,life:.9,a0:.9,a1:.2,delay:.55});
  for(let i=0;i<30;i++){const a=Math.random()*6.28;L.emit({o:L.sprite(i%3?'glow':'star',col),cx,cz,ang:a,rad:L.R(.9,1.5),rv:-1,orbit:L.R(2.5,5),x:cx,y:L.R(.05,.5),z:cz,vy:L.R(.3,.9),life:L.R(.8,1.1),s0:.11,s1:.03,delay:L.R(.5,.85)})}
  setTimeout(()=>sfx('light',.8),600);
  if(duo){setTimeout(()=>{L.burst(cx+.31,1.25,cz,26,{col:[0xffffff,0xffd23f,0xff6fb5],tx:'star',el0:-.5,el1:1.5,sp0:1,sp1:2.6,g:2,l0:.3,l1:.6,s0:.14});L.emit({o:L.sprite('glow',0xffffff,true),x:cx+.31,y:1.25,z:cz,s0:.2,s1:1.1,life:.3,a0:1,a1:0});sfx('shing',.7,1.2)},760)}
@@ -15245,9 +15246,9 @@ EFF.arrosoir_old=c=>{const {S,L,tx,tz,add}=c;let can_=null,lastS=0,psch=0;const 
     if(now-lastS>80){lastS=now;const a=Math.random()*6.28,r=Math.random()*.55;L.shock(tx+Math.cos(a)*r,tz+Math.sin(a)*r,0x9fd0ff,.35,.4,0)}
     if(!psch){psch=1;c.word('PSCHHH',0x9fd0ff,tx,tz,.9,0,false);sfx('miss2',.5,.7)}}},
   end(){}}};
-EFF.gabian=c=>{const {S,pg,L,tx,tz}=c;let seen=0,lastF=0,lost=null;
+EFF.gabian=c=>{const {S,pg,L,tx,tz}=c;let seen=0,lastF=0,lost=null,sm=null,sd=1,lt=0;
  return{dur:()=>seen?9.5:4.8,
-  follow(t){const g=gullPos(S,pg);if(g){seen=1;lost=null;const B=terBox(S),sd=g[0]<(B.xa+B.xb)/2?1:-1;return[[g[0]+sd*1.4,g[1]+.9,g[2]+2.3],[g[0],g[1]-.1,g[2]]]}return null},
+  follow(t){const g=gullPos(S,pg);if(g){seen=1;lost=null;if(!sm){const B=terBox(S);sd=g[0]<(B.xa+B.xb)/2?1:-1;sm=g.slice();lt=t}else{const k=1-Math.exp(-Math.max(0,t-lt)/.55);lt=t;for(let i=0;i<3;i++)sm[i]+=(g[i]-sm[i])*k}return[[sm[0]+sd*1.9,sm[1]+1.4,sm[2]+3.1],[sm[0],sm[1]-.25,sm[2]-.3]]}return sm?[[sm[0]+sd*1.9,sm[1]+1.4,sm[2]+3.1],[sm[0],sm[1]-.25,sm[2]-.3]]:null},
   frame(t,now){const g=gullPos(S,pg);if(g&&now-lastF>120){lastF=now;L.emit({o:L.sprite('feather',0xffffff,false),x:g[0]+L.R(-.2,.2),y:g[1],z:g[2]+L.R(-.2,.2),vx:L.R(-.2,.2),vy:-.35,vz:L.R(-.2,.2),life:1.6,s0:.12,s1:.12,spin:L.R(-3,3),a0:1,a1:0})}
    if(seen&&!g){if(lost==null)lost=now;if(now-lost>500)return{dur:t}}return null},
   end(){}}};
@@ -15647,6 +15648,44 @@ new MutationObserver(()=>{try{const f=document.querySelector('#peta .fter');if(!
 @media (orientation:portrait){#peta .fsel .fs-grid{--sc:3}}
 @media (orientation:portrait) and (min-height:760px){#peta .fsel .fs-grid{--sc:4}}
 `;document.head.appendChild(st)})();
+</script>
+<script>
+// ===== v605 : relief du terrain et vue sur le cochonnet
+(function(){
+const HM=.1;
+function hAt(B,fx,fy){let h=0;for(const q of B){const d=Math.hypot(fx-q.x,fy-q.y);if(d<q.r){const c=Math.cos(Math.PI/2*d/q.r);h+=Math.sign(q.h)*HM*Math.min(1.3,Math.abs(q.h))*c*c}}return h}
+window.__bumpH=(fx,fy)=>{try{const B=window.__PG&&window.__PG.bumps;return B&&B.length?hAt(B,fx,fy):0}catch(_){return 0}};
+window.__bumpGeo=function(THREE,sw,sl,px,pz,K,C,B){const g=new THREE.PlaneGeometry(sw,sl,Math.ceil(sw/.045),Math.ceil(sl/.045)),p=g.attributes.position;
+ for(let i=0;i<p.count;i++){const lx=p.getX(i),ly=p.getY(i),wx=px+lx,wz=pz-ly,fy=wx/K+C.y,fx=C.x-wz/K;p.setZ(i,hAt(B,fx,fy))}
+ const col=new Float32Array(p.count*3),e=1.5;for(let i=0;i<p.count;i++){const lx=p.getX(i),ly=p.getY(i),wx=px+lx,wz=pz-ly,fy=wx/K+C.y,fx=C.x-wz/K;
+  const gx=(hAt(B,fx,fy+e)-hAt(B,fx,fy-e))/(2*e*K),gz=(hAt(B,fx-e,fy)-hAt(B,fx+e,fy))/(2*e*K);const sh=Math.max(.62,Math.min(1.28,1+2.6*(gx*.6-gz*.8)));col[i*3]=col[i*3+1]=col[i*3+2]=sh}
+ g.setAttribute('color',new THREE.BufferAttribute(col,3));g.computeVertexNormals();g.userData.vc=1;return g};
+// les boules montent et descendent avec le relief
+(window.__P3HOOK=window.__P3HOOK||[]).push(()=>{try{const P=window.__PG;if(!P||!P.bumps||!P.bumps.length)return;for(const b of P.balls){if(!b.alive)continue;b.__dy=b.air>0?0:hAt(P.bumps,b.x,b.y)}}catch(_){}});
+// ---------- bouton « voir le cochonnet » ----------
+const st=document.createElement('style');st.textContent=`
+#pcoch{position:absolute;right:8px;z-index:40;display:flex;align-items:center;gap:5px;background:rgba(20,16,42,.82);border:2px solid #ffd23f;border-radius:6px;padding:3px 8px 3px 4px;color:#fff;font:400 12px Lilita,sans-serif;letter-spacing:.03em;cursor:pointer;pointer-events:auto;min-width:0;box-shadow:none;line-height:1}
+#pcoch svg{width:20px;height:20px;flex:none}
+#pcoch.on{background:#ffd23f;color:#2a0a00;border-color:#fff}
+#pcoch[hidden]{display:none!important}
+#peta .fsel .fs-t.sit canvas{filter:brightness(.85) saturate(.85)}#peta .fsel .fs-t.sit:hover canvas{filter:none}`;document.head.appendChild(st);
+let ON=false,btn=null;const OKP={select:1,ai:1,wait:1};
+const off=()=>{if(!ON)return;ON=false;window.__P3CAM=null;if(btn){btn.classList.remove('on');btn.querySelector('b').textContent='Cochonnet'}};
+const on=()=>{ON=true;btn.classList.add('on');btn.querySelector('b').textContent='Revenir';try{dsfx&&dsfx('shing',.3,1.4)}catch(_){}};
+function mk(ov){btn=document.createElement('button');btn.id='pcoch';btn.type='button';btn.setAttribute('aria-label','Voir le cochonnet de près');
+ btn.innerHTML='<svg viewBox="0 0 20 20" shape-rendering="crispEdges"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13" y="13" width="3" height="3" fill="currentColor" transform="rotate(45 14.5 14.5)"/><rect x="13.5" y="14.5" width="5" height="2.6" fill="currentColor" transform="rotate(45 16 15.8)"/><circle cx="9" cy="9" r="2.4" fill="#ff6a3a"/></svg><b>Cochonnet</b>';
+ btn.onclick=e=>{e.stopPropagation();ON?off():on()}}
+// toucher le terrain pour viser ramène la vue normale
+document.addEventListener('pointerdown',e=>{try{if(ON&&e.target&&e.target.closest&&e.target.closest('#peta canvas.c3d'))off()}catch(_){}},true);
+window.__P3HOOK.push(()=>{try{const ov=document.getElementById('peta'),mm=document.getElementById('pmm'),P=window.__PG,S=window.__P3S;
+ if(!ov||!mm||!P||!S){if(btn)btn.hidden=true;off();return}
+ if(!btn)mk(ov);if(btn.parentNode!==mm.parentNode)mm.parentNode.appendChild(btn);
+ const busy=window.__RPLON||window.__POWCINE&&window.__POWCINE.on||ov.classList.contains('cine')||!OKP[P.phase];
+ btn.hidden=!!busy;if(busy){off();return}
+ btn.style.top=(mm.offsetTop+mm.offsetHeight+6)+'px';btn.style.right='auto';btn.style.left=(mm.offsetLeft+mm.offsetWidth-btn.offsetWidth)+'px';
+ if(ON){const c=P.coch&&P.coch();if(!c){off();return}const x=S.X3(c.y),z=S.Z3(c.x);window.__P3CAM=[[x+.35,1.75,z+1.75],[x,0,z-.25]]}}catch(_){}});
+window.__cochView=v=>{if(!btn)return;(v?on:off)()};
+})();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
