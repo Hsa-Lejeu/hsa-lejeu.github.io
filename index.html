@@ -527,7 +527,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v603')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v604')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5589,7 +5589,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v603')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v604')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -13959,7 +13959,7 @@ window.__selNew=function(X){const {ov,ALL,pick,POW,anim,headC,icon,okS,blip,whoo
   info(lk&&!real(lk)?(window.__PTEST?`🔓 Débloqué pour les tests. Normalement : ${lk.t}.`:`🔒 ${lk.t}.`):'');ref()}
  function info(t){q('.fs-info').textContent=t}
  function tiles(){const G=q('.fs-grid');G.innerHTML='';ALL.forEach(p=>{const t=document.createElement('div');const i=pick.indexOf(p);t.className='fs-t '+p.grp+(p===foc?' on':'')+(i>=0?' pk':'');
-  let h;try{h=(window.__headStill||headC)(p.ci,32,160)}catch(_){h=document.createElement('canvas')}t.appendChild(h);t.insertAdjacentHTML('beforeend',`<span>${p.nm.replace('Cédric ','').replace('Mme ','M<sup>me</sup> ')}</span>${i>=0?`<em>J${i+1}</em>`:''}`);
+  const sp=document.createElement('div');sp.className='fs-sp';const h=document.createElement('canvas');h.width=16;h.height=26;sp.appendChild(h);t.appendChild(sp);try{anim(h,p.ci,i>=0?66:24,p===foc?0:1)}catch(_){}t.insertAdjacentHTML('beforeend',`<span>${p.nm.replace('Cédric ','').replace('Mme ','M<sup>me</sup> ')}</span>${i>=0?`<em>J${i+1}</em>`:''}`);
   const lk=lockOf(p);if(lk&&!isOK(lk))t.insertAdjacentHTML('beforeend','<div class="lk">🔒</div>');else if(lk&&!real(lk))t.insertAdjacentHTML('beforeend','<i class="tst">TEST</i>');
   t.onclick=()=>{prev(p,true);tiles()};t.ondblclick=()=>{take()};G.appendChild(t)})}
  function slots(){d.querySelectorAll('.fs-slot').forEach((s,i)=>{s.querySelectorAll('canvas').forEach(c=>c.remove());const p=pick[i];if(p){try{s.appendChild((window.__headStill||headC)(p.ci,26,160))}catch(_){}}})}
@@ -14801,6 +14801,12 @@ html body #m #mb .abk .atab.on{opacity:1;box-shadow:2px 2px 0 rgba(0,0,0,.3),ins
   #peta .card0 .terw { margin-top: 4px !important; }
   #peta .card0 .ters button { padding: 3px 8px !important; font-size: 13px !important; }
   #peta .card0 .btns { position: sticky; bottom: -8px; }
+  #peta .card0.arcd .qtill { max-height: 34vh; width: auto; margin: 4px auto 6px; }
+  #peta .fsel .fs-grid { --sc: 3; }
+  #peta .fsel .fs-t { padding-top: 8px !important; }
+  #peta .fsel .fs-sp { height: calc(var(--sc) * 26px + 6px) !important; }
+  #peta .fsel .fs-t > span { margin-top: 1px !important; }
+  #peta .fsel .fs-grid { gap: 4px 0px !important; }
 
   /* Cartes et album */
   html body #ulp { right: auto !important; left: calc(env(safe-area-inset-left,0px) + 134px) !important; top: calc(env(safe-area-inset-top,0px) + 52px) !important; }
@@ -15598,7 +15604,6 @@ const st=document.createElement('style');st.textContent=`
 #peta .card0.arcd{width:min(96vw,720px)!important;margin:auto!important}
 #peta .card0.arcd .qtill{display:block;width:100%;aspect-ratio:320/110;image-rendering:pixelated;border:3px solid #14124a;border-radius:8px;box-shadow:0 0 0 2px #ffd23f,0 6px 0 #14124a;margin:6px 0 8px}
 #peta .card0.arcd .ctx{display:none}
-@media (orientation:landscape) and (max-height:600px){#peta .card0.arcd .qtill{max-height:34vh;width:auto;margin:4px auto 6px}}
 /* l'équipe d'en face dans le panneau */
 #peta .pls .plth{flex-basis:100%;font:400 11px Lilita,sans-serif;letter-spacing:.14em;color:#ff7a1a;margin:4px 0 -2px 4px}
 #peta .pls .pl.th{border-color:#ff7a1a!important;background:#fff1e4!important}#peta .pls .pl.th.cur{background:#ffd9b8!important;border-color:#e8551a!important}
@@ -15621,6 +15626,27 @@ const st=document.createElement('style');st.textContent=`
 // la carte en portrait : la zone de la carte prend juste la hauteur de la carte
 new MutationObserver(()=>{try{const f=document.querySelector('#peta .fter');if(!f||f.__fit)return;f.__fit=1;const fm=f.querySelector('.fm');const go=()=>{if(!f.isConnected)return;if(innerHeight>innerWidth){const m=f.querySelector('.fm-in.pt');const W=fm.clientWidth-8;if(W>20){const ar=.7467,h=Math.min(W/ar,f.clientHeight*.72);const w=h*ar;m.style.width=Math.floor(w)+'px';m.style.height=Math.floor(h)+'px';fm.style.height=Math.floor(h+12)+'px'}}else fm.style.height='';requestAnimationFrame(go)};go()}catch(_){}}).observe(document.body,{childList:true,subtree:true});
 })();
+</script>
+<script>
+// ===== v604 : le banc des joueurs
+(function(){const st=document.createElement('style');st.textContent=`
+#peta .fs-grid{--sc:4}#peta .fsel .fs-grid{display:flex!important;flex-wrap:wrap;justify-content:center;align-content:safe center;gap:8px 0!important;overflow:auto;padding:4px 0}
+#peta .fsel .fs-t{width:calc(var(--sc)*16px + 16px);aspect-ratio:auto!important;background:none!important;border:0!important;box-shadow:none!important;transform:none!important;overflow:visible;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-end;padding-top:16px;cursor:pointer}
+#peta .fsel .fs-sp{position:relative;height:calc(var(--sc)*26px + 12px);display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(to top,#5a3d22 0 3px,#c9a46a 3px 12px,transparent 12px)}
+#peta .fsel .fs-t.on .fs-sp{background:linear-gradient(to top,#5a3d22 0 3px,#e3c486 3px 12px,transparent 12px),radial-gradient(ellipse 60% 90% at 50% 100%,rgba(255,210,63,.45),transparent 70%)}
+#peta .fsel .fs-sp::after{content:"";position:absolute;bottom:4px;left:50%;width:calc(var(--sc)*11px);height:5px;transform:translateX(-50%);background:rgba(0,0,0,.35);border-radius:50%}
+#peta .fsel .fs-t canvas{width:calc(var(--sc)*16px)!important;height:calc(var(--sc)*26px);margin-bottom:6px;position:relative;z-index:1;image-rendering:pixelated;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;outline:0;transform:none;transform-origin:50% 100%;transition:transform .18s,filter .18s;filter:brightness(.6) saturate(.6)}
+#peta .fsel .fs-t.pk canvas,#peta .fsel .fs-t:hover canvas{filter:none}
+#peta .fsel .fs-t.on canvas{filter:drop-shadow(0 0 3px rgba(255,255,255,.7));transform:translateY(3px) scale(1.12)}
+#peta .fsel .fs-t>span{align-self:center;margin-top:3px;font:400 11px Lilita,sans-serif;color:#fff;background:none!important;width:auto;padding:0 4px 1px;transform:none;white-space:nowrap;border-bottom:3px solid #4a3a70}
+#peta .fsel .fs-t.r>span{border-color:#2faee0}#peta .fsel .fs-t.u>span{border-color:#6bd36b}#peta .fsel .fs-t.x>span{border-color:#ffd23f}
+#peta .fsel .fs-t.on>span{background:#ffd23f!important;color:#2a0a00}
+#peta .fsel .fs-t em{top:0;left:50%;right:auto;transform:translateX(-50%);z-index:2}
+#peta .fsel .fs-t .tst{top:14px;left:0;transform:none;z-index:2}
+#peta .fsel .fs-t .lk{inset:16px 0 18px 0;background:rgba(10,4,24,.6)}
+@media (orientation:portrait){#peta .fsel .fs-grid{--sc:3}}
+@media (orientation:portrait) and (min-height:760px){#peta .fsel .fs-grid{--sc:4}}
+`;document.head.appendChild(st)})();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
