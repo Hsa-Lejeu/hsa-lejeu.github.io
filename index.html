@@ -527,7 +527,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v602')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v603')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5589,7 +5589,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v602')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v603')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -13896,8 +13896,8 @@ window.__pRes=(s0,s1,sim)=>{if(sim)return;const st=PST();st.m++;if(s0>s1){st.w++
 #peta .fs-x{background:#111;color:#fff;border:2px solid #fff;font:400 12px Lilita,sans-serif;padding:4px 8px;cursor:pointer}
 #peta .fs-main{flex:1;min-height:0;display:flex;gap:8px;position:relative}
 #peta .fs-pv{flex:1.25;min-width:0;display:flex;gap:10px;align-items:stretch;background:linear-gradient(100deg,rgba(255,46,122,.28),rgba(47,174,224,.18));border:2px solid rgba(255,255,255,.25);padding:8px;position:relative;overflow:hidden}
-#peta .fs-big{flex:none;width:clamp(70px,20vw,130px);display:flex;align-items:flex-end;justify-content:center;background:radial-gradient(ellipse at 50% 90%,rgba(255,210,63,.45),transparent 60%)}
-#peta .fs-big canvas{width:100%;image-rendering:pixelated}
+#peta .fs-big{flex:none;width:clamp(70px,20vw,130px);display:flex;align-items:center;justify-content:center;padding:6px 4px;background:radial-gradient(ellipse at 50% 90%,rgba(255,210,63,.45),transparent 60%)}
+#peta .fs-big canvas{width:100%;height:100%;max-height:100%;object-fit:contain;object-position:center;image-rendering:pixelated}#peta .fs-big canvas.tk{filter:drop-shadow(0 0 6px #ffd23f)}
 #peta .fs-pv.fspp .fs-big{animation:fspop .35s ease-out}@keyframes fspop{0%{opacity:.35}}
 #peta .fs-inf{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
 #peta .fs-grp{font:400 clamp(9px,1.7vw,12px) Lilita,sans-serif;letter-spacing:.12em;color:#7fd8ff;text-transform:uppercase}
@@ -13942,7 +13942,7 @@ window.__selNew=function(X){const {ov,ALL,pick,POW,anim,headC,icon,okS,blip,whoo
  ov.classList.add('sfm');try{petaMus('petac')}catch(_){}
  const guest=p=>p.grp==='x';const lockOf=p=>guest(p)?GUESTU[p.id]:null;const okP=p=>!lockOf(p)||isOK(lockOf(p));
  const d=document.createElement('div');d.className='fsel';
- d.innerHTML=`<div class="fs-top"><b class="fs-ttl">CHOISIS TES CHAMPIONS !</b><div class="fs-slots">${[0,1,2].map(i=>`<div class="fs-slot" data-i="${i}"><b>J${i+1}</b></div>`).join('')}</div><button class="fs-x">✕ Sans moi</button></div>
+ d.innerHTML=`<div class="fs-top"><b class="fs-ttl">CHOISIS TON PÉTANQUEUR !</b><div class="fs-slots">${[0,1,2].map(i=>`<div class="fs-slot" data-i="${i}"><b>J${i+1}</b></div>`).join('')}</div><button class="fs-x">✕ Sans moi</button></div>
  <div class="fs-main"><div class="fs-pv"><div class="fs-big"><canvas width="16" height="26"></canvas></div><div class="fs-inf"></div></div><div class="fs-grid"></div></div>
  <div class="fs-bot"><div class="fs-balls"><span>TES BOULES</span></div><button class="fs-btn fs-take">Prendre</button><button class="fs-btn go fs-go" disabled>C’EST PARTI !</button><div class="fs-info"></div></div>`;
  ov.innerHTML='';ov.appendChild(d);const q=s=>d.querySelector(s);
@@ -13950,11 +13950,11 @@ window.__selNew=function(X){const {ov,ALL,pick,POW,anim,headC,icon,okS,blip,whoo
  const grpL=p=>p.grp==='r'?'Riverain·e':p.grp==='u'?'Usager·e de la halte':'Invité·e surprise';
  const bars=n=>`<i>${[1,2,3,4,5].map(k=>`<u class="${k<=n?'on':''}"></u>`).join('')}</i>`;
  function prev(p,pop){foc=p;const s=p.st||{pr:3,fo:3,po:3,re:3},pw=POW[p.pw]||{nm:'?',ds:''},lk=lockOf(p);
-  q('.fs-inf').innerHTML=`<span class="fs-grp">${grpL(p)} · ${p.role}</span><span class="fs-nm">${p.nm}</span><span class="fs-sn">« ${NICK[p.id]||NICK[p.pw]||'Le Champion du Quartier'} »</span><span class="fs-q">« ${QUO[p.pw]||'À moi de jouer.'} »</span>
+  q('.fs-inf').innerHTML=`<span class="fs-grp">${grpL(p)} · ${p.role}</span><span class="fs-nm">${p.nm}</span>
   <div class="fs-st"><span>🎯 PRÉCISION</span>${bars(s.pr)}<span>💪 FORCE</span>${bars(s.fo)}<span>📏 PORTÉE</span>${bars(s.po)}<span>⚡ RECHARGE</span>${bars(s.re)}</div>
   <div class="fs-pw"><div><span class="lb">COUP SPÉCIAL</span><b>${pw.nm}</b><small>${pw.ds}</small></div></div>`;
   try{q('.fs-pw').insertBefore(icon(p.pw),q('.fs-pw').firstChild)}catch(_){}
-  const old=q('.fs-big canvas'),c=document.createElement('canvas');c.width=16;c.height=26;old.replaceWith(c);try{anim(c,p.ci,24,1)}catch(_){}
+  const old=q('.fs-big canvas'),c=document.createElement('canvas');c.width=16;c.height=26;old.replaceWith(c);const tk_=pick.indexOf(p)>=0;c.classList.toggle('tk',tk_);try{if(tk_)anim(c,p.ci,66,0);else anim(c,p.ci,24,1)}catch(_){}
   if(pop){const pv=q('.fs-pv');pv.classList.remove('fspp');void pv.offsetWidth;pv.classList.add('fspp');try{whoosh()}catch(_){}try{dsfx('shing',.45,1.25)}catch(_){}}
   info(lk&&!real(lk)?(window.__PTEST?`🔓 Débloqué pour les tests. Normalement : ${lk.t}.`:`🔒 ${lk.t}.`):'');ref()}
  function info(t){q('.fs-info').textContent=t}
@@ -13965,7 +13965,7 @@ window.__selNew=function(X){const {ov,ALL,pick,POW,anim,headC,icon,okS,blip,whoo
  function slots(){d.querySelectorAll('.fs-slot').forEach((s,i)=>{s.querySelectorAll('canvas').forEach(c=>c.remove());const p=pick[i];if(p){try{s.appendChild((window.__headStill||headC)(p.ci,26,160))}catch(_){}}})}
  function ref(){const i=pick.indexOf(foc),full=pick.length>=3;const tk=q('.fs-take');tk.textContent=i>=0?'Retirer':full?'Équipe complète':'Prendre';tk.className='fs-btn fs-take'+(i>=0?' rm':'');tk.disabled=!okP(foc)||(i<0&&full);
   const ok=pick.length===3;q('.fs-go').disabled=!ok;slots()}
- function take(){if(!okP(foc)){tone(160,.12,'square',.05);return}const i=pick.indexOf(foc);if(i>=0){pick.splice(i,1);tone(330,.08,'square',.05)}else if(pick.length<3){pick.push(foc);try{okS()}catch(_){}try{dsfx('ko',.35,1.3)}catch(_){}}else{tone(160,.12,'square',.05);return}tiles();ref()}
+ function take(){if(!okP(foc)){tone(160,.12,'square',.05);return}const i=pick.indexOf(foc);if(i>=0){pick.splice(i,1);tone(330,.08,'square',.05)}else if(pick.length<3){pick.push(foc);try{okS()}catch(_){}try{dsfx('ko',.35,1.3)}catch(_){}}else{tone(160,.12,'square',.05);return}tiles();prev(foc,true)}
  q('.fs-take').onclick=take;
  q('.fs-x').onclick=()=>{try{skip&&skip()}catch(_){}};
  // boules
