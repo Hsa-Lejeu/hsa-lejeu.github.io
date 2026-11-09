@@ -12698,12 +12698,12 @@ body.aigB .edg,body.aigB #hxpop,body:has(#app.open) .edg,body:has(#rw) .edg,body
   if(land){if(hp){const q=hp.getBoundingClientRect();if(q.width)l=q.right+34}t=78;if(tb){const q=tb.getBoundingClientRect();if(q.width)r=q.left-34}}
   else{if(hud){const q=hud.getBoundingClientRect();t=q.bottom+34}if(tb){const q=tb.getBoundingClientRect();if(q.height)b=q.top-34}}
   return{l,t,r,b}};
- const targets=()=>{const L=[];try{STF.forEach(z=>{if(z.call&&!(z.off>0)&&z.px!=null)L.push({k:'c'+z.n,kind:'call',mx:z.px+OX,my:z.py+OY-12,lab:Math.max(1,Math.round(z.call.t))+' s',go:()=>{if(z.call)openCall(z)}})})}catch(_){}
+ const targets=()=>{const L=[];try{STF.forEach(z=>{if(z.call&&!(z.off>0)&&z.px!=null)L.push({k:'c'+z.n,kind:'call',ci:z.ci,mx:z.px+OX,my:z.py+OY-12,lab:Math.max(1,Math.round(z.call.t))+' s',go:()=>{if(z.call)openCall(z)}})})}catch(_){}
   try{for(let i=0;i<9;i++){if(!built[i])continue;const c=closeFix(i);if(!c||!c.urg)continue;const mx=OX+R[i][2]+16,my=OY+R[i][3]+10;L.push({k:'r'+i,kind:'room',mx,my,lab:c.w.length>14?'fermée':c.w,go:()=>{flyMap(mx,my+12,1.8,()=>{try{const p=mapPt(mx,my);roomWheel(i,p[0],p[1])}catch(_){}})}})}}catch(_){}return L};
  const ico=k=>{const I=window.HSAICO||{};const im=k==='call'?null:I.alerte;return im&&im.complete&&im.naturalWidth?`<img src="${im.src}" alt="">`:(k==='call'?'☎️':'⛔')};
  const tick=()=>{try{const L=on()?targets():[];const seen={};const s=safe(),cx=(s.l+s.r)/2,cy=(s.t+s.b)/2;
   L.forEach(o=>{let p;try{p=mapPt(o.mx,o.my)}catch(_){return}const[X,Y]=p;const inside=X>=s.l-24&&X<=s.r+24&&Y>=s.t-24&&Y<=s.b+24;if(inside)return;seen[o.k]=1;
-   let e=E[o.k];if(!e){e=document.createElement('button');e.type='button';e.className='edg pulse '+o.kind;e.innerHTML=ico(o.kind)+'<i></i><small></small>';document.body.appendChild(e);E[o.k]=e}
+   let e=E[o.k];if(!e){e=document.createElement('button');e.type='button';e.className='edg pulse '+o.kind;e.innerHTML=ico(o.kind)+'<i></i><small></small>';document.body.appendChild(e);E[o.k]=e;if(o.ci!=null)e.dataset.ci=o.ci}
    e.onclick=ev=>{ev.stopPropagation();try{o.go()}catch(_){}};e.title=o.kind==='call'?'Un appel : toucher pour répondre':'Salle fermée : toucher pour y aller';
    const dx=X-cx,dy=Y-cy;const kx=dx?((dx>0?s.r:s.l)-cx)/dx:1e9,ky=dy?((dy>0?s.b:s.t)-cy)/dy:1e9;const k=Math.min(Math.abs(kx),Math.abs(ky));const ex=cx+dx*k,ey=cy+dy*k;
    e.style.left=Math.round(ex)+'px';e.style.top=Math.round(ey)+'px';const a=Math.atan2(dy,dx);e.querySelector('i').style.transform=`rotate(${a}rad) translateX(26px)`;const sm=e.querySelector('small');if(sm.textContent!==o.lab)sm.textContent=o.lab});
@@ -16098,6 +16098,22 @@ window.__P3HOOK.push(()=>{try{const S=window.__P3S,A=window.__pBallAPI;if(!S||!S
 // bouton pour revenir sur le choix Pointe / Tire
 {const st2=document.createElement('style');st2.textContent=`#peta .wrap #qctag.ctag{top:auto!important;bottom:14px;left:12px!important;display:flex;align-items:center;gap:8px;padding:6px 12px 6px 10px!important;font-size:18px!important;background:#ffd23f!important;color:#14124a!important;box-shadow:3px 3px 0 #14124a!important;border:2px solid #14124a;z-index:31}#peta .wrap #qctag.ctag[hidden]{display:none!important}#peta .wrap #qctag.ctag span{font:400 12px 'Atkinson Hyperlegible',sans-serif;background:#14124a;color:#fff;padding:2px 7px;border-radius:3px;transform:skew(12deg)}`;document.head.appendChild(st2)}
 })();
+</script>
+<script>
+// ===== v621 : appel hors de l'écran — le visage de la personne qui appelle dans un rond vert, un combiné qui sonne
+(function(){const st=document.createElement('style');st.textContent=`
+html body button.edg:not(#_e){border-radius:50%!important;box-shadow:0 3px 0 rgba(0,0,0,.3)!important}
+html body button.edg.call:not(#_e){background:#3fae5a!important;border:3px solid #1d4d2a!important;overflow:visible}
+.edg.call>img{display:none!important}
+html body .edg.call canvas.edf{width:30px!important;height:37px!important;image-rendering:pixelated;margin-top:3px;pointer-events:none;border:0!important;outline:0!important;background:none!important;box-shadow:none!important;border-radius:0!important}
+.edg.call b.edb{position:absolute;top:-9px;right:-10px;width:24px;height:24px;border-radius:50%;background:#fff;border:2px solid #1d4d2a;display:flex;align-items:center;justify-content:center;font:13px/1 sans-serif;pointer-events:none;animation:edring 1s ease-in-out infinite;box-sizing:border-box}
+@keyframes edring{0%,40%,100%{transform:rotate(0)}5%,15%,25%,35%{transform:rotate(-22deg)}10%,20%,30%{transform:rotate(22deg)}}
+.edg.call i{margin-top:-10px!important;border-top-width:10px!important;border-bottom-width:10px!important;border-left:15px solid #1d4d2a!important}
+.edg.call small{background:#1d4d2a!important;font-size:11px!important;bottom:-13px!important}
+@media (prefers-reduced-motion:reduce){.edg.call b.edb{animation:none}}`;document.head.appendChild(st);
+ const face=e=>{const ci=+e.dataset.ci;if(isNaN(ci)||e.dataset.f==ci)return;let c=e.querySelector('canvas.edf');if(!c){c=document.createElement('canvas');c.className='edf';c.width=16;c.height=20;e.insertBefore(c,e.firstChild);const b=document.createElement('b');b.className='edb';b.textContent='📞';e.appendChild(b)}
+  const g=c.getContext('2d');g.imageSmoothingEnabled=false;const dr=()=>{g.clearRect(0,0,16,20);g.drawImage(IMC,ci*48+16,1,16,20,0,0,16,20);e.dataset.f=ci};if(IMC.complete&&IMC.naturalWidth)dr();else IMC.addEventListener('load',dr,{once:true})};
+ setInterval(()=>{try{document.querySelectorAll('.edg.call[data-ci]').forEach(face)}catch(_){}},150)})();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
