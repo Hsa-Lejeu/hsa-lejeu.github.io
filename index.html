@@ -531,7 +531,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v643')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v644')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -1254,7 +1254,7 @@ const rect=(a,b,w,h,c)=>{x.fillStyle=c;x.fillRect(a|0,b|0,w,h)};
 const CIN=[8,3,0,5,6,11,2,1,10,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,4,7,16,21],IM={1:'plant',2:'chair',5:'sofa_red',7:'bookcase',8:'tv',9:'plant',22:'arm_teal',23:'plant'};
 const IMA=new Image();IMA.src='a/ce6d607e4461.png';const NIMA=92,POSE={sitR:48,sitL:54,phone:60,read:66,sleep:72},IMAok=()=>IMA.complete&&IMA.naturalWidth>0;
 function pcA(ci,px,py,col){x.drawImage(window._volOn&&window.IMV&&ci<46&&col<48&&IMV.complete&&IMV.naturalWidth?IMV:IMA,col*16,ci*26,16,26,Math.round((px-4)*2)/2,Math.round((py-12)*2)/2,8,13)}
-function hrt(px,py){rect(px-1,py-17,1,1,'#e63');rect(px+1,py-17,1,1,'#e63');rect(px-1,py-16,3,1,'#e63');rect(px,py-15,1,1,'#e63')}
+function hrt(px,py){const P=['.##.##.','#######','#######','.#####.','..###..','...#...'],X0=Math.round(px)-3,Y0=Math.round(py)-21;P.forEach((r,j)=>{for(let i=0;i<7;i++)if(r[i]=='#')rect(X0+i,Y0+j,1,1,'#e8355a')});rect(X0+1,Y0+1,1,1,'#ffb3c4');rect(X0+2,Y0+1,1,1,'#ff7b98')}
 function pc(ci,px,py,heart,mv,dir,fr){if(fr==null&&ci<NIMA&&IMAok()){const t=performance.now(),d=dir|0;pcA(ci,px,py,mv?d*6+((t/105)|0)%6:24+d*6+(((t/170)+ci*3)|0)%6)}else{const f=fr!=null?fr:mv?[0,1,2,1][(performance.now()/130|0)%4]:1;if(IMC.complete&&IMC.naturalWidth)x.drawImage(IMC,ci*48+f*16,(dir|0)*26,16,26,Math.round((px-4)*2)/2,Math.round((py-12)*2)/2,8,13);else rect(px-1,py-8,3,8,'#888')}
 if(heart)hrt(px,py)}
 function pcPose(ci,px,py,pose,sp,ph){const f=(((performance.now()/(sp||200))+(ph||0))|0)%6;pcA(ci,px,py,POSE[pose]+f)}
@@ -5617,7 +5617,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v643')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v644')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -16375,15 +16375,15 @@ window.MUSP=function(g,R,A){
  const DOG=['.#...........','###.........#','####.......#.','.##########..','..#########..','..#########..','..##.....##..','..#.#....#.#.','..#.#....#.#.'];
  const txt=(g,t,cx,y,c)=>{let w=-1;for(const ch of t)w+=(GL[ch]?GL[ch][0].length:3)+1;let x0=Math.round(cx-w/2);g.fillStyle=c;for(const ch of t){const G=GL[ch];if(G)G.forEach((r,j)=>{for(let i=0;i<r.length;i++)if(r[i]=='#')g.fillRect(x0+i,y+j,1,1)});x0+=(G?G[0].length:3)+1}};
  window.DOGSIGN=function(g){g.save();g.setTransform(1,0,0,1,0,0);
-  const X=24,Y=10,Wd=42,Hd=38,cx=45,cy=23,R0=10;
+  const X=23,Y=9,Wd=44,Hd=40,cx=45,cy=22,R0=11;
   g.fillStyle='rgba(0,0,0,.28)';g.fillRect(X+1,Y+2,Wd,Hd);
   g.fillStyle='#2a2433';g.fillRect(X,Y+1,Wd,Hd-2);g.fillRect(X+1,Y,Wd-2,Hd);
   g.fillStyle='#fbf8f1';g.fillRect(X+1,Y+1,Wd-2,Hd-2);g.fillStyle='#e6e0d4';g.fillRect(X+1,Y+Hd-3,Wd-2,2);
   g.fillStyle='#8a8a92';g.fillRect(X+3,Y+3,1,1);g.fillRect(X+Wd-4,Y+3,1,1);g.fillRect(X+3,Y+Hd-4,1,1);g.fillRect(X+Wd-4,Y+Hd-4,1,1);
   for(let py=cy-R0;py<=cy+R0;py++)for(let px=cx-R0;px<=cx+R0;px++){const d=Math.hypot(px-cx+.5,py-cy+.5);if(d<=R0&&d>R0-2.2){g.fillStyle='#d7262c';g.fillRect(px,py,1,1)}}
-  g.fillStyle='#2a2433';DOG.forEach((r,j)=>{for(let i=0;i<r.length;i++)if(r[i]=='#')g.fillRect(cx-6+i,cy-4+j,1,1)});
-  for(let k=-6;k<=6;k++){g.fillStyle='#d7262c';g.fillRect(cx+k-1,cy+k-1,2,2)}
-  txt(g,'CHIENS',cx,Y+25,'#2a2433');txt(g,'INTERDITS',cx,Y+31,'#d7262c');
+  if(IMD.complete&&IMD.naturalWidth){g.imageSmoothingEnabled=false;g.drawImage(IMD,0,16,16,16,cx-8,cy-9,16,16)}else{g.fillStyle='#2a2433';DOG.forEach((r,j)=>{for(let i=0;i<r.length;i++)if(r[i]=='#')g.fillRect(cx-6+i,cy-4+j,1,1)})}
+  for(let k=-7;k<=7;k++){g.fillStyle='#d7262c';g.fillRect(cx+k-1,cy+k-1,2,2)}
+  txt(g,'CHIENS',cx,Y+27,'#2a2433');txt(g,'INTERDITS',cx,Y+33,'#d7262c');
   g.restore()};
 })();
 </script>
