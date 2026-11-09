@@ -531,7 +531,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v638')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v639')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5617,7 +5617,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v638')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v639')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -6948,8 +6948,9 @@ window.stTgt=stTgt;
 
 
 // gros titres en haut de l'écran (visite HAS, nouveauté, défi) : empilés à droite sous le HUD, sans jamais passer sur les portraits
-window.STK2=1;let STKM=0;setInterval(()=>{try{if(typeof MEET!='undefined'&&MEET||document.body.classList.contains('meet')){if(!STKM){STKM=1;['hasb','ulp','dfb'].forEach(id=>{const e=document.getElementById(id);if(e)['top','right','left','transform','max-width'].forEach(k=>e.style.removeProperty(k))})}return}STKM=0;const hud=document.getElementById('hud');let y=(hud?hud.getBoundingClientRect().bottom:60)+8;try{const c=document.getElementById('ctoast');if(c&&c.classList.contains('on')&&innerWidth<innerHeight){const r=c.getBoundingClientRect();if(r.height>0&&r.bottom>0)y=Math.max(y,r.bottom+8)}}catch(_){}const LC_=window.LSCOL&&LSCOL();if(LC_)y=50;const L=document.getElementById('lci');let lw=8;if(L&&L.children.length){const r=L.getBoundingClientRect();if(r.width>0)lw=r.right+8}
- ['hasb','ulp','dfb'].forEach(id=>{const e=document.getElementById(id);if(!e)return;const cs=getComputedStyle(e);if(cs.display=='none'||cs.visibility=='hidden')return;const s=e.style,ty=Math.round(y)+'px';
+window.STK2=1;let STKM=0;setInterval(()=>{try{if(typeof MEET!='undefined'&&MEET||document.body.classList.contains('meet')){if(!STKM){STKM=1;['hasb','hasc','ulp','dfb','dfi'].forEach(id=>{const e=document.getElementById(id);if(e)['top','right','left','transform','max-width'].forEach(k=>e.style.removeProperty(k))})}return}STKM=0;const hud=document.getElementById('hud');let y=(hud?hud.getBoundingClientRect().bottom:60)+8;try{const c=document.getElementById('ctoast');if(c&&c.classList.contains('on')&&innerWidth<innerHeight){const r=c.getBoundingClientRect();if(r.height>0&&r.bottom>0)y=Math.max(y,r.bottom+8)}}catch(_){}const LC_=window.LSCOL&&LSCOL();if(LC_)y=50;const L=document.getElementById('lci');let lw=8;if(L&&L.children.length){const r=L.getBoundingClientRect();if(r.width>0)lw=r.right+8}
+ const PO_=innerWidth<innerHeight;if(PO_){const op=document.getElementById('objp');if(op&&getComputedStyle(op).display!='none'){const r=op.getBoundingClientRect();if(r.height>0)y=Math.max(y,r.bottom+6)}}else{['dfi','hasc'].forEach(i_=>{const d_=document.getElementById(i_);if(d_&&d_.style.getPropertyValue('top'))['top','right','left','transform','max-width','animation'].forEach(k=>d_.style.removeProperty(k))})}
+ (PO_?['hasb','hasc','ulp','dfb','dfi']:['hasb','ulp','dfb']).forEach(id=>{const e=document.getElementById(id);if(!e)return;const cs=getComputedStyle(e);if(cs.display=='none'||cs.visibility=='hidden')return;const s=e.style,ty=Math.round(y)+'px';
   if(s.getPropertyValue('top')!==ty)s.setProperty('top',ty,'important');const RR_=LC_?'62px':'8px';if(s.getPropertyValue('right')!==RR_){s.setProperty('right',RR_,'important');s.setProperty('left','auto','important');s.setProperty('transform','none','important');s.setProperty('animation','none','important')}const mw=`calc(100vw - ${Math.round(lw+8)}px)`;if(s.getPropertyValue('max-width')!==mw)s.setProperty('max-width',mw,'important');
   y=e.getBoundingClientRect().bottom+6})}catch(_){}},200);
 
@@ -14803,6 +14804,7 @@ html body #m #mb .abk .atab.on{opacity:1;box-shadow:2px 2px 0 rgba(0,0,0,.3),ins
 
   /* Visite HAS */
   html body #hasb { max-width: min(46vw, 420px); z-index: 44; left: 50% !important; top: calc(env(safe-area-inset-top,0px) + 50px) !important; transform: translateX(-50%) !important; font-size: 12px !important; }
+  html body #hasc { z-index: 44; top: calc(env(safe-area-inset-top,0px) + 50px) !important; font-size: 12px !important; }
 
   /* Panneau latéral et onglets */
   #app #side { top: 50px !important; bottom: 8px !important; max-height: none !important; }
@@ -16302,5 +16304,22 @@ html body .edg.call canvas.edf{width:30px!important;height:37px!important;image-
 
 <style id="v638">.hasr h2{color:#ffe9a0!important;text-shadow:0 2px 0 #000;border-bottom-color:#ffe9a0!important}
 @media (orientation:portrait){#dfi{top:calc(var(--hh,44px) + 60px)!important}}</style>
+
+<style id="v639">
+#hasc{position:fixed;left:50%;top:58px;transform:translateX(-50%);z-index:45;background:#fffaf0;border:3px solid #2a2433;border-radius:999px;padding:4px 14px 4px 8px;font:700 13px 'Atkinson Hyperlegible',sans-serif;color:#2a2433;box-shadow:0 3px 0 rgba(0,0,0,.28);display:flex;gap:6px;align-items:center;white-space:nowrap;cursor:pointer;min-width:0;min-height:0}
+#hasc b{color:#2f6fb5}#hasc.soon{border-color:#e0a020}
+body:has(#m:not([hidden])) #hasc,body.fly #hasc,body:has(#mtg) #hasc,body:has(#hasb) #hasc,body.hdcin #hasc{display:none}
+</style>
+<script>
+// v639 : le mois qui précède une visite HAS, une pastille rappelle combien de jours il reste
+(function(){
+ setInterval(()=>{try{let e=document.getElementById('hasc');
+  const am=(YR-1)*12+mo,hv=(window.HASV_?HASV_():[]).find(v=>v==am+1),ok=typeof started!='undefined'&&started&&!(typeof ended!='undefined'&&ended)&&hv!=null&&(B.hasAnn||{})[hv]&&!(B.hasDone||{})[hv]&&!B.hasI;
+  if(!ok){if(e)e.remove();return}
+  const n=Math.max(1,31-(day||1)),pre=(B.has||0)==0&&am<12&&!window.HARD;
+  if(!e){e=document.createElement('button');e.id='hasc';e.title='Visite à venir';e.onclick=()=>{try{say(`📋 ${pre?'Première visite, sans note : les évaluatrices':'Les évaluatrices'} regarderont les salles, les formations, les partenaires, les déchets${(B.has||0)>=1&&!B.pmr?', l’accès PMR':''}…`)}catch(_){}};document.body.appendChild(e)}
+  const t=`<span>📋</span>Visite HAS dans <b>${n}</b> jour${n>1?'s':''}`;if(e.innerHTML!==t)e.innerHTML=t;e.classList.toggle('soon',n<=7)}catch(_){}},1000);
+})();
+</script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
