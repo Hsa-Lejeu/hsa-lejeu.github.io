@@ -531,7 +531,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v645')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v646')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5617,7 +5617,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v645')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v646')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -8983,14 +8983,14 @@ try{NE.s='🩺';NE.d='📋'}catch(_){}
  // bulle de BD (canvas monde)
  const bub=(t,X,Y)=>{x.save();x.font="400 5.2px Lilita,'Atkinson Hyperlegible',sans-serif";const w=Math.min(78,x.measureText(t).width+6);const words=t.split(' '),lines=[];let cur='';words.forEach(wd=>{const s_=cur?cur+' '+wd:wd;if(x.measureText(s_).width>w-6&&cur){lines.push(cur);cur=wd}else cur=s_});lines.push(cur);
   const h=lines.length*6+4,bx=Math.round((()=>{const[l,rr]=crVis();return Math.max(l+2,Math.min(rr-w-2,X-w/2))})()),by=Math.round(Y-h-6);x.fillStyle='#2a2433';x.fillRect(bx-1,by-1,w+2,h+2);x.fillStyle='#fff';x.fillRect(bx,by,w,h);x.fillStyle='#2a2433';x.beginPath();x.moveTo(X-2,by+h);x.lineTo(X+2,by+h);x.lineTo(X,by+h+4);x.fill();x.fillStyle='#fff';x.fillRect(X-1,by+h-1,2,2);
-  x.fillStyle='#c0392b';x.textAlign='center';x.textBaseline='top';lines.forEach((l,i)=>x.fillText(l,bx+w/2,by+2.5+i*6));x.restore()};
+  x.fillStyle='#2a2433';x.textAlign='center';x.textBaseline='top';lines.forEach((l,i)=>x.fillText(l,bx+w/2,by+2.5+i*6));x.restore()};
  // dessin (dans le repère du monde)
  W('draw',(o,a)=>{const r=o(...a);try{if(!started||ended||MEET)return r;const now=performance.now();
   // an 1, février : un homme photographie la file depuis le trottoir d'en face
-  if(YR==1&&mo==10&&day>=4&&day<=26){x.save();x.setTransform(2,0,0,2,0,EY*2);const X=window.CRPX||250,Y=window.CRPY||64;pc(CR,X,Y,0,0,3);if(((now/1600)|0)%3==0&&(now%1600)<140){x.fillStyle='rgba(255,255,255,.9)';x.fillRect(X-1,Y-12,4,3)}x.restore()}
+  if(YR==1&&mo==10&&day>=4&&day<=26){x.save();x.setTransform(2,0,0,2,0,EY*2);const X=window.CRPX||250,Y=window.CRPY||64;window.CRPH={X,Y};if(((now/1600)|0)%3==0&&(now%1600)<140){x.fillStyle='rgba(255,255,255,.9)';x.fillRect(X-1,Y-12,4,3)}x.restore()}
   // an 2 : porte-à-porte
   const W_=window.CRW;if(W_){const dt=Math.min(.1,(now-W_.last)/1000);W_.last=now;if(!paused){if(W_.stop>0){W_.stop-=dt;if(W_.stop<=0){W_.si++;W_.say=null}}else{W_.x+=13*dt;const nx=W_.stops[W_.si];if(nx!=null&&W_.x>=nx){W_.x=nx;W_.stop=2.8;W_.say=LP[(W_.li++)%LP.length]}}}
-   x.save();x.setTransform(2,0,0,2,0,EY*2);pc(CR,W_.x,W_.y,0,W_.stop>0?0:1,W_.stop>0?3:2);if(W_.say)bub(W_.say,W_.x,W_.y-13);x.restore();
+   x.save();x.setTransform(2,0,0,2,0,EY*2);if(W_.say)bub(W_.say,W_.x,W_.y-13);x.restore();
    if(W_.x>(W_.end||WW+20)){window.CRW=null;crAfter()}}
  }catch(e){console.error(e)}return r});
  const crAfter=()=>{B.crR={until:GT+10*DAYL};B.crDrap=GT+15*DAYL;B.crMent=1;try{newsAdd('🚪','Crotti fait du porte-à-porte dans le quartier')}catch(_){}say('📣 Camille : « Crotti a fait tout l’immeuble. Une maraude ou une réunion de rue dans les 10 jours, vite ! »')};
@@ -16399,5 +16399,12 @@ window.MUSP=function(g,R,A){
  #dlc.ask .dlrep{display:block;margin:6px 0 2px auto!important;width:auto!important;font:400 17px Lilita,sans-serif;padding:8px 18px;border-radius:10px;background:#2e9e4f;color:#fff;border:2.5px solid #1f6b33;box-shadow:0 3px 0 #1f6b33;cursor:pointer}
 }
 </style>
+
+<script>
+// v646 : Crotti est dessiné à sa profondeur, avec les passant·es : les voitures de la rue passent devant lui
+{const _wo=window.streetLayer;if(typeof _wo==='function'){window.streetLayer=function(...a){try{if(started&&!ended&&!MEET){const C=window.CRW;
+  if(C)wdl(C.y,()=>{x.save();x.setTransform(2,0,0,2,0,EY*2);pc(76,C.x,C.y,0,C.stop>0?0:1,C.stop>0?3:2);x.restore()});
+  if(YR==1&&mo==10&&day>=4&&day<=26){const X=window.CRPX||250,Y=window.CRPY||64;wdl(Y,()=>{x.save();x.setTransform(2,0,0,2,0,EY*2);pc(76,X,Y,0,0,3);x.restore()})}}}catch(_){}return _wo.apply(this,a)};try{streetLayer=window.streetLayer}catch(_){}}}
+</script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
