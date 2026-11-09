@@ -531,7 +531,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v641')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v642')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -748,7 +748,7 @@ function selT(i){if(built[i])return roomMenu(i);if(MV)cancelSel();if(eu<rc_(i)||
 function place(k){if(sel<0||RLOCK(sel))return;const sx=SLOTS[k][0],sy=SLOTS[k][1];if(cellOcc(sx,sy)>=0||cellOcc(sx+CW,sy)>=0)return;const i=sel;eu-=RCOST[i];RINV[i]=RCOST[i];built[i]=1;SO[k]=i;putRoom(i,sx,sy,0);sel=-1;q+=1;say(`🏗️ ${RNM(i,'aménagé')} ! Recrute maintenant quelqu’un dans l’onglet Équipe.`);ui();if(i==1)nalModal()}
 function buyG(){if(B.g||!ULK('jar')||eu<400)return;eu-=400;B.g=1;q+=8;Object.values(hist).forEach(h=>h.sat=Math.min(100,h.sat+10));say('🌳 Le jardin est ouvert ! Équipe-le : potager, fontaine, bancs…');ui()}
 cv.onclick=e=>{if(Z.moved){Z.moved=0;return}const r=cv.getBoundingClientRect(),lx=(e.clientX-r.left)/r.width*WW-OX,ly=(e.clientY-r.top)/r.height*WH-OY;if(ended||paused||!$('m').hidden)return;if(window.odTap&&odTap(lx,ly))return;
-for(const z of STF)if(z.call&&z.off<=0&&z.px!=null&&Math.abs(lx-z.px)<11&&ly>z.py-30&&ly<z.py+3)return openCall(z);
+for(const z of STF)if(z.call&&z.off<=0&&z.px!=null&&Math.abs(lx-z.px)<15&&ly>z.py-38&&ly<z.py+6)return openCall(z);
 for(let j=0;j<DAS.length;j++){const d=DAS[j],r_=j?1:4;if(built[r_]&&Math.hypot(lx-(R[r_][2]+d.dx),ly-(R[r_][3]+d.dy-6))<14)return collect()}
 for(const o of BINS.concat(SYR))if(Math.hypot(lx-o.x,ly-(o.y-3))<9)return clean(o);
 if(cellTap(lx,ly))return;if(sel>=0){if(!(lx>=0&&lx<176&&ly>=0&&ly<170))cancelSel();return}{const r=roomAt(lx,ly);if(r>=0){if($('app').dataset.t==='4')roomMenu(r);else if(typeof roomWheel=='function')roomWheel(r,e.clientX,e.clientY)}}};
@@ -1508,7 +1508,7 @@ const t0=performance.now(),DUR=5.6;let fin=false;try{sfx('j_musee')}catch(_){}
 const TX=[44,78,112,146].slice(0,nb);
 function frame(now){if(fin)return;const T=(now-t0)/1000;
 if(IMF.complete){const w=FU.w8,f=FU.f8;for(let X=0;X<200;X+=16){for(let Y=0;Y<40;Y+=12)g.drawImage(IMF,w[0],w[1]+6,16,12,X,Y,16,12);g.drawImage(IMF,w[0],w[1]+12,16,12,X,38,16,12);for(let Y=50;Y<104;Y+=16)g.drawImage(IMF,f[0],f[1],16,16,X,Y,16,16)}}R(0,50,200,2,'#00000025');
-A('p1',22,34);A('p2',85,34);A('p3',148,34);A('plant',-8,62);A('vase',172,70);
+MUSP(g,R,A);A('plant',-8,62);A('vase',172,70);
 for(let X=14;X<168;X+=16)A('rope',X,62);A('post',166,63);
 A('bench',86,98);
 cis.forEach((c,i)=>{const st=.25*i,k=Math.min(1,Math.max(0,(T-st)/1.9)),X=-12+(TX[i]+12)*k,walk=k<1,turn=T>3.9&&i==0;
@@ -5617,7 +5617,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v641')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v642')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -6274,8 +6274,8 @@ function prep(b){ // prix en fin de texte (« · 40 € ») : on l'isole dans un
  const pf=b.querySelector('.pf');if(pf){const prev=pf.previousSibling,next=pf.nextSibling;if(prev&&prev.nodeType==3&&/·\s*$/.test(prev.nodeValue)&&next&&next.nodeType==3&&/^\s*€/.test(next.nodeValue)){prev.nodeValue=prev.nodeValue.replace(/\s*·\s*$/,'');const i=document.createElement('i');i.className='pp';next.nodeValue=next.nodeValue.replace(/^\s*€/,'');i.appendChild(pf);i.appendChild(document.createTextNode(' €'));b.insertBefore(i,next)}return}
  const t=b.lastChild;if(t&&t.nodeType==3){const m=t.nodeValue.match(/^(.*?)\s*·\s*(\d+)\s*€\s*$/);if(m){t.nodeValue=m[1];const i=document.createElement('i');i.className='pp';i.textContent=m[2]+' €';b.appendChild(i)}}}
 function tagB(b){if(b.closest('#staff')||b.classList.contains('xp'))return;const oc=b.getAttribute('onclick')||'';if(!oc&&!b.querySelector('.pf'))return;try{prep(b)}catch(_){}
- const i=b.querySelector(':scope>i,:scope>small>i');let m=i?i.textContent.match(PR):null;let tag=b.querySelector(':scope>.ptg');
- if(m){b.classList.add('ptb');try{if(!b.querySelector(':scope>.pnm')){const sp=document.createElement('span');sp.className='pnm';let n=b.firstChild;while(n&&n.nodeName!='BR'&&!(n.classList&&(n.classList.contains('ptg')))){const nx=n.nextSibling;sp.appendChild(n);n=nx}if(sp.childNodes.length)b.insertBefore(sp,b.firstChild)}}catch(_){}try{const host=i.parentElement===b?i:i.parentElement;let p=host.previousSibling;while(p&&p.nodeType==3&&!p.nodeValue.trim())p=p.previousSibling;if(p&&p.nodeName=='BR')p.classList.add('pbr')}catch(_){}if(!tag){tag=document.createElement('span');tag.className='ptg';b.appendChild(tag)}const h=m[1]+' €'+(m[2]?'<small style="text-transform:none">par mois</small>':'')+'<small>'+VERB(oc)+'</small>';if(tag.innerHTML!==h)tag.innerHTML=h}
+ const i=b.querySelector(':scope>i,:scope>small>i');let m=i?i.textContent.match(PR):null;let tag=b.querySelector(':scope>.ptg');const st_=!m&&i&&b.disabled&&i.textContent.trim()&&i.textContent.trim().length<18&&!!(b.closest('#side')||b.closest('#tabsbody'));
+ if(m||st_){b.classList.add('ptb');try{if(!b.querySelector(':scope>.pnm')){const sp=document.createElement('span');sp.className='pnm';let n=b.firstChild;while(n&&n.nodeName!='BR'&&!(n.classList&&(n.classList.contains('ptg')))){const nx=n.nextSibling;sp.appendChild(n);n=nx}if(sp.childNodes.length)b.insertBefore(sp,b.firstChild)}}catch(_){}try{const host=i.parentElement===b?i:i.parentElement;let p=host.previousSibling;while(p&&p.nodeType==3&&!p.nodeValue.trim())p=p.previousSibling;if(p&&p.nodeName=='BR')p.classList.add('pbr')}catch(_){}if(!tag){tag=document.createElement('span');tag.className='ptg';b.appendChild(tag)}const h=m?m[1]+' €'+(m[2]?'<small style="text-transform:none">par mois</small>':'')+'<small>'+VERB(oc)+'</small>':'<span class="pstx">'+i.innerHTML+'</span>';if(tag.innerHTML!==h)tag.innerHTML=h}
  else{b.classList.remove('ptb');if(tag)tag.remove()}}
 function run(){for(let t=0;t<5;t++){const p=document.getElementById('t'+t);if(p)p.querySelectorAll('button').forEach(tagB)}
  try{const sl=document.getElementById('sl');if(sl){const h=[...sl.querySelectorAll('h2')].find(e=>/Agrandir la halte/.test(e.textContent)),ex=document.getElementById('exb'),cn=document.getElementById('cnt');
@@ -10387,13 +10387,13 @@ body:has(#mrt) #fmo,body:has(#mrt) #ulp,body:has(#mrt) #ctoast,body:has(#mrt) #t
   portrait(g,S.dci,100,8,40,50);
   g.fillStyle='#fffaf0';g.fillRect(101,62,38,9);g.fillStyle='#2a2433';g.font="bold 7px 'Atkinson Hyperlegible',sans-serif";g.textAlign='center';g.fillText(S.dn,120,69);g.textAlign='left';
   // bougies et fleurs
-  [[103,93],[109,95],[129,95],[135,93]].forEach(([X,Y],i)=>{g.fillStyle='#f4efe4';g.fillRect(X,Y-6,3,6);const f=Math.sin(T*9+i*2)*.6;g.fillStyle='#ffcf4a';g.fillRect(X+1+Math.round(f*.5),Y-9,1,2);g.fillStyle='rgba(255,210,90,.25)';g.beginPath();g.arc(X+1.5,Y-8,4+f,0,7);g.fill()});
+  try{MRTDECO(g,T)}catch(_){}
   O(g,'flbush',112,98);
   // les personnes rassemblées, de dos, face à la photo
-  S.crowd.forEach((c,i)=>{const show=Math.min(1,Math.max(0,(T-c.t)*2));if(show<=0)return;g.globalAlpha=show;sprite(g,c.ci,42+((T*2.2+i)|0)%6*0,c.x,c.y);g.globalAlpha=1});
-  // les personnes qui parlent, face au groupe
+  // les personnes qui parlent, face au groupe (dessinées avant la foule, qui est devant elles)
   if(S.step>=2&&S.step<=3)sprite(g,18,24+((T*5)|0)%6,80,106);else sprite(g,18,42,80,108);
   if(S.step==4)sprite(g,S.sci,24+((T*5)|0)%6,160,106);else if(S.sci!=null)sprite(g,S.sci,42,160,108);
+  S.crowd.forEach((c,i)=>{const show=Math.min(1,Math.max(0,(T-c.t)*2));if(show<=0)return;g.globalAlpha=show;sprite(g,c.ci,42+((T*2.2+i)|0)%6*0,c.x,c.y);g.globalAlpha=1});
   if(S.step==2||S.step==3||S.step==4){const X=S.step==4?160:80;g.font='8px sans-serif';g.fillText('💬',X+5,78+Math.sin(T*3)*1.5)}
   if(S.step==5){g.fillStyle='rgba(10,10,30,.28)';g.fillRect(0,0,W,H);for(let k=0;k<14;k++){const p=((T*.12+k*.137)%1);const X=(k*53+Math.sin(T+k)*12)%W,Y=p*H;g.fillStyle=['#d98a3a','#c9a04a','#b5652e'][k%3];g.fillRect(X,Y,2,1)}}
  }
@@ -10422,11 +10422,12 @@ body:has(#mrt) #fmo,body:has(#mrt) #ulp,body:has(#mrt) #ctoast,body:has(#mrt) #t
   function setStep(k){S.step=k;const L=LINES[k],cap=ov.querySelector('.cap');cap.innerHTML=`${L.w?`<span class="who">${L.w}</span>`:''}<div>${L.t}</div><div class="row">${k==5?'<div class="bar"><i></i></div>':''}<button ${k==5?'hidden':''}>${k==6?'Reprendre':'Continuer ›'}</button></div>`;
    const bt=cap.querySelector('button');bt.onclick=()=>{if(k<6)setStep(k+1);else end()};
    if(k==5){const dur=15000,ts=performance.now(),bar=cap.querySelector('.bar i');const tk=setInterval(()=>{if(!document.getElementById('mrt')){clearInterval(tk);return}const p=Math.min(1,(performance.now()-ts)/dur);bar.style.width=(p*100)+'%';if(p>=1){clearInterval(tk);setStep(6)}},250)}
-   if(k==6){try{MUS.key=null;playMus(seas())}catch(_){}}}
+   if(k==6){try{const a=S.mel||MUS.cur;if(a&&AU.m>0){clearInterval(a._f);MUS.cur=a;MUS.key=S.mkey;a.volume=0;const pr=a.play();if(pr&&pr.catch)pr.catch(()=>{});fadeTo(a,musVol(),1300)}}catch(_){}}}
   function start(){ov.innerHTML=`<canvas width="240" height="135"></canvas><div class="cap"></div>`;cv2=ov.querySelector('canvas');g2=cv2.getContext('2d');t0=performance.now();raf=requestAnimationFrame(frame);
    try{if(MUS.cur)fadeTo(MUS.cur,0,3000,()=>{try{MUS.cur.pause()}catch(_){}})}catch(_){}
-   B.homm={until:GT+DAYL*.5,n:D.n};setStep(1)}
+   B.homm={until:GT+DAYL*.5,n:D.n};S.mel=MUS.cur;S.mkey=MUS.key;setStep(1)}
   function end(){cancelAnimationFrame(raf);ov.classList.remove('on');setTimeout(()=>{ov.remove();paused=false;try{ui()}catch(_){}},800);
+   try{if(AU.m>0&&(!MUS.cur||MUS.cur.paused)){MUS.key=null;playMus(seas())}}catch(_){}
    try{newsAdd('🕯️',`Hommage à ${D.n}, mort·e dans la rue`)}catch(_){}
    try{say(`🕯️ Camille : « Merci à toutes et tous d’être venu·es pour ${D.n}. On rouvre cet après-midi. »`)}catch(_){}}
  };
@@ -16325,6 +16326,45 @@ body:has(#m:not([hidden])) #hasc,body.fly #hasc,body:has(#mtg) #hasc,body:has(#h
 <script>
 // v640 : en paysage, la pastille du défi se place à gauche de la colonne des portraits au lieu de les recouvrir
 setInterval(()=>{try{const d=document.getElementById('dfi');if(!d||innerWidth<innerHeight)return;const L=document.getElementById('lci');let rt='8px';if(L&&L.children.length){const r=L.getBoundingClientRect();if(r.width>0&&r.left>innerWidth/2)rt=Math.round(innerWidth-r.left+8)+'px'}if(d.style.getPropertyValue('right')!==rt)d.style.setProperty('right',rt,'important')}catch(_){}},250);
+</script>
+
+<style id="v642">button.ptb .ptg .pstx{font:700 12px/1.15 'Atkinson Hyperlegible',sans-serif;white-space:nowrap;display:flex;align-items:center;gap:3px}button.ptb .ptg .pstx img{height:13px}</style>
+<script>
+// v642 : les tableaux de la sortie au musée — Vieux-Port et Bonne Mère, la vague, une calanque ; spots et cartels
+window.MUSP=function(g,R,A){
+ const fr=(X,Y)=>{R(X-1,Y-1,32,25,'#4a3418');R(X,Y,30,23,'#c8902f');R(X+1,Y+1,28,21,'#e8b85a');R(X+2,Y+2,26,19,'#8a5e22');R(X,Y,30,1,'#f6d98c');R(X+30,Y,1,24,'rgba(0,0,0,.18)');R(X,Y+23,31,1,'rgba(0,0,0,.18)')};
+ const spot=(X)=>{g.save();g.globalAlpha=.16;g.fillStyle='#fff6cf';g.beginPath();g.moveTo(X+11,0);g.lineTo(X+19,0);g.lineTo(X+34,40);g.lineTo(X-4,40);g.closePath();g.fill();g.restore();R(X+12,0,6,2,'#3a3a44');R(X+13,2,4,1,'#ffe9a0')};
+ const cartel=(X)=>{R(X+11,37,9,4,'#f7f3ea');R(X+12,38,7,1,'#9a948a');R(X+12,40,4,1,'#bdb7ad')};
+ // 1. Vieux-Port au couchant, la Bonne Mère sur sa colline
+ let X=21,Y=11;spot(X);fr(X,Y);const x0=X+3,y0=Y+3;
+ R(x0,y0,24,4,'#f08a5d');R(x0,y0+4,24,3,'#f7b267');R(x0,y0+7,24,2,'#fcd79a');R(x0+17,y0+2,3,2,'#fff3b0');
+ R(x0,y0+6,11,4,'#7d8f6a');R(x0+2,y0+5,7,2,'#7d8f6a');R(x0+4,y0+2,3,4,'#f2efe6');R(x0+5,y0,1,2,'#f2efe6');R(x0+5,y0-1,1,1,'#ffd23f');
+ R(x0,y0+10,24,2,'#e9d3b0');for(let k=0;k<24;k+=3)R(x0+k,y0+9,2,1,'#d8b98e');
+ R(x0,y0+12,24,5,'#2f6fb5');R(x0,y0+13,24,1,'#4f8fd0');R(x0+3,y0+15,8,1,'#f7b267');R(x0+14,y0+14,6,1,'#fcd79a');
+ R(x0+7,y0+8,1,5,'#3a2a1e');R(x0+15,y0+7,1,6,'#3a2a1e');R(x0+20,y0+9,1,4,'#3a2a1e');R(x0+5,y0+12,5,1,'#f2efe6');R(x0+13,y0+12,5,1,'#c0392b');R(x0+18,y0+12,4,1,'#f2efe6');
+ cartel(X);
+ // 2. la vague (dessin du pack, simplement éclairé)
+ X=84;spot(X);R(X-1,Y-1,32,25,'#4a3418');A('p2',85,34);R(X+30,Y,1,24,'rgba(0,0,0,.18)');cartel(X);
+ // 3. une calanque : falaises blanches, eau turquoise, pins
+ X=147;spot(X);fr(X,Y);const x1=X+3,y1=Y+3;
+ R(x1,y1,24,17,'#8fd3f0');R(x1,y1,24,3,'#b9e6f7');R(x1+16,y1+2,4,1,'#ffffff');R(x1+18,y1+1,3,1,'#ffffff');
+ R(x1,y1+3,8,14,'#e9e3d3');R(x1+1,y1+2,5,2,'#e9e3d3');R(x1+6,y1+6,3,11,'#cfc7b2');R(x1+17,y1+4,7,13,'#e9e3d3');R(x1+19,y1+3,5,2,'#e9e3d3');R(x1+16,y1+8,2,9,'#cfc7b2');
+ R(x1+1,y1+1,3,2,'#3f7a3a');R(x1+4,y1+1,2,1,'#5a9a4a');R(x1+19,y1+2,3,1,'#3f7a3a');R(x1+21,y1+1,2,2,'#5a9a4a');R(x1+2,y1+7,1,3,'#b8af98');R(x1+20,y1+9,1,3,'#b8af98');
+ for(let r=0;r<9;r++){const w=4+r*2,xs=x1+12-w/2;R(xs,y1+8+r,w,1,r<2?'#7fe0d6':r<6?'#2fb5b0':'#1f8f9a')}R(x1+9,y1+12,3,1,'#7fe0d6');R(x1+14,y1+14,4,1,'#7fe0d6');R(x1+11,y1+10,2,1,'#f2efe6');
+ cartel(X);
+};
+</script>
+
+<script>
+// v642 : hommage — couronnes de fleurs (couronne du pack, baies remplacées par des fleurs blanches et mauves, ruban violet) et bougies du pack
+(function(){let WR=null;const mk=()=>{try{const r=EVM.wreath;if(!EVI.complete||!EVI.naturalWidth)return null;const c=document.createElement('canvas');c.width=r[2];c.height=r[3];const g=c.getContext('2d');g.drawImage(EVI,r[0],r[1],r[2],r[3],0,0,r[2],r[3]);const d=g.getImageData(0,0,r[2],r[3]),p=d.data;let k=0;
+  for(let i=0;i<p.length;i+=4){const R_=p[i],G=p[i+1],B_=p[i+2];if(p[i+3]>0&&R_>140&&G<110&&B_<110){const w=(k++)%3;const col=w==0?[248,244,236]:w==1?[201,160,220]:[245,214,232];p[i]=col[0];p[i+1]=col[1];p[i+2]=col[2]}}g.putImageData(d,0,0);return c}catch(_){return null}};
+ window.MRTDECO=function(g,T){if(!WR)WR=mk();
+  // deux couronnes sur pied, de part et d'autre du chevalet
+  [[88,94],[137,94]].forEach(([X,YB])=>{g.fillStyle='#4a3420';g.fillRect(X+4,YB-8,1,9);g.fillRect(X+11,YB-8,1,9);if(WR)g.drawImage(WR,X,YB-24);g.fillStyle='#6a4a8a';g.fillRect(X+6,YB-9,4,2);g.fillRect(X+6,YB-7,1,3);g.fillRect(X+9,YB-7,1,3)});
+  // bougies du pack, au pied du chevalet
+  const f=((T*6)|0)%3;[[92,101],[139,101]].forEach(([X,YB],i)=>{try{EVd(g,'cnd'+((f+i)%3),X,YB)}catch(_){}g.fillStyle='rgba(255,210,90,.18)';g.beginPath();g.arc(X+6.5,YB-10,6+Math.sin(T*8+i)*.6,0,7);g.fill()})};
+})();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
