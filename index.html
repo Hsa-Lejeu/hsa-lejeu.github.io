@@ -531,7 +531,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v618')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v619')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -4559,7 +4559,7 @@ Object.assign(window,{strikeStart,strikeEnd,marchStart,seatsOf});
 
 W('traffic',(o,a)=>{if(B.march)return;return o(...a)});
 
-(function(){const st=document.createElement('style');st.textContent=`#splmail{font:700 13px 'Atkinson Hyperlegible',sans-serif;color:#2a2433;background:rgba(255,250,240,.9);border:2px solid #6a5c4c;border-radius:8px;padding:3px 12px;text-decoration:none;user-select:text}#splmail:focus-visible{outline:3px solid #2f6fb5}`;document.head.appendChild(st)})();
+(function(){const st=document.createElement('style');st.textContent=`#splmail{font:700 13px 'Atkinson Hyperlegible',sans-serif;color:#2a2433;background:rgba(255,250,240,.9);border:2px solid #6a5c4c;border-radius:8px;padding:5px 12px;text-decoration:none;user-select:text}#splmail:focus-visible{outline:3px solid #2f6fb5}`;document.head.appendChild(st)})();
 // ===== v178 : illustrations des histoires de vie composées avec les objets du pack
 const SIMG=new Image();SIMG.src='a/1e9840651118.png';
 LCD.img=(H,T,ci,o)=>{const i=o.i;if(SIMG.complete&&SIMG.naturalWidth)H.g.drawImage(SIMG,(i%10)*200,Math.floor(i/10)*104,200,104,0,0,200,104);else{H.g.fillStyle='#2a2433';H.g.fillRect(0,0,200,104)}};
@@ -5593,7 +5593,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v618')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v619')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -13409,7 +13409,7 @@ html body #lci button.lcb svg{display:block}
  setInterval(()=>{try{document.querySelectorAll('#lci .lcb svg:not([viewBox])').forEach(s=>{const w=s.getAttribute('width')||46,hh=s.getAttribute('height')||46;s.setAttribute('viewBox','0 0 '+w+' '+hh)})}catch(_){}},500);
  // indicateur de défilement
  const H=new Map();
- const cands=()=>{const L=[];['tabsbody','mb'].forEach(id=>{const e=document.getElementById(id);if(e)L.push(e)});document.querySelectorAll('#fmo *,#splx .bx,#xpov *,#rsp,#lcbook *').forEach(e=>{if(e.clientHeight>80&&e.scrollHeight>e.clientHeight+12){const o=getComputedStyle(e).overflowY;if(o=='auto'||o=='scroll')L.push(e)}});return L};
+ const cands=()=>{const L=[];['tabsbody','mb'].forEach(id=>{const e=document.getElementById(id);if(e)L.push(e)});document.querySelectorAll('#fmo *,#splx .bx,#xpov *,#rsp,#rsp .rsl,#lcbook *').forEach(e=>{if(e.clientHeight>80&&e.scrollHeight>e.clientHeight+12){const o=getComputedStyle(e).overflowY;if(o=='auto'||o=='scroll')L.push(e)}});return L};
  __hsaLayout(()=>{try{const L=cands(),seen=new Set();
   L.forEach(e=>{const r=e.getBoundingClientRect();const more=e.scrollHeight-e.scrollTop-e.clientHeight>14;const vis=r.width>60&&r.height>80&&e.offsetParent&&getComputedStyle(e).visibility!='hidden';if(!more||!vis)return;seen.add(e);
    let c=H.get(e);if(!c){c=document.createElement('div');c.className='scrh';c.textContent='⌄';c.title='Faire défiler';c.onclick=()=>{try{e.scrollBy({top:e.clientHeight*.7,behavior:'smooth'})}catch(_){e.scrollTop+=e.clientHeight*.7}};document.body.appendChild(c);H.set(e,c)}
@@ -14556,7 +14556,7 @@ html body #m #mb .abk .atab.on{opacity:1;box-shadow:2px 2px 0 rgba(0,0,0,.3),ins
 
   /* Réseau de la halte (v618) : fenêtre large, les filières en grille de trois colonnes */
   #m.modal:not(.endl) #mb:has(#rsp) { max-width: min(900px, 97vw) !important; width: min(900px, 97vw) !important; }
-  #rsp .rsl { display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; padding-bottom: 64px; margin-top: 3px !important; }
+  #rsp .rsl { display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; margin-top: 3px !important; }
   #rsp .rsr { flex-direction: column; align-items: stretch !important; height: auto !important; padding: 3px 5px !important; gap: 3px; overflow: visible !important; }
   #rsp .rsr .rsb { width: auto !important; max-width: none !important; flex: none !important; height: 20px !important; min-height: 0 !important; padding: 1px 6px !important; font-size: 11px !important; }
   #rsp .rso { width: 30px !important; height: 30px !important; border-width: 2px !important; }
@@ -14567,6 +14567,23 @@ html body #m #mb .abk .atab.on{opacity:1;box-shadow:2px 2px 0 rgba(0,0,0,.3),ins
   #rsp .rsr { justify-content: flex-start !important; }
   #rsp .rsr .rsc { flex: none !important; }
   #rsp .rsr .rsc { flex-wrap: wrap; row-gap: 4px; width: auto !important; }
+
+  /* Réseau (v619) : seule la grille défile, l'encadré « Touche une étape… » reste dessous sans rien cacher */
+  #m.modal:not(.endl) #mb:has(#rsp) { display: flex !important; flex-direction: column; overflow: hidden !important; }
+  #mb > #rsp { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+  #rsp > .rsh, #rsp > .lg, #rsp > .rsd, #rsp > div:last-child { flex: none; }
+  #rsp > .rsl { flex: 1 1 auto; min-height: 0; overflow-y: auto; align-content: start; padding: 2px 2px 4px; }
+  #rsp > .rsd { position: static !important; margin-top: 6px !important; box-shadow: none !important; }
+  #rsp > div:last-child:has(> button.go) { display: none !important; }
+
+  /* Aide (v619) : les boutons du bas suivent le contenu, ils ne passent plus sur le texte des fiches */
+  #m #mb .hlp > .act { position: static !important; box-shadow: none !important; }
+
+  /* Bilan final (v619) : place à droite du tableau pour la flèche ronde de défilement */
+  #m.endl #mb table.led { width: calc(100% - 40px); margin-right: 40px; }
+
+  /* Bandeau d'euros et de personnes accompagnées : 28 px au moins pour le doigt (v619) */
+  html body #app #hplank .euw, html body #app #hplank .euw + div { min-height: 28px !important; }
 
   /* Panneau latéral et onglets */
   #app.open #toasts { left: 60px; transform: none; width: calc(100% - var(--sw) - 150px); }

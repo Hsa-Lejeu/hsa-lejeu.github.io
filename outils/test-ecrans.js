@@ -11,6 +11,8 @@
 //   - « petit »  : moins de 28 px de haut ou de large
 // Pour les fenêtres (#m) : « vide » si plus de 35 % de la fenêtre est sans contenu (sauf pendant l'animation du radar,
 // quand « Passer » est affiché), « déborde » si elle dépasse l'écran.
+// « sous-barre » : une fois la fenêtre défilée jusqu'en bas, du texte reste sous une barre collée en bas
+// (boutons ou encadré en position sticky) : la fin du contenu ne peut pas être lue.
 // « erreur » : une erreur attrapée par oops() (v587) pendant l'écran.
 // Le résumé final compte les problèmes par écran et par format ; 0 « caché » et 0 « dehors » est l'objectif.
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
@@ -32,6 +34,7 @@ const ST=[
  ['bilan-annuel-fin','?an=2',"AG.rel=1;endGame();AG.rel=0",9000,['Continuer']],
  ['bilan-final','?an=3',"AG.rel=1;endGame();AG.rel=0",5000,['Passer','Voir le bilan']],
  ['debat','?an=3',"debOpen()",4000],
+ ['aide-fiche','?an=2',"AG.rel=1;help();const d=[...document.querySelectorAll('#mb details')];if(d.length)d[d.length-1].open=true;AG.rel=0",1200],
  ['album','?an=2',"album()",1200],
  ['carte','?an=2',"cardShow(CARDS[0][0])",1200],
  ['finances','?an=2',"finModal()",1200],
@@ -54,9 +57,15 @@ const PROBE=()=>{const W=innerWidth,H=innerHeight,out=[];
   if(r.bottom>H+1||r.top<-1||r.right>W+1||r.left<-1)out.push({k:'déborde',e:'#mb',r:[r.left|0,r.top|0,r.width|0,r.height|0]});
   // part vide : on quadrille la fenêtre et on cherche les cases sans contenu
   let empty=0,tot=0;const st=12;for(let y=r.top+st/2;y<Math.min(r.bottom,H);y+=st)for(let x=r.left+st/2;x<Math.min(r.right,W);x+=st){tot++;const f=document.elementFromPoint(x,y);if(!f||f===mb||f===m||(f.contains(mb)))empty++}
-  const vf=tot?empty/tot:0;if(vf>.35&&!mb.querySelector('.rvskip,.yrsk'))out.push({k:'vide',e:'#mb',v:Math.round(vf*100)+' %'})}
+  const vf=tot?empty/tot:0;if(vf>.35&&!mb.querySelector('.rvskip,.yrsk'))out.push({k:'vide',e:'#mb',v:Math.round(vf*100)+' %'})
+  // texte resté sous une barre collée en bas, fenêtre défilée jusqu'au bout
+  const sc=[mb,...mb.querySelectorAll('*')].filter(e=>{const o=getComputedStyle(e).overflowY;return (o=='auto'||o=='scroll')&&e.scrollHeight>e.clientHeight+2});const t0=sc.map(e=>e.scrollTop);sc.forEach(e=>e.scrollTop=e.scrollHeight);
+  const bars=[...mb.querySelectorAll('*')].filter(e=>{const c=getComputedStyle(e);return c.position=='sticky'&&c.bottom!='auto'&&vis(e)});const seen=new Set();
+  for(const s of bars){const br=s.getBoundingClientRect();for(const t of mb.querySelectorAll('p,li,td,th,summary,h3,small,label')){if(s.contains(t)||t.contains(s)||seen.has(t))continue;const q=t.getBoundingClientRect();if(q.height<4||!vis(t))continue;
+   if(q.bottom>br.top+3&&q.top<br.bottom-3&&q.right>br.left&&q.left<br.right){seen.add(t);out.push({k:'sous-barre',e:nm(t),par:nm(s),r:[q.left|0,q.top|0,q.width|0,q.height|0]})}}}
+  sc.forEach((e,i)=>e.scrollTop=t0[i])}
  return out};
-(async()=>{const b=await chromium.launch();const rep={};let tot={caché:0,dehors:0,petit:0,vide:0,déborde:0,erreur:0};
+(async()=>{const b=await chromium.launch();const rep={};let tot={caché:0,dehors:0,petit:0,vide:0,déborde:0,'sous-barre':0,erreur:0};
  for(const [n,q,code,wait,clk] of ST){if(FILT&&!n.includes(FILT))continue;
   for(const [vn,w,h] of VP){const pg=await b.newPage({viewport:{width:w,height:h},isMobile:true,hasTouch:true});const errs=[];pg.on('pageerror',e=>errs.push(e.message.slice(0,140)));
    try{await pg.goto(URL_+q);await pg.waitForTimeout(q?6000:wait);
@@ -71,4 +80,4 @@ const PROBE=()=>{const W=innerWidth,H=innerHeight,out=[];
     P.filter(p=>p.k!='petit').slice(0,6).forEach(p=>console.log('     ',p.k,p.e,p.par?'← '+p.par:'',p.v||'',p.r?JSON.stringify(p.r):''))}
    catch(e){console.log(n,vn,'ERREUR',e.message.slice(0,160))}await pg.close()}}
  fs.writeFileSync(path.join(OUT,'rapport.json'),JSON.stringify(rep,null,1));
- console.log('\nTotal :',Object.entries(tot).map(([k,v])=>k+' '+v).join(', '),'(objectif : 0 caché, 0 dehors, 0 déborde, 0 vide)');await b.close()})();
+ console.log('\nTotal :',Object.entries(tot).map(([k,v])=>k+' '+v).join(', '),'(objectif : 0 caché, 0 dehors, 0 déborde, 0 vide, 0 sous-barre)');await b.close()})();
