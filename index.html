@@ -531,7 +531,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v634')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v635')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5617,7 +5617,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v634')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v635')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -9035,8 +9035,15 @@ try{VAL.title='candidat à la mairie'}catch(_){}
 // ===== v386 : une salle déjà construite (avec l'aide de Camille) n'est pas annoncée comme « nouvelle » plus tard
 setInterval(()=>{try{if(!started||!B.unl||B.unl.all)return;[2,3,4,5].forEach(k=>{if(built[k]&&!B.unl['r'+k]){B.unl['r'+k]=1;B.unlT=B.unlT||{};B.unlT['r'+k]=AMI()}})}catch(_){}},500);
 // ===== v386 : à la reprise d'une sauvegarde, la halte n'est plus vide (les personnes présentes reviennent peu à peu)
-setInterval(()=>{try{if(started&&!ended&&!INTRO)localStorage.setItem('hsa-nv',String(V.filter(v=>!v.gone&&!v.leaving).length))}catch(_){}},4000);
-W('continueGame',(o,a)=>{const r=o(...a);try{const n=Math.min(12,parseInt(localStorage.getItem('hsa-nv')||'0',10)||0);for(let k=0;k<n;k++)setTimeout(()=>{try{if(started&&!ended&&V.length<14)V.push(newV())}catch(_){}},400+k*700)}catch(_){}return r});
+setInterval(()=>{try{if(started&&!ended&&!INTRO){const L=V.filter(v=>!v.gone&&!v.leaving&&v.name);localStorage.setItem('hsa-nv',String(L.length));
+ const K=['name','need','path','pi','dg','lang','dog','cared','skin','col','itp','nolang','wcb','siao','pz','done'];
+ localStorage.setItem('hsa-vs',JSON.stringify({run:B.runId,L:L.map(v=>{const o={};K.forEach(k=>{if(v[k]!==undefined&&typeof v[k]!='function')o[k]=v[k]});o.r=(v.s=='wait'||v.s=='in'||v.inroom||v.door)?v.r:-1;return o})}))}}catch(_){}},4000);
+window.vsRestore=function(){try{const d=JSON.parse(localStorage.getItem('hsa-vs')||'null');if(!d||!d.L||d.run!==B.runId)return false;let n=0;
+ for(const o of d.L.slice(0,16)){if(!o.name||V.some(v=>v.name===o.name))continue;window.FORCEN=o.name;let v;try{v=newV()}finally{window.FORCEN=null}if(!v)continue;Object.assign(v,o);
+  const r=o.r;if(r==null||r<0||!built[r]||!st[r]||!WL[r]){delete v.r;v.r=-1;v.pi=-1;v.first=true;V.push(v);n++;continue}
+  v.first=false;v.r=r;WL[r].push(v);v.s='wait';const sp_=spot(v);v.x=sp_[0];v.y=sp_[1];v.w=[];V.push(v);n++}
+ return n>0}catch(e){console.error(e);return false}};
+W('continueGame',(o,a)=>{const r=o(...a);try{if(window.vsRestore&&vsRestore())return r;const n=Math.min(12,parseInt(localStorage.getItem('hsa-nv')||'0',10)||0);for(let k=0;k<n;k++)setTimeout(()=>{try{if(started&&!ended&&V.length<14)V.push(newV())}catch(_){}},400+k*700)}catch(_){}return r});
 // ===== v387 A : « 📞 Appeler le 115 » dans la salle Social pendant le plan grand froid
 {const host=()=>$('par');
  const z115=()=>STF.find(z=>z.r==3&&z.off<=0);
