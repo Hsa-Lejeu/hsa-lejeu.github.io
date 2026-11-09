@@ -531,7 +531,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v619')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v620')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -4763,7 +4763,7 @@ W('nextYear',(o,a)=>{YRT.forEach(clearTimeout);YRT=[];$('m').className='modal';r
 
 // ===== v187 : vraie page qui se tourne dans les livres (recto = ancienne page, verso = nouvelle), montée de niveau animée
 // ---- livre : on photographie l'ancienne page avant le changement, puis la nouvelle, et la feuille tourne avec ses deux faces
-function lcSnap(el){if(!el)return null;const c=el.cloneNode(true);c.querySelectorAll('canvas').forEach((cv,i)=>{const o=el.querySelectorAll('canvas')[i];try{cv.getContext('2d').drawImage(o,0,0)}catch(_){}});c.classList.remove('flip');c.style.cssText='position:absolute;left:0;top:0;margin:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-sizing:border-box;';c.style.width=el.offsetWidth+'px';c.style.height=el.offsetHeight+'px';return c}
+function lcSnap(el){if(!el)return null;const c=el.cloneNode(true);c.querySelectorAll('canvas').forEach((cv,i)=>{const o=el.querySelectorAll('canvas')[i];try{cv.getContext('2d').drawImage(o,0,0)}catch(_){}});c.classList.remove('flip');const cc_=el.style.getPropertyValue('--cc');c.style.cssText='position:absolute;left:0;top:0;margin:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-sizing:border-box;';if(cc_)c.style.setProperty('--cc',cc_);c.style.width=el.offsetWidth+'px';c.style.height=el.offsetHeight+'px';return c}
 W('lcBook',(o,a)=>{const k=a[0];let prev=null,old=null;try{const S=lcS(k);prev=S?S._bi:null;const bk0=document.querySelector('#lcbook .bk');if(bk0&&prev!=null){const vert=getComputedStyle(bk0).flexDirection=='column';old={vert,l:bk0.querySelector('.pg.l'),r:bk0.querySelector('.pg.r')};const G=e=>e?{l:e.offsetLeft,t:e.offsetTop,w:e.offsetWidth,h:e.offsetHeight}:null;old.gl=G(old.l);old.gr=G(old.r);old.sl=lcSnap(old.l);old.sr=lcSnap(old.r)}}catch(_){}
  const r=o(...a);
  try{const S=lcS(k),i=S?S._bi:null;if(!old||prev==null||i==null||prev===i||matchMedia('(prefers-reduced-motion:reduce)').matches)return r;
@@ -5593,7 +5593,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v619')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="closeH();realModal()">📚 Le jeu et la réalité</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v620')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -5665,6 +5665,7 @@ setInterval(()=>{try{const e=$('cbx'),c=$('ccv');if(!e)return;const r=c&&c.getBo
 .modal .box:has(.fin2){max-width:min(600px,96vw)!important}
 .fin2{font-family:'Atkinson Hyperlegible',sans-serif;color:#2a2433;text-align:left}
 .fin2 .fh{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 8px}.fin2 .fh h2{font:400 22px/1.1 Lilita,sans-serif;margin:0}.fin2 .fh small{color:#8a7a66;font-weight:700;font-size:12px}
+.fin2 .fh .fx{display:none}
 .fin2 .hero{display:flex;gap:10px;align-items:stretch;margin-bottom:10px}
 .fin2 .pig{flex:1.2;background:#ffd23f;border:3px solid #2a2433;border-radius:12px;box-shadow:0 4px 0 #2a2433;padding:8px 12px;display:flex;align-items:center;gap:10px}
 .fin2 .pig .ic{font-size:34px;line-height:1}.fin2 .pig b{display:block;font:400 32px/1 Lilita,sans-serif;font-variant-numeric:tabular-nums}.fin2 .pig span{font-size:12px;font-weight:700;color:#5a4a20}
@@ -5702,7 +5703,7 @@ window.finModal=function(){if(!$('m').hidden)return;paused=true;
  const out=[['💼','Les salaires',`${pl(ns,'salarié·e')} × ${ps} €`+(nd?` + ${pl(nd,'médecin')} × ${pd} €`:'')+(SXP()?` + ${SXP()} € liés à l’expérience`:''),sal]];try{(window.finPend?finPend():[]).forEach(x=>out.push(x))}catch(_){}
  const it=(L,cl)=>L.map(([e,t,s,v])=>`<div class="it"><span class="e">${e}</span><span class="t">${t}<small>${s}</small></span><span class="v ${cl}">${cl=='pos'?'+':'−'}${fmt(v)} €</span></div>`).join('');
  const ex=inc.slice(2).reduce((t,x)=>t+x[3],0),outT=out.reduce((t,x)=>t+x[3],0),tot=Math.max(1,c+a+ex+outT),bal=c+a+ex-outT,end=eu+(window.PAYNOW?0:c+a)+ex-outT;
- let h=`<div class="fin2"><div class="fh"><h2>💶 Les comptes de la halte</h2><small>${MN[Math.min(mo,11)]} · année ${YR}</small></div>
+ let h=`<div class="fin2"><div class="fh"><h2>💶 Les comptes de la halte</h2><small>${MN[Math.min(mo,11)]} · année ${YR}</small><button class="fx" onclick="closeH()" title="Fermer" aria-label="Fermer">✕</button></div>
  <div class="hero"><div class="pig"><span class="ic">🐷</span><div><b>${fmt(eu)} €</b><span>dans la caisse aujourd’hui</span></div></div>
  <div class="fut"><span>À la fin du mois, sans imprévu</span><b class="${end>=0?'':'neg'}">≈ ${fmt(end)} €</b><i class="${bal>=0?'pos':'neg'}">${bal>=0?'▲':'▼'} ${sgn(bal)} ce mois-ci</i></div></div>
  <h3>📅 Ce mois-ci <small>(sans compter les dons et les imprévus)</small></h3>
@@ -14649,6 +14650,16 @@ html body #m #mb .abk .atab.on{opacity:1;box-shadow:2px 2px 0 rgba(0,0,0,.3),ins
   #m.modal.low #mb { height: auto !important; max-height: calc(100% - 8px) !important; }
   #mb .atab { min-width: 34px; font-size: 0px !important; padding: 0px !important; }
   #mb .atab::before { content: attr(data-ic); font-size: 16px; line-height: 1; }
+  /* Album (v620) : fenêtre plus large pour garder le titre des onglets à droite */
+  #m.modal:not(.endl) #mb:has(.abk) { width: min(97vw, 820px) !important; max-width: min(97vw, 820px) !important; }
+  #mb .abk .atabs { width: auto !important; gap: 2px !important; padding: 4px 2px 4px 0 !important; justify-content: center !important; }
+  #mb .abk .atab { width: auto !important; min-width: 0 !important; writing-mode: horizontal-tb !important; justify-content: flex-start !important; gap: 4px; padding: 0 8px 0 5px !important; font-size: 11px !important; flex: none !important; height: 21px !important; margin: 0 0 0 -6px !important; min-height: 0 !important; max-height: none !important; overflow: hidden; line-height: 1 !important; white-space: nowrap; }
+  #mb .abk .atab.on { padding-right: 12px !important; margin-left: -3px !important; }
+  /* Comptes (v620) : bouton ✕ en haut à droite */
+  #mb .fin2 .fh { align-items: center; }
+  #mb .fin2 .fh small { margin-left: auto; }
+  #mb .fin2 .fh .fx { display: flex; flex: none; align-items: center; justify-content: center; width: 36px; height: 36px; min-width: 36px; min-height: 36px; padding: 0; margin: -4px -4px 0 0; background: #3fae5a; color: #fff; border: 3px solid #2a2433; border-image: none; border-radius: 9px; font: 900 18px/1 sans-serif; box-shadow: 0 3px 0 #2a2433; }
+  #mb .abk .atab::before { font-size: 11px; line-height: 1 !important; }
   #m.endl #mb > .rvbox { float: left; margin: 0px 14px 6px 0px; width: min(36vw, 290px) !important; height: auto !important; }
   #m.endl #mb > .rvbox svg { max-width: 100%; height: auto; }
   #m.endl #mb > h2 { margin-bottom: 4px; }
