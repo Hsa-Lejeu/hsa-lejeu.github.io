@@ -531,7 +531,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v642')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v643')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -3889,7 +3889,7 @@ const RWM={0:{rec:["hire(0)","hireX('med')","hireX('int')"],form:['fd'],res:['wb
 // ---- le GEM (groupe d'entraide mutuelle) : psy + salle de repos
 const GEM={ic:'🤝',n:'Lancer un GEM',s:'groupe d’entraide mutuelle, géré par les usager·es',c:80};
 function gemState(){if(B.gem)return{done:1};if(!(built[2]&&built[5]))return{lock:'Il faut une salle de repos et un bureau psy.'};if(!STF.some(z=>z.r==5&&z.off<=0))return{lock:'Il faut une psychologue en poste.'};if(acc<10)return{lock:'Il faut d’abord accompagner au moins 10 personnes.'};return{ok:eu>=GEM.c}}
-function gemScene(H,T){const g=H.g;H.room('w6','f7');H.F('sofa_red',20,62);H.F('lowtable',84,78);H.F('plant_m',176,58);H.F('lamp',150,58);const u=usCi(),P=[[64,72],[96,70],[128,72],[60,96],[100,100],[140,96]];P.forEach(([X,Y],i)=>H.spr(i==1?stCi(5)||52:u[i%u.length],24+((i*2+((T*1.5)|0))%6),X,Y));if(T>1.5)heartPx(H,96,40-Math.min(8,(T-1.5)*5));if(T>2.5)heartPx(H,124,46-Math.min(8,(T-2.5)*5),'#7fd36b')}
+function gemScene(H,T){const g=H.g;H.room('w6','f7');H.F('sofa_red',20,62);H.F('plant_m',176,58);H.F('lamp',150,58);const u=usCi(),fr=i=>24+((i*2+((T*1.5)|0))%6),ci=i=>i==1?stCi(5)||52:u[i%u.length];[[78,72],[118,72]].forEach(([X,Y],k)=>H.spr(ci(k),fr(k),X,Y));H.F('lowtable',84,86);[[58,90],[142,90],[82,104],[120,104]].forEach(([X,Y],k)=>H.spr(ci(k+2),fr(k+2),X,Y));if(T>1.5)heartPx(H,96,40-Math.min(8,(T-1.5)*5));if(T>2.5)heartPx(H,124,46-Math.min(8,(T-2.5)*5),'#7fd36b')}
 window.gemGo=function(){const s=gemState();if(!s.ok)return;eu-=GEM.c;B.gem=1;B.gemT=AMI();q+=3;NOT=nUp(3);rdvSat(6,10);newsAdd('🤝','Un GEM est né à la halte');unlockCardS('c94');
  say('🤝 Le GEM est lancé : les usager·es s’y retrouvent et décident ensemble. La psychologue soutient, sans animer.');
  popWin({t:'Entraide',n:'🤝 Un groupe d’entraide mutuelle',d:'Chaque semaine, dans la salle de repos, des usager·es se retrouvent entre pairs : on partage un café, on organise des sorties, on s’écoute. C’est leur groupe : ils et elles en choisissent les règles. Chaque mois, la satisfaction des personnes accompagnées augmente un peu.',dur:8,snd:'joy',draw:gemScene});try{ui()}catch(_){}};
@@ -4419,12 +4419,12 @@ patrick:{n:'Patrick',ci:88,start:4,col:'#7a7f8c',off:[0,5,10,15,20,25],
  lost:`Patrick n’est plus venu. Un copain dit qu’il est hospitalisé quelque part, ou parti dans le Sud. On espère.`},
 lola:{n:'Lola',ci:89,fem:1,start:6,col:'#c43d8f',off:[0,5,10,15,20,25],
  ch:[
-  {t:'La maraude de nuit',sit:'rue',card:'c100',art:{k:'night',o:{sit:1,dog:1,staff:1}},txt:()=>`Maraude de nuit, près de la rotonde. Rencontré Lola, 38 ans, et sa chienne Nouba. Crack « pour tenir la nuit », travaille dans la rue depuis dix ans. A pris le matos et le café, on l'oriente vers Autres Regards mais réagit assez mal en disant qu'elle a pas besoin d'être aidée.`},
-  {t:'Nouba',sit:'rue',card:'c27',rdv:'Emmener Nouba chez un·e vétérinaire',art:{k:'night',o:{dog:1,staff:1}},txt:()=>`Et voilà que Nouba boite... J'aurais bien aimé trouver un coin pour qu'elle se repose, mais faut voir ce qu'on me propose : des hôtels interdits aux chiens, porte fermée à 22 h. Comment ils veulent que je bosse la nuit??? Puis je me séparerais pas de Nouba!`},
-  {t:'La nuit où ça a mal tourné',sit:'rue',rdv:'L’accompagner déposer plainte, avec une association',art:{k:'night',o:{sit:1,dog:1,rain:1}},txt:()=>`Un client m’a frappée. Il est parti avec mon sac et mon téléphone. J'ai lu un communiqué du Strass, ils disent que c'est en augmentation depuis 2016 avec la loi pénalisant les clients. On travaille plus loin, plus isolées, plus en danger... À la halte ils m'ont soigné mes plaies, et ils ont voulu m'accompagner porter plainte. Pour qu’on me traite de sale p*** au commissariat ? Non merci!`},
+  {t:'La maraude de nuit',sit:'rue',card:'c100',art:{k:'night',o:{sit:1,dog:1,staff:1}},txt:()=>`Maraude de nuit, près de la rotonde. Rencontré Lola, 38 ans, et sa chienne Nouba. Crack « pour tenir la nuit », travaille dans la rue depuis dix ans. A pris le matos et le café, on l'oriente vers Autres Regards mais réagit assez mal en disant qu'elle n'a pas besoin d'être aidée.`},
+  {t:'Nouba',sit:'rue',card:'c27',rdv:'Emmener Nouba chez un·e vétérinaire',art:{k:'night',o:{dog:1,staff:1}},txt:()=>`Et voilà que Nouba boite... J'aurais bien aimé trouver un coin pour qu'elle se repose, mais faut voir ce qu'on me propose : des hôtels interdits aux chiens, porte fermée à 22 h. Comment ils veulent que je bosse la nuit ??? Et jamais je me séparerai de Nouba !`},
+  {t:'La nuit où ça a mal tourné',sit:'rue',rdv:'L’accompagner déposer plainte, avec une association',art:{k:'night',o:{sit:1,dog:1,rain:1}},txt:()=>`Un client m’a frappée. Il est parti avec mon sac et mon téléphone. J'ai lu un communiqué du Strass, ils disent que c'est en augmentation depuis 2016 avec la loi pénalisant les clients. On travaille plus loin, plus isolées, plus en danger... À la halte ils m'ont soigné mes plaies, et ils ont voulu m'accompagner porter plainte. Pour qu’on me traite de sale p*** au commissariat ? Non merci !`},
   {t:S=>S.rdv&&S.rdv[2]?'La plainte':'Toute seule',sit:'rue',card:'c15',art:S=>S.rdv&&S.rdv[2]?{k:'police',o:{who:58,staff:1}}:{k:'room',o:{w:'w2',f:'f6',items:[['arm_red',60,70]],col:30,x:90,y:86,who:49}},
    txt:S=>S.rdv&&S.rdv[2]?`Finalement je suis allée chez les keufs à Noailles avec une bénévole d’Autres Regards et quelqu’un de la halte. En vrai, la policière était formée, elle était pas si mal. Pour une fois. J'en ai profité pour faire une carte SIM, un dépistage complet, et un rendez-vous pour la PrEP. Bon. J'aurais jamais cru faire tout ça...`:`Pas de plainte. Je fais avec, comme d’hab. Je passe à la halte pour les dépistages et la PrEP, et je repars travailler. Je gère. C’est juste que je dors plus beaucoup. Donc bon... Je tiens jusqu'à ce que je gère plus.`},
-  {t:'Le choix',sit:'rue',rdv:'Visiter un logement avec Lola et Nouba',art:{k:'room',o:{w:'w5',f:'f4',items:[['tdesk',70,70]],col:30,x:80,y:94,who:58}},txt:()=>`Une meuf d'une asso m’a proposé le « parcours de sortie de la prostitution » : 343 € par mois et un accompagnement, à condition d’arrêter de travailler. Non mais elle est ouf ou quoi ? Et j’arrête quoi, de manger ? Moi, ce que je veux, c’est un logement qui accepte Nouba. Et qu’on me fiche la paix!`},
+  {t:'Le choix',sit:'rue',rdv:'Visiter un logement avec Lola et Nouba',art:{k:'room',o:{w:'w5',f:'f4',items:[['tdesk',70,70]],col:30,x:80,y:94,who:58}},txt:()=>`Une meuf d'une asso m’a proposé le « parcours de sortie de la prostitution » : 343 € par mois et un accompagnement, à condition d’arrêter de travailler. Non mais elle est ouf ou quoi ? Et j’arrête quoi, de manger ? Moi, ce que je veux, c’est un logement qui accepte Nouba. Et qu’on me fiche la paix !`},
   {t:S=>S.end=='good'?'Un toit pour deux':'La rotonde',sit:S=>S.end=='good'?'studio':'rue',end:1,art:S=>S.end=='good'?{k:'studio',o:{dog:1,heart:1}}:{k:'night',o:{sit:1,rain:1}},
    txt:S=>S.end=='good'?`Un bailleur solidaire a dit oui pour Nouba. J’ai un studio. Je travaille toujours, moins et mieux : je choisis mes horaires, je refuse les clients que je sens pas. Je viens à la halte au créneau femmes, et c’est moi qui forme l’équipe. Ils étaient pas fichus d'écrire une fiche de prévention qui parle aux filles. Maintenant si.`:`Pas de logement. Nouba est morte d’une infection mal soignée. J’ai pleuré pendant une semaine. Je voulais mourir. Finalement, je travaille toujours près de la rotonde, et j’ai gardé sa laisse dans mon sac. Vous avez été corrects, vous. C’est déjà ça.`}
  ],
@@ -5617,7 +5617,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v642')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v643')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -8621,7 +8621,7 @@ setInterval(()=>{try{let e=$('rdfx');const L=[];if(started&&!ended){const am=AMI
  {k:'tapaj',ci:88,who:'Patrick, usager, et trois copains',ic:'🧹',bg:'street',story:'Patrick propose que des usagers nettoient le quartier contre une petite paie, comme le fait TAPAJ ailleurs. Les riverains ont entendu parler du projet et l’attendent.',
   o:[['Financer 4 usagers','−120 € par mois pendant 3 mois · 👤 un·e encadrant·e un jour par semaine · 🏘️ +3 par mois',stf(),()=>{RD.mon({lbl:'🧹 TAPAJ (−120 €/mois)',n:3,eu:120,v:3});RD.rec({lbl:'🧹 Encadrement TAPAJ',until:am()+3,every:7,dur:1,why:'encadre l’équipe TAPAJ'});try{unlockCard('c29')}catch(_){}}],
      ['Pas maintenant','😊 −5 · 🏘️ −3 : les riverains comptaient dessus',ok,()=>{satAll(-5);RD.V(-3)}]]},
- {k:'marche',ci:80,who:'Le placier du marché',ic:'🛍️',bg:'street',props:[['O','fruit_s',30,92]],story:'Le marché du samedi est le cœur du quartier. Le placier propose un stand à la halte : informer, répondre aux questions, rassurer.',
+ {k:'marche',ci:80,who:'Le vendeur du marché',ic:'🛍️',bg:'street',props:[['O','fruit_s',30,92]],story:'Le marché du samedi est le cœur du quartier. Un vendeur propose à la halte de partager son stand : informer, répondre aux questions, rassurer.',
   o:[['Chaque samedi','−80 € par semaine · 👤 un·e pro absent·e un jour par semaine pendant 3 mois · 🏘️ +2 par semaine',stf(),()=>{RD.rec({lbl:'🛍️ Stand du marché chaque samedi',until:am()+3,every:7,dur:1,eu:80,v:2,why:'tient le stand du marché'})}],
      ['Une seule fois','−120 € · 🏘️ +2',cash(120),()=>{RD.M(120);RD.V(2)}],
      ['Non','🏘️ −1',ok,()=>{RD.V(-1)}]]},
@@ -8682,6 +8682,7 @@ setInterval(()=>{try{let e=$('rdfx');const L=[];if(started&&!ended){const am=AMI
    <div class="dlst">RÉPONDU</div></div></div>`;
   $('m').className='modal';$('m').hidden=false;
   const mb=$('mb');
+  try{const dc=mb.querySelector('#dlc'),L_=mb.querySelector('.dlL');dc.classList.add('ask');const rb=document.createElement('button');rb.className='dlrep';rb.textContent='✍️ Répondre';rb.onclick=()=>{dc.classList.remove('ask');try{sfx('click')}catch(_){}try{mb.querySelector('.dlR').scrollIntoView({behavior:'smooth',block:'start'})}catch(_){}};L_.appendChild(rb)}catch(_){}
   if(!img){const cv=mb.querySelector('.dlimg canvas'),g=cv.getContext('2d');g.imageSmoothingEnabled=false;const H=mkH(g),dr=S_(d.bg,d.ci,d.ic,d.props),t0=performance.now();(function fr(){if(!document.body.contains(cv))return;try{dr(H,(performance.now()-t0)/1000)}catch(_){}requestAnimationFrame(fr)})()}
   let sel=-1,done=false;const go=mb.querySelector('.dlgo');
   mb.querySelectorAll('.dlo button').forEach(b=>b.onclick=()=>{if(done)return;const i=+b.dataset.i;if(st[i])return;sel=i;mb.querySelectorAll('.dlo button').forEach(x=>x.classList.toggle('on',x===b));go.disabled=false;go.classList.add('ready');try{sfx('click')}catch(_){}});
@@ -8938,7 +8939,7 @@ window.DLTX={
  repos:['Bonjour,','Nous habitons juste au-dessus de votre salle de repos. Notre bébé a trois mois et il se réveille toutes les nuits : les portes, les voix, les quintes de toux. Nous avons tout essayé. Nous allons finir par déménager.','Awa et Moussa Diallo'],
  chiens:['Madame, Monsieur,','Samedi, un chien a sauté sur un enfant dans le square. Pas de morsure, mais une très grosse peur. Nous vous demandons que les chiens des personnes que vous accueillez soient tenus.','Des parents du square'],
  tapaj:['Salut Camille,','Avec trois copains, on voudrait nettoyer le quartier contre une petite paie, comme ça se fait ailleurs avec TAPAJ. Les voisins en ont entendu parler et ils attendent de voir. Moi, j’ai envie de leur montrer.','Patrick'],
- marche:['Bonjour,','Le marché du samedi, c’est le cœur du quartier. Je vous propose un stand : pour informer, répondre aux questions, rassurer. Les gens ont peur de ce qu’ils ne connaissent pas.','Le placier du marché'],
+ marche:['Bonjour,','Le marché du samedi, c’est le cœur du quartier. Je vous propose de partager mon stand : pour informer, répondre aux questions, rassurer. Les gens ont peur de ce qu’ils ne connaissent pas.','Le vendeur du marché'],
  ligne:['Madame, Monsieur,','Les habitants veulent pouvoir joindre quelqu’un quand il se passe quelque chose, même la nuit. Le conseil de quartier vous demande donc une ligne téléphonique dédiée.','Pour le conseil de quartier'],
  pharma:['Chère Camille,','Je vous ai soutenus dès le premier jour. Mais mes clients se plaignent de croiser vos usagers au comptoir, et deux d’entre eux sont partis à la pharmacie d’en face. Je dois faire vivre mon officine.','Votre pharmacien'],
  musee:['Chère Camille,','L’exposition de vos usagers attire du monde, et j’en suis fière. Mais des visiteurs se plaignent : « On vient voir de l’art, pas des toxicomanes. » Mon conseil d’administration menace de couper nos crédits.','La directrice du musée'],
@@ -14468,7 +14469,7 @@ try{for(const k in GCV)delete GCV[k]}catch(_){}
   for(let py=cy-R0;py<=cy+R0;py++)for(let px=cx-R0;px<=cx+R0;px++){const dx=px-cx,dy=py-cy,d=Math.hypot(dx,dy);if(d<=R0-2&&Math.abs(dx-dy)<=2.1){g.fillStyle='#d7262c';g.fillRect(px,py,1,1)}}
   g.fillStyle='#2a2433';DOGB.forEach((row,j)=>{for(let i=0;i<row.length;i++)if(row[i]=='#')g.fillRect(cx-10+i,cy-6+j,1,1)});
   g.fillStyle='rgba(0,0,0,.25)';g.fillRect(cx-3,cy+R0+2,7,2);g.restore()};
- const o_=LCD.img;LCD.img=(H,T,ci,o)=>{o_(H,T,ci,o);try{if(o&&o.i==24)sign(H.g)}catch(_){}}})();
+ const o_=LCD.img;LCD.img=(H,T,ci,o)=>{o_(H,T,ci,o);try{if(o&&o.i==24)(window.DOGSIGN||sign)(H.g)}catch(_){}}})();
 </script>
 <script>
 // v578 : sur l'écran d'accueil, « Street Pétanqueur » en partie libre dès que le tournoi a été atteint dans une partie
@@ -16366,5 +16367,37 @@ window.MUSP=function(g,R,A){
   const f=((T*6)|0)%3;[[92,101],[139,101]].forEach(([X,YB],i)=>{try{EVd(g,'cnd'+((f+i)%3),X,YB)}catch(_){}g.fillStyle='rgba(255,210,90,.18)';g.beginPath();g.arc(X+6.5,YB-10,6+Math.sin(T*8+i)*.6,0,7);g.fill()})};
 })();
 </script>
+
+<script>
+// v643 : photo « Nouba » — plaque « CHIENS INTERDITS » fixée au mur de l'hôtel : pictogramme rond (chien de profil barré) et texte en lettres pixel
+(function(){
+ const GL={C:['###','#..','#..','#..','###'],H:['#.#','#.#','###','#.#','#.#'],I:['###','.#.','.#.','.#.','###'],E:['###','#..','##.','#..','###'],N:['#...#','##..#','#.#.#','#..##','#...#'],S:['###','#..','###','..#','###'],T:['###','.#.','.#.','.#.','.#.'],R:['##.','#.#','##.','#.#','#.#'],D:['##.','#.#','#.#','#.#','##.']};
+ const DOG=['.#...........','###.........#','####.......#.','.##########..','..#########..','..#########..','..##.....##..','..#.#....#.#.','..#.#....#.#.'];
+ const txt=(g,t,cx,y,c)=>{let w=-1;for(const ch of t)w+=(GL[ch]?GL[ch][0].length:3)+1;let x0=Math.round(cx-w/2);g.fillStyle=c;for(const ch of t){const G=GL[ch];if(G)G.forEach((r,j)=>{for(let i=0;i<r.length;i++)if(r[i]=='#')g.fillRect(x0+i,y+j,1,1)});x0+=(G?G[0].length:3)+1}};
+ window.DOGSIGN=function(g){g.save();g.setTransform(1,0,0,1,0,0);
+  const X=24,Y=10,Wd=42,Hd=38,cx=45,cy=23,R0=10;
+  g.fillStyle='rgba(0,0,0,.28)';g.fillRect(X+1,Y+2,Wd,Hd);
+  g.fillStyle='#2a2433';g.fillRect(X,Y+1,Wd,Hd-2);g.fillRect(X+1,Y,Wd-2,Hd);
+  g.fillStyle='#fbf8f1';g.fillRect(X+1,Y+1,Wd-2,Hd-2);g.fillStyle='#e6e0d4';g.fillRect(X+1,Y+Hd-3,Wd-2,2);
+  g.fillStyle='#8a8a92';g.fillRect(X+3,Y+3,1,1);g.fillRect(X+Wd-4,Y+3,1,1);g.fillRect(X+3,Y+Hd-4,1,1);g.fillRect(X+Wd-4,Y+Hd-4,1,1);
+  for(let py=cy-R0;py<=cy+R0;py++)for(let px=cx-R0;px<=cx+R0;px++){const d=Math.hypot(px-cx+.5,py-cy+.5);if(d<=R0&&d>R0-2.2){g.fillStyle='#d7262c';g.fillRect(px,py,1,1)}}
+  g.fillStyle='#2a2433';DOG.forEach((r,j)=>{for(let i=0;i<r.length;i++)if(r[i]=='#')g.fillRect(cx-6+i,cy-4+j,1,1)});
+  for(let k=-6;k<=6;k++){g.fillStyle='#d7262c';g.fillRect(cx+k-1,cy+k-1,2,2)}
+  txt(g,'CHIENS',cx,Y+25,'#2a2433');txt(g,'INTERDITS',cx,Y+31,'#d7262c');
+  g.restore()};
+})();
+</script>
+
+<style id="v643">#rsp .rso{overflow:visible!important}#rsp .rso i{overflow:visible;line-height:0;max-height:70%}#rsp .rso img.pxg{max-height:22px!important;max-width:24px!important;object-fit:contain}</style>
+
+<style id="v643b">
+#dlc .dlrep{display:none}
+@media (orientation:portrait){
+ #dlc .dlimg{max-width:72%;margin:4px auto 8px!important}
+ #dlc .dlimg img,#dlc .dlimg canvas{max-height:20vh!important;width:auto!important;max-width:100%!important;margin:0 auto}
+ #dlc.ask .dlR,#dlc.ask .dlst{display:none}
+ #dlc.ask .dlrep{display:block;margin:6px 0 2px auto!important;width:auto!important;font:400 17px Lilita,sans-serif;padding:8px 18px;border-radius:10px;background:#2e9e4f;color:#fff;border:2.5px solid #1f6b33;box-shadow:0 3px 0 #1f6b33;cursor:pointer}
+}
+</style>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
