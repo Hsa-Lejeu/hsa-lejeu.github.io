@@ -30,9 +30,30 @@ async function run(url, tag) {
   const ctx = await b.newContext({ viewport: { width: 375, height: 812 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
   const p = await ctx.newPage();
   const errs = []; p.on('pageerror', e => errs.push(String(e.message).slice(0, 160)));
-  await p.clock.install({ time: new Date('2026-01-05T09:00:00Z') });
-  await p.clock.pauseAt(new Date('2026-01-05T09:00:01Z'));   // le temps n'avance plus que par runFor
   await p.addInitScript(seed => {
+    // horloge simulée : le temps n'avance que par __adv(ms) ; minuteries et images dans l'ordre exact de leurs échéances
+    {
+      const RD = Date, BASE = RD.UTC(2026, 0, 5, 9, 0, 0), FR = 1000 / 60, Q = new Map(), realRAF = window.requestAnimationFrame.bind(window); let now = 0, seq = 0;
+      const add = (f, t, o) => { const id = ++seq; Q.set(id, Object.assign({ id, f, t }, o)); return id };
+      window.setTimeout = (f, d, ...a) => add(f, now + Math.max(0, +d || 0), { a });
+      window.setInterval = (f, d, ...a) => { const iv = Math.max(1, +d || 0); return add(f, now + iv, { a, iv }) };
+      window.clearTimeout = window.clearInterval = window.cancelAnimationFrame = id => { Q.delete(id) };
+      window.requestAnimationFrame = f => add(f, (Math.floor(now / FR + 1e-6) + 1) * FR, { raf: 1 });
+      window.requestIdleCallback = f => add(() => f({ didTimeout: false, timeRemaining: () => 8 }), now + 1, {}); window.cancelIdleCallback = id => { Q.delete(id) };
+      const pnow = () => now; try { Object.defineProperty(performance, 'now', { value: pnow, configurable: true }) } catch (_) { performance.now = pnow }
+      class D extends RD { constructor(...a) { if (a.length) super(...a); else super(BASE + now) } static now() { return BASE + Math.floor(now) } } window.Date = D;
+      window.__adv = async ms => {
+        const end = now + ms;
+        for (; ;) {
+          let n = null; for (const e of Q.values()) if (e.t <= end && (!n || e.t < n.t || (e.t === n.t && e.id < n.id))) n = e;
+          if (!n) break; if (n.t > now) now = n.t;
+          if (n.iv) n.t += n.iv; else Q.delete(n.id);
+          try { if (typeof n.f == 'function') n.f.apply(window, n.raf ? [now] : (n.a || [])); else (0, eval)(String(n.f)) } catch (e) { console.error(e); window.__ERRS = (window.__ERRS || 0) + 1 }
+          await null; await null;
+        }
+        now = end; await new Promise(r => realRAF(() => r()));   // une vraie image entre deux pas : mise en page et observateurs
+      };
+    }
     // hasard figé (mulberry32)
     let a = seed >>> 0; Math.random = function () { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296 };
     try { localStorage.clear(); sessionStorage.clear() } catch (_) { }
@@ -45,7 +66,7 @@ async function run(url, tag) {
   const ev = [], snaps = []; let vt = 0, lastK = '', same = 0, prev = {};
   const total = +DUR * 1000;
   while (vt < total) {
-    await p.clock.runFor(STEP); vt += STEP;
+    try { await p.evaluate(ms => __adv(ms), STEP) } catch (e) { ev.push({ t: vt / 1000, k: 'ARRÊT', x: String(e.message).split('\n')[0].slice(0, 120) }); break } vt += STEP;
     // 1. ce qui est affiché
     const cur = await p.evaluate(() => {
       const $ = id => document.getElementById(id), tx = e => { try { return (window.txa ? txa(e) : e.textContent) } catch (_) { return e.textContent } };
@@ -54,6 +75,7 @@ async function run(url, tag) {
       const o = {};
       const m = $('m'); if (m && !m.hidden) { const h = m.querySelector('h2,h3'); o.fenetre = cl(tx(h || m)) }
       const f = $('fmo'); if (f) o.scene = cl(tx(f.querySelector('.ft') || f)) + ' — ' + cl(tx(f.querySelector('.fd') || f)).slice(0, 90);
+      { const ex = [...document.querySelectorAll('#mrt,#epov,#shov,#xpov,#rsp,#splx,#lcbook,#vig,#tconf')].filter(vis).map(e => (e.id + ' ' + cl(tx(e.querySelector('h2,h3,b') || e))).slice(0, 120)).join(' | '); if (ex) o.autre = ex }
       const c = $('ctip'); if (c && c.classList.contains('on')) o.conseil = cl(tx(c.querySelector('p') || c));
       const u = $('ulp'); if (u && vis(u)) o.nouveau = cl(tx(u.querySelector('.un') || u));
       const ts = $('mtst'); if (ts) o.toast = cl(tx(ts));
@@ -62,7 +84,7 @@ async function run(url, tag) {
       try { if (ended) o.fin = String(typeof ENDING != 'undefined' ? ENDING : 'fin') } catch (_) { }
       return o;
     });
-    for (const k of ['fenetre', 'scene', 'conseil', 'nouveau', 'toast', 'alertes', 'fin']) if ((cur[k] || '') !== (prev[k] || '') && cur[k]) ev.push({ t: vt / 1000, d: cur.date, k, x: cur[k] });
+    for (const k of ['fenetre', 'scene', 'autre', 'conseil', 'nouveau', 'toast', 'alertes', 'fin']) if ((cur[k] || '') !== (prev[k] || '') && cur[k]) ev.push({ t: vt / 1000, d: cur.date, k, x: cur[k] });
     prev = cur;
     // 2. l'état complet, toutes les 10 s de jeu
     if (vt % SNAP === 0) {
@@ -71,9 +93,11 @@ async function run(url, tag) {
     }
     // 3. un geste du joueur automatique par seconde de jeu
     if (vt % 1000) continue;
-    const k = await p.evaluate(stuck => {
+    const k = await p.evaluate(([stuck, rep]) => {
       const $ = id => document.getElementById(id);
-      const vis = e => e && e.getClientRects().length > 0 && getComputedStyle(e).visibility != 'hidden';
+      const NON = /Recommencer|Rejouer|Reprendre (au|depuis|le chapitre)|Revenir au|Effacer|Supprimer|Quitter|Partag|Télécharg|Installer|Tableau souvenir|Pétanque|Jouer le tournoi|Mode test/;   // boutons qui quittent ou relancent la partie
+      const T0_ = e => (e.innerText || '').replace(/\s+/g, ' ').trim();
+      const vis = e => e && e.getClientRects().length > 0 && getComputedStyle(e).visibility != 'hidden' && !(e.tagName == 'BUTTON' && NON.test(T0_(e)));
       const T = e => (e.innerText || '').replace(/\s+/g, ' ').trim();
       const btn = (root, re) => [...(root || document).querySelectorAll('button')].find(x => vis(x) && !x.disabled && re.test(T(x)));
       const go = (x, k) => { x.click(); return k + ':' + T(x).slice(0, 40) };
@@ -82,7 +106,7 @@ async function run(url, tag) {
       const f = $('fmo'); if (f) { const bs = [...f.querySelectorAll('.fbt button')].filter(vis); const x = bs.find(x => !/Plus tard|Pas maintenant|Pas cette|Refuser|Ne pas|Laisser/.test(T(x))) || bs[0]; return x ? go(x, 'scène') : tap(f) }
       const m = $('m');
       { const x = btn(document, /^(▶ ?)?(Continuer|Fermer|Compris|Suivant|C.est parti|Reprendre)/); if (x && !(m && !m.hidden && m.contains(x)) && !x.closest('#ctip,#ulp')) return go(x, 'par-dessus') }
-      if (m && !m.hidden) { const x = btn(m, /(Commencer|C.est moi|Suivant|C.est parti|Compris|Continuer|D.accord|Passer(?! le guide)|^OK|Fermer)/) || btn(m, /./); if (x) return go(x, 'fenêtre'); return tap(m) }
+      if (m && !m.hidden) { const x = btn(m, /(Commencer|C.est moi|Suivant|C.est parti|Compris|Continuer|D.accord|Passer(?! le guide)|^OK|Fermer)/) || btn(m, /./); if (rep) { const all = [...m.querySelectorAll('button')].filter(x => vis(x) && !x.disabled); if (all.length) return go(all[rep % all.length], 'fenêtre') } if (x) return go(x, 'fenêtre'); return tap(m) }
       const n = $('nalg'); if (n && vis(n)) { const x = btn(n, /On en commande|Compris/); if (x) return go(x, 'naloxone'); const bn = $('bn'); if (bn && vis(bn) && !bn.disabled) return go(bn, 'naloxone') }
       const g = $('gdr'); if (g && vis(g)) { const r = g.getBoundingClientRect(), e = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); if (e) { const b = e.closest('button') || e; if (b.click) { b.click(); return 'guide:' + (b.id || T(b).slice(0, 30) || b.tagName) } } }
       const c = $('ctip'); if (c && c.classList.contains('on')) { const x = c.querySelector('button'); if (x) return go(x, 'conseil') }
@@ -90,12 +114,15 @@ async function run(url, tag) {
       const u = $('ulp'); if (u && vis(u)) { const x = u.querySelector('.ub button'); if (x) return go(x, 'nouveau') }
       const tu = $('tut'); if (tu && !tu.hidden) { const x = btn(tu, /Suivant|Passer|C.est parti|Compris/); if (x) return go(x, 'tuto') }
       const any = btn(document, /(Commencer|C.est moi|Suivant|Passer(?! le guide)|C.est parti|Nouvelle partie|Jouer)/); if (any) return go(any, 'départ');
+      // toute autre fenêtre qui met le jeu en pause : le premier bouton réellement au-dessus
+      { let pz = false; try { pz = !!paused } catch (_) { } if (pz) { const x = [...document.querySelectorAll('button')].find(x => { if (!vis(x) || x.disabled || x.closest('#tabs,#hud,#side')) return false; const r = x.getBoundingClientRect(), e = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return e && (e === x || x.contains(e)) }); if (x) return go(x, 'pause') } }
       const ov = [...document.querySelectorAll('div')].find(d => vis(d) && /Touche (l’écran )?pour continuer/.test(d.textContent) && d.textContent.length < 600); if (ov) return tap(ov);
       return '';
-    }, same > 6 ? same : 0);
-    if (k) { if (process.env.V) console.error(tag, vt / 1000 + 's', cur.date || '', k); ev.push({ t: vt / 1000, d: cur.date, k: 'geste', x: k }); same = k === lastK ? same + 1 : 0; lastK = k } else { same = 0; lastK = '' }
+    }, [same > 12 ? same : 0, same]);
+    if (k) { if (process.env.V) console.error(tag, vt / 1000 + 's', cur.date || '', k); ev.push({ t: vt / 1000, d: cur.date, k: 'geste', x: k }); const w = (cur.fenetre || cur.scene || cur.autre || '') + '|' + k.split(':')[0]; same = w === lastK ? same + 1 : 0; lastK = w } else { same = 0; lastK = '' }
     if (cur.fin && vt > 5000 && !k) break;
   }
+  if (process.env.DEBUG) { console.error(tag, await p.evaluate(() => { const o = {}; for (const k of ['paused', 'started', 'ended', 'GAMEON', 'INTRO', 'day', 'dayT', 'TS']) try { o[k] = eval(k) } catch (_) { o[k] = '?' } o.body = document.body.className; o.m = !document.getElementById('m').hidden; o.top = [...document.querySelectorAll('body>*,#app>*')].filter(e => e.getClientRects().length && getComputedStyle(e).position == 'fixed' && e.getBoundingClientRect().width > 300 && e.getBoundingClientRect().height > 600).map(e => e.tagName + '#' + e.id + '.' + e.className).join(' '); o.errs = window.__ERRS; return JSON.stringify(o) })); await p.screenshot({ path: process.env.DEBUG + '-' + tag + '.png' }) }
   await b.close();
   return { url, ev, snaps, errs: [...new Set(errs)] };
 }
