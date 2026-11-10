@@ -12,3 +12,7 @@ Minuteries et observateurs (v658-v659) :
 - `ui()` est limitée à une exécution toutes les 250 ms, y compris tout ce qui l'enveloppe (v669) : `W('ui',…)` ne s'exécute donc pas à chaque appel. Pour un affichage immédiat après un geste du joueur, appeler `uiNow()`.
 - Mesurer sur téléphone : ajouter `#perf` à l'adresse du jeu (compteur par image : jeu, interface, minuteries, navigateur).
 - Après un changement de ce type, mesurer avec `node outils/minuteries.js URL` (objectif : moins de 100 appels par seconde, moins de 10 ms de calcul par seconde).
+
+Styles (v678) :
+- Ne pas écrire de règle CSS `body:has(…)` : chaque changement dans la page oblige alors le navigateur à tout revérifier. Les 29 conditions existantes sont devenues des classes sur `<body>` (`hq0`, `hq1`…), tenues à jour par le script « v678 » placé après `__bodyMut` (table `A`). Pour une nouvelle condition, ajouter le sélecteur à cette table et écrire la règle avec `body.hqN`.
+- Dessin : `#perf` détaille le temps du dessin ; `#nocache` coupe le cache du décor des salles, `#nobmp` les copies figées, `#fx` le mode « effets réduits » des téléphones lents (`window.LOWFX`).
