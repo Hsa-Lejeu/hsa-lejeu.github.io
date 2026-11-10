@@ -48,6 +48,24 @@ window.txa=function txa(e){if(!e)return '';if(e.nodeType===3)return e.nodeValue;
  if(!document.body)document.addEventListener('DOMContentLoaded',start)})();
 </script>
 <script>
+// v667 : compteur de performance pour téléphone — ajouter #perf à l'adresse (ou localStorage hsa-perf=1).
+// Chaque seconde : images/s, durée moyenne et pire image, et ce qui se passe dans une image :
+// jeu (boucle : calcul + dessin), interface (passes de corrections), autres images (animations JS),
+// minuteries (ordonnanceur), et « navigateur » = le reste du temps d'une image (peinture, composition, autres tâches).
+(function(){let on=false;try{on=/perf/.test(location.hash)||localStorage.getItem('hsa-perf')==='1'}catch(_){}if(!on)return;
+ const R=window.requestAnimationFrame.bind(window),A={jeu:0,interface:0,autres:0},TOP={};let fr=0,last=-1,sum=0,worst=0,big=0,t0=performance.now(),tim=0,dr=0,wrapped=false;
+ window.requestAnimationFrame=function(cb){const nm=cb&&cb.name||'';const cat=(cb===window.loop||/loop/.test(nm))?'jeu':/^(run|cont)$/.test(nm)?'interface':'autres';
+  return R(function(ts){if(ts!==last){if(last>=0){const d=ts-last;fr++;sum+=d;if(d>worst)worst=d;if(d>45)big++}last=ts}const t=performance.now();try{return cb.apply(this,arguments)}finally{const d=performance.now()-t;A[cat]+=d;if(cat==='autres'){const k=(nm||String(cb).slice(0,30)).replace(/\s+/g,' ');TOP[k]=(TOP[k]||0)+d}}})};
+ const box=document.createElement('div');box.id='perfbox';box.style.cssText='position:fixed;left:4px;top:calc(env(safe-area-inset-top,0px) + 4px);z-index:2147483647;background:rgba(20,16,30,.86);color:#fff;font:600 11px/1.35 ui-monospace,Menlo,monospace;padding:5px 7px;border-radius:6px;pointer-events:none;white-space:pre;max-width:94vw';
+ const add=()=>{if(document.body&&!box.isConnected)document.body.appendChild(box)};
+ setTimeout(function tick(){try{add();if(!wrapped&&typeof window.draw==='function'){wrapped=true;const _d=window.draw;const w=function(){dr++;return _d.apply(this,arguments)};window.draw=w;try{draw=w}catch(_){}}const K=window.__TKST;if(K){K.on=1;tim=0;for(const k in K.by){if(!/^écran /.test(k))tim+=K.by[k].ms}K.by={}}
+  const el=(performance.now()-t0)/1000,ips=fr/el,img=fr?sum/fr:0,js=(A.jeu+A.interface+A.autres+tim)/Math.max(1,fr);
+  const pf=v=>(v/Math.max(1,fr)).toFixed(1);const nav=Math.max(0,img-js);
+  const tp=Object.entries(TOP).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([k,v])=>k.slice(0,18)+' '+pf(v)).join(' · ');
+  box.textContent=`${(dr/el).toFixed(1)} images dessinées/s (boucle ${ips.toFixed(1)}/s) · image ${img.toFixed(0)} ms (pire ${worst.toFixed(0)}, >45 ms : ${big})\njeu ${pf(A.jeu)} · interface ${pf(A.interface)} · minuteries ${pf(tim)} · autres ${pf(A.autres)}\nnavigateur (peinture, autres tâches) ≈ ${nav.toFixed(0)} ms${tp?'\nautres : '+tp:''}\n${(()=>{try{return `dessin ${DEMA.toFixed(0)} ms · 1 image sur 2 : ${SLOW?'OUI':'non'} · plafond 30 i/s : ${window.FPSCAPB?'OUI':'non'}${window.ECO?' · éco':''}`}catch(_){return''}})()}\nécran ${innerWidth}×${innerHeight} ×${(devicePixelRatio||1).toFixed(2)} · zoom ${(window.Z&&Z.s||0).toFixed?Z.s.toFixed(2):'?'}`;
+  fr=0;sum=0;worst=0;big=0;dr=0;A.jeu=A.interface=A.autres=0;for(const k in TOP)delete TOP[k];t0=performance.now()}catch(_){}setTimeout(tick,1000)},1000)})();
+</script>
+<script>
 // v588 : repositionnement de l'interface à la demande (au lieu de minuteries à 200-500 ms)
 // __hsaLayout(f) : f est appelée au prochain affichage après un redimensionnement, une rotation, un toucher,
 // l'ouverture ou la fermeture d'une fenêtre (#m, éléments ajoutés au corps de la page), un changement d'onglet,
@@ -584,7 +602,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v666')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v667')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -1471,7 +1489,7 @@ x.drawImage(nbSpr(C,urg?'#c0392b':'#2a2433'),X,Y,12,12.5);{const g_=x;if(window.
 function satBar(v,sa){v.sd=v.sd==null?sa:v.sd+(sa-v.sd)*.08;const p=Math.max(0,Math.min(1,v.sd/100)),c=p>.6?['#5cc983','#a8eabd','#3d9e63']:p>.3?['#f1c04f','#fbe2a0','#c9952e']:['#ec6f82','#f9b9c3','#b84d60'],k=Math.max(1,Math.min(1.6,2/((typeof Z!='undefined'&&Z.s)||2))),w=Math.round(8*k*2)/2,hh=Math.round(2*Math.min(k,1.4)*2)/2,X=Math.round((v.x-w/2)*2)/2,Y=v.y+2.5,O='rgba(74,58,80,.55)';
 rect(X+.5,Y+hh,w-1,.5,'rgba(60,40,50,.15)');rect(X+.5,Y,w-1,hh,O);rect(X,Y+.5,w,hh-1,O);rect(X+.5,Y+.5,w-1,hh-1,'#f6f0e4');
 const f=(w-1)*p;if(f>0){rect(X+.5,Y+.5,f,hh-1,c[0]);rect(X+.5,Y+.5,f,.5,c[1]);if(hh>2)rect(X+.5,Y+hh-1,f,.5,c[2])}}
-let DEMA=0,SLOW=0,SLOWF=0;function loop(t){const dt=Math.min(.1,(t-last)/1000||0);last=t;if(!paused&&!ended){upd(dt);if(TS>1&&!paused&&!ended)upd(dt)}if(!(window.BGTH&&BGTH())&&!(SLOW&&!document.body.classList.contains('fly')&&(SLOWF^=1))&&!(document.body.classList.contains('gpz')&&performance.now()-(window._gpzD||0)<500)){const d0=performance.now();window._gpzD=d0;draw();if(!document.body.classList.contains('gpz')){DEMA=DEMA*.92+(performance.now()-d0)*.08;SLOW=DEMA>34?1:DEMA<26?0:SLOW}}fx_(dt);bub(dt);requestAnimationFrame(loop)}
+let DEMA=0,SLOW=0,SLOWF=0;function loop(t){const dt=Math.min(.1,(t-last)/1000||0);last=t;if(!paused&&!ended){upd(dt);if(TS>1&&!paused&&!ended)upd(dt)}if(!(window.BGTH&&BGTH())&&!(SLOW&&!document.body.classList.contains('fly')&&(SLOWF^=1))&&!(document.body.classList.contains('gpz')&&performance.now()-(window._gpzD||0)<500)){const d0=performance.now();window._gpzD=d0;draw();if(!document.body.classList.contains('gpz')){DEMA=DEMA*.92+(performance.now()-d0)*.08;SLOW=0}}fx_(dt);bub(dt);requestAnimationFrame(loop)}
 let ord,cur;
 const QCI=[7,9,11,2,5,12,8,4,13,6,24,31,38,22,43,27,35,29,41,33,26,39,44,30,36,23,40,28,34,45];
 function showQ(){if(qi>=QS.length)return;paused=true;cur=QS[qi];ord=[0,1,2].sort(()=>Math.random()-.5);
@@ -5672,7 +5690,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v666')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v667')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -12629,7 +12647,7 @@ html body #peta button.sec{background:#fff!important;color:#0b2a5b!important}
    const sp=document.getElementById('splash'),m=document.getElementById('m');
    const hid=!!sp||(paused&&((m&&!m.hidden)||document.getElementById('fmo')||document.getElementById('petov')||document.getElementById('peta')||document.getElementById('epov')));
    if(hid){if(now-lastD>=(sp?250:125)){lastD=now;return false}return true}
-   if((window.FPSCAPB||window.ECO)&&now-lastDraw<31)return true;lastDraw=now;return false}catch(_){return false}}}}catch(_){}
+   if((window.FPSCAPB||window.ECO)&&now-lastDraw<24)return true;lastDraw=now;return false}catch(_){return false}}}}catch(_){}
  // 2. en paysage, la pile des contrats (#rdfx) ne doit pas passer sous le bouton Quiz : elle glisse alors en haut du plan (par transform, que l'ancien placement ne touche pas)
  __uiv(()=>{try{const e=document.getElementById('rdfx'),q=document.getElementById('qbub');if(!e)return;if(!(window.LSCOL&&LSCOL())){e.style.transform='';e.dataset.moved='';return}
   const h=document.getElementById('hud').getBoundingClientRect();const tr=e.style.transform;e.style.transform='';const r=e.getBoundingClientRect();const qr=q?q.getBoundingClientRect():null;
