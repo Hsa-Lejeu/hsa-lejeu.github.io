@@ -7,24 +7,59 @@
 window.esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))};
 </script>
 <script>
+// v658 : une seule minuterie pour tout le jeu (au lieu de 214).
+// setInterval(f,d) : f est rangée dans un ordonnanceur commun (un seul réveil toutes les 40 ms, chaque f garde sa cadence).
+// __uiv(f,d) : correction d'interface. f n'est plus appelée à intervalle fixe, mais quand l'écran a pu changer
+// (voir __hsaLayout juste en dessous) et, par sécurité, toutes les 3 s (sauf onglet caché, ou jeu en pause sans fenêtre #m).
+// Les corrections qui ne touchent que les panneaux et les fenêtres (PRX) sont sautées quand rien n'est ouvert et que seul ui() a demandé la passe.
+// window.__TKST.on=1 : mesure du temps passé dans chaque fonction (outils/minuteries.js).
+(function(){const _si=window.setInterval.bind(window),_ci=window.clearInterval.bind(window);
+ const L=new Map(),U=[];let seq=1e9,mid=0;const ST=window.__TKST={on:0,by:{},L,U};
+ const call=o=>{const t=ST.on?performance.now():0;try{o.f.apply(window,o.a)}catch(e){setTimeout(()=>{throw e})}
+  if(ST.on){const dt=performance.now()-t,k=o.k||(o.k=(o.u?'écran ':'')+o.d+'ms '+String(o.f).slice(0,70).replace(/\s+/g,' ')),r=ST.by[k]||(ST.by[k]={n:0,ms:0});r.n++;r.ms+=dt}};
+ const tick=()=>{const now=performance.now();for(const o of L.values()){if(now>=o.n){o.n+=o.d;if(o.n<=now)o.n=now+o.d;call(o)}}};
+ window.setInterval=function(f,d,...a){d=+d||0;if(typeof f!='function'||d<40)return _si(f,d,...a);const id=++seq;L.set(id,{f,d,a,n:performance.now()+d});if(!mid)mid=_si(tick,40);return id};
+ window.clearInterval=function(id){if(typeof id=='number'&&id>1e9){if(!L.delete(id))for(let i=0;i<U.length;i++)if(U[i].id===id){U.splice(i,1);break}return}return _ci(id)};
+ const PRX=/#(mb|fmo|rwf|tabsbody|dlc|side|trn|rbx|roster|lcm|lcbook|peta|petov|splash|vig|par|tut)\b|button\[|\.atab|\.ptb|\.hqb/;
+ window.__uiv=function(f,d,...a){const id=++seq;U.push({id,f,d:+d||0,a,u:1,p:PRX.test(String(f))});try{window.__hsaLayoutNow&&window.__hsaLayoutNow()}catch(_){}return id};
+ window.__uivRun=function(full){const now=performance.now();for(const o of U.slice()){if(o.p&&!full)continue;if(o.d>1000&&now-(o.t||-1e9)<o.d*.9)continue;o.t=now;call(o)}}})();
+</script>
+<script>
+// v659 : un seul observateur sur tout le document (au lieu de 18).
+// __bodyMut(f) : f(mutations) à chaque changement du document (texte compris) — réservé à ce qui doit tout voir (emojis en image, nom du chef).
+// __obsIn(ids,f,options) : observe seulement l'élément #id, quand il existe (fenêtre, pétanque, épilogue…) ; f([]) est appelée à son arrivée.
+(function(){const S=[],IN=[];let mo=null;
+ const scanIn=()=>{for(const o of IN)for(const id of o.ids){const e=document.getElementById(id);if(e&&!o.seen.has(e)){o.seen.add(e);try{o.mo.observe(e,o.opts)}catch(_){}try{o.cb([],o.mo)}catch(er){setTimeout(()=>{throw er})}}}};
+ const start=()=>{if(mo||!document.body)return;mo=new MutationObserver(ms=>{if(IN.length){let el=false;for(const m of ms){for(const n of m.addedNodes)if(n.nodeType==1&&n.tagName!='IMG'){el=true;break}if(el)break}if(el)scanIn()}
+   for(const f of S){try{f(ms,mo)}catch(er){setTimeout(()=>{throw er})}}});mo.observe(document.body,{childList:true,subtree:true,characterData:true});scanIn()};
+ window.__bodyMut=function(f){S.push(f);start()};
+ window.__obsIn=function(ids,cb,opts){IN.push({ids:[].concat(ids),cb,opts,seen:new WeakSet(),mo:new MutationObserver(cb)});start();if(mo)scanIn()};
+ if(!document.body)document.addEventListener('DOMContentLoaded',start)})();
+</script>
+<script>
 // v588 : repositionnement de l'interface à la demande (au lieu de minuteries à 200-500 ms)
 // __hsaLayout(f) : f est appelée au prochain affichage après un redimensionnement, une rotation, un toucher,
 // l'ouverture ou la fermeture d'une fenêtre (#m, éléments ajoutés au corps de la page), un changement d'onglet,
 // un défilement ou un appel à ui() ; et au moins une fois par seconde par sécurité.
 (function(){const F=[];let pend=false,last=0,started_=false;
- const ST=window.__LAYST={n:0,ms:0};const run=()=>{pend=false;const t=last=performance.now();for(const f of F){try{f()}catch(e){try{oops(e,'__hsaLayout')}catch(_){}}}ST.n++;ST.ms+=performance.now()-t};
- const soon=()=>{if(pend)return;pend=true;const w=Math.max(0,90-(performance.now()-last));if(w>0)setTimeout(()=>requestAnimationFrame(run),w);else requestAnimationFrame(run)};
- const slow=()=>{if(performance.now()-last>400)soon()};
+ const ST=window.__LAYST={n:0,ms:0};const run=()=>{pend=false;const t=last=performance.now();for(const f of F){try{f()}catch(e){try{oops(e,'__hsaLayout')}catch(_){}}}try{const fu=full||open_()||t-lastF>10000;full=false;if(fu)lastF=t;window.__uivRun(fu)}catch(_){}try{watch();MO&&MO.takeRecords()}catch(_){}ST.n++;ST.ms+=performance.now()-t};
+ // conteneurs dont le contenu est refait par le jeu : une passe quand leur contenu change (pas tout le document)
+ let full=true,lastF=0;const open_=()=>{try{const m=document.getElementById('m'),a=document.getElementById('app');return (m&&!m.hidden)||(a&&a.classList.contains('open'))||!!document.querySelector('#fmo,#vig,#rwf,#lcm,#lcbook,#peta,#petov,#envo,#tut:not([hidden])')||!!((document.getElementById('splash')||{}).offsetParent)}catch(_){return true}};
+ let MO=null;const WID=['mb','side','rwf','fmo','vig','lcm','lcbook','petov','envo','toasts','rdov','cmbx','xpov','debov','dfb'];
+ const watch=()=>{if(!MO)MO=new MutationObserver(ms=>{if(window.__LAYDBG)for(const m of ms){const k=(m.target.id||m.target.className||m.target.nodeName)+' '+m.type+' '+[...m.addedNodes,...m.removedNodes].map(n=>n.id||n.className||n.nodeName).join(',');window.__LAYDBG[k]=(window.__LAYDBG[k]||0)+1}const dt=performance.now()-last;if(dt<250&&!ms.some(m=>m.type=='attributes'||m.target===document.body)){if(chain<1){chain++;setTimeout(()=>soon(1),260-dt)}return}soon()});for(const id of WID){const e=document.getElementById(id);if(e&&!e.__lo){e.__lo=1;MO.observe(e,{childList:true,subtree:true})}}};
+ const safe=()=>{try{let p=false;try{p=paused}catch(_){}const m=document.getElementById('m');if(document.hidden||(p&&m&&m.hidden))return;if(performance.now()-last>=2950)soon(2)}catch(_){}};
+ let chain=0;const soon=k=>{if(k!==1)chain=k===2?1:0;if(k!==3)full=true;if(pend)return;pend=true;const w=Math.max(0,150-(performance.now()-last));if(w>0)setTimeout(()=>requestAnimationFrame(run),w);else requestAnimationFrame(run)};
+ const slow=()=>{if(performance.now()-last>400)soon(3)};
  const init=()=>{if(started_)return;started_=true;
   addEventListener('resize',soon);addEventListener('orientationchange',()=>{soon();setTimeout(soon,350)});
   addEventListener('scroll',soon,true);document.addEventListener('pointerup',()=>setTimeout(soon,40),true);
-  const obs=()=>{try{new MutationObserver(soon).observe(document.body,{childList:true});
-   const m=document.getElementById('m');if(m)new MutationObserver(soon).observe(m,{attributes:true,attributeFilter:['hidden','class']});
-   const a=document.getElementById('app');if(a)new MutationObserver(soon).observe(a,{attributes:true,attributeFilter:['class']});
+  const obs=()=>{try{watch();MO.observe(document.body,{childList:true});
+   const m=document.getElementById('m');if(m)MO.observe(m,{attributes:true,attributeFilter:['hidden','class']});
+   const a=document.getElementById('app');if(a)MO.observe(a,{attributes:true,attributeFilter:['class']});
    const _u=window.ui;if(typeof _u=='function'&&!_u.__lay){const w=function(){const r=_u.apply(this,arguments);slow();return r};w.__lay=1;window.ui=w;try{ui=w}catch(_){}}}catch(_){}};
   if(document.readyState=='complete')obs();else addEventListener('load',obs);
-  setInterval(run,1000)};
- window.__hsaLayout=function(f){F.push(f);init();soon();return F.length};window.__hsaLayoutNow=soon})();
+  setInterval(safe,500)};
+ window.__hsaLayout=function(f){F.push(f);init();soon();return F.length};window.__hsaLayoutNow=()=>{init();soon()};if(document.readyState=='loading')addEventListener('DOMContentLoaded',init);else init()})();
 </script>
 <script>
 // v587 : les erreurs ne sont plus avalées en silence. oops(e,ou) les écrit dans la console ([HSA]) et les compte dans window.__ERRS.
@@ -531,7 +566,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v655')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v659')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -2888,7 +2923,7 @@ W('continueGame',(o,a)=>{const r=o(...a);try{ISP=0;INTRO=0;homeZ()}catch(_){}ret
 
 // ===== v127 : bonus/malus au-dessus des bulles, salles verrouillées invisibles, alertes seulement après l'ouverture
 function fltCtx(){let c=$('cfl');if(!c){c=document.createElement('canvas');c.id='cfl';c.style.cssText='position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:5;image-rendering:pixelated';$('stage').appendChild(c)}if(c.width!=cv.width||c.height!=cv.height){c.width=cv.width;c.height=cv.height}const g=c.getContext('2d');g.setTransform(x.getTransform());g.imageSmoothingEnabled=false;return g}
-W('draw',(o,a)=>{try{const c=$('cfl');if(c){const g=c.getContext('2d');g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,c.width,c.height)}}catch(_){}return o(...a)});
+W('draw',(o,a)=>{try{const c=$('cfl');if(c&&c._d!==0){c._d=0;const g=c._g||c.getContext('2d');g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,c.width,c.height)}}catch(_){}return o(...a)});
 W('locs',(o,a)=>{const r=o(...a);try{R.forEach((_,i)=>{const b=$('rb'+i);if(b&&!built[i]&&RLOCK(i))b.style.display='none'});['lv','ax'].forEach(k=>{const b=$('ex'+k);if(b&&!ULK(k)&&!B[k])b.style.display='none';else if(b)b.style.display=''})}catch(_){}return r});
 W('docAlert',(o,a)=>{if(!started)return;return o(...a)});
 window.fltCtx=fltCtx;
@@ -3031,7 +3066,7 @@ function chefTx(s){if(!CHEF||!s||typeof s!='string')return s;const n0=CHEF.name|
 (function(){const fx=CanvasRenderingContext2D.prototype.fillText,sx=CanvasRenderingContext2D.prototype.strokeText,mt=CanvasRenderingContext2D.prototype.measureText;
  CanvasRenderingContext2D.prototype.fillText=function(t,...a){return fx.call(this,chefTx(t),...a)};CanvasRenderingContext2D.prototype.strokeText=function(t,...a){return sx.call(this,chefTx(t),...a)};CanvasRenderingContext2D.prototype.measureText=function(t){return mt.call(this,chefTx(t))};
  const walk=n=>{if(!CHEF)return;if(n.nodeType==3){const pp=n.parentNode;if(pp&&/^(SCRIPT|STYLE|TEXTAREA|NOSCRIPT)$/.test(pp.nodeName))return;const v=chefTx(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v;return}if(n.nodeType==1&&!/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(n.tagName)&&!['cgen','msg','ev'].includes(n.id))n.childNodes.forEach(walk)};
- new MutationObserver(ms=>{if(!CHEF)return;ms.forEach(m=>{const p_=m.target.nodeType==3?m.target.parentNode:m.target;if(p_&&p_.closest&&p_.closest('#msg,#ev'))return;if(m.type=='characterData')walk(m.target);else m.addedNodes.forEach(walk)})}).observe(document.body,{childList:true,subtree:true,characterData:true});window.chefWalk=()=>walk(document.body)})();
+ __bodyMut(ms=>{if(!CHEF)return;ms.forEach(m=>{const p_=m.target.nodeType==3?m.target.parentNode:m.target;if(p_&&p_.closest&&p_.closest('#msg,#ev'))return;if(m.type=='characterData')walk(m.target);else m.addedNodes.forEach(walk)})});window.chefWalk=()=>walk(document.body)})();
 // portrait des bulles : pas de clignement dessiné à la main sur un visage personnalisé
 W('camDraw',(o,a)=>{const r=o(...a);try{if(CHEF_APPLIED){const c=$('ccv'),g=c.getContext('2d');g.fillStyle='#e6d9b8';g.fillRect(0,0,18,20);g.fillStyle='rgba(255,255,255,.35)';g.fillRect(0,0,18,3);g.fillStyle='rgba(0,0,0,.13)';g.fillRect(0,15,18,5);const tk=CAM.talk&&Math.floor(performance.now()/160)%2;g.drawImage(IMC,18*48+(tk?0:16),1,16,20,1,1,16,20)}}catch(_){}return r});
 // ---- la lettre officielle
@@ -3413,7 +3448,7 @@ function xGroup(box,groups,keyOf,afterMove){if(!box)return;let changed=false;
  groups.forEach(([g])=>{const G=box.querySelector(`.xgrp[data-g="${g}"]`);if(G)box.appendChild(G)});
  xVis(box);return changed}
 function xVis(box){if(!box)return;box.querySelectorAll('.xgrp').forEach(G=>{const vis=[...G.querySelectorAll('.xrow>button')].some(b=>!b.hidden&&b.style.display!='none');G.style.display=vis?'':'none'})}
-setInterval(()=>{['staff','trn','out'].forEach(id=>xVis($(id)))},300);
+__uiv(()=>{['staff','trn','out'].forEach(id=>xVis($(id)))},300);
 // ---- recrutement : par salle, avec le portrait de la personne
 const XPCI={};
 function xStaff(){const s=$('staff');if(!s)return;const raw=[...s.children].some(b=>b.tagName=='BUTTON');if(!raw)return;
@@ -3575,7 +3610,7 @@ function xpReroll(k,b){const P=xpPool(k),cur=XPCI[k],f=P.filter(c=>c!=cur&&!STF.
 W('hire',(o,a)=>{const k='r'+a[0],n=XPN[k],n0=STF.length;window._nxN=n||null;let r;try{r=o(...a)}finally{window._nxN=null}try{if(STF.length>n0&&n){const z=STF[STF.length-1];if(!STF.some(s=>s!==z&&s.n==n))z.n=n;delete XPN[k]}}catch(_){}return r});
 W('hireX',(o,a)=>{const k=a[0],n=XPN[k],n0=STF.length;window._nxN=n||null;let r;try{r=o(...a)}finally{window._nxN=null}try{if(STF.length>n0&&n){const z=STF[STF.length-1];if(!STF.some(s=>s!==z&&s.n==n))z.n=n;delete XPN[k]}}catch(_){}return r});
 // ---- tutoriel : on recale le cadre en continu (polices, panneaux qui glissent…)
-setInterval(()=>{try{if(TI>=0&&!$('tut').hidden)tutLay()}catch(_){}},300);
+__uiv(()=>{try{if(TI>=0&&!$('tut').hidden)tutLay()}catch(_){}},300);
 window.XPN_=XPN;
 
 // ===== v154 : l'ambulance sort de l'hôpital vers le haut (sprites de face et de dos), une vraie rue devant l'hôpital, des feux rouges
@@ -3611,7 +3646,7 @@ dayPh=function(){if(!started||MEET)return{dawn:0,gold:0,night:0,d:-1};const d=(d
  return{d,dawn:cl(1-d/2.5),gold:cl((d-15.5)/3)*(1-cl((d-20.5)/2.5)),night:cl((d-20)/3.5)}};window.dayPh=dayPh;
 // ---- formations : le sous-onglet reste toujours visible dans Équipe
 try{const u=UL.find(e=>e.k=='trn');if(u)u.sub=[]}catch(_){}
-setInterval(()=>{const b=document.querySelector('#t0 .subt button[data-k="2"]');if(b&&b.style.display=='none'){b.style.display='';delete b.dataset.ulh}},400);
+__uiv(()=>{const b=document.querySelector('#t0 .subt button[data-k="2"]');if(b&&b.style.display=='none'){b.style.display='';delete b.dataset.ulh}},400);
 // ---- faillite : la formation « appels à projets » mise en avant
 window.openAAP=function(){try{tab(0);const b=document.querySelector('#t0 .subt button[data-k="2"]');if(b){b.style.display='';subSel(b)}setTimeout(()=>{const f=$('fa');if(f){f.scrollIntoView({block:'center',behavior:'smooth'});f.classList.add('aap');setTimeout(()=>f.classList.remove('aap'),6000)}},150)}catch(_){}};
 (function(){const st=document.createElement('style');st.textContent='#fa.aap{animation:aapP .8s ease-in-out 6;outline:3px solid #f2a20c;outline-offset:1px}@keyframes aapP{50%{transform:scale(1.04)}}';document.head.appendChild(st)})();
@@ -5518,7 +5553,7 @@ window.doorDraw=function(cx,by,i){if(!DOORA.complete)return false;if(!window.DOO
   if(ok){[72,76,79].forEach((m,i)=>{n(m,i*.085,.16,'square',.05);n(m-12,i*.085,.16,'triangle',.1)});n(84,.26,.5,'square',.05);n(88,.26,.5,'triangle',.07);n(72,.26,.55,'triangle',.12)}
   else{n(67,0,.2,'triangle',.12);n(63,.17,.22,'triangle',.11);n(60,.36,.45,'triangle',.12);n(55,.36,.45,'square',.025)}}catch(_){}}
  window.qJing=qJing;
- setInterval(()=>{try{const f=document.getElementById('qfic');if(f&&$('m').hidden)f.remove()}catch(_){}},400);
+ __uiv(()=>{try{const f=document.getElementById('qfic');if(f&&$('m').hidden)f.remove()}catch(_){}},400);
  W('ans',(o,a)=>{const c0=cur,ok=a[0]==c0[2],r=o(...a);try{document.querySelectorAll('#qfic').forEach(e=>e.remove());
   const mb=$('mb'),bs=mb.querySelectorAll('button.go');const g=bs[bs.length-1];if(g){const p=g.previousElementSibling;if(p&&p.tagName=='P')p.remove();g.remove()}
   const f=document.createElement('div');f.id='qfic';
@@ -5535,8 +5570,9 @@ window.doorDraw=function(cx,by,i){if(!DOORA.complete)return false;if(!window.DOO
 
 // ===== v205 : tranquillité plus douce en années 2-3 + alerte ; conteneurs DASRI qui clignotent à 80 % ; suivi refusé qu'on peut reproposer
 (function(){const st=document.createElement('style');st.textContent=`
-.hsaAl{animation:hsaAl 1s ease-in-out infinite;position:relative;z-index:2}
-@keyframes hsaAl{0%,100%{box-shadow:0 0 0 0 rgba(242,138,30,.0)}50%{box-shadow:0 0 0 6px rgba(242,138,30,.65)}}
+.hsaAl{position:relative;z-index:2}
+.hsaAl::before{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 6px rgba(242,138,30,.65);opacity:0;pointer-events:none;will-change:opacity,transform;animation:hsaAl 1s ease-in-out infinite}
+@keyframes hsaAl{0%,100%{opacity:0;transform:scale(.86)}50%{opacity:1;transform:scale(1)}}
 #lcdq{position:fixed;top:118px;left:112px;display:flex;gap:8px;z-index:40}@media (max-aspect-ratio:1/1){#lcdq{left:8px;top:156px}}
 #lcdq .lcb canvas{filter:grayscale(.85) brightness(1.08)}#lcdq .lcb .bd{background:#f2a541}
 `;document.head.appendChild(st)})();
@@ -5618,7 +5654,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v655')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v659')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -5644,12 +5680,14 @@ W('ui',(o,a)=>{const r=o(...a);try{euShow()}catch(_){}return r});
  const step=Math.sign(diff)*Math.max(Math.abs(diff)*2.2*dt,60*dt);EUD=Math.abs(step)>=Math.abs(diff)?eu:EUD+step;e.classList.toggle('dn',diff<0);e.classList.toggle('up',diff>0);euShow()}catch(_){}})();
 // ---- barres : la partie perdue reste un instant en rouge, puis fond
 const BGH={};
-setInterval(()=>{try{['qf','nf','spf'].forEach(id=>{const i=$(id);if(!i)return;const bar=i.parentNode;let g=bar.querySelector('i.gh');if(!g){g=document.createElement('i');g.className='gh';bar.insertBefore(g,i)}
- const cur=parseFloat(i.style.width)||0,s=BGH[id]||(BGH[id]={w:cur,hold:0});
- if(cur>=s.w-.2){s.w=cur;s.hold=0}else{if(s.hold<12)s.hold++;else s.w=Math.max(cur,s.w-1.2)}
- g.style.width=s.w+'%';g.style.opacity=s.w-cur>.3?1:0})}catch(_){}},50);
+__uiv((window.__gha=function(id){const i=$(id);if(!i||i._gh)return;i._gh=1;const bar=i.parentNode;let g=bar.querySelector('i.gh');if(!g){g=document.createElement('i');g.className='gh';bar.insertBefore(g,i)}
+ let last=parseFloat(i.style.width)||0;g.style.transition='none';g.style.width=last+'%';g.style.opacity=0;
+ g.addEventListener('transitionend',e=>{if(e.propertyName=='width')g.style.opacity=0});
+ new MutationObserver(()=>{try{const cur=parseFloat(i.style.width)||0;if(cur===last)return;last=cur;const bw=bar.clientWidth||1,gw=parseFloat(getComputedStyle(g).width)/bw*100;
+  if(cur>=gw-.3){g.style.transition='none';g.style.width=cur+'%';g.style.opacity=0}
+  else{g.style.opacity=1;g.style.transition='width '+Math.max(.05,(gw-cur)/24).toFixed(2)+'s linear .6s';g.style.width=cur+'%'}}catch(_){}}).observe(i,{attributes:true,attributeFilter:['style']})},()=>{try{['qf','nf','spf'].forEach(window.__gha)}catch(_){}}),1000);
 // ---- combo : au-dessus du portrait de Camille
-setInterval(()=>{try{const e=$('cbx'),c=$('ccv');if(!e)return;const r=c&&c.getBoundingClientRect();const ok=r&&r.width>0&&getComputedStyle(c).visibility!='hidden'&&getComputedStyle($('cam')).visibility!='hidden';
+__uiv(()=>{try{const e=$('cbx'),c=$('ccv');if(!e)return;const r=c&&c.getBoundingClientRect();const ok=r&&r.width>0&&getComputedStyle(c).visibility!='hidden'&&getComputedStyle($('cam')).visibility!='hidden';
  if(ok){e.classList.add('nearc');e.style.right=Math.max(4,innerWidth-r.right)+'px';e.style.top=Math.max(4,Math.min(innerHeight-e.offsetHeight-4,r.bottom-Math.round(e.offsetHeight*.55)))+'px'}else{e.classList.remove('nearc');e.style.right='';e.style.top=''}}catch(_){}},150);
 
 // ===== v210 : l'album de cartes se feuillette comme un vrai livre (même effet que le livre des histoires)
@@ -5753,7 +5791,7 @@ window.finModal=function(){if(!$('m').hidden)return;paused=true;
 (function(){const st=document.createElement('style');st.textContent=`#ulp{top:calc(var(--hh,64px) + 10px)!important}
 @media (orientation:portrait){#ctoast{top:calc(var(--hh,64px) + 10px)!important;transition:transform .45s cubic-bezier(.2,1.5,.45,1),opacity .3s!important}#ctoast:not(.on){opacity:0;pointer-events:none}}`;document.head.appendChild(st)})();
 // si les deux annonces sont là en même temps, celle des nouveautés se place juste en dessous de la carte
-setInterval(()=>{try{const p=$('ulp');if(!p)return;const c=$('ctoast');let t='';if(c&&c.classList.contains('on')&&matchMedia('(orientation:portrait)').matches){const r=c.getBoundingClientRect();if(r.bottom>0&&r.height>0)t=(r.bottom+8)+'px'}if(!window.STK2)p.style.setProperty('top',t||(Math.max(Math.round($('hud').getBoundingClientRect().bottom),0)+10)+'px','important')}catch(_){}},200);
+__uiv(()=>{try{const p=$('ulp');if(!p)return;const c=$('ctoast');let t='';if(c&&c.classList.contains('on')&&matchMedia('(orientation:portrait)').matches){const r=c.getBoundingClientRect();if(r.bottom>0&&r.height>0)t=(r.bottom+8)+'px'}if(!window.STK2)p.style.setProperty('top',t||(Math.max(Math.round($('hud').getBoundingClientRect().bottom),0)+10)+'px','important')}catch(_){}},200);
 
 // ===== v213 : l'invitation aux rendez-vous montre une affiche fixe ; l'animation est gardée pour la récompense (quand on participe)
 const RDVP={tab:['#2e7d4f','En novembre','Mois sans tabac'],sida:['#c0392b','1er décembre','Journée mondiale de lutte contre le sida'],sdp:['#e8780e','Autour du 26 juin','Support. Don’t Punish.'],iod:['#6a4fb5','31 août','Journée internationale des overdoses']};
@@ -5798,7 +5836,7 @@ function phUI(){if(P.x)Object.assign(SPC,PHR);
  const c=$('bdc');if(c){c.style.display='';if(!c.dataset.ph){c.dataset.ph=1;c.innerHTML='📅 Contrat DASRI avec la pharmacie<br><small>le pharmacien vide les conteneurs les 10 et 20 de chaque mois · 120 € + 20 €/mois</small>'}}
  let a=$('bpa');if(!a){const sp=$('sup');if(sp){a=document.createElement('button');a.id='bpa';a.setAttribute('onclick','phAutoBuy()');sp.appendChild(a)}}
  if(a){a.style.display=B.phOk?'':'none';const t=B.phAuto?'📦 Approvisionnement automatique<br><small>✔ contrat signé · la pharmacie livre dès qu’un stock baisse · 25 €/mois</small>':'📦 Approvisionnement automatique<br><small>la pharmacie livre dès qu’un stock baisse · 60 € + 25 €/mois</small>';if(a.innerHTML!==t)a.innerHTML=t;a.disabled=!!B.phAuto||eu<60}}
-setInterval(()=>{try{phUI()}catch(_){}},500);
+__uiv(()=>{try{phUI()}catch(_){}},500);
 window.phAutoBuy=function(){if(B.phAuto||!B.phOk||eu<60)return;eu-=60;B.phAuto=1;say('📦 Contrat signé avec la pharmacie : le pharmacien livrera lui-même le matériel dès qu’un stock baisse.');try{sfx('good')}catch(_){}phUI();ui()};
 // les achats auprès de la pharmacie partenaire : au bout de quelques-uns, le pharmacien propose ses contrats
 W('sup',(o,a)=>{const e0=eu,r=o(...a);try{if(P.x&&eu<e0){B.phN=(B.phN||0)+1;if(B.phN>=PHN&&!B.phOk){B.phOk=1;setTimeout(phUnlock,900)}}}catch(_){}return r});
@@ -5862,7 +5900,7 @@ W('monthEnd',(o,a)=>{try{if(started){svcIncome().forEach(([e,t,s,v,k])=>{eu+=v;L
 window.siaoSign=function(){if(B.siao||!built[7]||eu<100)return;eu-=100;B.siao=1;say('🛏️ Partenariat avec le SIAO : le 115 nous orientera des personnes sans solution pour la nuit, et chaque nuitée au dortoir sera financée (15 €).');try{sfx('good')}catch(_){}ui();siaoUI()};
 function siaoUI(){const par=$('par');if(!par)return;let b=$('psi');if(!b){b=document.createElement('button');b.id='psi';b.setAttribute('onclick','siaoSign()');par.appendChild(b)}
  b.style.display=built[7]?'':'none';const t=B.siao?'🛏️ SIAO (le 115)<br><small>✔ partenaire · oriente des personnes vers le dortoir, 15 € par nuitée</small>':'🛏️ SIAO (le 115)<br><small>oriente des personnes vers le dortoir et paie chaque nuitée · 100 €</small>';if(b.innerHTML!==t)b.innerHTML=t;b.disabled=!!B.siao||eu<100}
-setInterval(()=>{try{siaoUI()}catch(_){}},700);
+__uiv(()=>{try{siaoUI()}catch(_){}},700);
 W('outc',(o,a)=>{const d0=CN.dn||0,r=o(...a);try{if(B.siao&&(CN.dn||0)>d0){const v=15;eu+=v;B.siaoN=(B.siaoN||0)+1;LM.i['SIAO : nuitées au dortoir']=(LM.i['SIAO : nuitées au dortoir']||0)+v;LY.i['SIAO : nuitées au dortoir']=(LY.i['SIAO : nuitées au dortoir']||0)+v;const w=a[0];if(w)flt(w,'🛏️ +15 € (SIAO)',1)}}catch(_){}return r});
 let SIAOT=0;setInterval(()=>{try{if(!B.siao||!staffed(7)||!started||ended||paused||MEET)return;if(GT-SIAOT<35)return;SIAOT=GT;if(V.length>=20)return;const v=newV();v.need='z';v.path=[0,7];v.siao=1;V.push(v)}catch(_){}},1000);
 // ---- à mi-parcours : la santé mentale devient grande cause nationale
@@ -6283,7 +6321,7 @@ function run(){for(let t=0;t<5;t++){const p=document.getElementById('t'+t);if(p)
   const av=ex?[...ex.querySelectorAll('button')].some(b=>!b.disabled&&!/🔒|✔|loué|construit/i.test(b.textContent)):false;
   [h,ex,cn].forEach(e=>{if(e)e.style.display=av?'':'none'})}}catch(_){}}
 let tm=null;const mo=new MutationObserver(()=>{clearTimeout(tm);tm=setTimeout(()=>{mo.disconnect();try{run()}catch(_){}obs()},0)});
-const obs=()=>{for(let t=0;t<5;t++){const p=document.getElementById('t'+t);if(p)mo.observe(p,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['disabled']})}};
+const obs=()=>{for(let t=0;t<5;t++){const p=document.getElementById('t'+t);if(p)mo.observe(p,{childList:true,subtree:true,attributes:true,attributeFilter:['disabled']})}};
 const go=()=>{if(!document.getElementById('t0')){setTimeout(go,500);return}run();obs()};go();
 })();
 W('draw',(o,a)=>{const r=o(...a);try{if(!MEET&&!ENDING&&built[1]&&window.roomClosed&&roomClosed(1)){const A=R[1][2],Bb=R[1][3],w=RW[1];x.save();x.setTransform(2,0,0,2,OX*2,OY*2);[DAS.filter((d,j)=>j>=1).sort((a,b)=>(b.l||0)-(a.l||0))[0]].filter(Boolean).map(d=>[A+(d.dx!=null?d.dx:7),Bb+(d.dy!=null?d.dy:43),d.l]).forEach(([X,Y,l])=>{if(l>=10)bang(X,Y-12.5,'#e03a2e');else if(l>=8)bang(X,Y-12.5,'#f2a20c')});x.restore()}}catch(_){}return r});
@@ -6302,7 +6340,7 @@ function hints(){document.querySelectorAll('#tabsbody p.hint').forEach(p=>{if(p.
 function rooms(){document.querySelectorAll('#rb button').forEach(b=>{const i=b.querySelector('i');b.classList.toggle('built',!!(i&&/✔/.test(i.textContent)))})}
 function run(){try{hints()}catch(_){}try{rooms()}catch(_){}}
 let tm=null;const mo=new MutationObserver(()=>{clearTimeout(tm);tm=setTimeout(()=>{mo.disconnect();run();obs()},0)});
-const obs=()=>{const t=document.getElementById('tabsbody');if(t)mo.observe(t,{childList:true,subtree:true,characterData:true})};
+const obs=()=>{const t=document.getElementById('tabsbody');if(t)mo.observe(t,{childList:true,subtree:true})};
 const go=()=>{if(!document.getElementById('tabsbody')){setTimeout(go,500);return}run();obs()};go();
 })();
 W('tab',(o,a)=>{const r=o(...a);try{const s=document.getElementById('side'),n=a[0];if(s){if(n>=0)s.dataset.tab=String(n);else delete s.dataset.tab}}catch(_){}try{window.bPos&&bPos();requestAnimationFrame(()=>{try{bPos()}catch(_){}});setTimeout(()=>{try{bPos()}catch(_){}},350)}catch(_){}return r});
@@ -6320,7 +6358,7 @@ try{const st_=t=>String(t).replace(/<[^>]+>/g,'').trim();TUT.forEach(t=>{if(!t||
  else if(/^Dans le local, beaucoup/.test(s))t[1]='Dans le local, beaucoup de choses se touchent :<br>• toucher <b>une salle</b> (ou son nom, marqué d’un point jaune au début) ouvre sa roue : équipe, achats, actions, déplacer, statistiques ;<br>• une <b>boîte jaune</b> pleine se vide, une <b>seringue</b> dans la rue se ramasse ;<br>• un·e collègue avec un ❗ au-dessus de la tête a besoin de toi : touche-le ou touche-la.<br>Dans les menus, le bouton <b>? À savoir</b> déplie les explications.';
 })}catch(_){}
 // ---- la fenêtre de défi se décale à droite des portraits des personnes suivies au long cours
-setInterval(()=>{try{const d=document.getElementById('dfb');if(!d||window.STK2)return;const l=document.getElementById('lci');let x0=8;if(l&&l.offsetParent!==null){const r=l.getBoundingClientRect(),q=d.getBoundingClientRect();if(r.width>0&&r.bottom>q.top&&r.top<q.bottom+40)x0=Math.round(r.right+8)}const v=x0+'px';if(d.style.left!==v)d.style.left=v}catch(_){}},200);
+__uiv(()=>{try{const d=document.getElementById('dfb');if(!d||window.STK2)return;const l=document.getElementById('lci');let x0=8;if(l&&l.offsetParent!==null){const r=l.getBoundingClientRect(),q=d.getBoundingClientRect();if(r.width>0&&r.bottom>q.top&&r.top<q.bottom+40)x0=Math.round(r.right+8)}const v=x0+'px';if(d.style.left!==v)d.style.left=v}catch(_){}},200);
 
 // ===== v246 : tournée du camion — petit trajet halte → destination avec le camion qui avance et le temps restant
 (function(){const st=document.createElement('style');st.textContent=`
@@ -6385,7 +6423,7 @@ function fireBusy(z){return z.off>0&&(z.van||z.mis||z.trn)}
 // on note ce que l'embauche a coûté pour pouvoir la rembourser
 {const tagC=(o,a)=>{const n0=STF.length,e0=eu,r=o(...a);try{if(STF.length>n0){STF[STF.length-1].hc=Math.max(0,e0-eu)}}catch(_){}return r};W('hire',tagC);W('hireX',tagC)}
 function fireLabels(){try{document.querySelectorAll('#roster .rfire').forEach(b=>{const z=STF[+b.dataset.k];if(!z)return;const un=fireRecent(z);b.className='rfire'+(un?' un':'');b.textContent=un?'↩️ Annuler l’embauche':'📄 Fin de contrat';b.disabled=fireBusy(z)||ended;b.title=fireBusy(z)?'Impossible pendant une tournée, une formation ou une intervention':''})}catch(_){}}
-setInterval(fireLabels,700);
+__uiv(fireLabels,700);
 let FIREZ=null;
 {const ro=document.getElementById('roster');if(ro)new MutationObserver(()=>{fireLabels();try{if(FIREZ){const k=STF.indexOf(FIREZ),b=document.querySelector(`#roster .rfire[data-k="${k}"]`);if(k<0||!b||fireBusy(FIREZ))FIREZ=null;else if(!b.closest('.rs').querySelector('.rfc'))fireAsk(k,b,1)}}catch(_){}}).observe(ro,{childList:true})}
 function fireAsk(k,b,silent){const z=STF[k];if(!z||fireBusy(z))return;FIREZ=z;document.querySelectorAll('#roster .rfc').forEach(n=>n.remove());const un=fireRecent(z),fee=fireFee(z),last=z.r<9&&STF.filter(s=>s.r==z.r).length==1;
@@ -6408,7 +6446,7 @@ function dcRecent(){return B.dcAm!=null&&(((YR-1)*12+mo-B.dcAm)*30+day-B.dcD)<=F
 function dcSync(){try{const das=$('das');if(!das)return;let b=$('bdcx');if(!DCT){if(b)b.remove();const c=das.querySelector('.rfc');if(c)c.remove();return}
  if(!b){b=document.createElement('button');b.id='bdcx';b.type='button';das.appendChild(b);b.onclick=e=>{e.stopPropagation();dcAsk()}}
  const un=dcRecent(),t=un?'↩️ Annuler le contrat DASRI':'📄 Fin du contrat DASRI';if(b.textContent!==t){b.textContent=t;b.className='rfire'+(un?' un':'')}}catch(_){}}
-setInterval(dcSync,700);
+__uiv(dcSync,700);
 function dcAsk(){const das=$('das');let d=das.querySelector('.rfc');if(d){d.remove();return}const un=dcRecent();d=document.createElement('div');d.className='rfc'+(un?' un':'');
  d.innerHTML=(un?'<b>Annuler le contrat DASRI ?</b><br>Il a été signé il y a moins d’une semaine : les <b>120 €</b> sont remboursés.':'<b>Mettre fin au contrat DASRI ?</b><br>Les 120 € de signature ne sont pas remboursés. Plus de 20 €/mois, mais il faudra de nouveau faire vider les conteneurs soi-même (30 € la collecte).')
   +`<div class="rb"><button type="button" class="no">Garder le contrat</button><button type="button" class="ok">${un?'↩️ Annuler le contrat':'📄 Confirmer la fin'}</button></div>`;
@@ -6501,7 +6539,7 @@ window.hgIco=function(cx,cy,G){G=G||x;const t=performance.now()/1000,P=t%3/3,fl=
  // montants en bois
  x.fillStyle='#8a5a2b';x.fillRect(-w-.5,-h-.65,2*w+1,.6);x.fillRect(-w-.5,h+.05,2*w+1,.6);x.restore()};
 // ---- portraits des suivis au long cours (Jess, Jawad) : toujours sous la barre du haut, même quand elle passe sur deux lignes
-setInterval(()=>{try{const w=document.getElementById('lci'),h=document.getElementById('hud');if(!w||!h)return;if(w.dataset.col==='1')return;const b=(window.LSCOL&&LSCOL())?150:Math.round(h.getBoundingClientRect().bottom+8);if(b>8&&w.style.top!==b+'px')w.style.setProperty('top',b+'px','important')}catch(_){}},300);
+__uiv(()=>{try{const w=document.getElementById('lci'),h=document.getElementById('hud');if(!w||!h)return;if(w.dataset.col==='1')return;const b=(window.LSCOL&&LSCOL())?150:Math.round(h.getBoundingClientRect().bottom+8);if(b>8&&w.style.top!==b+'px')w.style.setProperty('top',b+'px','important')}catch(_){}},300);
 // ---- festival : l'invitation montre une affiche-calendrier (comme les rendez-vous de l'année) ; l'animation est gardée pour quand on accepte
 function festPoster(g,T){const MNF=['avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre','janvier','février','mars'],col='#7a4fb5';
  g.save();g.fillStyle='#cdb68c';g.fillRect(0,0,200,104);g.fillStyle='rgba(120,90,50,.18)';for(let y=0;y<104;y+=8){g.fillRect(0,y,200,1);for(let xx=(y/8)%2?0:12;xx<200;xx+=24)g.fillRect(xx,y,1,8)}
@@ -6513,10 +6551,10 @@ function festPoster(g,T){const MNF=['avril','mai','juin','juillet','août','sept
  g.fillStyle=col;g.fillRect(-20,88.5,40,1.5);
  [[-44,5],[44,5]].forEach(([px,py])=>{g.fillStyle='#4a2f7a';g.beginPath();g.arc(px,py,2.6,0,7);g.fill();g.fillStyle='#b48cf0';g.beginPath();g.arc(px-.5,py-.5,1.8,0,7);g.fill()});
  g.restore()}
-new MutationObserver(()=>{try{const ov=document.getElementById('fmo');if(!ov||ov._fstp)return;const ft=ov.querySelector('.ft'),fn=ov.querySelector('.fn');if(!ft||!fn||ft.textContent!='Festival'||!/festival du square/i.test(fn.textContent))return;ov._fstp=1;
+__obsIn(['fmo'],()=>{try{const ov=document.getElementById('fmo');if(!ov||ov._fstp)return;const ft=ov.querySelector('.ft'),fn=ov.querySelector('.fn');if(!ft||!fn||ft.textContent!='Festival'||!/festival du square/i.test(fn.textContent))return;ov._fstp=1;
  ft.textContent='Rendez-vous de l’année';ov._rdvp=1;
  const cv=ov.querySelector('canvas');if(!cv)return;const c2=document.createElement('canvas');c2.width=cv.width;c2.height=cv.height;c2.className=cv.className;c2.style.cssText=cv.style.cssText;cv.style.display='none';cv.after(c2);
- const g=c2.getContext('2d');g.imageSmoothingEnabled=false;const t0=performance.now();(function fr(){if(!document.body.contains(c2))return;g.clearRect(0,0,c2.width,c2.height);festPoster(g,(performance.now()-t0)/1000);requestAnimationFrame(fr)})()}catch(_){}}).observe(document.body,{childList:true,subtree:true});
+ const g=c2.getContext('2d');g.imageSmoothingEnabled=false;const t0=performance.now();(function fr(){if(!document.body.contains(c2))return;g.clearRect(0,0,c2.width,c2.height);festPoster(g,(performance.now()-t0)/1000);requestAnimationFrame(fr)})()}catch(_){}},{childList:true,subtree:true});
 // ---- épilogue : les bulles (« Merci Camille !!! »…) prennent le prénom et le genre choisis pour le personnage
 window.epTx=function(t){try{if(typeof chefTx=='function')t=chefTx(t);const C_=typeof CHEF!='undefined'?CHEF:window.CHEF,p=C_&&C_.pro;return String(t).replace(/battu·e/g,p=='il'?'battu':p=='elle'?'battue':'battu·e')}catch(_){return t}};
 
@@ -6540,11 +6578,11 @@ window.endTips=function(){try{const I=window.ENDINFO||{},sc=window.LASTSC||[],T=
 .ectip h4{margin:0 0 4px;font:400 17px Lilita,'Atkinson Hyperlegible',sans-serif;color:#7a4a10}.ectip ul{margin:0;padding-left:4px;list-style:none}.ectip li{font-size:13.5px;line-height:1.35;margin:4px 0}
 .ecpan .ecb .go.retry{font-size:16px!important;padding:5px 18px!important}`;document.head.appendChild(st)}
 // dans le panneau final (après le générique) : si la halte n'est pas pérennisée, une petite fenêtre de conseils puis « Ressaye ! »
-new MutationObserver(()=>{try{const pn=document.querySelector('#epov .ecpan.on');if(!pn||pn._tips||ENDING=='good')return;pn._tips=1;const L=endTips();if(!L.length)return;
+__obsIn(['epov'],()=>{try{const pn=document.querySelector('#epov .ecpan.on');if(!pn||pn._tips||ENDING=='good')return;pn._tips=1;const L=endTips();if(!L.length)return;
  const ps=pn.querySelectorAll('p');const second=ps[1];const box=document.createElement('div');box.className='ectip';
  box.innerHTML=(ENDING=='mid'?`<p class="ecretry">🔁 Réessaie pour faire inscrire les HSA dans le droit commun !<br><span>${window.endMiss?endMiss():''}</span></p>`:'')+`<h4>💡 Pour mieux convaincre le gouvernement la prochaine fois…</h4><ul>${L.map(t=>'<li>'+t+'</li>').join('')}</ul>`;
  if(second)second.replaceWith(box);else pn.insertBefore(box,pn.querySelector('.ecb'));
- const rb=pn.querySelector('.ecb button.go');if(rb){rb.textContent='↺ Ressaye !';rb.classList.add('retry')}}catch(_){}}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
+ const rb=pn.querySelector('.ecb button.go');if(rb){rb.textContent='↺ Ressaye !';rb.classList.add('retry')}}catch(_){}},{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
 
 // ===== v252 : le quartier montre les scores (graphismes du pack LimeZu) — fenêtres des riverains, notoriété (enseigne, affiches, panneaux, arrêt de bus), campement et personnes qui dorment dans le square ; bénévoles et pairs selon les scores ; Support. Don't Punish. avec les riverains si le quartier est tranquille
 const VISI=new Image();VISI.src='a/40fdf639ed5d.png';
@@ -6763,7 +6801,7 @@ window.indModal=function(){if(!$('m').hidden)return;paused=true;
  $('m').className='modal';$('m').hidden=false};
 // « À propos » (sources, pour aller plus loin) : croix verte en haut à droite pour fermer
 {const st=document.createElement('style');st.textContent=`#splx .bx.about .abx{position:sticky;top:0;float:right;margin:-6px -6px 0 8px;width:38px;height:38px;min-width:0;padding:0;display:flex;align-items:center;justify-content:center;background:#3fae5a;color:#fff;border:3px solid #2a2433;border-radius:9px;font:900 20px/1 sans-serif;box-shadow:0 3px 0 #2a2433;z-index:3;cursor:pointer}#splx .bx.about .abx:active{transform:translateY(2px);box-shadow:0 1px 0 #2a2433}body:has(#splx) #lci,body:has(#splx) #bAlb{visibility:hidden!important}`;document.head.appendChild(st);
- new MutationObserver(()=>{try{const bx=document.querySelector('#splx .bx.about');if(!bx||bx.querySelector('.abx'))return;const b=document.createElement('button');b.className='abx';b.type='button';b.title='Fermer';b.textContent='✕';b.onclick=()=>{const o=$('splx');if(o)o.remove()};bx.insertBefore(b,bx.firstChild)}catch(_){}}).observe(document.body,{childList:true,subtree:true})}
+ __obsIn(['splx'],()=>{try{const bx=document.querySelector('#splx .bx.about');if(!bx||bx.querySelector('.abx'))return;const b=document.createElement('button');b.className='abx';b.type='button';b.title='Fermer';b.textContent='✕';b.onclick=()=>{const o=$('splx');if(o)o.remove()};bx.insertBefore(b,bx.firstChild)}catch(_){}},{childList:true,subtree:true})}
 
 // Camille le dit une fois : on commence à parler de la halte (la notoriété n'a plus de chiffre dans le menu)
 setInterval(()=>{try{if(!started||ended||B.notSaid||typeof NOT=='undefined'||NOT<35)return;B.notSaid=1;if(typeof camSay=='function')camSay('📣 On commence à parler de nous dans le quartier ! Encore un peu, et des bénévoles viendront proposer leur aide.','good')}catch(_){}},3000);
@@ -6949,7 +6987,7 @@ window.stTgt=stTgt;
 
 
 // gros titres en haut de l'écran (visite HAS, nouveauté, défi) : empilés à droite sous le HUD, sans jamais passer sur les portraits
-window.STK2=1;let STKM=0;setInterval(()=>{try{if(typeof MEET!='undefined'&&MEET||document.body.classList.contains('meet')){if(!STKM){STKM=1;['hasb','hasc','ulp','dfb','dfi','rdfx'].forEach(id=>{const e=document.getElementById(id);if(e)['top','right','left','transform','max-width'].forEach(k=>e.style.removeProperty(k))})}return}STKM=0;const hud=document.getElementById('hud');let y=(hud?hud.getBoundingClientRect().bottom:60)+8;try{const c=document.getElementById('ctoast');if(c&&c.classList.contains('on')&&innerWidth<innerHeight){const r=c.getBoundingClientRect();if(r.height>0&&r.bottom>0)y=Math.max(y,r.bottom+8)}}catch(_){}const LC_=window.LSCOL&&LSCOL();if(LC_)y=50;const L=document.getElementById('lci');let lw=8;if(L&&L.children.length){const r=L.getBoundingClientRect();if(r.width>0)lw=r.right+8}
+window.STK2=1;let STKM=0;__uiv(()=>{try{if(typeof MEET!='undefined'&&MEET||document.body.classList.contains('meet')){if(!STKM){STKM=1;['hasb','hasc','ulp','dfb','dfi','rdfx'].forEach(id=>{const e=document.getElementById(id);if(e)['top','right','left','transform','max-width'].forEach(k=>e.style.removeProperty(k))})}return}STKM=0;const hud=document.getElementById('hud');let y=(hud?hud.getBoundingClientRect().bottom:60)+8;try{const c=document.getElementById('ctoast');if(c&&c.classList.contains('on')&&innerWidth<innerHeight){const r=c.getBoundingClientRect();if(r.height>0&&r.bottom>0)y=Math.max(y,r.bottom+8)}}catch(_){}const LC_=window.LSCOL&&LSCOL();if(LC_)y=50;const L=document.getElementById('lci');let lw=8;if(L&&L.children.length){const r=L.getBoundingClientRect();if(r.width>0)lw=r.right+8}
  const PO_=innerWidth<innerHeight;if(PO_){const op=document.getElementById('objp');if(op&&getComputedStyle(op).display!='none'){const r=op.getBoundingClientRect();if(r.height>0)y=Math.max(y,r.bottom+6)}}else{['dfi','hasc','hasb','rdfx'].forEach(i_=>{const d_=document.getElementById(i_);if(d_&&d_.style.getPropertyValue('top'))['top','right','left','transform','max-width','animation'].forEach(k=>d_.style.removeProperty(k))})}
  (PO_?['hasb','hasc','ulp','dfb','dfi','rdfx']:['ulp','dfb']).forEach(id=>{const e=document.getElementById(id);if(!e)return;const cs=getComputedStyle(e);if(cs.display=='none'||cs.visibility=='hidden')return;const s=e.style,ty=Math.round(y)+'px';
   if(s.getPropertyValue('top')!==ty)s.setProperty('top',ty,'important');const RR_=LC_?'62px':'8px';if(s.getPropertyValue('right')!==RR_){s.setProperty('right',RR_,'important');s.setProperty('left','auto','important');s.setProperty('transform','none','important');s.setProperty('animation','none','important')}const mw=`calc(100vw - ${Math.round(lw+8)}px)`;if(s.getPropertyValue('max-width')!==mw)s.setProperty('max-width',mw,'important');
@@ -6993,7 +7031,7 @@ W('world',(o,a)=>{NBQ.length=0;return o(...a)});
 W('satBar',(o,a)=>{try{const v=a[0];if(window.DOORZ&&v&&DOORZ(v.x,v.y))return}catch(_){}return o(...a)});
 // fenêtres des suivis au long cours (dossier, histoire) : croix verte en haut à droite pour fermer
 {const st=document.createElement('style');st.textContent=`#lcm,#lcbook{position:relative}#lcm .lcxb,#lcbook .lcxb{position:absolute!important;right:2px!important;top:2px!important;left:auto!important;width:36px!important;height:36px!important;min-width:0!important;max-width:36px!important;margin:0!important;padding:0!important;display:flex!important;align-items:center;justify-content:center;background:#3fae5a!important;color:#fff!important;border:3px solid #2a2433!important;border-radius:9px!important;font:900 19px/1 sans-serif!important;box-shadow:0 3px 0 #2a2433!important;z-index:5;cursor:pointer;text-align:center!important}#lcm .lcxb:active,#lcbook .lcxb:active{transform:translateY(2px);box-shadow:0 1px 0 #2a2433!important}`;document.head.appendChild(st);
- new MutationObserver(()=>{try{['lcm','lcbook'].forEach(id=>{const bx=document.getElementById(id);if(!bx||bx.querySelector('.lcxb'))return;const b=document.createElement('button');b.className='lcxb';b.type='button';b.title='Fermer';b.textContent='✕';b.onclick=()=>{$('m').hidden=true;paused=false};bx.insertBefore(b,bx.firstChild)})}catch(_){}}).observe(document.body,{childList:true,subtree:true})}
+ __obsIn(['lcm', 'lcbook'],()=>{try{['lcm','lcbook'].forEach(id=>{const bx=document.getElementById(id);if(!bx||bx.querySelector('.lcxb'))return;const b=document.createElement('button');b.className='lcxb';b.type='button';b.title='Fermer';b.textContent='✕';b.onclick=()=>{$('m').hidden=true;paused=false};bx.insertBefore(b,bx.firstChild)})}catch(_){}},{childList:true,subtree:true})}
 // maison de quartier : intérieur vivant
 const MQS={t0:performance.now()/1000};
 // sprites des packs pour les activités de la maison de quartier (Modern Interiors : salle de conférence, art ; Modern Exteriors : école)
@@ -7035,7 +7073,7 @@ W('world',(o,a)=>{const r=o(...a);try{const ev=B.mqEv;if(ev&&ev.t>0&&P.k){const 
 
 // tournée du camion : la petite fenêtre se range en bas à gauche, au-dessus des onglets
 {const st=document.createElement('style');st.textContent='#tvw{left:10px!important;right:auto!important;top:auto!important;bottom:calc(var(--tvb,90px) + 10px)!important;width:min(220px,44vw)!important}body:has(#tvw) #cam{left:calc(min(220px,44vw) + 18px)!important;max-width:calc(100vw - min(220px,44vw) - 26px)!important}@keyframes tvin{from{transform:translateX(-140%)}}';document.head.appendChild(st);
- setInterval(()=>{try{const tb=document.getElementById('tabs');if(!tb)return;const r=tb.getBoundingClientRect();const v=Math.max(0,Math.round(innerHeight-r.top))+'px';if(document.documentElement.style.getPropertyValue('--tvb')!==v)document.documentElement.style.setProperty('--tvb',v)}catch(_){}},500)}
+ __uiv(()=>{try{const tb=document.getElementById('tabs');if(!tb)return;const r=tb.getBoundingClientRect();const v=Math.max(0,Math.round(innerHeight-r.top))+'px';if(document.documentElement.style.getPropertyValue('--tvb')!==v)document.documentElement.style.setProperty('--tvb',v)}catch(_){}},500)}
 
 // ===== v311 : climatiseur du pack, posé sur un morceau de mur libre (sinon pas affiché)
 W('fs',(o,a)=>{o(...a);const L=window._acLog;if(L&&L.length<60){const r=FU[a[0]];if(r)L.push([a[1],a[2],r[2]/2,r[3]/2])}});
@@ -7109,7 +7147,7 @@ window.epFix=function(b){try{const box=b.parentNode;if(!box)return;const t0=b.te
   const others=[...box.children].filter(c=>c!==b&&!c.classList.contains('out')).map(c=>({l:c.offsetLeft-c.offsetWidth/2,r:c.offsetLeft+c.offsetWidth/2,t:c.offsetTop-c.offsetHeight,b:c.offsetTop}));
   for(let k=0;k<5;k++){const l=cx-w/2,r=cx+w/2,t=by-h;const hit=others.find(q=>q.l<r&&q.r>l&&q.t<by&&q.b>t);if(!hit)break;by=hit.t-4}
   by=Math.max(pad+h,Math.min(SH-pad,by));b.style.left=cx+'px';b.style.top=by+'px'}catch(_){}};
-new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes){if(n.nodeType==1&&n.classList&&n.classList.contains('epbub'))epFix(n)}}).observe(document.body,{childList:true,subtree:true});
+__obsIn(['epov', 'tvov'],ms=>{for(const m of ms)for(const n of m.addedNodes){if(n.nodeType==1&&n.classList&&n.classList.contains('epbub'))epFix(n)}},{childList:true,subtree:true});
 
 // ===== v325 : épilogue — la rue du bas est piétonne pendant la fête (pas de voiture au milieu de la foule)
 {const _hf=window.HDFILTER;window.HDFILTER=(n,a)=>{try{if((n=='obb'||n=='wheels')&&window.FBC&&document.getElementById('epov')&&typeof a[0]=='string'&&/^car_l/.test(a[0]))return true;if(n=='wheels'&&window.FBC&&document.getElementById('epov')&&a[2]>260&&a[2]<300)return true}catch(_){}return _hf?_hf(n,a):false}}
@@ -7320,7 +7358,7 @@ setInterval(()=>{try{const e=$('eu');if(!e||!window.PAYNOW||!started)return;cons
 #tabs button .albn{position:absolute;top:-7px;right:-5px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:#f28a1e;color:#fff;font:400 12px/16px Lilita,'Atkinson Hyperlegible',sans-serif;text-align:center;border:2px solid #fff6e8;box-shadow:0 2px 0 rgba(42,36,51,.45)}#tabs button .albn[hidden]{display:none}`;document.head.appendChild(st);
  const b=document.createElement('button');b.setAttribute('onclick','album()');b.title='Mon album de cartes';b.innerHTML='<span class="ic">📚</span><small>Cartes</small><span class="albn" hidden>0</span>';tabs.appendChild(b);window.ALBT=b;
  const upd=()=>{try{let L=[];try{L=JSON.parse(localStorage.getItem('hsa-cards-new')||'[]')}catch(_){}const n=L.filter(id=>COL[id]).length,e=b.querySelector('.albn');if(e.hidden!==!n){e.hidden=!n}if(e.textContent!=String(n))e.textContent=n;b.title='Mon album de cartes · '+CARDS.filter(c=>COL[c[0]]).length+'/'+CARDS.length}catch(_){}};
- setInterval(upd,600);setTimeout(upd,1200)})();
+ __uiv(upd,600);setTimeout(upd,1200)})();
 
 // ===== v337 : écran Construire — salles construites à part, prix sur chaque salle, tailles et prix dans la carte, salles verrouillées visibles avec leur condition
 (function(){const st=document.createElement('style');st.textContent=`#rb{display:none!important}#sl>h2:first-child,#szb{display:none!important}
@@ -7370,7 +7408,7 @@ setInterval(()=>{try{const e=$('eu');if(!e||!window.PAYNOW||!started)return;cons
   hb.disabled=!nh||eu<nh*HC;hb.querySelector('small').textContent=nh?nh+' salle'+(nh>1?'s':'')+' · plus personne n’a froid l’hiver':'toutes les salles sont chauffées';hb.querySelector('.pr').textContent=nh?nh*HC+' €':'✔';
   cb.disabled=!nc||eu<nc*CC;cb.querySelector('small').textContent=nc?nc+' salle'+(nc>1?'s':'')+' · de la fraîcheur pendant la canicule':'toutes les salles sont climatisées';cb.querySelector('.pr').textContent=nc?nc*CC+' €':'✔'}
  // le panneau « Nouveau ! » ne passe jamais par-dessus le menu ouvert (en paysage, il se décale à gauche du panneau)
- setInterval(()=>{try{const u=$('ulp');if(!u)return;const app=$('app'),sd=$('side');if(app.classList.contains('open')&&matchMedia('(orientation:landscape)').matches&&sd&&sd.offsetWidth){u.style.setProperty('right',(sd.offsetWidth+(window.LSCOL&&LSCOL()?70:16))+'px','important')}else if(window.LSCOL&&LSCOL())u.style.setProperty('right','62px','important');else if(u.style.getPropertyValue('right')&&u.style.getPropertyValue('right')!=='8px')u.style.setProperty('right','8px','important')}catch(_){}},200);
+ __uiv(()=>{try{const u=$('ulp');if(!u)return;const app=$('app'),sd=$('side');if(app.classList.contains('open')&&matchMedia('(orientation:landscape)').matches&&sd&&sd.offsetWidth){u.style.setProperty('right',(sd.offsetWidth+(window.LSCOL&&LSCOL()?70:16))+'px','important')}else if(window.LSCOL&&LSCOL())u.style.setProperty('right','62px','important');else if(u.style.getPropertyValue('right')&&u.style.getPropertyValue('right')!=='8px')u.style.setProperty('right','8px','important')}catch(_){}},200);
  window.heatAll=()=>{const L=R.map((r,i)=>i).filter(i=>built[i]&&!HEAT[i]);if(!L.length||eu<L.length*HC)return;eu-=L.length*HC;L.forEach(i=>HEAT[i]=1);try{sfx('build')}catch(_){}say(`🔥 Chauffage installé dans ${L.length} salle${L.length>1?'s':''} (discret, dans les murs) : plus personne n’aura froid cet hiver.`);ui()};
  window.coolAll=()=>{const L=R.map((r,i)=>i).filter(i=>built[i]&&!COOL[i]);if(!L.length||eu<L.length*CC)return;eu-=L.length*CC;L.forEach(i=>COOL[i]=1);try{sfx('build')}catch(_){}say(`❄️ Climatiseurs installés dans ${L.length} salle${L.length>1?'s':''} (discrets, dans les combles) : un peu de fraîcheur pendant la canicule.`);ui()};
  W('ui',(o,a)=>{const r=o(...a);try{build();state()}catch(e){console.error(e)}return r});setTimeout(()=>{try{build();state()}catch(_){}},1000)})();
@@ -7435,7 +7473,7 @@ window.chapOf=()=>Math.max(1,Math.min(3,YR||1));
 // ---- barres du bandeau : an 1 → 🤝 😊 👥 ; an 2 → + 🏘️ ; an 3 → + 💚. Mode difficile : tout dès le départ.
 (function(){const st=document.createElement('style');st.textContent=`#spw .r.chh{display:none!important}
 #chapc{flex:none;font:700 11px/1 'Atkinson Hyperlegible',sans-serif;color:#2a2433;background:#fff3c4;border:1.5px solid #2a2433;border-radius:7px;padding:3px 5px;white-space:nowrap;cursor:pointer;margin-right:2px}`;document.head.appendChild(st);
- setInterval(()=>{try{const ch=window.HARD?3:chapOf(),qf=$('qf'),sf=$('spf');const H=(el,h)=>{const r=el.closest('.r');if(!r)return;if(h)r.style.setProperty('display','none','important');else if(r.style.display=='none'&&!r.classList.contains('nhide'))r.style.removeProperty('display')};if(qf)H(qf,ch<2&&!(B&&B.qShow));if(sf)H(sf,ch<3);
+ __uiv(()=>{try{const ch=window.HARD?3:chapOf(),qf=$('qf'),sf=$('spf');const H=(el,h)=>{const r=el.closest('.r');if(!r)return;if(h)r.style.setProperty('display','none','important');else if(r.style.display=='none'&&!r.classList.contains('nhide'))r.style.removeProperty('display')};if(qf)H(qf,ch<2&&!(B&&B.qShow));if(sf)H(sf,ch<3);
   const w=$('spw');if(w){let c=$('chapc');if(!c){c=document.createElement('span');c.id='chapc';c.onclick=e=>{e.stopPropagation();try{chgShow(chapOf())}catch(_){}};w.insertBefore(c,w.firstChild)}let t='';if((started||(typeof TI!='undefined'&&TI>=0))&&!ended){const C=CHAP[chapOf()];c.title='Chapitre '+chapOf()+' · '+C.n+' (toucher pour revoir les enjeux)';if(chapOf()==1)t='🏠 An 1';if(chapOf()==2)t='🏘️ An 2';if(chapOf()==3&&window.dossier)t='📁'+dossier().met+'/'+dossier().L.length}c.textContent=t;c.style.display=t?'':'none'}}catch(_){}},600);
  // an 1 : si la tranquillité baisse vraiment, la barre apparaît quand même (avec un mot de Camille)
  setInterval(()=>{try{if(started&&!ended&&chapOf()==1&&!window.HARD&&false&&!(B.qShow)){B.qShow=1;say('🏘️ Camille : « Les voisins se plaignent ! Maraudes, seringues ramassées et DASRI vidés font remonter la barre 🏘️. »')}}catch(_){}},2000)})();
@@ -8489,7 +8527,7 @@ body:has(#vig) #cam{left:calc(min(236px,50vw) + 18px)!important;max-width:calc(1
 {const st=document.createElement('style');st.textContent=`#qbub{position:fixed;z-index:56;width:34px;height:34px;border-radius:50%;background:#ffd23f;border:3px solid #2a2433;box-shadow:0 3px 0 rgba(42,36,51,.4);font:400 20px/1 Lilita,sans-serif;color:#2a2433;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:qbob 1.6s ease-in-out infinite;padding:0}
 #qbub::after{content:'';position:absolute;bottom:-8px;left:50%;margin-left:-5px;border:5px solid transparent;border-top-color:#2a2433}@keyframes qbob{50%{transform:translateY(-4px)}}`;document.head.appendChild(st);
  let QB=0;const can=()=>{try{return started&&!ended&&!FIN&&!MEET&&qi<QS.length&&B.qM!==AMI()&&AMI()>=1&&$('m').hidden&&!document.getElementById('fmo')&&$('tut').hidden&&!document.getElementById('debov')}catch(_){return false}};
- setInterval(()=>{let b=$('qbub');if(!can()){if(b)b.remove();return}const c=$('ccv');if(!c)return;const r=c.getBoundingClientRect();if(!r.width)return;if(!b){b=document.createElement('button');b.id='qbub';b.title='Question du mois : bonus de financement';b.innerHTML='<span class="qi">🎓</span><span class="qt">Quiz</span>';b.onclick=e=>{e.stopPropagation();if(!can())return;QB=1;b.remove();try{sfx('page')}catch(_){}showQ()};document.body.appendChild(b)}
+ __uiv(()=>{let b=$('qbub');if(!can()){if(b)b.remove();return}const c=$('ccv');if(!c)return;const r=c.getBoundingClientRect();if(!r.width)return;if(!b){b=document.createElement('button');b.id='qbub';b.title='Question du mois : bonus de financement';b.innerHTML='<span class="qi">🎓</span><span class="qt">Quiz</span>';b.onclick=e=>{e.stopPropagation();if(!can())return;QB=1;b.remove();try{sfx('page')}catch(_){}showQ()};document.body.appendChild(b)}
   b.style.left=Math.max(6,Math.round(r.left+r.width/2-(b.offsetWidth||64)/2))+'px';b.style.top=Math.round(r.top-(b.offsetHeight||30)-12)+'px'},400);
  W('ans',(o,a)=>{try{B.qM=AMI()}catch(_){}return o(...a)});
  W('closeQ',(o,a)=>{if(QB){QB=0;$('m').hidden=true;paused=false;try{ui()}catch(_){}return}return o(...a)})}
@@ -8968,9 +9006,11 @@ window.dlExclu=n=>['Madame, Monsieur,',`${n}, que vous accueillez, m’a insult�
  {const st=document.createElement('style');st.textContent=`.chapr{background:#fff4e0!important;border:2.5px solid #b0702a!important;color:#6a4010!important;font-weight:700}`;document.head.appendChild(st)}}
 
 // ===== v383 : emojis nets — la couche des bulles et des +/− est dessinée en haute définition, emojis plus grands
-{const RZ=()=>Math.min(3,Math.max(2,Math.round(window.devicePixelRatio||2)));
- const f=function(){let c=$('cfl');if(!c){c=document.createElement('canvas');c.id='cfl';c.style.cssText='position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:5';$('stage').appendChild(c)}
-  const r=RZ();c.style.imageRendering='auto';{const W_=cv.clientWidth+'px',H_=cv.clientHeight+'px',L_=(cv.offsetLeft+cv.clientLeft)+'px',T_=(cv.offsetTop+cv.clientTop)+'px';if(c.style.width!==W_||c.style.height!==H_||c.style.left!==L_||c.style.top!==T_){c.style.width=W_;c.style.height=H_;c.style.left=L_;c.style.top=T_}}if(c.width!=cv.width*r||c.height!=cv.height*r){c.width=cv.width*r;c.height=cv.height*r}const g=c.getContext('2d'),m=x.getTransform();g.setTransform(m.a*r,m.b*r,m.c*r,m.d*r,m.e*r,m.f*r);g.imageSmoothingEnabled=true;g.imageSmoothingQuality='high';return g};
+{const RZ=()=>Math.min(2,window.devicePixelRatio||2);let lay=1;const relay=()=>{lay=1};
+ addEventListener('resize',relay);addEventListener('orientationchange',relay);try{const ro=new ResizeObserver(relay);ro.observe(cv);ro.observe($('stage'))}catch(_){}
+ const f=function(){let c=$('cfl');if(!c){c=document.createElement('canvas');c.id='cfl';c.style.cssText='position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:5;image-rendering:auto';$('stage').appendChild(c);lay=1}
+  if(lay){const cw=cv.clientWidth,ch=cv.clientHeight;if(cw&&ch){lay=0;const r=RZ();c.style.width=cw+'px';c.style.height=ch+'px';c.style.left=(cv.offsetLeft+cv.clientLeft)+'px';c.style.top=(cv.offsetTop+cv.clientTop)+'px';const w=Math.round(cw*r),h=Math.round(ch*r);if(c.width!=w||c.height!=h){c.width=w;c.height=h}}}
+  c._d=1;const g=c._g||(c._g=c.getContext('2d')),m=x.getTransform(),rx=c.width/cv.width,ry=c.height/cv.height;g.setTransform(m.a*rx,m.b*ry,m.c*rx,m.d*ry,m.e*rx,m.f*ry);g.imageSmoothingEnabled=true;g.imageSmoothingQuality='high';return g};
  try{fltCtx=f}catch(_){}window.fltCtx=f}
 // emojis en image (rendu une fois en grand, recadré au pixel près) pour un centrage parfait
 window.EMB={};window.emoBmp=e=>{if(EMB[e])return EMB[e];const c=document.createElement('canvas');c.width=c.height=96;const g=c.getContext('2d',{willReadFrequently:true});g.font='72px sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText(e,48,52);
@@ -9317,7 +9357,7 @@ window.LSCOL=()=>{try{return matchMedia('(orientation:landscape) and (max-height
 W('ui',(o,a)=>{const r=o(...a);try{if(innerWidth<innerHeight){const p=$('pl');if(p&&/ · An \d/.test(p.textContent)){const t=p.textContent.replace(/\s*·\s*An \d(\/3)?\s*$/,'');if(t!==p.textContent)p.textContent=t}if(p&&innerWidth<430){const t2=p.textContent.replace(/\s*·\s*J/,' J').replace(/^[^\wÀ-ÿ]+\s*/,'');if(t2!==p.textContent)p.textContent=t2;p.style.whiteSpace='nowrap'}}}catch(_){}return r});
 
 // v403 : paysage — les effets en cours (TAPAJ, fermeture…) sous la colonne des compteurs
-setInterval(()=>{try{const e=document.getElementById('rdfx');if(!e)return;if(window.LSCOL&&LSCOL()){const h=$('hud').getBoundingClientRect();const t=Math.round(h.bottom+6)+'px';if(e.style.top!==t){e.style.setProperty('top',t,'important');e.style.setProperty('left','6px','important');e.style.setProperty('max-width','156px','important')}}else if(innerWidth>=innerHeight){let y=$('hud').getBoundingClientRect().bottom+8;['hasb','ulp','dfb'].forEach(id=>{const b=document.getElementById(id);if(!b)return;const cs=getComputedStyle(b);if(cs.display=='none'||cs.visibility=='hidden')return;const r=b.getBoundingClientRect();if(r.height>0)y=Math.max(y,r.bottom+6)});const L=document.getElementById('lci');let x=8;if(L&&L.children.length){const r=L.getBoundingClientRect();if(r.width>0)x=r.right+6}const t=Math.round(y)+'px',l=Math.round(x)+'px';if(e.style.top!==t)e.style.setProperty('top',t,'important');if(e.style.left!==l)e.style.setProperty('left',l,'important');e.style.setProperty('max-width','calc(100vw - '+(Math.round(x)+10)+'px)','important')}}catch(_){}},400);
+__uiv(()=>{try{const e=document.getElementById('rdfx');if(!e)return;if(window.LSCOL&&LSCOL()){const h=$('hud').getBoundingClientRect();const t=Math.round(h.bottom+6)+'px';if(e.style.top!==t){e.style.setProperty('top',t,'important');e.style.setProperty('left','6px','important');e.style.setProperty('max-width','156px','important')}}else if(innerWidth>=innerHeight){let y=$('hud').getBoundingClientRect().bottom+8;['hasb','ulp','dfb'].forEach(id=>{const b=document.getElementById(id);if(!b)return;const cs=getComputedStyle(b);if(cs.display=='none'||cs.visibility=='hidden')return;const r=b.getBoundingClientRect();if(r.height>0)y=Math.max(y,r.bottom+6)});const L=document.getElementById('lci');let x=8;if(L&&L.children.length){const r=L.getBoundingClientRect();if(r.width>0)x=r.right+6}const t=Math.round(y)+'px',l=Math.round(x)+'px';if(e.style.top!==t)e.style.setProperty('top',t,'important');if(e.style.left!==l)e.style.setProperty('left',l,'important');e.style.setProperty('max-width','calc(100vw - '+(Math.round(x)+10)+'px)','important')}}catch(_){}},400);
 // v403 : la tranquillité ne dépasse jamais 100 %
 setInterval(()=>{try{if(typeof q=='number'){if(q>100)q=100;else if(q<0)q=0}}catch(_){}},300);
 // v403 : débat — les phrases de Crotti sur un fond sombre (lisibles même devant les pancartes) ; en paysage, la main de cartes plus basse et plus petite
@@ -9418,7 +9458,7 @@ W('newV',(o,a)=>{const v=o(...a);try{if(YR>=3&&v&&v.need=='s'&&F.t&&S.t>0&&!(v.d
 // ===== v409 : les projets de l'an 3 ont un coût mensuel visible dans les comptes
 {const _fp=window.finPend;window.finPend=()=>{const L=_fp?_fp():[];try{if(B.pjM>0)L.push(['💼','Projets de l’an 3','loyers et salaires, chaque mois',B.pjM])}catch(_){}return L}}
 // ===== v409 : recruter — le coût mensuel est affiché sur le bouton
-setInterval(()=>{try{const tb=$('tabsbody');if(!tb)return;tb.querySelectorAll('button[onclick^="hire("]').forEach(b=>{const tx=b.querySelector('.tx');if(!tx)return;const i=+((b.getAttribute('onclick')||'').match(/hire\((\d+)/)||[])[1];const doc=/médecin/i.test(tx.textContent);const m=(doc?SALD+8*(YR-1):SAL+4*(YR-1));let e=tx.querySelector('.t3s');const h=`💶 puis <b>${m} €/mois</b> de salaire`;if(!e){e=document.createElement('span');e.className='t3s';tx.appendChild(e)}if(e.innerHTML!==h)e.innerHTML=h})}catch(_){}},800);
+__uiv(()=>{try{const tb=$('tabsbody');if(!tb)return;tb.querySelectorAll('button[onclick^="hire("]').forEach(b=>{const tx=b.querySelector('.tx');if(!tx)return;const i=+((b.getAttribute('onclick')||'').match(/hire\((\d+)/)||[])[1];const doc=/médecin/i.test(tx.textContent);const m=(doc?SALD+8*(YR-1):SAL+4*(YR-1));let e=tx.querySelector('.t3s');const h=`💶 puis <b>${m} €/mois</b> de salaire`;if(!e){e=document.createElement('span');e.className='t3s';tx.appendChild(e)}if(e.innerHTML!==h)e.innerHTML=h})}catch(_){}},800);
 {const st=document.createElement('style');st.textContent=`#tabsbody .t3s{display:block;font:400 12px/1.3 'Atkinson Hyperlegible',sans-serif;color:#8a4a20;margin-top:2px}#tabsbody .t3s b{font-weight:700}`;document.head.appendChild(st)}
 // ===== v409 : défis — plus de défi gagné d'avance, des leviers clairs (« que faire ? »)
 {let apL=null;setInterval(()=>{try{if(!started)return;const v=(LY&&LY.i&&LY.i['Appels à projets'])||0;if(apL!=null){if(v>apL)B.apN=(B.apN||0)+1;else if(v<apL&&v>0)B.apN=(B.apN||0)+1}apL=v}catch(_){}},700)}
@@ -9432,7 +9472,7 @@ setInterval(()=>{try{const tb=$('tabsbody');if(!tb)return;tb.querySelectorAll('b
 window.dfHelp=()=>{try{const D=DF[B.dfK];if(!D||!$('m').hidden)return;const P=D.prog(),H=D.how||[];paused=true;
  $('mb').innerHTML=`<h2>🎯 ${D.t}</h2><p class="hint">${D.hold?'À tenir jusqu’à la fin du défi':'Encore '+Math.max(0,B.dfEnd-AMI())+' mois'}</p>`+P.map(([l,v,m],i)=>{const ok=v>=m,h=H[i];const tx=h?(typeof h[0]=='function'?h[0]():h[0]):'';return `<div style="border:2px solid ${ok?'#7fbf7f':'#e0c070'};border-radius:10px;padding:7px 9px;margin:6px 0;background:${ok?'#eef8ea':'#fffaf0'}"><b>${ok?'✅':'⬜'} ${l} : ${v}/${m}</b>${!ok&&tx?`<div style="font-size:13px;margin-top:3px">👉 ${tx}</div>${h[1]!=null?`<button class="go" style="margin-top:6px" onclick="$('m').hidden=true;paused=false;tab(${h[1]})">Y aller ›</button>`:''}`:''}</div>`}).join('')+`<button onclick="$('m').hidden=true;paused=false">Fermer</button>`;$('m').className='modal';$('m').hidden=false}catch(e){console.error(e)}};
 {const st=document.createElement('style');st.textContent=`#dfb{pointer-events:auto!important;cursor:pointer}#dfb:after{content:'Que faire ? ›';display:block;margin-top:3px;font:700 12px 'Atkinson Hyperlegible',sans-serif;color:#2f6fb5}`;document.head.appendChild(st);
- setInterval(()=>{const b=document.getElementById('dfb');if(b&&!b.onclick)b.onclick=()=>dfHelp()},700)}
+ __uiv(()=>{const b=document.getElementById('dfb');if(b&&!b.onclick)b.onclick=()=>dfHelp()},700)}
 // ===== v409 : le « ? » des mots du métier devient une petite carte
 {const st=document.createElement('style');st.textContent=`.gq{left:auto!important;right:-7px!important;top:-9px!important;width:19px!important;height:24px!important;border-radius:4px!important;background:linear-gradient(#2e9e8f 0 7px,#fffaf0 7px)!important;border:2px solid #2a2433!important;color:#2a2433!important;font:400 13px/29px Lilita,sans-serif!important;text-align:center;transform:rotate(9deg);box-shadow:2px 2px 0 rgba(42,36,51,.3)!important;padding:0!important}.gq:hover{transform:rotate(0) scale(1.12)}`;document.head.appendChild(st)}
 // ===== v411 : lettre du président — papier de taille fixe ; paysage — le bandeau des défis à côté de la colonne
@@ -9535,7 +9575,7 @@ W('train',(o,a)=>{const r=o(...a);try{B.unl=B.unl||{};if(F[a[0]]&&!B.unl.all&&!B
   else if(/un·e pro|Professionnel·le|Un·e pro/.test(t)){const free=STF.filter(z=>z.off<=0);if(free.length&&free.every(z=>soleR(z)>=0))R_.add(-2)}
   return R_};
  window.soleDbg=el=>{try{return [...rooms(el)]}catch(e){return String(e)}};
- setInterval(()=>{try{if(!started||ended)return;
+ __uiv(()=>{try{if(!started||ended)return;
   document.querySelectorAll('#mb button,#mb li,#fmo button,#rwf button,#app button,#side button,#lcm button,.ptb').forEach(el=>{if(!el.offsetParent)return;const R_=(/→ (🔒|👥)/.test(el.textContent)||(/→/.test(el.textContent)&&el.querySelector('img[alt="🔒"],img[alt="👥"]')))?new Set():rooms(el);if(!R_.size){if(el.dataset.solew)delete el.dataset.solew;return}
    const msg=R_.has(-2)?'⚠️ Toute l’équipe disponible est seule dans sa salle : une salle fermera pendant l’absence.':'⚠️ '+[...R_].map(r=>RNM[r]).join(' et ')+(R_.size>1?' fermeront':' fermera')+' pendant l’absence.';
    if(el.dataset.solew!==msg)el.dataset.solew=msg})}catch(e){window.soleErr=String(e)}},400)}
@@ -9565,7 +9605,7 @@ setInterval(()=>{try{if(!started||ended)return;const L=V.filter(v=>v.need&&!v.do
 // ===== v419 : équipe mobile — les 2 vaccinations arrivent quand un·e médecin rejoint l'équipe
 setInterval(()=>{try{if(B.emoV&&DOC()){CN.v=(CN.v||0)+B.emoV;B.emoV=0;say('💉 Camille : « Avec le ou la médecin, l’équipe mobile peut enfin vacciner : +2 vaccinations au dossier. »')}}catch(_){}},2000);
 // ===== v420 : salaire mensuel affiché aussi pour le ou la médecin et les recrutements depuis la fiche d'une salle
-setInterval(()=>{try{document.querySelectorAll('#rwf button[data-xr],button[onclick^="hireX("]').forEach(b=>{const xr=b.dataset.xr||((b.getAttribute('onclick')||'').match(/hireX\('(\w+)'/)||[])[1]||'';if(!xr)return;const doc=xr=='doc';const m=doc?SALD+8*(YR-1):SAL+4*(YR-1);const tx=b.querySelector('.tx')||b;let e=tx.querySelector('.t3s');if(!e&&/€\/mois/.test(b.textContent))return;const h=`💶 puis <b>${m} €/mois</b> de salaire`;if(!e){e=document.createElement('span');e.className='t3s';tx.appendChild(e)}if(e.innerHTML!==h)e.innerHTML=h})}catch(_){}},600);
+__uiv(()=>{try{document.querySelectorAll('#rwf button[data-xr],button[onclick^="hireX("]').forEach(b=>{const xr=b.dataset.xr||((b.getAttribute('onclick')||'').match(/hireX\('(\w+)'/)||[])[1]||'';if(!xr)return;const doc=xr=='doc';const m=doc?SALD+8*(YR-1):SAL+4*(YR-1);const tx=b.querySelector('.tx')||b;let e=tx.querySelector('.t3s');if(!e&&/€\/mois/.test(b.textContent))return;const h=`💶 puis <b>${m} €/mois</b> de salaire`;if(!e){e=document.createElement('span');e.className='t3s';tx.appendChild(e)}if(e.innerHTML!==h)e.innerHTML=h})}catch(_){}},600);
 {const st=document.createElement('style');st.textContent=`#rwf .t3s,button .t3s{display:block;font:400 12px/1.3 'Atkinson Hyperlegible',sans-serif;color:#6a4a20}`;document.head.appendChild(st)}
 // ===== v420 : bilan du mois — la caisse affichée tient compte des dépenses prélevées en toute fin de mois (projets de l'an 3, services, retenue de la ville…)
 W('monthEnd',(o,a)=>{const r=o(...a);try{const mb=$('mb'),v=mb&&mb.querySelector('.mbud.m2');if(v&&window._msEu!=null){const d=Math.round(window._msEu-eu);if(d>0){const fmt=n=>Math.abs(Math.round(n)).toLocaleString('fr-FR').replace(/ | /g,' ');const net=window._msNet-d;const b=v.querySelector('.mbal b');if(b)b.textContent=fmt(eu)+' €';const rs=v.querySelector('.mres');if(rs){rs.classList.toggle('pos',net>=0);rs.classList.toggle('neg',net<0);const rb=rs.querySelector('b');if(rb)rb.textContent=(net>=0?'+':'−')+fmt(net)+' €'}const ti=window._msTi||0,to=(window._msTo||0)+d,lbs=v.querySelectorAll('.mbl .lb');if(lbs[0]){const sp=lbs[0].querySelectorAll('span')[1];if(sp)sp.textContent=net<0?'il manque '+fmt(-net)+' €':'+'+fmt(net)+' € de côté'}if(lbs[1]){const sp=lbs[1].querySelector('span');if(sp)sp.textContent='Sorties −'+fmt(to)+' €'}
@@ -9575,7 +9615,7 @@ W('monthEnd',(o,a)=>{const r=o(...a);try{const mb=$('mb'),v=mb&&mb.querySelector
 // ===== v420 : pas de panne de chauffage en plein été
 W('event',(o,a)=>{try{if(mo>=1&&mo<=5){const sv=EV;const i=sv.findIndex(e=>/Panne de chauffage/.test(e[1]));if(i>=0){const e=sv[i];sv.splice(i,1);try{return o(...a)}finally{sv.splice(i,0,e)}}}}catch(_){}return o(...a)});
 // ===== v425 : le prix affiché du matériel suit la remise de la pharmacie partenaire
-setInterval(()=>{try{['n','s','t','v','c'].forEach(k=>{if(SPC[k]==null)return;const base=(typeof PHB!='undefined'&&PHB[k])||SPC[k],disc=SPC[k]<base;const want=disc?`<s style="opacity:.7;font-size:.8em">${base} €</s> ${SPC[k]} €`:`${SPC[k]} €`;
+__uiv(()=>{try{['n','s','t','v','c'].forEach(k=>{if(SPC[k]==null)return;const base=(typeof PHB!='undefined'&&PHB[k])||SPC[k],disc=SPC[k]<base;const want=disc?`<s style="opacity:.7;font-size:.8em">${base} €</s> ${SPC[k]} €`:`${SPC[k]} €`;
   document.querySelectorAll(`#b${k},button[onclick="sup('${k}')"]`).forEach(b=>{const tg=b.querySelector('.ptg');if(tg){let v=tg.querySelector('.ppv');if(!v){const sm=tg.querySelector('small');tg.innerHTML='<span class="ppv"></span>'+(sm?sm.outerHTML:'');v=tg.querySelector('.ppv')}if(v.innerHTML!==want)v.innerHTML=want}const pp=b.querySelector('.pp');if(pp&&pp.textContent!==SPC[k]+' €')pp.textContent=SPC[k]+' €'});
   try{if(STKN[k])STKN[k][2]=SPC[k]+' €'}catch(_){}})}catch(_){}},700);
 // ===== v428 : bilan — chaque achat fait d'un clic a sa ligne (au lieu d'un seul « Investissements et imprévus »)
@@ -9623,7 +9663,7 @@ W('act',(o,a)=>{const k=a[0],e0=eu,r=o(...a);try{if(eu<e0&&(k=='m'||k=='r'))B.ri
  W('flt',(o,a)=>{try{const [v,t]=a;const m=typeof t=='string'&&/^(🩺|🏛️) \+(\d+) €$/.exec(t);if(m&&v&&typeof v=='object'){let p=PEND.get(v);if(!p){p={s:0,ok:a[2]};PEND.set(v,p);setTimeout(()=>{PEND.delete(v);const ld=LD.get(v);if(ld&&now()-ld<900)return;if(seen('d',p.s))return;LP.set(v,now());REC.push({k:'p',a:p.s,t:now()});try{if(isVis(v))hudFlash('💶');else o(v,'💶 +'+p.s+' €',p.ok)}catch(_){}},120)}p.s+=+m[2];return}
   if(typeof t=='string'&&isVis(v)&&!/^(😊|😞)/.test(t)&&/^[^\w]{1,4}\s?[+−-]\s?[\d,]/u.test(t)){hudFlash(t);return}if(typeof t=='string'&&/^🏘️/.test(t)){let ch=YR;try{ch=window.chapOf?chapOf():YR}catch(_){}if(ch<2&&!(B&&B.qShow))return}if(typeof t=='string'&&v&&typeof v=='object'&&/^💶\s?[+−-]\s?\d+\s?€$/.test(t)){const lp=LP.get(v);if(PEND.has(v)||(lp&&now()-lp<900))return;LD.set(v,now())}const d=typeof t=='string'&&/^💶\s?\+\s?(\d+)\s?€$/.exec(t);if(d){const amt=+d[1];let pend=0;PEND.forEach(p=>{pend+=p.s});if(seen("p",amt)||pend==amt)return;REC.push({k:'d',a:amt,t:now()})}}catch(_){}return o(...a)})}
 // v439 : courrier de doléances — on voit ce qu'il restera dans la caisse avant de signer une option payante
-setInterval(()=>{try{const c=document.getElementById('dlc');if(!c)return;let sal=0;try{sal=euFc().sal||0}catch(_){}c.querySelectorAll('.dlo button').forEach(b=>{const fx=b.querySelector('.fx');if(!fx)return;const ch=[...fx.querySelectorAll('.ch')].find(s=>/^−\s?\d[\d  ]*\s?€/.test(s.textContent.trim()));if(!ch)return;const n=+ch.textContent.trim().match(/^−\s?([\d  ]+)/)[1].replace(/\D/g,'');const rest=eu-n,k=rest+'|'+sal;if(fx.dataset.rk===k)return;fx.dataset.rk=k;let r=fx.querySelector('.ch.rest');if(!r){r=document.createElement('span');r.className='ch rest';fx.appendChild(r)}
+__uiv(()=>{try{const c=document.getElementById('dlc');if(!c)return;let sal=0;try{sal=euFc().sal||0}catch(_){}c.querySelectorAll('.dlo button').forEach(b=>{const fx=b.querySelector('.fx');if(!fx)return;const ch=[...fx.querySelectorAll('.ch')].find(s=>/^−\s?\d[\d  ]*\s?€/.test(s.textContent.trim()));if(!ch)return;const n=+ch.textContent.trim().match(/^−\s?([\d  ]+)/)[1].replace(/\D/g,'');const rest=eu-n,k=rest+'|'+sal;if(fx.dataset.rk===k)return;fx.dataset.rk=k;let r=fx.querySelector('.ch.rest');if(!r){r=document.createElement('span');r.className='ch rest';fx.appendChild(r)}
  const low=sal>0&&rest<sal;r.className='ch rest'+(low?' neg':'');r.textContent=rest<0?'':low?`⚠️ il restera ${rest} € en caisse, moins que les salaires du mois (${sal} €)`:`💶 il restera ${rest} € en caisse${sal?` (salaires du mois : ${sal} €)`:''}`;r.style.display=rest<0?'none':''})}catch(_){}},400);
 // v441 : satisfaction moyenne glissante — les personnes venues ces 3 derniers mois (accompagnées ou reparties sans aide)
 window.SATWIN=90;window.satList=function(){try{const all=Object.values(hist),W_=window.SATWIN*DAYL;const L=all.filter(h=>h.lv!=null?GT-h.lv<=W_:h.v>0);return L.length?L:all.filter(h=>h.v>0)}catch(_){return[]}};
@@ -9649,7 +9689,7 @@ try{if(new URLSearchParams(location.search).get('an')=='3j'||/an3j/.test(locatio
  W('prpDo',(o,a)=>{const k=a[0],had=!!(B.prp||{})[k];try{if(!had&&left()>0){nope();return}}catch(_){}const r=o(...a);try{if(!had&&(B.prp||{})[k]){B.parAt=ad();B.parTold=0}}catch(_){}return r});
  W('siaoSign',(o,a)=>{const had=!!B.siao;try{if(!had&&left()>0){nope();return}}catch(_){}const r=o(...a);try{if(!had&&B.siao){B.parAt=ad();B.parTold=0}}catch(_){}return r});
  const signed=b=>{const oc=b.getAttribute('onclick')||'',m=/^partner\('(\w+)'\)/.exec(oc);if(m)return P[m[1]]?1:0;if(/^prp_/.test(b.id))return (B.prp||{})[b.id.slice(4)]?1:0;if(b.id=='psi')return B.siao?1:0;return -1};
- setInterval(()=>{try{if(!started||ended)return;const L=left();document.querySelectorAll('button[onclick^="partner("],button[id^="prp_"],#psi').forEach(b=>{const sg=signed(b);if(sg!==0||b.style.display=='none'||b.hidden)return;let t=b.querySelector('.pcd');if(L>0){if(!t){t=document.createElement('span');t.className='pcd';t.style.cssText='display:block;font:700 12px/1.2 Atkinson Hyperlegible,sans-serif;color:#8a4a10';b.appendChild(t)}t.textContent=`⏳ prochain partenariat dans ${L} j`;b.disabled=true}else if(t)t.remove()});
+ __uiv(()=>{try{if(!started||ended)return;const L=left();document.querySelectorAll('button[onclick^="partner("],button[id^="prp_"],#psi').forEach(b=>{const sg=signed(b);if(sg!==0||b.style.display=='none'||b.hidden)return;let t=b.querySelector('.pcd');if(L>0){if(!t){t=document.createElement('span');t.className='pcd';t.style.cssText='display:block;font:700 12px/1.2 Atkinson Hyperlegible,sans-serif;color:#8a4a10';b.appendChild(t)}t.textContent=`⏳ prochain partenariat dans ${L} j`;b.disabled=true}else if(t)t.remove()});
   if(L==0&&B.parAt!=null&&!B.parTold&&!paused&&$('m').hidden&&[...document.querySelectorAll('button[onclick^="partner("],button[id^="prp_"],#psi')].some(b=>signed(b)===0&&b.style.display!='none'&&!b.hidden)){B.parTold=1;say('🤝 Un nouveau partenariat peut être signé ! (onglet 🌳 Quartier › Partenaires)')}}catch(_){}},800)}
 
 // ===== v447 : handicap et validisme — fauteuils roulants (pack LimeZu, hôpital), accès PMR, structures inadaptées, cartes
@@ -9681,7 +9721,7 @@ W('hire',(o,a)=>{const n0=STF.length,r=o(...a);try{if(!B.wcStaff&&a[0]==3&&STF.l
 window.PMRC=900;
 window.pmrCost=()=>B.pmrAidOk?Math.round(PMRC/2):PMRC;window.pmrBuy=function(){try{const C_=pmrCost();if(B.pmr||eu<C_)return;eu-=C_;try{const L='Accessibilité PMR';LM.o[L]=(LM.o[L]||0)+C_;LY.o[L]=(LY.o[L]||0)+C_;ICON[L]='♿'}catch(_){}B.pmr=1;V.forEach(v=>{v.wcb=0});
  say('♿ Travaux terminés : rampe à l’entrée, portes élargies, toilettes adaptées. La halte est enfin accessible à toutes et tous.');try{sfx('build')}catch(_){}try{unlockCard('c113')}catch(_){}ui()}catch(e){console.error(e)}};
-setInterval(()=>{try{const b=$('pmrb');if(!b)return;const C_=pmrCost();b.disabled=!!B.pmr||eu<C_;const i=b.querySelector('i');if(i){const t=B.pmr?'✔ accessible':C_+' €';if(i.textContent!==t)i.textContent=t}
+__uiv(()=>{try{const b=$('pmrb');if(!b)return;const C_=pmrCost();b.disabled=!!B.pmr||eu<C_;const i=b.querySelector('i');if(i){const t=B.pmr?'✔ accessible':C_+' €';if(i.textContent!==t)i.textContent=t}
  let a=$('pmra');if(!a){a=document.createElement('button');a.id='pmra';a.style.width='100%';a.onclick=()=>{try{if(B.pmr||B.pmrAid||B.pmrAidOk)return;B.pmrAid=AMI()+1;say('🏛️ Dossier envoyé à la mairie : elle peut financer la moitié des travaux d’accessibilité. Réponse dans un mois environ.');ui()}catch(_){}};b.insertAdjacentElement('afterend',a)}
  a.style.display=B.pmr?'none':'';a.disabled=!!(B.pmrAid||B.pmrAidOk);const t2=B.pmrAidOk?'🏛️ Aide de la mairie accordée<br><small>la moitié des travaux est prise en charge</small>':B.pmrAid?'🏛️ Demande d’aide envoyée<br><small>réponse de la mairie dans environ un mois</small>':'🏛️ Demander une aide de la mairie<br><small>elle finance la moitié des travaux, réponse en un mois</small>';if(a._t!==t2){a._t=t2;a.innerHTML=t2}
  if(B.pmrAid&&!B.pmrAidOk&&AMI()>=B.pmrAid&&started&&!paused){B.pmrAidOk=1;B.pmrAid=0;say(`🏛️ La mairie accepte : elle finance la moitié de la mise en accessibilité. Il reste ${pmrCost()} € à la charge de la halte (🏗️ Locaux › Couloir).`);try{newsAdd('♿','La mairie aide la halte à devenir accessible')}catch(_){}}}catch(_){}},800);
@@ -9718,7 +9758,7 @@ window.addEventListener('click',e=>{try{if(!(e.target===cv||(e.target&&e.target.
 
 // v453 : à côté du compteur 👥, les personnes en cours d'accompagnement (le compteur ne monte qu'à la fin du parcours)
 {const st=document.createElement('style');st.textContent='#acip{margin-left:4px;font:400 12px/1 "Atkinson Hyperlegible",sans-serif;color:#6a5a7a;white-space:nowrap}#acip:empty{display:none}';document.head.appendChild(st);
- setInterval(()=>{try{const e=$('ac');if(!e)return;let s=$('acip');if(!s){s=document.createElement('span');s.id='acip';e.insertAdjacentElement('afterend',s)}
+ __uiv(()=>{try{const e=$('ac');if(!e)return;let s=$('acip');if(!s){s=document.createElement('span');s.id='acip';e.insertAdjacentElement('afterend',s)}
   if(!started||ended){s.textContent='';return}const n=V.filter(v=>!v.gone&&!v.leaving&&(v.pi>=0||v.inroom||v.s=='in'||v.s=='wait')).length;const t=n?(innerWidth>=600?`+${n} en cours`:`⏳${n}`):'';if(s.textContent!==t)s.textContent=t;s.title=n?`${n} personne${n>1?'s':''} en cours d’accompagnement : le compteur 👥 augmente quand chacune termine son parcours (accueil, salles, besoin).`:''}catch(_){}},700)}
 // v453 : réunion — une même solution n'est pas répétée par deux pros
 W('showMeeting',(o,a)=>{window._solUsed=new Set();return o(...a)});
@@ -9729,7 +9769,7 @@ W('roomFurn',(o,a)=>{const r=o(...a);try{const Dc=B.deco,i=a[0];if(Dc&&i<=8&&bui
 // v456 : le comité de voisinage tient vraiment la tranquillité à 45 % minimum (plus de 43 % affiché)
 W('upd',(o,a)=>{const r=o(...a);try{if(B.comite&&q<45)q=45}catch(_){}return r});
 // v456 : la règle des partenariats (un tous les deux mois) est annoncée avant de signer
-setInterval(()=>{try{const par=$('par');if(!par)return;let h=$('parhint');if(!h){h=document.createElement('div');h.id='parhint';h.style.cssText='margin:4px 0 8px;padding:6px 9px;border:2px solid #e0c070;border-radius:9px;background:#fff6dc;font-size:12.5px;line-height:1.35;color:#3a2e24';par.parentNode.insertBefore(h,par)}const L=window.parLeft?parLeft():0;const t=L>0?`⏳ Un partenariat se met en place sur un mois : prochain partenariat possible dans <b>${L} jours</b>.`:'🤝 Un partenariat se met en place sur un mois : <b>après une signature, il faudra attendre 1 mois avant le suivant</b>. Choisis celui qui répond aux besoins les plus urgents.';if(h._t!==t){h._t=t;h.innerHTML=t}}catch(_){}},1000);
+__uiv(()=>{try{const par=$('par');if(!par)return;let h=$('parhint');if(!h){h=document.createElement('div');h.id='parhint';h.style.cssText='margin:4px 0 8px;padding:6px 9px;border:2px solid #e0c070;border-radius:9px;background:#fff6dc;font-size:12.5px;line-height:1.35;color:#3a2e24';par.parentNode.insertBefore(h,par)}const L=window.parLeft?parLeft():0;const t=L>0?`⏳ Un partenariat se met en place sur un mois : prochain partenariat possible dans <b>${L} jours</b>.`:'🤝 Un partenariat se met en place sur un mois : <b>après une signature, il faudra attendre 1 mois avant le suivant</b>. Choisis celui qui répond aux besoins les plus urgents.';if(h._t!==t){h._t=t;h.innerHTML=t}}catch(_){}},1000);
 
 // v457 : personne ne passe plus dans l'étroit passage entre la halte et les cordons de la file :
 // pour changer de rangée de salles, on prend toujours le couloir de gauche
@@ -9850,7 +9890,7 @@ W('tutEnd',(o,a)=>{let first=false;try{first=!!INTRO&&!started&&!(st[0]>0)&&!STF
    const h0=vg.offsetHeight*z;const avail=innerHeight-y-8;const sc=Math.max(.55,Math.min(1,avail/Math.max(1,h0)));SP(vg,'transform',sc<1?`scale(${sc.toFixed(3)})`:'none')}
  }catch(_){}},300)}
 // v460 : les projets et partenaires créés par prjUI ont un onclick en attribut → ils prennent la mise en page « ligne pleine + étiquette de prix » comme les autres boutons
-setInterval(()=>{try{document.querySelectorAll('button[id^="prj_"],button[id^="prp_"]').forEach(b=>{if(b.getAttribute('onclick'))return;const k=b.id.slice(4),fn=b.id.startsWith('prj_')?'prjDo':'prpDo';b.onclick=null;b.setAttribute('onclick',`${fn}('${k}')`)})}catch(_){}},700);
+__uiv(()=>{try{document.querySelectorAll('button[id^="prj_"],button[id^="prp_"]').forEach(b=>{if(b.getAttribute('onclick'))return;const k=b.id.slice(4),fn=b.id.startsWith('prj_')?'prjDo':'prpDo';b.onclick=null;b.setAttribute('onclick',`${fn}('${k}')`)})}catch(_){}},700);
 // v460 : lisibilité — texte un peu plus grand dans les panneaux et les fenêtres ; les fenêtres des actions (maraude, réunion…) ne répètent le long texte que la première fois
 {const st=document.createElement('style');st.textContent=`body{font-size:15px}#fmo .fd,.fd{font-size:14px}.hint{font-size:13.5px}#mb p{font-size:15px}`;document.head.appendChild(st);
  W('actScene',(o,a)=>{const k=a[0];let sv=null;try{if(SCN[k]&&((B.nA||{})[k]||0)>=1){sv=SCN[k][1];const m=/^(.*?[.!?…])\s/.exec(sv);if(m&&m[1].length<sv.length-20)SCN[k][1]=m[1]}}catch(_){}try{return o(...a)}finally{if(sv!=null)SCN[k][1]=sv}})}
@@ -9914,7 +9954,7 @@ window.hWc=function(H,ci,X,YB,v,row){try{const S=wcSheet(ci,row|0);if(!S)return;
    bs.forEach(b=>{if(b.querySelector('.cq'))return;const t=b.textContent.trim();const m=/^(.*?)\s*\(([^()]+)\)\s*$/.exec(t);if(m){b.textContent='';const s1=document.createElement('span');s1.textContent=m[1];const s2=document.createElement('span');s2.className='cq';s2.textContent=m[2];b.append(s1,s2)}});
    const long=bs.length>=3||bs.some(b=>b.textContent.length>70);bt.classList.add('eq');if(long&&innerWidth<600)bt.classList.add('col');bt.style.setProperty('--nb',String(Math.min(bs.length,innerWidth<600?2:3)));if(bs.length>=3&&innerWidth<600)bt.classList.add('col')}catch(_){}};
  let pend=0;const run=()=>{pend=0;['fmo','m','rdov'].forEach(id=>{const e=document.getElementById(id);if(e&&!(e.hidden)){fixTextNodes(e);if(id=='fmo')eqBtns(e)}});document.querySelectorAll('#vig').forEach(fixTextNodes)};
- new MutationObserver(()=>{if(!pend){pend=1;requestAnimationFrame(run)}}).observe(document.body,{childList:true,subtree:true,characterData:false});
+ __uiv(run,300);
 }
 
 // v462 : autres représentations possibles d'une salle fermée (au choix : window.CLST = 'nuit' | 'gris' | 'porte' | 'hachures' ; 'tape' = rubalise actuelle)
@@ -10040,7 +10080,7 @@ window.CLST='final';
    L.forEach(n=>{const v=n.nodeValue;RE.lastIndex=0;const f=document.createDocumentFragment();let last=0,m;while((m=RE.exec(v))){const s=m.index+m[1].length;f.append(document.createTextNode(v.slice(last,s)));const a=document.createElement('abbr');a.className='sg';a.textContent=m[2];a.title=G[m[2]]||'';f.append(a);last=s+m[2].length}f.append(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)})}catch(_){}};
  const IDS=['m','fmo','vig','petov','toasts','dfb','lcbook','cmbx','rdov','xpov','debov','envo'];
  let pend=0;const run=()=>{pend=0;IDS.forEach(id=>{const e=document.getElementById(id);if(e&&!e.hidden)wrap(e)});const sd=document.getElementById('side');if(sd)sd.querySelectorAll('.hint,p,h2,h3,h4,li').forEach(e=>{if(!e.closest('button'))wrap(e)})};
- new MutationObserver(()=>{if(!pend){pend=1;setTimeout(run,60)}}).observe(document.body,{childList:true,subtree:true,characterData:true});
+ __uiv(run,300);
  let tip=null;const hide=()=>{if(tip){tip.remove();tip=null}};
  const show=(a)=>{hide();const k=a.textContent,d=G[k];if(!d)return;tip=document.createElement('div');tip.id='sgtip';tip.innerHTML=`<b>${k}</b> : ${d}`;document.body.appendChild(tip);const r=a.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight;let L=Math.max(8,Math.min(innerWidth-tw-8,r.left+r.width/2-tw/2)),T=r.top-th-8;if(T<8)T=r.bottom+8;tip.style.left=L+'px';tip.style.top=T+'px';clearTimeout(show._t);show._t=setTimeout(hide,7000)};
  ['pointerdown','click'].forEach(ev=>window.addEventListener(ev,e=>{const a=e.target&&e.target.closest&&e.target.closest('abbr.sg');if(a){e.preventDefault();e.stopPropagation();if(ev=='click')show(a);return}if(ev=='pointerdown')hide()},true));
@@ -10056,7 +10096,7 @@ W('newV',(o,a)=>{let v=o(...a);try{let n=0;while(v&&v.name==WCU&&window.FORCEN!=
 {const st=document.createElement('style');st.textContent=`#spw .r .bar{position:relative}#spw .r .blab{position:absolute;left:4px;right:3px;top:50%;transform:translateY(-50%);font:700 9.5px/1 'Atkinson Hyperlegible',sans-serif;color:#fff;text-shadow:1px 0 0 #2a2433,-1px 0 0 #2a2433,0 1px 0 #2a2433,0 -1px 0 #2a2433;white-space:nowrap;overflow:hidden;text-overflow:clip;pointer-events:none;display:flex;justify-content:space-between;gap:3px;z-index:3}
 #spw .r .bar.lb{height:13px!important;min-height:13px;overflow:hidden}#spw .r .bar.lb>i{height:100%!important}`;document.head.appendChild(st);
  const LB={spf:'Santé',qf:'Quartier',acf:'Social',saf:'Satisfaction',eqf:'Équipe'};
- setInterval(()=>{try{for(const id in LB){const f=document.getElementById(id);if(!f)continue;const bar=f.parentElement;let l=bar.querySelector('.blab');if(!l){l=document.createElement('span');l.className='blab';l.setAttribute('data-nosg','1');bar.appendChild(l)}const p=Math.round(parseFloat(f.style.width)||0),bw=bar.getBoundingClientRect().width,t=bw>=135?`<span>${LB[id]}</span><span>${p}%</span>`:bw>=40?`<span></span><span>${p}%</span>`:bw>=16?`<span></span><span style="font-size:8.5px;margin-right:-1px">${p}</span>`:'';if(l._t!==t){l._t=t;l.innerHTML=t;bar.classList.toggle('lb',!!t)}}}catch(_){}},600)}
+ __uiv(()=>{try{for(const id in LB){const f=document.getElementById(id);if(!f)continue;const bar=f.parentElement;let l=bar.querySelector('.blab');if(!l){l=document.createElement('span');l.className='blab';l.setAttribute('data-nosg','1');bar.appendChild(l)}const p=Math.round(parseFloat(f.style.width)||0),bw=bar.getBoundingClientRect().width,t=bw>=135?`<span>${LB[id]}</span><span>${p}%</span>`:bw>=40?`<span></span><span>${p}%</span>`:bw>=16?`<span></span><span style="font-size:8.5px;margin-right:-1px">${p}</span>`:'';if(l._t!==t){l._t=t;l.innerHTML=t;bar.classList.toggle('lb',!!t)}}}catch(_){}},600)}
 
 // ===== v465 : objectifs — trois prochaines étapes, toujours visibles d'un geste (🎯 dans le bandeau)
 {const OB=[
@@ -10086,7 +10126,7 @@ W('newV',(o,a)=>{let v=o(...a);try{let n=0;while(v&&v.name==WCU&&window.FORCEN!=
   p.innerHTML=`<button class="x" aria-label="Fermer">✕</button><h4>🎯 Prochaines étapes</h4>${L.length?L.map((o,i)=>`<div class="it"><b>${i+1}.</b><span>${o.t}</span><button class="go" data-t="${o.tab}">Y aller ›</button></div>`).join(''):'<p>Tout est en place pour l’instant. Bravo ! Continue de suivre les besoins des personnes.</p>'}`;
   document.body.appendChild(p);p.querySelector('.x').onclick=()=>{p.remove();open=false};p.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{p.remove();open=false;try{tab(+b.dataset.t)}catch(_){}})};
  window.obPanel=panel;
- setInterval(()=>{try{const sp=$('spw');if(!sp)return;let c=$('obc');const ok=started&&!ended&&!(window.gdK&&gdK()!='none');
+ __uiv(()=>{try{const sp=$('spw');if(!sp)return;let c=$('obc');const ok=started&&!ended&&!(window.gdK&&gdK()!='none');
   if(!c){c=document.createElement('span');c.id='obc';c.title='Prochaines étapes';c.addEventListener('click',e=>{e.stopPropagation();panel()});const ch=$('chapc');if(ch)ch.after(c);else sp.prepend(c)}
   c.style.display=ok?'':'none';if(!ok)return;const L=cur(),t='🎯 '+L.length;if(c.textContent!==t)c.textContent=t;
   const dn=OB.filter(o=>safe(o.ok)).map(o=>o.k);if(done0==null){done0=dn;return}
@@ -10190,7 +10230,7 @@ W('upd',(o,a)=>{const r=o(...a);try{for(const v of V){if(v._lf||!v.leaving||v.do
   const t=document.createElement('div');t.id='glt';t.innerHTML=`<b>${k}</b> — ${d}`;document.body.appendChild(t);const r=g.getBoundingClientRect(),tw=t.offsetWidth,th=t.offsetHeight;
   let L=Math.max(8,Math.min(innerWidth-tw-8,r.left+r.width/2-tw/2)),T=r.top-th-8;if(T<8)T=r.bottom+8;t.style.left=L+'px';t.style.top=T+'px';clearTimeout(window._glT);window._glT=setTimeout(hide,9000)},true);
  let pend=0;const run=()=>{pend=0;['m','fmo','side','vig','toasts','dfb'].forEach(id=>{const e=document.getElementById(id);if(e&&!e.hidden)wrap(e)});document.querySelectorAll('#cmbx,#petov,#lcbook').forEach(wrap)};
- new MutationObserver(()=>{if(!pend){pend=1;setTimeout(()=>requestAnimationFrame(run),60)}}).observe(document.body,{childList:true,subtree:true,characterData:true})}
+ __uiv(run,300)}
 
 // v465 : les affiches de Crotti se repèrent — tant qu'on n'en a jamais arraché, elles clignotent doucement et Camille explique le geste
 W('draw',(o,a)=>{const r=o(...a);try{if(B.crTornT||MEET||ENDING||!window.crottiL||!window.CRP_)return r;const L=crottiL();if(!L.length)return r;
@@ -12020,7 +12060,7 @@ button .gl,button abbr.sg{pointer-events:none!important;border-bottom:0!importan
  window.RNM=(i,v)=>{try{const k=R[i][0];const nm=(typeof HFN!='undefined'&&HFN[k])||k;return nm+' '+v+(RF[k]?'e':'')}catch(_){return R[i][0]+' '+v+'(e)'}};
  // conseils de Camille
  const box=()=>document.getElementById('ctip');
- const place=()=>{const b=box();if(!b)return;let off=10;try{const tb=document.getElementById('tabs');const r=tb&&tb.getBoundingClientRect();if(r&&r.height>0&&r.top>innerHeight*.55&&getComputedStyle(tb).visibility!=='hidden')off=Math.round(innerHeight-r.top+8)}catch(_){}if(!b.classList.contains('on')){b.classList.remove('mini');b.style.bottom='';b.style.visibility='hidden';return}b.style.visibility='';b.style.bottom=`calc(env(safe-area-inset-bottom,0px) + ${off}px)`};setInterval(place,400);
+ const place=()=>{const b=box();if(!b)return;let off=10;try{const tb=document.getElementById('tabs');const r=tb&&tb.getBoundingClientRect();if(r&&r.height>0&&r.top>innerHeight*.55&&getComputedStyle(tb).visibility!=='hidden')off=Math.round(innerHeight-r.top+8)}catch(_){}if(!b.classList.contains('on')){b.classList.remove('mini');b.style.bottom='';b.style.visibility='hidden';return}b.style.visibility='';b.style.bottom=`calc(env(safe-area-inset-bottom,0px) + ${off}px)`};__uiv(place,400);
  document.addEventListener('pointerdown',e=>{const b=box();if(!b||!b.classList.contains('on'))return;if(b.contains(e.target)){if(b.classList.contains('mini')){b.classList.remove('mini');e.stopPropagation();e.preventDefault()}return}b.classList.add('mini')},true);
  try{W('tsT',(o,a)=>{try{B.tips=B.tips||{};B.tips.spd=1}catch(_){}return o(...a)})}catch(_){}
  const URG=new Set(['das','stock','call','tired','hi']);const SEEN=new Set();
@@ -12100,12 +12140,12 @@ body:has(#app.open) #alst,body:has(#fmo) #alst,body:has(#rw) #alst{display:none}
    L.sort((a,b)=>b[0]-a[0]);const div=document.createElement('div');div.className='live';div.innerHTML=L.length?`<b>🔎 En ce moment, ce qui coince</b><ul>${L.slice(0,4).map(x=>`<li>${x[1]}</li>`).join('')}</ul>`:'<b>🔎 En ce moment</b> : rien ne coince, toutes les personnes trouvent de l’aide.';const t=mb.querySelector('.ind5');t.parentNode.insertBefore(div,t);linkify(div)}catch(e){console.error(e)}return r}}
  // ---- effets affichés avant de lancer une action du quartier
  const AFX={am:'👥 +2 personnes · 📣 +5 · 🏘️ +3',ar:'🏘️ +6 · désamorce une pétition',aa:'📣 +10 (moins si répété)',at:'⚡ énergie de l’équipe +35 (moins si répété)',af:'🏘️ +15 (moins si répété)'};
- const afx=()=>{for(const id in AFX){const b=document.getElementById(id);if(b&&!b.querySelector('.afx')){const s=document.createElement('small');s.className='afx';s.textContent=AFX[id];const i=b.querySelector('i');if(i)b.insertBefore(s,i);else b.appendChild(s)}}};setInterval(afx,1500);
+ const afx=()=>{for(const id in AFX){const b=document.getElementById(id);if(b&&!b.querySelector('.afx')){const s=document.createElement('small');s.className='afx';s.textContent=AFX[id];const i=b.querySelector('i');if(i)b.insertBefore(s,i);else b.appendChild(s)}}};__uiv(afx,1500);
  // ---- partenaires : la règle dite avant, le besoin du mois sur chaque partenaire, l'attente affichée tout de suite
  const PSANS={h:'hébergement',d:'aide pour leurs papiers',r:'repas',y:'douche',o:'traitement'};
  const parUpd=()=>{try{const L=window.parLeft?parLeft():0;document.querySelectorAll('button[onclick^="partner("]').forEach(b=>{const m=/partner\('(\w)'\)/.exec(b.getAttribute('onclick')||'');if(!m)return;const k=m[1];const signed=!!P[k];if(!signed&&L>0&&!b.disabled){b.disabled=true}let t=b.querySelector('.pneed');const n=(DGN.u||{})['p|'+k]||0;if(!signed&&n>0&&PSANS[k]){if(!t){t=document.createElement('span');t.className='pneed';b.appendChild(t)}t.textContent=`🙋 ${n} personne${n>1?'s':''} sans ${PSANS[k]} ce mois-ci`}else if(t)t.remove()});
 }catch(_){}};
- setInterval(parUpd,250);window.parUpd=parUpd;try{const _t=window.tab;window.tab=function(){const r=_t.apply(this,arguments);try{parUpd()}catch(_){}requestAnimationFrame(()=>{try{parUpd()}catch(_){}});return r};try{tab=window.tab}catch(_){}const _s=window.subSel;if(typeof _s==='function'){window.subSel=function(){const r=_s.apply(this,arguments);try{parUpd()}catch(_){}return r};try{subSel=window.subSel}catch(_){}}}catch(_){}
+ __uiv(parUpd,250);window.parUpd=parUpd;try{const _t=window.tab;window.tab=function(){const r=_t.apply(this,arguments);try{parUpd()}catch(_){}requestAnimationFrame(()=>{try{parUpd()}catch(_){}});return r};try{tab=window.tab}catch(_){}const _s=window.subSel;if(typeof _s==='function'){window.subSel=function(){const r=_s.apply(this,arguments);try{parUpd()}catch(_){}return r};try{subSel=window.subSel}catch(_){}}}catch(_){}
  // ---- un retour après chaque choix d'une fenêtre d'événement, même discret
  document.addEventListener('click',e=>{try{const b=e.target.closest&&e.target.closest('#fmo .fbt button');if(!b)return;const lab=(b.querySelector('span')||b).textContent.trim();const m0=(document.getElementById('msg')||{}).textContent,e0=(document.getElementById('ev')||{}).textContent;setTimeout(()=>{try{const m1=(document.getElementById('msg')||{}).textContent,e1=(document.getElementById('ev')||{}).textContent;if(m1===m0&&e1===e0&&!document.getElementById('fmo')&&lab.length<90)say('✔ Choix : « '+lab.replace(/\s*\(.*\)\s*$/,'')+' »')}catch(_){}},900)}catch(_){}},true);
  // ---- une fenêtre qui vient d'apparaître ignore les taps pendant 400 ms
@@ -12113,13 +12153,13 @@ body:has(#app.open) #alst,body:has(#fmo) #alst,body:has(#rw) #alst{display:none}
  new MutationObserver(ms=>{for(const m of ms){for(const n of m.addedNodes)if(n.id==='fmo'||n.id==='rwf')arm(n);if(m.type==='attributes'&&m.target.id==='m'&&!m.target.hidden&&m.oldValue!==null)arm(m.target.querySelector('.box')||m.target)}}).observe(document.body,{childList:true,subtree:false});
  try{new MutationObserver(ms=>{for(const m of ms)if(!m.target.hidden&&m.oldValue!==null)arm(m.target.querySelector('#mb')||m.target)}).observe(document.getElementById('m'),{attributes:true,attributeFilter:['hidden'],attributeOldValue:true})}catch(_){}
  // ---- achats : les objets obligatoires en tête, avec une pastille
- const oblig=()=>{try{document.querySelectorAll('#rwf .rwlist,#tabsbody').forEach(L=>{L.querySelectorAll('button').forEach(b=>{if(b.dataset.ob)return;if(/exigé par la HAS|obligatoire/i.test(b.textContent)&&!/Obligatoire/.test(b.textContent)){b.dataset.ob=1;b.insertAdjacentHTML('afterbegin','<span class="oblig">OBLIGATOIRE</span>');const p=b.parentNode;if(p&&p.firstElementChild!==b&&p.classList.contains('rwlist'))p.insertBefore(b,p.firstElementChild)}})})}catch(_){}};setInterval(oblig,600);
+ const oblig=()=>{try{document.querySelectorAll('#rwf .rwlist,#tabsbody').forEach(L=>{L.querySelectorAll('button').forEach(b=>{if(b.dataset.ob)return;if(/exigé par la HAS|obligatoire/i.test(b.textContent)&&!/Obligatoire/.test(b.textContent)){b.dataset.ob=1;b.insertAdjacentHTML('afterbegin','<span class="oblig">OBLIGATOIRE</span>');const p=b.parentNode;if(p&&p.firstElementChild!==b&&p.classList.contains('rwlist'))p.insertBefore(b,p.firstElementChild)}})})}catch(_){}};__uiv(oblig,600);
 })();
 
 // ===== v503 : portraits immobiles ; ⏩ en bas à droite en portrait ; annonces « Nouvelle salle » qui ne sautent plus ; absences = alerte ; pauses identiques pour tous les panneaux ; respiration après le bilan
 (function(){const st=document.createElement('style');st.textContent=`
 /* portraits immobiles */
-.pcv{animation:none!important}.lcb.pulse{animation:lcglow 1.2s ease-in-out infinite!important}@keyframes lcglow{50%{filter:drop-shadow(0 0 4px #ffd23f) drop-shadow(0 0 2px #ffd23f)}}
+.pcv{animation:none!important}.lcb.pulse{animation:none!important}.lcb.pulse::before{content:"";position:absolute;inset:3px;border-radius:50%;box-shadow:0 0 5px 3px #ffd23f,0 0 2px 1px #ffd23f;opacity:0;pointer-events:none;will-change:opacity,transform;animation:lcglow 1.2s ease-in-out infinite}@keyframes lcglow{0%,100%{opacity:0;transform:scale(.92)}50%{opacity:1;transform:scale(1)}}
 /* ⏩ en bas à droite, à côté des onglets, en portrait : la date du bandeau a toute sa place */
 @media (max-aspect-ratio:1/1){#tsb{position:fixed!important;right:8px!important;bottom:calc(env(safe-area-inset-bottom,0px) + 10px)!important;z-index:7;width:46px!important;height:46px!important;min-width:0!important;padding:0!important;font-size:18px!important;display:flex!important;align-items:center;justify-content:center}#tsb.on{font-size:13px!important}
  body:has(#app.open) #cam{visibility:hidden}}
@@ -12149,7 +12189,7 @@ body:has(#app.open) #alst,body:has(#fmo) #alst,body:has(#rw) #alst{display:none}
 #mb .qdet{font-size:12.5px;background:#f4ecda;border:2px dashed #b9a985;border-radius:10px;padding:6px 9px;margin:8px 0;text-align:left}#mb .qdet ul{margin:3px 0 0 16px;padding:0}#mb .qdet .pos{color:#2e7d32}#mb .qdet .neg{color:#b3261e}
 `;document.head.appendChild(st);
  // ---- jauges du bandeau : le pourcentage reste lisible même quand la barre est étroite (an 2, téléphone) ; repère des 50 % sur le quartier en an 2
- setInterval(()=>{try{const qb=document.getElementById('qf');if(qb)qb.parentElement.classList.toggle('q50',started&&YR==2)}catch(_){}},700);
+ __uiv(()=>{try{const qb=document.getElementById('qf');if(qb)qb.parentElement.classList.toggle('q50',started&&YR==2)}catch(_){}},700);
 
  // ---- un seul chiffre pour le quartier : le conseil lit la tranquillité du moment
  // ---- détail du quartier : ce qui fait monter, ce qui fait baisser (par mois)
@@ -12166,7 +12206,7 @@ body:has(#app.open) #alst,body:has(#fmo) #alst,body:has(#rw) #alst{display:none}
   const top=o=>Object.entries(o).filter(e=>e[1]>=.5).sort((a,b)=>b[1]-a[1]).slice(0,4).map(e=>`<li>${e[0]} : <b>${Math.round(e[1])}</b></li>`).join('');
   return `<div class="qdet"><b>🏘️ ${title} : <span class="pos">+${Math.round(g)}</span> / <span class="neg">−${Math.round(l)}</span></b>${l>=1?`<div>Ce qui fait baisser :</div><ul class="neg">${top(rec.l)}</ul>`:''}${g>=1?`<div>Ce qui fait monter :</div><ul class="pos">${top(rec.g)}</ul>`:''}</div>`}catch(_){return ''}};
  // dans le bilan mensuel (sous « Ce qui coince ») et dans le panneau des scores
- setInterval(()=>{try{const mb=document.getElementById('mb');if(!mb||document.getElementById('m').hidden||YR<2)return;if(mb.querySelector('.qdet'))return;
+ __uiv(()=>{try{const mb=document.getElementById('mb');if(!mb||document.getElementById('m').hidden||YR<2)return;if(mb.querySelector('.qdet'))return;
   const dg=mb.querySelector('.dgn');if(dg){const html=qDetail(AMI()-1,'Le quartier le mois dernier');if(html)dg.insertAdjacentHTML('afterend',html);else dg.insertAdjacentHTML('afterend','<span class="qdet" style="display:none"></span>');return}
   const lv=mb.querySelector('.live');if(lv){const html=qDetail(AMI(),'Le quartier ce mois-ci');lv.insertAdjacentHTML('afterend',html||'<span class="qdet" style="display:none"></span>')}}catch(_){}},400);
 
@@ -12208,14 +12248,14 @@ body:has(#app.open) #alst,body:has(#fmo) #alst,body:has(#rw) #alst{display:none}
   o=o.replace(/\b([Ee]lle) (est|était|sera|s’est|a été|est devenue?) (\p{L}+)·e\b/gu,'$1 $2 $3e').replace(/\b([Ii]l) (est|était|sera|s’est|a été) (\p{L}+)·e\b/gu,'$1 $2 $3').replace(/\b(elle|il) est devenu·e/g,(m,a)=>a+(a=='elle'?' est devenue':' est devenu'));
  }catch(_){}return o};
  const sweep=root=>{try{if(!root)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){const v=n.nodeValue;if(n._fx===v||!v||v.length<6)continue;const nv=FIXT(v);n._fx=nv;if(nv!==v)n.nodeValue=nv}}catch(_){}};
- setInterval(()=>{try{const mOn=!document.getElementById('m').hidden;if(mOn)sweep(document.getElementById('mb'));sweep(document.getElementById('fmo'));sweep(document.getElementById('msg'));sweep(document.getElementById('ev'));sweep(document.getElementById('alst'));document.querySelectorAll('.ctip,#ctip,.cbub,#petov').forEach(sweep)}catch(_){}},350);
+ __uiv(()=>{try{const mOn=!document.getElementById('m').hidden;if(mOn)sweep(document.getElementById('mb'));sweep(document.getElementById('fmo'));sweep(document.getElementById('msg'));sweep(document.getElementById('ev'));sweep(document.getElementById('alst'));document.querySelectorAll('.ctip,#ctip,.cbub,#petov').forEach(sweep)}catch(_){}},350);
  // une réplique propre à chaque personne suivie quand elle redonne des nouvelles
  window.LCHONTE={Jess:'J’ai honte d’avoir disparu comme ça.',Sylvie:'Je ne voulais pas que vous me voyiez dans cet état. Je suis désolée.',Jawad:'Je pensais que vous m’aviez oublié.',Patrick:'J’ai pas osé revenir. Vous êtes pas fâchés ?',Lola:'J’ai tout lâché d’un coup, je sais. Je suis désolée.',Samba:'Je voulais pas vous décevoir, alors je suis parti sans rien dire.'};
  // effets des rendez-vous de l'année
  window.RDVE={tab:'📣 +5 · 🏘️ +3 · 😊 +3',sida:'📣 +5 · 🏘️ +2 · 😊 +2 · dépistages si TROD',sdp:'📣 · 🏘️ +2 à +6 · ⚡ +8 pour l’équipe · 😊',iod:'📣 +4 · 🏘️ +2 · ⚡ +10 · 🆘 +2 naloxone · 😊 +3'};
 })();
 // v505 : bilan de l'an 1 — santé publique et tranquillité grisées sur le radar (elles comptent à partir de l'an 2)
-setInterval(()=>{try{if(YR!==1||document.getElementById('m').hidden)return;const mb=document.getElementById('mb');if(!mb||!/BILAN DE L|Bilan de l/i.test(mb.textContent||''))return;
+__uiv(()=>{try{if(YR!==1||document.getElementById('m').hidden)return;const mb=document.getElementById('mb');if(!mb||!/BILAN DE L|Bilan de l/i.test(mb.textContent||''))return;
  mb.querySelectorAll('svg text').forEach(t=>{if(t._g)return;const s=(t.textContent||'').trim();if(s!=='Santé publique'&&s!=='Tranquillité')return;t._g=1;t.setAttribute('fill','#a89f8c');const n=t.nextElementSibling;if(n&&n.tagName.toLowerCase()==='text'){n.setAttribute('fill','#a89f8c');n.style.fill='#a89f8c';n.textContent=n.textContent+' · an 2'}});
  mb.querySelectorAll('svg text').forEach(t=>{const s=(t.textContent||'').trim();if(/· an 2$/.test(s)){t.setAttribute('fill','#a89f8c');t.style.fill='#a89f8c'}})}catch(_){}},300);
 // ===== v506 : les boutons affichent le gain RÉEL de tranquillité (après l'amortissement : plus le quartier est haut, moins ça monte ; en an 2, les actions du mois s'essoufflent, les réponses aux lettres comptent davantage)
@@ -12223,7 +12263,7 @@ setInterval(()=>{try{if(YR!==1||document.getElementById('m').hidden)return;const
  window.qReal=function(n,free){try{const gen=Math.max(.1,.72*(1-Math.max(0,q)/112));let f=1;if(YR==2&&!free){const g0=((B.qgm||{})[AMI()])||0;f=Math.max(.12,.5-g0/30)}return Math.max(1,Math.round(n*gen*f))}catch(_){return n}};
  const RE=/🏘️(\s?)\+(\d+)/g;
  const sweep=(root,free)=>{try{if(!root)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){const v=n.nodeValue;if(!v)continue;if(n._qs!==v){if(v.indexOf('🏘️')<0||!/🏘️\s?\+\d/.test(v)){n._q0=null;continue}n._q0=v}if(!n._q0)continue;const fr=free||!!(n.parentElement&&n.parentElement.closest('#dlc,#petov'));const nv=n._q0.replace(RE,(m,s,d)=>'🏘️'+s+'+'+qReal(+d,fr));n._qs=nv;if(nv!==v)n.nodeValue=nv}}catch(_){}};
- setInterval(()=>{try{if(!started||ended)return;const mOn=!document.getElementById('m').hidden,ap=document.getElementById('app');if(mOn)sweep(document.getElementById('mb'));['fmo','petov','alst'].forEach(id=>sweep(document.getElementById(id)));if(ap&&ap.classList.contains('open'))sweep(ap);document.querySelectorAll('.afx').forEach(e=>sweep(e))}catch(_){}},600);
+ __uiv(()=>{try{if(!started||ended)return;const mOn=!document.getElementById('m').hidden,ap=document.getElementById('app');if(mOn)sweep(document.getElementById('mb'));['fmo','petov','alst'].forEach(id=>sweep(document.getElementById(id)));if(ap&&ap.classList.contains('open'))sweep(ap);document.querySelectorAll('.afx').forEach(e=>sweep(e))}catch(_){}},600);
 })();
 // ===== v507 : économies pour téléphone — dessin ralenti derrière les fenêtres et l'écran titre, date écrite une seule fois
 (function(){
@@ -12267,7 +12307,7 @@ setInterval(()=>{try{if(YR!==1||document.getElementById('m').hidden)return;const
  const st=document.createElement('style');st.textContent=`img.pxi{height:1.3em;width:auto;vertical-align:-.28em;image-rendering:pixelated;display:inline-block;pointer-events:none}#tabs .ic img.pxi{height:1.55em;vertical-align:middle}`;document.head.appendChild(st);
  const sweep=root=>{try{if(!root)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const L=[];let n;while((n=w.nextNode())){const v=n.nodeValue;if(v&&RX.test(v))L.push(n);RX.lastIndex=0}
   L.forEach(n=>{const v=n.nodeValue;const f=document.createDocumentFragment();let last=0;v.replace(RX,(m,k,off)=>{if(off>last)f.appendChild(document.createTextNode(v.slice(last,off)));const im=document.createElement('img');im.className='pxi';im.alt=k;im.src=SRC[DOMMAP[k]];f.appendChild(im);last=off+m.length;return m});if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.replaceWith(f)})}catch(_){}};
- const run=()=>{sweep(document.getElementById('hud'));sweep(document.getElementById('tabs'));document.querySelectorAll('#mb .ind5 .ii').forEach(sweep)};run();setInterval(run,500);
+ const run=()=>{sweep(document.getElementById('hud'));sweep(document.getElementById('tabs'));document.querySelectorAll('#mb .ind5 .ii').forEach(sweep)};run();__uiv(run,500);
  // bulles de besoin (dessinées sur le plan)
  try{NE.o='💊'}catch(_){}
  const BUB={'🏠':'maison','📋':'papiers','🍲':'repas','🩺':'soin','🧠':'psy','⚗️':'analyse','⚗':'analyse','😴':'lit','🚿':'douche','💊':'pilule'};
@@ -12572,7 +12612,7 @@ html body #peta button.sec{background:#fff!important;color:#0b2a5b!important}
    if(hid){if(now-lastD>=(sp?250:125)){lastD=now;return false}return true}
    if((window.FPSCAPB||window.ECO)&&now-lastDraw<31)return true;lastDraw=now;return false}catch(_){return false}}}}catch(_){}
  // 2. en paysage, la pile des contrats (#rdfx) ne doit pas passer sous le bouton Quiz : elle glisse alors en haut du plan (par transform, que l'ancien placement ne touche pas)
- setInterval(()=>{try{const e=document.getElementById('rdfx'),q=document.getElementById('qbub');if(!e)return;if(!(window.LSCOL&&LSCOL())){e.style.transform='';e.dataset.moved='';return}
+ __uiv(()=>{try{const e=document.getElementById('rdfx'),q=document.getElementById('qbub');if(!e)return;if(!(window.LSCOL&&LSCOL())){e.style.transform='';e.dataset.moved='';return}
   const h=document.getElementById('hud').getBoundingClientRect();const tr=e.style.transform;e.style.transform='';const r=e.getBoundingClientRect();const qr=q?q.getBoundingClientRect():null;
   const clash=qr&&qr.height>0&&r.bottom>qr.top-4&&r.left<qr.right;
   if(clash)e.dataset.moved='1';if(e.dataset.moved==='1'){const dx=Math.round(h.right+10-r.left),dy=Math.round(h.top+52-r.top);e.style.transform=`translate(${dx}px,${dy}px)`}else e.style.transform=tr}catch(_){}},600);
@@ -12631,10 +12671,10 @@ body:has(#m:not([hidden])) #qbub,body:has(#fmo) #qbub{display:none!important}
  const src=k=>{const m=MAP[k];const im=(window[m[0]]||{})[m[1]];return im&&im.complete&&im.naturalWidth?im.src:null};
  const sweep=root=>{try{if(!root)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const L=[];let n;while((n=w.nextNode())){RX.lastIndex=0;if(n.nodeValue&&RX.test(n.nodeValue))L.push(n)}
   L.forEach(n=>{const v=n.nodeValue;const f=document.createDocumentFragment();let last=0,ok=true;v.replace(RX,(m,k,off)=>{const s=src(k);if(!s){ok=false;return m}if(off>last)f.appendChild(document.createTextNode(v.slice(last,off)));const im=document.createElement('img');im.className='pxi';im.alt=k;im.src=s;f.appendChild(im);last=off+m.length;return m});if(!ok)return;if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.replaceWith(f)})}catch(_){}};
- const go=()=>{sweep(document.getElementById('hud'))};setInterval(go,500);
- try{new MutationObserver(go).observe(document.getElementById('hud'),{childList:true,subtree:true,characterData:true})}catch(_){}
+ const go=()=>{sweep(document.getElementById('hud'))};__uiv(go,500);
+ try{new MutationObserver(go).observe(document.getElementById('hud'),{childList:true,subtree:true})}catch(_){}
  // portraits (Jess, Samba…) : la colonne ne déborde plus en bas (elle rapetisse) et ne bouge que si l'écart dépasse 6 px
- setInterval(()=>{try{if(!(window.LSCOL&&LSCOL()))return;const li=document.getElementById('lci');if(!li||!li.children.length)return;
+ __uiv(()=>{try{if(!(window.LSCOL&&LSCOL()))return;const li=document.getElementById('lci');if(!li||!li.children.length)return;
   li.style.setProperty('transform-origin','top right','important');const cur=li.style.transform;li.style.transform='';const r=li.getBoundingClientRect();
   const avail=innerHeight-r.top-6;const sc=Math.max(.5,Math.min(1,avail/Math.max(1,r.height)));const want=sc<.999?`scale(${sc.toFixed(2)})`:'';
   li.style.transform=(cur&&want&&Math.abs(parseFloat(cur.slice(6))-sc)<.04)?cur:want}catch(_){}},400);
@@ -12661,7 +12701,7 @@ body:has(#m:not([hidden])) #qbub,body:has(#fmo) #qbub{display:none!important}
  setInterval(()=>{try{const el=document.getElementById('s'+window.DFI);if(!el)return;
   const p=el.parentElement;if(!p)return;const sib=[...p.children].filter(c=>c.tagName===el.tagName);if(sib[0]&&sib[0]!==el)p.insertBefore(el,sib[0])}catch(_){}},300);
  // le guide, quand un panneau est ouvert en paysage, se range à gauche du panneau et rétrécit pour ne pas le couvrir
- setInterval(()=>{try{const b=document.getElementById('gdb');if(!b)return;const land=window.LSCOL&&LSCOL(),sd=document.getElementById('side'),app=document.getElementById('app');
+ __uiv(()=>{try{const b=document.getElementById('gdb');if(!b)return;const land=window.LSCOL&&LSCOL(),sd=document.getElementById('side'),app=document.getElementById('app');
   const sv=sd&&sd.offsetParent!==null&&sd.getBoundingClientRect().width>120&&getComputedStyle(sd).visibility!=='hidden';if(!land||!sv){['width','left','top'].forEach(k=>{if(b.dataset.gp)b.style.removeProperty(k)});b.dataset.gp='';return}
   const sr=sd.getBoundingClientRect(),hr=document.getElementById('hud').getBoundingClientRect(),tb=document.getElementById('tabs').getBoundingClientRect();
   let L,avail;if(sr.left+sr.width/2>innerWidth/2){L=Math.round(hr.right+8);avail=Math.round(sr.left-L-8)}else{L=Math.round(sr.right+8);avail=Math.round(tb.left-L-8)}if(avail<140)return;
@@ -12725,8 +12765,8 @@ window.drumRoll=function(d){try{if(typeof AU=='undefined'||!AU.ctx||AU.s<=0)retu
 (function(){const st=document.createElement('style');st.id='v531';st.textContent=``;document.head.appendChild(st);
  const MC={'Janvier':'Janv.','Février':'Févr.','Juillet':'Juil.','Septembre':'Sept.','Octobre':'Oct.','Novembre':'Nov.','Décembre':'Déc.'},MRX=/Janvier|Février|Juillet|Septembre|Octobre|Novembre|Décembre/;
  const ab=()=>{try{if(!(innerWidth>innerHeight&&innerHeight<=600))return;const pl=document.getElementById('pl');if(!pl)return;const w=document.createTreeWalker(pl,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){if(MRX.test(n.nodeValue))n.nodeValue=n.nodeValue.replace(MRX,m=>MC[m])}}catch(_){}};
- setInterval(()=>{ab();try{const e=document.getElementById('eu');if(e)e.style.color=/^\s*[-−]/.test(e.textContent)?'#c8322a':''}catch(_){}},300);try{const pl=document.getElementById('pl');if(pl)new MutationObserver(ab).observe(pl,{childList:true,subtree:true,characterData:true})}catch(_){}
- setInterval(()=>{try{if(!(innerWidth>innerHeight&&innerHeight<=600))return;const pk=document.getElementById('hplank'),sp=document.getElementById('spw');if(pk&&sp&&sp.parentNode!==pk)pk.appendChild(sp)}catch(_){}},500)})();
+ __uiv(()=>{ab();try{const e=document.getElementById('eu');if(e)e.style.color=/^\s*[-−]/.test(e.textContent)?'#c8322a':''}catch(_){}},300);try{const pl=document.getElementById('pl');if(pl)new MutationObserver(ab).observe(pl,{childList:true,subtree:true})}catch(_){}
+ __uiv(()=>{try{if(!(innerWidth>innerHeight&&innerHeight<=600))return;const pk=document.getElementById('hplank'),sp=document.getElementById('spw');if(pk&&sp&&sp.parentNode!==pk)pk.appendChild(sp)}catch(_){}},500)})();
 
 // ===== v532 : portrait — retour de relecture (date et objectif à 360 px, rien sous le portrait de Camille, création du personnage, album…)
 (function(){const st=document.createElement('style');st.id='v532';st.textContent=`
@@ -12813,7 +12853,7 @@ body.aigB .edg,body.aigB #hxpop,body:has(#app.open) .edg,body:has(#rw) .edg,body
  const NEWT=new Set();
  window.ulSide=function(e){try{let t=e?e.tab:null;if(e&&e.k==='m'&&t==null)t=3;if(t===2)t=4;if(t!=null)NEWT.add(t)}catch(_){}};try{ulSide=window.ulSide}catch(_){}
  {const _t=window.tab;if(typeof _t==='function'){window.tab=function(n){try{NEWT.delete(n);if(n===2)NEWT.delete(4)}catch(_){}return _t.apply(this,arguments)};try{tab=window.tab}catch(_){}}}
- setInterval(()=>{try{document.querySelectorAll('#tabs button').forEach(b=>{const m=/tab\((\d+)\)/.exec(b.getAttribute('onclick')||'');if(!m)return;const n=+m[1];let s=b.querySelector('.hxn');const want=NEWT.has(n)&&(()=>{try{return started&&!ended}catch(_){return false}})();if(want&&!s){s=document.createElement('span');s.className='hxn';s.textContent='✦';s.title='Nouveau';b.appendChild(s)}else if(!want&&s)s.remove()})}catch(_){}},400);
+ __uiv(()=>{try{document.querySelectorAll('#tabs button').forEach(b=>{const m=/tab\((\d+)\)/.exec(b.getAttribute('onclick')||'');if(!m)return;const n=+m[1];let s=b.querySelector('.hxn');const want=NEWT.has(n)&&(()=>{try{return started&&!ended}catch(_){return false}})();if(want&&!s){s=document.createElement('span');s.className='hxn';s.textContent='✦';s.title='Nouveau';b.appendChild(s)}else if(!want&&s)s.remove()})}catch(_){}},400);
 })();
 
 // ===== v532 : portrait — date et objectif lisibles à 360 px, rien sous le portrait de Camille, album, libellés, ✕
@@ -12844,7 +12884,7 @@ html body body:has(#ctip.on) #qbub,body:has(#ctip.on) #qbub{display:none!importa
  #mb .aslot .ast{white-space:normal!important;font-size:8.5px!important;line-height:1.05!important;display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;height:auto!important;max-height:2.2em}
 }`;document.head.appendChild(st);
  const AIC={'RdR':'💉','Soins':'🩺','Droits':'📄','Quartier':'🏘️','Équipe':'👥','Lien':'🤝','Expression':'🎨','Partenaires':'🧩'};
- setInterval(()=>{try{const narrow=innerWidth<=420&&innerWidth<innerHeight;
+ __uiv(()=>{try{const narrow=innerWidth<=420&&innerWidth<innerHeight;
   document.querySelectorAll('#mb .atab').forEach(b=>{const t=(b.textContent||'').trim()||b.dataset.lb||'';if(!b.dataset.lb&&t)b.dataset.lb=t;const ic=AIC[b.dataset.lb]||'📁';if(b.dataset.ic!==ic){b.dataset.ic=ic;b.title=b.dataset.lb}});
   if(narrow){const t0=document.getElementById('t0');if(t0){const w=document.createTreeWalker(t0,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){if(/Salle de consommation ·/.test(n.nodeValue))n.nodeValue=n.nodeValue.replace(/Salle de consommation ·/g,'Conso ·')}}}
  }catch(_){}},400);
@@ -12871,7 +12911,7 @@ html body #mb button.aslot.on{padding:0!important}
 
 `;document.head.appendChild(st);
  // onglets : contour pour les nouveautés (plus de point rouge)
- setInterval(()=>{try{const N=(typeof B!='undefined'&&B.nw)||{};document.querySelectorAll('#tabs button').forEach(b=>{const m=/tab\((\d+)\)/.exec(b.getAttribute('onclick')||'');if(!m)return;const n=+m[1];const nw=!!b.querySelector('.hxn')||!!(N[n]&&N[n].length)||(n===4&&!!(N[2]&&N[2].length));b.classList.toggle('tnew',nw&&!b.querySelector('.hxt'))})}catch(_){}},400);
+ __uiv(()=>{try{const N=(typeof B!='undefined'&&B.nw)||{};document.querySelectorAll('#tabs button').forEach(b=>{const m=/tab\((\d+)\)/.exec(b.getAttribute('onclick')||'');if(!m)return;const n=+m[1];const nw=!!b.querySelector('.hxn')||!!(N[n]&&N[n].length)||(n===4&&!!(N[2]&&N[2].length));b.classList.toggle('tnew',nw&&!b.querySelector('.hxt'))})}catch(_){}},400);
  // argent : le chiffre monte depuis la personne ou la salle ; plus de doublon par-dessus l'argent
  {let lastF=-1e9;const _f=window.flt;if(typeof _f==='function'){window.flt=function(o,txt){try{if(/€/.test(String(txt)))lastF=performance.now()}catch(_){}return _f.apply(this,arguments)};try{flt=window.flt}catch(_){}}
   new MutationObserver(ms=>{const now=performance.now();ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.classList&&n.classList.contains('eufl')&&/^\+/.test(n.textContent||'')&&now-lastF<600)n.remove()}))}).observe(document.getElementById('hud')||document.body,{childList:true,subtree:true})}
@@ -12892,8 +12932,8 @@ button[onclick*="fpsToggle"]{display:none!important}`;document.head.appendChild(
   RX.lastIndex=0;if(!RX.test(v))return;if(!okNode(n))return;RX.lastIndex=0;const f=document.createDocumentFragment();let last=0,any=false;v.replace(RX,(m,k,off)=>{const s=src(k);if(!s)return m;if(off>last)f.appendChild(document.createTextNode(v.slice(last,off)));const im=document.createElement('img');im.className='pxg pxi';im.alt=k;im.src=s;im.draggable=false;f.appendChild(im);last=off+m.length;any=true;return m});if(!any)return;if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.replaceWith(f)};
  const sweep=root=>{try{if(!root)return;if(root.nodeType===3)return doText(root);if(root.nodeType!==1)return;if(SKIP.test(root.tagName))return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const L=[];let n;while((n=w.nextNode()))L.push(n);L.forEach(doText)}catch(_){}};
  let pend=new Set(),sch=0;const flush=()=>{sch=0;const P=[...pend];pend.clear();P.forEach(n=>{if(n.isConnected)sweep(n)})};
- new MutationObserver(ms=>{ms.forEach(m=>{if(m.type==='characterData')pend.add(m.target);else m.addedNodes.forEach(n=>pend.add(n))});if(!sch){sch=1;requestAnimationFrame(flush)}}).observe(document.body,{childList:true,subtree:true,characterData:true});
- const all=()=>sweep(document.body);setTimeout(all,600);setTimeout(all,2500);setInterval(all,5000);
+ __bodyMut(ms=>{ms.forEach(m=>{if(m.type==='characterData')pend.add(m.target);else m.addedNodes.forEach(n=>pend.add(n))});if(!sch){sch=1;requestAnimationFrame(flush)}});
+ const all=()=>sweep(document.body);setTimeout(all,600);setTimeout(all,2500);__uiv(all,5000);
 })();
 
 // ===== v535 : Street Pétanqueur — START toujours visible, menu d'action dans le panneau du bas en portrait, fond sombre, jauge de pouvoir expliquée
@@ -13007,7 +13047,7 @@ html body #ghb .gsz button.on .gszq{background:#ffd23f}
 `;document.head.appendChild(st);
  window.rbPick=(i,k)=>{try{setSZ(k!=null?k:0);selT(i)}catch(_){}};try{rbPick=window.rbPick}catch(_){}
  // texte sous chaque salle de la liste : capacité et prix selon la taille
- setInterval(()=>{try{document.querySelectorAll('#rbx .rbc:not(.lock)').forEach(c=>{if(c.querySelector('.szi'))return;const m=/rbPick\((\d+)\)/.exec(c.getAttribute('onclick')||'');if(!m)return;const i=+m[1];const d=document.createElement('div');d.className='szi';d.style.cssText='font-size:11.5px;color:#5a4c3c;margin-top:3px';d.textContent='La taille se choisit en la plaçant.';c.appendChild(d)})}catch(_){}},500);
+ __uiv(()=>{try{document.querySelectorAll('#rbx .rbc:not(.lock)').forEach(c=>{if(c.querySelector('.szi'))return;const m=/rbPick\((\d+)\)/.exec(c.getAttribute('onclick')||'');if(!m)return;const i=+m[1];const d=document.createElement('div');d.className='szi';d.style.cssText='font-size:11.5px;color:#5a4c3c;margin-top:3px';d.textContent='La taille se choisit en la plaçant.';c.appendChild(d)})}catch(_){}},500);
  // étiquette sur la salle en cours de placement
  const loop=()=>{try{const b=document.getElementById('ghb');let l=document.getElementById('ghlab');const R_=window.GHR;
   if(!b||!R_||typeof GH==='undefined'||!GH||sel<0){if(l)l.remove()}else{if(!l){l=document.createElement('div');l.id='ghlab';document.body.appendChild(l)}
@@ -13260,7 +13300,7 @@ window.P3BG=window.P3BG||{};window.P3BG.major={back:'a/de81f47bf75f.webp',side:'
 #roster.cmp .rs>.bar.xpb{grid-area:x;height:7px!important;margin:0!important}
 #roster.cmp .rs>small{grid-area:l;font-size:10px!important;white-space:nowrap}
 #roster.cmp .rs>:not(span):not(.rfire):not(.bar):not(small){grid-column:1/-1}`;document.head.appendChild(st);
- setInterval(()=>{try{const r=document.getElementById('roster');if(!r)return;const n=r.querySelectorAll('.rs').length;r.classList.toggle('cmp',n>=6||(innerWidth>innerHeight&&innerHeight<=600&&n>=3))}catch(_){}},500);
+ __uiv(()=>{try{const r=document.getElementById('roster');if(!r)return;const n=r.querySelectorAll('.rs').length;r.classList.toggle('cmp',n>=6||(innerWidth>innerHeight&&innerHeight<=600&&n>=3))}catch(_){}},500);
 })();
 
 // ===== v541 : Street Pétanqueur — le menu disparaît pendant le tour d'en face, écran titre plus compact en paysage, panneau du bas sans débordement
@@ -13316,12 +13356,12 @@ details.howto ol{margin:0 0 6px;padding:0 10px 0 26px}details.howto li{margin:2p
 <li>Les dépistages se font quand quelqu’un le demande : plus il vient de monde, plus il y a de TROD (voir Quartier, « attirer plus de monde »).</li>
 <li>Pour en faire plus : les <b>TROD délocalisés</b> pendant les tournées en camion, la <b>journée dépistage du foie</b> et le stand du <b>1er décembre</b>.</li></ol>`;
  const put=(id,anchor,html)=>{if(document.getElementById(id))return;const a=anchor();if(!a||!a.parentNode)return;const d=document.createElement('details');d.className='howto';d.id=id;d.innerHTML=html;a.parentNode.insertBefore(d,a)};
- setInterval(()=>{try{put('howAtt',()=>document.getElementById('out'),ATT);put('howTrod',()=>{const b=document.getElementById('bt');return b&&b.parentNode},TRD)}catch(_){}},1000)}
+ __uiv(()=>{try{put('howAtt',()=>document.getElementById('out'),ATT);put('howTrod',()=>{const b=document.getElementById('bt');return b&&b.parentNode},TRD)}catch(_){}},1000)}
 
 // ===== v543 : fin de partie — la fenêtre de fin n'est jamais retenue ; en paysage, le radar à gauche et le texte à droite ; filet « Rejouer »
 {const st=document.createElement('style');st.textContent=`
 #rejouer{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:99990;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;padding:12px 22px;border:3px solid #2a2433;border-radius:12px;background:#ffd23f;color:#2a2433;box-shadow:0 4px 0 #2a2433;filter:none}`;document.head.appendChild(st);
- let hid0=0;setInterval(()=>{try{const m=$('m');const isEnd=typeof ended!='undefined'&&ended&&typeof ENDING!='undefined'&&ENDING;m.classList.toggle('endl',!!(isEnd&&!m.hidden));
+ let hid0=0;setInterval(()=>{try{const m=$('m');const isEnd=typeof ended!='undefined'&&ended&&typeof ENDING!='undefined'&&ENDING;if(!isEnd){if(m.classList.contains('endl'))m.classList.remove('endl');hid0=0;return}m.classList.toggle('endl',!!(isEnd&&!m.hidden));
   const busy=!!document.querySelector('#tvov,#tvfade,#epov,#envo,#peta,#debov,#fmo,#badov');if(busy)hid0=0;else if(isEnd&&m.hidden&&!document.getElementById('badov')&&!document.getElementById('rejouer')){if(!hid0)hid0=performance.now();if(performance.now()-hid0>2500){const b=document.createElement('button');b.id='rejouer';b.textContent='↺ Rejouer';b.onclick=()=>{try{if(ENDING=='bad'&&typeof badEnd=='function'){b.remove();return badEnd()}}catch(_){}location.reload()};document.documentElement.appendChild(b)}}else hid0=0}catch(_){}},500)}
 
 // ===== v543 : fenêtres compactes en paysage — texte sur 640 px au plus, boutons de 34 px, bouton d'action collé en bas, menu ☰ en grille,
@@ -13496,9 +13536,9 @@ html body #lci button.lcb svg{display:block}
  // la parenthèse des boutons de choix passe en écriture normale
  const fix=b=>{try{if(b.dataset.nbx)return;b.dataset.nbx=1;const H=b.innerHTML;const k=H.search(/<br|<small|<div|<span class="(?:pr|ptg|bd)/);const head=k<0?H:H.slice(0,k),tail=k<0?'':H.slice(k);
    const m=/^([^]*?\S)\s*\(([^]{6,})\)\s*$/.exec(head);if(!m||/<button|<input/.test(head))return;b.innerHTML=m[1]+' <span class="nb">('+m[2]+')</span>'+tail}catch(_){}};
- setInterval(()=>{try{document.querySelectorAll('#fmo button:not([data-nbx]),#mb button:not([data-nbx])').forEach(fix)}catch(_){}},300);
+ __uiv(()=>{try{document.querySelectorAll('#fmo button:not([data-nbx]),#mb button:not([data-nbx])').forEach(fix)}catch(_){}},300);
  // portraits ronds : le dessin s'adapte à la taille du bouton
- setInterval(()=>{try{document.querySelectorAll('#lci .lcb svg:not([viewBox])').forEach(s=>{const w=s.getAttribute('width')||46,hh=s.getAttribute('height')||46;s.setAttribute('viewBox','0 0 '+w+' '+hh)})}catch(_){}},500);
+ __uiv(()=>{try{document.querySelectorAll('#lci .lcb svg:not([viewBox])').forEach(s=>{const w=s.getAttribute('width')||46,hh=s.getAttribute('height')||46;s.setAttribute('viewBox','0 0 '+w+' '+hh)})}catch(_){}},500);
  // indicateur de défilement
  const H=new Map();
  const cands=()=>{const L=[];['tabsbody','mb'].forEach(id=>{const e=document.getElementById(id);if(e)L.push(e)});document.querySelectorAll('#fmo *,#splx .bx,#xpov *,#rsp,#rsp .rsl,#lcbook *').forEach(e=>{if(e.clientHeight>80&&e.scrollHeight>e.clientHeight+12){const o=getComputedStyle(e).overflowY;if(o=='auto'||o=='scroll')L.push(e)}});return L};
@@ -13533,14 +13573,14 @@ html body #odc.on{left:var(--odx)!important;top:var(--ody)!important;transform:n
 #prpl b{position:absolute;left:8px;top:6px;font:400 13px Lilita,sans-serif;color:#ffd23f;text-shadow:1px 1px 0 #000;letter-spacing:.04em}
 @keyframes prin{from{transform:scale(.6);opacity:0}}`;document.head.appendChild(st);
  // objectif sous le bandeau, même quand celui-ci change de hauteur
- setInterval(()=>{try{const o=document.getElementById('objp'),hd=document.getElementById('hud');if(!o||!hd)return;if(innerWidth>innerHeight){o.style.removeProperty('top');return}const b=Math.round(hd.getBoundingClientRect().bottom+8);const v=b+'px';if(o.style.getPropertyValue('top')!==v)o.style.setProperty('top',v,'important')}catch(_){}},400);
+ __uiv(()=>{try{const o=document.getElementById('objp'),hd=document.getElementById('hud');if(!o||!hd)return;if(innerWidth>innerHeight){o.style.removeProperty('top');return}const b=Math.round(hd.getBoundingClientRect().bottom+8);const v=b+'px';if(o.style.getPropertyValue('top')!==v)o.style.setProperty('top',v,'important')}catch(_){}},400);
  // surdose : pastille au bord de l'écran, flèche vers la salle
  setInterval(()=>{try{const el=document.getElementById('odc');if(!el||!el.classList.contains('on'))return;if(el.textContent!=='🆘')el.textContent='🆘';el.title='Surdose en salle de conso : y aller';
   const r=cv.getBoundingClientRect(),k=r.width/WW,cx=r.left+(OX+R[1][2]+RW[1]/2)*k,cy=r.top+(OY+R[1][3]+23)*r.height/WH;
   const hb=(document.getElementById('hud')||{getBoundingClientRect:()=>({bottom:60})}).getBoundingClientRect().bottom;const m=34,x=Math.max(m,Math.min(innerWidth-m,cx)),y=Math.max(hb+40,Math.min(innerHeight-110,cy));
   el.style.setProperty('--odx',(x-26)+'px');el.style.setProperty('--ody',(y-26)+'px');el.style.setProperty('--oda',(Math.atan2(cy-y,cx-x)*180/Math.PI).toFixed(0)+'deg')}catch(_){}},150);
  // « À savoir » : une icône à côté des sous-onglets
- setInterval(()=>{try{document.querySelectorAll('#side .tab').forEach(t=>{const sb=t.querySelector('.subt');t.querySelectorAll('.hqb:not(.ic1)').forEach(b=>{if(!/savoir/i.test(b.textContent))return;b.classList.add('ic1');b.title='À savoir';b._sub=b.closest('.sub');if(sb&&b.parentNode!==sb)sb.appendChild(b)});t.querySelectorAll('.subt .hqb.ic1').forEach(b=>{const on=!b._sub||!!b._sub.offsetParent||getComputedStyle(b._sub).display!='none';b.style.setProperty('display',on?'inline-flex':'none','important')})})}catch(_){}},400);
+ __uiv(()=>{try{document.querySelectorAll('#side .tab').forEach(t=>{const sb=t.querySelector('.subt');t.querySelectorAll('.hqb:not(.ic1)').forEach(b=>{if(!/savoir/i.test(b.textContent))return;b.classList.add('ic1');b.title='À savoir';b._sub=b.closest('.sub');if(sb&&b.parentNode!==sb)sb.appendChild(b)});t.querySelectorAll('.subt .hqb.ic1').forEach(b=>{const on=!b._sub||!!b._sub.offsetParent||getComputedStyle(b._sub).display!='none';b.style.setProperty('display',on?'inline-flex':'none','important')})})}catch(_){}},400);
  // formations et salles : repliées ; un toucher déplie, un second valide
  const XS='#trn button,#rbx .rbc';
  document.addEventListener('click',e=>{try{const b=e.target.closest&&e.target.closest(XS);if(!b||b.disabled)return;if(b.classList.contains('xopen'))return;
@@ -13549,7 +13589,7 @@ html body #odc.on{left:var(--odx)!important;top:var(--ody)!important;transform:n
  // pétanque : enregistrement des coups et ralenti des beaux coups
  const REC={f:[],team:null,nice:'',ph:''};let playing=false;
  const NICE=/CARREAU|À la bande|COMBO|ENSEMBLE|Sardine géante/i;
- new MutationObserver(()=>{try{const b=document.querySelector('#peta #qban');if(b&&!b.classList.contains('off')&&NICE.test(b.textContent)&&REC.team===0)REC.nice=b.textContent.trim()}catch(_){}}).observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class']});
+ __obsIn(['peta'],()=>{try{const b=document.querySelector('#peta #qban');if(b&&!b.classList.contains('off')&&NICE.test(b.textContent)&&REC.team===0)REC.nice=b.textContent.trim()}catch(_){}},{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class']});
  const snap=pg=>pg.balls.filter(b=>b.alive!==false).map(b=>[b.x,b.y,b.r,b.team,b.air||0]);
  const play=(pg,label)=>{try{if(window.__RPL3||playing||!REC.f.length)return;const ov=document.getElementById('peta');if(!ov)return;const T=pg.T,sc=Math.min(240/T.w,90/T.h),Wc=Math.round(T.w*sc)+16,Hc=Math.round(T.h*sc)+30;
    const d=document.createElement('div');d.id='prpl';d.innerHTML='<canvas></canvas><b>⟲ REPLAY · '+label.replace(/[<>]/g,'')+'</b>';const c=d.querySelector('canvas');c.width=Wc*2;c.height=Hc*2;c.style.width=Wc+'px';c.style.height=Hc+'px';ov.appendChild(d);playing=true;
@@ -13699,13 +13739,13 @@ document.addEventListener('selectstart',e=>{const t=e.target;if(t&&t.closest&&t.
   if(!bt){bt=document.createElement('button');bt.type='button';bt.className='esb';bt.innerHTML='<b>+</b><span>En savoir +</span>';bd=document.createElement('div');bd.className='esbd';
    const first=box.querySelector(':scope>.subt');if(first)first.after(bt,bd);else box.prepend(bt,bd);
    bt.onclick=e=>{e.stopPropagation();const o=box.classList.toggle('esopen');bt.innerHTML=o?'<b>−</b><span>Masquer</span>':'<b>+</b><span>En savoir +</span>';try{sfx('click')}catch(_){}}}
-  L.forEach(p=>bd.appendChild(p))})}catch(_){}};setInterval(run,500);setTimeout(run,50)})();
+  L.forEach(p=>bd.appendChild(p))})}catch(_){}};__uiv(run,500);setTimeout(run,50)})();
 // ---- formations et salles : un toucher déplie ; on n'achète qu'avec le bouton vert ; un autre toucher replie
 (function(){const XS='#trn button,#rbx .rbc';const shut=()=>document.querySelectorAll('#trn .xopen,#rbx .xopen').forEach(x=>{x.classList.remove('xopen');x.querySelectorAll('.xhint,.xbuy').forEach(h=>h.remove())});
  document.addEventListener('click',e=>{try{const t=e.target;if(t.closest&&t.closest('.xbuy'))return;const b=t.closest&&t.closest(XS);
   if(b&&b.classList.contains('xopen')){e.preventDefault();e.stopImmediatePropagation();shut();try{sfx('click')}catch(_){}return}
   if(!b&&document.querySelector('#trn .xopen,#rbx .xopen'))shut()}catch(_){}},true);
- setInterval(()=>{try{document.querySelectorAll('#trn .xopen,#rbx .xopen').forEach(b=>{b.querySelectorAll('.xhint').forEach(h=>h.remove());if(b.classList.contains('lock')||b.querySelector('.xbuy'))return;const s=document.createElement('span');s.className='xbuy';s.setAttribute('role','button');s.textContent=b.closest('#rbx')?'🏗️ Placer la salle':'✔ Lancer la formation';b.appendChild(s)})}catch(_){}},120)})();
+ __uiv(()=>{try{document.querySelectorAll('#trn .xopen,#rbx .xopen').forEach(b=>{b.querySelectorAll('.xhint').forEach(h=>h.remove());if(b.classList.contains('lock')||b.querySelector('.xbuy'))return;const s=document.createElement('span');s.className='xbuy';s.setAttribute('role','button');s.textContent=b.closest('#rbx')?'🏗️ Placer la salle':'✔ Lancer la formation';b.appendChild(s)})}catch(_){}},120)})();
 </script>
 <script>
 // v568 : la prévision de construction se déplace aussi en touchant un autre endroit du plan (même quand le jeu est en pause, menu ouvert)
@@ -13975,10 +14015,10 @@ window.__ballChip=ballChip;window.__pBallAPI={BALLS,isOK:o=>isOK(o),real:o=>real
 let CB_={t:0,v:'acier'};const curBall=()=>{const n=performance.now();if(n-CB_.t<800)return CB_.v;CB_.t=n;const id=LS_.get('hsa-peta-ball','acier');const b=BALLS.find(x=>x.id===id);return CB_.v=(b&&isOK(b)?id:'acier')};
 // ---------- statistiques de pétanque (pour les déblocages) ----------
 let sardUsed=0;
-new MutationObserver(()=>{try{const b=document.querySelector('#peta #qban');if(!b||b.classList.contains('off'))return;const t=b.textContent;if(b._last===t)return;b._last=t;const pg=window.__PG,st=PST();
+__obsIn(['peta'],()=>{try{const b=document.querySelector('#peta #qban');if(!b||b.classList.contains('off'))return;const t=b.textContent;if(b._last===t)return;b._last=t;const pg=window.__PG,st=PST();
  if(/CARREAU/.test(t)&&pg&&pg.pending&&pg.pending.team===0){st.car++;LS_.set('hsa-peta-st',st)}
  if(/Pastagattaque/.test(t)){st.pas++;LS_.set('hsa-peta-st',st)}
- if(/Sardine géante/.test(t))sardUsed=1}catch(_){}}).observe(document.body,{subtree:true,childList:true,characterData:true});
+ if(/Sardine géante/.test(t))sardUsed=1}catch(_){}},{subtree:true,childList:true,characterData:true});
 window.__pRes=(s0,s1,sim)=>{if(sim)return;const st=PST();st.m++;if(s0>s1){st.w++;const k=window.__PG&&__PG.TK;if(k)st.wt[k]=(st.wt[k]||0)+1;if(sardUsed)st.sardW++}sardUsed=0;LS_.set('hsa-peta-st',st)};
 // ---------- écran de sélection façon jeu de combat ----------
 {const st=document.createElement('style');st.textContent=`
@@ -14080,7 +14120,7 @@ window.__selNew=function(X){const {ov,ALL,pick,POW,anim,headC,icon,okS,blip,whoo
  new MutationObserver(()=>{ok.hidden=q('.fs-go').disabled}).observe(q('.fs-go'),{attributes:true});
 };
 // les terrains bloqués sur l'écran titre
-new MutationObserver(()=>{try{const L=document.querySelectorAll('#peta .ters button:not([data-lk])');L.forEach(b=>{b.dataset.lk=1;const k=b.dataset.t,u=TERU[k];if(!u)return;const ok=isOK(u),rl=real(u);if(!ok){b.classList.add('tlock');b.insertAdjacentText('afterbegin','🔒 ');b.addEventListener('click',e=>{e.stopImmediatePropagation();const d=document.querySelector('#qterd');if(d)d.textContent='🔒 '+u.t+'.'},true)}else if(!rl){b.insertAdjacentHTML('beforeend',' <small style="font-size:9px;color:#ff6fb5">TEST</small>');b.addEventListener('click',()=>setTimeout(()=>{const d=document.querySelector('#qterd');if(d)d.textContent+=' (Débloqué pour les tests. Normalement : '+u.t.toLowerCase()+'.)'},0))}})}catch(_){}}).observe(document.body,{childList:true,subtree:true});
+__obsIn(['peta'],()=>{try{const L=document.querySelectorAll('#peta .ters button:not([data-lk])');L.forEach(b=>{b.dataset.lk=1;const k=b.dataset.t,u=TERU[k];if(!u)return;const ok=isOK(u),rl=real(u);if(!ok){b.classList.add('tlock');b.insertAdjacentText('afterbegin','🔒 ');b.addEventListener('click',e=>{e.stopImmediatePropagation();const d=document.querySelector('#qterd');if(d)d.textContent='🔒 '+u.t+'.'},true)}else if(!rl){b.insertAdjacentHTML('beforeend',' <small style="font-size:9px;color:#ff6fb5">TEST</small>');b.addEventListener('click',()=>setTimeout(()=>{const d=document.querySelector('#qterd');if(d)d.textContent+=' (Débloqué pour les tests. Normalement : '+u.t.toLowerCase()+'.)'},0))}})}catch(_){}},{childList:true,subtree:true});
 {const st=document.createElement('style');st.textContent='#peta .ters button.tlock{opacity:.55;filter:grayscale(.7)}';document.head.appendChild(st)}
 
 // ---------- 3D : boules habillées, sardine, traînées, zones interdites ----------
@@ -14479,7 +14519,7 @@ try{for(const k in GCV)delete GCV[k]}catch(_){}
  const ok=()=>{try{if(localStorage.getItem('hsa-peta-menu')==='1')return true;const sv=JSON.parse(localStorage.getItem('hsa-save')||'null');if(sv&&sv.B&&(sv.B.peta||sv.B.petaDone||(sv.YR>2)||(sv.YR==2&&sv.mo>=11)))return true}catch(_){}return false};
  const put=()=>{try{const sp=document.getElementById('splash');if(!sp||document.getElementById('splpet'))return;if(!ok())return;const al=sp.querySelector('button[onclick="album()"]');if(!al)return;const b=document.createElement('button');b.id='splpet';b.type='button';b.innerHTML='🎯 Street Pétanqueur<small>partie libre · le tournoi du quartier</small>';b.onclick=e=>{e.stopPropagation();try{sfx('click')}catch(_){}document.body.classList.add('pmenu');try{petaShow(true)}catch(err){console.error(err)}};al.insertAdjacentElement('afterend',b)}catch(_){}};
  setInterval(()=>{try{if(document.body.classList.contains('pmenu')){if(!document.getElementById('peta'))document.body.classList.remove('pmenu');else{const q=document.getElementById('qpend');if(q&&q.textContent!=='Retour à l’accueil')q.textContent='Retour à l’accueil';document.querySelectorAll('#qsqx,.fs-x').forEach(x=>{if(x._pm)return;x._pm=1;x.textContent='✕ Retour à l’accueil';x.onclick=e=>{e.stopPropagation();try{petaMus(null)}catch(_){}const p=document.getElementById('peta');if(p)p.remove();document.body.classList.remove('pmenu')}})}}}catch(_){}},300);
- setInterval(put,800);put()})();
+ __uiv(put,800);put()})();
 </script>
 <script>
 // v579 : débat en paysage — pancartes atténuées pendant que Crotti parle, main de cartes plus grande, consigne lisible
@@ -14571,7 +14611,7 @@ details.crit583>p{margin:4px 0!important;font-size:13px!important;line-height:1.
   r.style.display='block';r.style.left=(b.left-6)+'px';r.style.top=(b.top-6)+'px';r.style.width=(b.width+6)+'px';r.style.height=(b.height+6)+'px'}catch(_){}};requestAnimationFrame(loop)})();
 
 // 2. bilan final : en paysage, le bouton de l'épilogue va sous le radar ; le détail par critère est replié
-(function(){setInterval(()=>{try{const m=$('m');if(m.hidden||!m.classList.contains('endl'))return;const mb=$('mb');
+(function(){__uiv(()=>{try{const m=$('m');if(m.hidden||!m.classList.contains('endl'))return;const mb=$('mb');
   if(!mb.querySelector('details.crit583')){const p=[...mb.querySelectorAll(':scope>p')].find(p=>/^\s*\S*\s*Santé publique\s*:/.test(p.textContent)&&/Tranquillité\s*:/.test(p.textContent));
    if(p&&!p.classList.contains('rvh')){const d=document.createElement('details');d.className='crit583';d.innerHTML='<summary>Le détail, critère par critère</summary>';p.replaceWith(d);p.style.fontSize='';d.appendChild(p)}}
   const src=[...mb.querySelectorAll(':scope>p')].find(p=>/^\s*Sources\s*:/.test(p.textContent));if(src)src.classList.add('src583');
@@ -14580,7 +14620,7 @@ details.crit583>p{margin:4px 0!important;font-size:13px!important;line-height:1.
  }catch(_){}},250)})();
 
 // 3. bilan du mois négatif : le conseil « Pour équilibrer » juste sous les chiffres
-(function(){setInterval(()=>{try{const m=$('m');if(m.hidden)return;const mb=$('mb');if(!mb.classList.contains('bil2'))return;
+(function(){__uiv(()=>{try{const m=$('m');if(m.hidden)return;const mb=$('mb');if(!mb.classList.contains('bil2'))return;
   const p=[...mb.querySelectorAll(':scope>p')].find(p=>/Pour équilibrer/.test(p.textContent)),bd=mb.querySelector(':scope>.mbud');
   if(p&&bd&&bd.nextElementSibling!==p)bd.after(p)}catch(_){}},200)})();
 </script>
@@ -15544,8 +15584,8 @@ const st=document.createElement('style');st.textContent=`
 #peta .fter .fcap p{color:#2a2433}#peta .fter .fcap p b{color:#b03a10}
 `;document.head.appendChild(st);
 // on habille la carte dès qu'elle apparaît
-new MutationObserver(()=>{try{document.querySelectorAll('#peta .fm-in:not(.dressed)').forEach(m=>{m.classList.add('dressed');m.insertAdjacentHTML('beforeend','<i class="pin a"></i><i class="pin b"></i><i class="pin c"></i><i class="pin d"></i><i class="tape"></i><b class="fm-pk"></b>');
- m.addEventListener('click',e=>{const b=e.target.closest('.fm-s');if(!b||b.classList.contains('lock'))return;setTimeout(()=>{m.querySelectorAll('.fm-s').forEach(x=>{const on=x.classList.contains('on');if(on){const pk=m.querySelector('.fm-pk');pk.style.left=(parseFloat(x.style.left)+parseFloat(x.style.width)/2)+'%';pk.style.top=(parseFloat(x.style.top)+parseFloat(x.style.height)*.45)+'%';pk.classList.add('on')}})},0)})})}catch(_){}}).observe(document.body,{childList:true,subtree:true});
+__obsIn(['peta'],()=>{try{document.querySelectorAll('#peta .fm-in:not(.dressed)').forEach(m=>{m.classList.add('dressed');m.insertAdjacentHTML('beforeend','<i class="pin a"></i><i class="pin b"></i><i class="pin c"></i><i class="pin d"></i><i class="tape"></i><b class="fm-pk"></b>');
+ m.addEventListener('click',e=>{const b=e.target.closest('.fm-s');if(!b||b.classList.contains('lock'))return;setTimeout(()=>{m.querySelectorAll('.fm-s').forEach(x=>{const on=x.classList.contains('on');if(on){const pk=m.querySelector('.fm-pk');pk.style.left=(parseFloat(x.style.left)+parseFloat(x.style.width)/2)+'%';pk.style.top=(parseFloat(x.style.top)+parseFloat(x.style.height)*.45)+'%';pk.classList.add('on')}})},0)})})}catch(_){}},{childList:true,subtree:true});
 })();
 </script>
 <script>
@@ -15804,7 +15844,7 @@ const st=document.createElement('style');st.textContent=`
 #peta .hud .mn .wind.f0 .wa{display:none}
 `;document.head.appendChild(st);
 // la carte en portrait : la zone de la carte prend juste la hauteur de la carte
-new MutationObserver(()=>{try{const f=document.querySelector('#peta .fter');if(!f||f.__fit)return;f.__fit=1;const fm=f.querySelector('.fm');const go=()=>{if(!f.isConnected)return;if(innerHeight>innerWidth){const m=f.querySelector('.fm-in.pt');const W=fm.clientWidth-8;if(W>20){const ar=.7467,h=Math.min(W/ar,f.clientHeight*.72);const w=h*ar;m.style.width=Math.floor(w)+'px';m.style.height=Math.floor(h)+'px';fm.style.height=Math.floor(h+12)+'px'}}else fm.style.height='';requestAnimationFrame(go)};go()}catch(_){}}).observe(document.body,{childList:true,subtree:true});
+__obsIn(['peta'],()=>{try{const f=document.querySelector('#peta .fter');if(!f||f.__fit)return;f.__fit=1;const fm=f.querySelector('.fm');const go=()=>{if(!f.isConnected)return;if(innerHeight>innerWidth){const m=f.querySelector('.fm-in.pt');const W=fm.clientWidth-8;if(W>20){const ar=.7467,h=Math.min(W/ar,f.clientHeight*.72);const w=h*ar;m.style.width=Math.floor(w)+'px';m.style.height=Math.floor(h)+'px';fm.style.height=Math.floor(h+12)+'px'}}else fm.style.height='';requestAnimationFrame(go)};go()}catch(_){}},{childList:true,subtree:true});
 })();
 </script>
 <script>
@@ -16011,7 +16051,7 @@ const st=document.createElement('style');st.textContent=`
 `;document.head.appendChild(st);
 // la légende de l'action choisie, sous le menu
 const cap=m=>{const f=m.querySelector('.it.f small');let c=m.querySelector('.pcap');if(!c){c=document.createElement('div');c.className='pcap'}if(c.parentNode!==m||m.lastElementChild!==c)m.appendChild(c);const h=f?f.innerHTML:'';if(c.innerHTML!==h)c.innerHTML=h};
-new MutationObserver(()=>{const m=document.getElementById('qcmd');if(m&&!m.hidden)cap(m)}).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['class','hidden']});
+__obsIn(['peta'],()=>{const m=document.getElementById('qcmd');if(m&&!m.hidden)cap(m)},{subtree:true,childList:true,attributes:true,attributeFilter:['class','hidden']});
 })();
 </script>
 <script>
@@ -16032,7 +16072,7 @@ new MutationObserver(()=>{const m=document.getElementById('qcmd');if(m&&!m.hidde
 #peta .wrap #qcmd.cmd .it{padding-top:7px!important;padding-bottom:7px!important}
 `;document.head.appendChild(st);
 // les cases J1 J2 J3 du haut s'allument quand elles sont remplies
-new MutationObserver(()=>{document.querySelectorAll('#peta .fs-slot').forEach(s=>s.classList.toggle('full',!!s.querySelector('canvas')))}).observe(document.body,{subtree:true,childList:true});
+__obsIn(['peta'],()=>{document.querySelectorAll('#peta .fs-slot').forEach(s=>s.classList.toggle('full',!!s.querySelector('canvas')))},{subtree:true,childList:true});
 })();
 </script>
 <script>
@@ -16332,7 +16372,7 @@ body:has(#m:not([hidden])) #hasc,body.fly #hasc,body:has(#mtg) #hasc,body:has(#h
 
 <script>
 // v640 : en paysage, la pastille du défi se place à gauche de la colonne des portraits au lieu de les recouvrir
-setInterval(()=>{try{const d=document.getElementById('dfi');if(!d||innerWidth<innerHeight)return;const L=document.getElementById('lci');let rt='8px';if(L&&L.children.length){const r=L.getBoundingClientRect();if(r.width>0&&r.left>innerWidth/2)rt=Math.round(innerWidth-r.left+8)+'px'}if(d.style.getPropertyValue('right')!==rt)d.style.setProperty('right',rt,'important')}catch(_){}},250);
+__uiv(()=>{try{const d=document.getElementById('dfi');if(!d||innerWidth<innerHeight)return;const L=document.getElementById('lci');let rt='8px';if(L&&L.children.length){const r=L.getBoundingClientRect();if(r.width>0&&r.left>innerWidth/2)rt=Math.round(innerWidth-r.left+8)+'px'}if(d.style.getPropertyValue('right')!==rt)d.style.setProperty('right',rt,'important')}catch(_){}},250);
 </script>
 
 <style id="v642">button.ptb .ptg .pstx{font:700 12px/1.15 'Atkinson Hyperlegible',sans-serif;white-space:nowrap;display:flex;align-items:center;gap:3px}button.ptb .ptg .pstx img{height:13px}</style>
@@ -16482,7 +16522,7 @@ document.addEventListener('click',e=>{try{const b=e.target.closest&&e.target.clo
   g.putImageData(new ImageData(o,w+2,h+2),0,0);im.src=c.toDataURL()}catch(_){}};
  const run=()=>['coeur','coeur2','coeurvert','coeurbrise'].forEach(ol);run();setTimeout(run,1500);setTimeout(run,5000)})();
 // courrier : les réponses arrivent l'une après l'autre
-new MutationObserver(()=>{try{document.querySelectorAll('#dlc .dlo button').forEach((b,i)=>{if(!b.style.getPropertyValue('--i'))b.style.setProperty('--i',i)})}catch(_){}}).observe(document.body,{childList:true,subtree:true});
+__obsIn(['dlc'],()=>{try{document.querySelectorAll('#dlc .dlo button').forEach((b,i)=>{if(!b.style.getPropertyValue('--i'))b.style.setProperty('--i',i)})}catch(_){}},{childList:true,subtree:true});
 </script>
 <style id="v651">@media (orientation:portrait){#rdfx{left:auto;right:8px;align-items:flex-end;top:calc(var(--hh,44px) + 46px)}}</style>
 
@@ -16491,7 +16531,7 @@ new MutationObserver(()=>{try{document.querySelectorAll('#dlc .dlo button').forE
 // v654 : dotation de l'ARS, 150 € par mois en années 2 et 3 (versée quel que soit le nombre de passages)
 {const DOT=()=>(started&&!ended&&YR>=2&&YR<=3)?150:0,K='Dotation ARS';
  const _fe=window.finExtra;window.finExtra=()=>{const L=_fe?_fe():[];const v=DOT();if(v)L.push(['🩺','L’ARS (dotation)','150 € par mois, quel que soit le nombre de passages',v,K]);return L};
- W('monthEnd',(o,a)=>{try{const v=DOT();if(v){eu+=v;LM.i[K]=(LM.i[K]||0)+v;LY.i[K]=(LY.i[K]||0)+v}}catch(_){}return o(...a)})}
+ {const o=window.monthEnd;if(typeof o=='function'){const w=function(...a){try{const v=DOT();if(v){eu+=v;LM.i[K]=(LM.i[K]||0)+v;LY.i[K]=(LY.i[K]||0)+v}}catch(_){}return o.apply(this,a)};window.monthEnd=w;try{monthEnd=w}catch(_){}}}}
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>

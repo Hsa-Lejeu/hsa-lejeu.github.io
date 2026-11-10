@@ -19,7 +19,7 @@ const {chromium}=require('playwright');const fs=require('fs');const path=require
 const URL_=process.argv[2]||'http://localhost:8765/index.html';const OUT=process.argv[3]||'ecrans';const FILT=process.argv[4]||'';
 fs.mkdirSync(OUT,{recursive:true});
 const VP=[['portrait-375',375,812],['portrait-412',412,860],['paysage-812',812,375],['paysage-915',915,412]];
-const CLEAN="try{window.mrtShow=function(){};B.mort=B.mort||{n:'-'}}catch(_){}try{gdEnd()}catch(_){}try{AG.q.length=0}catch(_){}try{POPQ.length=0}catch(_){}try{chapClose()}catch(_){}document.querySelectorAll('#fmo,#petov,#vig,#peta,#mrt,#envo,#ulp,#nalg,#tvov,#ctip.on,#chap,#chov').forEach(e=>e.remove());$('m').hidden=true;paused=false;";
+const CLEAN="try{window.mrtShow=function(){};B.mort=B.mort||{n:'-'}}catch(_){}try{gdEnd()}catch(_){}try{AG.q.length=0}catch(_){}try{POPQ.length=0}catch(_){}try{B.chgS=Object.assign(B.chgS||{},{1:1,2:1,3:1})}catch(_){}try{chapClose()}catch(_){}document.querySelectorAll('#fmo,#petov,#vig,#peta,#mrt,#envo,#ulp,#nalg,#tvov,#ctip.on,#chap,#chov').forEach(e=>e.remove());$('m').hidden=true;paused=false;";
 const TAB0="try{tab(-1)}catch(_){};";
 // [nom, paramètre d'adresse, code à lancer, attente ms]
 const ST=[
