@@ -39,6 +39,7 @@ const ST=[
  ['carte','?an=2',"cardShow(CARDS[0][0])",1200],
  ['finances','?an=2',"finModal()",1200],
  ['petanque','?an=2',"petaShow(true)",2500],
+ ['partage','?an=3',"shareOpen()",3000],
 ];
 const PROBE=()=>{const W=innerWidth,H=innerHeight,out=[];
  const vis=e=>{const r=e.getBoundingClientRect();if(r.width<2||r.height<2)return null;let n=e;while(n&&n!==document.body){const c=getComputedStyle(n);if(c.display=='none'||c.visibility=='hidden'||+c.opacity<.05)return null;n=n.parentElement}return r};
