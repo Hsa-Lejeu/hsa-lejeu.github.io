@@ -602,7 +602,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v669')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v670')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5690,7 +5690,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v669')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v670')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -6808,7 +6808,7 @@ window.SC5=function(){const cl=v=>Math.max(0,Math.min(100,Math.round(v)));let so
   let ref=rq.nextSibling;[['acf','🤝','Accompagnement social'],['saf','😊','Satisfaction des personnes accueillies'],['eqf','👥','Équipe']].forEach(a=>{const r=mk(...a);w.insertBefore(r,ref);ref=r.nextSibling});
   w.title='Les 5 scores du bilan : santé publique · tranquillité · accompagnement social · satisfaction · équipe';return true};
  const t=setInterval(()=>{try{if(go())clearInterval(t)}catch(_){}},300);
- setInterval(()=>{try{if(!$('acf'))return;const s=SC5();$('acf').style.width=s.soc+'%';$('saf').style.width=s.sat+'%';$('eqf').style.width=s.eq+'%'}catch(_){}},700)})();
+ setInterval(()=>{try{if(!$('acf')||document.hidden)return;const s=SC5(),w_=(id,v)=>{const e=$(id),t=v+'%';if(e&&e.style.width!==t)e.style.width=t};w_('acf',s.soc);w_('saf',s.sat);w_('eqf',s.eq)}catch(_){}},1500)})();
 // fenêtre des 5 scores : une ligne claire par score (barre + valeur + une phrase), détail santé repliable
 {const st=document.createElement('style');st.textContent=`
 #mb .ind5{display:flex;flex-direction:column;gap:7px;margin:6px 0 4px}
@@ -9115,9 +9115,9 @@ try{VAL.title='candidat à la mairie'}catch(_){}
 // ===== v386 : une salle déjà construite (avec l'aide de Camille) n'est pas annoncée comme « nouvelle » plus tard
 setInterval(()=>{try{if(!started||!B.unl||B.unl.all)return;[2,3,4,5].forEach(k=>{if(built[k]&&!B.unl['r'+k]){B.unl['r'+k]=1;B.unlT=B.unlT||{};B.unlT['r'+k]=AMI()}})}catch(_){}},500);
 // ===== v386 : à la reprise d'une sauvegarde, la halte n'est plus vide (les personnes présentes reviennent peu à peu)
-setInterval(()=>{try{if(started&&!ended&&!INTRO){const L=V.filter(v=>!v.gone&&!v.leaving&&v.name);localStorage.setItem('hsa-nv',String(L.length));
+let __vsA='',__vsB='';setInterval(()=>{try{if(started&&!ended&&!INTRO&&!document.hidden){const L=V.filter(v=>!v.gone&&!v.leaving&&v.name);const nv=String(L.length);if(nv!==__vsA){__vsA=nv;localStorage.setItem('hsa-nv',nv)}
  const K=['name','need','path','pi','dg','lang','dog','cared','skin','col','itp','nolang','wcb','siao','pz','done'];
- localStorage.setItem('hsa-vs',JSON.stringify({run:B.runId,L:L.map(v=>{const o={};K.forEach(k=>{if(v[k]!==undefined&&typeof v[k]!='function')o[k]=v[k]});o.r=(v.s=='wait'||v.s=='in'||v.inroom||v.door)?v.r:-1;return o})}))}}catch(_){}},4000);
+ const j=JSON.stringify({run:B.runId,L:L.slice(0,16).map(v=>{const o={};K.forEach(k=>{if(v[k]!==undefined&&typeof v[k]!='function')o[k]=v[k]});o.r=(v.s=='wait'||v.s=='in'||v.inroom||v.door)?v.r:-1;return o})});if(j!==__vsB){__vsB=j;localStorage.setItem('hsa-vs',j)}}}catch(_){}},15000);
 window.vsRestore=function(){try{const d=JSON.parse(localStorage.getItem('hsa-vs')||'null');if(!d||!d.L||d.run!==B.runId)return false;let n=0;
  for(const o of d.L.slice(0,16)){if(!o.name||V.some(v=>v.name===o.name))continue;window.FORCEN=o.name;let v;try{v=newV()}finally{window.FORCEN=null}if(!v)continue;Object.assign(v,o);
   const r=o.r;if(r==null||r<0||!built[r]||!st[r]||!WL[r]){delete v.r;v.r=-1;v.pi=-1;v.first=true;V.push(v);n++;continue}
@@ -12854,12 +12854,12 @@ body.aigB .edg,body.aigB #hxpop,body:has(#app.open) .edg,body:has(#rw) .edg,body
   // caisse basse
   const sm=salM();if(sm>0&&eu<2*sm){const w=document.querySelector('#hud .euw');const ef=$('euf');if(w){const b=mkB('hxm',w,ef);b.onclick=e=>{e.stopPropagation();pop(b,`<b>💸 Caisse basse : ${Math.round(eu)} €</b>${eu<sm?'Pas de quoi payer les salaires du mois.':'Moins de 2 mois de salaires.'}<br><small>Salaires : ${sm} € / mois</small>`,'💶 Voir les comptes',()=>finModal())}}}else rmB('hxm');
   // quartier à bout
-  let qOn=false;try{qOn=q<12}catch(_){}const qr=$('qf')&&$('qf').closest('.r'),qVis=qr&&getComputedStyle(qr).display!='none'&&qr.getBoundingClientRect().width>0;
+  let qOn=false;try{qOn=q<12}catch(_){}const qr=qOn&&$('qf')&&$('qf').closest('.r'),qVis=!!(qr&&getComputedStyle(qr).display!='none'&&qr.getBoundingClientRect().width>0);
   if(qOn&&qVis){qr.classList.add('hxr');const b=mkB('hxq',qr,qr.firstChild);b.onclick=e=>{e.stopPropagation();pop(b,`<b>🏘️ Quartier à bout : ${Math.max(0,Math.round(q))} %</b>${YR==2?'À 0 %, le conseil de quartier vote la fermeture.':'À 0 %, la confiance s’effondre et la halte ferme.'}`,'🌳 Actions du quartier',()=>tab(3))}}else rmB('hxq');
   tabB(3,qOn&&!qVis);
   // naloxone presque épuisée, départ d'un·e collègue
   let nl=false;try{nl=!!(built[1]&&S.n<2)}catch(_){}tabB(1,nl);tabB(0,!!DEP||STF.length==0);
- }catch(_){}},500);
+ }catch(_){}},1000);
  // ---- appels et salles fermées : icône au bord de l'écran quand l'événement est hors de la vue
  const E={};
  const safe=()=>{const W=innerWidth,H=innerHeight,land=W>H;let l=34,t=34,r=W-34,b=H-34;const hp=$('hplank'),hud=$('hud'),tb=$('tabs');
@@ -16661,6 +16661,20 @@ html body #mb .phgal canvas{display:block;width:100%;height:auto;image-rendering
 // et des icônes pixel (sinon l'écriture garde son effet : remplacer des sous-éléments).
 (function(){const d=Object.getOwnPropertyDescriptor(Node.prototype,'textContent');if(!d||!d.set)return;
  Object.defineProperty(Node.prototype,'textContent',{configurable:true,enumerable:d.enumerable,get:d.get,set:function(v){try{if(this.nodeType===1&&v!=null){const s=String(v);let only=true,txt='';for(const n of this.childNodes){if(n.nodeType===3)txt+=n.nodeValue;else if(n.nodeName==='IMG'&&n.classList.contains('pxg'))txt+=n.alt||'';else{only=false;break}}if(only&&txt===s&&this.firstChild)return}}catch(_){}return d.set.call(this,v)}})})();
+</script>
+<script>
+// v670 : on ne dessine plus les personnages (et les chiens) loin de l'écran. Zoomé, on ne voit qu'une partie du plan,
+// mais tout le plan était redessiné à chaque image. La zone visible se déduit du zoom (Z.x, Z.y, Z.s), sans lire la mise en page.
+(function(){let VR=null;
+ // zone visible en pixels du canvas (avec une marge), à partir du zoom
+ const zone=()=>{VR=null;try{if(window.__noCull||window.MEET||!started||ended||!(Z.s>1.05))return;const kx=cv.width/Z.cw,ky=cv.height/Z.ch,m=60;
+   VR=[-Z.x/Z.s*kx-m,-Z.y/Z.s*ky-m,(innerWidth-Z.x)/Z.s*kx+m,(innerHeight-Z.y)/Z.s*ky+m]}catch(_){VR=null}};
+ window.__visR=()=>VR;
+ // position à l'écran via la transformation courante du canvas (les salles et la rue n'ont pas le même repère)
+ const out=(px,py)=>{if(VR===null)return false;const t=x.getTransform(),cx=t.a*px+t.c*py+t.e,cy=t.b*px+t.d*py+t.f;return cx<VR[0]||cx>VR[2]||cy<VR[1]||cy>VR[3]};
+ const wrap=(nm,get)=>{const o=window[nm];if(typeof o!=='function')return;const w=function(){try{if(VR!==null){const p=get(arguments);if(p&&out(p[0],p[1]))return}}catch(_){}return o.apply(this,arguments)};window[nm]=w;try{eval(nm+'=w')}catch(_){}};
+ wrap('pc',a=>[a[1],a[2]]);wrap('pcA',a=>[a[1],a[2]]);wrap('pcPose',a=>[a[1],a[2]]);wrap('sitDraw',a=>[a[1],a[2]]);wrap('drawDog',a=>a[0]?[a[0].x,a[0].y]:null);
+ const _d=window.draw;if(typeof _d==='function'){const w=function(){zone();try{return _d.apply(this,arguments)}finally{VR=null}};window.draw=w;try{draw=w}catch(_){}}})();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
