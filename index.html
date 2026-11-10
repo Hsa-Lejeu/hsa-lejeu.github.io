@@ -67,7 +67,7 @@ window.txa=function txa(e){if(!e)return '';if(e.nodeType===3)return e.nodeValue;
   const el=(performance.now()-t0)/1000,ips=fr/el,img=fr?sum/fr:0,js=(A.jeu+A.interface+A.autres+tim)/Math.max(1,fr);
   const pf=v=>(v/Math.max(1,fr)).toFixed(1);const nav=Math.max(0,img-js);
   const tp=Object.entries(TOP).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([k,v])=>k.slice(0,18)+' '+pf(v)).join(' · ');
-  box.textContent=`${(dr/el).toFixed(1)} images dessinées/s (boucle ${ips.toFixed(1)}/s) · image ${img.toFixed(0)} ms (pire ${worst.toFixed(0)}, >45 ms : ${big})\njeu ${pf(A.jeu)} · interface ${pf(A.interface)} · minuteries ${pf(tim)} · autres ${pf(A.autres)}\nnavigateur (peinture, autres tâches) ≈ ${nav.toFixed(0)} ms${tp?'\nautres : '+tp:''}${tt?'\nminuteries :\n  '+tt:''}${window.__perfU?'\ncorrections :\n  '+window.__perfU:''}\n${(()=>{try{return `dessin ${DEMA.toFixed(0)} ms · 1 image sur 2 : ${SLOW?'OUI':'non'} · plafond 30 i/s : ${window.FPSCAPB?'OUI':'non'}${window.ECO?' · éco':''}`}catch(_){return''}})()}${(()=>{try{const D=Math.max(1,dr);let tot=0,nb=0;const L=Object.entries(CA).map(([k,v])=>{tot+=v[1];nb+=v[0];return [k,v[0]/D,v[1]/D]}).sort((a,b)=>b[2]-a[2]).slice(0,8);for(const k in CA)delete CA[k];const d=DT/D;DT=0;return `\ndessin mesuré ${d.toFixed(0)} ms = canevas ${(tot/D).toFixed(0)} ms (${Math.round(nb/D)} appels) + calcul ${(d-tot/D).toFixed(0)} ms\n  `+L.map(x=>x[0]+' ×'+Math.round(x[1])+' '+x[2].toFixed(1)).join('\n  ')+(window.__BMP?`\nfigées ${__BMP.n} (${Math.round(100*__BMP.hit/Math.max(1,__BMP.hit+__BMP.miss))} %)`:'')}catch(_){return''}})()}\n${window.HSAV||'artefact v676'} · écran ${innerWidth}×${innerHeight} ×${(devicePixelRatio||1).toFixed(2)} · zoom ${(window.Z&&Z.s||0).toFixed?Z.s.toFixed(2):'?'}`;
+  box.textContent=`${(dr/el).toFixed(1)} images dessinées/s (boucle ${ips.toFixed(1)}/s) · image ${img.toFixed(0)} ms (pire ${worst.toFixed(0)}, >45 ms : ${big})\njeu ${pf(A.jeu)} · interface ${pf(A.interface)} · minuteries ${pf(tim)} · autres ${pf(A.autres)}\nnavigateur (peinture, autres tâches) ≈ ${nav.toFixed(0)} ms${tp?'\nautres : '+tp:''}${tt?'\nminuteries :\n  '+tt:''}${window.__perfU?'\ncorrections :\n  '+window.__perfU:''}\n${(()=>{try{return `dessin ${DEMA.toFixed(0)} ms · 1 image sur 2 : ${SLOW?'OUI':'non'} · plafond 30 i/s : ${window.FPSCAPB?'OUI':'non'}${window.ECO?' · éco':''}`}catch(_){return''}})()}${(()=>{try{const D=Math.max(1,dr);let tot=0,nb=0;const L=Object.entries(CA).map(([k,v])=>{tot+=v[1];nb+=v[0];return [k,v[0]/D,v[1]/D]}).sort((a,b)=>b[2]-a[2]).slice(0,8);for(const k in CA)delete CA[k];const d=DT/D;DT=0;return `\ndessin mesuré ${d.toFixed(0)} ms = canevas ${(tot/D).toFixed(0)} ms (${Math.round(nb/D)} appels) + calcul ${(d-tot/D).toFixed(0)} ms\n  `+L.map(x=>x[0]+' ×'+Math.round(x[1])+' '+x[2].toFixed(1)).join('\n  ')+(window.__RC?`\nsalles : ${__RC.blit} recollées, ${__RC.live} en direct, ${__RC.chg} changements`:'')+(window.__BMP?`\nfigées ${__BMP.n} (${Math.round(100*__BMP.hit/Math.max(1,__BMP.hit+__BMP.miss))} %)`:'')}catch(_){return''}})()}\n${window.HSAV||'artefact v677'} · écran ${innerWidth}×${innerHeight} ×${(devicePixelRatio||1).toFixed(2)} · zoom ${(window.Z&&Z.s||0).toFixed?Z.s.toFixed(2):'?'}`;
   fr=0;sum=0;worst=0;big=0;dr=0;A.jeu=A.interface=A.autres=0;for(const k in TOP)delete TOP[k];t0=performance.now()}catch(_){}setTimeout(tick,1000)},1000)})();
 </script>
 <script>
@@ -613,7 +613,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v676')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v677')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -1475,6 +1475,7 @@ if(B[20]&&window.EVw)EVw('niche',B.g?GX+43:GX+40,B.g?139:128);
 x.font=LBL;
 drawCells();
 R.forEach((r,i)=>{if(!built[i])return;if(window.__roomOut&&__roomOut(r,i))return;const[n,,a,b]=r,f=(ox,oy,w,h,c)=>rect(a+ox,b+oy,w,h,c),W_=RW[i],dw=W_-56,g=(ox,oy,w,h,c)=>rect(a+ox+dw,b+oy,w,h,c);
+const RC_=window.__rc?__rc(i,a,b,W_):0;if(RC_!==1){
 rect(a-1,b-1,W_+2,48,'#4a3f35');rect(a,b,W_,46,'#8a7a66');floorT(a,b,i,W_);wallT(a,b,i,W_);plaque(n,a+3,b+1.5);
 const F=(nm,ox,oy)=>fs(nm,a+ox+(ox>=28?dw:0),b+oy);
 window._acLog=[];roomFurn(i,a,b,W_,dw);{const dx_=DX[i]-a;if(b<10){f(dx_-6,45,12,3,'#efe2c0');f(dx_-6,45,1,3,'#3a2e24');f(dx_+5,45,1,3,'#3a2e24')}else{if(window.doorDraw&&doorDraw(a+dx_,b+20,i));else f(dx_-6,6,12,14,'#3a2e24');plaque(n,a+3,b+1.5)}}DAS.forEach((d,j)=>{if((j?1:4)==i)dasri(a+d.dx,b+d.dy,d.l)})
@@ -1482,6 +1483,7 @@ window._acLog=[];roomFurn(i,a,b,W_,dw);{const dx_=DX[i]-a;if(b<10){f(dx_-6,45,12
 if(isGF()&&!HEAT[i]){x.globalAlpha=.16;f(0,8,W_,38,'#6fa8dc');x.globalAlpha=1;if(!st[i]){x.font='7px sans-serif';x.fillText('🥶',(i==1&&B[window.DFI])?a+W_-20:a+W_-9,b+7);x.font=LBL}}
 if(isCN()&&!COOL[i]){x.globalAlpha=.12;f(0,8,W_,38,'#ff9a3c');x.globalAlpha=1;if(!st[i]){x.font='11px sans-serif';x.fillText('🥵',(i==1&&B[window.DFI])?a+W_-23:a+W_-12,b+11);x.font=LBL}}
 if(VOL[i]){if(window.volDraw)volDraw(i,a,b,W_,hist[VOL[i]].ci);else{pc(hist[VOL[i]].ci,a+W_-14,b+32,0,0,0);x.font='6px sans-serif';x.fillText('🤝',a+W_-17,b+14);x.font=LBL}}if(i==6)try{kitDraw(a,b,W_)}catch(_){}IT.forEach((t,k)=>{if(B[k]&&t[0]==i&&!NR[k]){const m=IM[k],X_=a+t[6]+(t[6]>=28?dw:0),YB_=b+t[7]+(m?FU[m][3]/2:0)-(m?FU[m][3]/2:0),age=POPF[k]?(performance.now()-POPF[k])/1000:9;if(m&&IMF.complete){const w_=FU[m][2]/2,h_=FU[m][3]/2,yb=b+t[7];if(age<.5){const e=age/.5,sc=e<.6?e/.6*1.25:1.25-(e-.6)/.4*.25;x.save();x.translate(X_+w_/2,yb);x.scale(Math.max(.05,sc),Math.max(.05,sc));fs(m,-w_/2,-h_);x.restore()}else fs(m,X_,yb-h_);if(age<1.8)popFx(X_,yb,w_,h_,age);else delete POPF[k]}else{{const eb=window.emoBmp&&emoBmp(t[1]);if(eb)x.drawImage(eb,a+t[6],b+t[7]-7,8,8);else{x.font='8px sans-serif';x.fillText(t[1],a+t[6],b+t[7])}}if(age<1.8)popFx(a+t[6],b+t[7]+1,8,8,age);else delete POPF[k]}}});window._acLog=null;if(!st[i]){x.fillStyle='#0004';x.fillRect(a,b+8,W_,38)}
+}if(RC_===2)__rcEnd(i);if(RC_&&(B.rwN||0)<2){x.font=LBL;window.__plOnly=1;try{plaque(n,a+3,b+1.5)}finally{window.__plOnly=0}}
 STF.filter(z=>z.r==i&&z.off<=0).forEach((z,k)=>{if(z.x==null){z.x=a+12+k*14;z.y=b+28}if(i==6&&!z.mv&&z.y>=b+26&&z.y<=b+30)z.y=b+24;z.px=z.x;z.py=z.y;if((i==3||i==5)&&z.seat&&z.ci<NIMA&&IMAok()){if(z.seat=='dn'){pc(z.ci,z.x,z.y,0,0,1)}else if(z.seat=='sitLc')sitDraw(z.ci,z.x,z.y,true,0,k*2);else pcPose(z.ci,z.x,z.y,z.seat,260,k*2)}else pc(z.ci,z.x,z.y,0,z.mv,z.dir||0);if(i==6&&z.y<b+27){Q('stove',a+10,b+27);Q('kcs',a+18,b+27);try{kitFood(a,b)}catch(_){}}});if(i==0){const td=b>=10,dxl=DX[0]-a,ok_=(cx,w)=>!td||cx+w<=dxl-6||cx>=dxl+6;let cx=4;const cw=FU.counter[2]/2,pw=FU.counter_pc[2]/2;if(ok_(cx,cw))Q('counter',a+cx,b+38);cx+=cw;if(!ok_(cx,pw)){cx=dxl+6}Q('counter_pc',a+cx,b+38);cx+=pw;while(cx<(window.QCW?QCW(W_):W_)-10){if(ok_(cx,cw))Q('counter',a+cx,b+38);cx+=cw}try{QSEATS().forEach(s=>seatC(s[0],s[1],true))}catch(_){}try{IT.forEach((t,k)=>{if(B[k]&&t[0]==0&&!NR[k]&&t[7]>=40&&IM[k]&&FU[IM[k]]&&!(window.POPF&&POPF[k])){const m=IM[k];fs(m,a+t[6]+(t[6]>=28?W_-56:0),b+t[7]-FU[m][3]/2)}})}catch(_){}try{STF.filter(z=>z.r==0&&z.off<=0&&z.px!=null).forEach(z=>{if(IT.some((t,k)=>{if(!(B[k]&&t[0]==0&&!NR[k]&&t[7]>=40&&IM[k]&&FU[IM[k]]))return false;const ix=a+t[6]+(t[6]>=28?W_-56:0),iw=FU[IM[k]][2]/2;return z.py>=b+t[7]-2&&z.px>ix-8&&z.px<ix+iw+8}))pc(z.ci,z.px,z.py,0,z.mv,z.dir||0)})}catch(_){}}});
 drawBureau();Object.keys(BEN).forEach(k=>{const r=BEN[k];if(B[k]&&r>0&&built[r]){const n_=r%2?'x_wait':'x_wait2',q_=window.XFU&&XFU[n_];if(q_&&XAI.complete)x.drawImage(XAI,q_[0],q_[1],q_[2],q_[3],Math.round((benX(r)-q_[2]/4)*2)/2,Math.round((rowC(r)+2-q_[3]/2)*2)/2,q_[2]/2,q_[3]/2);else os('bench',benX(r),rowC(r)+2)}});
 STF.filter(z=>z.role=='med'||z.role=='int'||z.role=='pair'||z.role=='doc').filter(z=>z.off<=0).forEach((z,k)=>{if(z.x==null){z.x=184+k*12;z.y=64}z.px=z.x;z.py=z.y;pc(z.ci,z.x,z.y,0,z.mv,z.dir||0);x.font='6px sans-serif';if(z.role!='int')x.fillText(z.role=='med'?'🤝':z.role=='pair'?'💚':'🩺',z.px-3,z.py-15);if((z.role=='pair'||z.role=='doc')&&z.vt>0&&z.vr>=0){x.globalAlpha=.15+.08*Math.sin(Date.now()/250);rect(R[z.vr][2],R[z.vr][3]+8,RW[z.vr],38,z.role=='doc'?'#8ec8ff':'#7fdc8a');x.globalAlpha=1}x.font=LBL});
@@ -5701,7 +5703,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v676')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v677')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -6447,7 +6449,7 @@ try{ICON['Embauches en cours de mois (prorata)']='📆'}catch(_){}
 // ===== v248 : roue des salles plus facile à trouver ; annuler une embauche / se séparer d'un·e employé·e
 // ---- 1. repère qui pulse à côté du nom des salles tant qu'on n'a pas ouvert la roue deux fois
 new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.id=='rw'){B.rwN=(B.rwN||0)+1}}).observe(document.body,{childList:true});
-W('plaque',(o,a)=>{const r=o(...a);try{const[t,X,Y]=a;if((B.rwN||0)<2&&started&&!ended&&!MEET&&!ENDING){const i=R.findIndex(q=>q[0]==t);if(i>=0&&built[i]){x.save();const W_=(window.plW?plW(t):Math.ceil(x.measureText(t).width))+6,cx=X+W_+3.2,cy=Y+3.5,T=performance.now()/1000,p=(T*1.1+i*.13)%1;
+W('plaque',(o,a)=>{const r=window.__plOnly?undefined:o(...a);try{const[t,X,Y]=a;if((B.rwN||0)<2&&started&&!ended&&!MEET&&!ENDING&&!window.__inA){const i=R.findIndex(q=>q[0]==t);if(i>=0&&built[i]){x.save();const W_=(window.plW?plW(t):Math.ceil(x.measureText(t).width))+6,cx=X+W_+3.2,cy=Y+3.5,T=performance.now()/1000,p=(T*1.1+i*.13)%1;
   x.globalAlpha=(1-p)*.9;x.strokeStyle='#ffd54a';x.lineWidth=.8;x.beginPath();x.arc(cx,cy,2+p*4,0,7);x.stroke();x.globalAlpha=1;
   x.fillStyle='#2a2433';x.beginPath();x.arc(cx,cy,2.5,0,7);x.fill();x.fillStyle='#ffd54a';x.beginPath();x.arc(cx,cy,1.9,0,7);x.fill();
   x.fillStyle='#2a2433';x.fillRect(cx-1.3,cy-.35,.7,.7);x.fillRect(cx-.35,cy-.35,.7,.7);x.fillRect(cx+.6,cy-.35,.7,.7);x.restore()}}}catch(_){}return r});
@@ -10707,7 +10709,7 @@ W('camOn',(o,a)=>{if(window._flyOn)return;return o(...a)});
  setInterval(()=>ensureAcc(1),1000);
  // plus de bureau dessiné ; la barre de la subvention passe sur le mur de l'accueil (tableau à la place de l'affiche)
  W('drawBureau',(o,a)=>{try{if(built[0]&&R[0][2]===AX){const a_=AX,b_=AY;rect(a_-1,b_-1.5,58,1.5,'#4a3f35');rect(a_+56,b_-1.5,1.5,49.5,'#4a3f35')}}catch(_){}});
- W('roomFurn',(o,a)=>{const r=o(...a);try{if(a[0]==0&&typeof hasGrant=='function'&&hasGrant()){const A=a[1],Bb=a[2];Q('o_line',A+2,Bb+20);rect(A+4,Bb+20.6,11,2.2,'#2a2433');rect(A+4.5,Bb+21.1,10*Math.max(0,Math.min(1,GP)),1.2,'#5b6ee1')}}catch(_){}return r});
+ W('roomFurn',(o,a)=>{const r=o(...a);try{if(a[0]==0&&typeof hasGrant=='function'&&hasGrant()){const A=a[1],Bb=a[2];Q('o_line',A+2,Bb+20);rect(A+4,Bb+20.6,11,2.2,'#2a2433');rect(A+4.5,Bb+21.1,Math.round(40*Math.max(0,Math.min(1,GP)))/4,1.2,'#5b6ee1')}}catch(_){}return r});
  // l'accueil n'est ni à construire, ni à déplacer, ni à agrandir
  {const st=document.createElement('style');st.textContent='#rb0,#rbx .rbc[onclick="rbPick(0)"]{display:none!important}';document.head.appendChild(st)}
  W('roomMenu',(o,a)=>{if(a[0]===0){try{say('🛎️ L’accueil reste à côté de l’entrée : c’est là que la file arrive. Il ne se déplace pas et garde sa taille.')}catch(_){}return}return o(...a)});
@@ -16789,6 +16791,40 @@ window.bubAt=function(v,txt){try{if(!v||v.x==null)return flt(v,txt,1);const e=do
    let k=0;for(const z of STF){if(z.r==i&&z.off<=0){if(z.x==null){z.x=a+12+k*14;z.y=b+28}z.px=z.x;z.py=z.y;k++}}return true}catch(_){return false}};
  const _w=window.wheels;if(typeof _w=='function'){const w=function(n,X,YB){try{if(!window.__noCull&&outR(X-10,YB-60,X+70,YB+10))return}catch(_){}return _w.apply(this,arguments)};window.wheels=w;try{wheels=w}catch(_){}}
 })();
+</script>
+
+<script>
+// ===== v677 : le décor de chaque salle (murs, sol, meubles, porte) est dessiné une fois, gardé en image, puis recollé.
+// Deux fois par seconde, la salle est redessinée pour de vrai et comparée (empreinte des ordres de dessin) : si quelque chose a bougé
+// (porte, objet qui apparaît, alerte), elle reste dessinée en direct jusqu'à ce qu'elle soit de nouveau stable. #nocache coupe tout.
+(function(){try{
+ if(typeof createImageBitmap!='function'||/[#&]nocache/.test(location.hash))return;
+ const P=CanvasRenderingContext2D.prototype;let REC=null,NID=0;const SH=new Map();
+ const hs=v=>{let h=SH.get(v);if(h===undefined){h=7;const t=String(v);for(let i=0;i<t.length;i++)h=(Math.imul(h,31)+t.charCodeAt(i))|0;if(SH.size>4000)SH.clear();SH.set(v,h)}return h};
+ const mix=v=>{REC=Math.imul(REC^v,16777619)|0};
+ const arg=v=>{const t=typeof v;if(t=='number')mix((v*64)|0);else if(t=='string')mix(hs(v));else if(v&&t=='object'){mix(v.__id||(v.__id=++NID));if(v.__v)mix(v.__v)}};
+ ['drawImage','fillRect','strokeRect','clearRect','fillText','strokeText','fill','stroke','translate','scale','rotate','setTransform','arc','rect','moveTo','lineTo','ellipse'].forEach((k,ki)=>{const o=P[k];if(typeof o!='function')return;
+  P[k]=function(){if(REC!==null){mix(ki+1);for(let i=0;i<arguments.length;i++)arg(arguments[i])}return o.apply(this,arguments)}});
+ ['fillStyle','globalAlpha','strokeStyle','font','globalCompositeOperation'].forEach((k,ki)=>{const d=Object.getOwnPropertyDescriptor(P,k);if(!d||!d.set)return;
+  Object.defineProperty(P,k,{configurable:true,enumerable:d.enumerable,get(){return d.get.call(this)},set(v){if(REC!==null){mix(100+ki);arg(typeof v=='object'?v:String(v))}d.set.call(this,v)}})});
+ const RS=[],ST=window.__RC={blit:0,live:0,cap:0,chg:0};
+ window.__rc=function(i,a,b,W_){try{
+   if(window.__noCache||window.__pv||window.MEET)return 0;const cv=x.canvas;
+   const t=x.getTransform();if(t.b||t.c)return 0;
+   const X0=Math.round(t.a*(a-1)+t.e),Y0=Math.round(t.d*(b-1)+t.f),w=Math.round((W_+2)*t.a),h=Math.round(52*t.d);
+   if(X0<0||Y0<0||X0+w>cv.width||Y0+h>cv.height||w<8||h<8)return 0;
+   const now=performance.now(),s=RS[i]||(RS[i]={bmp:null,key:'',next:0,live:now+600+i*70,hash:null,bh:null,bt:0,pend:0,cur:null}),key=X0+','+Y0+','+w+','+h+'|'+cv.width+'|'+(cv.id||'?');
+   if(s.bmp&&s.bh!==null&&s.key===key&&now<s.next&&now>=s.live){x.save();x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation='source-over';x.drawImage(s.bmp,X0,Y0);x.restore();ST.blit++;return 1}
+   if(s.key!==key){s.hash=null;s.bh=null;if(s.bmp){try{s.bmp.close()}catch(_){}s.bmp=null}s.key=key}
+   s.cur=[X0,Y0,w,h,key];REC=0x1505;window.__inA=1;ST.live++;return 2}catch(_){REC=null;window.__inA=0;return 0}};
+ window.__rcEnd=function(i){const h=REC;REC=null;window.__inA=0;try{const s=RS[i];if(!s||!s.cur)return;const now=performance.now();
+   if(s.hash!==null&&s.hash!==h){s.live=now+1200;s.bh=null;ST.chg++}
+   s.hash=h;
+   if(now>=s.live){const c=s.cur;
+    if(s.bmp&&s.bh===h&&now-s.bt<6000)s.next=now+450+(i*53)%150;   // rien n'a changé : l'image gardée reste bonne
+    else if(!s.pend){s.pend=1;createImageBitmap(x.canvas,c[0],c[1],c[2],c[3]).then(bm=>{s.pend=0;if(s.key!==c[4]||s.hash!==h){try{bm.close()}catch(_){}return}if(s.bmp)try{s.bmp.close()}catch(_){}s.bmp=bm;s.bh=h;s.bt=performance.now();s.next=s.bt+450+(i*53)%150;ST.cap++},()=>{s.pend=0;s.live=performance.now()+3000})}}
+  }catch(_){}};
+}catch(_){}})();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
