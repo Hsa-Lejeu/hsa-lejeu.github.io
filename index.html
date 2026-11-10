@@ -608,7 +608,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v673')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v674')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5696,7 +5696,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v673')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v674')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -8154,7 +8154,7 @@ window.debFinish=n=>{if(!DS||DS.ph=='end')return;DS.won=n;clearTimeout(DS.speakE
  W('draw',(o,a)=>{d++;return o(...a)});
  const tick=now=>{if(!on)return;n++;const dt=now-t0;if(dt>=1000){const deb=!!document.getElementById('debov'),pz=!deb&&document.body.classList.contains('gpz'),f=Math.round((deb?n:d)*1000/dt);if(!pz){hist.push(f);if(hist.length>60)hist.shift()}const lo=hist.length?Math.min(...hist):f,av=hist.length?Math.round(hist.reduce((a,b)=>a+b,0)/hist.length):f;
    let ph='';try{const P_=dayPh();ph=P_.night>0?'nuit':P_.dawn>0?'aube':P_.gold>0?'soir':'jour'}catch(_){}
-   const c=f>=40?'#7fe08a':f>=25?'#ffd23f':'#ff6f66';el.innerHTML=pz?`<b style="color:#aaa">pause</b>\nmoy. ${av} · pire ${lo}`:`<b style="color:${c}">${f}</b> img/s\nmoy. ${av} · pire ${lo}\n${deb?'débat':'dessin '+(Math.round(DEMA*10)/10)+' ms'+(SLOW?' · ½':'')}${ph&&!deb?' · '+ph:''}`;n=0;d=0;t0=now}requestAnimationFrame(tick)};
+   const c=f>=40?'#7fe08a':f>=25?'#ffd23f':'#ff6f66';el.innerHTML=pz?`<b style="color:#aaa">pause</b>\nmoy. ${av} · pire ${lo}`:`<b style="color:${c}">${f}</b> img/s\nmoy. ${av} · pire ${lo}\n${deb?'débat':'dessin '+(Math.round(DEMA*10)/10)+' ms'+(window.__BMP?' · figées '+__BMP.n+' ('+Math.round(100*__BMP.hit/Math.max(1,__BMP.hit+__BMP.miss))+' %)':'')+(SLOW?' · ½':'')}${ph&&!deb?' · '+ph:''}`;n=0;d=0;t0=now}requestAnimationFrame(tick)};
  window.fpsToggle=()=>{on=!on;try{localStorage.setItem('hsa-fps',on?'1':'')}catch(_){}if(on){el=el||document.createElement('div');el.id='fpsc';document.body.appendChild(el);el.textContent='…';n=0;d=0;t0=performance.now();hist=[];requestAnimationFrame(tick)}else if(el)el.remove()};
  try{if(localStorage.getItem('hsa-fps'))setTimeout(()=>{if(!on)fpsToggle()},1500)}catch(_){}})();
 
@@ -16752,6 +16752,27 @@ window.epStory=story;
 <script>
 // ===== v673 : bulle sans nom (même style que les paroles), pour « Parcours complet »
 window.bubAt=function(v,txt){try{if(!v||v.x==null)return flt(v,txt,1);const e=document.createElement('div');e.className='bub';e.textContent=txt;$('stage').appendChild(e);BB.push({e,v,t:3+txt.length/22});if(BB.length>2)BB.shift().e.remove()}catch(_){try{flt(v,txt,1)}catch(__){}}};
+</script>
+
+<script>
+// ===== v674 : les petites images préparées (ombres, sols, étiquettes…) sont dessinées depuis une copie figée (ImageBitmap)
+// Dessiner un <canvas> dans un autre oblige le téléphone à recopier sa texture à chaque appel ; une ImageBitmap est envoyée une seule fois.
+(function(){try{
+ if(typeof createImageBitmap!='function'||/[#&]nobmp/.test(location.hash))return;
+ const P=CanvasRenderingContext2D.prototype,C=HTMLCanvasElement.prototype;
+ ['fillRect','clearRect','strokeRect','fill','stroke','fillText','strokeText','putImageData','drawImage'].forEach(k=>{const o=P[k];if(typeof o!='function')return;P[k]=function(){const c=this.canvas;c.__v=(c.__v|0)+1;return o.apply(this,arguments)}});
+ ['width','height'].forEach(k=>{const d=Object.getOwnPropertyDescriptor(C,k);if(!d||!d.set)return;Object.defineProperty(C,k,{configurable:true,enumerable:d.enumerable,get(){return d.get.call(this)},set(v){this.__v=(this.__v|0)+1;d.set.call(this,v)}})});
+ const di=P.drawImage,ST=window.__BMP={n:0,hit:0,miss:0};
+ P.drawImage=function(im){
+  if(im instanceof HTMLCanvasElement&&im!==this.canvas&&!window.__pv&&!im.isConnected&&im.width>0&&im.height>0&&im.width<=2048&&im.height<=2048){
+   const v=im.__v|0,now=performance.now();let e=im.__bm;if(!e)e=im.__bm={v:-1,t:now,b:null,bv:-1,p:0};
+   if(e.v!==v){e.v=v;e.t=now}
+   if(e.b&&e.bv===v){ST.hit++;arguments[0]=e.b;return di.apply(this,arguments)}
+   ST.miss++;
+   if(!e.p&&now-e.t>250){e.p=1;const v0=v;createImageBitmap(im).then(b=>{e.p=0;if((im.__v|0)===v0){if(e.b&&e.b.close)try{e.b.close()}catch(_){}e.b=b;e.bv=v0;ST.n++}else if(b.close)b.close()},()=>{e.p=0;e.t=performance.now()+5000})}
+  }
+  return di.apply(this,arguments)};
+}catch(_){}})();
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
