@@ -566,7 +566,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v659')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v660')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -1457,7 +1457,7 @@ let DEMA=0,SLOW=0,SLOWF=0;function loop(t){const dt=Math.min(.1,(t-last)/1000||0
 let ord,cur;
 const QCI=[7,9,11,2,5,12,8,4,13,6,24,31,38,22,43,27,35,29,41,33,26,39,44,30,36,23,40,28,34,45];
 function showQ(){if(qi>=QS.length)return;paused=true;cur=QS[qi];ord=[0,1,2].sort(()=>Math.random()-.5);
-$('mb').innerHTML=`<b>Question ${qi+1}/${QS.length}</b><div class="vn">${ptHTML([/pipes à crack/.test(String(cur[0]&&cur[0][2]))?31:QCI[qi%QCI.length]],'#e8f1dc')}<p class="quote vq"><b>${cur[0][1]}</b><br><i>${cur[0][2]}</i></p></div><p>Que lui répondez-vous ?</p>`+ord.map(i=>`<button onclick="ans(${i},this)">${cur[1][i]}</button>`).join('');$('m').hidden=false;drawPts()}
+$('mb').innerHTML=`<b>Question ${qi+1}/${QS.length}</b><div class="vn">${ptHTML([/pipes à crack/.test(String(cur[0]&&cur[0][2]))?31:QCI[qi%QCI.length]],'#e8f1dc')}<p class="quote vq"><b>${cur[0][1]}</b><br><i>${cur[0][2]}</i></p></div><p>Que lui répondez-vous ?</p>`+ord.map(i=>`<button data-qa="1" onclick="ans(${i},this)">${cur[1][i]}</button>`).join('');$('m').hidden=false;drawPts()}
 function ans(i,b){const ok=i==cur[2];[...$('mb').querySelectorAll('button')].forEach(e=>e.disabled=true);b.className=ok?'good':'bad';
 if(ok){pts++;eu+=90;recf('Bonus du quiz',90);q+=3}else{q+=1}qi++;
 $('mb').insertAdjacentHTML('beforeend',`<p>${ok?'Bonne réponse : +90 € de financement bonus !':'❌ Pas tout à fait : pas de bonus ce mois-ci.'}<br>${cur[3]}</p><button class="go" onclick="closeQ()">Continuer</button>`)}
@@ -5654,7 +5654,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v659')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v660')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -11129,6 +11129,7 @@ body:has(#peta) #fmo,body:has(#peta) #ulp,body:has(#peta) #ctoast,body:has(#peta
   <div class="sline" hidden style="display:none!important"><span id="qslt"></span><button class="sec" id="qsnt" title="Tester le son" aria-label="Tester le son">🔊</button></div>
   <div class="coin">▶ INSÈRE UNE PIÈCE · APPUIE SUR START</div><div class="btns"><button class="sec" id="qpsk">Laisser l’équipe jouer sans moi</button><button id="qpgo" class="start">START · Composer l’équipe</button></div></div>`;
   try{window.__titleArt&&__titleArt(ov,(g,ci,col,x,y,sc)=>spr(g,ci,col,x,y,sc),IMAok)}catch(_){}
+  try{petaMus('petac')}catch(_){}
   $('#qpgo').onclick=(ev)=>{if(ev){window.__P2=0;ov.classList.remove('p2m')}if(window.__selNew){try{const sk=$('#qpsk')&&$('#qpsk').onclick;return window.__selNew({ov,$,ALL,pick,POW,anim,headC,icon,okS,blip,whoosh,tone,skip:sk,go:()=>{const fin=()=>{okS();ov.classList.remove('sfm');try{if(PM.el)fadeTo(PM.el,musVol()*.1,500)}catch(_){}vsScreen()};const ter=()=>{if(window.__terPick)window.__terPick(ov,fin);else fin()};const t2=()=>{if(!window.__P2)return ter();const p2=[];window.__P2SEL=2;window.__selNew({ov,$,ALL:ALL.filter(p=>!pick.includes(p)),pick:p2,POW,anim,headC,icon,okS,blip,whoosh,tone,skip:null,go:()=>{window.__P2SEL=1;window.__P2T=p2.slice();ter()}})};window.__P2SEL=1;if(window.__ballPick)window.__ballPick(ov,t2);else t2()}})}catch(e){console.error(e)}}selScreen()};if(force){$('.card0').classList.add('fun');ov.classList.add('pfun');try{const bt=$('.card0 .btns');if(bt&&!$('#qp2')){const b2=document.createElement('button');b2.id='qp2';b2.className='p2b';b2.textContent='2 joueurs';bt.appendChild(b2);b2.onclick=()=>{window.__P2=1;window.__P2T=null;ov.classList.add('p2m');$('#qpgo').onclick()}}}catch(_){}}
   const refT=()=>{ov.querySelectorAll('.ters button').forEach(b=>b.classList.toggle('on',!!window.__terF&&b.dataset.t===terK));const d=$('#qterd');if(d)d.textContent=TDS[terK]};ov.querySelectorAll('.ters button').forEach(b=>b.onclick=()=>{terK=b.dataset.t;refT();blip()});refT();window.__terSet=k=>{terK=k;window.__terF=k;refT()};
   $('#qsnt').onclick=()=>{try{if(typeof AU!=='undefined'&&AU.s<=0){AU.s=.7;try{auVol()}catch(_){}try{localStorage.setItem('hsa-vol',JSON.stringify({m:AU.m,s:AU.s}))}catch(_){}}}catch(_){}const a=AC();psLoad();okS();setTimeout(()=>{psfx('magic',.9);try{dsfx('shing',.8)}catch(_){}},150);setTimeout(()=>{const st=petaSndState();const e=$('#qslt');if(e)e.textContent=st[1]+(st[0]==='ok'?' — tu devrais avoir entendu un « ding » et un coup de magie.':'')},500)};$('#qpsk').onclick=()=>{const w=Math.random()<.55,o=Math.random()<.5?0:1;window.__pqPts=null;result(w?2:o,w?o:2,true)};
@@ -12481,11 +12482,11 @@ function bulApply(s){const t=bulNorm(String(s||''));for(const r of BULR){const m
    L_('defer'+p);
    // différée : le contenu est mis de côté (avec ses boutons) et la partie continue
    if(pend)return;pend=1;queueMicrotask(()=>{pend=null;try{if(!HD.get.call(mEl))return;const mb=$i('mb'),fr=document.createDocumentFragment();while(mb.firstChild)fr.appendChild(mb.firstChild);const cls=mEl.className;
-    AG.push({lvl:1,pri:p,kind:'m',run(){const mb2=$i('mb');mb2.replaceChildren(fr);mEl.className=cls;AG.rel=1;try{mEl.hidden=false}finally{AG.rel=0}try{paused=true}catch(_){}}});repause()}catch(_){}})}})}
+    AG.push({lvl:1,pri:p,kind:'m',txt:fr.textContent,run(){const mb2=$i('mb');mb2.replaceChildren(fr);mEl.className=cls;AG.rel=1;try{mEl.hidden=false}finally{AG.rel=0}try{paused=true}catch(_){}}});repause()}catch(_){}})}})}
  // ---- niveau 1 : les scènes illustrées (popWin)
  const clsO=o=>{const t=(o&&o.t)||'';if(DANG.test(t))return 1;if(BIL.test(t))return 3;return o&&o.btns&&o.btns.length>=2?2:4};
  {const _pw=window.popWin;if(typeof _pw==='function'){window.popWin=function(o){try{if(AG.rel||userNow())return _pw.apply(this,arguments);const p=clsO(o);if(p===1&&!mOpen()&&!others())return _pw.apply(this,arguments);
-    AG.push({lvl:1,pri:p,kind:'pw',run(){AG.rel=1;try{_pw.call(window,o)}finally{AG.rel=0}}});return}catch(_){return _pw.apply(this,arguments)}};try{popWin=window.popWin}catch(_){}}}
+    AG.push({lvl:1,pri:p,kind:'pw',o,run(){AG.rel=1;try{_pw.call(window,o)}finally{AG.rel=0}}});return}catch(_){return _pw.apply(this,arguments)}};try{popWin=window.popWin}catch(_){}}}
  // ---- niveau 3 : la bulle de Camille
  const fam=s=>{if(/Encore un effort|ouvre ses portes|emplacement de|aménagée|Recrute maintenant|recruté·e|Naloxone en stock|Recrute quelqu/i.test(s))return 'guide';if(/DASRI|conteneur/i.test(s))return 'dasri';const m=s.match(/^\S*\s*([A-ZÀ-Ý][\wÀ-ÿ’'-]+) (?:est fatigué|est en arrêt|part souffler|est à bout|revient)/);if(m)return 'stf:'+m[1];if(/tranquillité/i.test(s))return 'q';return null};
  {const _cs=window.camSay;if(typeof _cs==='function'){window.camSay=function(t,cls){try{const s0=String(t||'').trim();if(!s0||AG.rel)return _cs.apply(this,arguments);
@@ -15195,7 +15196,7 @@ html body #m #mb .abk .atab.on{opacity:1;box-shadow:2px 2px 0 rgba(0,0,0,.3),ins
 // La fenêtre est déposée dans la file de l'aiguilleur (AG.push) : elle attend son tour (délais, une seule fenêtre à la fois).
 window.openM=function(html,opts){opts=opts||{};const pri=opts.pri||4;
  const show=()=>{const m=$('m');$('mb').innerHTML=html;m.className=opts.cls||'modal';AG.rel=1;try{m.hidden=false}finally{AG.rel=0}try{paused=true}catch(_){}try{drawPts()}catch(_){}if(opts.onOpen)try{opts.onOpen()}catch(e){oops(e,'openM')}};
- try{if(!window.AG||opts.user){show();return}AG.push({lvl:1,pri,kind:'openM',run:show})}catch(e){oops(e,'openM');show()}};
+ try{if(!window.AG||opts.user){show();return}AG.push({lvl:1,pri,kind:'openM',txt:html,run:show})}catch(e){oops(e,'openM');show()}};
 try{openM=window.openM}catch(_){}
 </script>
 <script>
@@ -16532,6 +16533,23 @@ __obsIn(['dlc'],()=>{try{document.querySelectorAll('#dlc .dlo button').forEach((
 {const DOT=()=>(started&&!ended&&YR>=2&&YR<=3)?150:0,K='Dotation ARS';
  const _fe=window.finExtra;window.finExtra=()=>{const L=_fe?_fe():[];const v=DOT();if(v)L.push(['🩺','L’ARS (dotation)','150 € par mois, quel que soit le nombre de passages',v,K]);return L};
  {const o=window.monthEnd;if(typeof o=='function'){const w=function(...a){try{const v=DOT();if(v){eu+=v;LM.i[K]=(LM.i[K]||0)+v;LY.i[K]=(LY.i[K]||0)+v}}catch(_){}return o.apply(this,a)};window.monthEnd=w;try{monthEnd=w}catch(_){}}}}
+</script>
+<script>
+// v660 : quiz — les réponses s'écrivent dans la police du texte (Lilita, la police des titres, faisait tout en gras)
+{const st=document.createElement('style');st.textContent=`html body #mb button[data-qa]{font:400 15.5px/1.3 'Atkinson Hyperlegible',system-ui,sans-serif!important;color:#2a2433;text-align:left;letter-spacing:0;text-shadow:none}`;document.head.appendChild(st)}
+// v660 : pas de doublon bulle + fenêtre (RYTHME règle 3). Quand le jeu annonce la même chose dans la bulle de Camille
+// et dans une fenêtre, la fenêtre peut attendre son tour (règle 4 : 40 s en an 1) alors que la bulle passe tout de suite :
+// on lisait deux fois la même nouvelle, à 40 s d'écart. La fenêtre suffit : la bulle déposée dans les 4 s autour
+// d'une fenêtre qui dit la même chose (au moins la moitié de ses mots) est retirée de la file.
+{const AG=window.AG;if(AG&&AG.push){const WD=s=>new Set((String(s||'').replace(/<[^>]*>/g,' ').toLowerCase().match(/[a-zà-öø-ÿœ]{4,}/g)||[]));
+ const same=(a,b)=>{if(a.size<3)return false;let n=0;for(const w of a)if(b.has(w))n++;return n/a.size>=.5};
+ const lg=(k,t)=>{try{AG.log.push([+AG.clock.toFixed(1),k,String(t||'').slice(0,40)]);if(AG.log.length>200)AG.log.shift()}catch(_){}};
+ const RW=[],_p=AG.push;
+ AG.push=function(x){try{const now=performance.now();
+   if(x&&x.lvl===1){const o=x.o||{};const w=WD(x.o?[o.t,o.n,o.d].join(' '):x.txt);if(w.size>=3){RW.push({w,at:now});if(RW.length>8)RW.shift();
+     for(let i=AG.q.length-1;i>=0;i--){const y=AG.q[i];if(y.kind==='say'&&now-(y.pt||0)<4000&&same(WD(y.t),w)){AG.q.splice(i,1);lg('doublon',y.t)}}}}
+   else if(x&&x.kind==='say'){x.pt=now;const w=WD(x.t);if(RW.some(r=>now-r.at<4000&&same(w,r.w))){lg('doublon',x.t);return}}}catch(_){}
+  return _p.apply(this,arguments)}}}
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
