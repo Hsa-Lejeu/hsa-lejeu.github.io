@@ -61,5 +61,8 @@ Pétanque (v698-v699) :
 - Cassé depuis la v674 : les copies figées (v674), le cache des salles (v677, `binRoom` v697) et l'écartement des salles hors écran (v676) empêchaient l'épilogue d'enregistrer les objets. Pendant l'épilogue, `window.__HDON=1`, `__noCache=1` et `__noCull=1` coupent tout cela. Toute nouvelle copie figée ou nouveau cache doit tester `window.__HDON`.
 
 Récit et copies figées (v705) :
-- Une scène du fil rouge (Crotti, débat) porte `maj:1` dans son `popWin` : elle passe avec les décisions dans la file (RYTHME.md, règle 6).
+- Une scène du fil rouge (Crotti, débat, tournoi de pétanque, annonce d'un défi) porte `maj:1` dans son `popWin` : elle passe juste après les dangers dans la file (RYTHME.md, règle 6). `pri:N` fixe la priorité à la main (vote du conseil de quartier : `pri:3`). (v706)
+- Invitations des référent·es : une par trimestre au plus (`B.invQ`). Un courrier de doléances différé est daté du jour où il s'affiche.
+- Dans le script principal (celui de `upd`), `AMI()` n'est pas visible : écrire `(YR-1)*12+mo`.
+- Panneau MAISON DE QUARTIER : image `mq` de `IAPM`, via `IAPK` dans `ens()`.
 - Copie figée d'une salle (`__rcEnd`) : la zone est d'abord recopiée tout de suite dans un canevas à part, puis figée par `createImageBitmap` ; ne pas appeler `createImageBitmap` directement sur le canevas du jeu (lecture différée sur certains téléphones : la salle clignotait).

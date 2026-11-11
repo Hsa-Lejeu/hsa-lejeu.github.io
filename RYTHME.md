@@ -61,7 +61,7 @@ Un message de niveau 3 reste affiché au moins 1 s + 40 ms par caractère, sans 
 4. Récit (rencontre, lettre, imprévu, rendez-vous)
 5. Information (retour d'action, astuce, nouveauté)
 
-Le fil rouge (tribune, visite surprise et tract de Crotti, débat) est marqué `maj:1` dans son `popWin` et passe avec les décisions (priorité 2) : sinon il attendait derrière tous les autres récits, jusqu'à plusieurs mois de jeu (v705).
+Le fil rouge (tribune, visite surprise et tract de Crotti, débat, tournoi de pétanque, annonce d'un défi) est marqué `maj:1` dans son `popWin` et passe juste après les dangers, avant les autres décisions (priorité 1,5, toujours soumise au délai de la règle 4) : sinon il attendait derrière toute la file, jusqu'à plusieurs mois de jeu (v705-v706). Un `popWin` peut aussi fixer sa priorité avec `pri:` (le vote du conseil de quartier, en fin d'année 2, a `pri:3` : il s'affiche tout de suite après le bilan).
 
 À priorité égale, le plus ancien passe d'abord. Les messages de niveau 3 trop vieux (plus de 30 s de jeu dans la file) sont abandonnés : un retour d'action périmé n'a plus de sens.
 
