@@ -17,8 +17,12 @@
 // Ajouter V=1 devant la commande pour voir chaque geste du joueur automatique.
 // Ajouter SORTIE=dossier pour garder les deux journaux complets (JSON).
 //
-// Limites : la partie témoin ne couvre que ce que ce joueur automatique rencontre. Le dessin
-// n'est pas comparé (voir outils/test-ecrans.js pour la mise en page).
+// Limites : la partie témoin ne couvre que ce que ce joueur automatique rencontre. Il suit le
+// guide du début, ferme les fenêtres et répond aux scènes, mais ne gère pas la halte : sa partie
+// finit souvent par une défaite. Le tournoi de pétanque est évité (il ne se rejoue pas à
+// l'identique). Le dessin est allégé et n'est pas comparé (voir outils/test-ecrans.js pour la
+// mise en page ; DESSIN=1 garde le vrai dessin, en beaucoup plus lent).
+// Repères : 1500 s de jeu couvrent environ une année et demandent 3 à 6 minutes de calcul.
 
 const { chromium } = require('playwright');
 const [A, B_, START = 'an2', DUR = '600', SEED = '1'] = process.argv.slice(2);
@@ -99,21 +103,23 @@ async function run(url, tag) {
       const T0_ = e => (e.innerText || '').replace(/\s+/g, ' ').trim();
       const vis = e => e && e.getClientRects().length > 0 && getComputedStyle(e).visibility != 'hidden' && !(e.tagName == 'BUTTON' && NON.test(T0_(e)));
       const T = e => (e.innerText || '').replace(/\s+/g, ' ').trim();
-      const btn = (root, re) => [...(root || document).querySelectorAll('button')].find(x => vis(x) && !x.disabled && re.test(T(x)));
+      const onTop = x => { const r = x.getBoundingClientRect(), e = document.elementFromPoint(Math.min(innerWidth - 1, Math.max(0, r.left + r.width / 2)), Math.min(innerHeight - 1, Math.max(0, r.top + r.height / 2))); return !!e && (e === x || x.contains(e)) };
+      const btn = (root, re, top) => [...(root || document).querySelectorAll('button')].find(x => vis(x) && !x.disabled && re.test(T(x)) && (!top || onTop(x)));
       const go = (x, k) => { x.click(); return k + ':' + T(x).slice(0, 40) };
       const tap = e => { const r = e.getBoundingClientRect(), o = { bubbles: true, cancelable: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2, pointerId: 1, pointerType: 'touch', isPrimary: true };['pointerdown', 'pointerup'].forEach(n => e.dispatchEvent(new PointerEvent(n, o))); e.dispatchEvent(new MouseEvent('click', o)); return 'toucher:' + (e.id || e.className || e.tagName) };
       if (stuck) { const any = [...document.querySelectorAll('button')].filter(x => vis(x) && !x.disabled && !x.closest('#tabs,#hud')); const x = any[stuck % (any.length || 1)]; if (x) return go(x, 'débloquer') }
       const f = $('fmo'); if (f) { const bs = [...f.querySelectorAll('.fbt button')].filter(vis); const x = bs.find(x => !/Plus tard|Pas maintenant|Pas cette|Refuser|Ne pas|Laisser/.test(T(x))) || bs[0]; return x ? go(x, 'scène') : tap(f) }
       const m = $('m');
-      { const x = btn(document, /^(▶ ?)?(Continuer|Fermer|Compris|Suivant|C.est parti|Reprendre)/); if (x && !(m && !m.hidden && m.contains(x)) && !x.closest('#ctip,#ulp')) return go(x, 'par-dessus') }
+      { const cg = document.getElementById('cgen'); if (cg) { const x = btn(cg, /C.est moi/); if (x) return go(x, 'créateur') } }
+      { const x = btn(document, /^(▶ ?)?(Continuer|Fermer|Compris|Suivant|C.est parti|Reprendre)/, 1); if (x && !(m && !m.hidden && m.contains(x)) && !x.closest('#ctip,#ulp')) return go(x, 'par-dessus') }
       if (m && !m.hidden) { const x = btn(m, /(Commencer|C.est moi|Suivant|C.est parti|Compris|Continuer|D.accord|Passer(?! le guide)|^OK|Fermer)/) || btn(m, /./); if (rep) { const all = [...m.querySelectorAll('button')].filter(x => vis(x) && !x.disabled); if (all.length) return go(all[rep % all.length], 'fenêtre') } if (x) return go(x, 'fenêtre'); return tap(m) }
-      const n = $('nalg'); if (n && vis(n)) { const x = btn(n, /On en commande|Compris/); if (x) return go(x, 'naloxone'); const bn = $('bn'); if (bn && vis(bn) && !bn.disabled) return go(bn, 'naloxone') }
-      const g = $('gdr'); if (g && vis(g)) { const r = g.getBoundingClientRect(), e = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); if (e) { const b = e.closest('button') || e; if (b.click) { b.click(); return 'guide:' + (b.id || T(b).slice(0, 30) || b.tagName) } } }
+      const n = $('nalg'); if (n && vis(n)) { const x = btn(n, /On en commande|Compris/); if (x) return go(x, 'naloxone'); const bn = $('bn'); if (bn && vis(bn) && !bn.disabled) return go(bn, 'naloxone'); const tb = document.querySelector('#tabs button[onclick="tab(1)"]'); if (tb && vis(tb)) return go(tb, 'naloxone') }
+      const g = $('gdr'); if (g && vis(g)) { const r = g.getBoundingClientRect(), X = r.left + r.width / 2, Y = r.top + r.height / 2, e = document.elementFromPoint(X, Y); if (e) { const b = e.closest('button') || e, o = { bubbles: true, cancelable: true, clientX: X, clientY: Y, pointerId: 1, pointerType: 'touch', isPrimary: true, button: 0 };['pointerdown', 'mousedown', 'pointerup', 'mouseup'].forEach(n => b.dispatchEvent(new (n[0] == 'p' ? PointerEvent : MouseEvent)(n, o))); b.dispatchEvent(new MouseEvent('click', o)); return 'guide:' + (b.id || T(b).slice(0, 30) || (b.closest('[id]') || {}).id || '') } }
       const c = $('ctip'); if (c && c.classList.contains('on')) { const x = c.querySelector('button'); if (x) return go(x, 'conseil') }
       const call = [...document.querySelectorAll('.al.call')].find(vis); if (call) { call.click(); return 'appel' }
       const u = $('ulp'); if (u && vis(u)) { const x = u.querySelector('.ub button'); if (x) return go(x, 'nouveau') }
       const tu = $('tut'); if (tu && !tu.hidden) { const x = btn(tu, /Suivant|Passer|C.est parti|Compris/); if (x) return go(x, 'tuto') }
-      const any = btn(document, /(Commencer|C.est moi|Suivant|Passer(?! le guide)|C.est parti|Nouvelle partie|Jouer)/); if (any) return go(any, 'départ');
+      const any = btn(document, /(Commencer|C.est moi|Suivant|Passer(?! le guide)|C.est parti|Nouvelle partie|Jouer)/, 1); if (any) return go(any, 'départ');
       // toute autre fenêtre qui met le jeu en pause : le premier bouton réellement au-dessus
       { let pz = false; try { pz = !!paused } catch (_) { } if (pz) { const x = [...document.querySelectorAll('button')].find(x => { if (!vis(x) || x.disabled || x.closest('#tabs,#hud,#side')) return false; const r = x.getBoundingClientRect(), e = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return e && (e === x || x.contains(e)) }); if (x) return go(x, 'pause') } }
       const ov = [...document.querySelectorAll('div')].find(d => vis(d) && /Touche (l’écran )?pour continuer/.test(d.textContent) && d.textContent.length < 600); if (ov) return tap(ov);
