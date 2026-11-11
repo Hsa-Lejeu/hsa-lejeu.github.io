@@ -66,3 +66,10 @@ Récit et copies figées (v705) :
 - Dans le script principal (celui de `upd`), `AMI()` n'est pas visible : écrire `(YR-1)*12+mo`.
 - Panneau MAISON DE QUARTIER : image `mq` de `IAPM`, via `IAPK` dans `ens()`.
 - Copie figée d'une salle (`__rcEnd`) : la zone est d'abord recopiée tout de suite dans un canevas à part, puis figée par `createImageBitmap` ; ne pas appeler `createImageBitmap` directement sur le canevas du jeu (lecture différée sur certains téléphones : la salle clignotait).
+
+Retours des parties automatiques (v707) :
+- Retrouvailles (`lcBack`, scène « Des nouvelles ») : proposée une seule fois par personne (`S.asked`).
+- Paysage : `#hasc` et `#hasb` sont masqués quand un onglet est ouvert (`body.hq20`, feuille paysage).
+- Expérience de l'équipe (`#xpov`) : `.xpw` est une colonne, `.xpl` défile, `.xpbt` reste en bas.
+- `test-ecrans.js` : écrans `has-pastille`, `has-pastille-onglet`, `has-visite`, `has-visite-onglet`, `experience-12` ; contrôles « pastille par-dessus le panneau d'un onglet » et « bouton de l'expérience hors écran ».
+- `partie-temoin.js` : le robot joue le débat (bonne carte, puis phrase visée) et referme un onglet resté ouvert ; la partie `an3` va jusqu'à la fin.
