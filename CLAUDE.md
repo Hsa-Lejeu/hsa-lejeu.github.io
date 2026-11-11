@@ -73,3 +73,9 @@ Retours des parties automatiques (v707) :
 - Expérience de l'équipe (`#xpov`) : `.xpw` est une colonne, `.xpl` défile, `.xpbt` reste en bas.
 - `test-ecrans.js` : écrans `has-pastille`, `has-pastille-onglet`, `has-visite`, `has-visite-onglet`, `experience-12` ; contrôles « pastille par-dessus le panneau d'un onglet » et « bouton de l'expérience hors écran ».
 - `partie-temoin.js` : le robot joue le débat (bonne carte, puis phrase visée) et referme un onglet resté ouvert ; la partie `an3` va jusqu'à la fin.
+
+Fin de partie en paysage (v708) :
+- Débat : éventail à `bottom: 50px`, cartes 70×99 ; bilan final : `.rvskip` flottant à droite sous le titre, hors du radar.
+- Guide naloxone (`#nalg`) : fermé dès que la partie se termine (`ended`, `ENDING`, `__HDON`, `#epov`, `#tvov`), par `step`, par une correction `__uiv` et par une règle de style (`body.hq6`, `body.hq7`, `body.hdcin`). Les minuteries ne tournent pas quand le jeu est en pause ou terminé : ne pas compter sur un `setInterval` seul pour fermer quelque chose à la fin.
+- Cris de la fête (`EPG`) : un seul point d'exclamation.
+- Plaque LE SQUARE : image `square` de `IAPM`, dans `pancarte()`.
