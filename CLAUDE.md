@@ -43,3 +43,8 @@ Sortie (v689) :
 
 Panneaux peints (v690-v692) :
 - Enseignes de la halte (`window.IAE`), des boutiques (`window.IAN`, table `IANK` texte → image, dans `ens()`), et panneaux de la v692 dans `window.IAP` (table `IAPM`, dessin par `iaP(nom, X, Y)`) : grand panneau du square, plaques HSA, À LOUER, URGENCES, À VENDRE, TERRAIN À BÂTIR, affiche VOTEZ CROTTI (lettres posées à la main), tas de terre du terrain à bâtir (dessinés par le jeu, `tas1` à `tas3`), ÉPICERIE, et pour les petites scènes (`iaG(g, nom, X, Y)`) : trousse et spray de naloxone, couverture et piles du magazine, panneau VENDU, affiches des rendez-vous de l'année (`rdv_tab`, `rdv_sida`, `rdv_sdp`, `rdv_iod`). Le texte est dans l'image ; l'ancien dessin reste en repli si l'image n'est pas chargée.
+
+Une seule feuille d'images et fond des salles du quartier (v697) :
+- `IAE`, `IAN` et `IAP` désignent maintenant la même image que `IAS` (une seule feuille, empilée : objets, enseigne de la halte, enseignes des boutiques, panneaux). Les tables `IANM` et `IAPM` portent déjà le décalage vertical ; l'enseigne de la halte se lit dans `IAER`. Pour ajouter une image : l'ajouter à la feuille et à sa table, sans créer de nouvelle `Image`.
+- `binRoom` (murs et sols des salles visibles dans les bâtiments du quartier) dessine son fond une fois dans `BRC` puis le recopie : 268 `drawImage` de moins par image. `#nocache` coupe aussi ce cache.
+- Mesures : `drawImage` par image 626 → 365 ; les couches `W(...)` ne pèsent qu'environ 1 % du temps de calcul, les fusionner n'apporte presque rien.
