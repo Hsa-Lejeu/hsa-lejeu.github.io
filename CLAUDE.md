@@ -82,3 +82,9 @@ Fin de partie en paysage (v708) :
 
 Boules de verre (v709) :
 - Dans le choix des boules, `ballChip` dessine à part les deux boules de verre (`glassChip`) : `carte` = boule à neige de la Bonne Mère (image `__ndgImg`), `pastis` = verre à moitié plein. Une nouvelle boule de verre (script v618, `kind`) doit aussi y avoir sa vignette.
+
+Tableau souvenir (v710-v711) :
+- Panneau À VENDRE du camion : image `vendre2` de `IAPM` (dans `vanVDraw`). La boule `carte` s'appelle « La Bonne Mère ».
+- Photo de la halte vue d'en haut à la place du rapport HAS : `halteSnap()` recopie la zone de la halte du canevas du jeu dans `window.__haltePh` toutes les 15 s (jamais pendant une réunion, la fin ou l'épilogue) ; le rapport HAS reste en repli si la photo manque.
+- `draw(slogan, paysage, données, {lay, hit, skip, only})` : chaque élément a une clé (`i0`, `i1`… dans l'ordre des appels à `item`, `s0`… pour les autocollants). `lay` = `{o:{clé:[dx,dy]}, s:[{id,x,y}], z:[clés touchées]}`, gardé par format dans `LAYS` (`window.__shLay`). Pendant un glisser, le tableau sans l'élément (`skip`) et l'élément seul (`only`) sont dessinés une fois, puis seulement recomposés. Ne pas changer l'ordre des appels à `item` sans y penser : les clés en dépendent.
+- Autocollants : table `STK` (icônes `HSAICO`/`HSAICO2`, spray de la feuille `IAS`, cœurs recolorés par `hue`, arc-en-ciel et rubans dessinés dans le code) ; 16 au plus ; on en retire un en le sortant du tableau.
