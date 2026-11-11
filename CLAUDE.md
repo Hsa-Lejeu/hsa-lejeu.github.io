@@ -55,3 +55,7 @@ Pétanque (v698-v699) :
 - Mise en scène « dernière boule » seulement si l'équipe ne tient pas le point (`joker`). Pendant le replay (`__RPLON`), le lanceur est effacé.
 - Transitions entre les écrans de la pétanque : damier de gros pixels qui se résorbe en diagonale (`canvas.vtr`, script v699), à la place du balayage en biais.
 - Entrée de l'accueil (v701) : marches (`marches`) devant la porte de l'accueil sur le parvis, remplacées par marches + rampe (`rampe`) quand `B.pmr` ; dessinées dans `draw()` juste après le carrelage du parvis, donc sous les personnages.
+- Après les travaux PMR (v702) : seuil de l'accueil élargi au-dessus de la rampe ; Agnès entre par la rampe (`enter`) et ressort par elle (`outW`).
+
+Épilogue en vue inclinée (v703) :
+- Cassé depuis la v674 : les copies figées (v674), le cache des salles (v677, `binRoom` v697) et l'écartement des salles hors écran (v676) empêchaient l'épilogue d'enregistrer les objets. Pendant l'épilogue, `window.__HDON=1`, `__noCache=1` et `__noCull=1` coupent tout cela. Toute nouvelle copie figée ou nouveau cache doit tester `window.__HDON`.
