@@ -40,3 +40,6 @@ Sortie (v689) :
 - La passe des icônes pixel pose aussi les espaces insécables (après «, avant », ?, !, ; et :) et remplace l'apostrophe droite entre deux lettres par ’, dans les nœuds de texte seulement. Le texte d'origine reste dans `n.__o` : `txa()` et `hxa()` le rendent, donc les corrections continuent de comparer avec les textes du code.
 - Les scènes (`#fmo .fn`) n'ont plus d'icône devant leur nom.
 - `oops(e, lieu)` n'écrit plus dans la console que les 3 premières erreurs d'un même lieu (puis une sur 500) ; le compte reste dans `window.__ERRS`.
+
+Panneaux peints (v690-v692) :
+- Enseignes de la halte (`window.IAE`), des boutiques (`window.IAN`, table `IANK` texte → image, dans `ens()`), et panneaux de la v692 dans `window.IAP` (table `IAPM`, dessin par `iaP(nom, X, Y)`) : grand panneau du square, plaques HSA, À LOUER, URGENCES, À VENDRE, TERRAIN À BÂTIR, affiche VOTEZ CROTTI (lettres posées à la main), terre du terrain à bâtir. Le texte est dans l'image ; l'ancien dessin reste en repli si l'image n'est pas chargée.
