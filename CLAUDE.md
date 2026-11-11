@@ -59,3 +59,7 @@ Pétanque (v698-v699) :
 
 Épilogue en vue inclinée (v703) :
 - Cassé depuis la v674 : les copies figées (v674), le cache des salles (v677, `binRoom` v697) et l'écartement des salles hors écran (v676) empêchaient l'épilogue d'enregistrer les objets. Pendant l'épilogue, `window.__HDON=1`, `__noCache=1` et `__noCull=1` coupent tout cela. Toute nouvelle copie figée ou nouveau cache doit tester `window.__HDON`.
+
+Récit et copies figées (v705) :
+- Une scène du fil rouge (Crotti, débat) porte `maj:1` dans son `popWin` : elle passe avec les décisions dans la file (RYTHME.md, règle 6).
+- Copie figée d'une salle (`__rcEnd`) : la zone est d'abord recopiée tout de suite dans un canevas à part, puis figée par `createImageBitmap` ; ne pas appeler `createImageBitmap` directement sur le canevas du jeu (lecture différée sur certains téléphones : la salle clignotait).
