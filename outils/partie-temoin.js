@@ -58,6 +58,14 @@ async function run(url, tag) {
         now = end; await new Promise(r => realRAF(() => r()));   // une vraie image entre deux pas : mise en page et observateurs
       };
     }
+    // chargements réels (images, copies figées) : on les compte, pour attendre leur fin à des moments fixes de la partie
+    {
+      let pend = 0; window.__pending = () => pend;
+      const RI = window.Image; const done = im => { if (im.__p) { im.__p = 0; pend-- } };
+      const hook = im => { im.addEventListener('load', () => done(im)); im.addEventListener('error', () => done(im)); const d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src'); Object.defineProperty(im, 'src', { configurable: true, get() { return d.get.call(this) }, set(v) { if (!this.__p) { this.__p = 1; pend++ } d.set.call(this, v); if (this.complete && this.naturalWidth) done(this) } }); return im };
+      window.Image = function (w, h) { return hook(arguments.length ? new RI(w, h) : new RI()) }; window.Image.prototype = RI.prototype;
+      const cib = window.createImageBitmap; if (cib) window.createImageBitmap = function () { pend++; const p = cib.apply(this, arguments); p.then(() => { pend-- }, () => { pend-- }); return p };
+    }
     // hasard figé (mulberry32)
     let a = seed >>> 0; Math.random = function () { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296 };
     try { localStorage.clear(); sessionStorage.clear() } catch (_) { }
@@ -65,12 +73,14 @@ async function run(url, tag) {
   }, +SEED);
   const q = START === 'debut' ? '' : '?an=' + START.replace('an', '');
   await p.goto(url + q, { waitUntil: 'load' });
-  await p.waitForTimeout(1500);                       // images et polices (temps réel)
+  const settle = async () => { for (let i = 0, ok = 0; i < 400 && ok < 2; i++) { const n = await p.evaluate(() => window.__pending ? __pending() : 0); if (n) { ok = 0; await p.waitForTimeout(25) } else ok++ } };
+  await p.waitForTimeout(800); await settle(); await p.evaluate(() => document.fonts && document.fonts.ready).catch(() => { }); await settle();   // images et polices (temps réel)
   if (!process.env.DESSIN) await p.evaluate(() => { try { const g = CanvasRenderingContext2D.prototype;['drawImage', 'fillRect', 'fillText', 'strokeText', 'fill', 'stroke', 'clearRect', 'strokeRect', 'putImageData'].forEach(n => { g[n] = function () { } }) } catch (_) { } });   // le dessin ne change pas le jeu : on l'allège pour aller vite (DESSIN=1 pour le garder)
   const ev = [], snaps = []; let vt = 0, lastK = '', same = 0, prev = {};
   const total = +DUR * 1000;
   while (vt < total) {
     try { await p.evaluate(ms => __adv(ms), STEP) } catch (e) { ev.push({ t: vt / 1000, k: 'ARRÊT', x: String(e.message).split('\n')[0].slice(0, 120) }); break } vt += STEP;
+    await settle();   // un chargement lancé pendant ce pas se termine avant le pas suivant
     // 1. ce qui est affiché
     const cur = await p.evaluate(() => {
       const $ = id => document.getElementById(id), tx = e => { try { return (window.txa ? txa(e) : e.textContent) } catch (_) { return e.textContent } };
@@ -100,9 +110,9 @@ async function run(url, tag) {
     const k = await p.evaluate(([stuck, rep]) => {
       const $ = id => document.getElementById(id);
       const NON = /Recommencer|Rejouer|Reprendre (au|depuis|le chapitre)|Revenir au|Effacer|Supprimer|Quitter|Partag|Télécharg|Installer|Tableau souvenir|Pétanque|Jouer le tournoi|Mode test/;   // boutons qui quittent ou relancent la partie
-      const T0_ = e => (e.innerText || '').replace(/\s+/g, ' ').trim();
+      const T0_ = e => { let t; try { t = window.txa ? txa(e) : e.textContent } catch (_) { t = e.textContent } return (t || '').replace(/\s+/g, ' ').trim() };   // texte du code, pas texte affiché : ne dépend pas d'une animation en cours
       const vis = e => e && e.getClientRects().length > 0 && getComputedStyle(e).visibility != 'hidden' && !(e.tagName == 'BUTTON' && NON.test(T0_(e)));
-      const T = e => (e.innerText || '').replace(/\s+/g, ' ').trim();
+      const T = T0_;
       const onTop = x => { const r = x.getBoundingClientRect(), e = document.elementFromPoint(Math.min(innerWidth - 1, Math.max(0, r.left + r.width / 2)), Math.min(innerHeight - 1, Math.max(0, r.top + r.height / 2))); return !!e && (e === x || x.contains(e)) };
       const btn = (root, re, top) => [...(root || document).querySelectorAll('button')].find(x => vis(x) && !x.disabled && re.test(T(x)) && (!top || onTop(x)));
       const go = (x, k) => { x.click(); return k + ':' + T(x).slice(0, 40) };
