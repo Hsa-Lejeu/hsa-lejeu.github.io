@@ -40,6 +40,13 @@ const ST=[
  ['finances','?an=2',"finModal()",1200],
  ['petanque','?an=2',"petaShow(true)",2500],
  ['partage','?an=3',"shareOpen()",3000],
+ // pastille « Visite HAS dans N jours » (le mois d'avant), seule puis avec un onglet ouvert ; visite en cours (bandeau)
+ ['has-pastille','?an=2',"mo=3;"+TAB0,1800],
+ ['has-pastille-onglet','?an=2',"mo=3;tab(0)",1800],
+ ['has-visite','?an=2',"hasArrive();"+TAB0,1500],
+ ['has-visite-onglet','?an=2',"hasArrive();tab(3)",1500],
+ // expérience de l'équipe avec douze personnes : le bouton « Continuer » doit rester à l'écran
+ ['experience-12','?an=2',"AG.rel=1;while(STF.length<12)STF.push(Object.assign({},STF[STF.length%3],{n:'Test '+STF.length}));STF.forEach(z=>{z.xpM0=(z.xp||0)-25;z.lvM0=z.lv||0});MS.acc=1;monthEnd();$('m').hidden=true;xpShow(()=>{});AG.rel=0",2600],
 ];
 const PROBE=()=>{const W=innerWidth,H=innerHeight,out=[];
  const vis=e=>{const r=e.getBoundingClientRect();if(r.width<2||r.height<2)return null;let n=e;while(n&&n!==document.body){const c=getComputedStyle(n);if(c.display=='none'||c.visibility=='hidden'||+c.opacity<.05)return null;n=n.parentElement}return r};
@@ -54,6 +61,10 @@ const PROBE=()=>{const W=innerWidth,H=innerHeight,out=[];
   if(!sa&&(r.left<-1||r.top<-1||r.right>W+1||r.bottom>H+1))out.push({k:'dehors',e:nm(e),r:[r.left|0,r.top|0,r.width|0,r.height|0]});
   if(cx>=box.l&&cx<=box.r&&cy>=box.t&&cy<=box.b&&cx>=0&&cy>=0&&cx<W&&cy<H){const f=document.elementFromPoint(cx,cy);if(f&&f!==e&&!e.contains(f)&&!f.contains(e)){const fb=f.closest('button,[onclick],a,input,select');const sheet=document.querySelector('#app.open')&&f.closest('#phead,#side')&&!e.closest('#phead,#side');if(!(fb&&e.contains(fb))&&!sheet)out.push({k:'caché',e:nm(e),par:nm(f),r:[r.left|0,r.top|0,r.width|0,r.height|0]})}}
   if((r.width<28||r.height<28)&&!(sa&&(cy<box.t||cy>box.b)))out.push({k:'petit',e:nm(e),r:[r.width|0,r.height|0]})}
+ // le bouton d'une fenêtre à liste défilante doit rester à l'écran sans faire défiler
+ for(const e of document.querySelectorAll('#xpov .xpbt button')){const r=vis(e);if(r&&(r.bottom>H+1||r.top<-1))out.push({k:'dehors',e:nm(e),r:[r.left|0,r.top|0,r.width|0,r.height|0]})}
+ // une pastille de la carte restée par-dessus le panneau d'un onglet ouvert
+ {const sd=document.querySelector('#app.open #side');const q=sd&&vis(sd);if(q)for(const id of ['hasc','hasb','dfi','dfb','crc','rdfx']){const e=document.getElementById(id),r=e&&vis(e);if(r&&r.right>q.left+2&&r.left<q.right-2&&r.bottom>q.top+2&&r.top<q.bottom-2)out.push({k:'caché',e:'#side (panneau de l’onglet)',par:'#'+id,r:[r.left|0,r.top|0,r.width|0,r.height|0]})}}
  const m=document.getElementById('m');if(m&&!m.hidden){const mb=document.getElementById('mb')||m;const r=mb.getBoundingClientRect();
   if(r.bottom>H+1||r.top<-1||r.right>W+1||r.left<-1)out.push({k:'déborde',e:'#mb',r:[r.left|0,r.top|0,r.width|0,r.height|0]});
   // part vide : on quadrille la fenêtre et on cherche les cases sans contenu
