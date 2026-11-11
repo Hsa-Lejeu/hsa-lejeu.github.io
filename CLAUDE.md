@@ -54,3 +54,4 @@ Pétanque (v698-v699) :
 - La Canebière n'est plus en pente (`SLOPE=0`). Toujours du vent (brise, vent ou mistral).
 - Mise en scène « dernière boule » seulement si l'équipe ne tient pas le point (`joker`). Pendant le replay (`__RPLON`), le lanceur est effacé.
 - Transitions entre les écrans de la pétanque : damier de gros pixels qui se résorbe en diagonale (`canvas.vtr`, script v699), à la place du balayage en biais.
+- Entrée de l'accueil (v701) : marches (`marches`) devant la porte de l'accueil sur le parvis, remplacées par marches + rampe (`rampe`) quand `B.pmr` ; dessinées dans `draw()` juste après le carrelage du parvis, donc sous les personnages.
