@@ -65,7 +65,7 @@ Récit et copies figées (v705) :
 - Invitations des référent·es : une par trimestre au plus (`B.invQ`). Un courrier de doléances différé est daté du jour où il s'affiche.
 - Dans le script principal (celui de `upd`), `AMI()` n'est pas visible : écrire `(YR-1)*12+mo`.
 - Panneau MAISON DE QUARTIER : image `mq` de `IAPM`, via `IAPK` dans `ens()`.
-- Copie figée d'une salle (`__rcEnd`) : la zone est d'abord recopiée tout de suite dans un canevas à part, puis figée par `createImageBitmap` ; ne pas appeler `createImageBitmap` directement sur le canevas du jeu (lecture différée sur certains téléphones : la salle clignotait).
+- Copie figée d'une salle (`__rcEnd`) : la zone est recopiée tout de suite dans un canevas ordinaire, qui sert tel quel de copie (plus d'`ImageBitmap` depuis la v718). Le scintillement des salles signalé sur le téléphone de l'utilisateur n'a jamais été reproduit sur le banc d'essai ; il disparaît avec `#nocache`. Pour le cerner : `#nocache1` coupe seulement les copies figées des salles, `#nocache2` seulement le cache `binRoom`.
 
 Retours des parties automatiques (v707) :
 - Retrouvailles (`lcBack`, scène « Des nouvelles ») : proposée une seule fois par personne (`S.asked`).
@@ -95,3 +95,4 @@ Tableau souvenir (v710-v711) :
 - Le collectif de riverains du jeu s'appelle « Je dis oui HSA » (v714), avec l'accord du collectif marseillais #jedisOUI! HSA Marseille, cité en tête de « Pour aller plus loin » ; son logo est l'autocollant `jdo`.
 - Pour savoir si une partie est lancée, tester `GAMEON` et non `started` : `started` ne devient vrai qu'à l'ouverture de la halte (accueil et salle de consommation pourvus). Le tableau, sa photo et son raccourci en dépendaient à tort (v716).
 - Icône naloxone (v717) : `HSAICO.naloxone` (émoji 🆘 : achats, stock) est le spray nasal fourni par l'utilisateur, plus la trousse à pharmacie.
+- Tableau souvenir (v718) : les scènes de la mascotte et de la gazette, la photo d'équipe par défaut et le fond de liège sont gardés (`SC_`, `FALLPH`, `BGC`) : ne pas redessiner une scène animée à chaque rendu. L'image PNG n'est fabriquée qu'au partage ou au téléchargement (`need`). Texte libre en couleur (`CH.free`, clé `free`, déplaçable). La photo de la halte est prise à l'ouverture du tableau et une fois à la fin de la partie, plus toutes les 15 s.
