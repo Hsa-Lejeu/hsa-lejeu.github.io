@@ -79,3 +79,6 @@ Fin de partie en paysage (v708) :
 - Guide naloxone (`#nalg`) : fermé dès que la partie se termine (`ended`, `ENDING`, `__HDON`, `#epov`, `#tvov`), par `step`, par une correction `__uiv` et par une règle de style (`body.hq6`, `body.hq7`, `body.hdcin`). Les minuteries ne tournent pas quand le jeu est en pause ou terminé : ne pas compter sur un `setInterval` seul pour fermer quelque chose à la fin.
 - Cris de la fête (`EPG`) : un seul point d'exclamation.
 - Plaque LE SQUARE : image `square` de `IAPM`, dans `pancarte()`.
+
+Boules de verre (v709) :
+- Dans le choix des boules, `ballChip` dessine à part les deux boules de verre (`glassChip`) : `carte` = boule à neige de la Bonne Mère (image `__ndgImg`), `pastis` = verre à moitié plein. Une nouvelle boule de verre (script v618, `kind`) doit aussi y avoir sa vignette.
