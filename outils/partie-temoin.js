@@ -9,7 +9,7 @@
 // Installation (une fois) :  npm install playwright && npx playwright install chromium
 // Utilisation :
 //   node outils/partie-temoin.js AVANT APRES [départ=an2] [durée_s=600] [graine=1]
-//     AVANT, APRES : adresses des deux versions (ex. http://localhost:8765/sauvegarde-v682.html
+//     AVANT, APRES : adresses des deux versions (ex. une ancienne version tirée de git : git show <commit>:index.html > ancienne.html,
 //                    et http://localhost:8765/index.html). La même adresse deux fois vérifie
 //                    que la partie témoin est bien reproductible.
 //     départ       : debut (nouvelle partie), an2, an3 ou an3j (parties de test du jeu)
@@ -84,7 +84,7 @@ async function run(url, tag) {
     // 1. ce qui est affiché
     const cur = await p.evaluate(() => {
       const $ = id => document.getElementById(id), tx = e => { try { return (window.txa ? txa(e) : e.textContent) } catch (_) { return e.textContent } };
-      const cl = t => (t || '').replace(/\s+/g, ' ').trim().slice(0, 160);
+      const cl = t => (t || '').replace(/[’‘]/g, "'").replace(/\s+/g, ' ').replace(/ ?([?!;:»])/g, ' $1').replace(/« ?/g, '« ').trim().slice(0, 160);   // la typographie (espaces insécables, apostrophes) ne compte pas
       const vis = e => e && e.getClientRects().length > 0 && getComputedStyle(e).visibility != 'hidden';
       const o = {};
       const m = $('m'); if (m && !m.hidden) { const h = m.querySelector('h2,h3'); o.fenetre = cl(tx(h || m)) }

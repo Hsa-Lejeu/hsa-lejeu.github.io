@@ -6,7 +6,7 @@
  "start_url": "./",
  "scope": "./",
  "display": "fullscreen",
- "orientation": "portrait",
+ "orientation": "any",
  "background_color": "#a8d6f0",
  "theme_color": "#2e9e4f",
  "categories": [
@@ -91,6 +91,34 @@
    "type": "image/png",
    "form_factor": "wide",
    "label": "Gagne la confiance des riverains"
+  },
+  {
+   "src": "screenshots/09_halte.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "La halte et son quartier, sur téléphone"
+  },
+  {
+   "src": "screenshots/10_quartier.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Maraudes, riverains, partenaires"
+  },
+  {
+   "src": "screenshots/11_cartes.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Plus de 100 cartes sur la réduction des risques"
+  },
+  {
+   "src": "screenshots/12_has.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Le verdict de la HAS"
   }
  ]
 }

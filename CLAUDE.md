@@ -18,13 +18,13 @@ Styles (v678) :
 - Dessin : `#perf` détaille le temps du dessin ; `#nocache` coupe le cache du décor des salles, `#nobmp` les copies figées, `#fx` le mode « effets réduits » des téléphones lents (`window.LOWFX`).
 
 Nettoyage v683 :
-- `sauvegarde-v682.html` est la copie de la version d'avant, jouable à cette adresse : ne pas la modifier.
+- Version de référence d'avant le nettoyage : `git show 3c4991d^:index.html` (v682). La copie `sauvegarde-v682.html` a été retirée du site en v689.
 - Corrections des onglets : une correction qui ne touche que le panneau des onglets commence par `if(window.__panClosed&&__panClosed(f))return;` (elle ne fait rien panneau fermé, et `f` est rappelée à l'ouverture, avant le premier affichage).
 - Ne pas lire `innerWidth` / `innerHeight` ni `getBoundingClientRect()` dans le dessin (`draw` et ce qui l'enveloppe) : cela force une mise en page à chaque image. Garder la valeur en mémoire et la rafraîchir sur `resize`.
 - Ne pas ajouter de couche autour des méthodes du canevas (`CanvasRenderingContext2D.prototype`) : passer par `__setCvHook` (script v674).
 
 Partie témoin (v684) :
-- Avant et après tout nettoyage ou réécriture du code (fusion de couches, déplacement de script, changement d'une fonction du jeu), comparer l'ancienne et la nouvelle version : `node outils/partie-temoin.js AVANT APRES départ 1500`, pour les trois départs `debut`, `an2` et `an3` (objectif : « identiques » trois fois). `sauvegarde-v682.html` peut servir de référence tant que le comportement du jeu n'a pas été changé exprès.
+- Avant et après tout nettoyage ou réécriture du code (fusion de couches, déplacement de script, changement d'une fonction du jeu), comparer l'ancienne et la nouvelle version : `node outils/partie-temoin.js AVANT APRES départ 1500`, pour les trois départs `debut`, `an2` et `an3` (objectif : « identiques » trois fois). Comme référence, tirer l'ancienne version de git (`git show <commit>:index.html > ancienne.html`, à servir à côté de `three-r128.min.js` et `fonts/`). La typographie (espaces insécables, apostrophes) est ignorée dans la comparaison.
 - Un changement voulu du comportement (équilibrage, nouvelle scène, nouveau message) rend les parties différentes : c'est normal, vérifier seulement que la première différence est bien celle attendue.
 - Le script simule l'horloge et le hasard : ne pas lire l'heure ni tirer au hasard par un autre moyen que `performance.now()`, `Date`, `setTimeout`, `setInterval`, `requestAnimationFrame` et `Math.random()`, sinon la partie n'est plus reproductible.
 
@@ -32,3 +32,11 @@ CSS mort et images refaites (v685-v688) :
 - `outils/css-mort/` retire les déclarations CSS prouvées mortes (mode d'emploi dans son `LISEZMOI.md`). Après un passage : `4-verif.js` (0 anomalie), partie témoin, contrôle des écrans.
 - Objets dessinés par des images de l'IA (v688) : une seule feuille `window.IAS` (dans `<head>`), table `IAM`, dessin par `iaD(nom, X, Y, largeur, hauteur)` ; enseigne par `iaSign`. Les textes (HSA, VOTEZ, slogans) restent écrits par le jeu. Pour ajouter un objet : le réduire à sa vraie grille de pixels (`pix.py`, gardé hors dépôt), l'ajouter à la feuille et à `IAM`, et garder l'ancien dessin en repli quand `iaOK()` est faux.
 - Épilogue en vue inclinée : la bulle d'un·e salarié·e porte son portrait, son nom et son métier (`bub(..., who)`), et reste affichée 1 s + 40 ms par caractère.
+
+Sortie (v689) :
+- three.js n'est plus dans la page : `three-r128.min.js`, chargé par `need3D()` à l'ouverture de la pétanque (`petaShow` l'attend). Ne pas lire `THREE` en dehors de la pétanque : un filet de sécurité le charge alors de façon synchrone et l'écrit dans la console (« three.js lu avant need3D »).
+- Police Atkinson Hyperlegible dans `fonts/` (woff2, `<style id="police">`), plus aucun appel à Google Fonts.
+- `sw.js` est produit par `python3 outils/mksw.py vNNN outils/images-sw.txt` (depuis la racine du site) : la page se rabat sur le cache si le réseau ne répond pas en 3 s ; musiques, police et three.js sont dans le cache durable (un fichier modifié doit changer de nom).
+- La passe des icônes pixel pose aussi les espaces insécables (après «, avant », ?, !, ; et :) et remplace l'apostrophe droite entre deux lettres par ’, dans les nœuds de texte seulement. Le texte d'origine reste dans `n.__o` : `txa()` et `hxa()` le rendent, donc les corrections continuent de comparer avec les textes du code.
+- Les scènes (`#fmo .fn`) n'ont plus d'icône devant leur nom.
+- `oops(e, lieu)` n'écrit plus dans la console que les 3 premières erreurs d'un même lieu (puis une sur 500) ; le compte reste dans `window.__ERRS`.
