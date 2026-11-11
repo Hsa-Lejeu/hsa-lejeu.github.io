@@ -48,3 +48,9 @@ Une seule feuille d'images et fond des salles du quartier (v697) :
 - `IAE`, `IAN` et `IAP` désignent maintenant la même image que `IAS` (une seule feuille, empilée : objets, enseigne de la halte, enseignes des boutiques, panneaux). Les tables `IANM` et `IAPM` portent déjà le décalage vertical ; l'enseigne de la halte se lit dans `IAER`. Pour ajouter une image : l'ajouter à la feuille et à sa table, sans créer de nouvelle `Image`.
 - `binRoom` (murs et sols des salles visibles dans les bâtiments du quartier) dessine son fond une fois dans `BRC` puis le recopie : 268 `drawImage` de moins par image. `#nocache` coupe aussi ce cache.
 - Mesures : `drawImage` par image 626 → 365 ; les couches `W(...)` ne pèsent qu'environ 1 % du temps de calcul, les fusionner n'apporte presque rien.
+
+Pétanque (v698-v699) :
+- Panoramas des six terrains refaits (images de l'IA, coupées au ras du sol et dé-jaunies : feuillages ramenés vers le vert, ocres moins saturés). `P3BG[terrain].pano` ; `panoA` = 2 × largeur / hauteur de l'image (elle est doublée en miroir autour du terrain).
+- La Canebière n'est plus en pente (`SLOPE=0`). Toujours du vent (brise, vent ou mistral).
+- Mise en scène « dernière boule » seulement si l'équipe ne tient pas le point (`joker`). Pendant le replay (`__RPLON`), le lanceur est effacé.
+- Transitions entre les écrans de la pétanque : damier de gros pixels qui se résorbe en diagonale (`canvas.vtr`, script v699), à la place du balayage en biais.
