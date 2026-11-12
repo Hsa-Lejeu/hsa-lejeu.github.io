@@ -155,3 +155,8 @@ Modes de jeu, conseil du quartier, musiques allégées (v729) :
 Lyrica (v730) :
 - Premier chapitre de Samba (« Lyrica quand il en trouve ») et de Jawad (« prend du Lyrica acheté dans la rue »). Le mot est dans le glossaire des termes soulignés (`GLOSS.Lyrica`, script v465 ; la bulle dit « automédication (usage pirate) » liée aux parcours d'exil, formulation voulue par l'utilisateur, sans le mot « détourné ») : il suffit d'ajouter une clé à la table `G` pour qu'un mot soit souligné et expliqué dans les fenêtres.
 
+
+Colonne repliable en paysage (v733) :
+- En paysage (hauteur ≤ 600 px), la colonne de gauche est repliée par défaut : `body.hudc` (règles dans la feuille paysage, bloc ≤ 600 px). Repliée : argent et personnes accueillies en chiffres seuls, jauges de `#spw` en anneaux sur deux colonnes (`conic-gradient` avec `--v` = valeur et `--c` = couleur, posées sur chaque `.r` par la correction `__uiv` du script v733 ; `.low` sous 25 %). `--zl` est réduite pour ce qui se place à droite de la colonne.
+- Un toucher sur la colonne repliée la déplie (clic intercepté en capture, `body.hudo`) ; un toucher ailleurs la replie. L'épingle `#hudpin` (à droite de la colonne dépliée) la garde ouverte : `localStorage` `hsa-hudpin`. Pendant le guide (`body.gdon`), la colonne reste dépliée.
+- Une jauge a deux `<i>` : `.gh` (fantôme de l'animation) et la vraie ; lire `.bar > i:not(.gh)`. Les lignes argent / accueillis gardent 28 px de haut (cible du doigt, contrôle « petit » de `test-ecrans.js`).

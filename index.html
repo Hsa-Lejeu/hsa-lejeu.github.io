@@ -78,7 +78,7 @@ window.txa=function txa(e){if(!e)return '';if(e.nodeType===3)return (e.__nb===e.
   const el=(performance.now()-t0)/1000,ips=fr/el,img=fr?sum/fr:0,js=(A.jeu+A.interface+A.autres+tim)/Math.max(1,fr);
   const pf=v=>(v/Math.max(1,fr)).toFixed(1);const nav=Math.max(0,img-js);
   const tp=Object.entries(TOP).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([k,v])=>k.slice(0,18)+' '+pf(v)).join(' · ');
-  box.textContent=`${(dr/el).toFixed(1)} images dessinées/s (boucle ${ips.toFixed(1)}/s) · image ${img.toFixed(0)} ms (pire ${worst.toFixed(0)}, >45 ms : ${big})\njeu ${pf(A.jeu)} · interface ${pf(A.interface)} · minuteries ${pf(tim)} · autres ${pf(A.autres)}\nnavigateur (peinture, autres tâches) ≈ ${nav.toFixed(0)} ms${tp?'\nautres : '+tp:''}${tt?'\nminuteries :\n  '+tt:''}${window.__perfU?'\ncorrections :\n  '+window.__perfU:''}\n${(()=>{try{return `dessin ${DEMA.toFixed(0)} ms · 1 image sur 2 : ${SLOW?'OUI':'non'} · plafond 30 i/s : ${window.FPSCAPB?'OUI':'non'}${window.ECO?' · éco':''}`}catch(_){return''}})()}${(()=>{try{const D=Math.max(1,dr);let tot=0,nb=0;const L=Object.entries(CA).map(([k,v])=>{tot+=v[1];nb+=v[0];return [k,v[0]/D,v[1]/D]}).sort((a,b)=>b[2]-a[2]).slice(0,8);for(const k in CA)delete CA[k];const d=DT/D;DT=0;return `\ndessin mesuré ${d.toFixed(0)} ms = canevas ${(tot/D).toFixed(0)} ms (${Math.round(nb/D)} appels) + calcul ${(d-tot/D).toFixed(0)} ms\n  `+L.map(x=>x[0]+' ×'+Math.round(x[1])+' '+x[2].toFixed(1)).join('\n  ')+`\neffets réduits (téléphone lent) : ${window.LOWFX?'OUI':'non'}`+(window.__RC?`\nsalles : ${__RC.blit} recollées, ${__RC.live} en direct, ${__RC.chg} changements`:'')+(window.__BMP?`\nfigées ${__BMP.n} (${Math.round(100*__BMP.hit/Math.max(1,__BMP.hit+__BMP.miss))} %)`:'')}catch(_){return''}})()}\n${window.HSAV||'artefact v732'} · écran ${innerWidth}×${innerHeight} ×${(devicePixelRatio||1).toFixed(2)} · zoom ${(window.Z&&Z.s||0).toFixed?Z.s.toFixed(2):'?'}`;
+  box.textContent=`${(dr/el).toFixed(1)} images dessinées/s (boucle ${ips.toFixed(1)}/s) · image ${img.toFixed(0)} ms (pire ${worst.toFixed(0)}, >45 ms : ${big})\njeu ${pf(A.jeu)} · interface ${pf(A.interface)} · minuteries ${pf(tim)} · autres ${pf(A.autres)}\nnavigateur (peinture, autres tâches) ≈ ${nav.toFixed(0)} ms${tp?'\nautres : '+tp:''}${tt?'\nminuteries :\n  '+tt:''}${window.__perfU?'\ncorrections :\n  '+window.__perfU:''}\n${(()=>{try{return `dessin ${DEMA.toFixed(0)} ms · 1 image sur 2 : ${SLOW?'OUI':'non'} · plafond 30 i/s : ${window.FPSCAPB?'OUI':'non'}${window.ECO?' · éco':''}`}catch(_){return''}})()}${(()=>{try{const D=Math.max(1,dr);let tot=0,nb=0;const L=Object.entries(CA).map(([k,v])=>{tot+=v[1];nb+=v[0];return [k,v[0]/D,v[1]/D]}).sort((a,b)=>b[2]-a[2]).slice(0,8);for(const k in CA)delete CA[k];const d=DT/D;DT=0;return `\ndessin mesuré ${d.toFixed(0)} ms = canevas ${(tot/D).toFixed(0)} ms (${Math.round(nb/D)} appels) + calcul ${(d-tot/D).toFixed(0)} ms\n  `+L.map(x=>x[0]+' ×'+Math.round(x[1])+' '+x[2].toFixed(1)).join('\n  ')+`\neffets réduits (téléphone lent) : ${window.LOWFX?'OUI':'non'}`+(window.__RC?`\nsalles : ${__RC.blit} recollées, ${__RC.live} en direct, ${__RC.chg} changements`:'')+(window.__BMP?`\nfigées ${__BMP.n} (${Math.round(100*__BMP.hit/Math.max(1,__BMP.hit+__BMP.miss))} %)`:'')}catch(_){return''}})()}\n${window.HSAV||'artefact v733'} · écran ${innerWidth}×${innerHeight} ×${(devicePixelRatio||1).toFixed(2)} · zoom ${(window.Z&&Z.s||0).toFixed?Z.s.toFixed(2):'?'}`;
   fr=0;sum=0;worst=0;big=0;dr=0;A.jeu=A.interface=A.autres=0;for(const k in TOP)delete TOP[k];t0=performance.now()}catch(_){}setTimeout(tick,1000)},1000)})();
 </script>
 <script>
@@ -733,7 +733,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v732')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v733')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5827,7 +5827,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();shareOpen()">📸 Mon tableau souvenir</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v732')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();shareOpen()">📸 Mon tableau souvenir</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v733')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -15341,6 +15341,40 @@ html body #m #mb .abk .atab.on{opacity:1;box-shadow:2px 2px 0 rgba(0,0,0,.3),ins
     0% { opacity: 0; transform: translateY(-12px); }
     100% { opacity: 1; transform: none; }
   }
+
+  /* Colonne repliée (v733) : body.hudc. Chiffres courts, jauges en anneau autour de leur icône ; #hudpin garde la colonne dépliée */
+  html body #app #hplank { position: relative !important; }
+  html body #app #hplank #hudpin { display: flex !important; position: absolute !important; z-index: 3; top: -3px !important; left: calc(100% + 7px) !important; right: auto !important; width: 26px !important; height: 26px !important; min-width: 0px !important; padding: 0px !important; margin: 0px !important; box-sizing: border-box !important; align-items: center !important; justify-content: center !important; border-radius: 50% !important; background: rgb(255, 250, 240) !important; border: 2px solid rgb(42, 36, 51) !important; box-shadow: rgba(0, 0, 0, 0.28) 0px 2px 0px !important; cursor: pointer; }
+  html body #app #hplank #hudpin::after { content: ""; position: absolute; inset: -8px; }
+  html body #app #hplank #hudpin svg { width: 14px; height: 14px; display: block; transform: rotate(35deg); transition: transform 0.12s; }
+  html body #app #hplank #hudpin.on { background: rgb(232, 120, 14) !important; }
+  html body #app #hplank #hudpin.on svg { transform: none; }
+  html body #app #hplank #hudpin.on svg path { fill: rgb(255, 255, 255); }
+  html body.hudc #app #hplank #hudpin, html body.gdon #app #hplank #hudpin { display: none !important; }
+  html body.hudo #app #hplank { animation: hudpop 0.14s ease-out; transform-origin: 0 0; }
+  @keyframes hudpop { 
+    0% { transform: scale(0.82); opacity: 0.6; }
+    100% { transform: none; opacity: 1; }
+  }
+  body.hudc { --zl: calc(var(--sl) + 100px); }
+  html body.hudc #app #hud { width: 92px !important; }
+  html body.hudc #app #hplank { padding: 3px 6px 5px !important; cursor: pointer; }
+  html body.hudc #app #hplank .euw, html body.hudc #app #hplank .euw + div { gap: 5px !important; min-height: 28px !important; padding: 0px !important; justify-content: flex-start !important; }
+  html body.hudc #app #hplank .euw img.pxi { width: 19px !important; }
+  html body.hudc #app #hplank .euw + div img.pxi { height: 15px !important; margin: 0px 3px !important; }
+  html body.hudc #app #hplank #eu, html body.hudc #app #hplank #ac { font-size: 15px !important; margin: 0px !important; white-space: nowrap; }
+  html body.hudc #app #hplank .euw.neg #eu { color: rgb(200, 50, 42); }
+  html body.hudc #app #hplank #euf, html body.hudc #app #hplank #acip, html body.hudc #app #hplank .date #pl, html body.hudc #app #spw #chapc, html body.hudc #app #spw #obc, html body.hudc #app #spw .r .bar { display: none !important; }
+  html body.hudc #app #hplank .date { padding: 3px 0px !important; }
+  html body.hudc #app #hud #hplank #spw { flex-flow: row wrap !important; justify-content: center !important; align-items: center !important; gap: 3px 4px !important; padding: 5px 0px 0px !important; }
+  html body.hudc #app #hud #hplank #spw .r { flex: 0 0 auto !important; width: 33px !important; height: 33px !important; max-width: none !important; border-radius: 50% !important; box-sizing: border-box !important; position: relative !important; display: block !important; border: 2px solid rgb(42, 36, 51) !important; background: conic-gradient(var(--c, rgb(63, 174, 90)) calc(var(--v, 0) * 1%), rgb(214, 198, 162) 0) !important; }
+  html body.hudc #app #hud #hplank #spw .r .ic { position: absolute !important; inset: 5px !important; width: auto !important; border-radius: 50% !important; background: rgb(255, 250, 240) !important; box-shadow: rgba(42, 36, 51, 0.35) 0px 0px 0px 1px; }
+  html body.hudc #app #hud #hplank #spw .r .ic img.pxi { height: 14px !important; max-width: 17px; }
+  html body.hudc #app #hud #hplank #spw .r.low { animation: hudlow 1s ease-in-out infinite; }
+  @keyframes hudlow { 
+    50% { box-shadow: rgb(224, 64, 90) 0px 0px 0px 3px; }
+  }
+  @media (prefers-reduced-motion: reduce) { html body.hudc #app #hud #hplank #spw .r.low, html body.hudo #app #hplank { animation: none; } }
 }
 
 /* ======== Hauteur ≤ 560 px ======== */
@@ -17499,6 +17533,32 @@ window.shareFromMenu=function(){window.__shBack=1;let v=document.getElementById(
   draw(0);let last=-1;(function fr(){const t=(performance.now()-t0)/D;if(t>=1||!c.isConnected){c.remove();busy=0;return}const q=Math.floor(t*N)/N;if(q!==last){last=q;draw(q)}requestAnimationFrame(fr)})()}
  __obsIn(['peta'],()=>{try{const ov=document.getElementById('peta');if(!ov)return;for(const e of ov.querySelectorAll('.fsel,.vs,.card0')){if(seen.has(e))continue;seen.add(e);play(ov)}}catch(_){}},{childList:true,subtree:true});
 })();
+</script>
+<script>
+// ===== v733 : paysage — colonne de gauche repliable. Repliée (body.hudc) : chiffres courts, jauges en anneau autour de leur icône.
+// Un toucher la déplie ; un toucher ailleurs la replie ; l'épingle (#hudpin, « hsa-hudpin ») la garde dépliée.
+(function(){const K='hsa-hudpin';let pin=false,open=false;try{pin=localStorage.getItem(K)==='1'}catch(_){}
+ const B=document.body,land=()=>innerWidth>innerHeight&&innerHeight<=600;
+ const set=()=>{try{const pk=document.getElementById('hplank');if(!pk)return;
+   let b=document.getElementById('hudpin');
+   if(!b){b=document.createElement('span');b.id='hudpin';b.setAttribute('role','button');b.style.display='none';b.innerHTML='<svg viewBox="0 0 14 14" aria-hidden="true"><path fill="#2a2433" d="M4 1h6v2H9v4l2 2v1H8v4H6v-4H3V9l2-2V3H4z"/></svg>';pk.appendChild(b)}
+   const t=pin?'Colonne épinglée : toucher pour la laisser se replier':'Épingler : garder la colonne dépliée';if(b.title!==t){b.title=t;b.setAttribute('aria-label',t);b.setAttribute('aria-pressed',pin?'true':'false')}
+   if(b.classList.contains('on')!==pin)b.classList.toggle('on',pin);
+   const c=land()&&!pin&&!open&&!B.classList.contains('gdon');
+   if(B.classList.contains('hudc')!==c)B.classList.toggle('hudc',c);
+   if((c||!open)&&B.classList.contains('hudo'))B.classList.remove('hudo');
+   const eu=pk.querySelector('.euw'),ef=document.getElementById('euf');if(eu&&ef){const n=ef.classList.contains('neg');if(eu.classList.contains('neg')!==n)eu.classList.toggle('neg',n)}
+   pk.querySelectorAll('#spw .r').forEach(r=>{const i=r.querySelector('.bar > i:not(.gh)');if(!i)return;let v=parseFloat(i.style.width);if(!(v>=0)){const w=i.parentNode.clientWidth;v=w?i.offsetWidth/w*100:r._v||0}v=Math.max(0,Math.min(100,Math.round(v)));
+     if(r._v!==v){r._v=v;r.style.setProperty('--v',v)}
+     const col=i.style.background||i.style.backgroundColor||getComputedStyle(i).backgroundColor;if(col&&r._c!==col){r._c=col;r.style.setProperty('--c',col)}
+     const lo=v<25;if(r.classList.contains('low')!==lo)r.classList.toggle('low',lo)})}catch(_){}};
+ window.__hudFold=set;
+ document.addEventListener('click',e=>{try{const t=e.target;if(!t||!t.closest)return;
+   if(t.closest('#hudpin')){e.preventDefault();e.stopPropagation();pin=!pin;open=!pin;try{localStorage.setItem(K,pin?'1':'0')}catch(_){}set();return}
+   if(B.classList.contains('hudc')&&t.closest('#hplank')&&!t.closest('#cbh')){e.preventDefault();e.stopPropagation();open=true;B.classList.add('hudo');set()}}catch(_){}},true);
+ document.addEventListener('pointerdown',e=>{try{if(!open||pin)return;const t=e.target;if(t&&t.closest&&t.closest('#hplank'))return;open=false;set()}catch(_){}},true);
+ addEventListener('resize',set);
+ __uiv(set,400)})();
 </script>
 <script>
 // ===== v702 : Agnès (fauteuil) entre et sort par la rampe de l'accueil une fois la halte accessible
