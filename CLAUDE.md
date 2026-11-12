@@ -183,3 +183,9 @@ Tableau souvenir : taille de tous les éléments, hasard, caresses (v739) :
 - `LAYS[format]` porte aussi `k` (taille par clé, 0,5 à 2,2) et `r` (inclinaison ajoutée) pour les éléments épinglés ; `item` les applique (`g.scale`), la zone touchable suit. Tout élément touché devient `cur.sel` (`selObj` rend `{t:'i',k}` pour un élément épinglé) : la barre `.shsel` règle sa taille ; plan et suppression restent réservés aux autocollants et aux textes.
 - Options (« … ») : « Disposition au hasard » (`.shrnd` : décalage, taille, inclinaison et ordre tirés au sort, autocollants redistribués) et « Tout réinitialiser » (`.shrst`).
 - Toucher le chien sur le plan compte un câlin (`B.dogk`) et fait monter un cœur ; le chien est dessiné aux coordonnées locales `DOG.x`, `DOG.y` (comme les crottes), pas à celles de `DOGP`.
+
+Tableau souvenir : barre en bas en portrait (v740) :
+- En portrait (`@media (orientation:portrait)` dans la feuille du tableau), `.shrail` est une barre horizontale en bas (58 px + marge de sécurité), boutons de `min(46px, (100vw − 38px) / 9)` ; l'aperçu prend la largeur (369 × 651 sur 375 × 812, au lieu de 304 × 537). Tiroir, options, zoom plein écran et barre de l'élément choisi (`selBar`) tiennent compte de la barre. En paysage, rien ne change (colonne à droite, feuille paysage).
+- Un nouvel autocollant se pose au centre de la zone visible (du tableau, ou de la partie zoomée), décalé d'un autocollant à l'autre.
+- L'image porte « hsa-lejeu.github.io » en bas, dans le cadre. Le bouton du hasard s'appelle « Mélanger ».
+- « Cartes gagnées » lit l'album (`COL`, `localStorage` `hsa-cards-v1`), commun à toutes les parties : sur un navigateur neuf avec la partie de test `?an=3`, il vaut 0 puis monte d'un coup quand `cardTick` tourne.
