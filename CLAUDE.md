@@ -152,3 +152,6 @@ Modes de jeu, conseil du quartier, musiques allégées (v729) :
 - Musiques : `petanque_m`, `petanque_choix_m`, `reunions_m`, `tidy_clinic_m` en mono 64 kbit/s (noms neufs pour le cache durable) ; les saisons étaient déjà en mono 48 kbit/s. Dossier `musique/` : 16 Mo → 11 Mo.
 - Frise du 12 novembre : 4,4 messages par minute après l'ouverture (objectif ≤ 5).
 
+Lyrica (v730) :
+- Premier chapitre de Samba (« Lyrica quand il en trouve ») et de Jawad (« prend du Lyrica acheté dans la rue »). Le mot est dans le glossaire des termes soulignés (`GLOSS.Lyrica`, script v465) : il suffit d'ajouter une clé à la table `G` pour qu'un mot soit souligné et expliqué dans les fenêtres.
+
