@@ -137,3 +137,6 @@ Accueil (v727) :
 - `#splmail` et `#splhint` sont masqués (le second réapparaît avec la classe `msg` pour le message du tableau sans partie) ; l'adresse de contact est dans « À propos ».
 - Étiquettes des autocollants : lettres blanches cernées de sombre, sans fond. Icônes `fleche` et `main` du tableau fournies par l'utilisateur.
 
+Musique du tableau souvenir (v728) :
+- `musique/tidy_clinic.mp3` (« Tidy Clinic », créée avec Suno, créditée dans les Crédits ; ajoutée à la liste `MUS` de `outils/mksw.py`). `shMus(true)` à l'ouverture du tableau : la musique du jeu s'efface et se met en pause, celle du tableau monte ; `shMus(false)` à la fermeture fait l'inverse. Fondus par `requestAnimationFrame` (`shFade`), car le jeu est en pause. `playMus` ne fait rien tant que `#shov` est ouvert ou que le tableau vient de l'accueil (`__shBack`).
+

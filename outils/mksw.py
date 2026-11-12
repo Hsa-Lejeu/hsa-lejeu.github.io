@@ -3,7 +3,7 @@
 import sys,json,glob
 ver,liste=sys.argv[1],sys.argv[2]
 IMG=[l.strip() for l in open(liste) if l.strip()]
-MUS=['musique/hiver.mp3','musique/printemps.mp3','musique/ete.mp3','musique/automne.mp3','musique/reunions.mp3','musique/debat.mp3','musique/petanque.mp3','musique/petanque_choix.mp3']
+MUS=['musique/hiver.mp3','musique/printemps.mp3','musique/ete.mp3','musique/automne.mp3','musique/reunions.mp3','musique/debat.mp3','musique/petanque.mp3','musique/petanque_choix.mp3','musique/tidy_clinic.mp3']
 LIB=['three-r128.min.js']+sorted(glob.glob('fonts/*.woff2'))
 CODE=['index.html','manifest.webmanifest','icon-192-v2.png','icon-512-v2.png','icon-maskable-512-v2.png','apple-touch-icon-v2.png']
 js=f"""// v586 : le code (index.html) est dans un cache par version ; les images, les musiques, la police et three.js dans un cache durable.
