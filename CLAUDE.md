@@ -169,3 +169,6 @@ Combo, boutons du haut, caisse de solidarité (v734-v735) :
 
 Grève au choix (v736) :
 - La scène « Ras-le-bol » (`strikeStart`, dernière définition) a deux boutons : « Fermer la halte et manifester » (inchangé) et « Rester ouvert » (`B.strikeNo=1`, énergie −20 pour toute l'équipe, pas de fermeture, pas de suite). La moitié « grève » de la caisse de solidarité n'est versée que si `B.strikeD && !B.strikeNo`. Les robots prennent le premier bouton (la grève).
+
+Musique du tableau depuis l'accueil (v737) :
+- La couche `W('playMus')` de la v728 n'était jamais posée (`W` n'existe pas dans le script du tableau, erreur avalée par `try`) : la musique de la saison partait 700 ms après `startGame`, juste avant celle du tableau. Le blocage est maintenant posé directement sur `window.playMus`. Pour vérifier : compter les appels à `HTMLMediaElement.prototype.play` (un seul, `tidy_clinic_m.mp3`).
