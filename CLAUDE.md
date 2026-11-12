@@ -119,3 +119,9 @@ Tableau souvenir (v724) :
 - Depuis l'accueil, `shareFromMenu()` pose un voile `#shwait` (sous `#shov`) le temps que la partie se charge : le plan ne se voit plus avant le tableau.
 - En portrait, dès que l'aperçu est zoomé, `#shov` prend la classe `zf` : `.shvp` passe en plein écran, `.shside` est masquée, bouton `.shzx` « Tableau entier » (ou deux touchers) pour revenir. `zoom()` convertit les coordonnées au changement de mode et centre le tableau s'il est plus petit que l'écran. Ne pas centrer un bouton du jeu avec `transform` : l'état enfoncé des boutons le remplace et le bouton saute sous le doigt.
 
+Tableau souvenir « façon atelier » (v725) :
+- Le liège prend l'écran (`.shw`), les outils sont une colonne d'icônes à droite (`.shrail` : fermer, quatre outils `.shtabs`, options `.shmore`, télécharger, partager). Icônes fournies par l'utilisateur, réduites à leur grille : table `SHI` (data-URL), `ic(nom)` rend `<img class="shi">`.
+- `cur.tab` vaut `null` quand aucun outil n'est ouvert ; toucher une icône ouvre son tiroir (`.shside`, en bas), la retoucher ou toucher le liège le referme. Format et « Tout remettre en place » sont dans `.shopt` (bouton « … »). `.shmsg` est un message flottant qui s'efface seul.
+- La barre de l'élément choisi (`.shsel`) flotte à côté de lui : `selBar()` la place après chaque `render()` et chaque `zoom()`.
+- Paysage : règles dans `<style id="paysage">` (tiroir à gauche, boutons de la colonne plus petits).
+
