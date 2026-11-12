@@ -189,3 +189,8 @@ Tableau souvenir : barre en bas en portrait (v740) :
 - Un nouvel autocollant se pose au centre de la zone visible (du tableau, ou de la partie zoomée), décalé d'un autocollant à l'autre.
 - L'image porte « hsa-lejeu.github.io » en bas, dans le cadre. Le bouton du hasard s'appelle « Mélanger ».
 - « Cartes gagnées » lit l'album (`COL`, `localStorage` `hsa-cards-v1`), commun à toutes les parties : sur un navigateur neuf avec la partie de test `?an=3`, il vaut 0 puis monte d'un coup quand `cardTick` tourne.
+
+Écrans de chargement (v741) :
+- `#boot` et le voile du tableau (`#shwait`) montrent le chien de la halte qui trottine (feuille `IMD` recopiée en data-URL dans `<style id="ldst">`, variable `--ldog`), des traces de pattes qui apparaissent derrière lui (`.ldp`, masque SVG `--lpaw`) et une phrase courte (`window.__ldFact()`, liste `F` du petit script placé juste après `#boot`). `window.__ldHTML(titre)` rend le même bloc pour un autre écran d'attente.
+- La phrase avance d'un cran à chaque lancement (`localStorage` `hsa-ldi`), sans `Math.random()` : un tirage au chargement décalerait le hasard de la partie témoin.
+- Sources des chiffres (novembre 2026) : Allemagne 33 salles en 2024 (ministère fédéral de la Santé), Suisse 15 salles dans 11 villes (Infodrog, janvier 2025), 350 000 personnes sans domicile (Fondation pour le logement, rapport 2026), cocaïne 1,1 million d'usagers dans l'année (OFDT), Marseille bloquée en 2024 puis en 2025 ; les autres phrases reprennent les cartes et le quiz du jeu. À revoir quand ces chiffres changent.
