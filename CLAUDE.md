@@ -172,3 +172,9 @@ Grève au choix (v736) :
 
 Musique du tableau depuis l'accueil (v737) :
 - La couche `W('playMus')` de la v728 n'était jamais posée (`W` n'existe pas dans le script du tableau, erreur avalée par `try`) : la musique de la saison partait 700 ms après `startGame`, juste avant celle du tableau. Le blocage est maintenant posé directement sur `window.playMus`. Pour vérifier : compter les appels à `HTMLMediaElement.prototype.play` (un seul, `tidy_clinic_m.mp3`).
+
+Tableau souvenir : éléments bloqués, glisser fluide, compteurs (v738) :
+- Les clés `sign`, `st0`, `st1` commencent par « s » et étaient prises pour des autocollants (`s<rang>`) : impossibles à déplacer. Tester un autocollant avec `isStk(k)` (`/^s\d+$/`), jamais avec `k[0]==='s'`.
+- Glisser : rien n'est dessiné au toucher. Au premier mouvement (> 3 px), le tableau sans l'élément est peint une fois dans `.shpv` et l'élément seul, recadré, devient un calque `canvas.shdr` dans `.shvp` (position relative), déplacé par `transform` : aucun dessin pendant le glisser. Au lâcher, composition rapide puis `render()` 40 ms plus tard. Un canevas ajouté à la page hérite d'une bordure de 3 px d'une règle générale du jeu : la remettre à zéro en ligne.
+- `CN` (dont `CN.t`, dépistages), `SYP` (seringues ramassées) et `LS` (vies sauvées) repartent de zéro à chaque année (`nextYear`). Les totaux de la partie sont `B.totT`, `B.totS`, `B.totL` (cumulés juste avant le passage d'année) + la valeur de l'année en cours ; le tableau et la boule DASRI s'en servent. Les années déjà passées d'une partie commencée avant la v738 sont perdues.
+- Un post-it facultatif qui vaut 0 n'est plus proposé. Les câlins au chien (`B.dogk`) ne comptent que les usager·es qui s'arrêtent devant le chien, environ un par minute de jeu.
