@@ -153,5 +153,5 @@ Modes de jeu, conseil du quartier, musiques allégées (v729) :
 - Frise du 12 novembre : 4,4 messages par minute après l'ouverture (objectif ≤ 5).
 
 Lyrica (v730) :
-- Premier chapitre de Samba (« Lyrica quand il en trouve ») et de Jawad (« prend du Lyrica acheté dans la rue »). Le mot est dans le glossaire des termes soulignés (`GLOSS.Lyrica`, script v465 ; depuis la v731 la bulle parle d'automédication liée aux parcours d'exil, sans le mot « détourné ») : il suffit d'ajouter une clé à la table `G` pour qu'un mot soit souligné et expliqué dans les fenêtres.
+- Premier chapitre de Samba (« Lyrica quand il en trouve ») et de Jawad (« prend du Lyrica acheté dans la rue »). Le mot est dans le glossaire des termes soulignés (`GLOSS.Lyrica`, script v465 ; la bulle dit « automédication (usage pirate) » liée aux parcours d'exil, formulation voulue par l'utilisateur, sans le mot « détourné ») : il suffit d'ajouter une clé à la table `G` pour qu'un mot soit souligné et expliqué dans les fenêtres.
 
