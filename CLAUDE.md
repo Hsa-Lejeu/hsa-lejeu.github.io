@@ -111,3 +111,7 @@ Barre sombre dans les salles (v722) :
 - Banc d'essai : comparer le canevas d'une image à l'autre et chercher les lignes qui s'assombrissent d'un coup (5 défauts en 12 s avant, 0 après).
 - Pétanque : `sink` du Vélodrome à 0,15 (cage du fond entière) ; lampadaires en 3D à l'échelle 1,15 (au lieu de 0,55) ; `__flagTex2(graine, [r,v,b], joint)` : dalles grises à la Canebière / Vieux-Port, claires à la Major.
 
+Panoramas animés et caches rallumés (v723) :
+- `window.__panoFx(terrain, image, canevas, texture)` (appelé au chargement du panorama) dessine les effets dans un calque aux coordonnées de l'image (1086 px de large) et le recolle dans la texture avec ses deux moitiés en miroir, toutes les 110 ms : reflets et vaguelettes sur l'eau (pixels bleus d'une zone `water`), mouettes (`gulls`), pétales ou feuilles (`fall`), guirlandes (`lights`), fumigènes (`smoke`) et flashs (`flash`) au Vélodrome. Table `C` par terrain. Rien si `window.LOWFX` ou `#nopanofx`. La minuterie s'arrête quand la texture change ou que la pétanque se ferme.
+- Les deux caches du décor (copies figées des salles, `binRoom`) sont rallumés par défaut : le scintillement venait de `furnList` (v722), pas d'eux. `#nocache` les coupe.
+
