@@ -231,3 +231,8 @@ Huit scènes redécorées (v747) :
 - Outil de découpe (hors dépôt) : `mk31.py` (composantes par étiquetage après dilatation, pour les planches à plusieurs objets sur deux rangées).
 
 Massage cardiaque (v749) : dans `PRJS.psc`, la personne est allongée sur un tapis de sol plat (rectangle bleu), plus sur le tapis rond `rug_b`, qu'on prenait pour une table. Une personne allongée (`A30.lying`) se pose sur un tapis plat ou un lit, jamais sur un meuble rond.
+
+Scènes des parcours garnies (v750) :
+- `LCD.room` ajoute seul un tapis sous les personnes, un meuble à fleurs et une lampe à gauche (si la gauche est libre), une étagère ou un classeur à droite, et un bureau quand la scène ne donne aucun meuble. `LCD.studio` est un vrai petit logement (coin cuisine, frigo, table, lit, table de nuit, lampe).
+- Collectif (`PRJS.col`) : les pancartes sont les cartons `pk1`…`pk4` avec un cœur rouge.
+- Partie témoin `debut` : la variante instable donne « 68 événements, arrivée A1 M3 J10 » d'un côté ; si c'est le cas, relancer.
