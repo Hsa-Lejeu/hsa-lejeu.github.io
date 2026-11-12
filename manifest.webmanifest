@@ -44,81 +44,109 @@
    "label": "Dirige une Halte Soins Addictions"
   },
   {
-   "src": "screenshots/02_salle-conso.png",
-   "sizes": "1920x1080",
-   "type": "image/png",
-   "form_factor": "wide",
-   "label": "Réponds aux besoins des usager·es de la salle"
-  },
-  {
-   "src": "screenshots/03_accueil.png",
+   "src": "screenshots/02_halte.png",
    "sizes": "1920x1080",
    "type": "image/png",
    "form_factor": "wide",
    "label": "Accueille chaque personne sans jugement"
   },
   {
-   "src": "screenshots/04_suivi.png",
+   "src": "screenshots/03_debat.png",
    "sizes": "1920x1080",
    "type": "image/png",
    "form_factor": "wide",
-   "label": "Suis au long cours des usager·es"
+   "label": "Affronte Cédric Crotti en débat public"
   },
   {
-   "src": "screenshots/05_idees-recues.png",
+   "src": "screenshots/04_petanque.png",
    "sizes": "1920x1080",
    "type": "image/png",
    "form_factor": "wide",
-   "label": "Démonte les idées reçues"
+   "label": "Gagne le quartier à la pétanque"
   },
   {
-   "src": "screenshots/06_maraude.png",
+   "src": "screenshots/05_tableau.png",
    "sizes": "1920x1080",
    "type": "image/png",
    "form_factor": "wide",
-   "label": "Pars en maraude avec le camion"
+   "label": "Compose ton tableau souvenir"
   },
   {
-   "src": "screenshots/07_cartes.png",
+   "src": "screenshots/06_dilemme.png",
    "sizes": "1920x1080",
    "type": "image/png",
    "form_factor": "wide",
-   "label": "Plus de 100 cartes sur la réduction des risques"
+   "label": "Arbitre les dilemmes du quotidien"
   },
   {
-   "src": "screenshots/08_riverains.png",
+   "src": "screenshots/07_courrier.png",
    "sizes": "1920x1080",
    "type": "image/png",
    "form_factor": "wide",
-   "label": "Gagne la confiance des riverains"
+   "label": "Réponds au courrier du quartier"
   },
   {
-   "src": "screenshots/09_halte.png",
+   "src": "screenshots/08_quartier.png",
+   "sizes": "1920x1080",
+   "type": "image/png",
+   "form_factor": "wide",
+   "label": "Fais vivre tout un quartier"
+  },
+  {
+   "src": "screenshots/p01_titre.png",
    "sizes": "1080x1920",
    "type": "image/png",
    "form_factor": "narrow",
-   "label": "La halte et son quartier, sur téléphone"
+   "label": "Dirige une Halte Soins Addictions"
   },
   {
-   "src": "screenshots/10_quartier.png",
+   "src": "screenshots/p02_halte.png",
    "sizes": "1080x1920",
    "type": "image/png",
    "form_factor": "narrow",
-   "label": "Maraudes, riverains, partenaires"
+   "label": "Accueille chaque personne sans jugement"
   },
   {
-   "src": "screenshots/11_cartes.png",
+   "src": "screenshots/p03_debat.png",
    "sizes": "1080x1920",
    "type": "image/png",
    "form_factor": "narrow",
-   "label": "Plus de 100 cartes sur la réduction des risques"
+   "label": "Affronte Cédric Crotti en débat public"
   },
   {
-   "src": "screenshots/12_has.png",
+   "src": "screenshots/p04_petanque.png",
    "sizes": "1080x1920",
    "type": "image/png",
    "form_factor": "narrow",
-   "label": "Le verdict de la HAS"
+   "label": "Gagne le quartier à la pétanque"
+  },
+  {
+   "src": "screenshots/p05_tableau.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Compose ton tableau souvenir"
+  },
+  {
+   "src": "screenshots/p06_dilemme.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Arbitre les dilemmes du quotidien"
+  },
+  {
+   "src": "screenshots/p07_courrier.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Réponds au courrier du quartier"
+  },
+  {
+   "src": "screenshots/p08_quartier.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Fais vivre tout un quartier"
   }
  ]
 }

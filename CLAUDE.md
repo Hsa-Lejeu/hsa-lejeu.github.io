@@ -140,3 +140,8 @@ Accueil (v727) :
 Musique du tableau souvenir (v728) :
 - `musique/tidy_clinic.mp3` (« Tidy Clinic », créée avec Suno, créditée dans les Crédits ; ajoutée à la liste `MUS` de `outils/mksw.py`). `shMus(true)` à l'ouverture du tableau : la musique du jeu s'efface et se met en pause, celle du tableau monte ; `shMus(false)` à la fermeture fait l'inverse. Fondus par `requestAnimationFrame` (`shFade`), car le jeu est en pause. `playMus` ne fait rien tant que `#shov` est ouvert ou que le tableau vient de l'accueil (`__shBack`).
 
+Captures et vidéo de présentation (12 novembre 2026) :
+- `screenshots/` : huit captures paysage 1920 × 1080 (`01_titre` … `08_quartier`) et huit portrait 1080 × 1920 (`p01_…`), légendées dans l'image (titre Lilita, sous-titre Atkinson, bandeau sombre en bas) ; elles sont listées dans `manifest.webmanifest` (`wide` / `narrow`). Les originaux sans réduction de couleurs sont remis à l'utilisateur pour Google Play.
+- Méthode : la légende est un calque posé dans la page du jeu avant la capture (polices du jeu). Raccourcis utiles : `?an=3`, `?an=3#tableau`, `debOpen()`, `petaShow(true)` avec `__pTerOK=()=>true`.
+- Vidéo : enregistrée image par image avec l'horloge simulée de la partie témoin (`__adv(1000/30)` puis capture), animations CSS recalées sur le temps simulé (`document.getAnimations()`), assemblée par ffmpeg à 30 images par seconde. C'est le seul moyen d'avoir une vidéo fluide sur le banc d'essai.
+
