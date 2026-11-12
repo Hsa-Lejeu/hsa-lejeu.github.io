@@ -78,7 +78,7 @@ window.txa=function txa(e){if(!e)return '';if(e.nodeType===3)return (e.__nb===e.
   const el=(performance.now()-t0)/1000,ips=fr/el,img=fr?sum/fr:0,js=(A.jeu+A.interface+A.autres+tim)/Math.max(1,fr);
   const pf=v=>(v/Math.max(1,fr)).toFixed(1);const nav=Math.max(0,img-js);
   const tp=Object.entries(TOP).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([k,v])=>k.slice(0,18)+' '+pf(v)).join(' · ');
-  box.textContent=`${(dr/el).toFixed(1)} images dessinées/s (boucle ${ips.toFixed(1)}/s) · image ${img.toFixed(0)} ms (pire ${worst.toFixed(0)}, >45 ms : ${big})\njeu ${pf(A.jeu)} · interface ${pf(A.interface)} · minuteries ${pf(tim)} · autres ${pf(A.autres)}\nnavigateur (peinture, autres tâches) ≈ ${nav.toFixed(0)} ms${tp?'\nautres : '+tp:''}${tt?'\nminuteries :\n  '+tt:''}${window.__perfU?'\ncorrections :\n  '+window.__perfU:''}\n${(()=>{try{return `dessin ${DEMA.toFixed(0)} ms · 1 image sur 2 : ${SLOW?'OUI':'non'} · plafond 30 i/s : ${window.FPSCAPB?'OUI':'non'}${window.ECO?' · éco':''}`}catch(_){return''}})()}${(()=>{try{const D=Math.max(1,dr);let tot=0,nb=0;const L=Object.entries(CA).map(([k,v])=>{tot+=v[1];nb+=v[0];return [k,v[0]/D,v[1]/D]}).sort((a,b)=>b[2]-a[2]).slice(0,8);for(const k in CA)delete CA[k];const d=DT/D;DT=0;return `\ndessin mesuré ${d.toFixed(0)} ms = canevas ${(tot/D).toFixed(0)} ms (${Math.round(nb/D)} appels) + calcul ${(d-tot/D).toFixed(0)} ms\n  `+L.map(x=>x[0]+' ×'+Math.round(x[1])+' '+x[2].toFixed(1)).join('\n  ')+`\neffets réduits (téléphone lent) : ${window.LOWFX?'OUI':'non'}`+(window.__RC?`\nsalles : ${__RC.blit} recollées, ${__RC.live} en direct, ${__RC.chg} changements`:'')+(window.__BMP?`\nfigées ${__BMP.n} (${Math.round(100*__BMP.hit/Math.max(1,__BMP.hit+__BMP.miss))} %)`:'')}catch(_){return''}})()}\n${window.HSAV||'artefact v728'} · écran ${innerWidth}×${innerHeight} ×${(devicePixelRatio||1).toFixed(2)} · zoom ${(window.Z&&Z.s||0).toFixed?Z.s.toFixed(2):'?'}`;
+  box.textContent=`${(dr/el).toFixed(1)} images dessinées/s (boucle ${ips.toFixed(1)}/s) · image ${img.toFixed(0)} ms (pire ${worst.toFixed(0)}, >45 ms : ${big})\njeu ${pf(A.jeu)} · interface ${pf(A.interface)} · minuteries ${pf(tim)} · autres ${pf(A.autres)}\nnavigateur (peinture, autres tâches) ≈ ${nav.toFixed(0)} ms${tp?'\nautres : '+tp:''}${tt?'\nminuteries :\n  '+tt:''}${window.__perfU?'\ncorrections :\n  '+window.__perfU:''}\n${(()=>{try{return `dessin ${DEMA.toFixed(0)} ms · 1 image sur 2 : ${SLOW?'OUI':'non'} · plafond 30 i/s : ${window.FPSCAPB?'OUI':'non'}${window.ECO?' · éco':''}`}catch(_){return''}})()}${(()=>{try{const D=Math.max(1,dr);let tot=0,nb=0;const L=Object.entries(CA).map(([k,v])=>{tot+=v[1];nb+=v[0];return [k,v[0]/D,v[1]/D]}).sort((a,b)=>b[2]-a[2]).slice(0,8);for(const k in CA)delete CA[k];const d=DT/D;DT=0;return `\ndessin mesuré ${d.toFixed(0)} ms = canevas ${(tot/D).toFixed(0)} ms (${Math.round(nb/D)} appels) + calcul ${(d-tot/D).toFixed(0)} ms\n  `+L.map(x=>x[0]+' ×'+Math.round(x[1])+' '+x[2].toFixed(1)).join('\n  ')+`\neffets réduits (téléphone lent) : ${window.LOWFX?'OUI':'non'}`+(window.__RC?`\nsalles : ${__RC.blit} recollées, ${__RC.live} en direct, ${__RC.chg} changements`:'')+(window.__BMP?`\nfigées ${__BMP.n} (${Math.round(100*__BMP.hit/Math.max(1,__BMP.hit+__BMP.miss))} %)`:'')}catch(_){return''}})()}\n${window.HSAV||'artefact v729'} · écran ${innerWidth}×${innerHeight} ×${(devicePixelRatio||1).toFixed(2)} · zoom ${(window.Z&&Z.s||0).toFixed?Z.s.toFixed(2):'?'}`;
   fr=0;sum=0;worst=0;big=0;dr=0;A.jeu=A.interface=A.autres=0;for(const k in TOP)delete TOP[k];t0=performance.now()}catch(_){}setTimeout(tick,1000)},1000)})();
 </script>
 <script>
@@ -344,6 +344,15 @@ button:not(:disabled):active{transform:translateY(1px)}
 #splash .sbox button{box-sizing:border-box;width:min(320px,84vw)!important;min-width:0!important;padding:5px 14px!important;font-size:19px!important;line-height:1.25;text-align:center;justify-content:center}
 #splash .sbox button.go{font-size:22px!important}
 #splpet small{display:none!important}
+#modesel{position:fixed;inset:0;z-index:9500;display:flex;align-items:center;justify-content:center;background:rgba(20,16,42,.82);padding:max(12px,env(safe-area-inset-top,0px)) 12px max(12px,env(safe-area-inset-bottom,0px));box-sizing:border-box}
+#modesel .mdbx{background:#fffaf0;border:3px solid #2a2433;border-radius:14px;padding:14px;max-width:560px;width:100%;max-height:100%;overflow:auto;box-sizing:border-box;text-align:center}
+#modesel h2{margin:0 0 10px;font:400 20px Lilita,'Atkinson Hyperlegible',sans-serif;color:#3a2a1e}
+#modesel .mdl{display:flex;flex-direction:column;gap:8px}
+#modesel .mdl button{display:flex;flex-direction:column;gap:3px;align-items:center;width:100%;margin:0;padding:9px 10px;text-align:center}
+#modesel .mdl button[data-m="e"]{order:-1}
+#modesel .mdl b{font:400 18px Lilita,'Atkinson Hyperlegible',sans-serif}
+#modesel .mdl small{font:400 13px/1.3 'Atkinson Hyperlegible',sans-serif;color:#5c5068;white-space:normal}
+#modesel p{margin:10px 0 0;font:700 13px/1.3 'Atkinson Hyperlegible',sans-serif;color:#3a2a1e}
 #splpet,#splsh{display:none!important}
 #splash .sbox:not(.splok) button:not(.go){visibility:hidden}
 </style>
@@ -724,7 +733,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v728')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v729')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -4372,7 +4381,7 @@ h3.rvstamp,h2.rvstamp{animation:rvst .55s cubic-bezier(.25,1.6,.5,1) both}@keyfr
 window.tvShow=tvShow;window.rvStage=rvStage;
 
 // ===== v170 : épilogues de fin de partie (fin moyenne : applaudissements puis promenades ; super fin : fête géante au square), générique de remerciements, « Fin », cartes manquantes
-MUS.src.fin='musique/reunions.mp3';
+MUS.src.fin='musique/reunions_m.mp3';
 function epClap(d){try{if(!AU.ctx||AU.s<=0||!AU.fx)return;const t=AU.ctx.currentTime+.02;for(let i=0;i<Math.round(d*60);i++){const tt=t+Math.random()*d,f=900+Math.random()*1800,fade=1-Math.max(0,(tt-t)-d*.6)/(d*.4);noise(tt,.03+Math.random()*.03,(.08+Math.random()*.12)*Math.max(.15,fade),f,0,'bandpass')}}catch(_){}}
 function epPairs(){const pros=[{ci:18,n:'Camille',role:'chef·fe de service',cam:1}].concat(STF.filter(z=>z.ci!=null&&z.ci<88).map(z=>({ci:z.ci,n:z.n,role:(R[z.r]||[])[1]||''})));
  const us=Object.values(hist).filter(h=>h.v&&h.ci!=null&&h.ci<88).sort((a,b)=>(b.done?1:0)-(a.done?1:0)||b.v-a.v);let U=us.length?us:usCi().map(ci=>({ci,n:''}));if(!U.length)U=[{ci:3,n:''}];
@@ -5818,7 +5827,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();shareOpen()">📸 Mon tableau souvenir</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v728')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();shareOpen()">📸 Mon tableau souvenir</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v729')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -6128,6 +6137,7 @@ W('cDraw',(o,a)=>{const r=o(...a);try{document.querySelectorAll('canvas.cil').fo
 // ===== v219 : usagers de plus en plus exigeants, services qui comptent (santé publique, HAS), deux protections, nouvelle scène « santé mentale »
 // ---- un besoin non pourvu pèse de plus en plus : −15 en année 1, −25 en année 2, −35 en année 3 (au lieu de −22)
 W('outc',(o,a)=>{const v=a[0],u0=un,r=o(...a);try{if(un>u0&&v&&hist[v.name]){const f=[.7,1.15,1.6][Math.min(3,YR)-1];hist[v.name].sat+=22-22*f}}catch(_){}return r});
+setInterval(()=>{try{if(!started||ended||MEET||!$('m').hidden||$('fmo')||YR<2||q>=20)return;B.qTip=B.qTip||{};if(B.qTip[YR])return;B.qTip[YR]=1;ctip('q20y'+YR,'Le quartier est à bout. Une fête de quartier, des maraudes et des DASRI vidés à temps font remonter la tranquillité.')}catch(_){}},3000);
 setInterval(()=>{try{if(!started||ended||MEET||!$('m').hidden||$('fmo'))return;if(YR>=2&&!B.exS2){B.exS2=1;say('🧭 Camille : « Les gens attendent plus de nous maintenant : un besoin sans réponse déçoit davantage. »')}
  else if(YR>=3&&!B.exS3){B.exS3=1;say('🧭 Camille : « Dernière année : les attentes sont au plus haut. Chaque besoin sans réponse pèsera lourd. »')}}catch(_){}},3000);
 // ---- santé publique : chaque mois, chaque service de santé ouvert (soins, psy, labo) compte
@@ -7620,6 +7630,15 @@ window.setHard=function(v){window.HARD=v?1:0;try{localStorage.setItem('hsaHard',
  try{say(window.HARD?'🎚️ Mode difficile : la ville et l’ARS paient 20 % de moins, l’équipe attend 30 s au plus quand elle appelle, et chaque refus pèse davantage.':'🎚️ Mode normal rétabli.')}catch(_){}};
 {const _pa=window.payARS;window.payARS=function(n,v){if(window.HARD&&n){const k=Math.max(1,Math.round(n*.8*100)/100);return _pa.call(this,k,v)}return _pa.apply(this,arguments)};try{payARS=window.payARS}catch(_){}}
 W('leave',(o,a)=>{if(!window.HARD||!window.PAYNOW||!started||ended)return o(...a);const e0=eu;const r=o(...a);try{const g=eu-e0;if(g>0){const cut=Math.round(g*.2);eu-=cut;recf('Financement de la ville',-cut)}}catch(_){}return r});
+window.EASY=0;try{window.EASY=localStorage.getItem('hsaEasy')=='1'?1:0}catch(_){}
+window.setEasy=function(v){window.EASY=v?1:0;try{localStorage.setItem('hsaEasy',window.EASY?'1':'0')}catch(_){}if(window.EASY&&window.HARD){try{setHard(0)}catch(_){}}else{try{say(window.EASY?'🎚️ Mode découverte : la ville et l’ARS paient 20 % de plus, et la tranquillité du quartier baisse moins vite.':'🎚️ Mode normal rétabli.')}catch(_){}}};
+{const _sh=window.setHard;window.setHard=function(v){if(v&&window.EASY){window.EASY=0;try{localStorage.setItem('hsaEasy','0')}catch(_){}}return _sh.apply(this,arguments)}}
+{const _pa=window.payARS;window.payARS=function(n,v){if(window.EASY&&n)return _pa.call(this,Math.round(n*1.2*100)/100,v);return _pa.apply(this,arguments)};try{payARS=window.payARS}catch(_){}}
+W('leave',(o,a)=>{if(!window.EASY||!window.PAYNOW||!started||ended)return o(...a);const e0=eu;const r=o(...a);try{const g=eu-e0;if(g>0){const add=Math.round(g*.2);eu+=add;recf('Financement de la ville',add)}}catch(_){}return r});
+W('upd',(o,a)=>{if(!window.EASY)return o(...a);const q0=q;const r=o(...a);try{if(started&&!ended&&q<q0)q=q0-(q0-q)*.7}catch(_){}return r});
+W('settings',(o,a)=>{const r=o(...a);try{const mb=$('mb'),ref=mb.querySelector('button.go[style]');if(!ref)return r;const d=document.createElement('div');d.className='set';d.style.marginTop='8px';
+ d.innerHTML=`<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" ${window.EASY?'checked':''} onchange="setEasy(this.checked)" style="width:auto"> 🎚️ Mode découverte</label><p class="hint" style="margin:4px 0 0">Pour découvrir le jeu sans pression : la ville et l’ARS paient 20 % de plus, et la tranquillité du quartier baisse moins vite. Se change à tout moment.</p>`;
+ mb.insertBefore(d,ref)}catch(_){}return r});
 W('settings',(o,a)=>{const r=o(...a);try{const mb=$('mb'),ref=mb.querySelector('button.go[style]');if(!ref)return r;const d=document.createElement('div');d.className='set';d.style.marginTop='8px';
  d.innerHTML=`<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" ${window.HARD?'checked':''} onchange="setHard(this.checked)" style="width:auto"> 🎚️ Mode difficile</label><p class="hint" style="margin:4px 0 0">La ville et l’ARS paient 20 % de moins, l’équipe n’attend que 30 s quand elle appelle (−4 de tranquillité sans réponse), et refuser une demande coûte deux fois plus. Se change à tout moment.</p>`;
  mb.insertBefore(d,ref)}catch(_){}return r});
@@ -12085,7 +12104,7 @@ body.hq23 #fmo,body.hq23 #ulp,body.hq23 #ctoast,body.hq23 #toasts{visibility:hid
    const P=B.peta||{};try{newsAdd('🎳',P.w?`Tournoi de pétanque : le quartier de la halte gagne ${P.s[0]}–${P.s[1]}`:`Tournoi de pétanque : belle défaite ${P.s[0]}–${P.s[1]}, riverains et usager·es main dans la main`)}catch(_){}
    try{say(P.w?'🎳 Camille : « Tu as vu les voisins applaudir nos usager·es ? Ça, aucune affiche ne l’aurait fait. »':'🎳 Camille : « On a perdu la partie, mais pas le quartier. Les voisins en parlent encore. »')}catch(_){}}
  };
- try{MUS.src.peta='musique/petanque.mp3';MUS.src.petac='musique/petanque_choix.mp3'}catch(_){}
+ try{MUS.src.peta='musique/petanque_m.mp3';MUS.src.petac='musique/petanque_choix_m.mp3'}catch(_){}
  const PM={el:null,k:''};
  window.petaMusSlow=function(on){try{const a=PM.el;if(!a)return;a.preservesPitch=false;a.mozPreservesPitch=false;a.webkitPreservesPitch=false;a.playbackRate=on?.62:1;fadeTo(a,on?musVol()*.4:musVol()*.72,300)}catch(_){}};
  window.petaMus=function(k){try{if(PM.k===k&&PM.el&&!PM.el.paused)return;const old=PM.el;if(old){const o=old;fadeTo(o,0,600,()=>{try{o.pause()}catch(_){}})}
@@ -13587,7 +13606,11 @@ if(d.STF)STF=d.STF.map(z=>Object.assign(z,{call:null}));if(d.built)d.built.forEa
 V=[];WL.forEach(l=>l.length=0);occ=[0,0,0,0,0,0,0,0,0];if(typeof cm!='undefined')for(let i=0;i<cm.length;i++)cm[i]=0;LT=[];WS=null;MEET=null;DC=null;INV=null;SC=null;sel=-1;FLT=[];BB.splice(0).forEach(b=>b.e.remove());
 st=[0,1,2,3,4,5,6,7,8].map(i=>STF.filter(s=>s.r==i&&s.off<=0).length);RL=-1;SG=null}
 function continueGame(){const d=saveGet();if(!d)return startGame();startGame();INTRO=0;ii=99;saveApply(d);paused=false;const m=$('m');m.className='modal';m.hidden=true;ui();say(`💾 Partie reprise : ${MN[Math.min(mo,11)]}, jour ${day}${YR>1?', année '+YR:''}. Bon retour à la halte !`)}
-function newGameAsk(b){if(saveGet()&&!b.dataset.ok){b.dataset.ok=1;b.innerHTML='⚠️ Effacer la partie en cours et recommencer ?';return}saveClear();const go_=()=>{if(window.tvIntro)tvIntro(()=>chefCreate(startGame));else if(window.letterAnim)letterAnim(()=>chefCreate(startGame));else startGame()};if(window.twShow)twShow(go_);else go_()}
+function newGameAsk(b){if(saveGet()&&!b.dataset.ok){b.dataset.ok=1;b.innerHTML='⚠️ Effacer la partie en cours et recommencer ?';return}
+ if(!window.__modeOk&&!document.getElementById('modesel')){const o=document.createElement('div');o.id='modesel';const M=[['n','🎚️','Normal','Budget serré, quartier à convaincre.'],['e','🌱','Découverte','Plus d’argent, un quartier plus patient.'],['h','💪','Difficile','Moins d’argent, chaque refus pèse plus.']];
+  o.innerHTML='<div class="mdbx"><h2>Choisis ton mode de jeu</h2><div class="mdl">'+M.map(m=>'<button type="button" data-m="'+m[0]+'"><b>'+m[1]+' '+m[2]+'</b><small>'+m[3]+'</small></button>').join('')+'</div><p>Modifiable à tout moment dans ☰ › Paramètres.</p></div>';
+  document.body.appendChild(o);o.querySelectorAll('button').forEach(x=>x.onclick=()=>{const k=x.dataset.m;try{window.EASY=k=='e'?1:0;window.HARD=k=='h'?1:0;localStorage.setItem('hsaEasy',window.EASY?'1':'0');localStorage.setItem('hsaHard',window.HARD?'1':'0');const e=$('hardc');if(e)e.style.display=window.HARD?'':'none'}catch(_){}o.remove();window.__modeOk=1;try{newGameAsk(b)}finally{window.__modeOk=0}});return}
+ saveClear();const go_=()=>{if(window.tvIntro)tvIntro(()=>chefCreate(startGame));else if(window.letterAnim)letterAnim(()=>chefCreate(startGame));else startGame()};if(window.twShow)twShow(go_);else go_()}
 function splSave(){const d=saveGet(),b=$('splcont');if(!b)return;if(!d||!d.STF){b.hidden=true;return}b.hidden=false;b.innerHTML=`▶ Continuer <small>(${MN[Math.min(d.mo,11)]} · jour ${d.day}${d.YR>1?' · année '+d.YR:''})</small>`;$('splnew').classList.remove('go');$('splnew').textContent='✨ Nouvelle partie'}
 setInterval(()=>saveNow(),5000);addEventListener('pagehide',()=>saveNow(1));document.addEventListener('visibilitychange',()=>{if(document.hidden)saveNow(1)});
 (()=>{const o=window.lose;window.lose=function(...a){saveClear();return o(...a)}})();
@@ -14880,6 +14903,9 @@ html body #m #mb .abk .atab.on{opacity:1;box-shadow:2px 2px 0 rgba(0,0,0,.3),ins
 
   /* Tableau souvenir (v682) : aperçu à gauche, choix à droite */
   #shov .shw.shw { max-width: none; gap: 0; }
+  #modesel .mdbx { max-width: 860px; }
+  #modesel .mdl { flex-direction: row; align-items: stretch; }
+  #modesel .mdl button { flex: 1 1 0; min-width: 0; justify-content: flex-start; }
   #shov .shpv.shpv { max-height: calc(100vh - 16px); max-height: calc(100dvh - 16px); max-width: calc(100vw - 76px); }
   #shov .shside.shside { width: min(46vw, 400px); right: auto; max-height: calc(100vh - 16px); }
   #shov .shrail.shrail { gap: 4px; }
@@ -17270,7 +17296,7 @@ const CH={h:{},st:['acc','sat','dep','cards'],ph:null,txt:[],tid:0};window.__shC
 let SM=null;const shFade=(a,v,ms,done)=>{const v0=a.volume,t0=performance.now();const f=()=>{const p=Math.min(1,(performance.now()-t0)/ms);try{a.volume=Math.max(0,Math.min(1,v0+(v-v0)*p))}catch(_){}if(p<1)requestAnimationFrame(f);else if(done)done()};f()};
 const shMus=on=>{try{const vol=(typeof AU!='undefined'&&AU)?Math.min(1,AU.m*1.1):.5;
  if(on){if(vol<=0)return;try{if(MUS.cur&&!MUS.cur.paused){const m=MUS.cur;shFade(m,0,500,()=>{try{m.pause()}catch(_){}})}}catch(_){}try{const sm=document.getElementById('splm');if(sm&&!sm.paused)sm.pause()}catch(_){}
-  if(!SM){SM=new Audio('musique/tidy_clinic.mp3');SM.loop=true;SM.preload='auto'}SM.volume=0;const pr=SM.play();if(pr&&pr.catch)pr.catch(()=>{});shFade(SM,vol*.75,900)}
+  if(!SM){SM=new Audio('musique/tidy_clinic_m.mp3');SM.loop=true;SM.preload='auto'}SM.volume=0;const pr=SM.play();if(pr&&pr.catch)pr.catch(()=>{});shFade(SM,vol*.75,900)}
  else if(SM){const a=SM;shFade(a,0,500,()=>{try{if(!document.getElementById('shov'))a.pause()}catch(_){}});try{if(MUS.cur&&vol>0&&!window.__shBack){const m=MUS.cur,pr=m.play();if(pr&&pr.catch)pr.catch(()=>{});shFade(m,vol,700)}}catch(_){}}}catch(_){}};
 try{W('playMus',(o,a)=>{if(document.getElementById('shov')||window.__shBack)return;return o(...a)})}catch(_){}
 document.addEventListener('visibilitychange',()=>{try{if(!SM)return;if(document.hidden)SM.pause();else if(document.getElementById('shov')){const pr=SM.play();if(pr&&pr.catch)pr.catch(()=>{})}}catch(_){}});

@@ -145,3 +145,10 @@ Captures et vidéo de présentation (12 novembre 2026) :
 - Méthode : la légende est un calque posé dans la page du jeu avant la capture (polices du jeu). Raccourcis utiles : `?an=3`, `?an=3#tableau`, `debOpen()`, `petaShow(true)` avec `__pTerOK=()=>true`.
 - Vidéo : enregistrée image par image avec l'horloge simulée de la partie témoin (`__adv(1000/30)` puis capture), animations CSS recalées sur le temps simulé (`document.getAnimations()`), assemblée par ffmpeg à 30 images par seconde. C'est le seul moyen d'avoir une vidéo fluide sur le banc d'essai.
 
+Modes de jeu, conseil du quartier, musiques allégées (v729) :
+- Trois modes : découverte (`window.EASY`, `setEasy`, `hsaEasy`), normal, difficile (`HARD`). Découverte : la ville et l'ARS paient 20 % de plus (`payARS`, `leave`), la tranquillité baisse 30 % moins vite (`W('upd')`). Les deux cases sont dans les Paramètres et s'excluent.
+- Au lancement d'une nouvelle partie, `newGameAsk` ouvre `#modesel` (trois boutons `data-m="n|e|h"`, en colonnes en paysage via la feuille paysage) avant l'introduction. Les robots (`partie-temoin.js`, `frise-messages.js`) choisissent « normal » : tout nouvel écran avant le début de partie doit leur être appris, sinon ils restent bloqués.
+- Conseil `ctip('q20y'+YR, …)` quand la tranquillité passe sous 20 en année 2 ou 3 (une fois par an, `B.qTip`). Le bilan mensuel donne déjà les raisons des refus (`DGN.u`, `dgAdvice`).
+- Musiques : `petanque_m`, `petanque_choix_m`, `reunions_m`, `tidy_clinic_m` en mono 64 kbit/s (noms neufs pour le cache durable) ; les saisons étaient déjà en mono 48 kbit/s. Dossier `musique/` : 16 Mo → 11 Mo.
+- Frise du 12 novembre : 4,4 messages par minute après l'ouverture (objectif ≤ 5).
+
