@@ -132,3 +132,8 @@ Accueil, chargement, tableau (v726) :
 - Tableau : onglet Photos rangé en Affiches / Photos / Portraits ; portrait du personnage du joueur (`d.chef`, clé `chef`, ligne 18 de `IMA`, affiché si `CH.chef`). Choix et dispositions enregistrés dans `localStorage` (`hsa-tab-v1`, `tabSave()` à chaque rendu). Ouvert depuis l'accueil (`window.__shBack`), fermer recharge la page pour revenir à l'accueil.
 - Mode du doigt : `cur.pan` (bouton `.shmode`, icônes `fleche` / `main` dessinées à la main dans `SHI`) ; en mode main, toucher ne saisit plus les éléments, un doigt déplace le tableau zoomé.
 
+Accueil (v727) :
+- Transition : un clic sur un bouton de `#splash .sbox` est intercepté (écoute en capture sur `document`), le damier `#spltr` se referme, le clic est rejoué (`window.__splTr`), puis le damier se résorbe. Pas de transition pour la confirmation de « Nouvelle partie » ni pour le tableau sans partie enregistrée.
+- `#splmail` et `#splhint` sont masqués (le second réapparaît avec la classe `msg` pour le message du tableau sans partie) ; l'adresse de contact est dans « À propos ».
+- Étiquettes des autocollants : lettres blanches cernées de sombre, sans fond. Icônes `fleche` et `main` du tableau fournies par l'utilisateur.
+
