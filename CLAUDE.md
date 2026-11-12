@@ -115,3 +115,7 @@ Panoramas animés et caches rallumés (v723) :
 - `window.__panoFx(terrain, image, canevas, texture)` (appelé au chargement du panorama) dessine les effets dans un calque aux coordonnées de l'image (1086 px de large) et le recolle dans la texture avec ses deux moitiés en miroir, toutes les 110 ms : reflets et vaguelettes sur l'eau (pixels bleus d'une zone `water`), mouettes (`gulls`), pétales ou feuilles (`fall`), guirlandes (`lights`), fumigènes (`smoke`) et flashs (`flash`) au Vélodrome. Table `C` par terrain. Rien si `window.LOWFX` ou `#nopanofx`. La minuterie s'arrête quand la texture change ou que la pétanque se ferme.
 - Les deux caches du décor (copies figées des salles, `binRoom`) sont rallumés par défaut : le scintillement venait de `furnList` (v722), pas d'eux. `#nocache` les coupe.
 
+Tableau souvenir (v724) :
+- Depuis l'accueil, `shareFromMenu()` pose un voile `#shwait` (sous `#shov`) le temps que la partie se charge : le plan ne se voit plus avant le tableau.
+- En portrait, dès que l'aperçu est zoomé, `#shov` prend la classe `zf` : `.shvp` passe en plein écran, `.shside` est masquée, bouton `.shzx` « Tableau entier » (ou deux touchers) pour revenir. `zoom()` convertit les coordonnées au changement de mode et centre le tableau s'il est plus petit que l'écran. Ne pas centrer un bouton du jeu avec `transform` : l'état enfoncé des boutons le remplace et le bouton saute sous le doigt.
+
