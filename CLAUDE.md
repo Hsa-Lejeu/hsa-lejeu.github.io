@@ -125,3 +125,10 @@ Tableau souvenir « façon atelier » (v725) :
 - La barre de l'élément choisi (`.shsel`) flotte à côté de lui : `selBar()` la place après chaque `render()` et chaque `zoom()`.
 - Paysage : règles dans `<style id="paysage">` (tiroir à gauche, boutons de la colonne plus petits).
 
+Accueil, chargement, tableau (v726) :
+- `#boot` (premier élément de `<body>`, style en ligne) couvre la page pendant l'analyse des scripts ; il est retiré 250 ms après `load`, une fois la rangée des vignettes posée (filet à 10 s). Le menu apparaît d'un coup.
+- Les deux bonus de l'accueil (`#spl_peta`, `#spl_tab`) sont des autocollants : pas de cadre de bouton, liseré blanc (`drop-shadow`), inclinés, étiquette sombre.
+- Générique : trois cœurs rouges (`HSAICO.coeur2`) à la place de « Je vous aime fort ».
+- Tableau : onglet Photos rangé en Affiches / Photos / Portraits ; portrait du personnage du joueur (`d.chef`, clé `chef`, ligne 18 de `IMA`, affiché si `CH.chef`). Choix et dispositions enregistrés dans `localStorage` (`hsa-tab-v1`, `tabSave()` à chaque rendu). Ouvert depuis l'accueil (`window.__shBack`), fermer recharge la page pour revenir à l'accueil.
+- Mode du doigt : `cur.pan` (bouton `.shmode`, icônes `fleche` / `main` dessinées à la main dans `SHI`) ; en mode main, toucher ne saisit plus les éléments, un doigt déplace le tableau zoomé.
+
