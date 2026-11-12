@@ -106,3 +106,8 @@ Places d'attente, panoramas, accueil (v721) :
 - Accueil : `#splpet`, `#splsh` masqués et boutons du milieu invisibles (`.sbox:not(.splok)`) dans la feuille du haut de page, jusqu'à ce que la rangée `.splrow` soit posée (`build` ajoute `splok` ; filet à 4 s). La page s'affiche avant la fin de l'analyse des scripts : un style posé par un script de fin de page arrive trop tard pour le premier affichage.
 - Autocollants `bonnemere` (image `__ndgImg`) et `camion` (`OM.camper_r` de la feuille `OAT`).
 
+Barre sombre dans les salles (v722) :
+- Le vrai « scintillement des salles » : `furnList(r)` rejoue `roomFurn` avec `Q` détourné pour lister les meubles, mais les couches `W('roomFurn')` dessinaient alors pour de vrai (ombre de 7 px sous le mur, v. « DEPTH »), par-dessus l'image déjà finie. `srcs()` (vapeur, écrans) l'appelle toutes les 3 s depuis `W('draw')` : une bande sombre pendant une image, au niveau des bancs. `furnList` pose maintenant un masque vide (`clip` sur un rectangle nul) le temps de l'appel. Toute fonction qui rejoue un dessin « à blanc » doit faire de même.
+- Banc d'essai : comparer le canevas d'une image à l'autre et chercher les lignes qui s'assombrissent d'un coup (5 défauts en 12 s avant, 0 après).
+- Pétanque : `sink` du Vélodrome à 0,15 (cage du fond entière) ; lampadaires en 3D à l'échelle 1,15 (au lieu de 0,55) ; `__flagTex2(graine, [r,v,b], joint)` : dalles grises à la Canebière / Vieux-Port, claires à la Major.
+
