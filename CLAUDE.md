@@ -1,5 +1,12 @@
 # Instructions pour Claude
 
+Méthode de travail avec l'utilisateur (13 novembre 2026) :
+- Un essai d'abord. Quand une image ou un décor doit recouvrir ou remplacer quelque chose d'existant (surtout sur le plan du quartier), en faire UN, l'envoyer et attendre l'avis avant de faire les autres.
+- Planches de contrôle : toujours les rendre à partir de la version qui vient d'être publiée, avec les vrais personnages du jeu (évaluer la scène dans la portée du script principal), jamais à partir d'un rendu antérieur à la dernière correction. Si un rendu est partiel (personnages absents, scène non jouée), le dire dans la légende.
+- Demande ambiguë (« enlève-le », « recule », « descends ») : poser une question d'une ligne avant de publier une interprétation.
+- Un même type de défaut signalé deux fois : écrire un contrôle automatique (comme `outils/pieds-sur-meubles.js`) plutôt que corriger au cas par cas.
+- Retours d'une autre IA transmis par l'utilisateur : elle travaille sur des captures ; vérifier dans le code avant d'agir (raccourci ou fonction supposés, objets déjà tirés du pack).
+
 Avant d'ajouter, de modifier, de déplacer ou de supprimer un message affiché au joueur (fenêtre, scène, conseil de Camille, bulle, alerte, « Nouveau ! », toast), lire `RYTHME.md` et respecter ses règles. Après un tel changement, mesurer avec `outils/frise-messages.js` (règle 9).
 
 Mise en page en paysage : depuis la v585, toutes les règles `@media (orientation: landscape)` sont dans une seule feuille, `<style id="paysage">`, rangée par condition puis par zone de l'écran. Ne pas ajouter de bloc paysage ailleurs : écrire la règle dans cette feuille. Après tout changement de mise en page (portrait ou paysage), lancer `node outils/test-ecrans.js` (objectif : 0 caché, 0 dehors, 0 déborde, 0 vide).
