@@ -264,3 +264,5 @@ Caméras et meeting (v756) :
 - Meeting : estrade remontée (y 58), Crotti pieds à 65, public de sept personnes de dos DEVANT l'estrade, dessiné après Crotti et le pupitre (`PUB()`). Dans une scène de rue, la hauteur des pieds est resserrée (`__sy`) : une valeur au-delà de 104 descend encore un peu.
 - Pétanque : ses sons passent par `psfx`, `dsfx` et `sb`, pas par `sfx` : le plafond de la v753 ne s'y applique pas.
 - Tribune du CIQ (v757) : le micro sur pied moderne (`mic` de `DEBM`), pris pour une caméra moderne, est retiré.
+
+Pétanque, hauteur des sons (v758) : `sb('rpg/chop', …)` (chocs et atterrissages de boule) et `dsfx('obj', …)` du choix de coup varient de ± 8 % (`PVR()`, compteur qui tourne, pas de `Math.random`). Mesure de la pétanque (robot, 2 × 8 min, `psnd.js` hors dépôt) : ~30 sons par minute, 6 à 8 par lancer, jamais plus de 4 en 0,8 s : pas de plafond nécessaire. Pas d'ambiance pendant la visée (choix de l'utilisateur).
