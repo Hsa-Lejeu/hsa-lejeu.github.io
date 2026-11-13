@@ -254,3 +254,5 @@ Bruitages (v753) :
 - Nouveaux sons (fichiers Kenney CC0 fournis, `SDAT` préfixe `kn/`) : `stk_pose` (autocollant ajouté), `stk_lache` (élément lâché), `stk_melange` (Mélanger), `stk_photo` (Télécharger, Partager), `piqure` (`W('accident')`, bandeau « … s'est piqué·e »), `colere` (`W('sad')`, « … est en colère et s'en va »). `pet` (caresse au chien) réutilise `steel/09` plus aigu.
 - Toute scène (`popNext`, `chgShow`) joue un son à l'ouverture : `o.snd`, sinon `alert` si le titre parle de surdose, piqûre, SAMU ou urgence, sinon `open`.
 - Débat : `dsfx('crowd')` (absent de `DSFX`) remplacé par `sfx('fanfare')`.
+
+Meeting de Crotti (v754) : estrade `estrade` (60 × 21, avec son pupitre) et haut-parleurs sur pied `hp` (12 × 36) dans `IAPM`, scène `debStart`. Crotti (`valSpr`) monte sur l'estrade (pieds à 78) et le pupitre seul (`pupit`, découpé de l'estrade) est redessiné devant lui.
