@@ -258,3 +258,8 @@ Bruitages (v753) :
 Meeting de Crotti (v754) : estrade `estrade` (60 × 21, avec son pupitre) et haut-parleurs sur pied `hp` (12 × 36) dans `IAPM`, scène `debStart`. Crotti (`valSpr`) monte sur l'estrade (pieds à 78) et le pupitre seul (`pupit`, découpé de l'estrade) est redessiné devant lui.
 
 Aboiement et foule (v755) : sons fournis par l'utilisateur, convertis en MP3 mono 64 kbit/s dans `SDAT` (`kn/aboie`, `kn/foule`, gains 0,3 et 0,32 : ils sont plus forts que les autres). `pet` (caresse au chien) = aboiement ; `foule` remplace la fanfare à la fin du débat et passe toujours, comme `alarm` et `fanfare`. Public du meeting de Crotti : six personnes à gauche, sur deux rangs, pieds au-dessus du bord.
+
+Caméras et meeting (v756) :
+- Les caméras de tournage (`cam` de `EVM`, `cam1`/`cam2` de `DEBM`) ont l'objectif à GAUCHE dans le dessin d'origine : on ne les retourne que pour filmer vers la droite, et l'opérateur·rice se tient du côté opposé à l'objectif. Corrigé : meeting, tribune du CIQ, « caméra au poing », caméra du débat, conférence de presse (`presCams`).
+- Meeting : estrade remontée (y 58), Crotti pieds à 65, public de sept personnes de dos DEVANT l'estrade, dessiné après Crotti et le pupitre (`PUB()`). Dans une scène de rue, la hauteur des pieds est resserrée (`__sy`) : une valeur au-delà de 104 descend encore un peu.
+- Pétanque : ses sons passent par `psfx`, `dsfx` et `sb`, pas par `sfx` : le plafond de la v753 ne s'y applique pas.
