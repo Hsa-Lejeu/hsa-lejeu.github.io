@@ -246,3 +246,11 @@ Retours sur les scènes (v752) :
 - Prison (`LCD.jail`) : cellule grise vue à travers des barreaux au premier plan (lit `bed2`, toilettes, fenêtre grillagée), sans plantes ni fenêtre (`H.F` neutralisé pendant `H.room`).
 - Un personnage derrière un bureau ou une table se dessine AVANT le meuble ; sinon il a l'air debout dessus. Contrôle automatique : `node outils/pieds-sur-meubles.js URL [planche.png]` rejoue projets, parcours, cartes, défis et les scènes des fenêtres lues dans le code, et signale les pieds posés dans un meuble dessiné avant (objectif : 0). À lancer après tout ajout ou déplacement de meuble ou de personnage dans une scène.
 - La ministre en visite : les arguments de `H.spr` étaient dans le désordre (elle n'apparaissait pas).
+
+Bruitages (v753) :
+- Couche commune posée juste avant `sfxLoad` (script principal) : au plus un son « non geste » toutes les 0,8 s (le suivant est abandonné, sauf `alarm` et `fanfare`) ; `coin` au plus une fois toutes les 3 s, une des quatre pièces `kn/coin_1`…`4` à tour de rôle, hauteur 0,92 à 1,08 ; `bad`, `sad`, `joy`, `good` : hauteur 0,9 à 1,1 (`window.__sfxR`, lu par `sfxS`). Les variations viennent d'un compteur qui tourne, jamais de `Math.random()` (partie témoin). Les gestes (`click`, `page`, `stk_*`, `pet`) ne sont ni comptés ni retenus.
+- Pour mesurer : `window.__SFXLOG=[]` dans la console ; chaque appel y est noté `[secondes, son, 1 | 'muet' | '<0,8s' | 'coin<3s']`.
+- Volumes : `hire`, `alarm`, `alert` × 0,6 ; `syringe` × 2,5 (dans `SMAP`).
+- Nouveaux sons (fichiers Kenney CC0 fournis, `SDAT` préfixe `kn/`) : `stk_pose` (autocollant ajouté), `stk_lache` (élément lâché), `stk_melange` (Mélanger), `stk_photo` (Télécharger, Partager), `piqure` (`W('accident')`, bandeau « … s'est piqué·e »), `colere` (`W('sad')`, « … est en colère et s'en va »). `pet` (caresse au chien) réutilise `steel/09` plus aigu.
+- Toute scène (`popNext`, `chgShow`) joue un son à l'ouverture : `o.snd`, sinon `alert` si le titre parle de surdose, piqûre, SAMU ou urgence, sinon `open`.
+- Débat : `dsfx('crowd')` (absent de `DSFX`) remplacé par `sfx('fanfare')`.
