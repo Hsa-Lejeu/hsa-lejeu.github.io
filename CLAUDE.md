@@ -263,3 +263,4 @@ Caméras et meeting (v756) :
 - Les caméras de tournage (`cam` de `EVM`, `cam1`/`cam2` de `DEBM`) ont l'objectif à GAUCHE dans le dessin d'origine : on ne les retourne que pour filmer vers la droite, et l'opérateur·rice se tient du côté opposé à l'objectif. Corrigé : meeting, tribune du CIQ, « caméra au poing », caméra du débat, conférence de presse (`presCams`).
 - Meeting : estrade remontée (y 58), Crotti pieds à 65, public de sept personnes de dos DEVANT l'estrade, dessiné après Crotti et le pupitre (`PUB()`). Dans une scène de rue, la hauteur des pieds est resserrée (`__sy`) : une valeur au-delà de 104 descend encore un peu.
 - Pétanque : ses sons passent par `psfx`, `dsfx` et `sb`, pas par `sfx` : le plafond de la v753 ne s'y applique pas.
+- Tribune du CIQ (v757) : le micro sur pied moderne (`mic` de `DEBM`), pris pour une caméra moderne, est retiré.
