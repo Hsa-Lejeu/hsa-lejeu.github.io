@@ -273,3 +273,12 @@ Caméras et meeting (v756) :
 - Tribune du CIQ (v757) : le micro sur pied moderne (`mic` de `DEBM`), pris pour une caméra moderne, est retiré.
 
 Pétanque, hauteur des sons (v758) : `sb('rpg/chop', …)` (chocs et atterrissages de boule) et `dsfx('obj', …)` du choix de coup varient de ± 8 % (`PVR()`, compteur qui tourne, pas de `Math.random`). Mesure de la pétanque (robot, 2 × 8 min, `psnd.js` hors dépôt) : ~30 sons par minute, 6 à 8 par lancer, jamais plus de 4 en 0,8 s : pas de plafond nécessaire. Pas d'ambiance pendant la visée (choix de l'utilisateur).
+
+Tableau souvenir, chargement et entrée de l'accueil (v759) :
+- Message flottant du tableau (`msg`, dont les indices des autocollants à gagner) : posé juste au-dessus du tiroir ouvert, sinon juste au-dessus de la barre du bas (position calculée à chaque message).
+- Slogan : coupure choisie par la table `brk_` dans `draw` (nombre de mots sur la première ligne) ; « c'est à Marseille bébé » tient sur la ligne du bas.
+- Carte postale de l'espace (`pc`) : seulement si `B.debDone && B.deb>=3` (victoire totale, Crotti en orbite) : `d.pc`. Les portraits marqués « Perdu·e de vue » sont voulus : suivi jamais proposé (`!S.on`) ou personne perdue (`S.lost`).
+- Le bouton Fermer (`.shx`) est le dernier de la barre. Options : « Mélanger les places » (`shuf`) et « Tableau surprise » (`.shsur` : slogan, quatre post-it, photos masquées au hasard, 3 à 7 autocollants parmi ceux gagnés, puis `shuf`).
+- Polices déjà dans la page, sans poids de plus : `Lilita`, `Main` (manuscrite), `Amat`, `Cavt`, `LoraI` (italique à empattements), `PMark` (marqueur), Atkinson.
+- Écran de chargement : le chien avance et change d'image par `transform` seulement (`.ldr` translate, bande `.lds` de quatre images en `steps(4)`), animations tenues par le compositeur même quand la page lit ses scripts. Ne pas y animer `left`, `background-position` ni rien qui demande une mise en page.
+- `body.booting` (posée par le petit script de `#boot`) met en pause toutes les animations de `#splash` ; à la fin du chargement, la classe est retirée, `LG0` est remis à l'heure, `#boot` s'efface en 0,45 s : le titre entre mot à mot puis les boutons, comme au tout premier affichage.
