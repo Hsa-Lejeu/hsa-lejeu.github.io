@@ -39,7 +39,7 @@ const ST=[
  ['carte','?an=2',"cardShow(CARDS[0][0])",1200],
  ['finances','?an=2',"finModal()",1200],
  ['petanque','?an=2',"petaShow(true)",2500],
- ['partage','?an=3',"shareOpen()",3000],
+ ['partage','?an=3',"try{localStorage.setItem('hsa-tab-intro','1')}catch(_){};shareOpen()",3000],
  // pastille « Visite HAS dans N jours » (le mois d'avant), seule puis avec un onglet ouvert ; visite en cours (bandeau)
  ['has-pastille','?an=2',"mo=3;"+TAB0,1800],
  ['has-pastille-onglet','?an=2',"mo=3;tab(0)",1800],
