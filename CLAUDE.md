@@ -330,3 +330,9 @@ Pétanque, album, tableau, chargement (v774) :
 - Chargement : la police de la phrase est préchargée (`<link rel="preload">`) et la phrase reste invisible jusqu'à son arrivée ; au-delà de 1,5 s, elle s'affiche en police du système et n'en change plus.
 - Panoramas : les six PNG de la v721 venaient d'une archive `panoramas-pixel_1.zip` déjà pixelisée ; les images d'origine (avant pixelisation) ne sont pas dans la session. L'utilisateur les trouve moins bons que les originaux : attendre qu'il les renvoie avant de comparer.
 - Outils hors dépôt : `pt2.js` / `pt3.js` (robot qui amène la pétanque jusqu'au premier lancer, puis joue un fichier d'étapes `STEPS=` ; `TER=` impose le terrain en posant `window.__terF` à chaque tour ; la jauge se remplit par `__PG.__addJ`, injecté par le test).
+
+Décors de pétanque non pixelisés (v776) :
+- Nouveau mode du panorama : `P3BG[terrain]` porte `span` (degrés, 135) et `panoWH:[largeur, hauteur]`. L'image fournie par l'utilisateur (2172 de large, coupée au ras du sol, WebP qualité 92, non réduite, filtre linéaire) est posée telle quelle sur un arc de `span` degrés derrière le terrain ; deux arcs latéraux la reprennent en miroir. Hauteur = R × arc × hauteur / largeur ; `sink` petit (0,2 à 0,3). L'ancien mode (`panoA`, image doublée en miroir sur 360°) reste pour les terrains pas encore refaits.
+- Faits : Carli (`a/614ca38e6688.webp`, `noTree:1` : les platanes en pixels de `pg.DEC` ne sont plus posés, l'image a ses arbres) et Major (`a/cb0cb2652c0d.webp`). Restent : Calanques, Panier, Canebière, Vélodrome.
+- En mode `span`, `__panoFx` n'est pas appelé : les effets animés (guirlandes, feuilles, eau, mouettes) sont coupés sur ces terrains et restent à recaler (la table `C` est en coordonnées de l'ancienne image, 1086 px).
+- En portrait, la caméra de jeu vise un peu à gauche du centre de l'image : demander le sujet principal vers 40-45 % de la largeur.

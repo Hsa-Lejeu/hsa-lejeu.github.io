@@ -73,14 +73,14 @@ a/de81f47bf75f.webp
 a/9c0925480f75.webp
 a/14951db98559.png
 a/dd7c12f170a1.webp
-a/cfa70a9d9891.png
+a/614ca38e6688.webp
 a/8bf11de8061f.webp
 a/c42e97d3031c.webp
 a/0af304bdf9a6.webp
 a/b4b87c279ea8.webp
 a/0c62dcde7c95.png
 a/7c28ded1419a.png
-a/71f8450b80e4.png
+a/cb0cb2652c0d.webp
 a/f2ac6eece067.png
 a/f9dc448d301b.webp
 a/b66e55f85c24.png
