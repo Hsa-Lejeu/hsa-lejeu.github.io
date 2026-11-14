@@ -134,7 +134,7 @@ async function run(url, tag) {
       const tu = $('tut'); if (tu && !tu.hidden) { const x = btn(tu, /Suivant|Passer|C.est parti|Compris/); if (x) return go(x, 'tuto') }
       const any = btn(document, /(Commencer|C.est moi|Suivant|Passer(?! le guide)|C.est parti|Nouvelle partie|Jouer)/, 1); if (any) return go(any, 'départ');
       // toute autre fenêtre qui met le jeu en pause : le premier bouton réellement au-dessus
-      { let pz = false; try { pz = !!paused } catch (_) { } if (pz) { const x = [...document.querySelectorAll('button')].find(x => { if (!vis(x) || x.disabled || x.closest('#tabs,#hud,#side')) return false; const r = x.getBoundingClientRect(), e = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return e && (e === x || x.contains(e)) }); if (x) return go(x, 'pause') } }
+      { let pz = false; try { pz = !!paused } catch (_) { } if (pz) { const x = [...document.querySelectorAll('button')].find(x => { if (!vis(x) || x.disabled || x.closest('#tabs,#hud,#side,#lci')) return false; const r = x.getBoundingClientRect(), e = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return e && (e === x || x.contains(e)) }); if (x) return go(x, 'pause') } }
       const ov = [...document.querySelectorAll('div')].find(d => vis(d) && /Touche (l’écran )?pour continuer/.test(d.textContent) && d.textContent.length < 600); if (ov) return tap(ov);
       // un onglet resté ouvert (ouvert par une pastille « à faire ») : le refermer
       { const x = document.querySelector('#app.open #phead button'); if (x && vis(x) && onTop(x)) return go(x, 'onglet') }
