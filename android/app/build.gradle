@@ -1,0 +1,32 @@
+plugins { id 'com.android.application' }
+
+def vc = (System.getenv('VERSION_CODE') ?: '100') as int
+
+android {
+    namespace 'io.github.hsalejeu.haltesoinsaddictions'
+    compileSdk 36
+    defaultConfig {
+        applicationId 'io.github.hsalejeu.haltesoinsaddictions'
+        minSdk 24
+        targetSdk 36
+        versionCode vc
+        versionName "2." + vc
+    }
+    signingConfigs {
+        release {
+            storeFile file(System.getenv('KS_PATH') ?: 'signing.keystore')
+            storePassword System.getenv('KS_PASS')
+            keyAlias System.getenv('KS_ALIAS') ?: 'my-key-alias'
+            keyPassword System.getenv('KS_PASS')
+        }
+    }
+    buildTypes {
+        release { minifyEnabled false; signingConfig signingConfigs.release }
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.12.1'
+    implementation 'androidx.core:core-splashscreen:1.0.1'
+}

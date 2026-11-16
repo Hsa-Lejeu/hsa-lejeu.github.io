@@ -1,0 +1,12 @@
+<resources>
+    <style name="Theme.Halte" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/fond</item>
+        <item name="android:statusBarColor">@color/fond</item>
+        <item name="android:navigationBarColor">@color/fond</item>
+    </style>
+    <style name="Theme.Halte.Start" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/fond</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.Halte</item>
+    </style>
+</resources>

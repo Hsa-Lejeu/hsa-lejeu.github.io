@@ -1,0 +1,40 @@
+name: Appli Android
+
+on:
+  workflow_dispatch:
+  push:
+    paths: ['android/**', '.github/workflows/android.yml']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: '8.13' }
+      - name: Clé de signature
+        env: { ENC_PASS: '${{ secrets.ENC_PASS }}' }
+        run: |
+          if [ -z "$ENC_PASS" ]; then echo "::warning::Secrets absents : seule une version d'essai non signée est construite"; exit 0; fi
+          openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -in android/signing.keystore.enc -out "$RUNNER_TEMP/signing.keystore" -pass env:ENC_PASS
+      - name: Construire l'appli (.aab pour le Play Store, .apk pour essayer sur le téléphone)
+        env:
+          KS_PATH: '${{ runner.temp }}/signing.keystore'
+          KS_PASS: '${{ secrets.KS_PASS }}'
+          KS_ALIAS: my-key-alias
+        run: |
+          export VERSION_CODE=$((100 + GITHUB_RUN_NUMBER))
+          echo "versionCode = $VERSION_CODE"
+          mkdir -p out
+          if [ ! -f "$KS_PATH" ]; then gradle -p android --no-daemon assembleDebug; cp android/app/build/outputs/apk/debug/app-debug.apk out/essai-non-signe.apk; exit 0; fi
+          gradle -p android --no-daemon bundleRelease assembleRelease
+          cp android/app/build/outputs/bundle/release/app-release.aab "out/halte-soins-addictions-$VERSION_CODE.aab"
+          cp android/app/build/outputs/apk/release/app-release.apk "out/halte-soins-addictions-$VERSION_CODE.apk"
+      - uses: actions/upload-artifact@v4
+        with: { name: halte-soins-addictions-android, path: out/ }
+      - name: Effacer la clé
+        if: always()
+        run: rm -f "$RUNNER_TEMP/signing.keystore"
