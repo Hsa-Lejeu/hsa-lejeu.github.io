@@ -78,7 +78,7 @@ window.txa=function txa(e){if(!e)return '';if(e.nodeType===3)return (e.__nb===e.
   const el=(performance.now()-t0)/1000,ips=fr/el,img=fr?sum/fr:0,js=(A.jeu+A.interface+A.autres+tim)/Math.max(1,fr);
   const pf=v=>(v/Math.max(1,fr)).toFixed(1);const nav=Math.max(0,img-js);
   const tp=Object.entries(TOP).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([k,v])=>k.slice(0,18)+' '+pf(v)).join(' · ');
-  box.textContent=`${(dr/el).toFixed(1)} images dessinées/s (boucle ${ips.toFixed(1)}/s) · image ${img.toFixed(0)} ms (pire ${worst.toFixed(0)}, >45 ms : ${big})\njeu ${pf(A.jeu)} · interface ${pf(A.interface)} · minuteries ${pf(tim)} · autres ${pf(A.autres)}\nnavigateur (peinture, autres tâches) ≈ ${nav.toFixed(0)} ms${tp?'\nautres : '+tp:''}${tt?'\nminuteries :\n  '+tt:''}${window.__perfU?'\ncorrections :\n  '+window.__perfU:''}\n${(()=>{try{return `dessin ${DEMA.toFixed(0)} ms · 1 image sur 2 : ${SLOW?'OUI':'non'} · plafond 30 i/s : ${window.FPSCAPB?'OUI':'non'}${window.ECO?' · éco':''}`}catch(_){return''}})()}${(()=>{try{const D=Math.max(1,dr);let tot=0,nb=0;const L=Object.entries(CA).map(([k,v])=>{tot+=v[1];nb+=v[0];return [k,v[0]/D,v[1]/D]}).sort((a,b)=>b[2]-a[2]).slice(0,8);for(const k in CA)delete CA[k];const d=DT/D;DT=0;return `\ndessin mesuré ${d.toFixed(0)} ms = canevas ${(tot/D).toFixed(0)} ms (${Math.round(nb/D)} appels) + calcul ${(d-tot/D).toFixed(0)} ms\n  `+L.map(x=>x[0]+' ×'+Math.round(x[1])+' '+x[2].toFixed(1)).join('\n  ')+`\neffets réduits (téléphone lent) : ${window.LOWFX?'OUI':'non'}`+(window.__RC?`\nsalles : ${__RC.blit} recollées, ${__RC.live} en direct, ${__RC.chg} changements`:'')+(window.__BMP?`\nfigées ${__BMP.n} (${Math.round(100*__BMP.hit/Math.max(1,__BMP.hit+__BMP.miss))} %)`:'')}catch(_){return''}})()}\n${window.HSAV||'artefact v804'} · écran ${innerWidth}×${innerHeight} ×${(devicePixelRatio||1).toFixed(2)} · zoom ${(window.Z&&Z.s||0).toFixed?Z.s.toFixed(2):'?'}`;
+  box.textContent=`${(dr/el).toFixed(1)} images dessinées/s (boucle ${ips.toFixed(1)}/s) · image ${img.toFixed(0)} ms (pire ${worst.toFixed(0)}, >45 ms : ${big})\njeu ${pf(A.jeu)} · interface ${pf(A.interface)} · minuteries ${pf(tim)} · autres ${pf(A.autres)}\nnavigateur (peinture, autres tâches) ≈ ${nav.toFixed(0)} ms${tp?'\nautres : '+tp:''}${tt?'\nminuteries :\n  '+tt:''}${window.__perfU?'\ncorrections :\n  '+window.__perfU:''}\n${(()=>{try{return `dessin ${DEMA.toFixed(0)} ms · 1 image sur 2 : ${SLOW?'OUI':'non'} · plafond 30 i/s : ${window.FPSCAPB?'OUI':'non'}${window.ECO?' · éco':''}`}catch(_){return''}})()}${(()=>{try{const D=Math.max(1,dr);let tot=0,nb=0;const L=Object.entries(CA).map(([k,v])=>{tot+=v[1];nb+=v[0];return [k,v[0]/D,v[1]/D]}).sort((a,b)=>b[2]-a[2]).slice(0,8);for(const k in CA)delete CA[k];const d=DT/D;DT=0;return `\ndessin mesuré ${d.toFixed(0)} ms = canevas ${(tot/D).toFixed(0)} ms (${Math.round(nb/D)} appels) + calcul ${(d-tot/D).toFixed(0)} ms\n  `+L.map(x=>x[0]+' ×'+Math.round(x[1])+' '+x[2].toFixed(1)).join('\n  ')+`\neffets réduits (téléphone lent) : ${window.LOWFX?'OUI':'non'}`+(window.__RC?`\nsalles : ${__RC.blit} recollées, ${__RC.live} en direct, ${__RC.chg} changements`:'')+(window.__BMP?`\nfigées ${__BMP.n} (${Math.round(100*__BMP.hit/Math.max(1,__BMP.hit+__BMP.miss))} %)`:'')}catch(_){return''}})()}\n${window.HSAV||'artefact v805'} · écran ${innerWidth}×${innerHeight} ×${(devicePixelRatio||1).toFixed(2)} · zoom ${(window.Z&&Z.s||0).toFixed?Z.s.toFixed(2):'?'}`;
   fr=0;sum=0;worst=0;big=0;dr=0;A.jeu=A.interface=A.autres=0;for(const k in TOP)delete TOP[k];t0=performance.now()}catch(_){}setTimeout(tick,1000)},1000)})();
 </script>
 <script>
@@ -768,7 +768,7 @@ vw.addEventListener('dblclick',e=>e.preventDefault())})();
 new MutationObserver(fit).observe($('m'),{attributes:true});
 (function(){let t;const f=()=>{const e=$('toasts');e.style.opacity=1;clearTimeout(t);t=setTimeout(()=>{e.style.opacity=0},9000)};['ev','msg'].forEach(i=>new MutationObserver(f).observe($(i),{childList:true,characterData:true,subtree:true,attributes:true}));f()})();
 function togglePanel(){$('app').classList.toggle('full');setTimeout(fit,30)}
-function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v804')+'</p>';$('m').className='modal';$('m').hidden=false}
+function help(){if(!$('m').hidden)return;paused=true;$('mb').innerHTML='<h2>Comment jouer ?</h2><button onclick="closeH();tutStart()" style="width:100%;margin-bottom:6px">🎓 Revoir le tutoriel avec Camille</button>'+$('helptxt').innerHTML+'<button class="go" onclick="closeH()">Fermer</button><p class="hint" style="text-align:right;margin:6px 0 0">version '+(window.HSAV||'artefact v805')+'</p>';$('m').className='modal';$('m').hidden=false}
 function closeH(){$('m').hidden=true;paused=false}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.ResizeObserver)new ResizeObserver(fit).observe($('view'));
 const AU={ctx:null,m:.5,s:.7,mg:null,sg:null,step:0,next:0,last:0};
@@ -5966,7 +5966,7 @@ window.indModal=function(){if(!$('m').hidden)return;spModal();if($('m').hidden)r
  h2.insertAdjacentHTML('afterend',`<p style="font-size:13px">🏘️ <b>Tranquillité du quartier : <span class="${col(qv)}">${qv} %</span></b><br>Si elle baisse trop, les riverains se plaignent. Maraudes, ramassage des seringues, DASRI vidés et dialogue avec les habitant·es la font remonter.</p>${(()=>{const s=window.SC5?SC5():{soc:0,sat:0,eq:0};return `<p style="font-size:13px">🤝 <b>Accompagnement social : ${s.soc} %</b><br>Hébergements, ouverture de droits, repas : les partenariats et le bureau social le font monter.</p><p style="font-size:13px">😊 <b>Satisfaction : ${s.sat} %</b><br>Moins d’attente, des besoins écoutés, des parcours qui aboutissent.</p><p style="font-size:13px">👥 <b>Équipe : ${s.eq} %</b><br>Moral, formations, repas d’équipe et salaires payés à temps.</p><p style="font-size:13px">📣 <b>Notoriété : ${nv} %</b> — elle se voit dans le quartier (affiches, enseigne, bus HSA).</p>`})()}<h3 style="margin:10px 0 2px;font-size:14px">💚 Santé publique : ${spNow()} %</h3>`);
  h2.textContent='📊 Indicateurs'};
 window.hudMenu=function(){if(!$('m').hidden)return;paused=true;
- $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();shareOpen()">📸 Mon tableau souvenir</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v804')+'</p>';
+ $('mb').innerHTML='<h2>☰ Menu</h2><div style="display:flex;flex-direction:column;gap:8px"><button onclick="closeH();help()">❓ Comment jouer ?</button><button onclick="closeH();tutStart()">🎓 Revoir le tutoriel avec Camille</button><button onclick="closeH();shareOpen()">📸 Mon tableau souvenir</button><button onclick="closeH();settings()">⚙️ Paramètres</button><button onclick="aboutHub()">ℹ️ À propos</button><button onclick="ecoToggle()">🔋 Mode économie : '+(window.ECO?'<b>activé</b>':'désactivé')+'<br><small>30 images par seconde, bandeau moins souvent rafraîchi : pour les vieux téléphones</small></button><button onclick="closeH();fpsToggle()">📈 Compteur d’images (test)</button><button class="go" onclick="closeH()">Fermer</button></div><p class="hint" style="text-align:right;margin:8px 0 0">version '+(window.HSAV||'artefact v805')+'</p>';
  $('m').className='modal';$('m').hidden=false};
 setInterval(()=>{try{const w=$('spw');if(w)w.classList.toggle('hsaAl',!!(started&&!ended&&q<40))}catch(_){}},1000);
 
@@ -13423,7 +13423,7 @@ html body #peta{background:#0f0a16 repeating-linear-gradient(115deg,transparent 
   if(document.getElementById('peta'))return;try{if(B.peta)return;B.peta={st:'ask'}}catch(_){}
   try{popWin({maj:1,t:'Le tournoi de pétanque',n:'🏆 Street Pétanqueur',keep:1,d:'Avant le vote du conseil de quartier, le comité de voisinage et la halte organisent un tournoi de pétanque. En face, le club de la Boule d’en face, qui ne perd jamais. Tout le quartier sera là : une belle partie peut faire changer bien des avis avant le vote.',
    draw:(H,T)=>{H.street();[76,77,79,83,85].forEach((ci,i)=>H.spr(ci,24,30+i*28,86));H.spr(18,T%1.2<.6?24:25,172,88)},
-   btns:[{t:'🎯 Jouer le tournoi<br><small>composer l’équipe et lancer les boules</small>',go:1,f:()=>{try{B.peta=null}catch(_){}_ps.call(window,false);setTimeout(intro,30)}},
+   btns:[{t:'🎯 Jouer le tournoi<br><small>l’équipe est prête, à toi de lancer les boules</small>',go:1,f:()=>{try{B.peta=null}catch(_){}window.__pAuto=1;_ps.call(window,false);setTimeout(intro,30)}},
          {t:'Laisser l’équipe jouer sans moi<br><small>le résultat est tiré au sort</small>',f:()=>{try{B.peta=null}catch(_){}_ps.call(window,false);setTimeout(()=>{const b=document.getElementById('qpsk');if(b)b.click()},60)}}]})}catch(e){try{B.peta=null}catch(_){}_ps.call(this,false)}};
  try{petaShow=window.petaShow}catch(_){}
 })();
@@ -17983,4 +17983,74 @@ __uiv(function(){const m=document.getElementById('stm');if(!m||!m.classList.cont
 // v802 : l'album s'ouvre sur la dernière carte gagnée (cadre doré quelques secondes)
 </script>
 <style>#mb .aslot.glast{outline:3px solid #f2b705;outline-offset:2px;animation:glst .8s ease-in-out 3}@keyframes glst{50%{outline-color:#fff3b0}}body.hq0 #stm.on,body.hq1 #stm.on{opacity:0;pointer-events:none!important}</style>
+<style id="ptutst">
+#peta .ptut{position:absolute;left:50%;top:calc(96px + env(safe-area-inset-top,0px));transform:translateX(-50%);width:min(330px,calc(100% - 24px));z-index:60;background:#fffaf0;color:#2a2433;border:3px solid #2a2433;border-radius:10px;box-shadow:0 4px 0 rgba(0,0,0,.35);padding:10px 12px 10px;font:600 14.5px/1.4 'Atkinson Hyperlegible',system-ui,sans-serif;animation:ptin .25s ease-out}
+#peta .ptut .pth{font:400 12px Lilita,'Atkinson Hyperlegible',sans-serif;letter-spacing:.06em;color:#c0392b;text-transform:uppercase;margin-bottom:3px}
+#peta .ptut .ptb{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:8px}
+#peta .ptut .ptb button{margin:0!important;min-height:34px;padding:4px 12px;font:400 15px Lilita,'Atkinson Hyperlegible',sans-serif;border:2px solid #2a2433;border-radius:8px;background:#ffd23f;color:#2a2433;cursor:pointer}
+#peta .ptut .ptb button.pts{background:transparent;border-color:transparent;font:600 13px 'Atkinson Hyperlegible',sans-serif;text-decoration:underline;padding:4px 2px}
+#peta .ptut .pd{display:flex;gap:4px;align-self:center}#peta .ptut .pd i{width:7px;height:7px;border-radius:50%;background:#d8cbb4}#peta .ptut .pd i.on{background:#2a2433}
+#peta.cine .ptut{display:none}
+@keyframes ptin{from{opacity:0;transform:translate(-50%,-8px)}to{opacity:1;transform:translateX(-50%)}}
+@media (orientation:landscape) and (max-height:600px){#peta .ptut{top:calc(52px + env(safe-area-inset-top,0px));font-size:13.5px;width:min(360px,calc(100% - 140px))}}
+</style>
+<script>
+// v805 : tutoriel de la première partie de pétanque (une seule fois par navigateur, « Passer » à chaque étape ; #ptuto le rejoue)
+(function(){const K='hsa-peta-tut',N=5;let st=null,el=null,hideT=0;
+ const done=()=>{try{return !!localStorage.getItem(K)}catch(_){return true}},mark=()=>{try{localStorage.setItem(K,'1')}catch(_){}};
+ const T=[
+  'Le but : finir <b>plus près du cochonnet</b> (la petite boule orange) que l’équipe d’en face. Chaque joueur·se a deux boules par mène.',
+  'Choisis ton coup dans le menu : <b>Pointe</b> pour rouler près du cochonnet, <b>Tire</b> pour chasser une boule d’en face. Puis pose le doigt sur le terrain et <b>glisse vers l’arrière</b> : plus tu glisses, plus elle va loin. Lâche pour lancer.',
+  'C’est toujours <b>l’équipe la plus loin du cochonnet qui rejoue</b>. Tant que tu ne tiens pas le point, c’est à toi de lancer.',
+  'Fin de la mène ! Chaque boule <b>plus proche du cochonnet que la meilleure boule d’en face</b> rapporte un point. La première équipe à gagner <b>deux mènes</b> gagne le match.',
+  'Ta jauge est pleine : un <b>pouvoir</b> est prêt ! Ouvre le menu des coups et choisis « Pouvoir ». Jauge pleine deux fois : un pouvoir <b>à deux</b>.'];
+ function close(){if(el){el.remove();el=null}clearTimeout(hideT)}
+ function show(i,auto){close();const pe=document.getElementById('peta');if(!pe)return;st.cur=i;el=document.createElement('div');el.className='ptut';
+  el.innerHTML='<div class="pth">Les règles de la pétanque</div><div>'+T[i]+'</div><div class="ptb"><button class="pts">Passer le tutoriel</button><span class="pd">'+[0,1,2,3,4].map(k=>'<i'+(k===i?' class="on"':'')+'></i>').join('')+'</span><button class="pok">'+(i===0?'Suivant':'Compris')+'</button></div>';
+  el.addEventListener('pointerdown',e=>e.stopPropagation());el.addEventListener('click',e=>e.stopPropagation());
+  el.querySelector('.pts').onclick=()=>{mark();st.off=1;close()};
+  el.querySelector('.pok').onclick=()=>{st.ok[i]=1;close();if(i===0)show(1);if(i===3)mark()};
+  pe.appendChild(el);if(auto)hideT=setTimeout(()=>{if(st.cur===i){st.ok[i]=1;close();if(i===3)mark()}},auto)}
+ function tick(){try{const pe=document.getElementById('peta'),pg=window.__PG;
+  if(!pe||!pg||!pe.querySelector('#qcmd')){if(st&&!pe){close();st=null}return}
+  if(!st){if(done()&&!/#ptuto\b/.test(location.hash))return;st={sh:[],ok:[],cur:-1,our:0}}
+  if(st.off)return;const ph=pg.phase,ours=(pg.balls||[]).filter(b=>b.team===0).length;
+  if(el&&!el.isConnected)el=null;
+  if(!st.sh[0]&&ph==='select'){st.sh[0]=st.sh[1]=1;show(0);return}
+  if(!st.sh[2]&&st.ok[1]&&ours>=1&&(ph==='wait'||ph==='ai'||ph==='select')&&!el){st.sh[2]=1;show(2,9000);return}
+  if(!st.sh[3]&&ph==='score'){st.sh[3]=1;show(3,9000);return}
+  if(!st.sh[4]&&st.sh[3]&&ph==='select'&&!el&&pe.querySelector('#qg0.full')){st.sh[4]=1;show(4,10000);return}
+  if(ph==='throw'||ph==='roll'){if(el&&st.cur===1){st.ok[1]=1;close()}}
+ }catch(_){}}
+ let lt_=0;const lp_=t=>{if(t-lt_>350){lt_=t;tick()}requestAnimationFrame(lp_)};requestAnimationFrame(lp_)})();
+</script>
+<style id="pautost">
+#peta .pauto{position:absolute;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px));background:rgba(15,10,30,.55)}
+#peta .pauto .pc{width:min(380px,100%);background:#fffaf0;color:#2a2433;border:3px solid #2a2433;border-radius:12px;box-shadow:0 6px 0 rgba(0,0,0,.4);padding:14px 14px 12px;text-align:center;font:600 15px/1.4 'Atkinson Hyperlegible',system-ui,sans-serif;animation:ptin2 .3s ease-out}
+#peta .pauto h3{margin:0 0 6px!important;font-size:24px!important;font:400 24px Lilita,'Atkinson Hyperlegible',sans-serif;color:#1f4f8a;letter-spacing:.02em}
+#peta .pauto .pr{display:flex;justify-content:center;gap:10px;margin:8px 0}
+#peta .pauto .pp{display:flex;flex-direction:column;align-items:center;width:96px}
+#peta .pauto .pp canvas{width:48px;height:78px;image-rendering:pixelated;border:0!important;background:none}
+#peta .pauto .pp b{font:400 15px Lilita,'Atkinson Hyperlegible',sans-serif}#peta .pauto .pp small{font-size:12px;color:#6a5d78}
+#peta .pauto .pt{margin:8px 0 4px;padding:8px;border-radius:8px;background:#f1e6cf}#peta .pauto .pt b{font:400 18px Lilita,'Atkinson Hyperlegible',sans-serif;color:#c0392b}
+#peta .pauto .pn{font-size:12.5px;color:#6a5d78;margin:6px 0 10px}
+#peta .pauto button{margin:0 auto!important;display:block;min-width:200px}
+@keyframes ptin2{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+@media (orientation:landscape) and (max-height:600px){#peta .pauto .pc{width:min(520px,100%);padding:10px 12px}#peta .pauto .pp canvas{width:36px;height:58px}#peta .pauto .pn{margin:4px 0 6px}}
+</style>
+<script>
+// v805 : tournoi lancé par le jeu — trois joueur·ses tiré·es au sort (sans les invité·es, donc sans Crotti), terrain au hasard parmi les terrains ouverts
+(function(){const _sn=window.__selNew;if(typeof _sn!=='function')return;
+ const PR={major:'à la Major',carli:'au Carli',panier:'au Panier',canebiere:'sur la Canebière',calanques:'dans les Calanques',velodrome:'au Vélodrome'};const TN={major:['La Major','Sur le parvis de la Major, la cathédrale derrière.'],carli:['Le Carli','Au cours Julien : de l’herbe, de la musique, et quelques cailloux.'],panier:['Le Panier','La Bonne Mère au loin, et un terrain pas tout à fait plat.'],canebiere:['La Canebière','Les terrasses, et le Vieux-Port au bout de la rue.'],calanques:['Les Calanques','La mer, et de gros rochers en plein terrain.'],velodrome:['Le Vélodrome','Une pelouse de match, et tout le virage qui chante.']};
+ window.__selNew=function(X){if(!window.__pAuto||window.__P2)return _sn.apply(this,arguments);window.__pAuto=0;
+  try{const {ov,ALL,pick,anim,okS,go}=X;const L=ALL.filter(p=>p.grp!=='x'&&!/crotti/i.test(p.nm||''));for(let i=L.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[L[i],L[j]]=[L[j],L[i]]}
+   pick.length=0;L.slice(0,3).forEach(p=>pick.push(p));
+   const ok=k=>{try{return !window.__pTerOK||__pTerOK(k)}catch(_){return true}},TK=Object.keys(TN).filter(ok),tk=TK[Math.random()*TK.length|0]||'major';window.__terF=tk;
+   const d=document.createElement('div');d.className='pauto';
+   d.innerHTML='<div class="pc"><h3>Ton équipe</h3><div>Pour le tournoi, l’équipe est déjà composée :</div><div class="pr">'+pick.map(p=>'<div class="pp"><canvas width="16" height="26"></canvas><b>'+p.nm+'</b><small>'+(p.grp==='r'?'riverain·e':'usager·e de la halte')+'</small></div>').join('')+'</div><div class="pt">On joue <b>'+PR[tk]+'</b><br>'+TN[tk][1]+'</div><div class="pn">Dans Street Pétanqueur, depuis l’écran d’accueil, tu pourras choisir ton équipe et ton terrain.</div><button class="start pago">C’EST PARTI !</button></div>';
+   ov.appendChild(d);d.querySelectorAll('.pp canvas').forEach((c,i)=>{try{anim(c,pick[i].ci,24)}catch(_){}});
+   d.querySelector('.pago').onclick=()=>{try{okS()}catch(_){}const bp=window.__ballPick,tp=window.__terPick;window.__ballPick=(o,cb)=>cb();window.__terPick=(o,cb)=>{window.__terF=tk;cb()};d.remove();try{go()}finally{window.__ballPick=bp;window.__terPick=tp}};
+  }catch(e){try{oops(e,'pAuto')}catch(_){}return _sn.apply(this,arguments)}};
+})();
+</script>
 </body></html>
