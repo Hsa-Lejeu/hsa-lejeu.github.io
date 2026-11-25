@@ -26,7 +26,7 @@ Mis en place en v520 (objet `window.AG`, fin du code) :
 - La fenêtre `#m` est surveillée : une ouverture décidée par le jeu (pas par un geste du joueur) est mise en attente si une autre fenêtre est à l'écran ou si le délai de la règle 4 n'est pas écoulé. Son contenu est mis de côté avec ses boutons et la partie continue.
 - Ne sont jamais retardés : les dangers, les bilans, les chapitres, ce que le joueur ouvre lui-même (geste de moins de 0,4 s) et une fenêtre qui se redessine (fermée puis rouverte en moins de 1,5 s). La réunion de saison suit le bilan du mois sans délai, car elle s'ouvre quand le joueur ferme ce bilan.
 - L'horloge de l'aiguilleur (`AG.clock`) ne compte que le temps hors pause et hors fenêtre bloquante.
-- Les « Nouveau ! » et les conseils ne sont jamais abandonnés. Seuls les retours d'action de la bulle le sont après 30 s.
+- Les « Nouveau ! » ne sont jamais abandonnés, les conseils presque jamais : une couche de `ctip` (v734-v735) ignore un conseil non urgent arrivé moins de 35 s de jeu après le précédent, sans le noter comme vu (il peut revenir si son déclencheur se reproduit). Un conseil dont le drapeau est posé avant l'appel (`q20y` : `B.qTip[YR]`) serait alors perdu pour l'année. Seuls les retours d'action de la bulle sont abandonnés après 30 s.
 - `AG.log` garde la trace des ouvertures de `#m` (montrée, différée, geste du joueur).
 - **Toute nouvelle fenêtre passe par `openM(html, opts)`** (v589), qui la dépose dans la file de l'aiguilleur (`AG.push`) avec sa priorité (`opts.pri` : 1 danger, 2 décision, 3 bilan, 4 récit). Ne plus écrire `$('m').hidden=false` : la redéfinition de `hidden` sur `#m` ne reste que comme filet de sécurité pour les fenêtres anciennes.
 
@@ -97,13 +97,13 @@ Décisions prises sur la liste actuelle (inventaire du 2 novembre) :
 
 ## 8. Bulle de Camille
 
-La bulle reprend aujourd'hui automatiquement les 265 appels à `say()`. Chaque appel doit être classé :
+La bulle de Camille reçoit `camSay` et tout ce qui s'écrit dans `#ev` et `#msg` (observateur placé après `camSay`). Le tri fait en v523-v582 porte sur 242 messages (`outils/messages-bulle.json` : 124 montrer, 98 taire, 18 regrouper, 2 à discuter) ; dans le code, seules les règles « taire » et « réécrire » existent (`window.__BULR`, 88 règles, appliquées par `bulApply`). Chaque message doit être classé :
 
 - **montrer** : reste un message de niveau 3 dans la file ;
 - **regrouper** : fusionné avec d'autres messages du même type (par exemple les retours d'action d'un même jour) ;
 - **taire** : n'apparaît plus dans la bulle (il peut rester dans le journal ou les nouvelles).
 
-Par défaut, un nouveau `say()` est « taire » tant qu'il n'a pas été classé.
+Un message qui ne correspond à aucune règle de `__BULR` est **affiché** : c'est le cas de tous ceux « montrer » et de tous les textes écrits depuis le tri (v523). Un nouveau message s'affiche donc tant qu'on n'a pas ajouté de règle pour le taire. (Jusqu'à la v821, ce document disait l'inverse ; le code n'a jamais tu par défaut. Passer à « taire par défaut » demanderait d'abord d'écrire une règle pour chaque message à montrer.)
 
 ## 9. Vérifier
 
