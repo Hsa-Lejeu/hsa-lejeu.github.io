@@ -129,7 +129,16 @@ public class MainActivity extends Activity {
                 return share(b64, "", name);
             } catch (Exception e) { return false; }
         }
-
+        @JavascriptInterface
+        public boolean shareText(String text) {
+            try {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_TEXT, text);
+                runOnUiThread(() -> startActivity(Intent.createChooser(i, "Partager le jeu")));
+                return true;
+            } catch (Exception e) { return false; }
+        }
         @JavascriptInterface
         public boolean share(String b64, String text, String name) {
             try {
