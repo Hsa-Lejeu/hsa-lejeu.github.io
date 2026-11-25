@@ -31,4 +31,11 @@ self.addEventListener('fetch',e=>{{if(e.request.method!=='GET')return;
   e.waitUntil(net.catch(()=>{{}}));return}}
  e.respondWith(caches.match(e.request,{{ignoreSearch:true}}).then(r=>r||fetch(e.request).then(res=>{{if(res&&(res.ok||res.type==='opaque')){{const cp=res.clone();const m=/\\/(a|musique|fonts)\\/|three-r\\d+/.test(new URL(e.request.url).pathname);caches.open(m?AC:CACHE).then(c=>c.put(e.request,cp))}}return res}})).catch(()=>caches.match('index.html')))}});
 """
-open('sw.js','w').write(js);print('sw.js',len(IMG),'images,',len(LIB),'fichiers durables de plus, musiques',len(MUS))
+open('sw.js','w').write(js)
+# v822 : le numéro affiché dans « Comment jouer ? » et le menu (window.HSAV) suit la version du cache
+import re
+h=open('index.html',encoding='utf-8').read()
+h2,n=re.subn(r"window\.HSAV='[^']*'",f"window.HSAV='{ver}'",h,count=1)
+if n:open('index.html','w',encoding='utf-8').write(h2)
+else:print('ATTENTION : window.HSAV introuvable dans index.html')
+print('sw.js',len(IMG),'images,',len(LIB),'fichiers durables de plus, musiques',len(MUS))
